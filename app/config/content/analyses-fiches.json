@@ -3865,619 +3865,1291 @@
   },
   "microcanonique": {
     "question": "Comment les contraintes déterminent-elles les états comptés, et que conserve un retour portant sur une autre énergie ?",
-    "basis": "Modèle discret de trois sites distincts à niveaux 0 et ε, avec énergie totale fixée à ε puis 2ε. Aucun échantillonnage mesuré.",
+    "basis": "Modèle discret de trois sites distincts à niveaux 0 et ε > 0 : référence E = ε et variante séparée E = 2ε. États supposés, aucun échantillonnage mesuré.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Le support énergétique, le postulat uniforme, les probabilités regroupées et la comparaison des deux énergies sont distingués et reconstruits.",
+    "subject": {
+      "type": "physique",
+      "description": "Un système physique minimal à trois sites distincts, chacun à deux états non dégénérés, décrit par un modèle statistique isolé.",
+      "scope": "Énergie additive sans interaction, volume et nombre de particules fixés ; aucune réalisation matérielle, dynamique de parcours ou température numérique spécifiée."
+    },
     "levels": [
       {
+        "id": 1,
         "title": "Définir l’objet microscopique",
-        "system": "Le dossier des sites, niveaux et contraintes du modèle discret isolé.",
-        "input": "Les trois sites distincts et les deux énergies locales de l’exemple.",
-        "output": "Un objet théorique dont les configurations sont identifiables sans ambiguïté.",
+        "system": "Les sites, leurs états locaux et les contraintes énergétiques du modèle discret de référence.",
+        "input": "Trois sites étiquetés 1, 2, 3 ; deux états locaux non dégénérés d’énergies 0 et ε > 0 ; E = ε imposée.",
+        "output": "Configurations binaires ordonnées, énergie ε(σ₁+σ₂+σ₃) et contrainte σ₁+σ₂+σ₃ = 1 ; aucun poids probabiliste encore attribué.",
         "section": "contraintes",
         "comparison": "",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les attributs du modèle physique sont traduits en objets identifiables ; l’ordre des sites fait partie de la description microscopique."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Nommer les sites",
-            "action": "Repérer les trois sites distincts et attribuer à chacun les deux possibilités locales d’énergie zéro ou ε.",
-            "output": "Trois sites étiquetés avec leurs possibilités locales."
+            "title": "Nommer les états locaux",
+            "input": "Trois sites distincts à niveaux 0 et ε > 0 non dégénérés, E = ε ; 6.3 transmet séparément la variante 2ε pour comparaison.",
+            "action": "Associer à chaque site son label et ses deux possibilités locales ; conserver l’isolement, le volume et le nombre de particules fixés.",
+            "output": "Trois positions identifiables, niveaux locaux communs et énergie totale de référence E = ε ; ε reste non chiffré.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le dossier décrit un modèle supposé, sans identifier une substance ni une trajectoire microscopique effectivement observée."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir la description",
-            "action": "Décrire un micro-état par un triplet ordonné d’énergies locales, en précisant que permuter des sites peut changer la configuration.",
-            "output": "Convention de description respectant les sites distincts."
+            "title": "Coder et filtrer les configurations",
+            "input": "Les sites étiquetés et l’additivité des énergies locales, sans contribution d’interaction retenue.",
+            "action": "Poser σᵢ = 0 ou 1 selon l’état du site i ; calculer E(σ) = ε∑σᵢ et traduire E = ε par ∑σᵢ = 1.",
+            "output": "Un triplet ordonné σ = (σ₁σ₂σ₃) décrit chaque configuration ; une seule position doit être excitée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La somme énergétique produit la contrainte sur les triplets ; elle ne fournit aucune loi de probabilité ni mécanisme d’évolution."
+            }
           },
           {
             "id": 3,
-            "title": "Constituer le dossier",
-            "action": "Inscrire l’énergie totale imposée à ε et l’absence d’échange avec l’environnement, sans attribuer des fréquences d’occupation observées.",
-            "output": "Contraintes et statut théorique du dossier établis."
+            "title": "Établir le dossier de sélection",
+            "input": "Le codage binaire et la contrainte énergétique obtenue par 1.2.",
+            "action": "Conserver l’espace candidat {0,1}³ et définir A₁ = {σ : ∑σᵢ = 1} comme support de référence.",
+            "output": "Transmis à 2.1 : A₁, trois sites distincts, ε > 0 et énergie additive ; configurations possibles séparées des probabilités à postuler.",
+            "relation": {
+              "nature": "logique",
+              "description": "La sélection devient un attribut utilisable par le modèle statistique, tout en conservant les hypothèses physiques qui la déterminent."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les étiquettes",
-            "action": "Vérifier que les sites restent identifiables dans le dossier et qu’un même triplet ne possède pas plusieurs noms concurrents.",
-            "output": "Identification des configurations contrôlée avant tout dénombrement.",
-            "comparison": "Comparer le dossier de 3 aux sites de 1 en conservant la même méthode d’étiquetage."
+            "title": "Reprendre les labels et la contrainte",
+            "input": "Le dossier A₁ de 1.3, son espace candidat et la convention de codage.",
+            "action": "Relever l’ordre des trois labels et la somme imposée ; distinguer permutation de sites et simple changement de notation.",
+            "output": "Chaque triplet ordonné conserve une identité unique ; permuter une excitation entre sites distincts change le micro-état.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le dossier est repris avec les mêmes labels, afin que la comparaison ne fusionne pas des configurations physiquement distinctes dans ce modèle."
+            },
+            "comparison": "Comparer à 1.3 le support décrit, son codage et la règle énergétique, sans changer les objets comptés.",
+            "evaluation": {
+              "object": "Le codage et la contrainte relus en 1.4 et le dossier constitué en 1.3.",
+              "conditions": "Trois sites toujours distincts, états locaux non dégénérés et énergie additive.",
+              "criterion": "Pour tout σ retenu, σᵢ ∈ {0,1}, ∑σᵢ = 1 et E(σ) = ε ; les trois positions restent étiquetées.",
+              "finding": "La description est conservée ; aucune identification entre permutations de sites n’est introduite."
+            }
           },
           {
             "id": 5,
-            "title": "Examiner l’addition des énergies",
-            "action": "Expliciter l’hypothèse que l’énergie du modèle est la somme des énergies locales, sans contribution d’interaction supplémentaire retenue.",
-            "output": "Hypothèse énergétique nécessaire au filtrage clairement ajoutée.",
-            "comparison": "Confronter cette somme à la description de 2, afin de savoir quelles configurations satisfont la contrainte totale."
+            "title": "Inverser la description énergétique",
+            "input": "Les labels conservés et les énergies locales eᵢ = εσᵢ ; ε positif mais non chiffré.",
+            "action": "Inverser chaque énergie locale par σᵢ = eᵢ/ε ; comparer cette reconstruction à la seule équation scalaire E/ε = ∑σᵢ = 1.",
+            "output": "Le triplet d’énergies locales détermine σ ; l’énergie totale seule laisse libre la position de l’unique excitation.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion distingue une description microscopique complète d’un attribut global qui peut être partagé par plusieurs configurations."
+            },
+            "comparison": "Confronter cette inversion au codage et à la somme de 1.2 : sommer perd l’information sur la position excitée.",
+            "evaluation": {
+              "object": "Le codage direct de 1.2 et la reconstruction locale ou globale de 1.5.",
+              "conditions": "Niveaux locaux non dégénérés et ε > 0 connu symboliquement ; labels fixés.",
+              "criterion": "eᵢ/ε ∈ {0,1} restitue chaque σᵢ ; ∑σᵢ = 1 admet une excitation au site 1, 2 ou 3.",
+              "finding": "L’énergie totale ne suffit pas à identifier le micro-état ; la non-dégénérescence locale ne supprime pas la multiplicité globale."
+            }
           },
           {
             "id": 6,
-            "title": "Fixer l’objet à compter",
-            "action": "Conserver les triplets, leurs règles énergétiques et les contraintes imposées avant d’introduire une hypothèse de probabilité.",
-            "output": "Dossier de comptage distinct d’une loi probabiliste.",
-            "comparison": "Comparer cet objet final à 3 et aux sites de 1, sans confondre configurations possibles et fréquences mesurées."
+            "title": "Restituer les attributs physiques",
+            "input": "Le résultat d’inversion et le dossier de trois sites isolés à énergie totale ε.",
+            "action": "Restituer les possibilités 0 et ε de chaque site, les labels et l’additivité, puis garder indéterminée la position excitée avant sélection d’un micro-état.",
+            "output": "Retour à 1.1 : mêmes sites et niveaux, E = ε imposée ; ni valeur numérique de ε ni configuration unique déterminée.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour retrouve les attributs d’entrée et précise l’information supplémentaire nécessaire pour désigner une configuration particulière."
+            },
+            "comparison": "Comparer à 1.1 les sites, niveaux, contraintes et inconnues, sans remplacer le dossier physique par sa seule énergie.",
+            "evaluation": {
+              "object": "Les attributs restitués en 1.6 et les sites et contraintes posés en 1.1.",
+              "conditions": "Même modèle discret et même énergie de référence ; aucune probabilité ou fréquence d’occupation encore calculée.",
+              "criterion": "Retrouver trois labels, deux états locaux non dégénérés 0 et ε, ε > 0, E = ε et absence d’interaction énergétique.",
+              "finding": "Les attributs initiaux sont retrouvés ; volume et nombre de particules restent fixés sans valeur numérique supplémentaire."
+            }
           }
-        ],
-        "id": 1
+        ]
       },
       {
+        "id": 2,
         "title": "Formaliser l’accessibilité et les poids",
-        "system": "Le modèle de sélection énergétique et d’équiprobabilité microcanonique.",
-        "input": "Le dossier des sites du niveau 1 et l’hypothèse d’équilibre isolé.",
-        "output": "Une règle de filtrage et une probabilité conditionnée par les contraintes.",
+        "system": "La loi microcanonique uniforme sur le support discret sélectionné par l’énergie.",
+        "input": "Dossier A₁ transmis par 1.3 ; modèle isolé à l’équilibre et postulat d’équiprobabilité des micro-états accessibles.",
+        "output": "p(σ) = 1/Ω sur A₁ et zéro hors de A₁ ; S = kB ln Ω, avec Ω = |A₁|.",
         "section": "comptage",
         "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Le support fixé reçoit un postulat probabiliste supplémentaire ; ni le filtrage énergétique ni l’isolement ne démontrent à eux seuls l’uniformité."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Poser l’espace des configurations",
-            "action": "Prendre les triplets binaires des trois sites comme configurations candidates, avant de conserver celles d’énergie totale ε.",
-            "output": "Espace candidat séparé de l’ensemble finalement accessible."
+            "title": "Recevoir le support discret",
+            "input": "A₁ = {σ ∈ {0,1}³ : ∑σᵢ = 1}, avec labels et niveaux définis par 1.3.",
+            "action": "Distinguer les configurations candidates des seules configurations accessibles ; noter Ω = |A₁|, un nombre sans dimension.",
+            "output": "Support énergétique discret et fini ; les états incompatibles restent hors de l’ensemble microcanonique considéré.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La liste à compter est définie avant l’attribution des poids ; le nombre d’états n’est pas une probabilité."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les contraintes probabilistes",
-            "action": "Imposer l’énergie fixée puis adopter l’équiprobabilité des micro-états accessibles comme postulat d’équilibre, non comme mesure temporelle.",
-            "output": "Contraintes et postulat probabiliste explicitement distingués ici."
+            "title": "Normaliser sous le postulat uniforme",
+            "input": "Le support A₁ de taille Ω et le postulat que ses micro-états ont le même poids à l’équilibre.",
+            "action": "Imposer p(σ) = p sur A₁, puis résoudre Ωp = 1 ; substituer ce poids dans S = −kB∑p(σ)ln p(σ).",
+            "output": "p = 1/Ω et S = −kBΩ(1/Ω)ln(1/Ω) = kB ln Ω.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La normalisation détermine la valeur du poids une fois l’équiprobabilité postulée ; elle ne démontre pas ce postulat."
+            }
           },
           {
             "id": 3,
-            "title": "Construire la règle d’entropie",
-            "action": "Associer à un ensemble accessible de taille Ω la probabilité 1/Ω et l’entropie kB ln Ω.",
-            "output": "Probabilité et entropie définies après le filtrage."
+            "title": "Établir les règles statistiques",
+            "input": "La probabilité uniforme et l’entropie obtenues sur A₁.",
+            "action": "Associer un poids nul aux configurations exclues et conserver p = 1/Ω, S/kB = ln Ω pour celles du support.",
+            "output": "Transmis à 3.1 : règle de comptage, poids uniforme et entropie réduite ; aucun temps de visite des états défini.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les résultats statistiques sont fournis comme règles de calcul conditionnelles, distinctes d’une dynamique ou d’un échantillonnage observé."
+            }
           },
           {
             "id": 4,
-            "title": "Relire le support",
-            "action": "Vérifier que seuls les états compatibles entrent dans Ω et que les configurations exclues ne reçoivent aucun poids dans cet ensemble.",
-            "output": "Support des probabilités cohérent avec la contrainte.",
-            "comparison": "Comparer la règle de 3 aux configurations candidates de 1 en gardant explicite le filtrage énergétique."
+            "title": "Reprendre le support pondéré",
+            "input": "Les règles de 2.3, avec la distinction entre configurations accessibles et exclues.",
+            "action": "Relever les poids sur chaque partie de l’espace candidat et conserver le logarithme de la multiplicité sans dimension.",
+            "output": "La normalisation porte uniquement sur A₁ ; les configurations incompatibles avec E = ε ont un poids nul dans cet ensemble.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour reprend la loi complète, incluant son support, avant de distinguer normalisation et équiprobabilité."
+            },
+            "comparison": "Comparer à 2.3 le support, les poids et la forme d’entropie, avec le même statut de postulat.",
+            "evaluation": {
+              "object": "La loi reprise en 2.4 et les règles statistiques établies en 2.3.",
+              "conditions": "Ensemble discret isolé à énergie ε, équiprobabilité postulée ; aucune interprétation en fréquence temporelle.",
+              "criterion": "∑σ∈A₁ p(σ) = Ω/Ω = 1 ; p(σ) = 0 hors de A₁ ; S/kB = ln Ω.",
+              "finding": "La loi est conservée ; la somme unité constitue un contrôle interne de normalisation."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter le regroupement",
-            "action": "Distinguer la probabilité d’un triplet de celle d’un ensemble de triplets regroupés selon une propriété du premier site.",
-            "output": "Niveaux de description probabiliste clairement séparés ici.",
-            "comparison": "Confronter cette distinction au postulat de 2, qui ne rend équiprobables que les micro-états accessibles."
+            "title": "Résoudre la normalisation sans uniformité",
+            "input": "Le même support comportant au moins deux états ; on retire seulement le postulat d’égalité des poids.",
+            "action": "Former p₁ = 1/Ω+a, p₂ = 1/Ω−a et pⱼ = 1/Ω pour les autres états, avec |a| < 1/Ω.",
+            "output": "La somme vaut encore 1 ; a ≠ 0 donne des poids différents sur le même support et ne satisfait plus le postulat uniforme.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Une famille normalisée explicite la non-unicité de la normalisation seule ; elle est un contre-modèle, pas une nouvelle loi microcanonique retenue."
+            },
+            "comparison": "Confronter cette famille au traitement de 2.2 : l’hypothèse supplémentaire d’égalité des poids impose a = 0.",
+            "evaluation": {
+              "object": "La normalisation avec uniformité de 2.2 et les solutions sans uniformité construites en 2.5.",
+              "conditions": "Même support et poids strictement positifs ; la famille concurrente n’est pas présentée comme un équilibre microcanonique réalisé.",
+              "criterion": "(1/Ω+a)+(1/Ω−a)+(Ω−2)/Ω = 1 ; p₁ = p₂ exige a = 0.",
+              "finding": "Le comptage et la normalisation ne suffisent pas à prouver l’équiprobabilité ; celle-ci reste le postulat retenu."
+            }
           },
           {
             "id": 6,
-            "title": "Retenir le modèle de comptage",
-            "action": "Présenter ensemble accessible, normalisation et entropie avec leurs conditions, sans ajouter une dynamique de visite des configurations.",
-            "output": "Modèle d’équilibre sans affirmation dynamique supplémentaire ici.",
-            "comparison": "Comparer ce cadre à 3 et à l’espace de 1, sans conclure à un parcours instantané de tous les états."
+            "title": "Restituer le cadre probabiliste",
+            "input": "Le contre-modèle normalisé et le postulat uniforme conservé pour le problème initial.",
+            "action": "Restreindre la famille à a = 0 puis restituer A₁, Ω et les poids nuls hors support, sans ajouter de loi temporelle.",
+            "output": "Retour à 2.1 : même support énergétique ; loi uniforme retenue par postulat, sans durée de relaxation ni ergodicité déduite.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour retrouve le support d’entrée avec les conditions nécessaires à sa pondération, en séparant description d’équilibre et dynamique."
+            },
+            "comparison": "Comparer à 2.1 le support et ses contraintes ; la loi ajoutée demeure explicitement postulée.",
+            "evaluation": {
+              "object": "Le cadre restitué en 2.6 et le support discret reçu en 2.1.",
+              "conditions": "Trois sites distincts, énergie ε et même règle additive ; aucun mécanisme d’exploration des états fourni.",
+              "criterion": "Retrouver A₁ = {σ : ∑σᵢ = 1} ; les poids uniformes valent 1/Ω sur ce support, pas sur tout {0,1}³.",
+              "finding": "Le support initial est préservé. Dans un modèle continu, il faudrait une mesure normalisée ; 1/Ω ne serait pas une probabilité ponctuelle."
+            }
           }
-        ],
-        "id": 2
+        ]
       },
       {
+        "id": 3,
         "title": "Énumérer à énergie fixée",
-        "system": "Le calcul exact des configurations compatibles avec l’énergie ε.",
-        "input": "Les sites du niveau 1 et les règles du niveau 2.",
-        "output": "Trois configurations, une entropie réduite ln 3 et une occupation de 1/3.",
+        "system": "Le dénombrement exact et les grandeurs statistiques de la coquille d’énergie ε.",
+        "input": "Règles de 2.3 ; trois sites distincts, ε > 0, énergie additive E = ε et équiprobabilité postulée.",
+        "output": "A₁ = {(100),(010),(001)}, Ω₁ = 3, p = 1/3 ; S₁/kB = ln 3 et P(σ₁ = 1) = 1/3.",
         "section": "exemple",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le modèle de sélection et de pondération produit une liste exacte, une entropie et une probabilité locale calculées."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Recevoir les contraintes numériques",
-            "action": "Reprendre les trois sites et l’énergie ε, puis noter qu’une seule excitation suffit à satisfaire cette énergie totale.",
-            "output": "Problème discret prêt pour une énumération explicite."
+            "title": "Recevoir la coquille de référence",
+            "input": "A₁ et les règles p = 1/Ω, S/kB = ln Ω transmises par 2.3.",
+            "action": "Retenir ∑σᵢ = 1 sur trois positions distinctes ; conserver ε positif et non chiffré.",
+            "output": "Une excitation à répartir entre trois sites ; chaque possibilité doit être comptée une fois, sans états locaux dégénérés.",
+            "relation": {
+              "nature": "logique",
+              "description": "La contrainte énergétique réduit le problème à un choix de position, sans modifier la nature des sites."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir une énumération exhaustive",
-            "action": "Déplacer l’unique excitation entre les trois positions étiquetées en gardant les autres sites dans leur niveau fondamental.",
-            "output": "Méthode de génération sans permutation oubliée ou doublée."
+            "title": "Dénombrer par choix de position",
+            "input": "Trois positions étiquetées et exactement un site excité.",
+            "action": "Choisir le site portant l’excitation, puis placer les deux autres à zéro ; calculer Ω₁ = C(3,1) = 3.",
+            "output": "Les configurations engendrées sont (100), (010) et (001), sans doublon ; chacune possède l’énergie ε.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le choix combinatoire est exhaustif parce que toute configuration admissible possède une unique position excitée."
+            }
           },
           {
             "id": 3,
-            "title": "Produire le dénombrement",
-            "action": "Lister les trois triplets, attribuer un tiers à chacun et calculer S/kB ainsi que l’occupation du premier site.",
-            "output": "Ω = 3 ; S/kB = ln 3 ; occupation 1/3."
+            "title": "Établir les résultats statistiques",
+            "input": "Les trois configurations de 3.2 et le postulat uniforme.",
+            "action": "Attribuer 1/3 à chaque triplet ; calculer S₁/kB = ln 3 ≈ 1,098612 et sommer les poids où σ₁ = 1.",
+            "output": "Transmis à 4.1 : A₁, p(σ) = 1/3, S₁/kB = ln 3 et P(σ₁ = 1) = 1/3.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La probabilité locale provient du seul triplet (100) ; le nombre obtenu n’est pas une fréquence expérimentale."
+            }
           },
           {
             "id": 4,
-            "title": "Contrôler la compatibilité",
-            "action": "Additionner les énergies de chaque triplet et vérifier qu’aucune configuration répétée ou incompatible n’apparaît dans la liste.",
-            "output": "Liste vérifiée selon énergie et unicité des triplets.",
-            "comparison": "Comparer les résultats de 3 aux contraintes de 1 avec une vérification séparée de chaque configuration."
+            "title": "Reprendre la liste et les poids",
+            "input": "La liste pondérée et les valeurs statistiques établies en 3.3.",
+            "action": "Relever séparément les trois triplets, leurs poids et leur somme d’excitations, en conservant l’approximation de ln 3 comme secondaire.",
+            "output": "Trois états distincts d’énergie ε ; poids 1/3 chacun, entropie réduite ln 3 et probabilité locale 1/3.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour reçoit les résultats avec leur support exact et leur provenance calculatoire, avant d’en déduire les moments énergétiques."
+            },
+            "comparison": "Comparer à 3.3 les triplets, poids et grandeurs statistiques, sans remplacer la liste par son seul cardinal.",
+            "evaluation": {
+              "object": "La liste et les valeurs relues en 3.4 et les résultats établis en 3.3.",
+              "conditions": "Même coquille E = ε, mêmes labels et même loi uniforme postulée.",
+              "criterion": "A₁ = {(100),(010),(001)} ; ∑p = 1 ; P(σ₁ = 1) = p(100) = 1/3 ; S₁/kB = ln 3.",
+              "finding": "Les résultats sont repris sans perte du support ; la normalisation ne constitue pas une vérification empirique."
+            }
           },
           {
             "id": 5,
-            "title": "Vérifier la normalisation",
-            "action": "Additionner les probabilités des trois triplets et contrôler que l’occupation locale vient seulement des configurations où le premier site est excité.",
-            "output": "Normalisation et occupation locale vérifiées sans confusion.",
-            "comparison": "Confronter ce contrôle à l’énumération de 2, qui distingue explicitement les trois positions de l’excitation."
+            "title": "Reconstruire les attributs énergétiques",
+            "input": "Les trois états et leurs poids, avec E(σ) = ε pour chacun.",
+            "action": "Calculer ⟨E⟩ = ∑p(σ)E(σ), puis Var(E) = ∑p(σ)[E(σ)−⟨E⟩]² ; sommer aussi les trois occupations moyennes.",
+            "output": "⟨E⟩ = ε, Var(E) = 0 et ⟨σ₁+σ₂+σ₃⟩ = 1 ; chaque ⟨σᵢ⟩ vaut 1/3.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les moments reconstruisent les attributs de la coquille à partir de la liste pondérée ; aucune fluctuation temporelle n’a été mesurée."
+            },
+            "comparison": "Confronter les moments à la sélection de 3.2 : l’énergie identique de chaque état produit une variance nulle.",
+            "evaluation": {
+              "object": "La sélection combinatoire de 3.2 et la reconstruction énergétique et locale de 3.5.",
+              "conditions": "Sommes sur le support exact ; énergie additive et poids uniformes conservés.",
+              "criterion": "∑pE = ε∑p = ε ; ∑p(E−ε)² = 0 ; ∑ᵢ⟨σᵢ⟩ = 3×(1/3) = 1.",
+              "finding": "Les moments concordent avec la contrainte énergétique ; ils ont été calculés depuis celle-ci et ne la valident pas indépendamment."
+            }
           },
           {
             "id": 6,
-            "title": "Consigner les résultats exacts",
-            "action": "Conserver la liste, les probabilités et les résultats symboliques, puis donner l’approximation de ln 3 si utile à la lecture.",
-            "output": "Résultats exacts avec approximation numérique clairement secondaire.",
-            "comparison": "Comparer cette restitution à 3 et aux contraintes de 1, sans présenter les probabilités comme fréquences observées."
+            "title": "Restituer les contraintes reçues",
+            "input": "Les moments de 3.5 et le support complet maintenu dans le dossier.",
+            "action": "Restituer trois sites, une excitation totale et E = ε, en conservant la liste qui justifie la reconstruction.",
+            "output": "Retour à 3.1 : même contrainte ∑σᵢ = 1 et mêmes états locaux ; ε reste symbolique, aucune température déduite.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour retrouve les attributs énergétiques d’entrée à partir des états pondérés, sans inférer de propriété dynamique ou thermique supplémentaire."
+            },
+            "comparison": "Comparer à 3.1 le nombre de sites, la contrainte d’excitation et le statut non chiffré de ε.",
+            "evaluation": {
+              "object": "Les contraintes restituées en 3.6 et les attributs de la coquille reçus en 3.1.",
+              "conditions": "Même modèle et même ensemble ; les moments sont accompagnés de la liste dont ils proviennent.",
+              "criterion": "Retrouver σᵢ ∈ {0,1}, ∑σᵢ = 1 sur chaque état, E = ε et trois positions distinctes.",
+              "finding": "Les attributs initiaux sont restitués. L’entropie et les probabilités calculées n’identifient ni ε numérique ni une température."
+            }
           }
-        ],
-        "id": 3
+        ]
       },
       {
+        "id": 4,
         "title": "Relire par regroupement",
-        "system": "Le contrôle du comptage et des probabilités par une autre partition des configurations.",
-        "input": "La liste calculée au niveau 3, reprise comme donnée du retour.",
-        "output": "Une distinction vérifiable entre micro-états équiprobables et groupes de tailles différentes.",
+        "system": "La partition du support calculé selon l’état du premier site, et la reconstruction des probabilités microscopiques.",
+        "input": "Liste pondérée de 3.3 : A₁ = {(100),(010),(001)}, avec probabilité 1/3 par micro-état.",
+        "output": "Groupes de multiplicités 1 et 2, de probabilités 1/3 et 2/3 ; leur différence est compatible avec l’équiprobabilité microscopique.",
         "section": "contraintes",
-        "comparison": "Comparer le regroupement au dénombrement du niveau 3 et aux sites du niveau 1, en conservant les mêmes contraintes énergétiques.",
+        "comparison": "Comparer aux résultats du niveau 3 les groupes et leur réunion, en conservant les membres des classes et les poids microscopiques.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les états calculés deviennent les données d’un regroupement ; les probabilités des événements résultent d’une somme de poids."
+        },
+        "evaluation": {
+          "object": "La liste et les poids du niveau 3, confrontés à la partition et à sa reconstruction au niveau 4.",
+          "conditions": "Même coquille d’énergie ε et même loi uniforme ; chaque classe conserve la liste de ses membres.",
+          "criterion": "A₁ = G₁∪G₀, G₁∩G₀ = ∅ ; |G₁|+|G₀| = 1+2 = 3 et P(G₁)+P(G₀) = 1.",
+          "finding": "Le support et ses poids sont conservés. Les deux événements n’ont pas la même multiplicité et ne sont donc pas équiprobables."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Recevoir la liste calculée",
-            "action": "Importer les trois triplets accessibles et choisir comme propriété de regroupement l’excitation ou non du premier site.",
-            "output": "Liste de retour et observable locale explicitement choisie."
+            "title": "Recevoir les états à regrouper",
+            "input": "Le support pondéré transmis par 3.3 et l’observable b = σ₁ du premier site.",
+            "action": "Conserver les trois triplets et définir les événements G₁ : σ₁ = 1 et G₀ : σ₁ = 0.",
+            "output": "Une partition proposée de la liste calculée ; les états restent identifiables à l’intérieur de chaque classe.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le changement de description porte sur une propriété locale des mêmes micro-états ; il ne crée pas deux nouveaux micro-états."
+            }
           },
           {
             "id": 2,
-            "title": "Définir les groupes",
-            "action": "Former deux classes disjointes selon l’état du premier site, puis définir leur probabilité comme somme des poids des triplets.",
-            "output": "Règle de regroupement sans nouveau postulat d’équiprobabilité."
+            "title": "Sommer les poids par classe",
+            "input": "Les événements G₁ et G₀ et les poids microscopiques égaux à 1/3.",
+            "action": "Calculer P(G_b) = ∑σ∈G_b p(σ) = g_b/Ω₁, où g_b = |G_b| désigne la multiplicité du groupe.",
+            "output": "g₁ = 1 et g₀ = 2 donnent P(G₁) = 1/3 et P(G₀) = 2/3.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La probabilité d’un événement dépend de son nombre de réalisations microscopiques ; aucun postulat d’égalité des classes n’est ajouté."
+            }
           },
           {
             "id": 3,
-            "title": "Calculer les probabilités regroupées",
-            "action": "Compter un triplet dans la classe excitée et deux dans l’autre, puis calculer les probabilités un tiers et deux tiers.",
-            "output": "Deux classes de probabilités respectivement 1/3 et 2/3."
+            "title": "Établir les résultats regroupés",
+            "input": "Les probabilités et multiplicités obtenues par 4.2.",
+            "action": "Associer G₁ = {(100)} à 1/3 et G₀ = {(010),(001)} à 2/3, puis conserver leurs membres et l’énergie ε.",
+            "output": "Transmis à 5.1 : deux classes inégalement probables à énergie fixée, avec leurs trois micro-états uniformes explicitement conservés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La partition établit une autre description du même ensemble ; la multiplicité compte des états, pas une population mesurée."
+            }
           },
           {
             "id": 4,
-            "title": "Reconstruire le total",
-            "action": "Réunir les deux classes et vérifier que l’on retrouve tous les triplets et une probabilité totale égale à un.",
-            "output": "Reconstruction exhaustive de l’ensemble accessible initialement reçu.",
-            "comparison": "Comparer la reconstruction de 3 à la liste de 1, avec le même critère d’appartenance pour chaque triplet."
+            "title": "Reprendre les classes constituées",
+            "input": "Les deux classes pondérées de 4.3 et la liste de leurs membres.",
+            "action": "Relever séparément g₁, g₀, P(G₁) et P(G₀) ; maintenir l’énergie commune et la provenance calculatoire des valeurs.",
+            "output": "Une classe à un état et une classe à deux états ; probabilités 1/3 et 2/3, normalisées par leur somme.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour reçoit les résultats regroupés avec les informations nécessaires pour examiner ce qui peut être reconstruit au niveau microscopique."
+            },
+            "comparison": "Comparer à 4.3 les classes, membres, multiplicités et probabilités sans effacer leurs différences.",
+            "evaluation": {
+              "object": "Les résultats regroupés relus en 4.4 et les classes établies en 4.3.",
+              "conditions": "Même observable b = σ₁, mêmes états et même énergie imposée.",
+              "criterion": "G₁ = {(100)}, G₀ = {(010),(001)} ; g₁ = 1, g₀ = 2 ; P(G₁) = 1/3, P(G₀) = 2/3.",
+              "finding": "Les classes sont conservées ; leur somme unité n’implique aucune égalité entre leurs deux probabilités."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter l’équiprobabilité",
-            "action": "Vérifier que les probabilités différentes des groupes ne contredisent pas l’équiprobabilité des micro-états dont ils sont composés.",
-            "output": "Absence de contradiction entre poids microscopiques et regroupements.",
-            "comparison": "Confronter cette lecture à la somme des poids définie en 2, sans donner un poids égal aux classes."
+            "title": "Inverser le regroupement sous condition",
+            "input": "Les classes, leurs probabilités et le postulat uniforme maintenu à l’intérieur de chacune.",
+            "action": "Calculer p(σ|G_b) = 1/g_b, puis p(σ) = P(G_b)/g_b ; sans uniformité interne, poser p(010) = r et p(001) = 2/3−r.",
+            "output": "Le postulat restitue 1/3 pour chaque micro-état ; sans lui, tout 0 < r < 2/3 conserve la probabilité de G₀.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion expose l’information perdue dans une somme : un poids de groupe ne fixe pas à lui seul sa répartition interne."
+            },
+            "comparison": "Confronter cette reconstruction à la somme de 4.2 : les divisions par les multiplicités requièrent l’uniformité conservée.",
+            "evaluation": {
+              "object": "Le regroupement de 4.2 et son inversion conditionnelle en 4.5.",
+              "conditions": "Membres des classes connus ; l’uniformité interne provient du postulat microscopique, pas des seules probabilités regroupées.",
+              "criterion": "P(G₁)/g₁ = (1/3)/1 = 1/3 ; P(G₀)/g₀ = (2/3)/2 = 1/3 ; r+(2/3−r) = 2/3.",
+              "finding": "Les poids initiaux sont retrouvés sous le postulat ; les probabilités des classes seules n’identifient pas les poids individuels."
+            }
           },
           {
             "id": 6,
-            "title": "Qualifier le contrôle indépendant",
-            "action": "Consigner l’accord de l’énumération et du regroupement comme vérification combinatoire, en le distinguant d’un échantillonnage expérimental.",
-            "output": "Contrôle combinatoire terminé sans observation physique revendiquée.",
-            "comparison": "Comparer le contrôle final à 3 et aux triplets de 1, en conservant leur provenance théorique commune."
+            "title": "Restituer la liste pondérée",
+            "input": "Les poids reconstruits par 4.5 et les membres des deux classes maintenus dans le dossier.",
+            "action": "Réunir G₁ et G₀ puis réassocier 1/3 à chaque triplet, en gardant la définition de l’observable σ₁.",
+            "output": "Retour à 4.1 : A₁ = {(100),(010),(001)}, même énergie ε et même liste uniforme ; regroupement identifié comme opération de description.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour reconstitue les attributs reçus grâce aux membres conservés et au postulat, sans assimiler une partition à une expérience indépendante."
+            },
+            "comparison": "Comparer à 4.1 la liste, les poids, l’énergie et l’observable locale, avec leurs conditions de reconstruction.",
+            "evaluation": {
+              "object": "La liste pondérée restituée en 4.6 et le support reçu en 4.1.",
+              "conditions": "La liste des membres n’a pas été perdue ; même loi uniforme et mêmes labels des sites.",
+              "criterion": "G₁∪G₀ = {(100),(010),(001)} ; chaque poids vaut 1/3 et chaque triplet vérifie ∑σᵢ = 1.",
+              "finding": "Les attributs initiaux sont retrouvés. Une connaissance des seuls nombres 1/3 et 2/3 n’aurait pas suffi à reconstruire cette liste."
+            }
           }
-        ],
-        "id": 4
+        ]
       },
       {
+        "id": 5,
         "title": "Confronter le choix d’ensemble",
-        "system": "Le diagnostic des contraintes nécessaires au traitement microcanonique.",
-        "input": "Le contrôle du niveau 4 et les hypothèses d’isolement du niveau 2.",
-        "output": "Une décision sur l’ensemble statistique et la portée des probabilités.",
+        "system": "Le passage conditionnel à un réservoir thermique et la reconstruction d’une coquille microcanonique par conditionnement.",
+        "input": "Classes et poids de 4.3 ; extension proposée par couplage thermique faible à un grand réservoir, avec V et N fixés.",
+        "output": "L’énergie du sous-système peut fluctuer ; conditionner les poids canoniques sur une énergie fixée retrouve les poids microcanoniques de cette coquille.",
         "section": "passerelle",
-        "comparison": "Confronter le retour au cadre du niveau 2 : énergie fluctuante, distinguabilité modifiée ou nouvelles configurations physiques peuvent imposer un autre support ou ensemble.",
+        "comparison": "Confronter le traitement conditionnel au modèle du niveau 2 : mêmes poids uniformes après sélection énergétique, contraintes globales différentes.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les probabilités regroupées sont replacées dans un ensemble où l’énergie peut varier ; le retour étudie ce qu’un conditionnement énergétique conserve."
+        },
+        "evaluation": {
+          "object": "Le modèle microcanonique du niveau 2 et la loi canonique conditionnée sur la même énergie au niveau 5.",
+          "conditions": "Même spectre discret ; couplage faible à un grand réservoir à température positive, non chiffrée ; équilibre statistique supposé.",
+          "criterion": "Pour σ ∈ Aₘ, pcan(σ|E = mε) = [e^(−βmε)/Z]/[Ωₘe^(−βmε)/Z] = 1/Ωₘ.",
+          "finding": "Les poids conditionnels concordent avec le postulat du niveau 2 ; cette concordance ne démontre ni une dynamique ni une température du petit système."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Poser les changements possibles",
-            "action": "Imaginer un contact thermique avec un réservoir ou un changement des objets distinguables, sans affirmer qu’un dispositif a été modifié.",
-            "output": "Variantes de contraintes posées comme expériences de pensée."
+            "title": "Poser le contact thermique proposé",
+            "input": "Les groupes G₁, G₀ à énergie ε reçus de 4.3 et le modèle initial isolé.",
+            "action": "Envisager un couplage thermique faible à un grand réservoir de température TR > 0, en gardant les trois sites, V et N.",
+            "output": "Variante de cadre : énergie du sous-système non imposée ; énergie totale sous-système plus réservoir conservée dans l’ensemble isolé.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le contact est une extension de modèle proposée, sans réalisation revendiquée ; TR est un paramètre extérieur et non une valeur déduite du comptage."
+            }
           },
           {
             "id": 2,
-            "title": "Séparer les effets théoriques",
-            "action": "Distinguer fluctuation d’énergie et modification du comptage, car ces changements n’agissent pas sur la même partie du modèle.",
-            "output": "Deux causes théoriques séparées dans le diagnostic."
+            "title": "Construire les poids de réservoir",
+            "input": "Même spectre ; ensemble total isolé supposé microcanonique, couplage faible et grand réservoir de température TR maintenue dans l’approximation.",
+            "action": "Pondérer chaque σ par ΩR(Etot−E(σ)) ; dans l’approximation de grand réservoir, obtenir pcan(σ) = e^(−βE(σ))/Z avec β = 1/(kBTR).",
+            "output": "Z = ∑σ e^(−βε∑σᵢ) = (1+e^(−βε))³ ; les différentes énergies ne reçoivent généralement pas les mêmes poids microscopiques.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Sous l’équiprobabilité postulée des états composites, le comptage du réservoir produit les poids canoniques dans son approximation thermodynamique."
+            }
           },
           {
             "id": 3,
-            "title": "Construire les conséquences",
-            "action": "Identifier le passage canonique lors du contact thermique et la redéfinition du support si les règles de distinguabilité ou les configurations physiques changent.",
-            "output": "Conséquences attribuées aux contraintes réellement modifiées ici."
+            "title": "Établir les probabilités de coquille",
+            "input": "Les poids canoniques de 5.2 et les multiplicités Ωₘ des coquilles, avec m ∈ {0,1,2,3} excitations.",
+            "action": "Sommer les poids sur Aₘ = {σ : ∑σᵢ = m}, pour obtenir Pcan(E = mε) = Ωₘe^(−βmε)/Z.",
+            "output": "Transmis à 6.1 : changer l’énergie fixée exige une autre coquille ; E = 2ε définit un problème distinct du contact non conditionné.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La somme distingue les probabilités d’énergie des poids individuels ; les coquilles appartiennent à un même spectre, sans devenir une succession d’états observée."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les hypothèses inchangées",
-            "action": "Vérifier qu’une variante ne conduit pas à modifier tous les paramètres quand seul l’échange d’énergie ou la description microscopique change.",
-            "output": "Modifications limitées à leur cause théorique annoncée.",
-            "comparison": "Comparer les conséquences de 3 aux variantes de 1, sans ajouter de transformation matérielle non demandée."
+            "title": "Reprendre support et conservation",
+            "input": "Les probabilités de coquille de 5.3 et les contraintes de l’extension avec réservoir.",
+            "action": "Relever la dépendance en β, les multiplicités et la conservation d’Etot, en séparant celle-ci de l’énergie fluctuante du sous-système.",
+            "output": "Les coquilles portent des poids proportionnels à Ωₘe^(−βmε) ; aucune température ni probabilité canonique numérique n’est fournie.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour reçoit les résultats de l’extension avec leur dépendance aux paramètres du réservoir, sans importer ces fluctuations dans le cas isolé initial."
+            },
+            "comparison": "Comparer à 5.3 les poids d’énergie et les contraintes conservées, sans confondre sous-système et ensemble isolé.",
+            "evaluation": {
+              "object": "Les probabilités et contraintes relues en 5.4 et les résultats de coquille établis en 5.3.",
+              "conditions": "Spectre discret complet des trois sites ; approximation canonique de grand réservoir ; V et N du sous-système fixés.",
+              "criterion": "Pcan(E = mε) = Ωₘe^(−βmε)/Z ; ∑ₘPcan(E = mε) = 1 et Etot = E+ER demeure fixé pour l’ensemble isolé.",
+              "finding": "Les relations sont conservées. Une énergie de sous-système variable est compatible avec une énergie totale conservée."
+            }
           },
           {
             "id": 5,
-            "title": "Arbitrer le modèle initial",
-            "action": "Conserver le microcanonique pour les trois sites distincts isolés à énergie fixée, et ne rien conclure sur une durée de relaxation.",
-            "output": "Ensemble initial maintenu avec portée dynamique limitée.",
-            "comparison": "Confronter cet arbitrage aux distinctions de 2, en séparant équilibre statistique et accès temporel aux états."
+            "title": "Conditionner sur une énergie fixée",
+            "input": "Les probabilités individuelles et de coquille, avec une coquille Aₘ de probabilité non nulle.",
+            "action": "Diviser pcan(σ) par Pcan(E = mε) pour σ ∈ Aₘ ; simplifier les facteurs e^(−βmε) et Z.",
+            "output": "pcan(σ|E = mε) = 1/Ωₘ ; hors de Aₘ, la probabilité conditionnelle est nulle.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le conditionnement restitue une loi uniforme à énergie donnée ; il ne décrit pas une opération matérielle qui isolerait réellement le système."
+            },
+            "comparison": "Confronter cette réduction au traitement de 5.2 : les facteurs dépendant de l’énergie s’annulent uniquement à l’intérieur d’une même coquille.",
+            "evaluation": {
+              "object": "Les poids de réservoir construits en 5.2 et leur réduction conditionnelle en 5.5.",
+              "conditions": "Même E(σ), même réservoir et même Z ; l’événement conditionnant possède une probabilité positive.",
+              "criterion": "[e^(−βmε)/Z]/[Ωₘe^(−βmε)/Z] = 1/Ωₘ ; la normalisation conditionnelle vaut Ωₘ/Ωₘ = 1.",
+              "finding": "Le modèle microcanonique est retrouvé par conditionnement dans ce cadre ; l’annulation de β ne permet pas d’en déterminer la valeur."
+            }
           },
           {
             "id": 6,
-            "title": "Fixer la suite analytique",
-            "action": "Indiquer quelles contraintes supplémentaires seraient nécessaires pour comparer un autre ensemble ou une autre description des configurations.",
-            "output": "Entrées nécessaires à une extension du modèle explicitées.",
-            "comparison": "Comparer cette suite au diagnostic de 3 et aux variantes de 1, sans attribuer des probabilités non calculées."
+            "title": "Restituer le dossier à énergie ε",
+            "input": "La loi conditionnelle de 5.5 appliquée à A₁ et les groupes G₁, G₀ conservés au départ.",
+            "action": "Fixer m = 1 dans le conditionnement, puis sommer les poids uniformes sur les groupes à une et deux configurations.",
+            "output": "Retour à 5.1 : P(G₁|E = ε) = 1/3 et P(G₀|E = ε) = 2/3 ; TR reste un paramètre non chiffré.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour retrouve les attributs du dossier microcanonique reçu, tout en maintenant la différence avec le contact thermique non conditionné."
+            },
+            "comparison": "Comparer à 5.1 les groupes et probabilités de la coquille initiale ; distinguer cette restitution de l’ensemble canonique complet.",
+            "evaluation": {
+              "object": "Les classes conditionnelles restituées en 5.6 et les résultats à énergie ε reçus en 5.1.",
+              "conditions": "Même spectre, même partition selon σ₁ ; le conditionnement énergétique est une opération probabiliste, sans processus physique supposé.",
+              "criterion": "A₁ = {(100),(010),(001)} ; pcan(σ|E = ε) = 1/3 ; les groupes conservent multiplicités 1 et 2.",
+              "finding": "Le dossier initial est retrouvé conditionnellement. Le contact avec réservoir, sa température et une dynamique de relaxation restent non réalisés ou non spécifiés."
+            }
           }
-        ],
-        "id": 5
+        ]
       },
       {
+        "id": 6,
         "title": "Recompter après changement d’énergie",
-        "system": "Le nouveau problème microcanonique à énergie 2ε pour les mêmes sites.",
-        "input": "Le cadre confronté au niveau 5 et la variante du checkpoint.",
-        "output": "Même nombre d’états, mais configurations et occupation locale différentes.",
+        "system": "La variante microcanonique à énergie 2ε, comparée au modèle de référence à énergie ε.",
+        "input": "Distinction des coquilles transmise par 5.3 ; mêmes trois sites et niveaux, mais E = 2ε fixée dans un problème séparé.",
+        "output": "A₂ = {(110),(101),(011)}, Ω₂ = 3 et S₂/kB = ln 3 ; P(σ₁ = 1) = 2/3 malgré l’entropie inchangée.",
         "section": "controle",
-        "comparison": "Comparer le nouveau comptage à celui du niveau 3 et repérer ce qui change dans l’énergie imposée au niveau 1.",
+        "comparison": "Comparer aux attributs initiaux du niveau 1 les sites et règles conservés, l’énergie modifiée et les configurations différentes de la variante.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le modèle confronté est appliqué à une autre contrainte énergétique ; cette comparaison de problèmes isolés ne décrit pas une évolution spontanée entre eux."
+        },
+        "evaluation": {
+          "object": "Les attributs de la variante au niveau 6 et le système de référence défini au niveau 1.",
+          "conditions": "Même spectre local non dégénéré, mêmes labels et additivité ; équiprobabilité postulée séparément sur chaque coquille.",
+          "criterion": "E₁ = ε, E₂ = 2ε ; A₁∩A₂ = ∅ mais |A₁| = |A₂| = 3 ; P₁(σ₁ = 1) = 1/3, P₂(σ₁ = 1) = 2/3.",
+          "finding": "Les règles et sites sont conservés, l’énergie et les états changent. L’égalité des entropies ne détermine ni ces attributs ni une température."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Poser la nouvelle contrainte",
-            "action": "Conserver les trois sites distincts mais remplacer l’énergie totale ε par 2ε dans une nouvelle expérience de pensée.",
-            "output": "Nouvelle énergie imposée avec même description des sites."
+            "title": "Poser la nouvelle coquille",
+            "input": "La distinction entre ensemble et conditionnement issue de 5.3, puis la variante du checkpoint E = 2ε.",
+            "action": "Conserver trois sites distincts, états locaux 0 et ε > 0 et énergie additive ; remplacer seulement la contrainte totale par 2ε.",
+            "output": "A₂ = {σ : ∑σᵢ = 2} ; modèle isolé de variante, avec volume et nombre de particules toujours fixés.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le changement porte sur la définition d’un nouveau problème énergétique, et non sur un échange d’énergie réalisé par le système isolé initial."
+            }
           },
           {
             "id": 2,
-            "title": "Adapter la sélection",
-            "action": "Exiger deux sites excités et un site fondamental, tout en conservant le même postulat microcanonique d’équiprobabilité.",
-            "output": "Règle de filtrage mise à jour explicitement."
+            "title": "Dénombrer les deux excitations",
+            "input": "La contrainte ∑σᵢ = 2, les trois labels et le postulat uniforme sur le nouveau support.",
+            "action": "Choisir les deux sites excités, ou la position du site restant à zéro ; calculer Ω₂ = C(3,2) = 3.",
+            "output": "A₂ = {(110),(101),(011)} ; chaque micro-état a une probabilité 1/3 dans la variante.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La sélection combinatoire est refaite avec la nouvelle énergie ; l’égalité du cardinal avec l’ancien support ne dispense pas de cette sélection."
+            }
           },
           {
             "id": 3,
-            "title": "Énumérer les nouveaux états",
-            "action": "Lister les trois positions possibles du site fondamental et calculer l’entropie réduite ainsi que l’occupation du premier site.",
-            "output": "Ω = 3 ; S/kB = ln 3 ; occupation 2/3."
+            "title": "Établir les résultats de variante",
+            "input": "Les trois nouveaux états et leurs poids obtenus en 6.2.",
+            "action": "Calculer S₂/kB = ln 3 et sommer les poids de (110) et (101), où le premier site est excité.",
+            "output": "Transmis à 1.1 pour comparaison : E = 2ε, A₂ et S₂/kB = ln 3 ; P₂(σ₁ = 1) = 2/3.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le dossier de variante fournit de nouveaux attributs au parcours suivant, en conservant distinct le dossier de référence E = ε."
+            }
           },
           {
             "id": 4,
-            "title": "Comparer les supports",
-            "action": "Mettre les nouvelles configurations en regard des anciennes et vérifier qu’un même nombre ne signifie pas un même ensemble accessible.",
-            "output": "Supports différents malgré un cardinal identique obtenu.",
-            "comparison": "Comparer la liste de 3 à l’énergie de 1 avec le même étiquetage des trois sites."
+            "title": "Reprendre les nouveaux états",
+            "input": "La liste A₂ et les résultats de 6.3 ; A₁ conservé comme comparaison complémentaire.",
+            "action": "Relever les triplets à deux excitations et leurs probabilités, puis vérifier qu’aucun de ces triplets n’appartient à A₁.",
+            "output": "Même cardinal 3 et même entropie réduite ln 3 ; supports disjoints et probabilité du premier site différente.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour reprend d’abord les résultats de la variante, puis les situe face au support de référence sans confondre les deux listes."
+            },
+            "comparison": "Comparer les résultats repris à 6.3 ; compléter par la différence de support avec la coquille de référence.",
+            "evaluation": {
+              "object": "La liste et les valeurs relues en 6.4 et les résultats de variante établis en 6.3.",
+              "conditions": "Même énergie 2ε et mêmes labels pour la reprise ; le support A₁ sert uniquement de comparaison complémentaire.",
+              "criterion": "A₂ = {(110),(101),(011)}, p₂ = 1/3 par état ; P₂(σ₁ = 1) = 2/3 ; ∑σᵢ = 2 pour chaque triplet.",
+              "finding": "Les résultats de la variante sont conservés ; ils partagent leur entropie avec A₁ sans partager leurs états."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter l’entropie commune",
-            "action": "Examiner pourquoi une entropie identique ne détermine ni l’énergie totale ni l’occupation locale, puisque ces informations décrivent autre chose.",
-            "output": "Portée de l’entropie distincte des autres observables.",
-            "comparison": "Confronter cette lecture à la sélection de 2, qui impose une énergie différente malgré le cardinal conservé."
+            "title": "Construire la bijection de complément",
+            "input": "Les supports A₂ et A₁, leurs labels et leurs énergies additives.",
+            "action": "Définir C(σ)ᵢ = 1−σᵢ ; dériver E(Cσ) = 3ε−E(σ) et C²σ = σ, puis transformer la probabilité du premier site.",
+            "output": "C envoie A₂ sur A₁ et 2ε sur ε ; la probabilité transformée vaut 1−2/3 = 1/3, avec cardinal conservé.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La bijection explique la multiplicité commune et reconstruit la référence ; elle constitue une transformation des descriptions, sans dynamique physique imposée."
+            },
+            "comparison": "Confronter la bijection à la sélection de 6.2 : compléter les bits relie les contraintes une excitation et deux excitations.",
+            "evaluation": {
+              "object": "Le dénombrement par sélection de 6.2 et la reconstruction par complément de 6.5.",
+              "conditions": "Même ε > 0 et mêmes trois sites ; les probabilités uniformes sont transportées par une bijection de supports.",
+              "criterion": "∑σᵢ = 2 implique ∑(1−σᵢ) = 1 ; C(A₂) = A₁, C(A₁) = A₂ et C² = identité.",
+              "finding": "Le cardinal et l’entropie communs sont expliqués, tandis que l’énergie et l’occupation changent ; S seul n’identifie donc pas la coquille."
+            }
           },
           {
             "id": 6,
-            "title": "Fermer la comparaison statistique",
-            "action": "Présenter les deux ensembles, leurs entropies et leurs occupations, en expliquant précisément la contrainte modifiée et les règles conservées.",
-            "output": "Comparaison achevée entre deux problèmes d’équilibre distincts.",
-            "comparison": "Comparer le bilan final à 3 et aux conditions de 1, sans présenter ce changement de problème comme une évolution isolée spontanée."
+            "title": "Restituer la variante et son écart",
+            "input": "La bijection inverse de 6.5 et le dossier de référence reconstruit.",
+            "action": "Appliquer de nouveau C pour restituer A₂, l’énergie 2ε et l’occupation 2/3 ; conserver séparément la comparaison avec E = ε.",
+            "output": "Retour à 6.1 : mêmes sites et niveaux, ∑σᵢ = 2 et E = 2ε ; la contrainte de variante est retrouvée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le double complément reconstitue les attributs d’entrée locaux ; la comparaison globale conserve explicitement la différence entre les deux énergies."
+            },
+            "comparison": "Comparer à 6.1 les sites, niveaux et énergie imposée de la variante, avec ses règles inchangées.",
+            "evaluation": {
+              "object": "Les attributs restitués en 6.6 et la coquille de variante posée en 6.1.",
+              "conditions": "Bijection descriptive, énergie additive et loi uniforme ; aucune évolution isolée entre les coquilles n’est supposée.",
+              "criterion": "C²(A₂) = A₂ ; ∑σᵢ = 2 et E = 2ε sont retrouvés, avec trois sites distincts à états 0 et ε.",
+              "finding": "Les attributs de la variante sont restitués. Aucun parcours temporel, aucune ergodicité ni température ne sont déduits des deux comptages."
+            }
           }
-        ],
-        "id": 6
+        ]
       }
-    ],
-    "version": "0.1",
-    "updated": "2026-09-09"
+    ]
   },
   "boltzmann": {
     "question": "Comment normalisation, énergie moyenne et dégénérescence permettent-elles de comparer correctement les probabilités canoniques ?",
-    "basis": "Modèle discret à deux niveaux 0 et ε > 0, avec βε = 1 ; le retour examine une dégénérescence modifiée. Aucune population mesurée.",
+    "basis": "Deux niveaux 0 et ε > 0, avec x = ε/(kBT) = 1 ; variante de dégénérescence distincte. Probabilités calculées, aucune population mesurée.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les poids, moments et inversions sont explicités ; spectre fixé, dégénérescence et origine énergétique bornent les interprétations possibles.",
+    "subject": {
+      "type": "physique",
+      "description": "Un système discret minimal à deux niveaux, en équilibre canonique avec un grand réservoir thermique faiblement couplé.",
+      "scope": "N,V fixés, spectre complet supposé indépendant de T ; niveaux 0,ε et dégénérescences données. Aucune valeur numérique de ε ou T ni cinétique introduite."
+    },
     "levels": [
       {
+        "id": 1,
         "title": "Définir spectre et réservoir",
-        "system": "Le dossier du système discret en contact faible avec un grand réservoir thermique.",
-        "input": "Les niveaux et la condition ε/(kBT) = 1 de l’exemple.",
-        "output": "Un spectre étiqueté et des contraintes canoniques explicitement posées.",
+        "system": "Les énergies accessibles, leurs micro-états et la contrainte thermique du système canonique.",
+        "input": "Deux niveaux initialement non dégénérés, 0 et ε > 0 ; réservoir à T > 0, avec x = ε/(kBT) = 1.",
+        "output": "Dossier spectral distinct des probabilités ; N,V fixés et énergie du sous-système susceptible de fluctuer.",
         "section": "conditions",
         "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Le modèle physique pose les états et le contact thermique ; aucun comptage de populations ni évolution entre variantes n’est supposé."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Nommer les états disponibles",
-            "action": "Décrire les niveaux zéro et ε positif, puis préciser initialement qu’un seul micro-état correspond à chacun.",
-            "output": "Deux micro-états distincts avec énergies et multiplicités connues."
+            "title": "Recevoir les micro-états et leur contact",
+            "input": "Exemple initial ; 1.6 reprend ce dossier et 6.3 transmet séparément la variante comportant deux micro-états excités.",
+            "action": "Nommer l’état 0 et l’état excité ε > 0, chacun unique initialement ; poser grand réservoir, couplage faible et N,V fixés.",
+            "output": "Deux micro-états initiaux ; variante à trois micro-états conservée dans un dossier distinct.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le contact permet l’échange d’énergie, sans échange de particules ; ajouter un micro-état dans une variante ne signifie pas ajouter une particule."
+            }
           },
           {
             "id": 2,
-            "title": "Poser le contact thermique",
-            "action": "Fixer température positive, volume et nombre de particules, avec un couplage assez faible pour négliger l’énergie d’interaction.",
-            "output": "Conditions d’équilibre avec le réservoir clairement retenues."
+            "title": "Transformer le paramètre thermique",
+            "input": "Dossier de 1.1 ; β = 1/(kBT), kB = 1,380649 × 10⁻²³ J·K⁻¹ exact et x = βε = 1.",
+            "action": "Vérifier [β] = J⁻¹ et [x] = 1 ; résoudre ε = kBT et β = 1/ε, sans valeur séparée de ε ou T.",
+            "output": "Écart et température liés ; seule leur combinaison sans dimension est fournie.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le changement de variables rend la contrainte exploitable ; l’exactitude de kB ne fournit aucune température numérique manquante."
+            }
           },
           {
             "id": 3,
-            "title": "Constituer le dossier spectral",
-            "action": "Inscrire le rapport ε/(kBT) égal à un et séparer les paramètres du spectre des probabilités encore à calculer.",
-            "output": "Spectre et paramètre thermique sans probabilités supposées implicitement."
+            "title": "Établir le dossier spectral",
+            "input": "Relations de 1.2 ; énergies indépendantes de T, dégénérescences initiales g0 = gε = 1.",
+            "action": "Consigner les niveaux, multiplicités, x = 1 et contraintes N,V ; réserver les poids et probabilités au traitement suivant.",
+            "output": "À 2.1 : deux micro-états, énergies 0,ε, x = 1 et spectre fixé ; aucune probabilité encore normalisée.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les attributs spectraux alimentent le modèle statistique ; le nombre de micro-états d’un niveau est distinct de sa probabilité."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les étiquettes",
-            "action": "Vérifier qu’aucune population observée n’a été confondue avec le nombre de micro-états associé à un niveau.",
-            "output": "Dégénérescence distinguée d’une occupation physique éventuellement mesurable.",
-            "comparison": "Comparer le dossier de 3 aux états de 1, en conservant les mêmes objets et étiquettes microscopiques."
+            "title": "Reprendre paramètres et multiplicité",
+            "input": "Dossier de 1.3, avec un micro-état par niveau et température du réservoir non chiffrée.",
+            "action": "Reprendre g0 = gε = 1 comme dénombrement d’états disponibles ; conserver N fixé sans l’identifier au nombre de niveaux.",
+            "output": "Spectre, quantité fixée et condition thermique restent trois informations distinctes.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture porte sur la signification des attributs ; une multiplicité ne constitue pas une occupation observée."
+            },
+            "comparison": "1.4 ↔ 1.3 : conserver états, dégénérescences et paramètre thermique du dossier.",
+            "evaluation": {
+              "object": "1.4 ↔ 1.3 : niveaux, micro-états et variables fixées.",
+              "conditions": "Même modèle supposé, sans comptage de particules dans les niveaux.",
+              "criterion": "Retrouver deux micro-états d’énergies 0,ε, g0 = gε = 1 et x = 1 ; N,V restent fixés.",
+              "finding": "Les attributs sont conservés ; aucune population ni énergie instantanée n’a été imposée."
+            }
           },
           {
             "id": 5,
-            "title": "Examiner les variables fixées",
-            "action": "Contrôler que le contact permet des fluctuations d’énergie mais ne transforme pas le nombre de particules en variable d’échange.",
-            "output": "Contraintes canoniques séparées des échanges de particules.",
-            "comparison": "Confronter ce contrôle au contact défini en 2, sans substituer un ensemble à potentiel chimique imposé."
+            "title": "Construire les échelles compatibles",
+            "input": "Contrainte x = ε/(kBT) = 1 reprise en 1.4 ; ε,T positifs mais non chiffrés.",
+            "action": "Pour λ > 0, remplacer ε par λε et T par λT ; calculer x′ = λε/(kBλT) = x et β′ = β/λ.",
+            "output": "Une famille d’échelles énergétiques et thermiques possède le même x ; celui-ci ne sépare pas ε et T.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La transformation compare des paramètres possibles ; elle ne décrit pas un chauffage ou une modification du spectre effectivement réalisé."
+            },
+            "comparison": "1.5 ↔ 1.2 : retrouver la contrainte thermique en explicitant sa non-unicité d’échelle.",
+            "evaluation": {
+              "object": "1.5 ↔ 1.2 : relation ε = kBT et famille de paramètres compatibles.",
+              "conditions": "λ positif ; chaque spectre envisagé reste fixé dans son propre calcul canonique.",
+              "criterion": "Vérifier x′ = x = 1 et β′ε′ = βε ; aucune valeur absolue de T ou ε ne résulte de ces identités.",
+              "finding": "La relation initiale est retrouvée ; une information supplémentaire serait nécessaire pour fixer une échelle."
+            }
           },
           {
             "id": 6,
-            "title": "Fixer les entrées statistiques",
-            "action": "Conserver les énergies, multiplicités et contraintes du réservoir avec leur statut supposé, avant toute normalisation numérique.",
-            "output": "Dossier théorique complet pour le calcul canonique.",
-            "comparison": "Comparer ce dossier à 3 et aux états de 1, sans inventer une fréquence d’occupation expérimentale."
+            "title": "Restituer les entrées canoniques",
+            "input": "Résultat de 1.5 et dossier reçu en 1.1 ; retour au spectre de référence non dégénéré.",
+            "action": "Conserver ε > 0, T > 0, x = 1 et les deux micro-états ; restituer N,V fixés et le couplage thermique faible.",
+            "output": "À reprendre en 1.1 : même modèle, avec ε et T symboliques et variante de dégénérescence séparée.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour maintient les attributs initiaux et la liberté d’échelle non résolue ; il ne choisit pas une réalisation matérielle."
+            },
+            "comparison": "1.6 ↔ 1.1 : retrouver spectre, contact et variables d’entrée.",
+            "evaluation": {
+              "object": "1.6 ↔ 1.1 : énergies, multiplicité et contraintes physiques.",
+              "conditions": "Même système supposé ; les familles et variantes n’échangent pas leurs attributs avec le dossier initial.",
+              "criterion": "Retrouver 0,ε, g0 = gε = 1, x = 1 et N,V fixés ; énergie échangeable avec le réservoir.",
+              "finding": "Le dossier initial est restitué sans température numérique ni trajectoire d’occupation ajoutée."
+            }
           }
-        ],
-        "id": 1
+        ]
       },
       {
+        "id": 2,
         "title": "Formaliser poids et normalisation",
-        "system": "Le modèle canonique des poids microscopiques et de l’énergie moyenne.",
-        "input": "Le spectre et les contraintes du niveau 1.",
-        "output": "Des probabilités normalisées et deux expressions comparables de U.",
+        "system": "La normalisation canonique par micro-état et la dérivation de l’énergie moyenne à spectre fixé.",
+        "input": "1.3 transmet le spectre 0,ε et les contraintes N,V ; β varie seulement pour la dérivée, ε reste fixé.",
+        "output": "Z = 1+e⁻ˣ, p0 = 1/Z, pε = e⁻ˣ/Z et U = εpε ; moyenne également obtenue par −∂β ln Z.",
         "section": "microetats",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La loi canonique adoptée transforme les énergies en poids puis en probabilités ; leur normalisation ne démontre pas l’équilibre physique."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Identifier les objets pondérés",
-            "action": "Reprendre chaque micro-état du spectre et associer son énergie à un poids encore non normalisé.",
-            "output": "Liste des objets auxquels attribuer un poids."
+            "title": "Recevoir les objets à pondérer",
+            "input": "Deux micro-états de 1.3 ou reprise de 2.6 ; ε indépendant de β à N,V fixés.",
+            "action": "Associer chaque étiquette à son énergie Ei ; distinguer les poids wi, leur somme Z et les probabilités pi.",
+            "output": "Deux termes à normaliser ; aucun facteur de population ajouté aux micro-états.",
+            "relation": {
+              "nature": "logique",
+              "description": "La liste des états définit les termes de la somme ; une dégénérescence interviendrait par répétition d’états distincts."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les relations canoniques",
-            "action": "Définir β, les poids exponentiels et leur somme Z, puis conserver N et V fixés pour les dérivées.",
-            "output": "Relations canoniques avec variables de dérivation explicites."
+            "title": "Normaliser les poids canoniques",
+            "input": "Dossier de 2.1 ; loi canonique wi = exp(−βEi), avec β positif.",
+            "action": "Calculer w0 = 1, wε = e⁻ˣ, Z = 1+e⁻ˣ ; diviser chaque poids par Z pour obtenir p0 et pε.",
+            "output": "p0 = 1/(1+e⁻ˣ), pε = e⁻ˣ/(1+e⁻ˣ) ; Z est une somme de poids.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La division assure une somme unité sur les micro-états recensés ; Z n’est ni une probabilité ni une population."
+            }
           },
           {
             "id": 3,
-            "title": "Construire les expressions utiles",
-            "action": "Diviser chaque poids par Z et former l’énergie moyenne, puis préparer la dérivée de ln Z comme contrôle alternatif.",
-            "output": "Probabilités et deux voies de calcul de l’énergie."
+            "title": "Établir la moyenne pondérée",
+            "input": "Probabilités de 2.2 et énergies 0,ε ; aucune autre valeur d’énergie dans le spectre.",
+            "action": "Former U = ∑i piEi = 0p0+εpε ; conserver Z(β) pour une dérivation avant la substitution x = 1.",
+            "output": "À 3.1 : probabilités normalisées et U/ε = pε ; le paramètre x = 1 sera appliqué aux résultats.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La moyenne est un attribut de la distribution ; elle n’ajoute aucun niveau intermédiaire aux valeurs possibles de l’énergie."
+            }
           },
           {
             "id": 4,
-            "title": "Relire la normalisation",
-            "action": "Vérifier symboliquement que la somme des probabilités vaut un et que βE est sans dimension pour chaque terme.",
-            "output": "Normalisation et argument exponentiel contrôlés séparément ici.",
-            "comparison": "Comparer les expressions de 3 aux objets pondérés de 1 en vérifiant qu’aucun état n’est omis."
+            "title": "Reprendre la normalisation et les objets",
+            "input": "Expressions de 2.3 ; arguments βEi sans dimension et Z strictement positif.",
+            "action": "Recomposer p0+pε = 1 ; distinguer U, moyenne pondérée, des énergies 0 et ε auxquelles portent les probabilités.",
+            "output": "Normalisation retrouvée ; U est compris entre les valeurs du spectre.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le contrôle vérifie l’algèbre de la distribution et sa portée ; il ne mesure pas une énergie du système."
+            },
+            "comparison": "2.4 ↔ 2.3 : retrouver probabilités et moyenne à partir des mêmes termes.",
+            "evaluation": {
+              "object": "2.4 ↔ 2.3 : normalisation et définition de U.",
+              "conditions": "Même spectre complet à deux micro-états et β > 0.",
+              "criterion": "Vérifier p0+pε = (1+e⁻ˣ)/Z = 1 et U = εpε, avec 0 < pε < 1.",
+              "finding": "Les expressions sont cohérentes ; une énergie moyenne fractionnaire ne représente pas un troisième micro-état."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter la dérivée",
-            "action": "Préciser que les niveaux restent indépendants de T dans l’usage de la dérivée et que le potentiel chimique n’est pas fixé ici.",
-            "output": "Conditions de dérivation cohérentes avec le spectre choisi.",
-            "comparison": "Confronter ces précisions aux variables de 2, afin de ne pas mélanger les ensembles statistiques."
+            "title": "Dériver sans modifier le spectre",
+            "input": "Z(β) repris en 2.4 ; N,V, énergies Ei et dégénérescences maintenus fixes pendant la dérivée.",
+            "action": "Calculer ∂βZ = −∑i Ei exp(−βEi), puis −∂β ln Z = [∑i Ei exp(−βEi)]/Z = U.",
+            "output": "La dérivée retrouve la moyenne ; pour deux niveaux, U = ε/(1+eˣ).",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivation utilise ∂βEi = 0 ; elle précède l’évaluation à x = 1 et ne fixe pas le potentiel chimique."
+            },
+            "comparison": "2.5 ↔ 2.2 : la dérivée de la somme canonique retrouve la moyenne construite avec les mêmes poids.",
+            "evaluation": {
+              "object": "2.5 ↔ 2.2 : poids normalisés et identité dérivée de l’énergie.",
+              "conditions": "N,V fixés, spectre et multiplicités indépendants de β ; aucune dérivée à μ fixé.",
+              "criterion": "Vérifier −(∂β ln Z)N,V = ε exp(−βε)/[1+exp(−βε)] = εpε ; ne pas dériver un Z déjà remplacé par sa valeur à x = 1.",
+              "finding": "Les deux expressions de U concordent sous les mêmes contraintes spectrales."
+            }
           },
           {
             "id": 6,
-            "title": "Retenir le modèle calculatoire",
-            "action": "Conserver les expressions microscopiques et réserver les facteurs de dégénérescence aux sommes regroupées par niveaux d’énergie.",
-            "output": "Cadre prêt avec deux descriptions correctement distinguées.",
-            "comparison": "Comparer ce cadre à 3 et aux objets de 1, sans ajouter une multiplicité aux micro-états individuels."
+            "title": "Restituer les termes microscopiques",
+            "input": "Moyenne dérivée en 2.5 et objets reçus en 2.1 ; spectre de référence conservé.",
+            "action": "Réassocier les contributions 0p0 et εpε aux deux états ; restituer leurs poids et leur normalisation individuelle.",
+            "output": "À reprendre en 2.1 : états 0,ε, poids 1,e⁻ˣ et probabilités obtenues en divisant par Z.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour retrouve les objets pondérés ; ni U ni Z ne remplace le dénombrement des micro-états."
+            },
+            "comparison": "2.6 ↔ 2.1 : retrouver états, poids et variables fixées du modèle.",
+            "evaluation": {
+              "object": "2.6 ↔ 2.1 : termes du spectre et rôle des grandeurs statistiques.",
+              "conditions": "Même N,V et spectre fixe ; x = 1 demeure une valeur d’évaluation.",
+              "criterion": "Conserver un terme par micro-état, Z = w0+wε et U = ∑i piEi ; aucune population n’est introduite.",
+              "finding": "Le dossier initial est restitué avec la même liste d’états et les mêmes contraintes canoniques."
+            }
           }
-        ],
-        "id": 2
+        ]
       },
       {
+        "id": 3,
         "title": "Calculer les occupations prévues",
-        "system": "L’application canonique aux deux micro-états non dégénérés avec βε = 1.",
-        "input": "Les données de l’exemple et les relations du niveau 2.",
-        "output": "Probabilités normalisées et énergie moyenne réduite pour le modèle initial.",
+        "system": "Les probabilités et les moments de l’énergie pour les deux micro-états non dégénérés à x = 1.",
+        "input": "2.3 transmet les expressions canoniques ; ε reste l’unité symbolique d’énergie et x = βε = 1.",
+        "output": "pε ≈ 0,268941, p0 ≈ 0,731059 et U/ε ≈ 0,268941 ; énergie moyenne distincte des valeurs instantanées du modèle.",
         "section": "exemple",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La substitution numérique donne des probabilités d’équilibre ; aucun nombre de réalisations ni comptage temporel n’est ajouté."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Préparer le paramètre thermique",
-            "action": "Reprendre βε égal à un et les deux énergies, en gardant ε comme unité symbolique de l’énergie moyenne.",
-            "output": "Paramètre sans dimension et unité énergétique choisis."
+            "title": "Recevoir la valeur sans dimension",
+            "input": "Expressions de 2.3 ou reprise de 3.6 ; deux états 0,ε, g0 = gε = 1 et x = 1.",
+            "action": "Conserver ε symbolique et remplacer seulement βε par 1 dans les poids ; distinguer E, variable aléatoire d’énergie, de U = ⟨E⟩.",
+            "output": "Valeurs possibles E = 0 ou ε ; moyenne et probabilités encore à évaluer.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le spectre fixe les valeurs de la variable aléatoire ; sa moyenne n’est pas une valeur supplémentaire du spectre."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les poids explicites",
-            "action": "Attribuer les poids un et exp(−1), puis définir leur somme avant toute lecture de probabilité.",
-            "output": "Deux poids non normalisés avec leur somme."
+            "title": "Calculer les valeurs normalisées",
+            "input": "Entrées de 3.1 ; poids 1,e⁻¹ et fonction Z = 1+e⁻¹.",
+            "action": "Évaluer Z ≈ 1,367879, pε = 1/(1+e) et p0 = e/(1+e) ; multiplier pε par ε pour U.",
+            "output": "Z et les deux probabilités calculés ; U/ε = 1/(1+e).",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les décimales proviennent de l’exponentielle et de la normalisation ; Z peut dépasser un sans être une probabilité."
+            }
           },
           {
             "id": 3,
-            "title": "Évaluer les probabilités",
-            "action": "Calculer Z, la probabilité excitée et celle du fondamental, puis former l’énergie moyenne divisée par ε.",
-            "output": "Pexc ≈ 0,268941 ; Pfond ≈ 0,731059 ; U/ε ≈ 0,268941."
+            "title": "Établir les prévisions d’énergie",
+            "input": "Résultats de 3.2 ; probabilités complètes conservées avant arrondi.",
+            "action": "Consigner pε ≈ 0,268941, p0 ≈ 0,731059 et U ≈ 0,268941ε, sans choisir ε en joules.",
+            "output": "À 4.1 : deux probabilités et U/ε calculés, associés au spectre non dégénéré et à x = 1.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’énergie réduite exprime une moyenne prévue ; aucune énergie instantanée ni température n’a été mesurée."
+            }
           },
           {
             "id": 4,
-            "title": "Contrôler les bornes",
-            "action": "Vérifier la somme unité, la positivité et le fait que l’énergie moyenne reste comprise entre les deux énergies disponibles.",
-            "output": "Résultats numériques compatibles avec les contraintes élémentaires.",
-            "comparison": "Comparer les résultats de 3 au spectre de 1, sans interpréter une moyenne comme une énergie unique occupée."
+            "title": "Reprendre les valeurs accessibles",
+            "input": "Prévisions de 3.3 ; support de E limité à {0,ε}, avec ε positif.",
+            "action": "Vérifier p0+pε = 1 et 0 < U < ε ; conserver la distinction entre support de E et valeur moyenne.",
+            "output": "La moyenne est intérieure à l’intervalle, alors que les valeurs possibles du modèle restent ses deux extrémités.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les bornes suivent d’une combinaison convexe des énergies ; elles ne décrivent pas une énergie continûment parcourue."
+            },
+            "comparison": "3.4 ↔ 3.3 : retrouver probabilités normalisées et moyenne sans ajouter de niveau.",
+            "evaluation": {
+              "object": "3.4 ↔ 3.3 : probabilités, support et énergie moyenne.",
+              "conditions": "Mêmes résultats complets, spectre 0,ε et x = 1.",
+              "criterion": "Vérifier p0+pε = 1 et U/ε = pε ≈ 0,268941 ; U n’est égal ni à 0 ni à ε.",
+              "finding": "Les prévisions restent cohérentes avec deux valeurs possibles ; une moyenne fractionnaire ne prouve pas un état intermédiaire."
+            }
           },
           {
             "id": 5,
-            "title": "Interpréter la moyenne",
-            "action": "Vérifier qu’une énergie moyenne fractionnaire n’introduit aucun troisième niveau dans le modèle discret utilisé pour le calcul.",
-            "output": "Énergie moyenne distinguée des valeurs possibles d’une réalisation.",
-            "comparison": "Confronter cette interprétation aux poids de 2, qui ne portent que sur les deux micro-états définis."
+            "title": "Calculer la dispersion prévue",
+            "input": "Moyenne reprise en 3.4 ; deux valeurs 0,ε et probabilité excitée pε, à spectre fixé.",
+            "action": "Former ⟨E²⟩ = ε²pε puis Var(E) = ⟨E²⟩−U² = ε²pε(1−pε) > 0.",
+            "output": "Une énergie moyenne définie coexiste avec des fluctuations prévues ; celles-ci ne sont pas une incertitude instrumentale.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le second moment utilise la même distribution canonique ; aucune fluctuation n’est déduite d’une série de mesures absente."
+            },
+            "comparison": "3.5 ↔ 3.2 : le deuxième moment complète la moyenne issue des probabilités normalisées.",
+            "evaluation": {
+              "object": "3.5 ↔ 3.2 : distribution directe et dispersion de son énergie.",
+              "conditions": "Même ε fixé, x = 1 et valeurs calculées ; aucune dérivée avec spectre modifié.",
+              "criterion": "Vérifier Var(E)/ε² = e/(1+e)² = pεp0 > 0 ; les seules valeurs d’énergie restent 0 et ε.",
+              "finding": "La dispersion du modèle est positive ; l’équilibre canonique ne fixe pas l’énergie instantanée du sous-système."
+            }
           },
           {
             "id": 6,
-            "title": "Consigner les prévisions",
-            "action": "Présenter les probabilités et l’énergie moyenne comme prévisions d’équilibre, sans convertir leurs décimales en populations réellement comptées.",
-            "output": "Tableau de prévisions accompagné de sa nature théorique.",
-            "comparison": "Comparer le tableau final aux calculs de 3 et aux entrées de 1, en conservant le statut probabiliste."
+            "title": "Restituer la distribution initiale",
+            "input": "Moments de 3.5 et support {0,ε} reçu en 3.1, avec ε > 0 connu symboliquement.",
+            "action": "Retrouver pε = U/ε et p0 = 1−U/ε ; réassocier ces probabilités aux deux états et à x = 1 conservé.",
+            "output": "À reprendre en 3.1 : même spectre, même paramètre thermique et distribution, sans fréquence d’occupation observée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour reconstitue la distribution binaire grâce au support connu ; une moyenne seule ne reconstruirait pas une distribution arbitraire."
+            },
+            "comparison": "3.6 ↔ 3.1 : retrouver les valeurs possibles et les paramètres d’entrée.",
+            "evaluation": {
+              "object": "3.6 ↔ 3.1 : support et probabilités restitués depuis les moments.",
+              "conditions": "Origine E0 = 0 conservée, ε positif ; x = 1 reste une donnée du dossier.",
+              "criterion": "Retrouver pε = 1/(1+e), p0 = e/(1+e), g0 = gε = 1 et E ∈ {0,ε}.",
+              "finding": "Le dossier initial est restitué ; aucune énergie absolue ni trajectoire de transitions n’est déterminée."
+            }
           }
-        ],
-        "id": 3
+        ]
       },
       {
+        "id": 4,
         "title": "Relire par rapport et dérivée",
-        "system": "Le contrôle des probabilités par reconstruction de βε et calcul alternatif de U.",
-        "input": "Les probabilités calculées au niveau 3, reprises comme données du retour.",
-        "output": "Deux cohérences internes dont la dépendance au même modèle reste explicite.",
+        "system": "La reconstruction du paramètre thermique et le contrôle de l’énergie moyenne, avec changement conditionnel d’origine énergétique.",
+        "input": "3.3 transmet p0,pε et U/ε calculés ; les probabilités complètes sont reprises avec leur spectre.",
+        "output": "x = 1 et U/ε retrouvés ; ε/T est identifié conditionnellement, tandis que l’origine énergétique ne modifie pas les probabilités.",
         "section": "energie",
-        "comparison": "Comparer les contrôles du retour aux calculs du niveau 3 et au paramètre thermique du niveau 1, sans prétendre mesurer une température.",
+        "comparison": "4 ↔ 3 : retrouver probabilités et moyenne par rapport et dérivée, sans attribuer d’indépendance expérimentale à ces contrôles.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les sorties numériques deviennent les entrées du contrôle inverse ; leurs dépendances au modèle initial restent conservées."
+        },
+        "evaluation": {
+          "object": "4 ↔ 3 : paramètre thermique, probabilités et énergie moyenne reconstruits.",
+          "conditions": "Même spectre non dégénéré, origine E0 = 0 et N,V fixés ; valeurs issues du calcul initial.",
+          "criterion": "Retrouver ln(p0/pε) = 1 et U/ε = pε ≈ 0,268941 ; ε et T restent séparément non chiffrés.",
+          "finding": "Les résultats se correspondent ; la concordance n’est ni une thermométrie ni une mesure d’énergie indépendante."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Recevoir les probabilités calculées",
-            "action": "Reprendre les probabilités non arrondies et le spectre associé, en indiquant qu’ils proviennent de la normalisation précédente.",
-            "output": "Données de retour explicitement issues du calcul."
+            "title": "Recevoir les probabilités et leur origine",
+            "input": "Résultats de 3.3 ou reprise de 4.6 ; g0 = gε = 1, E0 = 0 et Eε = ε.",
+            "action": "Conserver les probabilités avant arrondi et leur provenance ; traiter x comme inconnue du contrôle, pas comme nouvelle température mesurée.",
+            "output": "Rapport de probabilités disponible avec spectre et dégénérescences connus.",
+            "relation": {
+              "nature": "logique",
+              "description": "L’inversion reprend une distribution calculée ; les informations spectrales nécessaires ne proviennent pas de cette seule distribution."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les contrôles alternatifs",
-            "action": "Utiliser le logarithme du rapport des probabilités pour βε et la dérivée de ln Z pour U.",
-            "output": "Deux méthodes alternatives définies avec leurs hypothèses."
+            "title": "Inverser le rapport et dériver Z",
+            "input": "Données de 4.1 ; pε/p0 = e⁻ˣ et Z(β) = 1+exp(−βε), avec ε fixé.",
+            "action": "Isoler x = ln(p0/pε) ; calculer −∂β ln Z = ε/(1+eˣ) à N,V et spectre fixes, puis évaluer x.",
+            "output": "Deux voies restituent x et U ; le rapport donne ε/T = kBx, sans séparer les deux paramètres.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le logarithme inverse les poids relatifs ; la dérivée confirme la moyenne dans les mêmes conditions canoniques."
+            }
           },
           {
             "id": 3,
-            "title": "Reconstruire les paramètres",
-            "action": "Retrouver βε égal à un et comparer l’énergie obtenue par dérivation à la moyenne directement pondérée.",
-            "output": "Paramètre thermique et énergie moyenne retrouvés algébriquement."
+            "title": "Établir le résultat du contrôle",
+            "input": "Relations de 4.2 et probabilités exactes p0 = e/(1+e), pε = 1/(1+e).",
+            "action": "Consigner x = ln e = 1 et U/ε = 1/(1+e) ; garder ε et T non chiffrés.",
+            "output": "À 5.1 : contrôles cohérents pour g0 = gε = 1 ; le comptage du spectre reste une donnée distincte.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les résultats retrouvent les paramètres utilisés à l’aller ; ils ne déterminent pas la multiplicité d’un autre spectre."
+            }
           },
           {
             "id": 4,
-            "title": "Relire la dépendance commune",
-            "action": "Vérifier que rapport et dérivée réemploient le même modèle canonique que les probabilités reçues, malgré leurs écritures différentes.",
-            "output": "Concordance qualifiée comme contrôle mathématique interne seulement.",
-            "comparison": "Comparer les résultats de 3 aux données de 1 en rendant explicite leur origine calculatoire commune."
+            "title": "Reprendre les dépendances du contrôle",
+            "input": "Résultats de 4.3 ; même loi canonique et mêmes probabilités calculées que dans la voie directe.",
+            "action": "Reprendre x = 1 et U/ε ; distinguer leur reconstruction algébrique d’une estimation fondée sur fréquences et spectre indépendamment connus.",
+            "output": "Identités internes retrouvées ; aucune température numérique ni fréquence expérimentale fournie.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les méthodes utilisent des écritures différentes des mêmes relations ; leur accord ne fournit pas une deuxième source de données."
+            },
+            "comparison": "4.4 ↔ 4.3 : conserver résultats inverses et leur provenance.",
+            "evaluation": {
+              "object": "4.4 ↔ 4.3 : x et moyenne obtenus par le contrôle.",
+              "conditions": "Même ε symbolique et distribution calculée complète, sans acquisition supplémentaire.",
+              "criterion": "Retrouver x = 1 et U/ε ≈ 0,268941 ; ε/T = kB ne fournit ni ε ni T séparément.",
+              "finding": "Les valeurs et leur portée sont conservées ; toute estimation physique demanderait des informations indépendantes."
+            }
           },
           {
             "id": 5,
-            "title": "Préparer une lecture expérimentale",
-            "action": "Identifier des fréquences indépendamment relevées et des énergies connues comme entrées nécessaires avant d’estimer une température à partir d’occupations.",
-            "output": "Données indépendantes requises pour une estimation physique future.",
-            "comparison": "Confronter ce projet aux contrôles de 2, en rappelant qu’aucune fréquence mesurée n’est disponible ici."
+            "title": "Déplacer l’origine des énergies",
+            "input": "Contrôle repris en 4.4 ; poser Ei′ = Ei+c, avec c commun et indépendant de β à N,V fixés.",
+            "action": "Calculer Z′ = e⁻ᵝᶜZ puis pi′ = pi ; dériver −∂β ln Z′ = c−∂β ln Z = U+c.",
+            "output": "Les probabilités et l’écart ε sont invariants ; Z et la valeur de U dépendent de l’origine choisie.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le décalage change la référence énergétique du même modèle ; il ne représente pas un apport de chaleur ou un changement de température."
+            },
+            "comparison": "4.5 ↔ 4.2 : rapport invariant et moyenne décalée comparés aux deux contrôles initiaux.",
+            "evaluation": {
+              "object": "4.5 ↔ 4.2 : inversion des rapports et dérivée après changement d’origine.",
+              "conditions": "c indépendant de β, même spectre relatif et dégénérescences ; aucune énergie absolue mesurée.",
+              "criterion": "Vérifier ln(p0′/pε′) = x et U′ = U+c ; Z′ = exp(−βc)Z n’est pas en général égal à Z.",
+              "finding": "Le rapport retrouve le même paramètre ; les probabilités ne fixent pas l’origine de l’énergie moyenne."
+            }
           },
           {
             "id": 6,
-            "title": "Qualifier les résultats inverses",
-            "action": "Conserver l’accord interne et préciser que les arrondis des probabilités peuvent affecter une reconstruction numérique trop précise.",
-            "output": "Contrôle inverse validé dans la précision du calcul.",
-            "comparison": "Comparer ce bilan à 3 et aux données de 1, sans annoncer une température expérimentalement déterminée."
+            "title": "Restituer la référence du dossier",
+            "input": "Transformation de 4.5 et origine reçue en 4.1 ; retour à c = 0 pour comparer les mêmes grandeurs.",
+            "action": "Restituer E0 = 0, Eε = ε, Z et U = εpε ; conserver x = 1 et les probabilités inchangées.",
+            "output": "À reprendre en 4.1 : même référence imposée et mêmes résultats calculés ; température et écart restent symboliques.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour retire le décalage de référence sans le traiter comme un processus physique inverse."
+            },
+            "comparison": "4.6 ↔ 4.1 : retrouver probabilités, spectre référencé et statut des entrées du contrôle.",
+            "evaluation": {
+              "object": "4.6 ↔ 4.1 : origine, probabilités et moyenne restituées.",
+              "conditions": "c remis à zéro, mêmes N,V et dégénérescences ; aucune observation ajoutée.",
+              "criterion": "Retrouver Z = 1+e⁻¹, pε = 1/(1+e), p0 = e/(1+e) et U = εpε.",
+              "finding": "Les attributs du dossier sont restitués ; le choix d’origine et la valeur de x ne fournissent aucune énergie absolue observée."
+            }
           }
-        ],
-        "id": 4
+        ]
       },
       {
+        "id": 5,
         "title": "Confronter niveaux et micro-états",
-        "system": "Le diagnostic de l’effet d’une dégénérescence sur normalisation et limites thermiques.",
-        "input": "Le retour du niveau 4 et les définitions microscopiques du niveau 2.",
-        "output": "Une règle correcte de regroupement et une limite haute température conditionnelle.",
+        "system": "Le regroupement canonique par niveaux et ses limites thermiques, pour une variante à deux micro-états excités.",
+        "input": "4.3 transmet le contrôle non dégénéré ; variante distincte g0 = 1, gε = 2 avec mêmes énergies 0,ε.",
+        "output": "Chaque micro-état garde son poids ; le niveau excité somme deux probabilités et tend vers 2/3 à haute température.",
         "section": "degenerescence",
-        "comparison": "Confronter le retour au modèle du niveau 2 : une multiplicité modifiée change le nombre de termes, pas la loi de chaque micro-état.",
+        "comparison": "5 ↔ 2 : comparer somme par micro-états et regroupement par énergie, avec multiplicité explicite dans la variante.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour modifie le nombre de termes du spectre, sans changer la loi canonique de chacun ni décrire une occupation supplémentaire observée."
+        },
+        "evaluation": {
+          "object": "5 ↔ 2 : normalisation microscopique et règle de regroupement.",
+          "conditions": "Spectres finis complets dans chaque modèle, N,V fixés et ε indépendant de T ; variante sans chronologie expérimentale.",
+          "criterion": "Retrouver Zg = 1+g e⁻ˣ et Pε = g e⁻ˣ/Zg ; pour g = 1, retrouver le modèle initial.",
+          "finding": "Le regroupement est compatible avec la loi microscopique ; la limite thermique dépend du nombre de micro-états retenus."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Poser la variante spectrale",
-            "action": "Imaginer deux micro-états d’énergie ε et un seul fondamental, en gardant les mêmes valeurs des deux niveaux.",
-            "output": "Variante de multiplicité explicitement séparée d’une population."
+            "title": "Recevoir la variante de multiplicité",
+            "input": "Contrôle de 4.3 ou reprise de 5.6 ; modèle initial gε = 1, variante gε = 2 avec g0 = 1.",
+            "action": "Nommer les états excités ε,a et ε,b, distincts mais de même énergie ; conserver ε et le contact canonique.",
+            "output": "Trois micro-états dans la variante ; aucune deuxième particule ni augmentation de température n’est introduite.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le changement concerne le spectre supposé ; il est distinct de la probabilité d’occuper un niveau et du nombre de particules N."
+            }
           },
           {
             "id": 2,
-            "title": "Définir le regroupement énergétique",
-            "action": "Associer au niveau excité la somme de ses deux poids et conserver un poids unique pour le fondamental.",
-            "output": "Somme par niveaux équivalente à trois micro-états."
+            "title": "Sommer puis regrouper les états",
+            "input": "Dossier de 5.1 ; noter g = gε, avec g0 = 1, et wi = exp(−βEi).",
+            "action": "Additionner Zg = 1+g e⁻ˣ ; obtenir pexc,ind = e⁻ˣ/Zg pour chaque micro-état excité et Pε = g pexc,ind.",
+            "output": "Probabilité individuelle et probabilité du niveau distinctes ; pour g = 2, Pε = 2e⁻ˣ/(1+2e⁻ˣ).",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le facteur g apparaît dans la somme regroupée, pas dans le poids d’un micro-état individuel."
+            }
           },
           {
             "id": 3,
-            "title": "Examiner la limite thermique",
-            "action": "Faire tendre βε vers zéro dans ce spectre fini et déterminer la probabilité limite du niveau excité.",
-            "output": "Limite excitée égale à deux tiers ici."
+            "title": "Établir les limites du spectre fini",
+            "input": "Formules de 5.2 ; variante g = 2, spectre fini complet et ε > 0 fixé.",
+            "action": "Faire tendre x vers 0+ puis vers l’infini : les trois probabilités individuelles tendent vers 1/3 à haute température ; Pε tend vers zéro à basse température.",
+            "output": "À 6.1 : Pε → 2/3 lorsque x → 0+, Pε → 0 lorsque x → ∞ ; formule disponible pour x = 1.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les limites concernent le modèle fixé ; elles ne supposent pas qu’un système réel conserve seulement ces niveaux à toute température."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les objets comparés",
-            "action": "Vérifier que chaque micro-état tend vers un tiers alors que le niveau excité en regroupe deux.",
-            "output": "Limites individuelles et regroupées explicitement distinguées ici.",
-            "comparison": "Comparer les limites de 3 aux micro-états de 1 en conservant les deux étiquettes excitées distinctes."
+            "title": "Reprendre les limites regroupées",
+            "input": "Résultats de 5.3 ; niveau excité formé de deux micro-états d’énergie ε.",
+            "action": "Reprendre 1/3+1/3 = 2/3 au niveau excité ; distinguer cette limite de la valeur 1/3 d’un seul micro-état.",
+            "output": "À haute température, les micro-états deviennent équiprobables, mais les deux niveaux n’ont pas la même probabilité.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La relecture conserve le regroupement des états ; l’égalité des poids individuels ne rend pas les multiplicités égales."
+            },
+            "comparison": "5.4 ↔ 5.3 : retrouver les limites individuelles et celles du niveau excité.",
+            "evaluation": {
+              "object": "5.4 ↔ 5.3 : probabilités microscopiques et probabilités des niveaux dans les limites.",
+              "conditions": "Mêmes trois micro-états {0,(ε,a),(ε,b)}, d’énergies 0,ε,ε ; ε fixe et T > 0.",
+              "criterion": "À x → 0+, vérifier P0 = 1/3 et Pε = 2/3 ; à x → ∞, vérifier P0 → 1 et Pε → 0.",
+              "finding": "Les limites sont cohérentes avec le comptage ; g = 2 n’est pas une population excitée égale à deux."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter la limite initiale",
-            "action": "Expliquer pourquoi la limite un demi du spectre non dégénéré n’est pas conservée après l’ajout d’un micro-état excité.",
-            "output": "Différence des limites attribuée à la multiplicité.",
-            "comparison": "Confronter cette conclusion au regroupement de 2, sans modifier artificiellement la température ou les valeurs d’énergie."
+            "title": "Déduire les bornes thermiques",
+            "input": "Probabilités reprises en 5.4 ; expression générale Pε(x) = g/(eˣ+g), à g et ε fixés.",
+            "action": "Dériver dPε/dx = −g eˣ/(eˣ+g)² < 0 ; combiner avec les limites pour obtenir 0 < Pε < g/(1+g) à x > 0.",
+            "output": "La borne haute vaut 1/2 pour g = 1 et 2/3 pour g = 2 ; elle dépend du spectre.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivée compare des états d’équilibre paramétrés par x ; elle ne décrit pas la vitesse d’une transition ou d’un chauffage."
+            },
+            "comparison": "5.5 ↔ 5.2 : la variation et les bornes déduites conservent le regroupement canonique.",
+            "evaluation": {
+              "object": "5.5 ↔ 5.2 : expression de niveau, monotonie et limites à multiplicité fixée.",
+              "conditions": "Spectre complet, g entier positif, ε constant et x > 0 ; aucune nouvelle valeur numérique de T.",
+              "criterion": "Vérifier dPε/dx < 0 et limx→0+ Pε = g/(1+g) ; substituer g = 1 puis g = 2.",
+              "finding": "Le modèle initial et la variante ont des limites différentes ; cette différence ne résulte pas d’une modification de la loi individuelle."
+            }
           },
           {
             "id": 6,
-            "title": "Retenir la règle générale",
-            "action": "Conserver la loi canonique par micro-état et énoncer que les probabilités de niveaux exigent leur multiplicité propre.",
-            "output": "Règle de calcul applicable aux deux spectres finis.",
-            "comparison": "Comparer cette règle à 3 et à la variante de 1, sans extrapoler la limite à un spectre infini."
+            "title": "Restituer la liste des états",
+            "input": "Bornes et regroupement de 5.5 ; variante reçue en 5.1 avec deux états excités.",
+            "action": "Décomposer Pε en deux contributions égales Pε/2 et restituer l’état fondamental unique, avec les mêmes énergies.",
+            "output": "À reprendre en 5.1 : trois micro-états et deux niveaux ; g0 = 1, gε = 2 restent des attributs supposés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour retrouve le dénombrement utilisé dans la somme ; les probabilités calculées ne mesurent pas une dégénérescence réelle."
+            },
+            "comparison": "5.6 ↔ 5.1 : retrouver les étiquettes, énergies et multiplicités de la variante.",
+            "evaluation": {
+              "object": "5.6 ↔ 5.1 : structure microscopique restituée depuis le regroupement.",
+              "conditions": "Même variante supposée ; les deux micro-états excités ont exactement la même énergie et le même poids.",
+              "criterion": "Retrouver pε,a = pε,b = Pε/2, gε = 2 et g0 = 1, avec N,V et ε inchangés.",
+              "finding": "Le dossier spectral est restitué ; ni nombre de particules ni occupation observée ne remplace le comptage des états."
+            }
           }
-        ],
-        "id": 5
+        ]
       },
       {
+        "id": 6,
         "title": "Recalculer avec une dégénérescence",
-        "system": "L’application de retour au spectre comportant deux micro-états excités avec βε = 1.",
-        "input": "Le cadre confronté au niveau 5 et le paramètre thermique initial conservé.",
-        "output": "Une nouvelle probabilité excitée explicitement reliée au changement de spectre.",
+        "system": "Les probabilités de la variante gε = 2 à x = 1 et leur inversion en tenant compte de la multiplicité.",
+        "input": "5.3 transmet la règle regroupée ; mêmes ε,T,N,V que le modèle initial, avec g0 = 1 et gε = 2.",
+        "output": "Pε ≈ 0,423883, chaque micro-état excité ≈ 0,211942 ; x = 1 retrouvé avec multiplicité connue et U/ε = Pε.",
         "section": "controle",
-        "comparison": "Comparer la somme par niveaux au calcul du niveau 3 et identifier la seule entrée modifiée depuis le niveau 1 : la dégénérescence.",
+        "comparison": "6 ↔ 1 : conserver écart, paramètre thermique et contact ; isoler le changement explicite de dégénérescence entre les deux dossiers.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le calcul compare deux spectres supposés aux mêmes paramètres ; il ne décrit ni augmentation mesurée de population ni transformation chronologique."
+        },
+        "evaluation": {
+          "object": "6 ↔ 1 : attributs du modèle initial et modification spectrale de la variante.",
+          "conditions": "Même ε > 0, T > 0, x = 1 et N,V fixés ; seule gε passe de 1 à 2 entre dossiers.",
+          "criterion": "Conserver les deux énergies 0,ε et g0 = 1 ; comparer pε initial ≈ 0,268941 à Pε variante ≈ 0,423883.",
+          "finding": "La différence provient du nombre de micro-états excités dans les modèles ; aucune température, particule ou population observée n’est ajoutée."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Fixer les données du retour",
-            "action": "Reprendre βε égal à un, garder les niveaux zéro et ε et poser les multiplicités un et deux.",
-            "output": "Paramètre thermique conservé avec multiplicité excitée modifiée."
+            "title": "Recevoir le modèle de retour",
+            "input": "Règle transmise par 5.3 ou reprise de 6.6 ; g0 = 1, gε = 2 et x = 1.",
+            "action": "Conserver les mêmes ε et T que dans le dossier initial ; répertorier les trois micro-états sans confondre leur nombre avec N.",
+            "output": "Variante spectrale à température et écart inchangés, tous deux non chiffrés séparément.",
+            "relation": {
+              "nature": "logique",
+              "description": "L’entrée modifiée est la multiplicité ; les conditions canoniques et la relation entre température et écart demeurent inchangées."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir la voie regroupée",
-            "action": "Utiliser Z = 1 + 2 exp(−1) et distinguer le poids du niveau excité de celui d’un de ses micro-états.",
-            "output": "Normalisation par niveaux et poids individuels séparés."
+            "title": "Normaliser les trois poids",
+            "input": "Dossier de 6.1 ; poids individuels 1,e⁻¹,e⁻¹ et deux micro-états dans le niveau excité.",
+            "action": "Calculer Zg = 1+2e⁻¹ ; obtenir P0 = 1/Zg, pε,a = pε,b = e⁻¹/Zg et Pε = 2e⁻¹/Zg.",
+            "output": "Zg ≈ 1,735759 ; probabilité du niveau et probabilités individuelles explicitement séparées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La normalisation porte sur trois termes, même lorsque le calcul est présenté sous forme de deux niveaux d’énergie."
+            }
           },
           {
             "id": 3,
-            "title": "Calculer la nouvelle occupation",
-            "action": "Évaluer la probabilité excitée 2/(exp(1) + 2), puis obtenir U/ε par la somme pondérée des deux niveaux.",
-            "output": "Pexc et U/ε égaux à 2/(exp(1) + 2)."
+            "title": "Établir les probabilités de la variante",
+            "input": "Expressions de 6.2 ; valeurs complètes conservées avant arrondi.",
+            "action": "Consigner P0 ≈ 0,576117, Pε ≈ 0,423883 et pε,a = pε,b ≈ 0,211942 ; former U/ε = Pε.",
+            "output": "À 1.1 : variante gε = 2, x = 1 et probabilités calculées ; le dossier initial gε = 1 reste distinct.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La nouvelle moyenne utilise la probabilité totale du niveau ; ε reste symbolique et l’énergie possible reste 0 ou ε."
+            }
           },
           {
             "id": 4,
-            "title": "Recompter par micro-états",
-            "action": "Calculer séparément les trois probabilités individuelles puis additionner les deux excitées pour retrouver la voie regroupée.",
-            "output": "Accord exact entre comptage individuel et regroupement.",
-            "comparison": "Comparer ce contrôle au résultat de 3 et aux multiplicités de 1 avec les mêmes énergies et température."
+            "title": "Recompter les contributions microscopiques",
+            "input": "Résultats de 6.3, avec probabilités exactes avant arrondi et énergies 0,ε,ε.",
+            "action": "Additionner P0+pε,a+pε,b = 1 ; retrouver Pε = pε,a+pε,b et U = εpε,a+εpε,b.",
+            "output": "Comptage individuel et regroupement donnent exactement la même probabilité excitée et la même moyenne.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La vérification s’effectue avant arrondi ; sommer deux décimales affichées peut sinon produire un dernier chiffre différent."
+            },
+            "comparison": "6.4 ↔ 6.3 : retrouver probabilité du niveau et moyenne par les contributions individuelles.",
+            "evaluation": {
+              "object": "6.4 ↔ 6.3 : probabilités regroupées, somme microscopique et énergie moyenne.",
+              "conditions": "Même spectre et x = 1 ; valeurs non arrondies pour les identités.",
+              "criterion": "Vérifier pε,a+pε,b = 2/(e+2) = Pε et P0+Pε = 1 ; U/ε = Pε.",
+              "finding": "Les résultats de la variante sont conservés ; une moyenne plus grande n’ajoute pas une nouvelle énergie au spectre."
+            }
           },
           {
             "id": 5,
-            "title": "Interpréter le changement",
-            "action": "Relier l’augmentation de probabilité excitée au nombre de micro-états disponibles, sans l’attribuer à une augmentation de température.",
-            "output": "Cause de la différence statistique correctement localisée.",
-            "comparison": "Confronter cette interprétation à la normalisation de 2, qui conserve le même paramètre βε dans les deux cas."
+            "title": "Inverser avec la multiplicité connue",
+            "input": "Probabilités reprises en 6.4 ; g0 = 1, gε = g connu et Pε/P0 = g e⁻ˣ.",
+            "action": "Isoler x = ln(gP0/Pε) ; avec g = 2 retrouver x = 1, puis ε/T = kBx.",
+            "output": "T = ε/(kBx) exige ε connu ; ε = kBTx exige T connu. Ici, aucune des deux valeurs séparées n’est fournie.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion restitue le rapport thermique en utilisant la dégénérescence donnée ; elle ne l’estime pas à partir d’une population mesurée."
+            },
+            "comparison": "6.5 ↔ 6.2 : le rapport corrigé de la multiplicité inverse les poids regroupés.",
+            "evaluation": {
+              "object": "6.5 ↔ 6.2 : normalisation par niveaux et reconstruction du paramètre thermique.",
+              "conditions": "Même g = 2 connu, P0,Pε positifs et spectre fixé ; calcul avant arrondi.",
+              "criterion": "Retrouver ln[2P0/Pε] = 1 ; omettre g donnerait 1−ln 2, en attribuant au paramètre thermique un effet de multiplicité.",
+              "finding": "Le bon paramètre est retrouvé ; son inversion reste conditionnelle au spectre et ne fournit pas une température absolue."
+            }
           },
           {
             "id": 6,
-            "title": "Fermer la comparaison canonique",
-            "action": "Présenter les deux spectres et leurs probabilités, puis rappeler les données indépendantes nécessaires à une confrontation avec des occupations réelles.",
-            "output": "Boucle théorique fermée ; confrontation aux populations encore ouverte.",
-            "comparison": "Comparer ce bilan à 3 et aux entrées de 1, en conservant la distinction entre multiplicité et population."
+            "title": "Restituer les deux dossiers séparés",
+            "input": "Paramètre reconstruit en 6.5 et attributs reçus en 6.1 ; énergies, contact et N,V conservés.",
+            "action": "Réassocier x = 1 aux deux modèles : gε = 1 initial et gε = 2 variante ; conserver leurs probabilités propres.",
+            "output": "À reprendre en 6.1 : même variante et même référence ; ε,T restent non chiffrés, dégénérescence distincte d’occupation.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour retrouve les conditions et la différence spectrale annoncées ; il ne transforme pas la comparaison en événement expérimental."
+            },
+            "comparison": "6.6 ↔ 6.1 : retrouver spectre de retour, paramètre thermique et données inchangées.",
+            "evaluation": {
+              "object": "6.6 ↔ 6.1 : énergies, multiplicité et contact du modèle de retour.",
+              "conditions": "Même N,V, couplage faible, ε > 0 et T > 0 ; les deux modèles demeurent des hypothèses distinctes.",
+              "criterion": "Retrouver 0,ε, g0 = 1, gε = 2 et x = 1 pour la variante, avec Pε = 2/(e+2).",
+              "finding": "Les attributs initiaux du retour sont restitués ; aucune énergie instantanée ni multiplicité matérielle n’a été mesurée."
+            }
           }
-        ],
-        "id": 6
+        ]
       }
-    ],
-    "version": "0.1",
-    "updated": "2026-09-09"
+    ]
   },
   "newton-referentiel": {
     "question": "Comment relier le mouvement annoncé sur une pente aux interactions retenues et au référentiel choisi ?",

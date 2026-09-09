@@ -1,6 +1,6 @@
 # Préciser les analyses existantes
 
-Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) aux fiches déjà rédigées. Elle conserve leurs coordonnées afin de permettre la reprise de chaque élément. Les lots **AP1 à AP7** concernent vingt fiches :
+Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) aux fiches déjà rédigées. Elle conserve leurs coordonnées afin de permettre la reprise de chaque élément. Les lots **AP1 à AP8** concernent les vingt-deux fiches existantes :
 
 | Lot | Fiche | Nature du sujet | Périmètre |
 | --- | --- | --- | --- |
@@ -24,14 +24,16 @@ Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) a
 | AP7 | `capacites-thermiques` | Phénomène physique | Gaz parfait monoatomique chauffé sous deux contraintes ; capacités, travail et énergie |
 | AP7 | `detente-isotherme` | Phénomène physique | Détentes réversible et libre entre mêmes états ; échanges et retour par compression |
 | AP7 | `entropie` | Phénomène physique | Gaz et thermostat ; variation d’état, échange et production globale avec le contact |
+| AP8 | `microcanonique` | Phénomène physique | Trois sites à énergie fixée ; dénombrement, événements et choix d’ensemble |
+| AP8 | `boltzmann` | Phénomène physique | Système discret avec réservoir ; probabilités, dégénérescence et énergie moyenne |
 
 ## Ce qui est précisé
 
-Les 720 sous-niveaux de ces sept lots reprennent les attributs reçus, le traitement effectué et la sortie à conserver. Chacun des lots AP1 à AP4, AP6 et AP7 en approfondit 108 ; AP5 en approfondit 72. Les fonctions 2 et 5 réalisent un traitement théorique propre au système local : le retour ne se limite pas à inviter à vérifier ou décider.
+Les 792 sous-niveaux de ces huit lots reprennent les attributs reçus, le traitement effectué et la sortie à conserver. Chacun des lots AP1 à AP4, AP6 et AP7 en approfondit 108 ; AP5 et AP8 en approfondissent chacun 72. Les fonctions 2 et 5 réalisent un traitement théorique propre au système local : le retour ne se limite pas à inviter à vérifier ou décider.
 
-Chaque niveau global et sous-niveau possède une relation entrante qualifiée. Les **840 relations** décrivent comment les entrées conduisent à l'élément étudié : dépendance logique, calcul, lecture, interprétation ou autre relation explicitée. Un contrôle de cohérence ne devient pas une mesure ; un changement de cas calculé ne devient pas une chronologie expérimentale.
+Chaque niveau global et sous-niveau possède une relation entrante qualifiée. Les **924 relations** décrivent comment les entrées conduisent à l'élément étudié : dépendance logique, calcul, lecture, interprétation ou autre relation explicitée. Un contrôle de cohérence ne devient pas une mesure ; un changement de cas calculé ne devient pas une chronologie expérimentale.
 
-Les trois comparaisons globales et les dix-huit comparaisons locales de chaque fiche possèdent quatre champs, soit **420 évaluations détaillées** au total :
+Les trois comparaisons globales et les dix-huit comparaisons locales de chaque fiche possèdent quatre champs, soit **462 évaluations détaillées** au total :
 
 1. **Éléments comparés** : références exactes, correspondant à 4/3, 5/2 ou 6/1.
 2. **Conditions de comparaison** : hypothèses communes, conventions et statut des données.
@@ -101,13 +103,22 @@ Le septième lot reprend trois analyses liées aux échanges thermiques. Leurs 1
 
 Ces références existantes ont été revérifiées le 9 septembre 2026. Les bilans des exemples et des retours sont recalculés dans leurs hypothèses. Les comparaisons 4/3, 5/2 et 6/1 sont explicites aux deux étages ; les calculs inverses ne remplacent pas une confrontation indépendante. Les fiches scientifiques et les repères des recueils sont conservés ; leurs ouvrages complets restent privés.
 
+## AP8 : états accessibles et probabilités de Boltzmann
+
+Le huitième lot approfondit les deux dernières analyses dans leur première rédaction. Leurs 72 sous-niveaux distinguent micro-états, événements, poids statistiques et grandeurs moyennes. Les systèmes physiques sont représentés par des modèles discrets ; leurs attributs sont supposés et leurs résultats calculés.
+
+- **Microcanonique** : énumérer les configurations sous contrainte énergétique, puis construire les probabilités sous le postulat d'équiprobabilité. Les trois sites à E = ε et à E = 2ε possèdent chacun trois micro-états, mais des configurations différentes : la probabilité d'excitation du premier site passe de 1/3 à 2/3. Même multiplicité et même entropie n'identifient donc ni l'énergie ni l'ensemble des états. Le dénombrement ne fournit aucune dynamique d'exploration. [MIT, notes microcanoniques, p. 1–4](https://ocw.mit.edu/courses/8-044-statistical-physics-i-spring-2013/328b69f845f540b137c5fbde68203697_MIT8_044S13_mcrocanoncl.pdf).
+- **Boltzmann** : normaliser les poids, distinguer probabilité d'un micro-état et d'un niveau dégénéré, puis relier occupation et énergie moyenne. Le retour par le rapport des probabilités exige de connaître les multiplicités ; il identifie ε/T sans séparer les deux paramètres. Le changement d'origine énergétique conserve les probabilités, mais modifie Z et U. La variante de dégénérescence n'est pas un changement du nombre de particules. [MIT, notes canoniques, p. 1–4](https://ocw.mit.edu/courses/8-044-statistical-physics-i-spring-2013/7fa3fb4237d0d00d5603ae4ea8f02236_MIT8_044S13_Canonical.pdf).
+
+Ces références existantes ont été revérifiées le 9 septembre 2026. Dénombrements, probabilités, moyennes et inversions ont été recalculés. La passerelle entre ensembles précise le grand réservoir et le couplage faible ; une cohérence interne ne valide pas expérimentalement le choix d'ensemble. Les comparaisons 4/3, 5/2 et 6/1 sont explicites aux deux étages. Les fiches scientifiques et les repères des recueils sont conservés ; leurs ouvrages complets restent privés.
+
 ## Lecture dans le site
 
 Les fiches concernées portent la mention « Entrées et évaluations précisées » dans les catalogues. Leur schéma global indique la nature et le périmètre du sujet ainsi que la révision de l'analyse.
 
 Dans une page de niveau, chaque point présente ses éléments reçus et la nature du lien entrant. Les retours affichent les quatre champs d'évaluation à côté des liens vers les éléments comparés. Les coordonnées et tous les anciens liens restent utilisables.
 
-Les autres fiches affichent leurs comparaisons sous leur forme initiale. Ce maintien permet de perfectionner les analyses par groupes cohérents sans prétendre que tout le catalogue a reçu la même profondeur de relecture.
+Les 22 fiches disposent désormais de ces entrées, relations et évaluations détaillées. Cette couverture marque un premier approfondissement analytique complet du catalogue existant ; elle ne clôt pas la relecture scientifique avec l'auteur.
 
 ## Rédaction et données
 
@@ -121,4 +132,4 @@ Dans `app/config/content/analyses-fiches.json`, une analyse précisée comporte 
 
 Le champ `comparison` conserve un résumé compatible. Les gabarits affichent les quatre champs quand ils sont présents, ou la comparaison initiale sinon. Les tests vérifient la couverture complète des analyses précisées ; une vérification technique ne remplace pas la relecture du sens des textes.
 
-La suite du perfectionnement appliquera ces exigences aux autres fiches, en réexaminant réellement le rôle théorique de chaque 2 et 5 et l'objet des trois comparaisons de chaque boucle.
+La suite appliquera ces exigences aux nouvelles fiches et aux révisions ciblées du catalogue, en réexaminant le rôle théorique de chaque 2 et 5 et l'objet des trois comparaisons de chaque boucle.
