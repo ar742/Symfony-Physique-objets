@@ -4,13 +4,15 @@ require dirname(__DIR__).'/vendor/autoload.php';
 $kernel = new App\Kernel('dev', true);
 $kernel->boot();
 $library = new App\Content\LearningLibrary(dirname(__DIR__), new App\Content\SourceLibrary(dirname(__DIR__)));
+$domains = new App\Content\DomainLibrary(dirname(__DIR__), $library, new App\Content\SourceLibrary(dirname(__DIR__)));
 $checks = 0;
 $errors = [];
 $check = function (bool $ok, string $message) use (&$checks, &$errors): void {
     $checks++;
     if (!$ok) { $errors[] = $message; }
 };
-$paths = ['/', '/recueils/', '/fiches/', '/fiches/corrections'];
+$paths = ['/', '/recueils/', '/fiches/', '/fiches/corrections', '/domaines/'];
+foreach ($domains->available() as $domain) { $paths[] = '/domaines/'.$domain['slug']; }
 foreach (range(1, 6) as $base) { $paths[] = '/boucle/'.$base; }
 foreach ($library->all() as $card) { $paths[] = '/fiches/'.$card['slug']; }
 $documents = [];
@@ -33,7 +35,7 @@ foreach ($paths as $path) {
             }
         }
     }
-    if (str_starts_with($path, '/boucle/')) {
+    if (str_starts_with($path, '/boucle/') || $path === '/domaines/mecanique') {
         $check((new DOMXPath($document))->query('//*[@data-loop-node]')->length === 6, 'Six nœuds '.$path);
         $check((new DOMXPath($document))->query('//*[@role="tooltip"]')->length === 6, 'Six infos '.$path);
     }
@@ -45,7 +47,7 @@ foreach ($documents as $path => $document) {
         $targetPath = $url['path'] ?? $path;
         // Existing archive routes and PDFs are checked by verify-loop / verify-catalog.
         if (!isset($documents[$targetPath])) {
-            if (str_starts_with($targetPath, '/boucle/') || str_starts_with($targetPath, '/fiches/')) {
+            if (str_starts_with($targetPath, '/boucle/') || str_starts_with($targetPath, '/fiches/') || str_starts_with($targetPath, '/domaines/')) {
                 $check(false, 'Destination inconnue '.$targetPath);
             }
             continue;
@@ -56,11 +58,11 @@ foreach ($documents as $path => $document) {
         }
     }
 }
-foreach (['/boucle/0', '/boucle/7', '/fiches/inconnue', '/fiches/..%2F.env'] as $path) {
+foreach (['/boucle/0', '/boucle/7', '/fiches/inconnue', '/fiches/..%2F.env', '/domaines/inconnu', '/domaines/optique', '/domaines/..%2F.env'] as $path) {
     $response = $kernel->handle(Symfony\Component\HttpFoundation\Request::create($path), Symfony\Component\HttpKernel\HttpKernelInterface::SUB_REQUEST);
     $check($response->getStatusCode() === 404, 'Route invalide '.$path);
 }
-foreach (['/boucle/2', '/fiches/boltzmann', '/styles/science.css'] as $path) {
+foreach (['/boucle/2', '/fiches/boltzmann', '/domaines/mecanique', '/fiches/oscillateur-harmonique', '/styles/science.css'] as $path) {
     $curl = curl_init('http://127.0.0.1'.$path);
     curl_setopt_array($curl, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 30]);
     $html = curl_exec($curl);
@@ -68,7 +70,7 @@ foreach (['/boucle/2', '/fiches/boltzmann', '/styles/science.css'] as $path) {
     $check(is_string($html) && strlen($html) > 100, 'Contenu HTTP '.$path);
     unset($curl);
 }
-$result = ['checks' => $checks, 'pages' => count($documents), 'substeps' => 36, 'cards' => 8, 'corrections' => 7, 'browser_visual_test' => false, 'errors' => $errors];
+$result = ['checks' => $checks, 'pages' => count($documents), 'substeps' => 36, 'domain_steps' => array_sum(array_map(static fn (array $domain): int => count($domain['steps']), $domains->all())), 'cards' => count($library->all()), 'corrections' => array_sum(array_map(static fn (array $card): int => count($card['corrections']), $library->all())), 'browser_visual_test' => false, 'errors' => $errors];
 file_put_contents(dirname(__DIR__).'/var/learning-verification.json', json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)."\n";
 exit($errors ? 1 : 0);

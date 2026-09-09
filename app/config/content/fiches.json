@@ -102,7 +102,8 @@
     "number": 1,
     "version": "1.0",
     "updated": "2026-09-09",
-    "status": "Version pilote · relecture auteur à faire"
+    "status": "Version pilote · relecture auteur à faire",
+    "domain": "thermodynamique-statistique"
   },
   {
     "slug": "gaz-parfait",
@@ -217,7 +218,8 @@
     "number": 2,
     "version": "1.0",
     "updated": "2026-09-09",
-    "status": "Version pilote · relecture auteur à faire"
+    "status": "Version pilote · relecture auteur à faire",
+    "domain": "thermodynamique-statistique"
   },
   {
     "slug": "premier-principe",
@@ -310,7 +312,8 @@
     "number": 3,
     "version": "1.0",
     "updated": "2026-09-09",
-    "status": "Version pilote · relecture auteur à faire"
+    "status": "Version pilote · relecture auteur à faire",
+    "domain": "thermodynamique-statistique"
   },
   {
     "slug": "capacites-thermiques",
@@ -426,7 +429,8 @@
     "number": 4,
     "version": "1.0",
     "updated": "2026-09-09",
-    "status": "Version pilote · relecture auteur à faire"
+    "status": "Version pilote · relecture auteur à faire",
+    "domain": "thermodynamique-statistique"
   },
   {
     "slug": "detente-isotherme",
@@ -535,7 +539,8 @@
     "number": 5,
     "version": "1.0",
     "updated": "2026-09-09",
-    "status": "Version pilote · relecture auteur à faire"
+    "status": "Version pilote · relecture auteur à faire",
+    "domain": "thermodynamique-statistique"
   },
   {
     "slug": "entropie",
@@ -655,7 +660,8 @@
     "number": 6,
     "version": "1.0",
     "updated": "2026-09-09",
-    "status": "Version pilote · relecture auteur à faire"
+    "status": "Version pilote · relecture auteur à faire",
+    "domain": "thermodynamique-statistique"
   },
   {
     "slug": "microcanonique",
@@ -737,7 +743,8 @@
     "number": 7,
     "version": "1.0",
     "updated": "2026-09-09",
-    "status": "Version pilote · relecture auteur à faire"
+    "status": "Version pilote · relecture auteur à faire",
+    "domain": "thermodynamique-statistique"
   },
   {
     "slug": "boltzmann",
@@ -877,6 +884,431 @@
       }
     ],
     "number": 8,
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire",
+    "domain": "thermodynamique-statistique"
+  },
+  {
+    "slug": "newton-referentiel",
+    "title": "Passer du bilan des forces au mouvement",
+    "level": "CPGE · Mécanique du point",
+    "summary": "Choisir un référentiel, isoler un mobile et prévoir son accélération.",
+    "objective": "Écrire une équation du mouvement avec des axes et des conditions initiales explicites.",
+    "prerequisites": [
+      "Vecteurs et projections",
+      "Dérivation et intégration élémentaires"
+    ],
+    "system": "Un mobile assimilé à un point matériel de masse constante, sans échange de matière.",
+    "conditions": [
+      "Référentiel supposé galiléen à la précision de l’étude ; le laboratoire terrestre est une approximation à justifier.",
+      "Vitesses petites devant celle de la lumière ; description classique du mobile.",
+      "Les forces retenues et les contraintes de contact sont explicitées."
+    ],
+    "sections": [
+      {
+        "id": "bilan",
+        "title": "Isoler le mobile et nommer les interactions",
+        "paragraphs": [
+          "Tracer une frontière autour du mobile. Recenser les actions du milieu extérieur sur lui : pesanteur, support, ressort, frottement, tension. La force exercée par le mobile sur le support agit sur un autre système ; elle ne s’ajoute pas au bilan du mobile.",
+          "Le point matériel suffit si les dimensions et la rotation propre ne jouent pas de rôle dans la question posée. Pour étudier un basculement ou une rotation, il faut un modèle de solide."
+        ],
+        "equations": []
+      },
+      {
+        "id": "loi",
+        "title": "Projeter la loi de Newton",
+        "paragraphs": [
+          "La somme vectorielle des forces détermine l’accélération. À masse constante, la quantité de mouvement est p = mv. On dérive les vecteurs dans le référentiel choisi et on projette ensuite sur une base explicitement orientée.",
+          "Sur un plan rectiligne incliné d’un angle α par rapport à l’horizontale, orienter x vers le bas de la pente. Sans frottement et tant que le contact est maintenu, ma = mg sin α et la réaction normale vaut N = mg cos α. Les deux projections répondent à deux questions différentes."
+        ],
+        "equations": [
+          {
+            "id": "newton",
+            "reading": "La somme des forces extérieures est égale à la dérivée temporelle de la quantité de mouvement, soit m fois l’accélération à masse constante."
+          }
+        ]
+      },
+      {
+        "id": "limites",
+        "title": "Intégrer puis confronter",
+        "paragraphs": [
+          "Une accélération ne suffit pas à connaître la trajectoire : il faut aussi la position et la vitesse initiales. Si a est constant, v(t) = v₀ + at et x(t) = x₀ + v₀t + at²/2.",
+          "Comparer des positions horodatées au calcul permet de rechercher un frottement oublié, un biais de mesure ou un mauvais choix de référentiel. Une force résultante nulle impose une vitesse constante, qui peut être non nulle.",
+          "Dans un référentiel accéléré, les termes d’inertie doivent être pris en compte. Un mobile qui perd ou reçoit de la matière exige un bilan de quantité de mouvement avec les flux ; la formule à masse constante ne s’y applique pas directement."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Un mobile de 2,00 kg part du repos sur une pente de 30° sans frottement. On choisit g = 9,81 m·s⁻². Que prévoit le modèle après 2,00 s ?",
+      "steps": [
+        "a = g sin(30°) = 4,905 m·s⁻².",
+        "N = mg cos(30°) = 16,991 N.",
+        "v = at = 9,810 m·s⁻¹ ; distance parcourue = at²/2 = 9,810 m."
+      ],
+      "result": "Le mouvement accélère vers le bas de la pente. La masse intervient dans les forces mais se simplifie dans l’accélération de ce modèle."
+    },
+    "checkpoint": {
+      "question": "Si la masse est doublée, la vitesse au bout de deux secondes double-t-elle ?",
+      "answer": "Non. Avec les mêmes hypothèses, a = g sin α ne dépend pas de m : la vitesse reste 9,810 m·s⁻¹. Le poids et la réaction normale doublent."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P1",
+        "page": 265,
+        "section": "Référentiels, position, vitesse et accélération"
+      },
+      {
+        "doc": "cpge",
+        "code": "P1",
+        "page": 268,
+        "section": "Principe fondamental de la dynamique à masse constante"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 239,
+        "section": "Mécanique et gravitation newtonienne : PFD"
+      }
+    ],
+    "references": [
+      "mit-newton"
+    ],
+    "corrections": [],
+    "number": 9,
+    "domain": "mecanique",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "travail-energie-mecanique",
+    "title": "Choisir un bilan de travail et d’énergie",
+    "level": "CPGE · Mécanique du point",
+    "summary": "Relier une force à une variation de vitesse et distinguer les deux bilans d’énergie.",
+    "objective": "Calculer une vitesse finale sans résoudre toute la trajectoire, en contrôlant les signes des travaux.",
+    "prerequisites": [
+      "Loi de Newton",
+      "Produit scalaire et intégrale"
+    ],
+    "system": "Un point matériel de masse constante, observé dans un référentiel galiléen.",
+    "conditions": [
+      "Toutes les forces appliquées au point sont incluses dans le bilan.",
+      "Les potentiels utilisés sont indépendants du temps et associés aux forces conservatives retenues.",
+      "Le travail d’une force dépend du déplacement de son point d’application."
+    ],
+    "sections": [
+      {
+        "id": "travail",
+        "title": "Un travail est une intégrale sur le déplacement",
+        "paragraphs": [
+          "Une force constante fournit le travail W = Fd cos θ sur un déplacement rectiligne de longueur d, où θ est l’angle entre force et déplacement. Le travail peut être positif, négatif ou nul. Un effort important ne garantit donc pas un transfert d’énergie au mobile.",
+          "Une réaction normale ne travaille pas dans le modèle d’un point glissant sur un support fixe si elle reste perpendiculaire au déplacement. Sur un support mobile ou pour un autre modèle de contact, cette conclusion doit être réexaminée."
+        ],
+        "equations": []
+      },
+      {
+        "id": "bilan",
+        "title": "Théorème de l’énergie cinétique",
+        "paragraphs": [
+          "L’énergie cinétique Ec = mv²/2 dépend du référentiel. Sa variation égale la somme des travaux de toutes les forces appliquées au point. Cette équation donne souvent la norme de la vitesse finale, mais pas sa direction ni la durée du trajet."
+        ],
+        "equations": [
+          {
+            "id": "travailmeca",
+            "reading": "La variation de l’énergie cinétique entre A et B est la somme des intégrales des forces scalaires avec le déplacement."
+          }
+        ]
+      },
+      {
+        "id": "conservation",
+        "title": "Quand conserver l’énergie mécanique ?",
+        "paragraphs": [
+          "Si une force dérive d’un potentiel Ep indépendant du temps, son travail vaut −ΔEp. On peut regrouper énergie cinétique et énergie potentielle dans Em = Ec + Ep. Seuls les travaux des forces non conservatives apparaissent alors au second membre.",
+          "Ne pas compter une interaction à la fois par son travail et par son potentiel dans le même bilan. Avec un frottement, l’énergie mécanique peut diminuer : l’énergie totale n’a pas disparu, elle a été transférée aux degrés de liberté internes du mobile et du milieu.",
+          "Pour un système étendu déformable, il faut aussi traiter les travaux internes. Le présent calcul concerne le point matériel."
+        ],
+        "equations": [
+          {
+            "id": "emeca",
+            "reading": "La variation de l’énergie mécanique est égale au travail des forces non conservatives, lorsque les potentiels ne dépendent pas explicitement du temps."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "Un mobile de 2,00 kg avance à 3,00 m·s⁻¹ sur une piste horizontale. Une traction de 6,00 N l’aide et un frottement de 2,00 N s’y oppose pendant 4,00 m.",
+      "steps": [
+        "Wtraction = 6 × 4 = 24,000 J ; Wfrottement = −2 × 4 = −8,000 J.",
+        "ΔEc = 16,000 J ; Ec initiale = 9,000 J ; Ec finale = 25,000 J.",
+        "v finale = √(2Ec finale/m) = 5,000 m·s⁻¹."
+      ],
+      "result": "La vitesse augmente malgré le frottement, car le travail total est positif. Le poids et la réaction normale ont ici un travail nul."
+    },
+    "checkpoint": {
+      "question": "Quelle distance d’arrêt prévoit le même frottement de 2,00 N si l’on supprime la traction dès la vitesse initiale de 3,00 m·s⁻¹ ?",
+      "answer": "Le travail du frottement annule les 9,000 J d’énergie cinétique initiale : −2d = −9, donc d = 4,500 m. On suppose le frottement constant jusqu’à l’arrêt."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P1",
+        "page": 268,
+        "section": "Théorèmes des énergies cinétique et mécanique"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 239,
+        "section": "Bilans de puissance et d’énergie"
+      }
+    ],
+    "references": [
+      "mit-travail"
+    ],
+    "corrections": [],
+    "number": 10,
+    "domain": "mecanique",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "oscillateur-harmonique",
+    "title": "Comprendre l’oscillateur et son amortissement",
+    "level": "CPGE · Vers la physique théorique",
+    "summary": "De la masse-ressort à une équation commune aux circuits et aux petites oscillations.",
+    "objective": "Calculer une période, une énergie et l’effet d’un frottement linéaire avec des unités cohérentes.",
+    "prerequisites": [
+      "Loi de Newton",
+      "Énergie mécanique",
+      "Équation différentielle du second ordre"
+    ],
+    "system": "Une masse m sur un axe horizontal, attachée à un ressort idéal de raideur k ; X est l’écart à l’équilibre.",
+    "conditions": [
+      "m > 0 et k > 0 ; ressort dans son domaine élastique linéaire.",
+      "Le support est fixe ; la masse du ressort est négligée.",
+      "Dans le cas amorti, la force résistante vaut −b dX/dt avec b ≥ 0 en kg·s⁻¹. Aucune excitation extérieure dans cette fiche."
+    ],
+    "sections": [
+      {
+        "id": "modele",
+        "title": "La force de rappel fixe la pulsation",
+        "paragraphs": [
+          "La force −kX ramène la masse vers l’équilibre. L’équation sans frottement donne une oscillation sinusoïdale. La pulsation ω₀ s’exprime en rad·s⁻¹, la fréquence f en Hz et la période T en secondes : ω₀ = 2πf et T = 2π/ω₀.",
+          "La solution X(t) = A cos(ω₀t + φ) contient deux constantes fixées par la position et la vitesse initiales. La période ne dépend pas de A dans le modèle linéaire."
+        ],
+        "equations": [
+          {
+            "id": "oscillation",
+            "reading": "L’équation est X seconde plus ω₀ au carré fois X égale zéro ; ω₀ vaut la racine de k sur m."
+          }
+        ]
+      },
+      {
+        "id": "energie",
+        "title": "L’énergie circule entre mouvement et déformation",
+        "paragraphs": [
+          "Sans amortissement, Em = m(dX/dt)²/2 + kX²/2 reste constante. Aux extrémités, la vitesse est nulle et l’énergie est potentielle ; au passage par l’équilibre, l’énergie est cinétique.",
+          "Pour une amplitude A, Em = kA²/2 et la vitesse maximale vaut Aω₀. Une amplitude doublée multiplie donc l’énergie par quatre."
+        ],
+        "equations": []
+      },
+      {
+        "id": "amortissement",
+        "title": "Distinguer b et b/m",
+        "paragraphs": [
+          "Avec le frottement −b dX/dt, la division de la loi de Newton par m fait apparaître b/m, en s⁻¹. Le facteur de qualité du modèle est Q = mω₀/b pour b > 0.",
+          "Le régime est pseudopériodique si b² < 4mk, critique si b² = 4mk et apériodique si b² > 4mk. Dans le premier cas, la pulsation amortie vaut √(k/m − b²/(4m²)) et l’enveloppe décroît comme exp(−bt/(2m)).",
+          "L’énergie vérifie dEm/dt = −b(dX/dt)² ≤ 0. Le cas b = 0 redonne la conservation de l’énergie."
+        ],
+        "equations": [
+          {
+            "id": "amorti",
+            "reading": "L’équation normalisée contient le coefficient b sur m devant la dérivée première, et k sur m devant X."
+          }
+        ]
+      },
+      {
+        "id": "limites",
+        "title": "Passer à d’autres systèmes",
+        "paragraphs": [
+          "Autour d’un minimum non dégénéré d’un potentiel régulier V, le développement au second ordre donne V ≈ Véquilibre + k effectif X²/2. Cette approximation explique la présence fréquente de l’oscillateur en physique.",
+          "Pour un pendule simple, la sinusoïde suppose de petits angles en radians. Une amplitude importante, un ressort non linéaire ou un frottement non proportionnel à la vitesse exige un autre modèle.",
+          "Les circuits RLC et les modes d’un solide conduisent à des équations apparentées. La résonance nécessite une excitation ; elle ne se déduit pas d’une simple oscillation libre."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Prendre m = 0,200 kg, k = 20,0 N·m⁻¹ et une amplitude A = 0,0500 m, initialement sans frottement.",
+      "steps": [
+        "ω₀ = √(k/m) = 10,000 rad·s⁻¹ ; T = 2π/ω₀ = 0,628319 s.",
+        "Em = kA²/2 = 0,025 J ; vitesse maximale = Aω₀ = 0,500 m·s⁻¹.",
+        "Avec b = 0,400 kg·s⁻¹ : b/m = 2,000 s⁻¹, Q = 5,000 et pulsation amortie = 9,949874 rad·s⁻¹."
+      ],
+      "result": "Le régime amorti reste pseudopériodique ; son enveloppe décroît comme exp(−t/1,000 s). La période libre calculée vaut environ 0,628 s."
+    },
+    "checkpoint": {
+      "question": "Que deviennent la période libre et l’énergie si l’amplitude double, sans modifier m ni k ?",
+      "answer": "La période libre reste identique dans le modèle linéaire. L’énergie est multipliée par quatre et devient 0,100 J. La vitesse maximale double."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P2",
+        "page": 277,
+        "section": "Masse-ressort, amortissement et énergie"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 244,
+        "section": "Oscillateurs mécaniques et équations du mouvement"
+      }
+    ],
+    "references": [
+      "mit-oscillateur"
+    ],
+    "corrections": [
+      {
+        "id": "C08",
+        "title": "Normaliser le coefficient d’amortissement par la masse",
+        "detail": "Les passages cités emploient λ dans la force −λv, puis λ devant la dérivée première après normalisation. Si λ désigne le coefficient de force en kg·s⁻¹, ce second coefficient doit être λ/m. La version web distingue b (kg·s⁻¹) et b/m (s⁻¹), ce qui fixe également le discriminant et Q.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P2",
+            "page": 277,
+            "section": "Masse-ressort, amortissement et énergie"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC1",
+            "page": 244,
+            "section": "Oscillateurs mécaniques et équations du mouvement"
+          }
+        ]
+      }
+    ],
+    "number": 11,
+    "domain": "mecanique",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "force-centrale-orbite",
+    "title": "Relier force centrale, moment cinétique et orbite",
+    "level": "CPGE · Vers la mécanique céleste",
+    "summary": "Utiliser les conservations et calculer une orbite circulaire sans confondre rayon et altitude.",
+    "objective": "Expliquer la conservation du moment cinétique et calculer vitesse et période orbitales dans un modèle newtonien.",
+    "prerequisites": [
+      "Loi de Newton",
+      "Produit vectoriel",
+      "Mouvement circulaire"
+    ],
+    "system": "Un point de masse m soumis à une force dirigée suivant la droite qui le relie à un centre O fixe.",
+    "conditions": [
+      "O est fixe dans le référentiel galiléen adopté.",
+      "Pour l’exemple gravitationnel, la masse centrale M domine : m est négligeable devant M.",
+      "Champ newtonien d’un corps sphérique à l’extérieur de celui-ci ; perturbations, atmosphère et corrections relativistes négligées."
+    ],
+    "sections": [
+      {
+        "id": "moment",
+        "title": "Un moment de force est un bras de levier vectoriel",
+        "paragraphs": [
+          "Avec r = OM et p = mv, le moment cinétique est L = r × p. Le moment de la force en O est τ = r × F : il s’exprime en N·m. Aucun facteur m supplémentaire ne doit être ajouté si F est déjà une force.",
+          "Pour une force centrale, r et F sont colinéaires ; leur produit vectoriel est nul. L est donc constant. Si L est non nul, le mouvement reste dans le plan perpendiculaire à L. Si L est nul, un mouvement radial est possible."
+        ],
+        "equations": [
+          {
+            "id": "moment",
+            "reading": "Le moment cinétique est r vectoriel p ; sa dérivée est r vectoriel F, nulle pour une force centrale."
+          }
+        ]
+      },
+      {
+        "id": "orbite",
+        "title": "L’orbite circulaire est un cas particulier",
+        "paragraphs": [
+          "La gravitation produit une accélération vers le centre. Sur un cercle de rayon r, sa norme v²/r doit égaler GM/r². La norme de la vitesse est constante, mais le vecteur vitesse change de direction : l’accélération n’est pas nulle.",
+          "Le rayon r est mesuré depuis le centre de l’astre. Si l’on fournit une altitude h au-dessus d’un corps sphérique de rayon R, il faut employer r = R + h."
+        ],
+        "equations": [
+          {
+            "id": "orbite",
+            "reading": "Pour une orbite circulaire avec m négligeable devant M, v vaut la racine de GM sur r, et T vaut deux pi fois la racine de r au cube sur GM."
+          }
+        ]
+      },
+      {
+        "id": "limites",
+        "title": "Ce que la conservation n’impose pas",
+        "paragraphs": [
+          "Une force centrale ne garantit ni un cercle ni une vitesse constante. Pour la gravitation en inverse du carré, les conditions initiales et l’énergie distinguent notamment ellipses et trajectoires non liées. La vitesse varie sur une ellipse non circulaire.",
+          "Avec un moment cinétique non nul, la vitesse aréolaire est constante : le rayon balaie des aires égales en des temps égaux. Cela ne signifie pas des angles égaux en des temps égaux.",
+          "Si les deux masses sont comparables, il faut traiter le problème à deux corps et sa masse réduite. Les résultats newtoniens ne suffisent pas aux champs gravitationnels intenses."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Dans un modèle d’astre sphérique, prendre GM = 3,986 × 10¹⁴ m³·s⁻² et un rayon orbital r = 7,000 × 10⁶ m. Ces paramètres arrondis servent au calcul pédagogique.",
+      "steps": [
+        "v = √(GM/r) = 7546,049 m·s⁻¹.",
+        "T = 2πr/v = 5828,520 s, soit 97,142 min.",
+        "Accélération centrale = GM/r² = 8,134694 m·s⁻²."
+      ],
+      "result": "Le mobile est en chute libre orbitale : une accélération non nulle courbe continuellement sa trajectoire. Les valeurs sont calculées pour le modèle, pas mesurées."
+    },
+    "checkpoint": {
+      "question": "Pour la même masse centrale, quel est le rapport des périodes de deux orbites circulaires dont les rayons sont r et 2r ?",
+      "answer": "T est proportionnelle à r^(3/2) : le rapport est 2√2 ≈ 2,828. Le rapport des vitesses est 1/√2 ≈ 0,707."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P1",
+        "page": 269,
+        "section": "Force centrale, lois de Kepler et orbite circulaire"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 240,
+        "section": "Mouvements à force centrale et gravitation"
+      }
+    ],
+    "references": [
+      "mit-orbite"
+    ],
+    "corrections": [
+      {
+        "id": "C09",
+        "title": "Ne pas multiplier une force par une seconde masse dans son moment",
+        "detail": "La ligne de définition du moment des forces en G contient un facteur mi en plus du produit GMi × fi, alors que fi est désignée comme une force. Pour des forces fi en newtons, le moment est la somme des seuls produits GMi × fi. La dimension obtenue est N·m. Un facteur de masse serait requis si la grandeur multipliée était une force par unité de masse, ce qui est une autre convention.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P1",
+            "page": 265,
+            "section": "Définition du moment des forces en G"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC1",
+            "page": 239,
+            "section": "Définition du moment des forces en G"
+          }
+        ]
+      }
+    ],
+    "number": 12,
+    "domain": "mecanique",
     "version": "1.0",
     "updated": "2026-09-09",
     "status": "Version pilote · relecture auteur à faire"

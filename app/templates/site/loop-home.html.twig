@@ -7,8 +7,8 @@
         {% include 'site/_loop.html.twig' %}
         <p class="loop-help">Cliquez sur une étape pour la parcourir. Survolez-la ou utilisez Tab pour son explication. Sur mobile, touchez « i ». Échap ferme l’info-bulle.</p>
     </section>
-    <section class="source-entry-strip" aria-label="Documents de référence"><div><h2>Les recueils d’Aurélien Roudier</h2><p>Fiches CPGE et physique théorique : accédez directement aux pages des documents.</p></div><a class="primary-link" href="{{ path('source_index') }}">Parcourir les recueils</a></section>
-    <div class="guide-heading"><p class="eyebrow">Un premier parcours de lecture</p><h2>Thermodynamique et physique statistique</h2><p>Explorez les 36 sous-étapes de la méthode et les huit premières fiches web : hypothèses, formules, exemples calculés et sources précises.</p><a class="primary-link" href="{{ path('learning_index') }}">Lire les huit fiches</a> <a href="{{ path('learning_corrections') }}">Voir les corrections documentées</a></div>
+    <section class="source-entry-strip" aria-label="Parcours par domaine"><div><h2>Appliquer la boucle à un domaine</h2><p>Mécanique, thermodynamique et physique statistique : choisissez un parcours de fiches.</p></div><a class="primary-link" href="{{ path('learning_domains') }}">Explorer les domaines</a></section>
+    <div class="guide-heading"><p class="eyebrow">Un premier parcours de lecture</p><h2>Thermodynamique et physique statistique</h2><p>Explorez les 36 sous-étapes de la méthode et les huit premières fiches web : hypothèses, formules, exemples calculés et sources précises.</p><a class="primary-link" href="{{ path('learning_domain', {slug: 'thermodynamique-statistique'}) }}">Lire les huit fiches</a> <a href="{{ path('learning_corrections') }}">Voir les corrections documentées</a></div>
     {% for step in steps %}
         <section class="guide-step tone-{{ step.color }}" id="etape-{{ step.id }}" tabindex="-1">
             <div class="guide-step-heading"><span class="step-number">0{{ step.id }}</span><div><p class="eyebrow">{{ step.subtitle }}</p><h2>{{ step.heading }}</h2></div></div>

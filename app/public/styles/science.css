@@ -1,6 +1,8 @@
 .pilot-status { display: inline-block; border: 1px solid #bed2d8; border-radius: .25rem; padding: .35rem .7rem; color: #264d59; background: #f0f7f8; font-size: .9rem; }
 .learning-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .learning-grid h2 { font-size: 1.3rem; margin: .6rem 0; }
+.learning-grid h3 { font-size: 1.3rem; margin: .6rem 0; }
+.domain-reading { margin: 2rem 0; }
 .base-switcher { display: flex; gap: .5rem; flex-wrap: wrap; margin: 0 0 2rem; }
 .base-switcher a { padding: .55rem .85rem; border: 1px solid var(--line); border-radius: .3rem; text-decoration: none; }
 .base-switcher a[aria-current] { background: var(--blue); color: white; border-color: var(--blue); }

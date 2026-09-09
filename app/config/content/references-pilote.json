@@ -28,5 +28,29 @@
     "title": "MIT — Dérivation de l’ensemble canonique",
     "url": "https://ocw.mit.edu/courses/8-044-statistical-physics-i-spring-2013/7fa3fb4237d0d00d5603ae4ea8f02236_MIT8_044S13_Canonical.pdf",
     "note": "Probabilités des micro-états d’un système en équilibre avec un réservoir thermique."
+  },
+  "mit-newton": {
+    "title": "MIT 8.01SC — Lois de Newton",
+    "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter7.pdf",
+    "note": "Chapitre 7, §7.2–7.4 : référentiel inertiel, quantité de mouvement et forces.",
+    "checked": "2026-09-09"
+  },
+  "mit-travail": {
+    "title": "MIT 8.01SC — Énergie cinétique et travail",
+    "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter13.pdf",
+    "note": "Chapitre 13, §13.4–13.7 : signes, intégrale du travail et théorème de l’énergie cinétique.",
+    "checked": "2026-09-09"
+  },
+  "mit-oscillateur": {
+    "title": "MIT 8.01SC — Oscillation harmonique",
+    "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter23.pdf",
+    "note": "Chapitre 23, §23.2–23.5 : masse-ressort, énergie et oscillateur amorti.",
+    "checked": "2026-09-09"
+  },
+  "mit-orbite": {
+    "title": "MIT 8.01SC — Mécanique céleste",
+    "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter25new.pdf",
+    "note": "Chapitre 25, §25.2–25.5 : réduction à un corps, moment cinétique et lois de Kepler.",
+    "checked": "2026-09-09"
   }
 }

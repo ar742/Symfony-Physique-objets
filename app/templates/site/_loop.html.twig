@@ -14,12 +14,12 @@
     </svg>
     {% for step in steps %}
         <div class="loop-node node-{{ step.id }} tone-{{ step.color }}" data-loop-node>
-            <a class="loop-node-link" href="#{{ anchor_prefix }}{{ step.id }}" aria-describedby="{{ tip_prefix }}{{ step.id }}">
+            <a class="loop-node-link" href="{{ step.href|default('#' ~ anchor_prefix ~ step.id) }}" aria-describedby="{{ tip_prefix }}{{ step.id }}">
                 <span class="step-number">{{ step.coordinate|default('0' ~ step.id) }}</span><strong>{{ step.title }}</strong><span class="step-subtitle">{{ step.subtitle }}</span>
             </a>
             <button type="button" class="tip-toggle" aria-label="À propos de l’étape {{ step.coordinate|default(step.id) }} : {{ step.title }}" aria-controls="{{ tip_prefix }}{{ step.id }}" aria-expanded="false">i</button>
             <span class="loop-tooltip" id="{{ tip_prefix }}{{ step.id }}" role="tooltip">{{ step.tip }}</span>
         </div>
     {% endfor %}
-    <a class="loop-evaluation" href="#{{ anchor_prefix }}4">Évaluations et comparaisons</a>
+    <a class="loop-evaluation" href="{{ evaluation_href|default('#' ~ anchor_prefix ~ '4') }}">Évaluations et comparaisons</a>
 </div>

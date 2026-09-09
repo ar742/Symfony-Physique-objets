@@ -3,7 +3,7 @@
 {% block body %}
     <div class="page-heading"><p class="eyebrow">Les documents sources</p><h1>CPGE et physique théorique</h1><p class="lead">Deux recueils d’Aurélien Roudier, 1 433 pages et 91 points d’entrée pour retrouver une fiche.</p><p>Les liens ouvrent le PDF à la page indiquée. Le numéro imprimé a été vérifié pour chaque entrée du sommaire.</p></div>
     <nav class="source-shortcuts" aria-label="Choisir un recueil">{% for document in documents %}<a class="topic-card" href="#recueil-{{ document.key }}"><span class="eyebrow">{{ document.pages }} pages · {{ document.entries|length }} entrées</span><h2>{{ document.title }}</h2><p>{{ document.subtitle }}</p></a>{% endfor %}</nav>
-    <p><a class="primary-link" href="{{ path('learning_index') }}">Lire les huit premières fiches web</a> · <a href="{{ path('learning_corrections') }}">Corrections documentées</a></p>
+    <p><a class="primary-link" href="{{ path('learning_domains') }}">Explorer les fiches web par domaine</a> · <a href="{{ path('learning_corrections') }}">Corrections documentées</a></p>
     <section class="source-bridges"><h2>Passer de la CPGE aux approfondissements</h2><div class="topic-grid">
         <div class="topic-card"><h3>Mécanique</h3><p><a href="#cpge-P2">Oscillateurs · P2</a></p><p><a href="#theorique-PC1">Mécanique · PC1</a></p></div>
         <div class="topic-card"><h3>Thermodynamique</h3><p><a href="#cpge-P22">Thermodynamique · P22</a></p><p><a href="#theorique-PC3">Physique statistique · PC3</a></p></div>

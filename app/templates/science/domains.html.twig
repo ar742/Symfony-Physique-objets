@@ -1,0 +1,18 @@
+{% extends 'site/layout.html.twig' %}
+{% block title %}Domaines de physique — Physique objets{% endblock %}
+{% block body %}
+<nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="{{ path('sitephys_physmvc_home') }}">La boucle</a> / Domaines</nav>
+<header class="page-heading"><p class="eyebrow">CPGE · Approfondissements théoriques</p><h1>Choisir un domaine de physique</h1><p class="lead">Entrez dans les parcours disponibles ou repérez les thèmes à venir dans les recueils.</p></header>
+<h2>Parcours disponibles</h2>
+<div class="topic-grid learning-grid">
+{% for domain in domains %}{% if domain.cards %}
+<a class="topic-card" href="{{ path('learning_domain', {slug: domain.slug}) }}"><span class="eyebrow">{{ domain.cards|length }} fiches web · version pilote</span><h3>{{ domain.title }}</h3><p>{{ domain.summary }}</p><p>{{ domain.scope }}</p></a>
+{% endif %}{% endfor %}
+</div>
+<section class="content-note"><h2>Domaines à venir</h2><p>Les repères ci-dessous donnent accès aux sommaires des ouvrages. Ces parcours web ne sont pas encore rédigés.</p>
+<div class="topic-grid learning-grid">
+{% for domain in domains %}{% if not domain.cards %}
+<article class="topic-card"><p class="eyebrow">Planifié</p><h3>{{ domain.title }}</h3><p>{{ domain.summary }}</p><details><summary>Repères dans les recueils</summary><ul class="precise-sources">{% for source in domain.sources %}<li><a href="{{ path('source_index', {_fragment: source.doc ~ '-' ~ source.code}) }}">{{ source.doc == 'cpge' ? 'CPGE' : 'Physique théorique' }} · {{ source.code }} · {{ source.title }}</a><span>p. {{ source.page }}</span></li>{% endfor %}</ul></details></article>
+{% endif %}{% endfor %}
+</div></section>
+{% endblock %}

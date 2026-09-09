@@ -2,7 +2,7 @@
 
 namespace App\Tests;
 
-use App\Content\{LearningLibrary, LoopGuide, SourceLibrary};
+use App\Content\{DomainLibrary, LearningLibrary, LoopGuide, SourceLibrary};
 use PHPUnit\Framework\TestCase;
 
 final class LearningLibraryTest extends TestCase
@@ -40,8 +40,8 @@ final class LearningLibraryTest extends TestCase
     public function testCardsHavePreciseSourcesAndWellFormedMath(): void
     {
         $cards = $this->library()->all();
-        self::assertCount(8, $cards);
-        self::assertCount(8, array_unique(array_column($cards, 'slug')));
+        self::assertCount(12, $cards);
+        self::assertCount(12, array_unique(array_column($cards, 'slug')));
         $corrections = [];
         foreach ($cards as $card) {
             $anchors = ['conditions', 'exemple', 'controle', 'corrections', 'sources', 'dans-la-boucle', ...array_column($card['sections'], 'id')];
@@ -55,7 +55,11 @@ final class LearningLibraryTest extends TestCase
             foreach ($card['references'] as $reference) {
                 self::assertSame('https', parse_url($reference['url'], PHP_URL_SCHEME));
             }
-            self::assertNotEmpty((new LoopGuide(dirname(__DIR__), new SourceLibrary(dirname(__DIR__))))->locationsFor($card['slug']));
+            $sources = new SourceLibrary(dirname(__DIR__));
+            $domain = (new DomainLibrary(dirname(__DIR__), $this->library(), $sources))->find($card['domain']);
+            self::assertNotNull($domain);
+            $locations = array_filter($domain['steps'], static fn (array $step): bool => $step['card'] === $card['slug']);
+            self::assertNotEmpty([...$locations, ...(new LoopGuide(dirname(__DIR__), $sources))->locationsFor($card['slug'])]);
             foreach ($card['sections'] as $section) {
                 foreach ($section['equations'] as $equation) {
                     self::assertMatchesRegularExpression('/^[a-z]+$/', $equation['id']);
@@ -67,8 +71,11 @@ final class LearningLibraryTest extends TestCase
                     // Fractions and subscripts require exactly two arguments.
                     $xpath = new \DOMXPath($xml);
                     $xpath->registerNamespace('m', 'http://www.w3.org/1998/Math/MathML');
-                    foreach ($xpath->query('//m:mfrac|//m:msub|//m:msup|//m:munder') as $element) {
+                    foreach ($xpath->query('//m:mfrac|//m:msub|//m:msup|//m:munder|//m:mover') as $element) {
                         self::assertSame(2, $element->childElementCount, $equation['id']);
+                    }
+                    foreach ($xpath->query('//m:msubsup') as $element) {
+                        self::assertSame(3, $element->childElementCount, $equation['id']);
                     }
                 }
             }
@@ -78,7 +85,7 @@ final class LearningLibraryTest extends TestCase
                 $corrections[] = $correction['id'];
             }
         }
-        self::assertCount(7, $corrections);
+        self::assertCount(9, $corrections);
     }
 
     public function testDisplayedExamplesMatchIndependentCalculations(): void
@@ -99,5 +106,13 @@ final class LearningLibraryTest extends TestCase
         $containsNumber('microcanonique', log(3), 6);
         $containsNumber('boltzmann', 1 / (1 + exp(1)), 6);
         $containsNumber('boltzmann', 1 + exp(-1), 6);
+        $containsNumber('newton-referentiel', 9.81 * sin(pi()/6), 3);
+        $containsNumber('newton-referentiel', 2 * 9.81 * cos(pi()/6), 3);
+        $containsNumber('travail-energie-mecanique', sqrt(3**2 + 2 * (6 - 2) * 4 / 2), 3);
+        $containsNumber('oscillateur-harmonique', 2 * pi() * sqrt(.2/20), 6);
+        $containsNumber('oscillateur-harmonique', .5 * 20 * .05**2, 3);
+        $containsNumber('oscillateur-harmonique', sqrt(20/.2 - (.4/(2*.2))**2), 6);
+        $containsNumber('force-centrale-orbite', sqrt(3.986e14/7e6), 3);
+        $containsNumber('force-centrale-orbite', 2 * pi() * sqrt((7e6)**3/3.986e14), 3);
     }
 }

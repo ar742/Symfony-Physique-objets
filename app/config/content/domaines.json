@@ -1,0 +1,417 @@
+[
+  {
+    "slug": "mecanique",
+    "title": "Mécanique",
+    "summary": "Forces, mouvement, énergie et oscillations.",
+    "scope": "M1 disponible : mécanique du point et oscillateur. Rotations des solides et formalismes analytiques à venir (M2).",
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P1"
+      },
+      {
+        "doc": "cpge",
+        "code": "P2"
+      },
+      {
+        "doc": "cpge",
+        "code": "P3"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1"
+      }
+    ],
+    "steps": [
+      {
+        "id": 1,
+        "title": "Définir le système",
+        "subtitle": "Point et référentiel",
+        "tip": "Choisir ce que l’on suit, dans quel référentiel et avec quelles hypothèses.",
+        "card": "newton-referentiel",
+        "section": "conditions",
+        "color": "blue"
+      },
+      {
+        "id": 2,
+        "title": "Recenser les interactions",
+        "subtitle": "Forces et contraintes",
+        "tip": "Isoler le mobile puis nommer les actions extérieures sans compter deux fois une interaction.",
+        "card": "newton-referentiel",
+        "section": "bilan",
+        "color": "orange"
+      },
+      {
+        "id": 3,
+        "title": "Choisir les lois",
+        "subtitle": "Newton ou énergie",
+        "tip": "Le bilan d’énergie donne souvent la vitesse sans résoudre toute la trajectoire.",
+        "card": "travail-energie-mecanique",
+        "section": "bilan",
+        "color": "green"
+      },
+      {
+        "id": 4,
+        "title": "Confronter les prévisions",
+        "subtitle": "Période et amplitude",
+        "tip": "Tester les effets d’un changement d’amplitude avant de comparer à une mesure.",
+        "card": "oscillateur-harmonique",
+        "section": "controle",
+        "color": "blue"
+      },
+      {
+        "id": 5,
+        "title": "Résoudre un modèle",
+        "subtitle": "Orbite circulaire",
+        "tip": "Relier le rayon orbital à la vitesse et à la période, sous des hypothèses précises.",
+        "card": "force-centrale-orbite",
+        "section": "orbite",
+        "color": "orange"
+      },
+      {
+        "id": 6,
+        "title": "Relier les domaines",
+        "subtitle": "Oscillateurs et analogies",
+        "tip": "Identifier l’équation commune et les limites de l’approximation linéaire.",
+        "card": "oscillateur-harmonique",
+        "section": "limites",
+        "color": "green"
+      }
+    ]
+  },
+  {
+    "slug": "thermodynamique-statistique",
+    "title": "Thermodynamique et physique statistique",
+    "summary": "Du système macroscopique aux probabilités des micro-états.",
+    "scope": "Premier parcours : huit fiches et 36 sous-étapes.",
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P20"
+      },
+      {
+        "doc": "cpge",
+        "code": "P22"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC3"
+      }
+    ],
+    "steps": []
+  },
+  {
+    "slug": "fluides-ondes",
+    "title": "Fluides et ondes mécaniques",
+    "summary": "Hydrostatique, écoulements, élasticité et acoustique.",
+    "scope": "Lot F1 planifié : fiches web à rédiger.",
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P4"
+      },
+      {
+        "doc": "cpge",
+        "code": "P6"
+      },
+      {
+        "doc": "cpge",
+        "code": "P7"
+      },
+      {
+        "doc": "cpge",
+        "code": "P8"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1"
+      }
+    ],
+    "steps": []
+  },
+  {
+    "slug": "electromagnetisme",
+    "title": "Électromagnétisme",
+    "summary": "Champs, flux, induction, Maxwell et propriétés des milieux.",
+    "scope": "Lot E1 planifié : fiches web à rédiger.",
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P11"
+      },
+      {
+        "doc": "cpge",
+        "code": "P12"
+      },
+      {
+        "doc": "cpge",
+        "code": "P13"
+      },
+      {
+        "doc": "cpge",
+        "code": "P14"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2"
+      }
+    ],
+    "steps": []
+  },
+  {
+    "slug": "circuits-signaux",
+    "title": "Circuits et signaux",
+    "summary": "RLC, filtres, composants, amplification et technologies.",
+    "scope": "Lot E2 planifié : fiches web à rédiger.",
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P15"
+      },
+      {
+        "doc": "cpge",
+        "code": "P16"
+      },
+      {
+        "doc": "cpge",
+        "code": "P17"
+      },
+      {
+        "doc": "cpge",
+        "code": "P18"
+      },
+      {
+        "doc": "cpge",
+        "code": "P19"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2"
+      }
+    ],
+    "steps": []
+  },
+  {
+    "slug": "optique",
+    "title": "Optique",
+    "summary": "Images, propagation lumineuse, interférences et diffraction.",
+    "scope": "Lot O1 planifié : fiches web à rédiger.",
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P9"
+      },
+      {
+        "doc": "cpge",
+        "code": "P10"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2"
+      }
+    ],
+    "steps": []
+  },
+  {
+    "slug": "quantique-matiere",
+    "title": "Physique quantique et matière",
+    "summary": "États, mesures, atomes et propriétés des solides.",
+    "scope": "Lot Q1 planifié : fiches web à rédiger.",
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P21"
+      },
+      {
+        "doc": "cpge",
+        "code": "P25"
+      },
+      {
+        "doc": "cpge",
+        "code": "P26"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC4"
+      }
+    ],
+    "steps": []
+  },
+  {
+    "slug": "relativite",
+    "title": "Relativité",
+    "summary": "Événements, invariants, espace-temps et gravitation.",
+    "scope": "Lot R1 planifié : fiches web à rédiger.",
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P5"
+      },
+      {
+        "doc": "theorique",
+        "code": "CU3"
+      },
+      {
+        "doc": "theorique",
+        "code": "CU4"
+      },
+      {
+        "doc": "theorique",
+        "code": "CU5"
+      }
+    ],
+    "steps": []
+  },
+  {
+    "slug": "particules-champs",
+    "title": "Noyaux, particules et champs",
+    "summary": "Du noyau au modèle standard et à la théorie quantique des champs.",
+    "scope": "Lot P1 planifié : fiches web à rédiger.",
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P26"
+      },
+      {
+        "doc": "theorique",
+        "code": "TQC1"
+      },
+      {
+        "doc": "theorique",
+        "code": "TQC2"
+      },
+      {
+        "doc": "theorique",
+        "code": "TQC3"
+      },
+      {
+        "doc": "theorique",
+        "code": "TQC4"
+      },
+      {
+        "doc": "theorique",
+        "code": "TQC5"
+      },
+      {
+        "doc": "theorique",
+        "code": "TQC6"
+      },
+      {
+        "doc": "theorique",
+        "code": "TQC7"
+      },
+      {
+        "doc": "theorique",
+        "code": "TQC8"
+      }
+    ],
+    "steps": []
+  },
+  {
+    "slug": "cosmologie",
+    "title": "Astrophysique et cosmologie",
+    "summary": "Évolution de l’Univers, observations et modèles.",
+    "scope": "Lot C1 planifié : fiches web à rédiger.",
+    "sources": [
+      {
+        "doc": "theorique",
+        "code": "CU1"
+      },
+      {
+        "doc": "theorique",
+        "code": "CU2"
+      },
+      {
+        "doc": "theorique",
+        "code": "CU6"
+      },
+      {
+        "doc": "theorique",
+        "code": "CU7"
+      },
+      {
+        "doc": "theorique",
+        "code": "CU8"
+      },
+      {
+        "doc": "theorique",
+        "code": "CU9"
+      }
+    ],
+    "steps": []
+  },
+  {
+    "slug": "recherche-contemporaine",
+    "title": "Prolongements contemporains",
+    "summary": "Gravités quantiques, cordes, SUSY et approches alternatives.",
+    "scope": "Lot A1 planifié : fiches web à rédiger.",
+    "sources": [
+      {
+        "doc": "theorique",
+        "code": "GQ1"
+      },
+      {
+        "doc": "theorique",
+        "code": "GQ2"
+      },
+      {
+        "doc": "theorique",
+        "code": "GQ3"
+      },
+      {
+        "doc": "theorique",
+        "code": "GQ4"
+      },
+      {
+        "doc": "theorique",
+        "code": "SCSG1"
+      },
+      {
+        "doc": "theorique",
+        "code": "SCSG2"
+      },
+      {
+        "doc": "theorique",
+        "code": "SCSG3"
+      },
+      {
+        "doc": "theorique",
+        "code": "RMM1"
+      },
+      {
+        "doc": "theorique",
+        "code": "RMM2"
+      },
+      {
+        "doc": "theorique",
+        "code": "GNC1"
+      },
+      {
+        "doc": "theorique",
+        "code": "GNC2"
+      }
+    ],
+    "steps": []
+  },
+  {
+    "slug": "mesure-transferts",
+    "title": "Mesure et liens transversaux",
+    "summary": "Incertitudes, diffusion, transferts et thermométrie.",
+    "scope": "Lot T1 planifié : fiches web à rédiger.",
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P19"
+      },
+      {
+        "doc": "cpge",
+        "code": "P23"
+      },
+      {
+        "doc": "cpge",
+        "code": "P24"
+      }
+    ],
+    "steps": []
+  }
+]

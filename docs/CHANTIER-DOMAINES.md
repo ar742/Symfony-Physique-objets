@@ -47,4 +47,4 @@ Le site fonctionne localement ; `physicstopics.fr` n'a plus d'hébergement. L'en
 
 ## Suivi
 
-Voir [le journal des avancées](AVANCEES.md). Le lot M1 est la première réalisation prévue. Les lots suivants restent planifiés tant que le journal ne mentionne pas une livraison effective.
+Voir [le journal des avancées](AVANCEES.md). Le lot M1 est réalisé : quatre fiches, une boucle de mécanique et l'entrée par domaines. La relecture de l'auteur reste à faire. Le prochain lot est M2. Les autres lots restent planifiés tant que le journal ne mentionne pas une livraison effective.
