@@ -47,4 +47,4 @@ Le site fonctionne localement ; `physicstopics.fr` n'a plus d'hébergement. L'en
 
 ## Suivi
 
-Voir [le journal des avancées](AVANCEES.md). Le lot M1 est réalisé : quatre fiches, une boucle de mécanique et l'entrée par domaines. La relecture de l'auteur reste à faire. Le prochain lot est M2. Les autres lots restent planifiés tant que le journal ne mentionne pas une livraison effective.
+Voir [le journal des avancées](AVANCEES.md). Les lots M1 et M2 sont réalisés : huit fiches de mécanique, deux boucles et l'entrée par domaines. M2 introduit les formalismes de Lagrange et de Hamilton sur un système à un degré de liberté ; il ne transpose pas tout le contenu avancé des recueils. La relecture de l'auteur reste à faire. Le prochain lot est F1 (fluides et ondes). Les autres lots restent planifiés tant que le journal ne mentionne pas une livraison effective.

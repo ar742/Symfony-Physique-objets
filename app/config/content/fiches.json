@@ -1312,5 +1312,510 @@
     "version": "1.0",
     "updated": "2026-09-09",
     "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "rotation-axe-fixe",
+    "title": "Mettre un solide en rotation autour d’un axe",
+    "level": "CPGE · Mécanique du solide",
+    "summary": "Choisir le bon moment d’inertie, projeter les couples et calculer l’énergie de rotation.",
+    "objective": "Passer d’un couple appliqué à une accélération angulaire en précisant l’axe et la répartition de masse.",
+    "prerequisites": [
+      "Moment d’une force",
+      "Vitesse et accélération angulaires",
+      "Énergie cinétique"
+    ],
+    "system": "Un solide indéformable en rotation autour d’un axe Δ fixe dans un référentiel galiléen.",
+    "conditions": [
+      "L’axe est fixe et le moment d’inertie IΔ reste constant.",
+      "La rotation du solide est décrite par un angle θ, sa dérivée ω et son accélération α.",
+      "Le bilan comprend les moments axiaux de toutes les actions extérieures ; un palier idéal ne fournit pas de couple résistant autour de Δ."
+    ],
+    "sections": [
+      {
+        "id": "inertie",
+        "title": "L’axe compte autant que la masse",
+        "paragraphs": [
+          "Le moment d’inertie pondère chaque élément de masse par le carré de sa distance à l’axe. Déplacer de la matière vers la périphérie augmente donc la résistance à une variation de la rotation, même si la masse totale ne change pas.",
+          "Pour un disque homogène mince de masse m et de rayon R, autour de son axe central perpendiculaire au disque, I = mR²/2. Pour un cerceau mince de même masse et de même rayon, I = mR². L’unité est kg·m².",
+          "Le théorème de Huygens donne IΔ = IΔG + md² pour deux axes parallèles, dont l’un passe par le centre de masse G, séparés par une distance d. Il ne compare pas directement deux axes d’orientations différentes."
+        ],
+        "equations": [
+          {
+            "id": "inertiesolide",
+            "reading": "Le moment d’inertie autour de Δ est l’intégrale de la distance perpendiculaire à l’axe, au carré, multipliée par la masse élémentaire."
+          }
+        ]
+      },
+      {
+        "id": "dynamique",
+        "title": "Projeter le théorème du moment cinétique",
+        "paragraphs": [
+          "Choisir le sens positif de θ, puis attribuer un signe à chaque moment axial τΔ. Avec IΔ constant, leur somme vaut IΔα. Un couple opposé à la rotation peut ralentir le solide ; le signe dépend du sens choisi.",
+          "Cette relation est une projection sur l’axe fixe. Pour une rotation générale en trois dimensions, le moment cinétique n’est pas nécessairement parallèle à la vitesse angulaire : un tenseur d’inertie est alors nécessaire."
+        ],
+        "equations": [
+          {
+            "id": "rotationsolide",
+            "reading": "La somme des moments axiaux extérieurs vaut IΔ fois l’accélération angulaire. L’énergie cinétique de rotation vaut un demi IΔ ω au carré."
+          }
+        ]
+      },
+      {
+        "id": "energie",
+        "title": "Vérifier par le travail du couple",
+        "paragraphs": [
+          "Pour un moment axial constant, le travail pendant un déplacement angulaire Δθ est τΔΔθ. Un angle doit être exprimé en radians dans ce calcul. La puissance est τΔω.",
+          "Le bilan de travail doit retrouver la variation de IΔω²/2. Un désaccord invite à vérifier l’axe choisi, les unités, les signes ou un frottement oublié."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Un disque homogène de 2,00 kg et de rayon 0,300 m part du repos. Un couple axial constant de 0,120 N·m agit pendant 3,00 s, sans couple résistant.",
+      "steps": [
+        "I = mR²/2 = 0,090 kg·m² ; α = τ/I = 1,333333 rad·s⁻².",
+        "ω = αt = 4,000 rad·s⁻¹ ; angle parcouru = αt²/2 = 6,000 rad.",
+        "Ec = Iω²/2 = 0,720 J ; travail = τΔθ = 0,720 J."
+      ],
+      "result": "Le calcul dynamique et le bilan énergétique donnent la même énergie de rotation."
+    },
+    "checkpoint": {
+      "question": "Un cerceau mince de même masse et de même rayon reçoit le même couple pendant la même durée. Quelle vitesse angulaire atteint-il ?",
+      "answer": "Son moment d’inertie vaut 0,180 kg·m², soit le double. L’accélération est divisée par deux et la vitesse finale vaut 2,000 rad·s⁻¹."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P3",
+        "page": 283,
+        "section": "Définition et exemples de matrices d’inertie"
+      },
+      {
+        "doc": "cpge",
+        "code": "P3",
+        "page": 284,
+        "section": "Moment d’inertie du cylindre"
+      },
+      {
+        "doc": "cpge",
+        "code": "P3",
+        "page": 286,
+        "section": "Axe fixe, théorèmes du moment cinétique et de Huygens"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 243,
+        "section": "Moment cinétique axial, théorème de Huygens et énergie"
+      }
+    ],
+    "references": [
+      "mit-rotation"
+    ],
+    "corrections": [
+      {
+        "id": "C10",
+        "title": "Rétablir le moment d’inertie axial du disque",
+        "detail": "Dans la matrice du disque mince homogène présentée p. 283, les deux moments diamétraux valent mR²/4, mais le troisième terme diagonal est nul. Autour de l’axe central perpendiculaire au disque, ce terme doit valoir mR²/2. Pour une répartition plane, il est aussi égal à la somme des deux moments diamétraux. La fiche web utilise cette valeur non nulle.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P3",
+            "page": 283,
+            "section": "Matrice d’inertie du disque de rayon R"
+          },
+          {
+            "doc": "cpge",
+            "code": "P3",
+            "page": 284,
+            "section": "Cylindre et moment d’inertie axial"
+          }
+        ]
+      }
+    ],
+    "number": 13,
+    "domain": "mecanique",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "roulement-sans-glissement",
+    "title": "Relier translation et rotation dans un roulement",
+    "level": "CPGE · Contraintes et énergie",
+    "summary": "Comprendre pourquoi un cylindre qui roule n’a pas la vitesse d’un point qui glisse.",
+    "objective": "Utiliser la condition de contact et vérifier qu’un frottement statique suffisant permet le roulement.",
+    "prerequisites": [
+      "Énergie mécanique",
+      "Rotation d’un solide",
+      "Frottement statique"
+    ],
+    "system": "Un cylindre homogène plein qui descend un plan incliné fixe en roulant sur sa surface latérale.",
+    "conditions": [
+      "Le cylindre est indéformable ; son rayon R et son moment d’inertie IG = mR²/2 sont constants.",
+      "Départ du repos ; pesanteur uniforme ; angle α avec l’horizontale tel que 0 < α < 90°.",
+      "Contact maintenu, sans glissement et sans résistance au roulement ; le frottement statique doit satisfaire |f| ≤ μsN."
+    ],
+    "sections": [
+      {
+        "id": "contact",
+        "title": "Le point de contact est immobile à cet instant",
+        "paragraphs": [
+          "Sur un support fixe, l’absence de glissement signifie que la vitesse du point matériel du solide au contact est nulle dans le référentiel du support. Cela ne signifie pas que son accélération est nulle, ni que ce même point reste au contact.",
+          "Pour le cylindre, vG = Rω en normes. La translation du centre et la rotation autour du centre se compensent au contact. Le centre de masse continue à se déplacer."
+        ],
+        "equations": []
+      },
+      {
+        "id": "bilan",
+        "title": "Partager l’énergie entre deux mouvements",
+        "paragraphs": [
+          "Le théorème de König sépare l’énergie cinétique du mouvement du centre et celle de la rotation autour de G. Il faut conserver les deux contributions. Pour une perte d’altitude h depuis le repos, mgh = mvG²/2 + IGω²/2.",
+          "Avec IG = mR²/2 et vG = Rω, on obtient vG² = 4gh/3. Une partie de l’énergie disponible alimente la rotation : le cylindre va moins vite qu’un point glissant sans frottement depuis la même hauteur."
+        ],
+        "equations": [
+          {
+            "id": "energiroulement",
+            "reading": "L’énergie cinétique vaut un demi m vG au carré plus un demi IG ω au carré ; sans glissement sur le plan fixe, vG égale Rω."
+          }
+        ]
+      },
+      {
+        "id": "frottement",
+        "title": "Le frottement statique peut faire tourner sans dissiper",
+        "paragraphs": [
+          "Orienter la pente vers le bas. Le frottement statique est ici dirigé vers le haut : ma = mg sin α − f et IG(a/R) = fR. Pour le cylindre plein, a = 2g sin α/3 et f = mg sin α/3.",
+          "Le point de contact ayant une vitesse nulle sur le support fixe, la puissance totale de cette force sur le solide est nulle dans le modèle idéal. Le frottement redistribue les contributions de translation et de rotation sans dissipation mécanique.",
+          "La condition f ≤ μsN, avec N = mg cos α, impose μs ≥ tan α/3. Si elle échoue, le cylindre glisse et la contrainte vG = Rω ne peut plus être imposée."
+        ],
+        "equations": [
+          {
+            "id": "accelroulement",
+            "reading": "Pour un cylindre homogène plein : accélération égale deux tiers de g sin α ; le coefficient de frottement statique minimal vaut tan α sur trois."
+          }
+        ]
+      },
+      {
+        "id": "limites",
+        "title": "Reconnaître les autres modèles",
+        "paragraphs": [
+          "La résistance au roulement, les déformations et les pertes internes peuvent dissiper de l’énergie. Un contact mobile peut aussi transférer de l’énergie au solide. Ces situations demandent un bilan adapté.",
+          "Un anneau, une sphère et un cylindre n’ont pas le même rapport IG/(mR²), donc pas la même accélération. Le résultat numérique de cette fiche concerne le cylindre plein."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Un cylindre homogène plein de 1,00 kg et de rayon 0,100 m perd une altitude h = 0,500 m sur une pente de 30°. Prendre g = 9,81 m·s⁻² et μs = 0,25.",
+      "steps": [
+        "μs minimal = tan(30°)/3 = 0,192450 : 0,25 suffit au roulement dans ce modèle.",
+        "a = 2g sin(30°)/3 = 3,270 m·s⁻² ; vG = √(4gh/3) = 2,557342 m·s⁻¹.",
+        "Énergie de translation = 3,270 J ; énergie de rotation = 1,635 J ; somme = mgh = 4,905 J."
+      ],
+      "result": "Le bilan inclut la rotation. Le frottement statique vaut 1,635 N vers le haut de la pente et ne dissipe pas d’énergie dans ce modèle."
+    },
+    "checkpoint": {
+      "question": "Peut-on conserver ce calcul si μs = 0,10 pour la même pente ?",
+      "answer": "Non : 0,10 est inférieur au seuil 0,192450. Le frottement statique disponible ne suffit pas ; il faut traiter le glissement et connaître la loi de frottement correspondante."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P3",
+        "page": 284,
+        "section": "Inertie du cylindre"
+      },
+      {
+        "doc": "cpge",
+        "code": "P3",
+        "page": 286,
+        "section": "Cinématique du solide et énergies de translation et rotation"
+      },
+      {
+        "doc": "cpge",
+        "code": "P3",
+        "page": 287,
+        "section": "Théorème de König et contacts solides"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 243,
+        "section": "Deuxième théorème de König et énergie cinétique du solide"
+      }
+    ],
+    "references": [
+      "mit-roulement"
+    ],
+    "corrections": [],
+    "number": 14,
+    "domain": "mecanique",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "referentiel-tournant",
+    "title": "Écrire la dynamique dans un référentiel tournant",
+    "level": "CPGE · Changement de référentiel",
+    "summary": "Séparer les forces réelles des termes centrifuge et de Coriolis.",
+    "objective": "Calculer les termes d’inertie et interpréter leur direction sans confondre les vitesses des deux référentiels.",
+    "prerequisites": [
+      "Loi de Newton",
+      "Produit vectoriel",
+      "Composition des vitesses"
+    ],
+    "system": "Un point matériel décrit depuis un repère qui tourne uniformément autour d’un axe fixe d’un référentiel galiléen.",
+    "conditions": [
+      "Les origines des deux repères coïncident et restent fixes ; le vecteur Ω est constant dans le référentiel galiléen.",
+      "La masse m est constante ; r est mesuré depuis l’origine commune et v′ est la vitesse relative.",
+      "Une translation accélérée de l’origine ou une rotation non uniforme ajouterait des termes d’inertie absents de ce modèle."
+    ],
+    "sections": [
+      {
+        "id": "vitesses",
+        "title": "Deux observations du même mouvement",
+        "paragraphs": [
+          "Le même point possède une vitesse v dans le référentiel galiléen et une vitesse v′ dans le référentiel tournant. Elles sont reliées par v = v′ + Ω × r. Il faut nommer le référentiel de chaque dérivée.",
+          "Un point immobile dans le repère tournant peut ainsi avoir une vitesse non nulle dans le référentiel galiléen. Les forces réelles proviennent toujours d’interactions identifiables ; les termes d’inertie viennent du choix du repère."
+        ],
+        "equations": []
+      },
+      {
+        "id": "forces",
+        "title": "Les deux termes d’inertie du modèle uniforme",
+        "paragraphs": [
+          "La loi de Newton dans le repère tournant s’écrit ma′ = ΣF réelles − mΩ × (Ω × r) − 2mΩ × v′. Le premier terme ajouté est centrifuge, le second est celui de Coriolis.",
+          "La force centrifuge est dirigée vers l’extérieur, perpendiculairement à l’axe, et sa norme vaut mΩ²r⊥. La force de Coriolis dépend de la vitesse relative et s’annule si v′ est parallèle à Ω. Elle est perpendiculaire à v′ : son produit scalaire avec cette vitesse est nul.",
+          "Ces termes ne sont pas une paire d’action-réaction avec une interaction matérielle. Il ne faut pas ajouter une force centripète indépendante si la résultante des forces réelles produit déjà l’accélération vers l’axe."
+        ],
+        "equations": [
+          {
+            "id": "inertierotation",
+            "reading": "ma prime vaut la somme des forces réelles, moins m fois le produit vectoriel de Ω par le produit vectoriel de Ω et r, moins deux m fois le produit vectoriel de Ω et v prime."
+          }
+        ]
+      },
+      {
+        "id": "directions",
+        "title": "Fixer l’orientation avant de calculer",
+        "paragraphs": [
+          "Choisir Ω suivant +ez, er radial vers l’extérieur et eθ dans le sens positif de rotation. Alors ez × er = eθ. Une vitesse relative radiale vers l’extérieur entraîne une force de Coriolis dans le sens −eθ.",
+          "Vérifier un signe par un produit vectoriel évite de mémoriser une règle ambiguë. Une accélération apparente dans le repère tournant ne prouve pas la présence d’une force réelle supplémentaire."
+        ],
+        "equations": []
+      },
+      {
+        "id": "limites",
+        "title": "Changer de cadre quand les hypothèses changent",
+        "paragraphs": [
+          "Si Ω varie, le terme d’Euler −m(dΩ/dt) × r intervient. Si l’origine du repère accélère, un terme de translation apparaît également. Ces contributions doivent être établies à partir de la composition des accélérations.",
+          "Pour un référentiel terrestre, la rotation et la variation spatiale de la gravitation doivent être évaluées à l’échelle de l’expérience. Ne pas compter deux fois un effet centrifuge déjà inclus dans une pesanteur effective."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "À un instant donné, m = 0,500 kg, Ω = 2,00 ez rad·s⁻¹, r = 0,400 er m et v′ = 0,300 er m·s⁻¹. Les forces réelles horizontales sont nulles ; poids et support se compensent verticalement.",
+      "steps": [
+        "Force centrifuge : +mΩ²r er = +0,800 er N.",
+        "Force de Coriolis : −2mΩv′ eθ = −0,600 eθ N.",
+        "Accélération relative horizontale : a′ = +1,600 er − 1,200 eθ m·s⁻²."
+      ],
+      "result": "Ces valeurs décrivent un instant. La vitesse relative ne restera pas radiale et constante : le mouvement apparent se courbe, alors que l’accélération horizontale galiléenne est nulle."
+    },
+    "checkpoint": {
+      "question": "Si v′ est nulle à cet instant, tous les termes d’inertie disparaissent-ils ?",
+      "answer": "Non. Le terme de Coriolis s’annule, mais le terme centrifuge reste égal à +0,800 er N pour le même r et le même Ω. Le point n’est pas nécessairement en équilibre dans le repère tournant."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P1",
+        "page": 265,
+        "section": "Composition des vitesses et accélérations"
+      },
+      {
+        "doc": "cpge",
+        "code": "P1",
+        "page": 268,
+        "section": "Forces d’inertie dans le PFD non galiléen"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 238,
+        "section": "Repères et cinématique"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 239,
+        "section": "Principe fondamental dans un référentiel non galiléen"
+      }
+    ],
+    "references": [
+      "mit-tournant"
+    ],
+    "corrections": [],
+    "number": 15,
+    "domain": "mecanique",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "lagrange-hamilton",
+    "title": "Passer de Lagrange à Hamilton sur un même système",
+    "level": "CPGE · Introduction aux formalismes théoriques",
+    "summary": "Décrire la masse-ressort par ses coordonnées, puis par sa position et son moment conjugué.",
+    "objective": "Retrouver une équation connue avec deux formalismes et préciser quand le hamiltonien représente l’énergie.",
+    "prerequisites": [
+      "Oscillateur harmonique",
+      "Dérivées partielles",
+      "Équations différentielles"
+    ],
+    "system": "Une masse m attachée à un ressort de raideur k sur un axe horizontal ; q est l’élongation autour de l’équilibre.",
+    "conditions": [
+      "m et k sont positifs et constants ; absence de frottement et d’excitation.",
+      "Pour l’exemple, la coordonnée est cartésienne, le potentiel ne dépend que de q et les contraintes sont indépendantes du temps.",
+      "Le passage usuel à Hamilton exige de pouvoir inverser la relation entre vitesse et moment conjugué ; il est régulier pour cet oscillateur."
+    ],
+    "sections": [
+      {
+        "id": "lagrangien",
+        "title": "Un lagrangien rassemble cinétique et potentiel",
+        "paragraphs": [
+          "Pour ce système, l’énergie cinétique est T = m q̇²/2 et le potentiel V = kq²/2. Le lagrangien L = T − V dépend de la coordonnée et de sa vitesse. La lettre T désigne ici une énergie cinétique, pas une période ni une température.",
+          "L’équation d’Euler–Lagrange redonne m q̈ + kq = 0. On retrouve ainsi la loi de Newton, avec les mêmes conditions initiales. Pour plusieurs coordonnées indépendantes, il existe une équation par coordonnée."
+        ],
+        "equations": [
+          {
+            "id": "lagrangemeca",
+            "reading": "La dérivée temporelle de la dérivée partielle de L par rapport à q point, moins la dérivée partielle de L par rapport à q, est nulle."
+          }
+        ]
+      },
+      {
+        "id": "action",
+        "title": "L’action est stationnaire",
+        "paragraphs": [
+          "L’action S est l’intégrale de L entre deux instants fixés. Le trajet physique annule la variation première de S pour des variations du trajet dont les extrémités sont fixées : δS = 0.",
+          "Stationnaire ne signifie pas toujours minimum. Cette formulation conduit à Euler–Lagrange sous les hypothèses de régularité du problème ; elle ne dispense pas de préciser les contraintes."
+        ],
+        "equations": []
+      },
+      {
+        "id": "moments",
+        "title": "Définir p puis changer de variables",
+        "paragraphs": [
+          "Le moment conjugué est p = ∂L/∂q̇. Ici p = m q̇, ce qui permet d’écrire q̇ = p/m. Pour une coordonnée angulaire, le moment conjugué peut être un moment cinétique ; il n’est pas toujours une quantité de mouvement linéaire.",
+          "Le hamiltonien est la transformée de Legendre H(q,p,t) = p q̇ − L, après avoir exprimé q̇ en fonction de q et p. Pour plusieurs coordonnées, on remplace p q̇ par la somme des produits pi q̇i."
+        ],
+        "equations": [
+          {
+            "id": "legendre",
+            "reading": "Le moment conjugué p est la dérivée partielle de L par rapport à q point ; H vaut p q point moins L, exprimé en q et p."
+          }
+        ]
+      },
+      {
+        "id": "hamilton",
+        "title": "Deux équations du premier ordre",
+        "paragraphs": [
+          "Les équations canoniques donnent q̇ = ∂H/∂p et ṗ = −∂H/∂q. Pour l’oscillateur, H = p²/(2m) + kq²/2, donc q̇ = p/m et ṗ = −kq.",
+          "Une équation du second ordre pour q devient deux équations du premier ordre pour (q,p). Il faut toujours deux données initiales. On n’a pas ajouté de degré de liberté au système.",
+          "Dans cet exemple, H est l’énergie mécanique et reste constant. Plus généralement, un hamiltonien autonome se conserve le long du mouvement. Son identification à l’énergie mécanique exige de vérifier la forme du lagrangien et le choix des coordonnées ; elle n’est pas automatique dans un changement de coordonnées dépendant du temps."
+        ],
+        "equations": [
+          {
+            "id": "hamiltonmeca",
+            "reading": "q point vaut la dérivée partielle de H par rapport à p ; p point vaut moins la dérivée partielle de H par rapport à q."
+          },
+          {
+            "id": "hamiltonosc",
+            "reading": "Pour la masse-ressort, H vaut p au carré sur deux m, plus k q au carré sur deux."
+          }
+        ]
+      },
+      {
+        "id": "limites",
+        "title": "Préparer les prolongements",
+        "paragraphs": [
+          "Un frottement ne se traite pas en conservant simplement ce hamiltonien d’oscillateur isolé. Il faut introduire les forces généralisées, le milieu ou un modèle dissipatif adapté.",
+          "Les contraintes, les champs et la physique quantique réutilisent ces idées avec des structures supplémentaires. Cette fiche établit le passage sur un système à un degré de liberté ; elle ne suppose pas que tous les lagrangiens possèdent la même transformation régulière."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Prendre m = 0,200 kg, k = 20,0 N·m⁻¹, q = 0,0500 m et p = 0,100 kg·m·s⁻¹ à un instant donné.",
+      "steps": [
+        "q̇ = p/m = 0,500 m·s⁻¹ ; ṗ = −kq = −1,000 N ; q̈ = −5,000 m·s⁻².",
+        "T = p²/(2m) = 0,025 J ; V = kq²/2 = 0,025 J ; L = 0,000 J ; H = 0,050 J.",
+        "ω₀ = √(k/m) = 10,000 rad·s⁻¹ ; amplitude A = √(2H/k) = 0,070711 m."
+      ],
+      "result": "L peut être nul à cet instant alors que l’énergie H est positive. Les équations de Hamilton et de Lagrange donnent la même accélération."
+    },
+    "checkpoint": {
+      "question": "Au passage par q = 0, quelle est la valeur absolue du moment conjugué pour cette même trajectoire ?",
+      "answer": "Toute l’énergie H = 0,050 J est cinétique : |p| = √(2mH) = 0,141421 kg·m·s⁻¹. Le signe dépend du sens de passage par l’équilibre."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P2",
+        "page": 277,
+        "section": "Lagrangien et équation de Lagrange de l’oscillateur"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 244,
+        "section": "Lagrangien, action et équations du mouvement"
+      },
+      {
+        "doc": "theorique",
+        "code": "TQC1",
+        "page": 345,
+        "section": "Formalismes lagrangien et hamiltonien"
+      },
+      {
+        "doc": "theorique",
+        "code": "TQC1",
+        "page": 350,
+        "section": "Équations canoniques dans l’espace des phases"
+      },
+      {
+        "doc": "theorique",
+        "code": "TQC1",
+        "page": 351,
+        "section": "Moments conjugués et transformée de Legendre"
+      }
+    ],
+    "references": [
+      "mit-hamilton",
+      "mit-action"
+    ],
+    "corrections": [
+      {
+        "id": "C11",
+        "title": "Énoncer la stationnarité de l’action",
+        "detail": "Le passage p. 244 décrit le mouvement par une minimisation de l’action. La formulation générale requiert une action stationnaire : la variation première s’annule pour des variations à extrémités fixées. Le trajet peut correspondre à un minimum dans certains cas, mais ce n’est pas garanti. La version web retient δS = 0.",
+        "sources": [
+          {
+            "doc": "theorique",
+            "code": "PC1",
+            "page": 244,
+            "section": "Définition de l’action et minimisation"
+          }
+        ]
+      }
+    ],
+    "number": 16,
+    "domain": "mecanique",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
   }
 ]

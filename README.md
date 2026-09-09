@@ -7,8 +7,9 @@ Un site pour étudier la physique en reliant observations, modèles et applicati
 - Une boucle générale interactive et six sous-boucles : **36 sous-étapes** avec explications au survol, accès clavier et boutons d'information tactiles.
 - **Huit fiches web** de thermodynamique et physique statistique : hypothèses, 13 équations MathML, exemples calculés, questions corrigées et références de pages.
 - **Quatre fiches de mécanique** : Newton et référentiel, travail-énergie, oscillateur amorti, force centrale et orbite. Une boucle de mécanique à six entrées ouvre directement les sections des fiches.
-- Une page **Domaines** : deux parcours disponibles, dix autres domaines planifiés avec repères dans les recueils ; douze fiches et vingt équations MathML au total.
-- Un journal de **neuf corrections ou clarifications** des passages utilisés des recueils.
+- **Quatre fiches de mécanique supplémentaires** : rotation autour d'un axe fixe, roulement sans glissement, référentiel tournant, Lagrange et Hamilton. Une seconde boucle de six entrées conserve l'accès à la première et relie les nouveaux sujets.
+- Une page **Domaines** : deux domaines disponibles, dix autres planifiés avec repères dans les recueils ; seize fiches et vingt-neuf équations MathML au total.
+- Un journal de **onze corrections ou clarifications** des passages utilisés des recueils.
 - Les sommaires de deux recueils d'Aurélien Roudier : **91 points d'entrée** pour 1 433 pages sources.
 - Le code de consultation et d'import des archives scientifiques de 2018.
 
@@ -49,7 +50,7 @@ docker compose up -d --wait
 
 Ouvrir [le site local](http://localhost:8080/), [les domaines](http://localhost:8080/domaines/), [la mécanique](http://localhost:8080/domaines/mecanique) ou [le diagnostic](http://localhost:8080/installation). Adapter le port dans les liens s'il a été changé.
 
-La boucle, les deux parcours et les douze fiches sont présents dès le démarrage. Les tables d'archives sont initialement vides ; leur import est facultatif. Sur un PC où le projet modernisé fonctionne déjà, publier ce dépôt ne nécessite pas de réinstaller le site.
+La boucle, les deux domaines et les seize fiches sont présents dès le démarrage. Les tables d'archives sont initialement vides ; leur import est facultatif. Sur un PC où le projet modernisé fonctionne déjà, publier ce dépôt ne nécessite pas de réinstaller le site.
 
 ## Ajouter les documents et les archives
 

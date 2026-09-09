@@ -52,5 +52,35 @@
     "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter25new.pdf",
     "note": "Chapitre 25, §25.2–25.5 : réduction à un corps, moment cinétique et lois de Kepler.",
     "checked": "2026-09-09"
+  },
+  "mit-rotation": {
+    "title": "MIT 8.01SC — Dynamique de rotation",
+    "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter17.pdf",
+    "note": "Chapitre 17, §17.4–17.5 : moment d’inertie, couples et énergie.",
+    "checked": "2026-09-09"
+  },
+  "mit-roulement": {
+    "title": "MIT 8.01SC — Dynamique du solide",
+    "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter21.pdf",
+    "note": "Chapitre 21, exemple 21.4, p. 21-16 à 21-19 : roulement d’un cylindre sur une pente.",
+    "checked": "2026-09-09"
+  },
+  "mit-tournant": {
+    "title": "MIT 8.01SC — Référentiels non inertiels",
+    "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter31.pdf",
+    "note": "Chapitre 31, §31.4.2–31.5 : composition des accélérations, forces centrifuge et de Coriolis, application terrestre.",
+    "checked": "2026-09-09"
+  },
+  "mit-hamilton": {
+    "title": "MIT 8.223 — Formalisme hamiltonien",
+    "url": "https://ocw.mit.edu/courses/8-223-classical-mechanics-ii-january-iap-2017/09ab68ae8e7987debc025892e00c0f1f_MIT8_223IAP17_Lec15.pdf",
+    "note": "Cours 15, p. 1 et 7–9 : transformée de Legendre, équations canoniques et lien entre hamiltonien et énergie.",
+    "checked": "2026-09-09"
+  },
+  "mit-action": {
+    "title": "MIT 8.09 — Principe variationnel",
+    "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf",
+    "note": "§1.2, p. imprimée 2 (page PDF 7) : la trajectoire rend l’action stationnaire.",
+    "checked": "2026-09-09"
   }
 }

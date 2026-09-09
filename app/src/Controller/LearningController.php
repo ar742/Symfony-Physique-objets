@@ -26,10 +26,13 @@ final class LearningController extends AbstractController
     {
         $domain = $domains->find($slug);
         if ($domain === null || $domain['cards'] === []) { throw $this->createNotFoundException('Parcours indisponible.'); }
-        foreach ($domain['steps'] as &$step) {
-            $step['href'] = $this->generateUrl('learning_card', ['slug' => $step['card'], '_fragment' => $step['section']]);
+        foreach ($domain['loops'] as &$group) {
+            foreach ($group['steps'] as &$step) {
+                $step['href'] = $this->generateUrl('learning_card', ['slug' => $step['card'], '_fragment' => $step['section']]);
+            }
+            unset($step);
         }
-        unset($step);
+        unset($group);
         return $this->render('science/domain.html.twig', ['domain' => $domain]);
     }
 

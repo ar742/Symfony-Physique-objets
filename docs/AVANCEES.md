@@ -22,3 +22,18 @@ Les détails du chantier sont dans [CHANTIER-DOMAINES.md](CHANTIER-DOMAINES.md).
 Ce lot couvre les quatre sujets ci-dessus, pas l'intégralité de P1, P2 ou PC1. La relecture scientifique par l'auteur et la recette visuelle au navigateur restent à faire. Aucune nouvelle dépendance ni modification de la base de données.
 
 Prochain lot : **M2**, mécanique du solide, rotations et référentiels ; préparer ensuite le prolongement lagrangien et hamiltonien avant F1 (fluides et ondes). Les autres lots restent planifiés.
+
+## 9 septembre 2026 — M2 : solides, référentiels et formalismes
+
+- Quatre fiches supplémentaires : `rotation-axe-fixe`, `roulement-sans-glissement`, `referentiel-tournant`, `lagrange-hamilton` (numéros 13–16). Chaque fiche relie des passages précis des deux recueils à un exemple original recalculé et à une question corrigée.
+- La mécanique dispose de deux boucles à six entrées. L'ancre historique `boucle-domaine` reste disponible ; `boucle-solides-formalismes` ouvre le nouveau groupe. Chaque fiche revient à sa boucle et les identifiants des info-bulles sont distincts entre les groupes.
+- Les exemples traitent un disque soumis à un couple, un cylindre sur une pente avec vérification du frottement statique, les forces d'inertie à un instant dans un repère tournant, et une masse-ressort décrite par Lagrange puis Hamilton.
+- Neuf nouvelles équations MathML. Correction C10 : inertie axiale non nulle du disque homogène (CPGE P3 p. 283). Correction C11 : stationnarité de l'action, sans minimum garanti (théorie PC1 p. 244).
+- Sources examinées : CPGE P1 p. 265 et 268, P2 p. 277, P3 p. 283–284 et 286–287 ; théorie PC1 p. 238–239, 243–244 et TQC1 p. 345, 350–351. Formules contrôlées sur rendus des pages. Compléments MIT : 8.01SC chapitres 17, 21, 31 ; 8.223 cours 15 ; 8.09 §1.2.
+- Les nouveaux exemples et équations ont reçu une seconde lecture scientifique. Elle a conduit à préciser l'intervalle ouvert de l'angle de pente, le groupement du produit vectoriel imbriqué et les sections des références externes.
+- Validation : 10 tests, 1 346 assertions ; 58 fichiers Twig valides ; injection Symfony valide ; 1 302 contrôles fonctionnels sur 29 pages, sans erreur. Les contrôles couvrent notamment les deux boucles, leurs identifiants et descriptions accessibles, les ancres, les retours vers les boucles, la pagination par domaine et les réponses HTTP.
+- Le lot est synchronisé avec le site local, avec sauvegarde des fichiers antérieurs. Le site compte désormais 16 fiches, 29 équations MathML et 11 corrections documentées.
+
+Portée : rotation autour d'un axe fixe, cylindre idéal sans glissement, rotation uniforme autour d'une origine fixe, formalismes analytiques pour un oscillateur à un degré de liberté. Les situations générales restent à approfondir. La relecture de l'auteur et la recette visuelle au navigateur restent à faire. Aucun PDF complet ou extrait de page n'est publié ; aucune nouvelle dépendance ni modification de la base de données.
+
+Prochain lot : **F1**, hydrostatique et écoulements, puis ondes mécaniques et acoustique.

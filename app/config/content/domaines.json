@@ -2,8 +2,8 @@
   {
     "slug": "mecanique",
     "title": "Mécanique",
-    "summary": "Forces, mouvement, énergie et oscillations.",
-    "scope": "M1 disponible : mécanique du point et oscillateur. Rotations des solides et formalismes analytiques à venir (M2).",
+    "summary": "Forces et énergie, solides et rotations, puis formalismes de Lagrange et de Hamilton.",
+    "scope": "Deux parcours de quatre fiches : bases de la mécanique (M1), puis solides, référentiels et formalismes (M2).",
     "sources": [
       {
         "doc": "cpge",
@@ -20,6 +20,10 @@
       {
         "doc": "theorique",
         "code": "PC1"
+      },
+      {
+        "doc": "theorique",
+        "code": "TQC1"
       }
     ],
     "steps": [
@@ -76,6 +80,69 @@
         "card": "oscillateur-harmonique",
         "section": "limites",
         "color": "green"
+      }
+    ],
+    "loop_title": "Forces, énergie et oscillations",
+    "loops": [
+      {
+        "anchor": "boucle-solides-formalismes",
+        "title": "Solides, référentiels et formalismes",
+        "steps": [
+          {
+            "id": 1,
+            "title": "Définir le solide",
+            "subtitle": "Axe et répartition de masse",
+            "tip": "Le moment d’inertie dépend de l’axe choisi autant que de la répartition de masse.",
+            "card": "rotation-axe-fixe",
+            "section": "inertie",
+            "color": "blue"
+          },
+          {
+            "id": 2,
+            "title": "Préciser les contraintes",
+            "subtitle": "Contact et roulement",
+            "tip": "Sans glissement sur un support fixe, la vitesse du point matériel au contact est nulle à cet instant.",
+            "card": "roulement-sans-glissement",
+            "section": "contact",
+            "color": "orange"
+          },
+          {
+            "id": 3,
+            "title": "Choisir le référentiel",
+            "subtitle": "Forces réelles et inertie",
+            "tip": "Dans le repère tournant, distinguer les interactions des termes centrifuge et de Coriolis.",
+            "card": "referentiel-tournant",
+            "section": "forces",
+            "color": "green"
+          },
+          {
+            "id": 4,
+            "title": "Vérifier la validité",
+            "subtitle": "Frottement disponible",
+            "tip": "Tester la condition de non-glissement avant de conserver la relation entre translation et rotation.",
+            "card": "roulement-sans-glissement",
+            "section": "controle",
+            "color": "blue"
+          },
+          {
+            "id": 5,
+            "title": "Changer de formulation",
+            "subtitle": "Lagrange puis Hamilton",
+            "tip": "Retrouver le même mouvement avec une équation du second ordre ou deux du premier ordre.",
+            "card": "lagrange-hamilton",
+            "section": "hamilton",
+            "color": "orange"
+          },
+          {
+            "id": 6,
+            "title": "Confronter les bilans",
+            "subtitle": "Couple, travail et énergie",
+            "tip": "Le travail du couple doit retrouver la variation de l’énergie de rotation.",
+            "card": "rotation-axe-fixe",
+            "section": "exemple",
+            "color": "green"
+          }
+        ]
       }
     ]
   },

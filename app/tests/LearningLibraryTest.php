@@ -40,8 +40,8 @@ final class LearningLibraryTest extends TestCase
     public function testCardsHavePreciseSourcesAndWellFormedMath(): void
     {
         $cards = $this->library()->all();
-        self::assertCount(12, $cards);
-        self::assertCount(12, array_unique(array_column($cards, 'slug')));
+        self::assertCount(16, $cards);
+        self::assertCount(16, array_unique(array_column($cards, 'slug')));
         $corrections = [];
         foreach ($cards as $card) {
             $anchors = ['conditions', 'exemple', 'controle', 'corrections', 'sources', 'dans-la-boucle', ...array_column($card['sections'], 'id')];
@@ -85,7 +85,7 @@ final class LearningLibraryTest extends TestCase
                 $corrections[] = $correction['id'];
             }
         }
-        self::assertCount(9, $corrections);
+        self::assertCount(11, $corrections);
     }
 
     public function testDisplayedExamplesMatchIndependentCalculations(): void
@@ -114,5 +114,17 @@ final class LearningLibraryTest extends TestCase
         $containsNumber('oscillateur-harmonique', sqrt(20/.2 - (.4/(2*.2))**2), 6);
         $containsNumber('force-centrale-orbite', sqrt(3.986e14/7e6), 3);
         $containsNumber('force-centrale-orbite', 2 * pi() * sqrt((7e6)**3/3.986e14), 3);
+        $containsNumber('rotation-axe-fixe', .5 * 2 * .3**2, 3);
+        $containsNumber('rotation-axe-fixe', .12 / (.5 * 2 * .3**2), 6);
+        $containsNumber('rotation-axe-fixe', .5 * .09 * 4**2, 3);
+        $containsNumber('roulement-sans-glissement', sqrt(2 * 9.81 * .5 / (1 + .5)), 6);
+        $containsNumber('roulement-sans-glissement', tan(pi()/6) / 3, 6);
+        $containsNumber('roulement-sans-glissement', 9.81 * .5, 3);
+        $containsNumber('referentiel-tournant', .5 * 2**2 * .4, 3);
+        $containsNumber('referentiel-tournant', 2 * .5 * 2 * .3, 3);
+        self::assertStringContainsString('−0,600 eθ', implode(' ', $library->find('referentiel-tournant')['example']['steps']), 'Coriolis opposé à eθ pour une vitesse radiale sortante');
+        $containsNumber('lagrange-hamilton', .1 / .2, 3);
+        $containsNumber('lagrange-hamilton', .1**2 / (2 * .2) + .5 * 20 * .05**2, 3);
+        $containsNumber('lagrange-hamilton', sqrt(.05**2 + (.1 / (.2 * 10))**2), 6);
     }
 }
