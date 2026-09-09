@@ -1,6 +1,6 @@
 # Préciser les analyses existantes
 
-Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) aux fiches déjà rédigées. Elle conserve leurs coordonnées afin de permettre la reprise de chaque élément. Les lots **AP1 et AP2** concernent six fiches :
+Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) aux fiches déjà rédigées. Elle conserve leurs coordonnées afin de permettre la reprise de chaque élément. Les lots **AP1 à AP3** concernent neuf fiches :
 
 | Lot | Fiche | Nature du sujet | Périmètre |
 | --- | --- | --- | --- |
@@ -10,14 +10,17 @@ Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) a
 | AP2 | `travail-energie-mecanique` | Phénomène physique | Mobile ponctuel sur piste horizontale, traction et frottement constants ; bilans et freinage calculés |
 | AP2 | `viscosite-poiseuille` | Phénomène physique | Fluide newtonien en tube circulaire horizontal, régime laminaire établi ; débit, profil et dissipation |
 | AP2 | `onde-corde` | Phénomène physique | Corde idéale homogène à extrémités fixes, petites pentes ; propagation et modes propres |
+| AP3 | `rotation-axe-fixe` | Phénomène physique | Disque puis cerceau autour du même axe central fixe ; couple constant, palier idéal |
+| AP3 | `roulement-sans-glissement` | Phénomène physique | Cylindre homogène sur plan incliné fixe ; contact idéal et condition de frottement statique |
+| AP3 | `referentiel-tournant` | Phénomène physique | Même point matériel décrit dans deux repères ; origine commune fixe et rotation uniforme |
 
 ## Ce qui est précisé
 
-Les 216 sous-niveaux de ces deux lots reprennent les attributs reçus, le traitement effectué et la sortie à conserver. Chaque lot en approfondit 108. Les fonctions 2 et 5 réalisent un traitement théorique propre au système local : le retour ne se limite pas à inviter à vérifier ou décider.
+Les 324 sous-niveaux de ces trois lots reprennent les attributs reçus, le traitement effectué et la sortie à conserver. Chaque lot en approfondit 108. Les fonctions 2 et 5 réalisent un traitement théorique propre au système local : le retour ne se limite pas à inviter à vérifier ou décider.
 
-Chaque niveau global et sous-niveau possède une relation entrante qualifiée. Les **252 relations** décrivent comment les entrées conduisent à l'élément étudié : dépendance logique, calcul, lecture, interprétation ou autre relation explicitée. Un contrôle de cohérence ne devient pas une mesure ; un changement de cas calculé ne devient pas une chronologie expérimentale.
+Chaque niveau global et sous-niveau possède une relation entrante qualifiée. Les **378 relations** décrivent comment les entrées conduisent à l'élément étudié : dépendance logique, calcul, lecture, interprétation ou autre relation explicitée. Un contrôle de cohérence ne devient pas une mesure ; un changement de cas calculé ne devient pas une chronologie expérimentale.
 
-Les trois comparaisons globales et les dix-huit comparaisons locales de chaque fiche possèdent quatre champs, soit **126 évaluations détaillées** au total :
+Les trois comparaisons globales et les dix-huit comparaisons locales de chaque fiche possèdent quatre champs, soit **189 évaluations détaillées** au total :
 
 1. **Éléments comparés** : références exactes, correspondant à 4/3, 5/2 ou 6/1.
 2. **Conditions de comparaison** : hypothèses communes, conventions et statut des données.
@@ -37,6 +40,16 @@ Le deuxième lot applique la même structure à trois phénomènes physiques. Le
 - **Corde** : séparer déplacement matériel, propagation et modes imposés par les extrémités. Retrouver la tension depuis les fréquences exige de connaître longueur et masse linéique. Les amplitudes dépendent des conditions initiales ; le temps de parcours et la période fondamentale sont deux grandeurs différentes.
 
 Les relations de référence ont été vérifiées le 9 septembre 2026 : [MIT 8.01SC, chapitre 13](https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter13.pdf) pour le travail et le théorème de l'énergie cinétique ; [OpenStax, §14.7](https://openstax.org/books/university-physics-volume-1/pages/14-7-viscosity-and-turbulence) pour résistance hydraulique et régime ; [OpenStax, §16.3](https://openstax.org/books/university-physics-volume-1/pages/16-3-wave-speed-on-a-stretched-string) et [§16.6](https://openstax.org/books/university-physics-volume-1/pages/16-6-standing-waves-and-resonance) pour la célérité et les modes de corde. Les inversions proposées sont des conséquences algébriques des modèles annoncés, contrôlées par recalcul ; elles ne fournissent pas de nouvelles observations. Les repères des deux recueils restent ceux des fiches.
+
+## AP3 : rotation, roulement et référentiel tournant
+
+Le troisième lot approfondit trois autres sujets physiques. Chaque chaîne de retour traite les résultats du scénario d'entrée puis explicite la portée de la comparaison. Les variantes restent séparées du cas initial ; les sorties calculées ne sont pas des observations indépendantes.
+
+- **Rotation axiale** : relier distribution de masse, moment d'inertie et moment axial, puis confronter dynamique et travail du couple. Le passage du disque au cerceau conserve masse, rayon, couple et durée. Retrouver une inertie depuis le mouvement exige de connaître les actions extérieures ; un accord énergétique interne ne mesure pas les frottements d'un palier. [MIT, chapitre 17](https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter17.pdf).
+- **Roulement** : distinguer point matériel et position de contact, puis associer translation, rotation et admissibilité du frottement statique. La puissance totale de ce frottement est nulle dans le modèle idéal sur support fixe, alors que ses contributions de translation et de rotation se compensent. La variante avec μs = 0,10 échoue au test d'adhérence ; aucune trajectoire de glissement n'est chiffrée sans loi correspondante. [MIT, chapitre 21, exemple 21.4](https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter21.pdf).
+- **Référentiel tournant** : reconstruire les vitesses et accélérations du même point dans les deux descriptions. Les termes centrifuge et de Coriolis sont séparés des interactions matérielles. La variante v′ = 0 concerne un instant ; elle ne suffit pas à conclure à un équilibre relatif. Les dérivées sont rattachées au repère utilisé. [MIT, chapitre 31](https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter31.pdf).
+
+Ces références existantes ont été revérifiées le 9 septembre 2026. Les exemples et les contrôles inverses sont recalculés dans les hypothèses indiquées ; les passages des deux recueils gardent leurs repères existants et leurs documents privés.
 
 ## Lecture dans le site
 

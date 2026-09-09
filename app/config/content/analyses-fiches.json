@@ -4369,927 +4369,1935 @@
   },
   "rotation-axe-fixe": {
     "question": "Comment relier un couple appliqué à la rotation d’un objet en tenant compte de sa répartition de masse et de l’axe choisi ?",
-    "basis": "Le disque et le cerceau sont des objets idéalisés de l’énoncé ; couples, inerties et mouvements sont supposés ou calculés, sans mesures effectuées.",
+    "basis": "Disque calculé : m = 2,00 kg, R = 0,300 m, τ = 0,120 N·m pendant 3,00 s depuis le repos ; cerceau comparé à paramètres identiques.",
     "levels": [
       {
         "id": 1,
         "title": "Décrire le solide autour de l’axe",
-        "system": "Le dossier géométrique du solide, de son axe imposé et de la façon dont son angle serait suivi.",
-        "input": "L’énoncé donne disque homogène, masse, rayon, couple constant et durée, avec un départ du repos.",
-        "output": "Axe, forme et origine angulaire sont fixés avant tout calcul d’inertie ou de mouvement.",
+        "system": "Le dossier du disque, de son axe central et des conventions décrivant la rotation sous couple imposé.",
+        "input": "Disque homogène, masse, rayon, couple constant et durée donnés ; repos initial et palier sans couple résistant supposés.",
+        "output": "Géométrie, axe orienté et données initiales disponibles pour calculer l’inertie et projeter les moments.",
         "section": "inertie",
         "comparison": "",
         "steps": [
           {
             "id": 1,
-            "title": "Identifier le solide suivi",
-            "action": "Repérer le disque, son axe central et le palier extérieur, puis distinguer rayon géométrique et distance de chaque masse élémentaire à l’axe.",
-            "output": "Objet et axe de référence clairement individualisés."
+            "title": "Identifier l’objet et son axe",
+            "input": "Disque de masse m et rayon R, axe central fixe perpendiculaire au disque ; en reprise, comparaison avec le cerceau de 6.3.",
+            "action": "Repérer disque, axe et palier ; distinguer rayon extérieur et distance élémentaire à l’axe, puis conserver séparément la variante éventuelle.",
+            "output": "Objet, distances géométriques et variante étiquetés.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le choix de l’objet détermine les distances qui entreront dans l’inertie. Les formes comparées ne sont pas interchangeables."
+            }
           },
           {
             "id": 2,
-            "title": "Définir le suivi angulaire",
-            "action": "Choisir un sens positif de rotation et une origine d’angle, avec une horloge commençant au départ du repos.",
-            "output": "Conventions angulaires et temporelles du suivi fixées."
+            "title": "Formaliser les grandeurs signées",
+            "input": "Axe de 1.1, couple imposé et départ du repos ; aucune origine angulaire n’est matériellement imposée.",
+            "action": "Orienter l’axe par eΔ, poser θ(0) = 0, ω = dθ/dt et α = dω/dt ; définir τΔ = M·eΔ.",
+            "output": "Angle, vitesse, accélération et moment axial signés.",
+            "relation": {
+              "nature": "logique",
+              "description": "La projection associe un scalaire au moment vectoriel. Le choix d’orientation fixe ensemble les signes des grandeurs angulaires."
+            }
           },
           {
             "id": 3,
-            "title": "Construire la description initiale",
-            "action": "Rassembler forme, masse, rayon et couple imposé en séparant l’homogénéité supposée d’une éventuelle répartition de masse à déterminer expérimentalement.",
-            "output": "Dossier d’entrée associant géométrie et actions imposées."
+            "title": "Établir le dossier initial",
+            "input": "Géométrie de 1.1 et conventions de 1.2 ; homogénéité, axe central et repos initial supposés.",
+            "action": "Consigner m = 2,00 kg, R = 0,300 m, τΔ = +0,120 N·m et t = 3,00 s.",
+            "output": "Données et conventions transmises au modèle 2.1.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les valeurs sont rattachées au même axe. L’homogénéité demeure une propriété supposée du disque."
+            }
           },
           {
             "id": 4,
-            "title": "Relire l’axe déclaré",
-            "action": "Reprendre le dossier et vérifier que le rayon fourni correspond à l’axe autour duquel l’angle et le couple sont décrits.",
-            "output": "Cohérence entre géométrie, angle et couple vérifiée.",
-            "comparison": "Les données organisées en 1.3 sont relues depuis l’axe identifié en 1.1, sans changer silencieusement la distance des masses."
+            "title": "Reprendre l’axe déclaré",
+            "input": "Dossier de 1.3 : rayon, axe perpendiculaire central, origine angulaire et couple positif.",
+            "action": "Relever que les distances de masse, l’angle et le moment projeté se rapportent tous au même axe.",
+            "output": "Axe commun retrouvé dans les attributs.",
+            "relation": {
+              "nature": "logique",
+              "description": "La relecture porte sur la cohérence géométrique du dossier, sans déplacer l’axe ni mesurer son alignement."
+            },
+            "comparison": "4/3 : mêmes axe, distances et orientation que le dossier produit.",
+            "evaluation": {
+              "object": "1.4/1.3 : axe, rayon et orientation relus face aux attributs du dossier initial.",
+              "conditions": "Même disque central et mêmes données supposées, sans relevé d’alignement.",
+              "criterion": "Conserver l’axe perpendiculaire central et τΔ positif ; ne pas remplacer R par un diamètre.",
+              "finding": "Les conventions concordent dans le dossier. L’alignement d’un montage reste non renseigné."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter les conventions d’angle",
-            "action": "Examiner ce que deviendraient les signes du couple et de la vitesse si le sens positif était inversé.",
-            "output": "Effets du changement de convention explicitement suivis.",
-            "comparison": "La convention de 1.2 doit modifier ensemble les composantes signées sans changer l’énergie physique du même mouvement."
+            "title": "Inverser l’orientation choisie",
+            "input": "Conventions relues en 1.4 ; le mouvement physique et l’origine temporelle restent identiques.",
+            "action": "Poser eΔ′ = −eΔ et θ′ = −θ ; déduire ω′ = −ω, α′ = −α et τΔ′ = −τΔ.",
+            "output": "Composantes signées inversées, produits τΔω et τΔdθ invariants.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion change la représentation du mouvement, pas le mouvement. Les deux facteurs signés changent ensemble dans puissance et travail."
+            },
+            "comparison": "5/2 : les définitions restent compatibles après inversion de toutes les composantes.",
+            "evaluation": {
+              "object": "1.5/1.2 : conventions inversées comparées aux définitions différentielles et à la projection initiales.",
+              "conditions": "Même axe géométrique, origine θ(0) = 0 et même mouvement supposé.",
+              "criterion": "Retrouver ω′ = dθ′/dt, α′ = dω′/dt et τΔ′ = M·eΔ′ ; conserver τΔω.",
+              "finding": "La transformation respecte les définitions ; un changement de signe isolé serait incohérent."
+            }
           },
           {
             "id": 6,
-            "title": "Fixer le dossier de rotation",
-            "action": "Conserver les données et préciser que suivre l’angle demanderait un repère visible sur le solide et des instants connus.",
-            "output": "Dossier utilisable et méthode d’observation future décrite.",
-            "comparison": "Le dossier revient au solide de 1.1 et complète la description de 1.3 sans prétendre avoir observé une rotation réelle."
+            "title": "Restituer les conventions initiales",
+            "input": "Transformation de 1.5 et attributs matériels de 1.1 ; aucun axe géométrique n’a été modifié.",
+            "action": "Appliquer une seconde inversion ; restituer l’orientation initiale, les paramètres du disque et les données nécessaires à un suivi angulaire.",
+            "output": "Dossier réutilisable, avec forme et conventions conservées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La transformation appliquée deux fois restitue les attributs de départ. Elle permet une reprise locale sans changer le solide."
+            },
+            "comparison": "6/1 : même solide et même axe après restitution des conventions.",
+            "evaluation": {
+              "object": "1.6/1.1 : objet et axe restitués comparés au disque initialement décrit.",
+              "conditions": "Même géométrie, palier et paramètres ; seules des conventions ont été transformées.",
+              "criterion": "Retrouver eΔ, θ et τΔ après deux inversions, avec m et R inchangés.",
+              "finding": "Le dossier initial est restitué ; aucune rotation observée n’a été ajoutée."
+            }
           }
-        ]
+        ],
+        "relation": {
+          "nature": "interprétative",
+          "description": "L’énoncé devient un ensemble d’attributs. La définition d’un suivi angulaire ne constitue pas un enregistrement du mouvement."
+        }
       },
       {
         "id": 2,
         "title": "Formaliser inertie et moments axiaux",
-        "system": "Le modèle projeté reliant distribution de masse, moments extérieurs et accélération angulaire autour d’un axe fixe.",
-        "input": "Le dossier du niveau 1 fournit géométrie et convention ; le solide est indéformable et le palier est idéal.",
-        "output": "L’équation axiale et le bilan énergétique sont établis avec un moment d’inertie défini pour cet axe.",
+        "system": "Le modèle reliant répartition de masse, projection du moment cinétique et moments extérieurs autour de l’axe fixe.",
+        "input": "1.3 transmet le disque, les paramètres et l’orientation ; rigidité, homogénéité et palier idéal sont conservés.",
+        "output": "IΔ = mR²/2, ΣτΔ = IΔα et Ec = IΔω²/2, sous les conditions propres au disque central.",
         "section": "dynamique",
         "comparison": "",
         "steps": [
           {
             "id": 1,
-            "title": "Recenser les contributions axiales",
-            "action": "Reprendre les actions extérieures et distinguer le couple moteur des réactions du palier dont le moment axial est supposé nul.",
-            "output": "Bilan des moments autour de l’axe retenu."
+            "title": "Recenser les moments extérieurs",
+            "input": "Dossier transmis par 1.3 ; couple moteur axial, poids appliqué en G sur l’axe central et réactions du palier idéal.",
+            "action": "Recenser moteur, poids en G sur Δ et réactions ; leurs moments axiaux valent respectivement τΔ, zéro et zéro pour le palier idéal.",
+            "output": "Trois actions recensées ; poids et palier à moment axial nul.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le poids agit sur l’axe ; les réactions peuvent maintenir celui-ci tout en ayant une projection axiale nulle."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir la description inertielle",
-            "action": "Définir l’inertie par les distances perpendiculaires à l’axe puis poser la dynamique projetée avec inertie constante et angle signé.",
-            "output": "Modèle axial avec définition géométrique de l’inertie."
+            "title": "Définir inertie et dynamique axiale",
+            "input": "Inventaire de 2.1, solide rigide et axe fixe Δ ; moments calculés en un point O fixe de Δ, distances notées r⊥.",
+            "action": "Définir IΔ = ∫r⊥²dm et LΔ = IΔω ; projeter le théorème du moment cinétique pour obtenir ΣτΔ = IΔα.",
+            "output": "Équation axiale avec inertie géométrique constante.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’axe fixe permet de dériver la projection ; la rigidité conserve les distances à l’axe et donc IΔ."
+            }
           },
           {
             "id": 3,
-            "title": "Établir les relations utiles",
-            "action": "Appliquer la forme homogène du disque pour relier couple, accélération et énergie cinétique de rotation dans la même convention.",
-            "output": "Relations théoriques du disque sur son axe central."
+            "title": "Établir les expressions du disque",
+            "input": "Relations de 2.2 ; disque mince homogène de rayon R, autour de son axe central perpendiculaire.",
+            "action": "Intégrer r²dm avec dm = 2mr dr/R² ; établir IΔ = mR²/2, α = τΔ/IΔ et Ec = IΔω²/2.",
+            "output": "Expressions du disque transmises au calcul 3.1.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégration utilise la répartition homogène. Le facteur un demi ne s’applique pas à toute masse de même rayon."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les dimensions",
-            "action": "Reprendre les relations et vérifier que le rayon intervient au carré, avec une inertie en kilogrammes mètres carrés.",
-            "output": "Dimensions et dépendance géométrique de l’inertie contrôlées.",
-            "comparison": "Les expressions de 2.3 doivent décrire les contributions axiales de 2.1, sans remplacer un moment par une force simple."
+            "title": "Reprendre dimensions et conditions",
+            "input": "Expressions de 2.3 et définition géométrique de IΔ ; τΔ représente un moment, non une force.",
+            "action": "Relever les unités kg·m², N·m et J ; rattacher le facteur mR²/2 à l’axe central et à l’homogénéité.",
+            "output": "Unités et conditions géométriques identifiées.",
+            "relation": {
+              "nature": "logique",
+              "description": "La relecture précise les attributs des expressions produites. Une unité correcte ne démontre pas la bonne répartition de masse."
+            },
+            "comparison": "4/3 : les expressions gardent leurs unités et leurs conditions de géométrie.",
+            "evaluation": {
+              "object": "2.4/2.3 : unités et conditions relues face aux relations du disque.",
+              "conditions": "Même axe central, même masse et même rayon ; aucune géométrie nouvelle.",
+              "criterion": "IΔα doit avoir l’unité N·m et IΔω² l’unité J ; IΔ dépend de R².",
+              "finding": "Les dimensions concordent. Le facteur un demi reste conditionné par la forme supposée."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter la portée axiale",
-            "action": "Examiner si la même écriture scalaire conviendrait à une rotation générale autour d’un axe mobile et préciser ce qui manquerait.",
-            "output": "Domaine d’emploi de la projection axiale délimité.",
-            "comparison": "Le cadre de 2.2 suppose un axe fixe ; une orientation changeante demande davantage que substituer une nouvelle valeur d’inertie."
+            "title": "Reconstituer le sens de la projection",
+            "input": "Relations axiales de 2.4 ; moment cinétique vectoriel en O décomposé L = LΔeΔ + Lperp, avec eΔ fixe.",
+            "action": "Projeter dL/dt : eΔ·dL/dt = dLΔ/dt = IΔα ; montrer que les composantes transverses ne sont pas déterminées par cette égalité.",
+            "output": "Projection retrouvée, sans imposer en général L parallèle à la vitesse angulaire vectorielle.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour replace le scalaire dans le théorème vectoriel. Un axe principal autorise une simplification supplémentaire, absente d’une rotation générale."
+            },
+            "comparison": "5/2 : l’équation scalaire est retrouvée comme projection, avec ses limites vectorielles.",
+            "evaluation": {
+              "object": "2.5/2.2 : projection reconstruite comparée à la dynamique axiale posée à l’entrée.",
+              "conditions": "Axe fixe et IΔ constant ; Lperp demeure un vecteur transverse, pas une donnée mesurée.",
+              "criterion": "La projection doit redonner ΣτΔ = IΔα sans exiger Lperp = 0 pour un solide quelconque.",
+              "finding": "La loi axiale est retrouvée avec sa portée. Le disque central bénéficie en plus de sa symétrie."
+            }
           },
           {
             "id": 6,
-            "title": "Retenir le bilan de rotation",
-            "action": "Présenter l’équation du disque et le travail du couple avec leurs conventions, en réservant les axes décalés à une géométrie explicitée.",
-            "output": "Cadre mécanique et énergétique prêt au calcul.",
-            "comparison": "La sortie conserve les actions de 2.1 et les relations de 2.3 pour un même axe, sans mélange de projections."
+            "title": "Restituer le bilan des actions",
+            "input": "Projection de 2.5 et inventaire de 2.1 ; disque autour de son axe central, palier sans résistance axiale.",
+            "action": "Projeter couple moteur, poids en G et réactions du palier ; retrouver τΔ = IΔα, les deux autres moments axiaux étant nuls.",
+            "output": "Trois actions restituées ; inertie centrale du disque conservée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les composantes transverses ne sont pas utilisées pour accélérer θ. Le retour conserve les liaisons nécessaires à l’axe fixe."
+            },
+            "comparison": "6/1 : mêmes actions, avec leur projection axiale clairement distinguée.",
+            "evaluation": {
+              "object": "2.6/2.1 : moments restitués comparés à l’inventaire des actions extérieures.",
+              "conditions": "Même disque, même axe et même hypothèse de palier idéal.",
+              "criterion": "Moteur : τΔ ; poids en G et palier idéal : moments axiaux nuls, sans supprimer poids ni réactions.",
+              "finding": "L’inventaire est conservé et les limites de projection sont explicites."
+            }
           }
-        ]
+        ],
+        "relation": {
+          "nature": "logique",
+          "description": "La géométrie et les actions sont traduites en relations mécaniques. L’équation axiale ne remplace pas tout le bilan vectoriel."
+        }
       },
       {
         "id": 3,
         "title": "Calculer angle et énergie du disque",
-        "system": "L’application numérique du modèle axial au disque démarrant du repos sous couple constant.",
-        "input": "Le niveau 2 fournit inertie et équation ; le niveau 1 fournit masse, rayon, couple et durée.",
-        "output": "Les prévisions d’accélération, vitesse angulaire, angle et énergie sont produites par deux chemins de calcul.",
+        "system": "L’application du modèle axial au disque partant du repos, avec deux expressions de son transfert énergétique.",
+        "input": "2.3 fournit inertie et dynamique ; m = 2,00 kg, R = 0,300 m, τΔ = 0,120 N·m et t = 3,00 s.",
+        "output": "Inertie, accélération, angle, vitesse et énergie calculés ; accord des deux expressions énergétiques à contrôler.",
         "section": "exemple",
         "comparison": "",
         "steps": [
           {
             "id": 1,
-            "title": "Préparer les valeurs axiales",
-            "action": "Rassembler masse, rayon, couple et durée du disque puis vérifier que le repos initial est associé à l’origine de l’horloge.",
-            "output": "Paramètres numériques du mouvement axial correctement associés."
+            "title": "Préparer le mouvement imposé",
+            "input": "Expressions de 2.3 et paramètres du disque ; ω(0) = 0, θ(0) = 0 et couple résultant constant.",
+            "action": "Associer masse, rayon, moment axial et durée au même disque ; conserver le repos initial et l’absence de résistance.",
+            "output": "Paramètres du calcul axial rassemblés.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les entrées désignent un seul intervalle de rotation. La durée est donnée et ne provient pas d’une observation."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir deux chemins de calcul",
-            "action": "Définir un chemin dynamique par intégration et un chemin énergétique par travail du couple, en utilisant les angles en radians.",
-            "output": "Deux procédures partageant les mêmes données physiques."
+            "title": "Intégrer la dynamique constante",
+            "input": "Dossier de 3.1, IΔ constant et τΔ positif ; angle exprimé en radians.",
+            "action": "Déduire α = τΔ/IΔ, ω = αt et Δθ = αt²/2 ; former Ec = IΔω²/2 et W = τΔΔθ.",
+            "output": "Expressions temporelles et énergétiques disponibles.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégration utilise le repos et le couple constant. Le travail et l’énergie partagent donc les mêmes hypothèses."
+            }
           },
           {
             "id": 3,
-            "title": "Appliquer la dynamique constante",
-            "action": "Calculer inertie, accélération, vitesse et angle puis déduire l’énergie cinétique et le travail du couple pendant la durée donnée.",
-            "output": "Prévisions numériques du mouvement et du transfert énergétique."
+            "title": "Établir les résultats du disque",
+            "input": "Expressions de 3.2 et valeurs imposées ; conserver α exacte avant l’affichage arrondi.",
+            "action": "Calculer IΔ = 0,090 kg·m², α = 1,333333 rad·s⁻², ω = 4,000 rad·s⁻¹, Δθ = 6,000 rad et Ec = W = 0,720 J.",
+            "output": "Résultats et provenance transmis à 4.1.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les substitutions établissent les valeurs de la fiche. L’accélération affichée est arrondie, les calculs suivants utilisent sa valeur exacte."
+            }
           },
           {
             "id": 4,
-            "title": "Comparer les énergies obtenues",
-            "action": "Reprendre angle et vitesse calculés pour confronter le travail axial à l’énergie de rotation, sans arrondir prématurément l’accélération.",
-            "output": "Accord énergétique contrôlé à partir des expressions exactes.",
-            "comparison": "La relecture de 3.3 conserve les données de 3.1 et compare deux procédures calculatoires, pas deux expériences indépendantes."
+            "title": "Reprendre les deux énergies",
+            "input": "Angle et vitesse de 3.3 ; même inertie et même moment axial, tous calculés dans le scénario idéal.",
+            "action": "Recalculer τΔΔθ et IΔω²/2 sans arrondi intermédiaire ; consigner leur valeur commune de 0,720 J.",
+            "output": "Accord énergétique interne retrouvé.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les deux expressions sont évaluées sur les mêmes sorties. Leur accord ne mesure pas les pertes d’un palier."
+            },
+            "comparison": "4/3 : mêmes 0,720 J par travail et énergie cinétique.",
+            "evaluation": {
+              "object": "3.4/3.3 : travail et énergie relus face aux deux valeurs numériques annoncées.",
+              "conditions": "Même disque, même durée et mêmes expressions exactes avant arrondi.",
+              "criterion": "Retrouver τΔΔθ = IΔω²/2 = 0,720 J avec Δθ en radians.",
+              "finding": "L’accord numérique est retrouvé ; il reste un contrôle interne de la prévision."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter l’intégration constante",
-            "action": "Examiner le rôle de l’absence de couple résistant et préciser pourquoi une résistance variable modifierait l’accélération utilisée dans l’intégration.",
-            "output": "Hypothèses nécessaires au calcul temporel clairement identifiées.",
-            "comparison": "La procédure de 3.2 suppose le couple résultant constant ; l’accord énergétique ne prouve pas qu’un palier réel soit idéal."
+            "title": "Généraliser l’intégration du moment",
+            "input": "Accord relu en 3.4 ; envisager symboliquement un moment résultant τnet(s) variable, avec IΔ constant et repos initial.",
+            "action": "Intégrer IΔα = τnet : ω(t) = IΔ⁻¹∫₀ᵗτnet(s)ds et Δθ(t) = IΔ⁻¹∫₀ᵗ(t − s)τnet(s)ds.",
+            "output": "Vitesse et angle dépendent différemment de l’histoire du moment.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le traitement expose ce qui changerait avec une résistance variable. Aucun historique de couple nouveau n’est attribué au disque."
+            },
+            "comparison": "5/2 : les intégrales générales redonnent les deux expressions temporelles initiales.",
+            "evaluation": {
+              "object": "3.5/3.2 : intégration du moment variable comparée aux expressions du moment constant.",
+              "conditions": "Même IΔ, même repos initial et même origine angulaire ; extension uniquement symbolique.",
+              "criterion": "Pour τnet(s) = τΔ constant, retrouver ω = τΔt/IΔ et Δθ = τΔt²/(2IΔ).",
+              "finding": "La solution initiale est retrouvée comme cas particulier. L’accord énergétique ne démontre pas la constance du moment réel."
+            }
           },
           {
             "id": 6,
-            "title": "Archiver la prévision axiale",
-            "action": "Conserver les deux chemins et leurs résultats avec unités pour permettre une comparaison à une autre répartition de la même masse.",
-            "output": "Résultat du disque reproductible par deux méthodes.",
-            "comparison": "Les valeurs finales renvoient au disque de 3.1 et aux sorties de 3.3 sans généraliser son inertie à tout solide circulaire."
+            "title": "Restituer le cas constant",
+            "input": "Relations de 3.5 et paramètres de 3.1 ; τnet reprend la valeur constante imposée.",
+            "action": "Appliquer τnet = 0,120 N·m pendant 3,00 s ; restituer ω, Δθ et les deux énergies du disque.",
+            "output": "Prévision initiale retrouvée, avec hypothèse temporelle explicite.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La substitution referme le traitement général sur le cas fourni. Elle permet une reprise si un historique indépendant devient disponible."
+            },
+            "comparison": "6/1 : mêmes données et prévisions, sans changement de sollicitation.",
+            "evaluation": {
+              "object": "3.6/3.1 : mouvement et paramètres restitués comparés au dossier du disque.",
+              "conditions": "Même m, R, couple et durée ; l’extension variable n’est pas conservée comme donnée réelle.",
+              "criterion": "Retrouver IΔ = 0,090 kg·m², ω = 4,000 rad·s⁻¹ et Δθ = 6,000 rad.",
+              "finding": "Le cas d’entrée est retrouvé avec son repos initial et son couple constant."
+            }
           }
-        ]
+        ],
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les paramètres imposés produisent des prévisions. Le travail utilise l’angle issu de cette même dynamique."
+        }
       },
       {
         "id": 4,
         "title": "Relire la rotation et son énergie",
-        "system": "Un audit de l’accord entre travail et mouvement calculés, complété par les conditions d’un futur relevé angulaire.",
-        "input": "Les sorties du niveau 3 deviennent données de retour, sans enregistrement réel de rotation disponible.",
-        "output": "L’audit distingue erreur d’axe, unité angulaire, couple oublié et simple contrôle interne des calculs.",
+        "system": "Le dossier de retour confrontant travail moteur, variation cinétique et provenance des grandeurs du disque.",
+        "input": "3.3 transmet inertie, angle, vitesse et énergies calculés ; aucun relevé indépendant d’angle ou de couple.",
+        "output": "Résidu énergétique nul identifié comme interne ; effets distincts d’une inertie incorrecte et d’un travail résistant explicités.",
         "section": "energie",
-        "comparison": "Le retour confronte les énergies de 3 à la géométrie et au suivi angulaire de 1 ; un accord interne ne mesure pas le couple réel.",
+        "comparison": "4/3 : travail, mouvement et énergie relus face aux résultats du disque.",
         "steps": [
           {
             "id": 1,
-            "title": "Importer les grandeurs calculées",
-            "action": "Reprendre inertie, angle, vitesse et travail du disque en indiquant les expressions et données qui ont produit chaque grandeur.",
-            "output": "Table du retour distinguant géométrie et mouvement."
+            "title": "Importer les résultats et leur origine",
+            "input": "Sorties de 3.3 : IΔ, α, ω, Δθ, Ec et W du disque.",
+            "action": "Reprendre les valeurs en distinguant paramètres géométriques, couple donné et mouvement déduit ; conserver la durée de 3,00 s.",
+            "output": "Grandeurs du retour associées à leur provenance.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le travail et la vitesse n’entrent pas comme mesures indépendantes. Le retour conserve cette dépendance explicite."
+            }
           },
           {
             "id": 2,
-            "title": "Définir les critères d’audit",
-            "action": "Prévoir de comparer travail et variation cinétique, puis préciser quels relevés d’angle et de couple rendraient ce contrôle indépendant.",
-            "output": "Contrôle comptable séparé d’un éventuel protocole expérimental."
+            "title": "Définir le résidu énergétique",
+            "input": "Dossier de 4.1, angle en radians et vitesse initiale nulle ; Iutil désigne l’inertie employée.",
+            "action": "Former D = τΔΔθ − Iutilω²/2 ; distinguer un calcul avec les sorties prédites d’une comparaison nécessitant des relevés indépendants.",
+            "output": "Résidu en joules et statut de ses entrées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La soustraction compare travail moteur et variation cinétique. Son interprétation dépend de l’inertie et des actions incluses."
+            }
           },
           {
             "id": 3,
-            "title": "Produire le diagnostic interne",
-            "action": "Vérifier l’égalité des énergies calculées et dresser une liste de causes possibles d’écart sans leur attribuer une présence réelle.",
-            "output": "Accord calculatoire et causes d’écart seulement hypothétiques."
+            "title": "Établir l’accord interne",
+            "input": "Expression de 4.2 avec Iutil = 0,090 kg·m², ω = 4,000 rad·s⁻¹ et Δθ = 6,000 rad.",
+            "action": "Calculer D = 0,720 − 0,720 = 0 J ; joindre les paramètres supposés et l’absence de mesure indépendante.",
+            "output": "Accord et limites d’identification transmis à 5.1.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La substitution produit un zéro construit avec la même dynamique. Elle ne détermine pas un frottement réel."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les conversions",
-            "action": "Examiner le diagnostic et vérifier qu’une conversion en tours ou degrés serait retraduite en radians avant le calcul du travail.",
-            "output": "Risques de conversion angulaire explicitement repérés.",
-            "comparison": "Le diagnostic de 4.3 est relu depuis les grandeurs importées en 4.1, avec une convention d’angle physiquement cohérente."
+            "title": "Reprendre les unités angulaires",
+            "input": "Résidu et angle de 4.3 ; les travaux sont calculés avec une variation angulaire en radians.",
+            "action": "Relever Δθ = 6,000 rad ; si l’angle est réexprimé en tours N ou degrés β, appliquer Δθ = 2πN = πβ/180.",
+            "output": "Angle physique conservé sous conversion d’unité.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La conversion relie plusieurs descriptions du même angle. Elle ne fournit ni nouvel angle ni nouvelle mesure."
+            },
+            "comparison": "4/3 : le même angle en radians doit entrer dans le résidu.",
+            "evaluation": {
+              "object": "4.4/4.3 : angle et résidu relus comparés aux valeurs utilisées dans l’accord.",
+              "conditions": "Même mouvement calculé, couple exprimé en N·m et origine angulaire conservée.",
+              "criterion": "Toute conversion inverse doit retrouver 6,000 rad avant d’évaluer τΔΔθ.",
+              "finding": "L’unité employée dans le zéro énergétique est correcte ; aucun diagnostic de perte n’en découle."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter l’interprétation d’un écart",
-            "action": "Comparer les effets possibles d’une inertie incorrecte et d’un couple résistant, puis reconnaître les données nécessaires pour les départager.",
-            "output": "Non-unicité d’un diagnostic fondé sur l’énergie seule.",
-            "comparison": "Le protocole de 4.2 doit distinguer géométrie et actions avant d’attribuer un désaccord à une dissipation du palier."
+            "title": "Décomposer un écart éventuel",
+            "input": "Résidu relu en 4.4 ; poser δI = Iutil − Ivrai et Wr le travail axial résistant éventuel.",
+            "action": "Partir de Ivraiω²/2 = τΔΔθ + Wr ; substituer dans D pour obtenir D = −Wr − δIω²/2.",
+            "output": "Deux contributions distinctes peuvent modifier le résidu.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La décomposition sépare erreur d’inertie et travail omis. Elle ne leur attribue aucune valeur dans le montage."
+            },
+            "comparison": "5/2 : le résidu initial est retrouvé, avec ses contributions possibles distinguées.",
+            "evaluation": {
+              "object": "4.5/4.2 : résidu décomposé comparé à sa définition par travail et énergie.",
+              "conditions": "Repos initial, même axe et inerties constantes ; seul Wr représente ici un travail supplémentaire hypothétique.",
+              "criterion": "Pour δI = 0 et Wr = 0, retrouver D = 0 ; un seul D ne détermine pas les deux inconnues.",
+              "finding": "L’identité retrouve le calcul idéal. Un écart isolé ne pourrait être attribué automatiquement au palier."
+            }
           },
           {
             "id": 6,
-            "title": "Garder la conclusion conditionnelle",
-            "action": "Présenter l’accord du disque comme vérification du calcul et indiquer les enregistrements manquants pour tester les hypothèses sur un montage.",
-            "output": "Bilan d’audit et besoin d’observations explicités.",
-            "comparison": "La conclusion revient aux données de 4.1 et limite le diagnostic de 4.3 à ce qui a réellement été calculé."
+            "title": "Restituer le bilan sous hypothèses",
+            "input": "Décomposition de 4.5 et dossier de 4.1 ; l’exemple conserve l’inertie donnée et aucun travail résistant.",
+            "action": "Appliquer δI = 0 et Wr = 0 ; restituer D nul, le mouvement calculé et les grandeurs indépendantes nécessaires à une confrontation.",
+            "output": "Bilan initial retrouvé avec limites d’interprétation.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’application du traitement de retour conserve le scénario idéal. Des données indépendantes pourraient ensuite préciser les termes séparés."
+            },
+            "comparison": "6/1 : mêmes grandeurs calculées et mêmes hypothèses identifiées.",
+            "evaluation": {
+              "object": "4.6/4.1 : valeurs et provenance restituées comparées au dossier importé.",
+              "conditions": "Même disque et mêmes paramètres ; aucun relevé supplémentaire de géométrie ou de moment.",
+              "criterion": "Retrouver IΔ = 0,090 kg·m², ω = 4,000 rad·s⁻¹ et W = 0,720 J.",
+              "finding": "Le dossier initial est conservé. L’inertie réelle et les pertes restent à établir séparément."
+            }
           }
-        ]
+        ],
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les sorties deviennent les données de la comparaison. Leur dépendance commune au modèle limite la portée de l’accord."
+        },
+        "evaluation": {
+          "object": "4/3 : énergies et résidu repris comparés aux résultats numériques du niveau 3.",
+          "conditions": "Même disque et même intervalle ; angle et vitesse issus de la dynamique calculée.",
+          "criterion": "Retrouver τΔΔθ = IΔω²/2 = 0,720 J et leur différence nulle.",
+          "finding": "L’accord est retrouvé par calcul. Il ne mesure ni le moment appliqué ni les pertes réelles."
+        }
       },
       {
         "id": 5,
-        "title": "Confronter forme et couple résistant",
-        "system": "La comparaison des hypothèses de répartition de masse et d’action extérieure qui gouvernent la rotation prédite.",
-        "input": "Le diagnostic du niveau 4 est confronté à l’inertie homogène et au palier idéal du niveau 2.",
-        "output": "Le modèle du disque est conservé pour l’exemple ; la forme et les résistances restent des mécanismes distincts.",
+        "title": "Confronter inertie et couple résultant",
+        "system": "Le traitement inverse de la dynamique, séparant répartition de masse, moment résultant et informations nécessaires à leur détermination.",
+        "input": "4.3 transmet l’accord interne et le mouvement calculé ; forme homogène et palier idéal restent les hypothèses de référence.",
+        "output": "Inversions conditionnelles établies ; une même accélération ne détermine pas simultanément inertie et moment résultant.",
         "section": "inertie",
-        "comparison": "Le cadre de retour confronte au niveau 2 l’axe, la forme et le couple net ; une répartition de masse ne remplace pas un frottement.",
+        "comparison": "5/2 : inversions et ambiguïtés confrontées à la dynamique axiale du disque.",
         "steps": [
           {
             "id": 1,
-            "title": "Recenser les hypothèses révisables",
-            "action": "Reprendre homogénéité, axe central et couple résistant nul puis les associer à leurs effets distincts sur la dynamique de rotation.",
-            "output": "Hypothèses séparées par origine géométrique ou mécanique."
+            "title": "Identifier données et inconnues",
+            "input": "Accord de 4.3, α calculée, géométrie du disque et couple moteur imposé ; résistance supposée nulle.",
+            "action": "Séparer l’inertie issue de la forme, le moment moteur donné et un éventuel moment résistant ; conserver leur provenance.",
+            "output": "Paramètres géométriques et mécaniques distingués.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le dossier distingue ce qui est imposé de ce qu’une analyse inverse chercherait. Aucun paramètre n’est déjà mesuré."
+            }
           },
           {
             "id": 2,
-            "title": "Définir des comparaisons contrôlées",
-            "action": "Choisir de modifier la distribution de masse à couple identique, ou le couple résistant à inertie identique, sans mélanger ces essais théoriques.",
-            "output": "Deux comparaisons ne variant qu’un mécanisme chacune."
+            "title": "Construire les inversions conditionnelles",
+            "input": "Attributs de 5.1, IΔ positif et α non nulle ; τnet représente la somme signée des moments axiaux.",
+            "action": "Isoler IΔ = τnet/α lorsque τnet est connu ; inversement, former τnet = IΔα lorsque l’inertie est connue.",
+            "output": "Deux inversions, chacune avec son paramètre fixé.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La réorganisation utilise la même dynamique axiale. Une accélération ne fournit qu’une relation entre inertie et moment résultant."
+            }
           },
           {
             "id": 3,
-            "title": "Produire les conséquences attendues",
-            "action": "Décrire comment inertie plus grande et couple résultant plus faible peuvent tous deux diminuer l’accélération sans constituer la même cause.",
-            "output": "Effets semblables reliés à deux causes différentes."
+            "title": "Établir les paramètres retrouvés",
+            "input": "Inversions de 5.2 et valeurs du disque ; utiliser α exacte dans les deux calculs séparés.",
+            "action": "Retrouver IΔ = 0,090 kg·m² à couple fixé, puis τnet = 0,120 N·m à inertie fixée.",
+            "output": "Reconstructions et cadre m, R, couple, durée invariants transmis à 6.1.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les paramètres reconstruits ont produit l’accélération utilisée. La comparaison du cerceau conservera les sollicitations, en changeant explicitement la forme."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les alternatives",
-            "action": "Reprendre ces conséquences et identifier quelles informations géométriques ou mesures de couple permettraient de lever leur ambiguïté dynamique.",
-            "output": "Données discriminantes entre inertie et résistance repérées.",
-            "comparison": "Les prédictions de 5.3 sont relues selon les hypothèses de 5.1 ; une accélération seule ne fixe pas les deux mécanismes."
+            "title": "Reprendre la portée des inversions",
+            "input": "Deux résultats de 5.3 et leurs conditions ; aucune accélération indépendante du modèle n’est disponible.",
+            "action": "Relever quel paramètre était fixé dans chaque reconstruction ; distinguer les deux contrôles d’une détermination simultanée.",
+            "output": "Conditions d’inversion conservées, identification réelle absente.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les valeurs retrouvées sont relues avec leurs hypothèses de connaissance. Leur accord n’ajoute pas une seconde équation indépendante."
+            },
+            "comparison": "4/3 : les valeurs sont reprises avec le paramètre fixé dans chaque calcul.",
+            "evaluation": {
+              "object": "5.4/5.3 : paramètres et conditions relus face aux deux reconstructions effectuées.",
+              "conditions": "Même α calculée ; couple fixé dans un calcul, inertie fixée dans l’autre.",
+              "criterion": "Conserver 0,090 kg·m² et 0,120 N·m avec leurs conditions respectives.",
+              "finding": "Les deux résultats sont cohérents, mais ne constituent pas une identification conjointe."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter le choix théorique",
-            "action": "Conserver les hypothèses du disque donné faute de mesures nouvelles et choisir le changement de forme pour une comparaison de retour calculable.",
-            "output": "Cadre initial maintenu et variante géométrique choisie.",
-            "comparison": "Le dispositif de 5.2 autorise une variante de forme explicite, sans prétendre estimer un couple résistant absent des données."
+            "title": "Déduire une famille indiscernable",
+            "input": "Limite relue en 5.4 ; envisager uniquement le problème inverse où IΔ et τnet seraient simultanément inconnus.",
+            "action": "Appliquer (IΔ, τnet) → (λIΔ, λτnet), avec λ > 0 ; montrer que α et le mouvement depuis le repos restent identiques.",
+            "output": "Une famille de paramètres partage la même cinématique.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La transformation établit l’indétermination du quotient. Elle ne modifie pas les valeurs géométriques déjà données pour le disque."
+            },
+            "comparison": "5/2 : la transformation explique pourquoi les inversions exigent un paramètre connu.",
+            "evaluation": {
+              "object": "5.5/5.2 : famille de paramètres comparée aux inversions conditionnelles du modèle axial.",
+              "conditions": "Moment résultant constant et inertie constante inconnus ; λ doit rester compatible avec les contraintes géométriques et mécaniques éventuelles.",
+              "criterion": "Le quotient (λτnet)/(λIΔ) doit rester τnet/IΔ ; connaître séparément l’un des paramètres supprime cette liberté.",
+              "finding": "L’ambiguïté est démontrée par transformation. Une information géométrique ou mécanique indépendante serait nécessaire pour la lever."
+            }
           },
           {
             "id": 6,
-            "title": "Fixer les cadres comparés",
-            "action": "Déclarer un disque et un cerceau idéaux de même masse et rayon, soumis au même couple et autour de leurs axes centraux.",
-            "output": "Deux modèles géométriques prêts pour le retour.",
-            "comparison": "Le choix répond aux hypothèses de 5.1 et conserve la séparation des causes révélée en 5.3 pour une comparaison intelligible."
+            "title": "Restituer les cadres géométriques",
+            "input": "Famille de 5.5 et géométrie donnée en 5.1 ; disque homogène et variante cerceau de mêmes m et R.",
+            "action": "Fixer l’inertie du disque par sa forme ; restituer son couple résultant, puis déclarer le cerceau sous le même couple et la même durée.",
+            "output": "Deux formes déclarées, sollicitations conservées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La géométrie ferme l’inversion du disque. Le cerceau constitue une comparaison définie, sans ajustement d’une résistance inconnue."
+            },
+            "comparison": "6/1 : mêmes paramètres de référence, avec la variante de forme explicitement distinguée.",
+            "evaluation": {
+              "object": "5.6/5.1 : forme, inertie et moments restitués comparés aux attributs recensés à l’entrée.",
+              "conditions": "Même disque de référence ; cerceau étiqueté comme variante, palier idéal conservé pour les deux.",
+              "criterion": "Retrouver Idisque = mR²/2 et τnet = 0,120 N·m ; conserver séparément l’hypothèse de résistance nulle.",
+              "finding": "Le dossier initial est restitué et la variante est définie. L’absence réelle de résistance n’est pas établie."
+            }
           }
-        ]
+        ],
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour inverse la relation dynamique. Les paramètres sont reconstruits séparément, selon celui tenu connu."
+        },
+        "evaluation": {
+          "object": "5/2 : modèle inverse comparé à ΣτΔ = IΔα et à l’inertie géométrique du niveau 2.",
+          "conditions": "Même axe fixe et mêmes attributs calculés ; aucune inertie ou résistance nouvelle mesurée.",
+          "criterion": "À τnet connu, IΔ = τnet/α ; à IΔ connu, τnet = IΔα. Leur quotient seul ne fixe pas les deux.",
+          "finding": "Les paramètres de référence sont retrouvés séparément. La géométrie donnée apporte une information distincte de la seule accélération."
+        }
       },
       {
         "id": 6,
         "title": "Revenir par la rotation d’un cerceau",
-        "system": "L’application du cadre axial à une autre répartition de masse, comparée au disque initial.",
-        "input": "Les cadres du niveau 5 conservent masse, rayon, couple et durée ; seul le moment d’inertie change avec la forme.",
-        "output": "Le retour attribue la différence de vitesse angulaire à la répartition de masse plutôt qu’à la masse totale.",
+        "system": "La comparaison du disque et du cerceau sous même couple et même durée, puis la restitution de leurs paramètres.",
+        "input": "5.3 transmet le cadre invariant ; m, R, couple, durée et repos initial conservés, seule la répartition de masse change.",
+        "output": "Cerceau : inertie doublée et vitesse finale de 2,000 rad·s⁻¹ ; travail différent malgré la même impulsion angulaire.",
         "section": "controle",
-        "comparison": "La méthode dynamique de 3 est répétée pour le cerceau ; les paramètres conservés de 1 isolent l’effet de la répartition de masse.",
+        "comparison": "6/1 : mêmes m, R, couple, durée et repos ; la forme cerceau est la variation explicitement introduite.",
         "steps": [
           {
             "id": 1,
-            "title": "Poser le second objet",
-            "action": "Reprendre masse et rayon du disque puis définir un cerceau mince idéal soumis au même couple depuis le repos pendant la même durée.",
-            "output": "Comparaison géométrique avec paramètres de sollicitation identiques."
+            "title": "Définir les deux objets comparés",
+            "input": "Cadre transmis par 5.3 : masse, rayon, couple constant et durée du disque, avec repos initial.",
+            "action": "Déclarer disque homogène et cerceau mince autour de leurs axes centraux ; conserver m, R, τΔ et t ainsi que les paliers idéaux.",
+            "output": "Deux répartitions supposées, même sollicitation.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le changement porte sur la distribution de masse. L’inertie n’est pas modifiée indépendamment de la forme déclarée."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les résultats comparables",
-            "action": "Utiliser les expressions axiales retenues pour comparer inertie, accélération, vitesse et angle sur le même intervalle de temps.",
-            "output": "Plan de comparaison de deux distributions de masse."
+            "title": "Déduire les rapports cinématiques",
+            "input": "Deux formes de 6.1 ; disque de Idisque = mR²/2 et cerceau dont toute la masse est à distance R.",
+            "action": "Intégrer Icerceau = ∫R²dm = mR² ; déduire les rapports d’accélération, vitesse et angle comme Idisque/Icerceau à même couple et durée.",
+            "output": "Inertie doublée ; α, ω et Δθ divisés par deux.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La définition géométrique fournit l’inertie du cerceau. Les rapports cinématiques utilisent ensuite la même équation et le même départ."
+            }
           },
           {
             "id": 3,
-            "title": "Calculer le retour du cerceau",
-            "action": "Déterminer l’inertie du cerceau puis sa vitesse finale et son angle, en gardant la même convention positive que pour le disque.",
-            "output": "Vitesse et angle réduits par l’inertie doublée."
+            "title": "Établir le mouvement du cerceau",
+            "input": "Relations de 6.2 et résultats du disque ; mêmes valeurs m = 2,00 kg, R = 0,300 m et t = 3,00 s.",
+            "action": "Calculer Icerceau = 0,180 kg·m², ωcerceau = 2,000 rad·s⁻¹ et Δθcerceau = 3,000 rad, avec accélération moitié de celle du disque.",
+            "output": "Variante et résultats transmis au prochain dossier 1.1.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La substitution réalise le contrôle de la fiche. Les résultats du cerceau restent associés à sa propre géométrie."
+            }
           },
           {
             "id": 4,
-            "title": "Relire le travail fourni",
-            "action": "Reprendre les deux angles et vérifier pourquoi le même couple pendant la même durée ne fournit pas nécessairement le même travail.",
-            "output": "Différence de travail expliquée par les angles parcourus.",
-            "comparison": "Les résultats de 6.3 sont relus avec les sollicitations de 6.1 ; même durée ne signifie pas même déplacement angulaire."
+            "title": "Reprendre le travail fourni",
+            "input": "Angles de 6.3 et du disque : 3,000 et 6,000 rad ; même couple axial pendant la même durée.",
+            "action": "Calculer Wcerceau = 0,360 J et Wdisque = 0,720 J ; retrouver les mêmes valeurs avec Iω²/2 pour chaque objet.",
+            "output": "Travail et énergie divisés par deux pour le cerceau.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le travail dépend de l’angle parcouru. Un même couple appliqué pendant la même durée n’impose pas un même travail."
+            },
+            "comparison": "4/3 : le travail retrouve l’énergie correspondant au mouvement du cerceau.",
+            "evaluation": {
+              "object": "6.4/6.3 : travaux et énergies relus comparés aux angles et vitesses calculés du cerceau.",
+              "conditions": "Même couple de 0,120 N·m ; chaque énergie utilise l’inertie de son propre objet.",
+              "criterion": "0,120 × 3,000 = 0,360 J = 0,180 × 2,000²/2 ; conserver les valeurs du disque séparément.",
+              "finding": "L’accord retrouve le mouvement du cerceau et explique la différence de travail par les angles."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter la comparaison de formes",
-            "action": "Vérifier que les objets restent idéaux et que la différence calculée ne résulte pas d’un changement d’axe ou de palier entre scénarios.",
-            "output": "Cause géométrique de la différence correctement isolée.",
-            "comparison": "La comparaison de 6.2 attribue l’écart à la distribution de masse seulement si les autres paramètres du modèle restent fixés."
+            "title": "Reformuler à impulsion angulaire fixée",
+            "input": "Travaux différents relus en 6.4 ; même couple, même durée et même moment cinétique axial initial nul.",
+            "action": "Intégrer dLΔ/dt = τΔ pour obtenir LΔ = τΔt ; éliminer ω dans Ec = IΔω²/2 et déduire Ec = LΔ²/(2IΔ).",
+            "output": "Même moment cinétique axial final, énergie inversement proportionnelle à l’inertie.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégration du moment distingue impulsion angulaire et travail. Elle explique les rapports énergétiques à partir des mêmes sollicitations."
+            },
+            "comparison": "5/2 : la formulation par LΔ retrouve les rapports dynamiques et leur conséquence énergétique.",
+            "evaluation": {
+              "object": "6.5/6.2 : formulation à impulsion fixée comparée aux rapports issus de la dynamique et des inerties.",
+              "conditions": "Même τΔt, départ du repos et inerties constantes ; LΔ désigne une projection axiale.",
+              "criterion": "ω = LΔ/IΔ doit redonner ωcerceau/ωdisque = 1/2 ; Ec = LΔ²/(2IΔ) donne le même rapport énergétique.",
+              "finding": "Les deux descriptions concordent. L’égalité d’impulsion n’implique pas l’égalité des énergies."
+            }
           },
           {
             "id": 6,
-            "title": "Refermer la boucle axiale",
-            "action": "Rapprocher la vitesse du cerceau de celle du disque et indiquer ce qu’une expérience devrait maintenir constant pour tester cette différence.",
-            "output": "Bilan comparatif et conditions d’une vérification réelle.",
-            "comparison": "Le retour de 6.3 répond aux objets de 6.1 et aux données initiales sans transformer la comparaison théorique en mesure de laboratoire."
+            "title": "Restituer les inerties et sollicitations",
+            "input": "Relation LΔ = IΔω de 6.5, vitesses calculées et paramètres déclarés en 6.1.",
+            "action": "À couple connu, retrouver IΔ = τΔt/ω pour chaque objet ; séparément, à inertie connue, reconstruire τΔ = IΔω/t.",
+            "output": "Deux inerties et même couple retrouvés sous conditions distinctes.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les inversions relient les résultats aux attributs initiaux. Elles ne cherchent pas simultanément deux paramètres inconnus dans une seule vitesse."
+            },
+            "comparison": "6/1 : formes et sollicitations sont restituées sans inversion simultanée injustifiée.",
+            "evaluation": {
+              "object": "6.6/6.1 : inerties et couples restitués comparés aux deux formes et aux invariants initiaux.",
+              "conditions": "Chaque calcul fixe soit le couple, soit l’inertie ; même durée et mêmes axes déclarés.",
+              "criterion": "Retrouver 0,090 et 0,180 kg·m² à couple fixé ; retrouver 0,120 N·m avec chaque inertie fixée.",
+              "finding": "Les attributs des deux scénarios sont retrouvés. Leur comparaison matérielle demanderait de contrôler séparément formes et sollicitations."
+            }
           }
-        ]
+        ],
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Deux formes idéalisées sont comparées. Le cerceau ne représente pas une transformation physique du disque pendant sa rotation."
+        },
+        "evaluation": {
+          "object": "6/1 : paramètres restitués des deux objets comparés au dossier initial du disque.",
+          "conditions": "Axes centraux perpendiculaires, paliers idéaux ; même masse, rayon, moment axial et durée, mais répartition de masse différente.",
+          "criterion": "Conserver m = 2,00 kg, R = 0,300 m, τΔ = 0,120 N·m et t = 3,00 s ; Icerceau = 2Idisque.",
+          "finding": "Le disque atteint 4,000 rad·s⁻¹ et le cerceau 2,000 rad·s⁻¹. La différence calculée dépend de la forme supposée."
+        }
       }
     ],
-    "version": "0.1",
-    "updated": "2026-09-09"
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les projections, les inerties propres aux formes et les inversions sont explicitées ; le retour distingue impulsion angulaire et travail.",
+    "subject": {
+      "type": "physique",
+      "description": "Mise en rotation d’un disque homogène, puis d’un cerceau mince, autour de leurs axes centraux fixes.",
+      "scope": "Solides indéformables, référentiel galiléen, inerties constantes et palier idéal ; aucune rotation générale, déformation ou mesure réalisée."
+    }
   },
   "roulement-sans-glissement": {
-    "question": "Quand le roulement sans glissement d’un cylindre est-il compatible avec les forces disponibles, et comment le vérifier par deux bilans ?",
-    "basis": "Les données de pente, forme et adhérence sont imposées dans l’exemple ; les vitesses et forces calculées ne proviennent pas de mesures sur un cylindre réel.",
+    "question": "Comment le contact couple-t-il translation et rotation, et à quelles conditions la descente calculée reste-t-elle un roulement sans glissement ?",
+    "basis": "Exemple supposé : cylindre plein, m = 1,00 kg, R = 0,100 m, h = 0,500 m, pente 30°, μs = 0,25 ; variante μs = 0,10.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "La cinématique matérielle du contact, les puissances de translation et rotation, puis l’admissibilité du frottement sont précisées aux deux étages.",
+    "subject": {
+      "type": "physique",
+      "description": "Descente depuis le repos d’un cylindre homogène plein sur un plan incliné fixe, avec couplage translation-rotation par le contact.",
+      "scope": "Solide indéformable, pesanteur uniforme et contact maintenu. Roulement idéal testé ; résistance au roulement seulement symbolique, loi de glissement non fournie."
+    },
     "levels": [
       {
         "id": 1,
         "title": "Décrire le cylindre et son contact",
-        "system": "Le dossier du cylindre, du support fixe et des grandeurs cinématiques nécessaires pour caractériser le contact.",
-        "input": "L’énoncé impose masse, rayon, pente, dénivelé, départ du repos et coefficient de frottement statique.",
-        "output": "La description distingue centre, point de contact et hypothèse d’adhérence encore à vérifier.",
+        "system": "Le dossier matériel du cylindre et du plan, avec les repères distinguant position du contact, point matériel et centre de masse.",
+        "input": "Masse, rayon, pente, dénivelé et adhérence sont supposés connus ; le départ du repos concerne translation et rotation.",
+        "output": "Géométrie et conventions définies ; l’absence de glissement reste une contrainte candidate dont la faisabilité doit être calculée.",
         "section": "contact",
         "comparison": "",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les attributs physiques supposés deviennent un dossier de calcul ; le schéma des repères n’est pas un enregistrement du contact."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Identifier les objets en contact",
-            "action": "Repérer le cylindre, son centre de masse et le plan extérieur, puis distinguer le point matériel touchant le support à chaque instant.",
-            "output": "Frontière du solide et contact instantané explicités."
+            "title": "Distinguer les objets au contact",
+            "input": "Cylindre plein de masse 1,00 kg et rayon 0,100 m ; plan fixe à 30°, départ du repos, h = 0,500 m.",
+            "action": "Repérer G, la position géométrique C du contact et le point matériel P du cylindre qui occupe C à l’instant considéré.",
+            "output": "G, C et P distingués ; la reprise de 6.3 conserve séparément le scénario à adhérence réduite.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le repérage sépare une position géométrique et une identité matérielle ; des points successifs du cylindre occupent le contact."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les variables de suivi",
-            "action": "Définir déplacement du centre, angle du cylindre et dénivelé, avec le support fixe comme référence de toutes les vitesses.",
-            "output": "Variables de translation, rotation et altitude distinguées."
+            "title": "Déduire les variables de contact",
+            "input": "Repères de 1.1 ; x est orienté vers le bas du plan, n vers l’extérieur, ω positive dans le sens du roulement descendant.",
+            "action": "Appliquer la cinématique du solide : vP = (vG − Rω)ex ; déduire vG = Rω si P adhère au support fixe.",
+            "output": "Vitesse matérielle au contact exprimée ; h = s sinα relie dénivelé et distance du centre.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La composition translation-rotation exploite la géométrie de 1.1 ; la contrainte découle d’une adhérence supposée, pas du seul repos initial."
+            }
           },
           {
             "id": 3,
-            "title": "Construire le scénario initial",
-            "action": "Rassembler géométrie, pente et coefficient donné puis inscrire sans glissement comme hypothèse à tester, pas comme conséquence du seul départ au repos.",
-            "output": "Dossier initial avec contrainte cinématique seulement supposée."
+            "title": "Établir le dossier initial",
+            "input": "Relations de 1.2, μs = 0,25, g = 9,81 m·s⁻² ; inertie du cylindre plein IG = mR²/2.",
+            "action": "Consigner les paramètres, vG(0) = ω(0) = 0 et la contrainte candidate ; distinguer la variante ultérieure μs = 0,10.",
+            "output": "Dossier transmis à 2.1 : support fixe, inertie, conditions initiales et capacité statique à confronter au besoin.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les conventions et valeurs deviennent les entrées du bilan des forces ; l’adhérence n’est pas encore démontrée admissible."
+            }
           },
           {
             "id": 4,
-            "title": "Relire le contact décrit",
-            "action": "Reprendre le dossier et vérifier que l’immobilité instantanée du contact ne signifie pas que le même point reste attaché au plan.",
-            "output": "Nature instantanée du contact correctement conservée.",
-            "comparison": "La description de 1.3 est relue selon les objets de 1.1 ; un point matériel successif remplace le précédent au contact."
+            "title": "Reprendre l’immobilité instantanée",
+            "input": "Le dossier de 1.3 impose vP = 0 sous adhérence ; P désigne seulement le point matériel actuellement au contact.",
+            "action": "Reprendre la distinction entre P et C : la position C avance avec G, tandis que chaque point matériel du plan reste fixe.",
+            "output": "Immobilité matérielle instantanée distinguée du déplacement de la position géométrique C.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture conserve la contrainte de 1.3 tout en précisant quel objet reçoit une vitesse nulle."
+            },
+            "comparison": "1.4 ↔ 1.3 : conserver la contrainte matérielle sans immobiliser la position géométrique du contact.",
+            "evaluation": {
+              "object": "1.4 ↔ 1.3 : identité du point P et portée de vP = 0, face au contact supposé du dossier.",
+              "conditions": "Même cylindre rigide et même plan fixe ; le suivi concerne des points matériels successifs, sans film fourni.",
+              "criterion": "Distinguer vP = 0 de dC/dt = vGex ; le même P ne demeure pas au contact.",
+              "finding": "L’immobilité supposée porte sur P à cet instant ; elle ne décrit pas une fixation permanente du cylindre au plan."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter les variables cinématiques",
-            "action": "Examiner si observer seulement le centre suffirait à distinguer roulement et glissement puis préciser le besoin d’un repère angulaire sur le cylindre.",
-            "output": "Informations complémentaires nécessaires pour tester le contact.",
-            "comparison": "La méthode de 1.2 doit suivre translation et rotation ; une trajectoire du centre seule ne prouve pas l’adhérence."
+            "title": "Dériver l’accélération matérielle",
+            "input": "Distinction de 1.4 ; β = dω/dt, aG = dvG/dt et GP = −Rn à l’instant du contact.",
+            "action": "Appliquer la formule d’accélération du solide : aP = (aG − Rβ)ex + Rω²n ; sous roulement, aG = Rβ.",
+            "output": "aP = Rω²n sous adhérence : vP = 0 n’impose pas aP = 0.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivation suit le même point matériel P ; dériver naïvement une vitesse nulle attribuée à des points successifs supprimerait ce terme normal."
+            },
+            "comparison": "1.5 ↔ 1.2 : la cinématique d’accélération complète celle des vitesses sans transformer le contact en point matériel permanent.",
+            "evaluation": {
+              "object": "1.5 ↔ 1.2 : composition des accélérations au retour, face à la composition des vitesses ayant défini l’adhérence.",
+              "conditions": "Plan rectiligne fixe, rayon constant, contact maintenu ; n est orientée du plan vers G.",
+              "criterion": "Retrouver aG − Rβ = 0 et aP·n = Rω² ; ce dernier terme ne s’annule que lorsque ω = 0.",
+              "finding": "Les deux compositions sont compatibles ; l’accélération matérielle normale persiste pendant le roulement malgré la vitesse instantanément nulle."
+            }
           },
           {
             "id": 6,
-            "title": "Fixer les entrées du contact",
-            "action": "Conserver les paramètres imposés et les deux suivis nécessaires, en distinguant hauteur perdue et longueur parcourue sur la pente.",
-            "output": "Entrées prêtes pour une analyse du roulement.",
-            "comparison": "Le dossier final conserve les objets de 1.1 et les hypothèses de 1.3 sans convertir une adhérence supposée en observation."
+            "title": "Restituer les repères initiaux",
+            "input": "Résultat de 1.5, géométrie et repos initial de 1.1 ; aucune chronologie matérielle n’a été relevée.",
+            "action": "Restituer les identités G, C, P et appliquer ω(0) = 0 ; conserver ensuite aP = Rω²n pour chaque point arrivant au contact.",
+            "output": "Dossier cinématique restitué, avec accélération nulle de P au départ seulement dans ce modèle.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le résultat de retour précise les attributs initiaux sans changer le rayon, le support ou la distinction entre position et matière."
+            },
+            "comparison": "1.6 ↔ 1.1 : retrouver objets, géométrie et repos initial, puis préciser leur évolution cinématique conditionnelle.",
+            "evaluation": {
+              "object": "1.6 ↔ 1.1 : repères, géométrie et état initial restitués, face au cylindre et au plan décrits.",
+              "conditions": "Même masse, rayon, pente et support fixe ; le départ est supposé sans vitesse linéaire ni angulaire.",
+              "criterion": "Conserver R = 0,100 m, vG(0) = ω(0) = 0 et la distinction C/P ; ne pas prolonger aP(0) = 0 à tout instant.",
+              "finding": "Le dossier initial est retrouvé ; la cinématique ultérieure reste subordonnée à une adhérence suffisante."
+            }
           }
         ]
       },
       {
         "id": 2,
         "title": "Formaliser la contrainte d’adhérence",
-        "system": "Le modèle associant translation du centre, rotation propre et capacité du contact à fournir un frottement statique.",
-        "input": "Le dossier du niveau 1 fournit la géométrie et l’adhérence disponible ; le cylindre est plein et homogène.",
-        "output": "Les équations et le seuil d’adhérence permettent de vérifier le scénario avant de calculer sa vitesse.",
+        "system": "Les bilans de translation et de rotation qui déterminent le frottement requis, puis leur lecture en puissances.",
+        "input": "1.3 transmet cylindre plein, plan fixe et contrainte candidate ; le frottement statique disponible est borné par μsN.",
+        "output": "Accélération et frottement requis déduits ; le seuil statique conditionne l’application du bilan énergétique sans pertes.",
         "section": "frottement",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le dossier matériel alimente Newton et le bilan de moment autour de G ; l’adhérence intervient comme contrainte à tester."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Recenser les actions du plan",
-            "action": "Reprendre poids, réaction normale et frottement statique, puis distinguer le sens inconnu du frottement de sa valeur maximale disponible.",
-            "output": "Bilan des actions et borne de frottement identifiés."
+            "title": "Recevoir les actions et contraintes",
+            "input": "Dossier de 1.3 ; poids appliqué en G, réaction normale et frottement au contact, sans couple de résistance au roulement.",
+            "action": "Poser f positif vers le haut de la pente, sans préjuger sa valeur ; écrire |f| ≤ μsN et IG = mR²/2.",
+            "output": "Trois actions recensées ; sens positif de f et borne statique définis.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les paramètres sont associés aux actions et à leurs points d’application ; f reste une inconnue, pas automatiquement μsN."
+            }
           },
           {
             "id": 2,
-            "title": "Poser les équations couplées",
-            "action": "Écrire translation et rotation autour du centre avec la contrainte de contact, en fixant les conventions pour les vitesses et moments.",
-            "output": "Modèle dynamique couplé à la contrainte de roulement."
+            "title": "Résoudre les équations couplées",
+            "input": "Actions de 2.1, pente orientée vers le bas ; β positive pour la rotation descendante et aG = Rβ sous adhérence.",
+            "action": "Combiner maG = mg sinα − f, IGβ = fR et N = mg cosα ; éliminer β puis f avec IG = mR²/2.",
+            "output": "aG = 2g sinα/3 et f = mg sinα/3, dirigé vers le haut.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La résolution traite simultanément force résultante et moment ; le frottement produit le couple nécessaire à la rotation descendante."
+            }
           },
           {
             "id": 3,
-            "title": "Déduire le besoin d’adhérence",
-            "action": "Résoudre les équations pour obtenir accélération et frottement requis, puis comparer ce dernier à la borne imposée par le coefficient statique.",
-            "output": "Condition d’existence du roulement exprimée par un seuil."
+            "title": "Établir le seuil requis",
+            "input": "Expressions de 2.2, 0 < α < 90° ; N positif et coefficient statique fourni indépendamment des équations dynamiques.",
+            "action": "Former f/N = tanα/3 puis imposer f ≤ μsN ; conserver les expressions dynamiques uniquement si cette inégalité est satisfaite.",
+            "output": "Relations transmises à 3.1 : aG, f, N et condition μs ≥ tanα/3.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La force requise est confrontée à une capacité maximale ; l’inégalité détermine l’admissibilité du contact candidat."
+            }
           },
           {
             "id": 4,
-            "title": "Relire le sens obtenu",
-            "action": "Reprendre le frottement calculé et vérifier que sa direction produit la rotation nécessaire sans être confondue avec celle d’un frottement de glissement.",
-            "output": "Sens du frottement lié au couplage des mouvements.",
-            "comparison": "La sortie de 2.3 est relue avec les actions de 2.1 ; la direction résulte du modèle, pas d’une règle automatique."
+            "title": "Reprendre force et capacité",
+            "input": "2.3 fournit une force requise vers le haut et un seuil ; aucune force de glissement n’a été introduite.",
+            "action": "Reprendre séparément f requis et μsN maximal, puis rattacher le signe positif de f au moment qui accélère la rotation.",
+            "output": "Direction dynamique et marge statique distinctes ; le frottement n’est pas nécessairement saturé.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour qualifie le résultat de 2.3 ; la direction provient du couplage imposé, pas d’une opposition automatique à vG."
+            },
+            "comparison": "2.4 ↔ 2.3 : retrouver le frottement requis et sa borne, sans remplacer une inégalité par une égalité.",
+            "evaluation": {
+              "object": "2.4 ↔ 2.3 : direction, valeur requise et capacité relues, face au seuil obtenu par résolution.",
+              "conditions": "Même cylindre plein, départ du repos et pente descendante ; les trois actions du modèle sont seules retenues.",
+              "criterion": "Conserver f > 0, f/N = tanα/3 et f ≤ μsN ; l’égalité n’est exigée qu’au seuil.",
+              "finding": "Le frottement moteur pour la rotation est résistant dans le bilan de translation ; son intensité s’ajuste sous la borne."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter la puissance du contact",
-            "action": "Examiner le travail de la force au point matériel de contact et distinguer puissance totale nulle et redistribution entre translation et rotation.",
-            "output": "Rôle énergétique du frottement statique correctement distingué.",
-            "comparison": "Le cadre de 2.2 suppose un support fixe et un contact adhérent ; ces conditions rendent nulle la puissance totale du frottement."
+            "title": "Décomposer la puissance du frottement",
+            "input": "Frottement relu en 2.4, vitesse vG et rotation ω liées par vG = Rω ; support et contact sont idéaux.",
+            "action": "Calculer Pf,trans = −fvG et Pf,rot = fRω ; additionner pour obtenir Pf = −f(vG − Rω) = 0.",
+            "output": "Puissance totale nulle, avec contributions de translation et rotation opposées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le bilan de puissance traite le même frottement que 2.2 ; les deux termes sont une décomposition, pas deux forces supplémentaires."
+            },
+            "comparison": "2.5 ↔ 2.2 : les puissances obtenues à partir des bilans dynamiques se compensent sous la même contrainte.",
+            "evaluation": {
+              "object": "2.5 ↔ 2.2 : bilan de puissance du frottement, face aux équations de translation et de rotation.",
+              "conditions": "Même plan fixe, même moment autour de G et vG = Rω ; résistance au roulement et déformations exclues.",
+              "criterion": "Retrouver −fvG + fRω = 0 ; après multiplication de Newton par vG et de l’équation angulaire par ω, retrouver ces deux termes.",
+              "finding": "Le frottement ne dissipe pas dans ce modèle ; sa contribution négative à la translation alimente la rotation."
+            }
           },
           {
             "id": 6,
-            "title": "Conserver le modèle conditionnel",
-            "action": "Présenter les équations avec leur seuil d’adhérence et interdire l’usage de la contrainte lorsque le frottement nécessaire dépasse la capacité disponible.",
-            "output": "Cadre de roulement soumis à sa condition d’existence.",
-            "comparison": "Le modèle final conserve les actions de 2.1 et le test de 2.3, sans imposer l’adhérence après son éventuel échec."
+            "title": "Restituer les actions admissibles",
+            "input": "Puissances de 2.5 et actions de 2.1 ; la normale ne travaille pas, le poids fournit mg sinα vG.",
+            "action": "Assembler dEc/dt = mg sinα vG puis conserver la borne |f| ≤ μsN à côté du bilan, sans la déduire de l’énergie.",
+            "output": "Même inventaire des forces, bilan énergétique et condition statique distincts.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les puissances restituent l’action de chaque force reçue ; un bilan énergétique seul ne fixe pas la capacité d’adhérence."
+            },
+            "comparison": "2.6 ↔ 2.1 : retrouver les trois actions et la borne statique malgré l’annulation de la puissance totale du contact.",
+            "evaluation": {
+              "object": "2.6 ↔ 2.1 : actions, points d’application et capacité statique restitués, face au bilan matériel initial.",
+              "conditions": "Même cylindre rigide et plan fixe, contact maintenu ; l’inertie et les forces ne sont pas modifiées au retour.",
+              "criterion": "Conserver poids, N et f ; la puissance nulle de N et du frottement ne supprime pas leur rôle dynamique. La puissance du poids vaut mg sinα vG.",
+              "finding": "Les actions initiales restent nécessaires ; l’énergie sera utilisable sous la condition d’adhérence conservée."
+            }
           }
         ]
       },
       {
         "id": 3,
         "title": "Calculer le roulement possible",
-        "system": "L’application des équations et du bilan énergétique au cylindre descendant le dénivelé indiqué.",
-        "input": "Le cadre du niveau 2 est appliqué aux paramètres de l’exemple, en vérifiant d’abord le seuil statique.",
-        "output": "Accélération, vitesse et partage d’énergie sont annoncés seulement après la vérification théorique de l’adhérence.",
+        "system": "Le calcul de la descente et du partage énergétique, avec reconstruction des paramètres à partir des résultats théoriques.",
+        "input": "2.3 fournit les équations et le seuil ; les valeurs supposées décrivent un cylindre plein descendant h = 0,500 m.",
+        "output": "Adhérence admissible pour μs = 0,25 ; vitesse, accélération et deux énergies calculées avec leurs paramètres d’origine.",
         "section": "exemple",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les relations conditionnelles reçoivent les valeurs de l’énoncé ; les résultats numériques restent des prédictions du modèle."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Préparer les paramètres du contact",
-            "action": "Rassembler angle, dénivelé, masse, rayon et coefficient statique en conservant le départ du repos et la forme pleine du cylindre.",
-            "output": "Données numériques et géométrie du cylindre réunies."
+            "title": "Recevoir les données numériques",
+            "input": "Relations de 2.3 ; m = 1,00 kg, R = 0,100 m, α = 30°, h = 0,500 m, g = 9,81 m·s⁻², μs = 0,25.",
+            "action": "Conserver vG(0) = ω(0) = 0 ; calculer IG = 0,00500 kg·m² et s = h/sinα = 1,00 m.",
+            "output": "Entrées SI complètes, avec altitude et longueur de pente distinguées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La géométrie et l’inertie rendent les données utilisables ; aucune vitesse finale n’est fournie indépendamment du calcul."
+            }
           },
           {
             "id": 2,
-            "title": "Ordonner les calculs",
-            "action": "Choisir de tester l’adhérence avant d’utiliser le bilan énergétique et préparer la comparaison entre calcul dynamique et calcul depuis le dénivelé.",
-            "output": "Procédure plaçant la validité du contact en premier."
+            "title": "Déduire la vitesse admissible",
+            "input": "Données de 3.1 et borne μs ≥ tanα/3 ; puissance totale du contact nulle si la contrainte est réalisable.",
+            "action": "Tester 0,25 ≥ tan30°/3, puis combiner mgh = mvG²/2 + IGω²/2 avec ω = vG/R pour isoler vG² = 4gh/3.",
+            "output": "Vitesse déduite après le test d’adhérence ; Etrans = 2mgh/3 et Erot = mgh/3.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le bilan de König et la contrainte utilisent le même cylindre ; la rotation est conservée dans l’énergie disponible."
+            }
           },
           {
             "id": 3,
-            "title": "Produire la descente calculée",
-            "action": "Vérifier le seuil puis calculer accélération, vitesse, frottement et énergies de translation et rotation pour la perte d’altitude donnée.",
-            "output": "Prévisions du roulement avec condition d’adhérence satisfaite."
+            "title": "Établir la descente calculée",
+            "input": "Expressions de 3.2 et de 2.3 ; la condition statique est satisfaite par les paramètres supposés.",
+            "action": "Consigner μmin ≈ 0,192450, aG = 3,270 m·s⁻², f = 1,635 N et vG ≈ 2,557342 m·s⁻¹, puis les deux énergies.",
+            "output": "À 4.1 : Etrans = 3,270 J, Erot = 1,635 J, total 4,905 J ; ω = vG/R et N ≈ 8,495709 N.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les valeurs sont issues des équations retenues ; la vitesse angulaire est dérivée de la contrainte et non relevée séparément."
+            }
           },
           {
             "id": 4,
-            "title": "Reconstruire la vitesse",
-            "action": "Reprendre l’accélération et la longueur de pente correspondant au dénivelé pour retrouver la vitesse obtenue par le partage d’énergie.",
-            "output": "Concordance entre dynamique et énergie du scénario.",
-            "comparison": "La relecture conserve les données de 3.1 et contrôle la vitesse de 3.3 sans remplacer le dénivelé par la longueur de pente."
+            "title": "Reprendre le trajet et les énergies",
+            "input": "Résultats de 3.3 ; même dénivelé h, longueur s = 1,00 m et départ du repos.",
+            "action": "Reprendre séparément aG, vG, Etrans et Erot ; vérifier 3,270 + 1,635 = 4,905 J, sans confondre h avec s.",
+            "output": "Partage énergétique repris et trajet correspondant clairement identifié.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise conserve les résultats et leur géométrie avant un second traitement ; l’accord arithmétique reste interne au modèle."
+            },
+            "comparison": "3.4 ↔ 3.3 : retrouver les deux contributions et leur somme pour la même perte d’altitude.",
+            "evaluation": {
+              "object": "3.4 ↔ 3.3 : valeurs cinématiques, partage énergétique et géométrie relus, face à la descente calculée.",
+              "conditions": "Même cylindre et données non arrondies dans les relations ; les valeurs affichées sont seulement des arrondis.",
+              "criterion": "Retrouver Etrans + Erot = mgh = 4,905 J et s sin30° = 0,500 m.",
+              "finding": "Les sorties sont reprises sans perte du terme de rotation ; aucune mesure indépendante ne compare encore ce partage."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter la répartition énergétique",
-            "action": "Vérifier que les deux contributions cinétiques utilisent le même moment d’inertie et la même relation de roulement que les équations dynamiques.",
-            "output": "Partage énergétique cohérent avec la géométrie retenue.",
-            "comparison": "Les deux méthodes de 3.2 ne sont comparables que si elles emploient le même cylindre et la même contrainte d’adhérence."
+            "title": "Reconstruire vitesse et inertie",
+            "input": "aG, s et énergies repris en 3.4 ; départ du repos, accélération constante et contrainte vG = Rω.",
+            "action": "Intégrer vG dvG/ds = aG pour retrouver vG² = 2aGs ; former Erot/Etrans = IG/(mR²) afin de reconstruire l’inertie.",
+            "output": "Même vitesse obtenue dynamiquement ; IG = mR²(Erot/Etrans) = mR²/2.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour combine cinématique et rapport énergétique ; l’inversion suppose m et R connus et des énergies issues du même calcul."
+            },
+            "comparison": "3.5 ↔ 3.2 : la dynamique restitue la vitesse énergétique et le rapport des énergies restitue l’inertie employée.",
+            "evaluation": {
+              "object": "3.5 ↔ 3.2 : intégration dynamique et reconstruction de l’inertie, face au bilan énergétique direct.",
+              "conditions": "Même masse, rayon, repos initial et accélération constante ; le rapport énergétique est évalué après la descente, où vG ≠ 0.",
+              "criterion": "Retrouver 2aGs = 4gh/3 et Erot/Etrans = 1/2 ; ces relations doivent donner la même vitesse et IG.",
+              "finding": "Les deux traitements sont cohérents sous les hypothèses communes ; l’inertie reconstruite n’est pas une détermination expérimentale."
+            }
           },
           {
             "id": 6,
-            "title": "Conserver le résultat admissible",
-            "action": "Enregistrer les valeurs et la marge d’adhérence, puis rappeler qu’il s’agit d’une descente calculée sur un support supposé idéal.",
-            "output": "Résultat reproductible avec test préalable de validité.",
-            "comparison": "Les sorties finales reviennent aux paramètres de 3.1 et aux résultats de 3.3, sans déclarer un contact réel observé sans glissement."
+            "title": "Restituer les données de départ",
+            "input": "Relations de 3.5 et paramètres reçus en 3.1 ; m et R restent fixés lors des reconstructions.",
+            "action": "Restituer IG = 0,00500 kg·m², h = (Etrans + Erot)/(mg) et s = h/sinα ; conserver μs = 0,25 au-dessus du seuil.",
+            "output": "Inertie, dénivelé, trajet et capacité statique retrouvés dans le scénario initial.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour remonte des résultats aux attributs initiaux sous contraintes déclarées ; il n’identifie pas simultanément masse, rayon et inertie."
+            },
+            "comparison": "3.6 ↔ 3.1 : retrouver géométrie, inertie et adhérence initiales par restitution conditionnelle des résultats.",
+            "evaluation": {
+              "object": "3.6 ↔ 3.1 : inertie, altitude, longueur de pente et coefficient conservés, face aux entrées numériques.",
+              "conditions": "m = 1,00 kg, R = 0,100 m, α = 30° et g fixés ; l’état initial reste au repos.",
+              "criterion": "Retrouver h = 0,500 m, s = 1,00 m et IG = 0,00500 kg·m² ; 0,25 doit rester supérieur à 0,192450.",
+              "finding": "Les attributs initiaux sont restitués ; la marge d’adhérence est calculée, sans attester la qualité d’un contact réel."
+            }
           }
         ]
       },
       {
         "id": 4,
         "title": "Relire translation et rotation ensemble",
-        "system": "Une procédure de confrontation des deux mouvements et du bilan énergétique à partir des sorties calculées.",
-        "input": "Les résultats du niveau 3 forment les données du retour ; aucun film ou relevé angulaire indépendant n’est fourni.",
-        "output": "La relecture sépare adhérence cinématique, admissibilité statique et conservation d’énergie.",
+        "system": "Les trois comparateurs qui distinguent vitesse de glissement, bilan énergétique et capacité statique à partir des prévisions de descente.",
+        "input": "3.3 transmet vitesses liées par la contrainte, énergies et forces calculées ; aucun suivi indépendant de translation et rotation n’est fourni.",
+        "output": "Écarts cinématique et énergétique nuls par construction, marge statique positive ; les trois conditions restent distinctes.",
         "section": "contact",
-        "comparison": "Le retour reprend les deux mouvements de 3 avec le repérage de 1 ; vérifier l’énergie ne remplace pas vérifier le contact.",
+        "comparison": "4 ↔ 3 : reprendre les résultats avec leur provenance ; leurs écarts nuls ne constituent pas des mesures indépendantes.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les prévisions deviennent des attributs de comparaison ; leur dépendance commune au roulement limite la portée d’un accord."
+        },
+        "evaluation": {
+          "object": "4 ↔ 3 : vitesses, énergies et marge statique relues, face aux résultats calculés de la descente.",
+          "conditions": "Même cylindre, même dénivelé et μs = 0,25 ; la rotation reçue a été déduite de vG/R.",
+          "criterion": "Retrouver r = vG − Rω = 0, D = mgh − Ec = 0 et μsN − f > 0 avec les valeurs non arrondies.",
+          "finding": "Les trois références sont cohérentes dans le calcul ; elles ne remplacent pas un suivi matériel des deux mouvements."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Importer les deux mouvements",
-            "action": "Reprendre vitesse du centre, rotation déduite, frottement et partage d’énergie, en conservant la contrainte utilisée pour produire ces valeurs.",
-            "output": "Dossier du retour avec dépendance au roulement déclarée."
+            "title": "Recevoir les deux mouvements calculés",
+            "input": "3.3 fournit vG ≈ 2,557342 m·s⁻¹, ω = vG/R, Etrans, Erot, f et N pour la descente depuis le repos.",
+            "action": "Identifier la provenance de chaque grandeur, notamment ω dérivée de vG ; conserver h et IG pour reconstruire l’énergie sans double comptage.",
+            "output": "Dossier numérique du retour, avec dépendance cinématique des vitesses explicitée.",
+            "relation": {
+              "nature": "logique",
+              "description": "La transmission conserve les mêmes états et conventions ; un second nom de variable ne crée pas une acquisition indépendante."
+            }
           },
           {
             "id": 2,
-            "title": "Définir trois comparaisons",
-            "action": "Prévoir des contrôles distincts du rapport des vitesses, de l’énergie totale et du frottement disponible, avec leurs observations nécessaires.",
-            "output": "Trois tests séparés de l’hypothèse de roulement."
+            "title": "Construire trois écarts distincts",
+            "input": "Vitesses, forces et énergie de 4.1 ; h est la perte d’altitude du centre depuis le repos.",
+            "action": "Former r = vG − Rω, D = mgh − mvG²/2 − IGω²/2 et S = μsN − |f|.",
+            "output": "Trois objets définis : vitesse relative, défaut d’énergie et marge de force statique.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les soustractions produisent des comparateurs de dimensions différentes ; aucune somme entre vitesse, énergie et force ne serait pertinente."
+            }
           },
           {
             "id": 3,
-            "title": "Construire la grille de retour",
-            "action": "Mettre en regard les attentes théoriques et les relevés de centre, angle et hauteur qui resteraient à recueillir sur un support réel.",
-            "output": "Grille cinématique et énergétique sans relevés fabriqués."
+            "title": "Établir les références de comparaison",
+            "input": "Définitions de 4.2 et valeurs calculées de 4.1 ; aucune mesure indépendante de vG, ω ou perte d’altitude.",
+            "action": "Consigner r = 0 m·s⁻¹, D = 0 J et S = μsN − f > 0, puis distinguer leurs conditions physiques.",
+            "output": "À 5.1 : adhérence cinématique, énergie conservée et capacité suffisante comme trois propriétés du scénario calculé.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’évaluation des expressions fixe des références analytiques ; les deux zéros sont construits avec les mêmes hypothèses que les prévisions."
+            }
           },
           {
             "id": 4,
-            "title": "Relire l’indépendance des tests",
-            "action": "Vérifier que la rotation ne serait pas simplement recalculée depuis la vitesse du centre dans un test prétendant observer l’absence de glissement.",
-            "output": "Risque de contrôle circulaire explicitement écarté.",
-            "comparison": "La grille de 4.3 doit distinguer les grandeurs dérivées de 4.1 et les relevés indépendants nécessaires à un test réel."
+            "title": "Reprendre la portée des zéros",
+            "input": "Résultats de 4.3 ; ω est issu de la contrainte, tandis que vG provient du bilan énergétique.",
+            "action": "Reprendre r = 0 et D = 0 comme identités de substitution ; réserver une confrontation matérielle à des relevés réellement indépendants.",
+            "output": "Deux zéros internes identifiés ; la marge S conserve son rôle d’inégalité statique.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture examine la provenance des attributs de 4.3, sans conclure à la réalisation matérielle des conditions représentées."
+            },
+            "comparison": "4.4 ↔ 4.3 : conserver les trois références et distinguer leurs calculs d’un contrôle expérimental.",
+            "evaluation": {
+              "object": "4.4 ↔ 4.3 : statut des deux zéros et de la marge positive, face aux références établies.",
+              "conditions": "Mêmes expressions non arrondies ; aucun film, relevé angulaire ou bilan indépendant n’est disponible.",
+              "criterion": "La substitution ω = vG/R annule r ; celle de vG² = 4gh/3 annule D pour IG = mR²/2.",
+              "finding": "Les zéros sont retrouvés par construction ; leur lecture n’ajoute pas une preuve indépendante de roulement."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter les signatures d’écart",
-            "action": "Examiner comment résistance au roulement, erreur d’inertie ou glissement changeraient différemment les trois comparaisons prévues.",
-            "output": "Signatures possibles associées aux mécanismes concurrents.",
-            "comparison": "Le cadre de 4.2 évite d’attribuer toute perte énergétique au glissement sans vérifier séparément la relation cinématique de contact."
+            "title": "Séparer les contraintes dans les vitesses",
+            "input": "r et D repris en 4.4 ; m, IG, R et h positifs sont fixés, vG et ω sont désormais des variables symboliques.",
+            "action": "Déduire de D = 0 l’ellipse vG² + (IG/m)ω² = 2gh et de r = 0 la droite vG = Rω ; calculer leur intersection descendante.",
+            "output": "L’intersection retrouve vG² = 4gh/3 ; chacune des deux conditions isolées laisse une indétermination.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La comparaison géométrique exploite les mêmes écarts que 4.2 ; conserver l’énergie ne suffit pas à imposer la relation de contact."
+            },
+            "comparison": "4.5 ↔ 4.2 : les équations des comparateurs produisent deux lieux distincts, dont l’intersection seule fixe les vitesses descendantes.",
+            "evaluation": {
+              "object": "4.5 ↔ 4.2 : lieux cinématique et énergétique, face aux écarts définis séparément à l’entrée.",
+              "conditions": "Même cylindre plein, même h et départ du repos ; branche vG ≥ 0, ω ≥ 0 choisie par la descente.",
+              "criterion": "Substituer vG = Rω dans l’ellipse pour retrouver vG² = 4gh/3 ; S ≥ 0 reste une condition supplémentaire.",
+              "finding": "Les deux traitements concordent ; ni énergie conservée ni relation des vitesses ne démontre à elle seule une capacité statique suffisante."
+            }
           },
           {
             "id": 6,
-            "title": "Produire le diagnostic ouvert",
-            "action": "Décrire ce que chaque type de relevé permettrait de trancher et conserver le résultat actuel comme simple cohérence du scénario idéal.",
-            "output": "Diagnostic conditionnel et mesures discriminantes à fournir.",
-            "comparison": "La conclusion conserve la provenance de 4.1 et les lacunes de 4.3 sans annoncer une adhérence expérimentalement vérifiée."
+            "title": "Restituer un diagnostic conditionnel",
+            "input": "Intersection obtenue en 4.5 et dossier de 4.1 ; la marge statique n’entre pas dans les deux lieux de vitesses.",
+            "action": "Restituer vG ≈ 2,557342 m·s⁻¹ et ω = vG/R, puis conserver f = 1,635 N et leur comparaison séparée à μsN.",
+            "output": "Dossier initial retrouvé avec trois conditions distinctes et provenance calculée des vitesses.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intersection restitue les prévisions reçues ; les forces et leur borne sont conservées pour éviter de fermer le diagnostic par l’énergie seule."
+            },
+            "comparison": "4.6 ↔ 4.1 : retrouver vitesses, paramètres et forces en conservant l’absence de relevés indépendants.",
+            "evaluation": {
+              "object": "4.6 ↔ 4.1 : dossier cinématique et statique restitué, face aux prévisions importées avant la comparaison.",
+              "conditions": "Mêmes m, R, IG, h et μs ; le calcul ne crée aucune donnée expérimentale supplémentaire.",
+              "criterion": "Retrouver les deux vitesses et Ec = 4,905 J ; conserver f < 0,25 × N et la provenance ω = vG/R.",
+              "finding": "Le dossier reçu est restitué ; un examen réel doit caractériser translation, rotation et contact par des informations distinctes."
+            }
           }
         ]
       },
       {
         "id": 5,
         "title": "Confronter le seuil et les pertes",
-        "system": "Le choix du modèle de contact à partir du seuil statique et des signatures de dissipation possibles.",
-        "input": "La grille du niveau 4 est confrontée aux contraintes du niveau 2 et au coefficient donné dans l’exemple.",
-        "output": "L’adhérence idéale est retenue pour le premier scénario ; les conditions de passage au glissement sont explicites.",
+        "system": "Le bilan de puissance qui distingue contact adhérent, résistance au roulement et glissement, puis retrouve le modèle idéal sous ses conditions.",
+        "input": "4.3 fournit r, D et la marge statique ; ces attributs calculés servent à comparer les mécanismes possibles sans écart observé.",
+        "output": "Adhérence et dissipation sont distinguées ; la limite idéale restitue accélération et seuil avant la variante à μs réduit.",
         "section": "limites",
-        "comparison": "Le cadre de retour confronte au niveau 2 l’adhérence, la rigidité et le support fixe ; un échec du seuil demande un autre contact.",
+        "comparison": "5 ↔ 2 : la lecture en puissances retrouve la dynamique idéale sous contrainte, en exposant les lois supplémentaires des autres contacts.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les comparateurs reçus alimentent un bilan général puis sa spécialisation ; le retour effectue un traitement théorique des conditions du contact."
+        },
+        "evaluation": {
+          "object": "5 ↔ 2 : bilan de puissance et spécialisation idéale, face aux équations couplées et au seuil statique de l’aller.",
+          "conditions": "Même cylindre plein et plan fixe ; le modèle initial correspond à r = 0 et à une résistance au roulement nulle.",
+          "criterion": "Retrouver aG = 2g sinα/3, f = mg sinα/3 et μs ≥ tanα/3 ; sans ces hypothèses, compléter les lois du contact.",
+          "finding": "Le retour restitue la théorie d’entrée et délimite sa portée ; un bilan de puissance ne détermine pas seul une loi de glissement."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Rassembler les critères de contact",
-            "action": "Reprendre seuil statique, relation entre vitesses et bilan d’énergie puis identifier la condition physique que chacun permettrait d’interroger.",
-            "output": "Critères associés à adhérence, géométrie et dissipation."
+            "title": "Recevoir les critères du contact",
+            "input": "4.3 transmet r = 0, D = 0 et S > 0 pour μs = 0,25 ; aucun écart matériel n’a été établi.",
+            "action": "Associer r à la vitesse relative, D au bilan depuis le repos et S à la capacité statique ; conserver leurs unités distinctes.",
+            "output": "Trois attributs classés selon la propriété physique interrogée.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour reprend les résultats en distinguant leur fonction ; une même valeur nulle ne donne pas le même renseignement physique."
+            }
           },
           {
             "id": 2,
-            "title": "Définir les cadres concurrents",
-            "action": "Comparer roulement idéal, roulement avec résistance et glissement, en indiquant les lois de contact propres à chaque description.",
-            "output": "Trois cadres de contact avec hypothèses distinctes."
+            "title": "Dériver la puissance générale du contact",
+            "input": "Comparateurs de 5.1 ; Fτ désigne la force tangentielle signée vers le bas, et Mr ≥ 0 un couple résistant symbolique.",
+            "action": "Combiner maG = mg sinα + Fτ et IGβ = −RFτ − Mr pour déduire dEm/dt = Fτ(vG − Rω) − Mrω.",
+            "output": "Puissance mécanique du contact : Fτr − Mrω, avec Em = mvG²/2 + IGω²/2 + Ep.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La somme des bilans de translation et rotation traite les mécanismes séparément ; Mr est une extension symbolique, nulle dans l’exemple."
+            }
           },
           {
             "id": 3,
-            "title": "Évaluer leurs conséquences",
-            "action": "Décrire quels cadres conservent la relation de roulement, lesquels dissipent de l’énergie et lesquels nécessitent une loi de frottement supplémentaire.",
-            "output": "Table des contraintes conservées selon le contact."
+            "title": "Établir les signatures conditionnelles",
+            "input": "Puissance de 5.2 sur plan fixe ; le mouvement descendant prend ω ≥ 0, sans valeur de résistance ni loi cinétique fournie.",
+            "action": "Consigner : r = Mr = 0 conserve Em ; r = 0 avec Mrω > 0 dissipe ; r ≠ 0 requiert une loi pour Fτ.",
+            "output": "À 6.1 : cadres distincts et seuil statique à éprouver en remplaçant seulement μs = 0,25 par 0,10.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les conséquences du bilan classent les contacts possibles ; la variante choisie éprouve la capacité statique sans attribuer de frottement cinétique."
+            }
           },
           {
             "id": 4,
-            "title": "Relire le classement",
-            "action": "Reprendre cette table et vérifier que dissipation et glissement ne sont pas identifiés systématiquement à une seule propriété du contact.",
-            "output": "Dissipation et adhérence traitées comme questions distinctes.",
-            "comparison": "Les conséquences de 5.3 sont relues avec les critères de 5.1 ; un solide peut rouler en subissant une résistance dissipative."
+            "title": "Reprendre adhérence et dissipation",
+            "input": "Signatures de 5.3 ; la conservation d’Em et l’annulation de r proviennent de conditions différentes.",
+            "action": "Reprendre le cas r = 0, Mrω > 0 et celui r ≠ 0 ; ne pas identifier tout déficit énergétique à un glissement.",
+            "output": "Un contact adhérent peut accompagner une résistance dissipative ; le glissement ne fixe pas seul la puissance.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture conserve les implications exactes de 5.3 et leur caractère conditionnel ; elle n’attribue aucun mécanisme à une mesure absente."
+            },
+            "comparison": "5.4 ↔ 5.3 : conserver les signatures sans confondre contrainte cinématique et bilan mécanique.",
+            "evaluation": {
+              "object": "5.4 ↔ 5.3 : portée des signatures relues, face aux conséquences du bilan de puissance.",
+              "conditions": "Même support fixe ; Mr est seulement symbolique, et Fτ n’a pas reçu de loi cinétique.",
+              "criterion": "Conserver Fτr = 0 sous adhérence et −Mrω < 0 si Mrω > 0 ; r ≠ 0 seul ne fixe pas Fτr.",
+              "finding": "Dissipation et glissement restent deux questions distinctes ; un déficit énergétique seul ne les départage pas."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter le cadre disponible",
-            "action": "Conserver l’adhérence idéale pour le coefficient de l’exemple tout en précisant que ce test ne démontre ni rigidité parfaite ni absence de pertes.",
-            "output": "Cadre initial maintenu sous hypothèses supplémentaires explicites.",
-            "comparison": "Le classement de 5.2 ne permet pas de déduire un contact idéal complet du seul dépassement du seuil statique."
+            "title": "Retrouver la dynamique idéale",
+            "input": "Cas idéal repris en 5.4 : r = 0, Mr = 0, IG = mR²/2 ; énergie mécanique conservée depuis le repos.",
+            "action": "Remplacer ω par vG/R dans Em puis dériver : (3m/2)vGaG = mg sinα vG ; pour vG > 0, isoler aG puis f.",
+            "output": "aG = 2g sinα/3 et f = mg sinα − maG = mg sinα/3 retrouvés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La spécialisation du bilan de puissance restitue le mouvement idéal ; la division par vG concerne la descente après le départ."
+            },
+            "comparison": "5.5 ↔ 5.2 : la spécialisation idéale du bilan général restitue les forces compatibles avec une puissance totale du contact nulle.",
+            "evaluation": {
+              "object": "5.5 ↔ 5.2 : équations retrouvées sous adhérence idéale, face au bilan général des puissances.",
+              "conditions": "Même cylindre et plan ; r = Mr = 0, repos initial et vG > 0 après démarrage. Le résultat initial vient des équations dynamiques.",
+              "criterion": "Retrouver les deux équations avec Fτ = −f ; la somme de leurs puissances doit redonner dEm/dt = 0.",
+              "finding": "Le traitement retrouve le modèle idéal sans prolonger une division par zéro au départ ; la capacité statique reste à vérifier séparément."
+            }
           },
           {
             "id": 6,
-            "title": "Fixer le scénario de retour",
-            "action": "Proposer d’abaisser seulement le coefficient statique pour éprouver la condition d’existence, sans inventer une valeur de frottement dynamique absente.",
-            "output": "Retour choisi pour tester une limite du modèle.",
-            "comparison": "La décision revient aux critères de 5.1 et à la table de 5.3, en laissant le mouvement glissé non déterminé."
+            "title": "Restituer les critères de référence",
+            "input": "Force requise retrouvée en 5.5 et critères reçus en 5.1 ; N = mg cosα et μs = 0,25 dans la référence.",
+            "action": "Former à nouveau f/N = tanα/3 et S = μsN − f ; conserver r = D = 0 et distinguer le futur coefficient réduit.",
+            "output": "Critères initiaux retrouvés ; référence admissible, variante à 0,10 encore distincte du mouvement glissé inconnu.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour restitue les attributs du scénario de référence à partir de la limite idéale ; il prépare une modification explicite du seul coefficient."
+            },
+            "comparison": "5.6 ↔ 5.1 : retrouver les trois critères et leur provenance, sans leur attribuer une portée expérimentale supplémentaire.",
+            "evaluation": {
+              "object": "5.6 ↔ 5.1 : seuil, marge et conditions idéales restitués, face aux critères transmis à l’entrée.",
+              "conditions": "Même pente de 30°, cylindre plein et μs = 0,25 ; aucun couple résistant n’est ajouté au calcul numérique.",
+              "criterion": "Retrouver f/N ≈ 0,192450 < 0,25, r = 0 et D = 0 ; maintenir distinct le dossier à μs = 0,10.",
+              "finding": "Les attributs de référence sont conservés ; le calcul d’une variante de contact nécessite son propre test d’admissibilité."
+            }
           }
         ]
       },
       {
         "id": 6,
         "title": "Revenir quand l’adhérence devient insuffisante",
-        "system": "Une application du test d’admissibilité à un coefficient plus faible, qui ferme ou suspend le calcul selon le résultat.",
-        "input": "Le cadre du niveau 5 conserve cylindre et pente ; le coefficient statique est remplacé par celui du contrôle de la fiche.",
-        "output": "Le retour constate l’échec de la condition et expose les données manquantes pour calculer le glissement.",
+        "system": "Le test de roulement pour un coefficient statique réduit, puis les équations qui restent ouvertes après rejet de la contrainte.",
+        "input": "5.3 fournit les cadres possibles ; la variante reprend le même départ du repos avec μs = 0,10, sans loi de frottement cinétique.",
+        "output": "Roulement idéal inadmissible pour la variante ; paramètres initiaux conservés et mouvement glissé laissé indéterminé.",
         "section": "controle",
-        "comparison": "Le retour applique d’abord le test de 3 au nouveau coefficient ; il compare l’admissibilité aux conditions de 1 avant tout calcul de vitesse.",
+        "comparison": "6 ↔ 1 : comparer la variante aux attributs initiaux en isolant le changement de μs et la perte d’admissibilité de la contrainte.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les conditions du retour alimentent un nouveau test statique ; ce scénario alternatif ne prolonge pas chronologiquement la descente déjà calculée."
+        },
+        "evaluation": {
+          "object": "6 ↔ 1 : cylindre, pente, départ et capacité du contact dans la variante, face au système initial.",
+          "conditions": "Mêmes m, R, h, g, pente et support fixe ; μs passe de 0,25 à 0,10 dans une descente distincte depuis le repos.",
+          "criterion": "Conserver m = 1,00 kg, R = 0,100 m, α = 30°, h = 0,500 m ; comparer chaque μs au même seuil 0,192450.",
+          "finding": "Les attributs sont conservés sauf l’adhérence disponible : 0,25 suffit, 0,10 échoue. La vitesse de référence ne décrit pas la variante."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Poser le contact modifié",
-            "action": "Reprendre le cylindre et la pente initiaux puis remplacer uniquement le coefficient statique par la valeur plus faible du contrôle proposé.",
-            "output": "Scénario de retour modifiant seulement l’adhérence disponible."
+            "title": "Recevoir le contact modifié",
+            "input": "Cadres transmis par 5.3 ; même cylindre, même pente et même h, mais μs = 0,10 au départ de cette variante.",
+            "action": "Conserver m = 1,00 kg, R = 0,100 m, α = 30° et vG(0) = ω(0) = 0 ; remplacer seulement le coefficient statique.",
+            "output": "Variante distincte depuis le repos ; aucune vitesse finale ni force cinétique fournie.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour définit une autre condition du contact ; il ne remplace pas le coefficient au milieu d’une trajectoire déjà déterminée."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir le test préalable",
-            "action": "Conserver les équations du roulement comme hypothèse candidate et calculer la force statique qu’elles exigeraient sur cette pente.",
-            "output": "Test d’admissibilité avant application d’une contrainte cinématique."
+            "title": "Calculer la force candidate et sa borne",
+            "input": "Données de 6.1 ; les équations de roulement sont utilisées uniquement comme hypothèse candidate à confronter à μsN.",
+            "action": "Résoudre le bilan candidat pour f requis = mg sinα/3, puis calculer N = mg cosα et la capacité maximale 0,10 × N.",
+            "output": "Besoin indépendant de μs, capacité proportionnelle à μs ; deux forces comparables.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La résolution sous contrainte détermine le besoin, puis l’inégalité teste son existence ; elle n’impose pas cette force après l’échec."
+            }
           },
           {
             "id": 3,
-            "title": "Appliquer la comparaison de forces",
-            "action": "Comparer frottement requis et capacité maximale pour montrer que la contrainte sans glissement ne peut pas être maintenue dans ce scénario.",
-            "output": "Échec calculé de l’adhérence pour le coefficient réduit."
+            "title": "Établir l’inadmissibilité du roulement",
+            "input": "Forces candidates de 6.2 : f requis = 1,635 N et N ≈ 8,495709 N pour la pente de 30°.",
+            "action": "Comparer 1,635 N à 0,10 × N ≈ 0,849571 N ; consigner que la force statique disponible ne maintient pas la contrainte.",
+            "output": "À 1.1 pour reprise : même cylindre avec μs = 0,10, roulement idéal rejeté, loi de glissement manquante.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inégalité échouée est un résultat du test ; elle invalide le candidat sans produire une trajectoire de remplacement."
+            }
           },
           {
             "id": 4,
-            "title": "Relire la conclusion d’échec",
-            "action": "Vérifier que cette conclusion ne fournit ni la vitesse glissée ni une loi de frottement dynamique simplement en changeant l’étiquette du coefficient.",
-            "output": "Portée du résultat limitée à l’inadmissibilité du roulement.",
-            "comparison": "La sortie de 6.3 répond aux données de 6.1 ; elle ne crée pas les paramètres nécessaires au mouvement glissé."
+            "title": "Reprendre la portée de l’échec",
+            "input": "Résultat de 6.3 : besoin statique supérieur à la capacité ; aucune relation de force pendant le glissement n’est fournie.",
+            "action": "Reprendre l’inadmissibilité et exclure la réutilisation de vG = Rω ou de vG² = 4gh/3 comme résultats de cette variante.",
+            "output": "Contrainte et vitesse associée retirées du dossier de prédiction ; paramètres matériels conservés.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour sépare une conclusion négative établie et les inconnues qu’elle laisse ; μs ne devient pas un coefficient cinétique."
+            },
+            "comparison": "6.4 ↔ 6.3 : conserver l’échec calculé et sa portée, sans lui ajouter une vitesse de glissement.",
+            "evaluation": {
+              "object": "6.4 ↔ 6.3 : conclusion et conséquences retirées, face à l’inégalité statique échouée.",
+              "conditions": "Même variante à 0,10 et mêmes forces candidates ; aucune expérience ni loi de glissement supplémentaire.",
+              "criterion": "Conserver 1,635 > 0,849571 en newtons ; ne déduire ni Fτ = −0,10 × N ni la vitesse de référence.",
+              "finding": "Le roulement candidat est exclu ; la capacité statique seule ne détermine pas le mouvement ultérieur."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter le modèle à abandonner",
-            "action": "Retirer la contrainte de roulement pour un calcul ultérieur et identifier les équations et lois de contact qu’il faudrait alors compléter.",
-            "output": "Révision du cadre cinématique et informations manquantes identifiées.",
-            "comparison": "Le test de 6.2 autorise le rejet d’une contrainte, mais pas la conservation de ses conséquences après son échec."
+            "title": "Dériver le système sans contrainte",
+            "input": "Échec repris en 6.4 ; Fτ est désormais une force tangentielle signée inconnue, sans couple de résistance au roulement.",
+            "action": "Écrire maG = mg sinα + Fτ et IGβ = −RFτ ; soustraire Rβ de aG pour obtenir dr/dt = g sinα + 3Fτ/m.",
+            "output": "dr/dt décrit la variation de la vitesse relative r, non l’accélération vectorielle de P ; Fτ requiert une loi.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La contrainte rejetée est remplacée par une inconnue cinématique ; les bilans conservés montrent explicitement pourquoi μs seul ne ferme pas le mouvement."
+            },
+            "comparison": "6.5 ↔ 6.2 : retirer r = 0 libère translation et rotation ; l’imposer de nouveau restituerait la force candidate inadmissible.",
+            "evaluation": {
+              "object": "6.5 ↔ 6.2 : équations sans adhérence imposée, face au système candidat couplé par r = 0.",
+              "conditions": "Même cylindre plein, support fixe et contact maintenu ; Fτ n’est pas assimilée à la borne statique.",
+              "criterion": "Imposer dr/dt = 0 restituerait Fτ = −mg sinα/3 ; sans loi pour Fτ, les deux vitesses restent indéterminées.",
+              "finding": "Le traitement retrouve l’origine de la contradiction et expose l’équation manquante ; aucune trajectoire glissée n’est calculée."
+            }
           },
           {
             "id": 6,
-            "title": "Refermer sur une limite explicite",
-            "action": "Comparer retour et aller pour montrer pourquoi une vitesse auparavant calculable devient indéterminée sans données nouvelles sur le glissement.",
-            "output": "Boucle close sur le diagnostic et prolongement ouvert.",
-            "comparison": "La conclusion confronte 6.3 aux conditions de 6.1 et à l’aller, sans recycler la vitesse d’un scénario désormais incompatible."
+            "title": "Restituer les attributs et l’indétermination",
+            "input": "Système ouvert de 6.5 et paramètres de 6.1 ; l’état initial reste vG = ω = 0, mais l’égalité ne peut être maintenue statiquement.",
+            "action": "Restituer cylindre, pente, h et μs = 0,10 ; conserver l’échec du seuil et demander une loi de contact avant tout calcul ultérieur.",
+            "output": "Dossier initial restitué avec contrainte inadmissible et force tangentielle à déterminer.",
+            "relation": {
+              "nature": "logique",
+              "description": "La restitution confronte les conséquences du traitement aux attributs de la variante ; l’ouverture porte sur la loi, pas sur une valeur calculée cachée."
+            },
+            "comparison": "6.6 ↔ 6.1 : retrouver tous les attributs de la variante en distinguant état de repos et possibilité de maintenir l’adhérence.",
+            "evaluation": {
+              "object": "6.6 ↔ 6.1 : géométrie, état initial, coefficient et inconnues restitués, face au contact modifié reçu.",
+              "conditions": "Même m, R, α, h et support ; la variante reste indépendante de celle à 0,25.",
+              "criterion": "Retrouver IG = 0,00500 kg·m², μs = 0,10 et r(0) = 0 ; leur réunion ne satisfait pas μs ≥ tan30°/3.",
+              "finding": "Les données initiales sont conservées, avec une limite explicite : être au repos initialement n’assure pas un roulement ultérieur."
+            }
           }
         ]
       }
-    ],
-    "version": "0.1",
-    "updated": "2026-09-09"
+    ]
   },
   "referentiel-tournant": {
-    "question": "Comment deux descriptions du même mouvement peuvent-elles donner des accélérations différentes sans ajouter une interaction physique ?",
-    "basis": "La fiche impose un état instantané et des forces réelles horizontales nulles ; les termes d’inertie sont calculés, aucune trajectoire filmée n’est fournie.",
+    "question": "Comment reconstruire le même mouvement dans deux repères sans attribuer les termes d’inertie à de nouvelles interactions ?",
+    "basis": "L’énoncé fournit un état instantané supposé ; les vitesses, accélérations et retours sont calculés. Aucune observation indépendante n’est disponible.",
     "levels": [
       {
         "id": 1,
         "title": "Exprimer l’instant dans deux repères",
-        "system": "Le dossier d’un même point matériel et des deux conventions de description, galiléenne et tournante.",
-        "input": "L’énoncé donne masse, rotation uniforme, position radiale et vitesse relative radiale à un instant défini.",
-        "output": "Un état instantané complet distingue rotation du repère, mouvement relatif et interactions réelles.",
+        "system": "Le dossier du point matériel, des interactions et des conventions nécessaires pour décrire un même instant dans deux repères.",
+        "input": "L’énoncé fixe m, Ω, r et v′ ; une reprise peut recevoir séparément la variante à vitesse relative nulle de 6.3.",
+        "output": "Le dossier distingue les axes rigides, la base cylindrique instantanée, les vitesses des deux repères et les forces matérielles supposées.",
         "section": "vitesses",
         "comparison": "",
         "steps": [
           {
             "id": 1,
             "title": "Identifier le point et les repères",
-            "action": "Repérer le mobile, l’origine commune et l’axe fixe puis distinguer le point matériel des axes qui servent à le décrire.",
-            "output": "Objet physique unique et deux repères clairement séparés."
+            "input": "État initial : m, Ω, r, v′ ; en reprise, dossier distinct v′ = 0 de 6.3 et conventions précisées en 1.6.",
+            "action": "Nommer R galiléen et R′ rigide tournant, leurs origines communes fixes ; distinguer le scénario initial d’une reprise issue de 6.3.",
+            "output": "Données supposées datées ; forces horizontales nulles, poids et support compensés. La reprise v′ = 0 reste un scénario distinct.",
+            "relation": {
+              "nature": "logique",
+              "description": "L’identification conserve un seul mobile et sépare ses propriétés physiques des repères choisis ; 1.6 peut préciser cette description."
+            }
           },
           {
             "id": 2,
-            "title": "Nommer chaque vitesse",
-            "action": "Attribuer explicitement une origine à la position et un référentiel à chaque vitesse, en choisissant une base radiale orientée.",
-            "output": "Données vectorielles annotées par leur référentiel de définition."
+            "title": "Composer les deux vitesses",
+            "input": "Le vecteur position est commun ; D_R et D_R′ désignent les dérivées vectorielles dans les axes rigides respectifs.",
+            "action": "Appliquer D_R A = D_R′ A + Ω × A à r, puis projeter v = v′ + Ω × r.",
+            "output": "v′ = D_R′r ; v = D_Rr = 0,300 e_r + 0,800 e_θ m·s⁻¹, avec e_z × e_r = e_θ.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivation transporte la rotation des axes ; la projection utilise e_r et e_θ à t₀, sans les supposer fixes."
+            }
           },
           {
             "id": 3,
-            "title": "Construire l’état instantané",
-            "action": "Rassembler les vecteurs donnés à l’instant étudié et noter les forces réelles horizontales nulles sans prolonger cette géométrie dans le temps.",
-            "output": "État daté avec interactions et directions supposées."
+            "title": "Consigner les attributs de l’instant",
+            "input": "La composition fournit v ; l’énoncé fournit r, v′, Ω et m, ainsi que l’inventaire des interactions matérielles.",
+            "action": "Réunir les vecteurs à t₀ et distinguer les valeurs données de la vitesse galiléenne calculée ; transmettre ce dossier à 2.1.",
+            "output": "À t₀ : r = 0,400 e_r m, v′ = 0,300 e_r m·s⁻¹, v = 0,300 e_r + 0,800 e_θ m·s⁻¹ ; ΣF_mat = 0.",
+            "relation": {
+              "nature": "logique",
+              "description": "L’état rassemble les données nécessaires à Newton et au changement de repère, sans postuler la trajectoire ultérieure."
+            }
           },
           {
             "id": 4,
-            "title": "Relire la radialité",
-            "action": "Reprendre cet état et vérifier que seule la vitesse relative annoncée est radiale, sans imposer cette propriété à la vitesse galiléenne.",
-            "output": "Radialité rattachée à la bonne vitesse du dossier.",
-            "comparison": "La description de 1.3 est relue selon les deux repères de 1.1 ; une propriété relative ne devient pas absolue."
+            "title": "Relire la radialité annoncée",
+            "input": "Le dossier 1.3 contient les deux vitesses exprimées dans la même base cylindrique instantanée et le même inventaire matériel.",
+            "action": "Comparer leurs composantes azimutales et rapporter la radialité à v′ ; conserver l’origine commune et l’orientation de la base.",
+            "output": "v′_θ = 0 tandis que v_θ = 0,800 m·s⁻¹ : la radialité relative n’est pas une propriété galiléenne.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture attribue chaque composante à sa dérivée d’origine ; une différence de vitesse traduit ici la rotation des axes."
+            },
+            "evaluation": {
+              "object": "1.4 ↔ 1.3 : radialité et étiquettes des deux vitesses.",
+              "conditions": "Même point à t₀, origine fixe commune et Ω suivant +e_z ; valeurs supposées ou calculées identifiées.",
+              "criterion": "v_θ − v′_θ doit égaler Ωr = 0,800 m·s⁻¹, et v_r doit rester égal à v′_r.",
+              "finding": "La différence azimutale calculée respecte la composition ; seule v′ est radiale à cet instant."
+            },
+            "comparison": "1.4 relit les composantes de 1.3 dans leur repère ; la radialité de v′ ne s’étend pas à v."
           },
           {
             "id": 5,
-            "title": "Confronter l’origine commune",
-            "action": "Examiner comment une origine mobile changerait les données nécessaires et confirmer que cette possibilité reste exclue du scénario actuel.",
-            "output": "Conditions géométriques nécessaires à la comparaison des repères.",
-            "comparison": "La convention de 1.2 suppose des origines coïncidentes et fixes ; déplacer l’une demanderait une nouvelle composition des vitesses."
+            "title": "Retrouver le mouvement relatif",
+            "input": "La relecture fournit v_r = 0,300 m·s⁻¹ et v_θ = 0,800 m·s⁻¹ ; Ω et r restent connus.",
+            "action": "Inverser la composition, puis utiliser v′ = ṙ e_r + rθ̇′ e_θ pour retrouver ṙ et la vitesse angulaire relative θ̇′.",
+            "output": "v′ = v − Ω × r ; ṙ = 0,300 m·s⁻¹, θ̇′ = v_θ/r − Ω = 0 à t₀.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion distingue l’angle θ′ du point dans R′ de la rotation Ω des axes rigides ; e_r suit aussi θ′."
+            },
+            "evaluation": {
+              "object": "1.5 ↔ 1.2 : compositions inverse et directe des vitesses.",
+              "conditions": "Même r non nul et mêmes axes ; θ′ décrit la position dans R′, sans supposer cette position fixe.",
+              "criterion": "D_R′e_r = θ̇′e_θ et D_R′e_θ = −θ̇′e_r ; v − Ω × r doit redonner v′.",
+              "finding": "L’inversion retrouve v′ et θ̇′ = 0 à t₀ ; elle ne donne pas θ̇′ = 0 aux instants suivants."
+            },
+            "comparison": "1.5 inverse le transport de 1.2 et précise la mobilité de la base cylindrique dans le repère rigide."
           },
           {
             "id": 6,
-            "title": "Fixer le dossier instantané",
-            "action": "Conserver les vecteurs, la base et les interactions du scénario puis indiquer que la trajectoire ultérieure reste à construire par intégration.",
-            "output": "Dossier utilisable sans extrapolation temporelle non justifiée.",
-            "comparison": "Le dossier final conserve les repères de 1.1 et le caractère instantané de 1.3, sans inventer un mouvement radial permanent."
+            "title": "Fixer le dossier de reprise",
+            "input": "Les deux descriptions et leur inversion conservent la masse, les interactions, l’instant et la géométrie supposés en 1.1.",
+            "action": "Retenir ces attributs avec leurs dérivées nommées ; reporter toute modification de vitesse dans un scénario distinct au prochain 1.1.",
+            "output": "Dossier initial inchangé ; l’annulation instantanée de θ̇′ ne fixe ni θ̈′ ni la trajectoire relative ultérieure.",
+            "relation": {
+              "nature": "logique",
+              "description": "La sortie ferme la description de l’instant ; elle fournit une reprise locale sans transformer une condition instantanée en contrainte permanente."
+            },
+            "evaluation": {
+              "object": "1.6 ↔ 1.1 : identité du mobile et attributs du scénario.",
+              "conditions": "Retour sur le scénario initial ; la variante v′ = 0, si reprise, conserve son étiquette distincte.",
+              "criterion": "Retrouver m = 0,500 kg, Ω = 2,00 e_z rad·s⁻¹, r = 0,400 e_r m, v′ = 0,300 e_r m·s⁻¹ et ΣF_mat = 0.",
+              "finding": "Tous les attributs initiaux sont conservés ; aucune liaison imposant un mouvement radial permanent n’a été ajoutée."
+            },
+            "comparison": "1.6 confronte le dossier reconstruit à 1.1 et permet de reprendre les conventions ou un scénario explicitement séparé."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "logique",
+          "description": "Les attributs de l’énoncé définissent deux descriptions du même point ; changer de description ne change pas ses interactions."
+        }
       },
       {
         "id": 2,
-        "title": "Formaliser les termes du repère",
-        "system": "Le système d’équations de composition reliant accélérations et forces dans les deux descriptions du même mobile.",
-        "input": "Le dossier du niveau 1 fixe rotation uniforme et origine commune ; les lois de Newton sont appliquées d’abord dans le repère galiléen.",
-        "output": "Les termes centrifuge et de Coriolis sont identifiés comme termes de description, avec leurs signes et conditions.",
+        "title": "Déduire la dynamique relative",
+        "system": "La transformation des dérivées et de la loi de Newton pour le même point dans les deux repères.",
+        "input": "Le dossier de 1 fixe v = v′ + Ω × r, Ω constant, origine fixe commune et résultante matérielle nulle.",
+        "output": "La dérivation fournit a = a′ + 2Ω × v′ + Ω × (Ω × r), puis les termes centrifuge et de Coriolis.",
         "section": "forces",
         "comparison": "",
         "steps": [
           {
             "id": 1,
-            "title": "Reprendre les interactions véritables",
-            "action": "Recenser les forces dues au milieu et garder séparées les contributions qui apparaîtront seulement après changement de repère.",
-            "output": "Interactions matérielles distinguées des futurs termes d’inertie."
+            "title": "Reprendre les données cinématiques",
+            "input": "Le dossier 1.3 transmet m, r, Ω, les deux vitesses et ΣF_mat = 0, avec les conventions précisées en 2.6.",
+            "action": "Distinguer les vecteurs vitesse de leurs dérivées : a = D_Rv et a′ = D_R′v′ ; reprendre la compensation verticale supposée.",
+            "output": "La composition des vitesses et l’inventaire matériel sont les entrées ; a′ reste à calculer, sans force horizontale réelle ajoutée.",
+            "relation": {
+              "nature": "logique",
+              "description": "Ces attributs posent le problème dynamique ; les accélérations diffèrent parce que les dérivées sont prises dans des repères différents."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir la règle de dérivation",
-            "action": "Écrire la composition des vitesses puis celle des accélérations pour une rotation uniforme, en nommant le référentiel de chaque dérivée.",
-            "output": "Règles de transformation compatibles avec l’origine commune."
+            "title": "Dériver deux fois la position",
+            "input": "La règle D_R A = D_R′ A + Ω × A s’applique aux vecteurs, avec Ω constant et origine commune fixe.",
+            "action": "Dériver v′ et Ω × r dans R ; additionner les deux contributions Ω × v′ avant d’isoler a′ dans Newton.",
+            "output": "D_Rv′ = a′ + Ω × v′ ; D_R(Ω × r) = Ω × v′ + Ω × (Ω × r).",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les deux termes croisés proviennent de dérivées distinctes ; leur somme explique le facteur 2 de Coriolis."
+            }
           },
           {
             "id": 3,
-            "title": "Produire l’équation relative",
-            "action": "Réorganiser Newton pour obtenir les termes centrifuge et de Coriolis, puis repérer leur dépendance envers position et vitesse relative.",
-            "output": "Équation relative avec contributions d’inertie correctement séparées."
+            "title": "Établir les termes utilisables",
+            "input": "La dérivation 2.2 donne a ; la loi galiléenne ma = ΣF_mat permet de réécrire l’équation dans R′.",
+            "action": "Consigner l’équation relative avec signes et unités, puis transmettre à 3.1 les expressions vectorielles à évaluer.",
+            "output": "ma′ = ΣF_mat + F_cf + F_cor, avec F_cf = −mΩ × (Ω × r) et F_cor = −2mΩ × v′.",
+            "relation": {
+              "nature": "logique",
+              "description": "La transposition de termes cinématiques définit F_cf et F_cor ; leurs dimensions de force ne les rendent pas matérielles."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les directions",
-            "action": "Reprendre les produits vectoriels obtenus et vérifier leur direction dans la base orientée, notamment pour une vitesse radiale vers l’extérieur.",
-            "output": "Directions centrifuge et transversale reliées à la base.",
-            "comparison": "La sortie de 2.3 est relue avec les interactions de 2.1 ; une contribution d’inertie ne doit pas recevoir de partenaire matériel fictif."
+            "title": "Contrôler les directions des produits",
+            "input": "Les expressions de 2.3 et la base directe donnent e_z × e_r = e_θ et e_z × e_θ = −e_r.",
+            "action": "Lire successivement chaque produit vectoriel pour r et v′ radiaux sortants ; distinguer accélérations d’entraînement et termes d’inertie opposés.",
+            "output": "F_cf pointe vers +e_r, F_cor vers −e_θ ; les contributions correspondantes à la composition de a ont les signes opposés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’orientation de la base et les signes de transposition déterminent les directions ; aucune interaction supplémentaire n’est nécessaire."
+            },
+            "evaluation": {
+              "object": "2.4 ↔ 2.3 : signes et directions des deux termes d’inertie.",
+              "conditions": "Ω orienté vers +e_z, r et v′ vers +e_r au même instant, conformément aux données supposées.",
+              "criterion": "Ω × (Ω × r) = −Ω²r e_r et Ω × v′ = Ωv′_r e_θ ; les deux forces portent le signe moins de 2.3.",
+              "finding": "Les termes sont centrifuge vers l’extérieur et Coriolis vers −e_θ, en accord avec leurs définitions."
+            },
+            "comparison": "2.4 confronte les directions relues aux produits vectoriels établis en 2.3."
           },
           {
             "id": 5,
-            "title": "Confronter l’uniformité supposée",
-            "action": "Examiner quels termes apparaîtraient si la rotation variait ou si l’origine accélérait, sans les ajouter au scénario uniforme actuel.",
-            "output": "Termes absents justifiés par les hypothèses du repère.",
-            "comparison": "Le cadre de 2.2 est limité à la rotation uniforme et à l’origine fixe ; il ne couvre pas tous les repères accélérés."
+            "title": "Reconstruire les forces matérielles",
+            "input": "Les signes relus donnent ma′ = ΣF_mat + F_cf + F_cor ; aucune nouvelle interaction n’apparaît dans l’inventaire.",
+            "action": "Isoler ΣF_mat puis remplacer F_cf et F_cor par leurs produits vectoriels pour retrouver exactement ma.",
+            "output": "ΣF_mat = ma′ − F_cf − F_cor = m[a′ + 2Ω × v′ + Ω × (Ω × r)] = ma.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La substitution inverse reconstitue Newton dans R ; les termes d’inertie se compensent comme éléments de la transformation."
+            },
+            "evaluation": {
+              "object": "2.5 ↔ 2.2 : inversion dynamique et dérivation cinématique.",
+              "conditions": "Mêmes dérivées, masse constante, origine fixe commune et Ω constant ; comparaison algébrique des descriptions.",
+              "criterion": "Remplacer a par sa composition doit rendre ΣF_mat = ma, sans terme restant et sans compter deux fois une contribution.",
+              "finding": "L’inversion restitue la loi de départ ; ce contrôle interne ne constitue pas une validation physique indépendante."
+            },
+            "comparison": "2.5 inverse la dynamique issue de 2.2 et retrouve le même inventaire des forces matérielles."
           },
           {
             "id": 6,
-            "title": "Retenir les transformations du cas",
-            "action": "Présenter les relations de vitesse et d’accélération avec la même base et rappeler qu’aucune force centripète indépendante ne doit être ajoutée.",
-            "output": "Cadre de comparaison des repères prêt au calcul.",
-            "comparison": "Les équations finales traitent les interactions de 2.1 et les termes de 2.3 sans doubler la résultante des forces réelles."
+            "title": "Conserver un inventaire unique",
+            "input": "L’inversion a séparé les forces matérielles des termes issus du repère ; le dossier 2.1 supposait ΣF_mat = 0.",
+            "action": "Retenir Newton galiléen et sa forme relative comme deux descriptions compatibles ; réintroduire seulement les interactions explicitement établies lors d’une reprise.",
+            "output": "ΣF_mat = 0 reste l’entrée physique ; F_cf et F_cor ne possèdent pas de partenaires matériels d’action-réaction.",
+            "relation": {
+              "nature": "logique",
+              "description": "La sortie restitue l’inventaire initial et les conditions de dérivation ; elle permet de reprendre 2.1 sans ajouter une force centripète autonome."
+            },
+            "evaluation": {
+              "object": "2.6 ↔ 2.1 : interactions et conventions de dérivation.",
+              "conditions": "Même point, mêmes deux repères et mêmes hypothèses de compensation ; aucune modification matérielle du scénario.",
+              "criterion": "L’inventaire doit conserver poids et support compensés, aucune force horizontale réelle, et les définitions a = D_Rv, a′ = D_R′v′.",
+              "finding": "Le bilan matériel et les définitions initiaux sont préservés ; seule leur expression dynamique change avec le repère."
+            },
+            "comparison": "2.6 retrouve les attributs physiques et cinématiques de 2.1, en distinguant leur expression relative."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La composition cinématique transforme Newton ; elle déplace des termes d’accélération sans introduire d’interaction matérielle."
+        }
       },
       {
         "id": 3,
-        "title": "Calculer les accélérations du même instant",
-        "system": "L’application numérique des transformations au point décrit dans l’exemple, avec forces horizontales réelles nulles.",
-        "input": "Les vecteurs du niveau 1 et les équations du niveau 2 déterminent les contributions relatives à l’instant donné.",
-        "output": "Les termes d’inertie et l’accélération relative sont calculés puis reconvertis dans le référentiel galiléen.",
+        "title": "Calculer puis reconstruire l’instant",
+        "system": "L’application numérique des transformations au point dont la résultante matérielle est supposée nulle à l’instant étudié.",
+        "input": "Les produits vectoriels de 2 et les données initiales déterminent F_cf, F_cor et a′, tandis que Newton donne a = 0.",
+        "output": "Le calcul donne F_cf = 0,800 e_r N, F_cor = −0,600 e_θ N et a′ = 1,600 e_r − 1,200 e_θ m·s⁻².",
         "section": "exemple",
         "comparison": "",
         "steps": [
           {
             "id": 1,
-            "title": "Préparer les vecteurs numériques",
-            "action": "Reprendre masse, rotation, position et vitesse relative en conservant leurs orientations dans la base radiale à l’instant donné.",
-            "output": "Vecteurs du scénario prêts pour les produits vectoriels."
+            "title": "Rassembler les facteurs numériques",
+            "input": "Les expressions de 2.3 accompagnent m = 0,500 kg, Ω = 2,00 rad·s⁻¹, r = 0,400 m et v′_r = 0,300 m·s⁻¹.",
+            "action": "Associer chaque valeur à sa direction et son unité ; reprendre ΣF_mat = 0 et les attributs reconstruits en 3.6.",
+            "output": "À t₀, Ω suit +e_z, r et v′ suivent +e_r ; v′_θ = 0 et les interactions matérielles se compensent.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les valeurs scalaires n’ont de sens dans les produits vectoriels qu’avec leur orientation et les conditions de cet instant."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir le calcul vectoriel",
-            "action": "Calculer séparément les deux contributions d’inertie puis prévoir une conversion inverse de l’accélération pour contrôler la description galiléenne.",
-            "output": "Méthode directe et contrôle par transformation inverse."
+            "title": "Évaluer les contributions relatives",
+            "input": "Les données de 3.1 sont insérées dans F_cf = −mΩ × (Ω × r), F_cor = −2mΩ × v′ et ma′ = F_cf + F_cor.",
+            "action": "Calculer mΩ²r et 2mΩv′_r, conserver les signes vectoriels, puis diviser leur somme par la masse.",
+            "output": "mΩ²r = 0,800 N ; 2mΩv′_r = 0,600 N ; a′_r = Ω²r et a′_θ = −2Ωv′_r.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La substitution donne des forces puis une accélération ; le facteur m s’élimine dans a′ lorsque ΣF_mat = 0."
+            }
           },
           {
             "id": 3,
-            "title": "Produire les valeurs relatives",
-            "action": "Évaluer les forces centrifuge et de Coriolis et en déduire les composantes de l’accélération relative avec les interactions horizontales annoncées.",
-            "output": "Accélération relative calculée sans force horizontale réelle."
+            "title": "Établir le résultat vectoriel",
+            "input": "Le traitement 3.2 fournit les contributions et l’accélération relative ; la vitesse galiléenne provient du dossier initial.",
+            "action": "Consigner les vecteurs calculés à t₀ avec ΣF_mat = 0, puis transmettre cet ensemble à la relecture 4.1.",
+            "output": "F_cf = 0,800 e_r N ; F_cor = −0,600 e_θ N ; a′ = 1,600 e_r − 1,200 e_θ m·s⁻² ; a = 0.",
+            "relation": {
+              "nature": "logique",
+              "description": "Ces résultats appartiennent à un même état supposé ; la différence des accélérations est prévue par la transformation cinématique."
+            }
           },
           {
             "id": 4,
             "title": "Recomposer l’accélération galiléenne",
-            "action": "Reprendre l’accélération relative et ajouter les termes de composition pour retrouver l’accélération horizontale nulle du même point physique.",
-            "output": "Accélération horizontale galiléenne retrouvée par transformation inverse.",
-            "comparison": "La relecture de 3.3 utilise les mêmes vecteurs que 3.1 ; elle compare deux descriptions, pas deux situations physiques."
+            "input": "Les vecteurs de 3.3, Ω et v′ permettent de former les deux contributions qui complètent a′ dans R.",
+            "action": "Additionner a′, 2Ω × v′ et Ω × (Ω × r), en regroupant séparément les composantes radiale et azimutale.",
+            "output": "a = (1,600 − 1,600)e_r + (−1,200 + 1,200)e_θ = 0 m·s⁻², conformément au bilan matériel supposé.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour confronte les résultats relatifs à leur recomposition galiléenne, avec les mêmes équations et les mêmes valeurs."
+            },
+            "evaluation": {
+              "object": "3.4 ↔ 3.3 : accélération relative calculée et accélération galiléenne reconstruite.",
+              "conditions": "Même instant et même base de projection ; a = 0 résulte de ΣF_mat = 0, supposé dans l’énoncé.",
+              "criterion": "La composante radiale doit donner 1,600 − 1,600 = 0 et l’azimutale −1,200 + 1,200 = 0 m·s⁻².",
+              "finding": "Les deux composantes s’annulent exactement dans ce calcul ; aucun suivi indépendant n’est ainsi ajouté."
+            },
+            "comparison": "3.4 relit a′ de 3.3 en recomposant a et retrouve le résultat galiléen attendu."
           },
           {
             "id": 5,
-            "title": "Confronter les signes retenus",
-            "action": "Examiner l’annulation des contributions et vérifier qu’un signe de Coriolis inversé empêcherait la reconstruction galiléenne attendue.",
-            "output": "Convention des produits vectoriels contrôlée par recomposition.",
-            "comparison": "La méthode de 3.2 exige une seule orientation de base pour les calculs direct et inverse, sans changement implicite de référentiel."
+            "title": "Inverser les composantes calculées",
+            "input": "La recomposition est nulle ; a′_r = 1,600 m·s⁻², a′_θ = −1,200 m·s⁻², Ω = 2,00 rad·s⁻¹ et v′_θ = 0.",
+            "action": "Résoudre a′_r = Ω²r pour r et a′_θ = −2Ωv′_r pour v′_r, sous les hypothèses de 3.1.",
+            "output": "r = a′_r/Ω² = 0,400 m ; v′_r = −a′_θ/(2Ω) = 0,300 m·s⁻¹, puisque Ω ≠ 0.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion retrouve deux entrées du calcul direct ; elle dépend de Ω connu, v′_θ nul et de la résultante matérielle nulle."
+            },
+            "evaluation": {
+              "object": "3.5 ↔ 3.2 : inversion des composantes et calcul direct.",
+              "conditions": "Rotation connue non nulle, vitesse relative radiale à t₀, ΣF_mat = 0 et résultats calculés par le même modèle.",
+              "criterion": "Les relations inverses doivent retrouver r = 0,400 m et v′_r = 0,300 m·s⁻¹ ; elles ne déterminent pas m.",
+              "finding": "Position radiale et vitesse relative initiales sont retrouvées ; cette réversibilité est un contrôle algébrique du calcul direct."
+            },
+            "comparison": "3.5 inverse les relations de 3.2 dans les mêmes conditions, sans prétendre identifier une masse par l’accélération."
           },
           {
             "id": 6,
-            "title": "Conserver l’instant calculé",
-            "action": "Enregistrer les composantes dans chaque repère et rappeler que la vitesse relative ne restera pas nécessairement radiale après cet instant.",
-            "output": "Résultats datés avec portée strictement instantanée.",
-            "comparison": "La conclusion revient aux vecteurs de 3.1 et aux valeurs de 3.3 sans traiter une accélération instantanée comme une trajectoire entière."
+            "title": "Restituer les données du calcul",
+            "input": "Le retour restitue r et v′_r ; Ω, m et l’inventaire matériel restent les données supposées de 3.1.",
+            "action": "Rapprocher valeurs reconstruites et données conservées, puis garder la qualification instantanée pour une reprise du calcul en 3.1.",
+            "output": "r et v′_r sont retrouvés ; m = 0,500 kg et Ω = 2,00 rad·s⁻¹ restent imposés, sans vitesse radiale permanente.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour identifie ce qui est reconstruit et ce qui demeure fourni ; la comparaison ne fabrique pas de données supplémentaires."
+            },
+            "evaluation": {
+              "object": "3.6 ↔ 3.1 : valeurs numériques, directions et conditions du calcul.",
+              "conditions": "Même scénario initial ; seuls r et v′_r ont été inversés, les autres attributs restent explicitement supposés.",
+              "criterion": "Retrouver r = 0,400 m, v′_r = 0,300 m·s⁻¹, v′_θ = 0 et conserver m, Ω ainsi que ΣF_mat = 0.",
+              "finding": "Les attributs d’entrée sont restitués ; l’accélération azimutale non nulle interdit de prolonger la radialité instantanée sans calcul."
+            },
+            "comparison": "3.6 confronte les attributs reconstruits à 3.1 et distingue les paramètres retrouvés de ceux restés donnés."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les valeurs supposées et la dynamique relative produisent des résultats numériques à t₀ ; elles ne constituent pas une trajectoire mesurée."
+        }
       },
       {
         "id": 4,
-        "title": "Relire les deux descriptions du mouvement",
-        "system": "L’audit de la correspondance entre résultats relatifs et galiléens, complété par une méthode de comparaison de suivis éventuels.",
-        "input": "Les valeurs du niveau 3 servent de données de retour ; aucun suivi réel depuis deux caméras n’est disponible.",
-        "output": "La relecture sépare changement de coordonnées, biais de suivi et modification véritable des interactions.",
+        "title": "Relire les dérivées et les bases",
+        "system": "La correspondance entre résultats vectoriels et composantes, dans les axes rigides des repères et dans la base cylindrique du point.",
+        "input": "Le retour reçoit a′, a = 0 et les vitesses de 3 ; tous ces résultats proviennent du même scénario calculé.",
+        "output": "Les accélérations se recomposent ; la variation des composantes cylindriques reste distincte de la dérivée vectorielle dans chaque repère.",
         "section": "directions",
-        "comparison": "Le retour confronte les descriptions de 3 selon les bases et dates de 1 ; une accélération apparente différente n’est pas une nouvelle interaction.",
+        "comparison": "4 confronte les résultats relus à ceux de 3, après identification du même instant, des bases et des dérivées.",
         "steps": [
           {
             "id": 1,
-            "title": "Importer les résultats par repère",
-            "action": "Reprendre les accélérations obtenues en indiquant pour chacune sa base, son référentiel et l’instant commun auquel elle s’applique.",
-            "output": "Données du retour étiquetées sans ambiguïté de repère."
+            "title": "Reprendre les vecteurs étiquetés",
+            "input": "Les résultats 3.3 transmettent a′ et a ; 1.3 complète leurs vitesses. La reprise 4.6 conserve les conventions de dérivation.",
+            "action": "Attribuer chaque vecteur à t₀ et à sa dérivée, puis distinguer les axes cartésiens rigides de la base cylindrique instantanée.",
+            "output": "Entrées calculées : v′ = 0,300 e_r, v = 0,300 e_r + 0,800 e_θ m·s⁻¹ ; a′ = 1,600 e_r − 1,200 e_θ m·s⁻².",
+            "relation": {
+              "nature": "logique",
+              "description": "Les composantes ne se comparent qu’après identification de leur base ; aucune orientation de caméra mesurée n’est disponible."
+            }
           },
           {
             "id": 2,
-            "title": "Définir une comparaison cinématique",
-            "action": "Prévoir de ramener des positions datées dans un même référentiel avant de comparer vitesses et accélérations issues de deux suivis.",
-            "output": "Méthode de comparaison exigeant une transformation commune."
+            "title": "Transformer des coordonnées rigides",
+            "input": "ρ contient les coordonnées rigides dans R′ ; Q les exprime dans R. Ici Ω désigne la composante scalaire suivant e_z, en rad·s⁻¹.",
+            "action": "Différencier x = Qρ avec Q̇ = ΩQJ et J(u,w) = (−w,u), puis utiliser J² = −I dans le plan.",
+            "output": "ẋ = Q(ρ̇ + ΩJρ) ; ẍ = Q(ρ̈ + 2ΩJρ̇ − Ω²ρ), pour Ω constant et origine fixe.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivation explicite des axes rigides retrouve le transport vectoriel ; ρ̇ et ρ̈ sont les coordonnées de v′ et a′."
+            }
           },
           {
             "id": 3,
-            "title": "Construire le contrôle de description",
-            "action": "Appliquer la transformation aux seules données théoriques disponibles et noter l’accord galiléen attendu sans inventer un relevé de caméra.",
-            "output": "Accord interne des descriptions calculées du scénario."
+            "title": "Consigner la correspondance reconstruite",
+            "input": "À t₀, choisir les axes de R′ alignés sur e_r,e_θ donne ρ = (0,400;0), ρ̇ = (0,300;0), ρ̈ = (1,600;−1,200) en unités SI.",
+            "action": "Établir la somme dans 4.2 et transmettre à 5.1 son résultat, les hypothèses utilisées et l’absence de données indépendantes.",
+            "output": "Le calcul donne ẍ = Q(0;0) = 0 et ΣF_mat = 0 ; Ω constant et origine fixe demeurent supposés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La rotation Q transporte les composantes ; la somme nulle reste nulle quelle que soit l’orientation instantanée choisie."
+            }
           },
           {
             "id": 4,
-            "title": "Relire la simultanéité",
-            "action": "Vérifier que les directions radiales comparées désignent le même instant et ne sont pas des axes figés artificiellement pendant la rotation.",
-            "output": "Erreur possible de base et de datation identifiée.",
-            "comparison": "Le contrôle de 4.3 doit conserver l’instant des données de 4.1 ; comparer des bases à des dates différentes fausserait les composantes."
+            "title": "Séparer alignement et immobilité",
+            "input": "Le résultat 4.3 utilise un alignement des axes de R′ avec e_r,e_θ seulement à t₀, sans immobiliser la base cylindrique.",
+            "action": "Relire le zéro reconstruit et conserver l’alignement comme convention instantanée ; distinguer ρ̈ de la dérivée brute de composantes cylindriques.",
+            "output": "L’accélération galiléenne reconstruite reste nulle ; l’alignement à t₀ ne rend pas e_r et e_θ solidaires de R′ pour toute durée.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Un choix de coordonnées à un instant facilite la projection ; il n’impose aucune contrainte ultérieure au mouvement du point."
+            },
+            "evaluation": {
+              "object": "4.4 ↔ 4.3 : accélération reconstruite et statut de l’alignement des bases.",
+              "conditions": "Même t₀ ; Q relie des axes rigides, tandis que e_r,e_θ suivent la position du mobile.",
+              "criterion": "ρ̈ + 2ΩJρ̇ − Ω²ρ doit rester nul ; l’égalité ponctuelle des bases ne doit pas être utilisée comme identité temporelle.",
+              "finding": "Le zéro de 4.3 est conservé ; le statut instantané de l’alignement empêche de figer artificiellement la base cylindrique."
+            },
+            "comparison": "4.4 retrouve le résultat de 4.3 en explicitant la portée de l’alignement des axes."
           },
           {
             "id": 5,
-            "title": "Confronter les écarts possibles",
-            "action": "Examiner comment une vitesse angulaire mal connue ou un décalage temporel pourrait produire un désaccord sans révéler une force horizontale oubliée.",
-            "output": "Causes cinématiques distinguées d’une nouvelle interaction physique.",
-            "comparison": "Le protocole de 4.2 demande d’abord une transformation correcte ; un résidu ne doit pas être attribué automatiquement à une force réelle."
+            "title": "Retrouver les dérivées cylindriques",
+            "input": "La relecture impose a = 0, v_r = 0,300 m·s⁻¹, v_θ = 0,800 m·s⁻¹ et θ̇ = v_θ/r = 2,00 rad·s⁻¹.",
+            "action": "Dériver v = v_r e_r + v_θ e_θ dans R, puis résoudre a_r = v̇_r − θ̇v_θ et a_θ = v̇_θ + θ̇v_r.",
+            "output": "v̇_r = 1,600 m·s⁻² et v̇_θ = −0,600 m·s⁻² malgré a = 0 ; les termes de base compensent ces variations.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "D_Re_r = θ̇e_θ et D_Re_θ = −θ̇e_r produisent les corrections ; θ̇ = Ω + θ̇′ distingue les deux rotations."
+            },
+            "evaluation": {
+              "object": "4.5 ↔ 4.2 : dérivation cylindrique et dérivation dans les axes rigides.",
+              "conditions": "Même vecteur v et même dérivée galiléenne ; θ̇′ = 0 seulement à t₀, sans immobilité permanente dans R′.",
+              "criterion": "Les composantes doivent donner a_r = 1,600 − 2,00 × 0,800 = 0 et a_θ = −0,600 + 2,00 × 0,300 = 0 m·s⁻².",
+              "finding": "La dérivation cylindrique retrouve ẍ = 0 de 4.2 ; les dérivées scalaires non nulles ne représentent pas une accélération supplémentaire."
+            },
+            "comparison": "4.5 reformule le calcul de 4.2 avec une base mobile et retrouve la même accélération vectorielle."
           },
           {
             "id": 6,
-            "title": "Produire le diagnostic conditionnel",
-            "action": "Indiquer les données de rotation et de synchronisation nécessaires à un vrai contrôle, en gardant l’accord présent au rang de cohérence calculatoire.",
-            "output": "Conditions d’une comparaison réelle encore à satisfaire.",
-            "comparison": "La conclusion conserve la provenance de 4.1 et limite la portée de 4.3 aux transformations effectivement calculées sur le même instant."
+            "title": "Restituer des descriptions comparables",
+            "input": "Les dérivées cylindriques et rigides décrivent les mêmes vitesses et accélérations, avec les conditions instantanées reçues en 4.1.",
+            "action": "Conserver les vecteurs avec leur repère, la base de leurs composantes et leur instant ; reprendre ces étiquettes en 4.1.",
+            "output": "v, v′, a et a′ restent ceux de l’entrée ; les variations de composantes sont désormais séparées des dérivées vectorielles.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour restitue les attributs de description ; comparer ultérieurement des observations demanderait des repères et instants documentés."
+            },
+            "evaluation": {
+              "object": "4.6 ↔ 4.1 : vecteurs, instants et conventions de projection.",
+              "conditions": "Mêmes valeurs calculées à t₀ ; aucun nouvel enregistrement ni calibration indépendante n’est introduit par la relecture.",
+              "criterion": "Retrouver v′ = 0,300 e_r m·s⁻¹, v = 0,300 e_r + 0,800 e_θ m·s⁻¹, a′ = 1,600 e_r − 1,200 e_θ m·s⁻² et a = 0.",
+              "finding": "Les vecteurs d’entrée sont préservés ; l’explication des dérivées de base précise leur lecture sans ajouter de données physiques."
+            },
+            "comparison": "4.6 confronte les descriptions finales aux vecteurs de 4.1 et prépare une reprise sur leurs conventions."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les résultats de 3 deviennent les données d’une relecture des conventions ; les différences de composantes ne désignent pas de nouvelles interactions."
+        },
+        "evaluation": {
+          "object": "4 ↔ 3 : vitesses et accélérations calculées, relues dans les bases nommées.",
+          "conditions": "Même point à t₀, mêmes hypothèses et valeurs ; les transformations réutilisent les résultats calculés de la chaîne d’entrée.",
+          "criterion": "La recomposition doit conserver v = 0,300 e_r + 0,800 e_θ m·s⁻¹ et a = 0, à partir de v′ et a′.",
+          "finding": "La correspondance est retrouvée ; les dérivées des composantes cylindriques peuvent être non nulles malgré a = 0."
+        }
       },
       {
         "id": 5,
-        "title": "Confronter les hypothèses du repère",
-        "system": "La décision sur la forme des termes d’inertie lorsque l’uniformité de rotation ou la fixité de l’origine est discutée.",
-        "input": "Le diagnostic du niveau 4 est comparé aux hypothèses cinématiques employées au niveau 2.",
-        "output": "Le repère uniforme est maintenu pour l’exemple, avec des critères explicites pour compléter sa description.",
+        "title": "Dériver puis délimiter le cadre uniforme",
+        "system": "Le traitement des hypothèses de mouvement du repère à partir de la correspondance reconstruite entre les accélérations.",
+        "input": "Le retour 4 retrouve a = 0 sous Ω constant et origine fixe ; ce résultat calculé ne détermine pas ces hypothèses.",
+        "output": "La composition générale isole les termes de translation et d’Euler ; sa restriction restitue le modèle uniforme pour la variante v′ = 0.",
         "section": "limites",
-        "comparison": "Le cadre de retour confronte au niveau 2 rotation uniforme et origine fixe ; une révision du repère ne crée pas une interaction matérielle.",
+        "comparison": "5 confronte la composition générale restreinte au cadre uniforme de 2 ; le résidu calculé ne vérifie pas indépendamment ce cadre.",
         "steps": [
           {
             "id": 1,
-            "title": "Organiser les hypothèses cinématiques",
-            "action": "Reprendre origine commune, rotation constante et orientation connue puis distinguer chaque hypothèse des propriétés physiques du mobile et du support.",
-            "output": "Hypothèses du repère séparées de celles des interactions."
+            "title": "Reprendre les hypothèses du résultat",
+            "input": "Le résultat 4.3 transmet a = 0, ΣF_mat = 0 et les conditions Ω constant, origine commune fixe ; 5.6 peut préciser leur portée.",
+            "action": "Identifier ces conditions comme données du repère ; distinguer leur statut supposé du zéro calculé dans la recomposition.",
+            "output": "A_O = 0 et Ω̇ = 0 sont imposés ; la compensation matérielle et les vecteurs de l’instant restent ceux du dossier.",
+            "relation": {
+              "nature": "logique",
+              "description": "L’accord calculé de 4 fournit un résultat sous hypothèses ; il ne transforme pas les hypothèses cinématiques en observations."
+            }
           },
           {
             "id": 2,
-            "title": "Définir les cadres étendus",
-            "action": "Choisir les extensions correspondant à rotation variable ou origine accélérée, en les formulant comme changements distincts de description cinématique.",
-            "output": "Deux extensions du cadre uniforme clairement distinguées."
+            "title": "Dériver les termes exclus",
+            "input": "Pour examiner les hypothèses, écrire symboliquement X = R_O + r, avec V_O = dR_O/dt et A_O = dV_O/dt dans R.",
+            "action": "Dériver X puis v = V_O + v′ + Ω × r sans annuler A_O ni Ω̇ ; regrouper les termes obtenus.",
+            "output": "a = A_O + a′ + 2Ω × v′ + Ω̇ × r + Ω × (Ω × r).",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivation produit la translation accélérée et le terme d’Euler ; leur présence dépend du mouvement du repère, pas d’interactions nouvelles."
+            }
           },
           {
             "id": 3,
-            "title": "Produire les termes nécessaires",
-            "action": "Identifier dans chaque extension le terme d’Euler ou le terme de translation à ajouter, sans modifier les forces réelles par simple convention.",
-            "output": "Contributions supplémentaires liées au repère choisi."
+            "title": "Établir la restriction et sa variante",
+            "input": "La composition générale 5.2 reçoit A_O = 0 et Ω̇ = 0 du scénario ; aucune extension cinématique n’est adoptée.",
+            "action": "Consigner l’équation restreinte et transmettre à 6.1 une variante qui garde m, r, Ω et ΣF_mat, mais impose v′ = 0 à t₀.",
+            "output": "Cadre uniforme retrouvé ; variante supposée à t₀ : m = 0,500 kg, r = 0,400 e_r m, Ω = 2,00 e_z rad·s⁻¹, v′ = 0, ΣF_mat = 0.",
+            "relation": {
+              "nature": "logique",
+              "description": "La restriction fournit le cadre de la nouvelle application ; changer la vitesse initiale définit un autre scénario, pas un instant ultérieur établi."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les contributions",
-            "action": "Vérifier que l’accélération de l’origine apparaît une seule fois dans la composition des accélérations, et distinguer ce terme de sa contribution aux vitesses.",
-            "output": "Contributions de vitesse et d’accélération distinguées sans double comptage.",
-            "comparison": "Les termes de 5.3 sont relus selon les hypothèses de 5.1 ; leur provenance reste cinématique et non matérielle."
+            "title": "Relire la portée du résidu",
+            "input": "La restriction de 5.3 annule les termes supplémentaires ; le zéro reconstruit provient du calcul sous ces mêmes conditions.",
+            "action": "Former Δ = a − a′ − 2Ω × v′ − Ω × (Ω × r), puis séparer son annulation calculée d’une détermination du repère.",
+            "output": "Dans le calcul actuel, Δ = 0 ; en général, la composition donne Δ = A_O + Ω̇ × r.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le résidu regroupe les contributions omises ; sa valeur calculée ici reflète leur annulation supposée, sans mesure du mouvement des axes."
+            },
+            "evaluation": {
+              "object": "5.4 ↔ 5.3 : restriction cinématique et résidu correspondant.",
+              "conditions": "Mêmes valeurs du scénario ; A_O = 0 et Ω̇ = 0 sont fournis avant le calcul, non ajustés après observation.",
+              "criterion": "L’équation restreinte de 5.3 doit donner Δ = 0 ; ne pas en déduire séparément A_O = 0 et Ω̇ = 0.",
+              "finding": "Le résidu calculé est nul ; il ne constitue pas une identification indépendante des deux contributions générales."
+            },
+            "comparison": "5.4 confronte le résidu à la restriction de 5.3 et distingue conséquence calculée et détermination du repère."
           },
           {
             "id": 5,
-            "title": "Confronter le cadre disponible",
-            "action": "Maintenir la rotation uniforme donnée et préciser qu’aucune variation de rotation ne peut être estimée à partir des seules valeurs instantanées actuelles.",
-            "output": "Cadre initial conservé faute de données temporelles supplémentaires.",
-            "comparison": "Les extensions de 5.2 exigent de nouvelles informations cinématiques ; elles ne doivent pas être introduites pour expliquer un désaccord non observé."
+            "title": "Résoudre ce que le résidu contraint",
+            "input": "La relecture fournit Δ = A_O + Ω̇ × r ; seule cette somme serait accessible si les autres termes étaient connus indépendamment.",
+            "action": "Isoler A_O = Δ − Ω̇ × r, puis projeter sur r pour montrer ce qu’un résidu nul peut contraindre.",
+            "output": "Δ · r = A_O · r ; si Δ = 0, A_O = −Ω̇ × r reste possible, sans imposer chaque terme nul.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion révèle une indétermination à un seul point : même A_O connu nul ne détermine pas la composante de Ω̇ parallèle à r."
+            },
+            "evaluation": {
+              "object": "5.5 ↔ 5.2 : inversion du résidu et composition générale.",
+              "conditions": "Comparaison symbolique à un instant et une position ; aucune accélération d’origine ou variation de Ω n’est nouvellement mesurée.",
+              "criterion": "Réinsérer A_O = Δ − Ω̇ × r doit rendre la composition de 5.2 ; Ω̇ parallèle à r laisse Ω̇ × r nul.",
+              "finding": "L’inversion conserve l’équation générale et expose son indétermination ; le cadre uniforme repose donc sur les données initiales du repère."
+            },
+            "comparison": "5.5 inverse les termes supplémentaires de 5.2 et précise pourquoi un résidu unique ne suffit pas à identifier leur origine."
           },
           {
             "id": 6,
-            "title": "Fixer le calcul de retour",
-            "action": "Retenir le même repère uniforme et proposer d’annuler seulement la vitesse relative à l’instant étudié pour isoler les deux termes d’inertie.",
-            "output": "Variante instantanée choisie dans le cadre retenu.",
-            "comparison": "Le choix revient aux hypothèses de 5.1 et aux contributions de 5.3, sans transformer le problème en rotation non uniforme."
+            "title": "Restituer le cadre réellement fourni",
+            "input": "La dérivation et son inversion précisent la portée des hypothèses ; le scénario 5.1 impose toujours origine fixe et Ω constant.",
+            "action": "Conserver A_O = 0 et Ω̇ = 0 comme données, puis réserver toute extension à un dossier de repère documenté séparément.",
+            "output": "Hypothèses initiales conservées ; la variante ne change que v′ à t₀, sans translation accélérée, rotation variable ou interaction ajoutée.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour restitue les conditions employées et leur statut ; 5.1 peut les reprendre sans confondre conséquence et preuve."
+            },
+            "evaluation": {
+              "object": "5.6 ↔ 5.1 : conditions du repère et statut des attributs.",
+              "conditions": "Même cadre fourni par l’énoncé ; l’étude symbolique des termes exclus n’est pas une modification effective du repère.",
+              "criterion": "Retrouver A_O = 0, Ω̇ = 0, Ω = 2,00 e_z rad·s⁻¹ et ΣF_mat = 0, avec origine commune fixe.",
+              "finding": "Les conditions d’entrée sont inchangées et restent supposées ; leur justification ne vient pas de l’annulation calculée de Δ."
+            },
+            "comparison": "5.6 retrouve les hypothèses de 5.1 tout en conservant l’indétermination mise en évidence dans le traitement général."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La dérivation avec un mouvement général du repère précise les termes supprimés par les hypothèses employées en 2."
+        },
+        "evaluation": {
+          "object": "5 ↔ 2 : composition générale restreinte et dynamique du repère uniforme.",
+          "conditions": "Même point et mêmes forces matérielles ; translation et rotation variable sont examinées symboliquement, sans modifier le scénario.",
+          "criterion": "Poser A_O = 0 et Ω̇ = 0 doit restituer a = a′ + 2Ω × v′ + Ω × (Ω × r), donc l’équation de 2.",
+          "finding": "Le cadre de 2 est retrouvé comme restriction ; il reste imposé par l’énoncé, et non établi par le résidu calculé."
+        }
       },
       {
         "id": 6,
-        "title": "Revenir au repos relatif instantané",
-        "system": "Une application des transformations à une vitesse relative nulle qui distingue repos relatif et équilibre physique.",
-        "input": "Le cadre du niveau 5 conserve position, rotation et interactions ; seule la vitesse relative instantanée est changée.",
-        "output": "Le retour montre quels termes disparaissent et pourquoi le point peut conserver une accélération relative.",
+        "title": "Distinguer repos instantané et maintien",
+        "system": "La variante à vitesse relative nulle, confrontée à l’état initial et à la condition matérielle d’un maintien dans R′.",
+        "input": "Le cadre de 5 conserve m, r, Ω, origine fixe et ΣF_mat = 0 ; seule v′ devient nulle à t₀.",
+        "output": "F_cor = 0, F_cf = 0,800 e_r N et a′ = 1,600 e_r m·s⁻² ; le repos relatif instantané n’est pas un équilibre.",
         "section": "controle",
-        "comparison": "Le retour modifie la vitesse relative avec la méthode vectorielle de 3 ; il confronte le repos instantané aux hypothèses et interactions de 1.",
+        "comparison": "6 confronte les attributs de la variante à ceux de 1 : m, r, Ω et forces sont conservés, tandis que v′ change explicitement.",
         "steps": [
           {
             "id": 1,
-            "title": "Poser le repos relatif",
-            "action": "Reprendre position et rotation du scénario initial puis imposer une vitesse relative nulle à cet instant, sans ajouter une force de maintien.",
-            "output": "Nouvel état instantané avec mêmes interactions extérieures."
+            "title": "Recevoir la variante instantanée",
+            "input": "Le résultat 5.3 fournit v′ = 0 à t₀, avec m = 0,500 kg, r = 0,400 e_r m et Ω = 2,00 e_z rad·s⁻¹.",
+            "action": "Reprendre ΣF_mat = 0 et l’origine fixe ; qualifier v′ = 0 de donnée instantanée, selon la distinction conservée en 6.6.",
+            "output": "Variante supposée distincte : mêmes interactions compensées, même position, même rotation ; aucune contrainte de maintien dans R′ n’est donnée.",
+            "relation": {
+              "nature": "logique",
+              "description": "La variante reçoit le cadre théorique de 5 ; elle remplace un attribut de vitesse sans ajouter une force de liaison."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les comparaisons du retour",
-            "action": "Utiliser les transformations retenues pour comparer vitesse galiléenne, terme de Coriolis et terme centrifuge dans les deux états instantanés.",
-            "output": "Plan de comparaison séparant vitesse et accélération relatives."
+            "title": "Calculer lorsque v′ s’annule",
+            "input": "Le cadre uniforme et la variante 6.1 permettent d’évaluer v = v′ + Ω × r et ma′ = ΣF_mat + F_cf + F_cor.",
+            "action": "Substituer v′ = 0 ; conserver le double produit vectoriel centrifuge et recomposer ensuite l’accélération galiléenne.",
+            "output": "v = Ω × r ; F_cor = 0 ; a′ = −Ω × (Ω × r) ; a = a′ + Ω × (Ω × r) = 0.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’annulation de v′ supprime uniquement les termes qui en dépendent ; le terme centrifuge dépend encore de r et Ω."
+            }
           },
           {
             "id": 3,
-            "title": "Appliquer les transformations",
-            "action": "Calculer l’annulation de Coriolis et le maintien du terme centrifuge, puis déterminer la vitesse galiléenne correspondant au repos relatif choisi.",
-            "output": "Repos relatif compatible avec mouvement galiléen non nul."
+            "title": "Établir l’état à reprendre",
+            "input": "Le traitement 6.2 fournit les conséquences de la variante, tandis que m, r, Ω, origine fixe et ΣF_mat restent ceux de 6.1.",
+            "action": "Consigner les valeurs de la variante et transmettre cet état à 1.1 pour une reprise clairement séparée du scénario radial initial.",
+            "output": "Variante v′ = 0 : v = 0,800 e_θ m·s⁻¹, F_cor = 0, F_cf = 0,800 e_r N, a′ = 1,600 e_r m·s⁻² et a = 0.",
+            "relation": {
+              "nature": "logique",
+              "description": "La sortie conserve le dossier de 6.1 avec ses résultats calculés ; son retour vers 1.1 ouvre une autre analyse du même emplacement."
+            }
           },
           {
             "id": 4,
-            "title": "Relire l’équilibre supposé",
-            "action": "Vérifier que vitesse relative nulle n’impose pas accélération relative nulle et préciser quelle force réelle serait nécessaire pour maintenir la position relative.",
-            "output": "Repos instantané distingué d’un équilibre effectivement maintenu.",
-            "comparison": "La relecture de 6.3 conserve l’absence de maintien ajoutée en 6.1 ; elle ne transforme pas un instant en immobilité durable."
+            "title": "Relire le zéro de vitesse",
+            "input": "Le résultat 6.3 associe v′ = 0 à a′ = 1,600 e_r m·s⁻², sous une résultante matérielle supposée nulle.",
+            "action": "Comparer le zéro de vitesse au bilan d’accélération ; distinguer cette instantanéité de l’hypothèse d’une position durablement fixe dans R′.",
+            "output": "La vitesse relative est nulle à t₀, mais sa dérivée ne l’est pas ; aucune immobilité durable n’est obtenue.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les valeurs de vitesse et d’accélération sont deux attributs distincts ; la dérivée calculée exclut ici le maintien libre dans R′."
+            },
+            "evaluation": {
+              "object": "6.4 ↔ 6.3 : vitesse relative nulle et accélération relative calculée.",
+              "conditions": "Même variante à t₀, ΣF_mat = 0, Ω non nul et point situé hors de l’axe.",
+              "criterion": "D_R′v′ = a′ = 1,600 e_r m·s⁻² doit rester distinct de v′ = 0 ; l’équilibre demanderait aussi a′ = 0.",
+              "finding": "Le bilan de 6.3 donne une accélération non nulle ; le point n’est donc pas en équilibre dans le repère tournant."
+            },
+            "comparison": "6.4 relit le résultat de 6.3 en séparant le repos instantané d’un maintien de position."
           },
           {
             "id": 5,
-            "title": "Confronter les interactions conservées",
-            "action": "Examiner pourquoi le mobile libre dans le plan ne peut suivre durablement le cercle du repère sans action radiale supplémentaire.",
-            "output": "Condition dynamique d’une immobilité durable dans le repère.",
-            "comparison": "Le cadre de 6.2 décrit le même inventaire de forces ; maintenir artificiellement la position changerait le système physique étudié."
+            "title": "Déduire la force d’un maintien",
+            "input": "La relecture montre a′ non nulle avec ΣF_mat = 0 ; un maintien dans R′ demanderait au contraire v′ = 0 et a′ = 0.",
+            "action": "Imposer conditionnellement ces deux zéros dans la même équation dynamique, puis isoler la résultante matérielle requise.",
+            "output": "Pour maintenir le point, il faudrait ΣF_mat = −F_cf = −0,800 e_r N ; cette force est absente de la variante.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La résolution inverse distingue une condition matérielle de maintien d’un simple changement de vitesse ; elle ne modifie pas le scénario retenu."
+            },
+            "evaluation": {
+              "object": "6.5 ↔ 6.2 : bilan résolu pour le maintien et calcul sans force horizontale.",
+              "conditions": "Même r, Ω et masse ; a′ = 0 est une condition contrefactuelle, tandis que 6.2 garde les interactions initiales.",
+              "criterion": "Avec v′ = a′ = 0, ΣF_mat = mΩ × (Ω × r) = −0,800 e_r N, au lieu de ΣF_mat = 0 dans 6.2.",
+              "finding": "La même équation exige une résultante différente pour le maintien ; aucun tel effort n’est ajouté à l’état calculé de 6.2."
+            },
+            "comparison": "6.5 inverse le bilan de 6.2 pour une condition de maintien distincte et expose la modification matérielle nécessaire."
           },
           {
             "id": 6,
-            "title": "Refermer la comparaison de repères",
-            "action": "Comparer le retour au dossier initial et exposer ce qu’un suivi temporel ajouterait pour distinguer repos instantané et mouvement relatif durable.",
-            "output": "Boucle cinématique close et prolongement temporel identifié.",
-            "comparison": "Le résultat de 6.3 répond à l’état de 6.1 et retrouve les conventions initiales sans inventer une trajectoire observée du mobile."
+            "title": "Restituer la variante sans contrainte",
+            "input": "Le traitement de retour a isolé la force d’un maintien hypothétique ; les données 6.1 n’imposaient aucune force horizontale réelle.",
+            "action": "Conserver l’état libre instantanément au repos relatif et ses interactions initiales ; réserver le maintien forcé à un autre problème.",
+            "output": "Variante conservée : v′ = 0, ΣF_mat = 0, a′ = 1,600 e_r m·s⁻² ; la force hypothétique de maintien reste exclue du dossier.",
+            "relation": {
+              "nature": "logique",
+              "description": "La sortie retrouve les attributs de 6.1 et précise leur portée ; elle permet une reprise locale sans confondre condition et conséquence."
+            },
+            "evaluation": {
+              "object": "6.6 ↔ 6.1 : vitesse, interactions et contraintes de la variante.",
+              "conditions": "Même m, r, Ω et instant ; la force calculée en 6.5 demeure contrefactuelle et n’entre pas dans l’inventaire retenu.",
+              "criterion": "Retrouver v′ = 0, ΣF_mat = 0, m = 0,500 kg, r = 0,400 e_r m, Ω = 2,00 e_z rad·s⁻¹ et origine commune fixe.",
+              "finding": "Tous les attributs supposés de 6.1 sont conservés ; l’accélération relative calculée complète cet état sans le transformer en équilibre."
+            },
+            "comparison": "6.6 confronte le dossier final à 6.1 et conserve la distinction entre variante libre et maintien imposé."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’application au nouvel état conserve le modèle uniforme ; la différence de vitesse est une variante supposée, sans évolution temporelle établie."
+        },
+        "evaluation": {
+          "object": "6 ↔ 1 : attributs initiaux et variante à vitesse relative nulle.",
+          "conditions": "Deux états supposés comparés au même emplacement dans les mêmes repères ; la variante n’est pas présentée comme l’état ultérieur du premier.",
+          "criterion": "Conserver m = 0,500 kg, r = 0,400 e_r m, Ω = 2,00 e_z rad·s⁻¹, origine fixe et ΣF_mat = 0 ; remplacer seulement v′ = 0,300 e_r m·s⁻¹ par 0.",
+          "finding": "La variante conserve les attributs annoncés et supprime Coriolis ; a′ reste non nulle, sans force de maintien ajoutée."
+        }
       }
     ],
-    "version": "0.1",
-    "updated": "2026-09-09"
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les dérivées dans les deux repères, leurs projections cylindriques et les reconstructions de retour sont explicitées pour chaque boucle.",
+    "subject": {
+      "type": "physique",
+      "description": "Le mouvement d’un point matériel, décrit à un même instant dans un repère galiléen et un repère rigide tournant.",
+      "scope": "Rotation uniforme, origine commune fixe et résultante matérielle nulle ; exemple calculé et variante v′ = 0, sans trajectoire mesurée."
+    }
   },
   "lagrange-hamilton": {
     "question": "Quels attributs et déductions établissent la correspondance entre Lagrange et Hamilton pour le même oscillateur, sans confondre action, énergie et observation ?",
