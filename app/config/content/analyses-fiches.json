@@ -2,926 +2,1934 @@
   "systeme-et-grandeurs": {
     "question": "La description reste-t-elle cohérente quand on change la frontière ou la taille du système ?",
     "basis": "Expérience de pensée : deux compartiments identiques, chacun contenant 1 mol à 300 K et 100 kPa. Aucune mesure effectuée.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "La duplication conditionnelle, les catégories d’échanges et les inversions des grandeurs totales, molaires et massiques sont explicitées.",
+    "subject": {
+      "type": "physique",
+      "description": "Deux échantillons macroscopiques homogènes du même gaz, décrits à l’équilibre puis considérés comme un ensemble.",
+      "scope": "Juxtaposition descriptive de copies identiques, sans transformation imposée ni mélange d’espèces différentes. Aucun modèle de gaz ni volume numérique ajouté."
+    },
     "levels": [
       {
+        "id": 1,
         "title": "Délimiter les compartiments",
-        "system": "Le dossier des frontières, parois et échanges des deux échantillons.",
-        "input": "L’exemple et les propriétés des parois encore à préciser.",
-        "output": "Deux descriptions initiales dont les frontières sont explicites.",
+        "system": "Les frontières et attributs supposés des compartiments A et B, avant toute règle de réunion.",
+        "input": "Deux compartiments identiques : n₀ = 1 mol, T₀ = 300 K, P₀ = 100 kPa absolus ; composition identique.",
+        "output": "Dossier A/B avec états égaux, V₀ et U₀ inconnus, frontières nommées et propriétés des parois non spécifiées.",
         "section": "frontiere",
         "comparison": "",
+        "relation": {
+          "nature": "interprétative",
+          "description": "L’énoncé devient une description de systèmes physiques ; l’égalité des états n’indique pas les échanges permis par leurs parois."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Dessiner les frontières",
-            "action": "Représenter les deux compartiments et leur environnement, en repérant les parois communes et les pistons éventuels.",
-            "output": "Croquis des frontières et contacts à conserver."
+            "title": "Nommer les frontières",
+            "input": "Les deux compartiments de l’énoncé, contenant le même gaz dans le même état supposé.",
+            "action": "Distinguer les domaines gazeux A et B, leur union A∪B et l’environnement ; laisser les propriétés des parois indéterminées.",
+            "output": "Trois périmètres descriptifs ; deux jeux identiques n₀, T₀, P₀, sans volume numérique connu.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le choix des domaines associe chaque attribut à son périmètre, sans déplacer une paroi ni réunir matériellement les gaz."
+            }
           },
           {
             "id": 2,
-            "title": "Classer les échanges",
-            "action": "Distinguer matière, chaleur et travail avant de qualifier chaque enceinte de fermée ou isolée.",
-            "output": "Tableau des échanges autorisés par chaque paroi."
+            "title": "Calculer les catégories d’échanges",
+            "input": "Frontières nommées ; matière, chaleur et travail sont les trois catégories d’échanges considérées dans ce cadre usuel.",
+            "action": "Appliquer les implications : fermé ⇒ matière interdite ; adiabatique ⇒ chaleur interdite ; isolé ⇒ matière, chaleur et travail interdits.",
+            "output": "Une frontière non caractérisée reste non classée ; aucune de ces propriétés ne découle des seules valeurs n₀, T₀, P₀.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les définitions produisent des contraintes sur les échanges autorisés, indépendamment du nombre de moles ou de l’égalité des températures."
+            }
           },
           {
             "id": 3,
-            "title": "Constituer les données",
-            "action": "Reporter séparément quantité, température et pression supposées pour chaque compartiment, sans les présenter comme des mesures.",
-            "output": "Deux fiches initiales fondées sur des suppositions."
-          },
-          {
-            "id": 4,
-            "title": "Relire les périmètres",
-            "action": "Vérifier que chaque valeur du dossier obtenu concerne bien le compartiment dessiné, et non leur réunion.",
-            "output": "Association explicite entre valeurs et frontières choisies.",
-            "comparison": "Comparer les fiches de 3 aux frontières de 1 en conservant le même repérage."
-          },
-          {
-            "id": 5,
-            "title": "Vérifier la fermeture",
-            "action": "Rechercher si un piston peut transmettre du travail malgré l’absence d’échange de matière annoncée.",
-            "output": "Qualification des enceintes corrigée ou conservée explicitement.",
-            "comparison": "Confronter cette possibilité aux catégories de 2, sans déduire l’isolement de la fermeture seule."
-          },
-          {
-            "id": 6,
-            "title": "Arrêter le dossier",
-            "action": "Rééditer les fiches avec des frontières nommées et les caractéristiques des parois encore inconnues.",
-            "output": "Dossier utilisable avec les informations matérielles manquantes.",
-            "comparison": "Comparer le dossier final à 3 et aux objets de 1, en nommant les précisions ajoutées."
-          }
-        ],
-        "id": 1
-      },
-      {
-        "title": "Formaliser le changement de taille",
-        "system": "Le modèle d’addition de deux copies homogènes indépendantes.",
-        "input": "Les frontières définies et la liste P, V, T, n, N, U.",
-        "output": "Une règle conditionnelle de duplication des grandeurs.",
-        "section": "variables",
-        "comparison": "",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Poser la duplication",
-            "action": "Prendre deux copies du même état et inventorier les grandeurs associées à leur réunion théorique.",
-            "output": "Liste des grandeurs concernées par la duplication."
-          },
-          {
-            "id": 2,
-            "title": "Définir l’additivité",
-            "action": "Négliger les effets de surface et interactions entre compartiments pour poser l’addition de U, V, n et N.",
-            "output": "Hypothèses explicites concernant les grandeurs extensives usuelles."
-          },
-          {
-            "id": 3,
-            "title": "Construire la règle",
-            "action": "Doubler les grandeurs extensives et conserver les valeurs communes de P et T pour les copies identiques.",
-            "output": "Règle distinguant quantités totales et valeurs communes."
-          },
-          {
-            "id": 4,
-            "title": "Auditer les opérations",
-            "action": "Reprendre la règle obtenue et vérifier qu’aucune somme de températures ou de pressions n’y figure.",
-            "output": "Table de duplication vérifiée grandeur par grandeur.",
-            "comparison": "Comparer les opérations de 3 à l’inventaire de 1, avec les mêmes unités explicites."
-          },
-          {
-            "id": 5,
-            "title": "Examiner les interactions",
-            "action": "Poser une interaction significative entre compartiments et identifier quelle hypothèse d’addition simple serait alors insuffisante.",
-            "output": "Limite de l’additivité énergétique clairement localisée ici.",
-            "comparison": "Confronter ce contrecas aux approximations de 2, sans modifier arbitrairement toutes les classifications retenues."
-          },
-          {
-            "id": 6,
-            "title": "Retenir la règle conditionnelle",
-            "action": "Restituer la règle avec ses conditions d’homogénéité et d’indépendance avant de l’appliquer aux données numériques.",
-            "output": "Modèle de duplication prêt pour une application.",
-            "comparison": "Comparer cette formulation à 3 et vérifier qu’elle répond à la duplication définie en 1."
-          }
-        ],
-        "id": 2
-      },
-      {
-        "title": "Réunir les descriptions",
-        "system": "Le calcul des grandeurs globales des deux compartiments identiques.",
-        "input": "Les valeurs supposées du niveau 1 et les règles du niveau 2.",
-        "output": "2 mol, volume doublé, température et pression inchangées.",
-        "section": "exemple",
-        "comparison": "",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Rassembler les entrées",
-            "action": "Vérifier l’égalité des pressions, températures et compositions supposées avant de construire la description globale.",
-            "output": "Deux jeux de données effectivement comparables ici."
-          },
-          {
-            "id": 2,
-            "title": "Choisir la réunion",
-            "action": "Définir l’ensemble comme l’union des compartiments, sans ajouter une transformation physique au changement de frontière.",
-            "output": "Convention de réunion distincte d’une évolution réelle."
-          },
-          {
-            "id": 3,
-            "title": "Calculer les totaux",
-            "action": "Additionner matière et volumes, puis attribuer à l’ensemble homogène la pression et la température communes.",
-            "output": "Résultat : 2 mol, 300 K, 100 kPa."
-          },
-          {
-            "id": 4,
-            "title": "Décomposer le résultat",
-            "action": "Rechercher les deux contributions à chaque total et distinguer ces sommes des valeurs intensives communes.",
-            "output": "Origine des résultats globaux rendue directement vérifiable.",
-            "comparison": "Comparer les résultats de 3 aux fiches de 1 avec le même périmètre de comptage."
-          },
-          {
-            "id": 5,
-            "title": "Questionner l’homogénéité",
-            "action": "Imaginer deux températures différentes et vérifier qu’une température globale immédiate ne découle plus de la simple réunion.",
-            "output": "Réserve explicite pour des compartiments initialement hétérogènes.",
-            "comparison": "Confronter cette variante à la convention de 2, qui ne décrit aucune phase d’équilibration."
-          },
-          {
-            "id": 6,
-            "title": "Publier le résultat conditionnel",
-            "action": "Présenter le calcul des copies identiques et laisser distinctement ouverte la description d’une éventuelle equilibration hétérogène.",
-            "output": "Résultat retenu et variante demandant un autre bilan.",
-            "comparison": "Comparer cette présentation à 3 et aux données égales de 1, sans extrapolation injustifiée."
-          }
-        ],
-        "id": 3
-      },
-      {
-        "title": "Relire les grandeurs rapportées",
-        "system": "L’audit du tableau global par normalisation molaire et reconstruction des totaux.",
-        "input": "Le résultat calculé au niveau 3, repris comme donnée du retour.",
-        "output": "Une correspondance cohérente entre grandeurs totales et molaires.",
-        "section": "capacites",
-        "comparison": "Comparer les résultats du niveau 3 par normalisation, puis retrouver les données du niveau 1 sans invoquer de mesure.",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Recevoir le tableau",
-            "action": "Reprendre le tableau des deux moles et identifier les énergies et capacités qui y seraient totales.",
-            "output": "Tableau de retour avec sa provenance indiquée."
-          },
-          {
-            "id": 2,
-            "title": "Définir les quotients",
-            "action": "Choisir la division par n pour former des grandeurs molaires et expliciter leurs nouvelles unités.",
-            "output": "Règles de normalisation accompagnées des unités correspondantes."
-          },
-          {
-            "id": 3,
-            "title": "Normaliser les grandeurs",
-            "action": "Diviser symboliquement U et une capacité totale par la quantité globale pour reconstruire leurs valeurs molaires.",
-            "output": "Quotients calculés pour l’ensemble des deux copies."
-          },
-          {
-            "id": 4,
-            "title": "Reconstruire les totaux",
-            "action": "Remultiplier les quotients par deux moles et vérifier que les valeurs initiales du tableau sont retrouvées.",
-            "output": "Reconstruction des totaux sans facteur de matière superflu.",
-            "comparison": "Comparer la reconstruction de 3 au tableau de 1 avec les mêmes unités et quantités."
-          },
-          {
-            "id": 5,
-            "title": "Contrôler les catégories",
-            "action": "Vérifier que le caractère intensif des capacités molaires n’est pas attribué aux capacités thermiques totales.",
-            "output": "Distinction maintenue entre capacité totale et molaire.",
-            "comparison": "Confronter les appellations aux quotients de 2 et corriger seulement les confusions de normalisation."
-          },
-          {
-            "id": 6,
-            "title": "Établir la correspondance",
-            "action": "Livrer un tableau permettant le passage dans les deux sens entre chaque compartiment et leur ensemble.",
-            "output": "Table d’addition et de normalisation mutuellement cohérente.",
-            "comparison": "Comparer les passages inverses à 3 et vérifier qu’ils restituent le dossier reçu en 1."
-          }
-        ],
-        "id": 4
-      },
-      {
-        "title": "Confronter les hypothèses de réunion",
-        "system": "Le diagnostic séparé des frontières, de l’équilibre et de l’additivité.",
-        "input": "L’audit du niveau 4 et les conditions du modèle du niveau 2.",
-        "output": "Les règles conservées et les limites matérielles identifiées.",
-        "section": "conditions",
-        "comparison": "Confronter l’audit au modèle du niveau 2 et conserver les règles usuelles seulement dans les conditions annoncées.",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Recueillir les réserves",
-            "action": "Rassembler les incertitudes sur les parois, l’homogénéité et les interactions sans les transformer en anomalies observées.",
-            "output": "Liste de réserves issue du contrôle précédent."
-          },
-          {
-            "id": 2,
-            "title": "Séparer les conditions",
-            "action": "Distinguer le choix de frontière, l’état d’équilibre et l’approximation d’additivité dans le modèle de réunion.",
-            "output": "Trois catégories de conditions clairement séparées ici."
-          },
-          {
-            "id": 3,
-            "title": "Construire les contrecas",
-            "action": "Poser un piston mobile, des températures différentes puis une interaction significative, pour identifier la condition affectée dans chaque cas.",
-            "output": "Trois variantes théoriques et leurs conditions concernées."
-          },
-          {
-            "id": 4,
-            "title": "Relire les variantes",
-            "action": "Vérifier que chaque contrecas modifie seulement la condition annoncée avant d’attribuer une différence au changement de taille.",
-            "output": "Contrecas délimités sans confusion entre causes possibles.",
-            "comparison": "Comparer les variantes de 3 aux réserves de 1 en gardant explicite leur nature hypothétique."
-          },
-          {
-            "id": 5,
-            "title": "Arbitrer les règles",
-            "action": "Maintenir l’extensivité dans l’exemple donné tout en refusant d’inférer l’isolement de la seule fermeture.",
-            "output": "Décision motivée sur les règles et limites.",
-            "comparison": "Confronter l’arbitrage aux distinctions de 2 : la mobilité d’une paroi concerne d’abord les échanges."
-          },
-          {
-            "id": 6,
-            "title": "Fixer le cadre retenu",
-            "action": "Réécrire les conditions suffisantes pour la réunion et les propriétés des parois à documenter dans une réalisation future.",
-            "output": "Cadre conservé avec informations expérimentales encore nécessaires.",
-            "comparison": "Comparer ce cadre aux contrecas de 3 et aux réserves de 1, sans prétendre les avoir mesurées."
-          }
-        ],
-        "id": 5
-      },
-      {
-        "title": "Subdiviser puis recomposer",
-        "system": "Le problème inverse de reconstruction des compartiments à partir de leur ensemble.",
-        "input": "Le modèle confronté au niveau 5 et le tableau global calculé.",
-        "output": "Une boucle descriptive fermée, distincte d’une validation expérimentale.",
-        "section": "controle",
-        "comparison": "Comparer subdivision et recomposition au calcul du niveau 3, puis vérifier la restitution des hypothèses initiales du niveau 1.",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Poser le problème inverse",
-            "action": "Reprendre l’ensemble de deux moles et demander la description de deux copies égales dans le même état.",
-            "output": "Problème inverse posé sur des données calculées."
-          },
-          {
-            "id": 2,
-            "title": "Conserver l’état commun",
-            "action": "Maintenir pression, température et composition communes en négligeant les contributions des interfaces ajoutées par la subdivision.",
-            "output": "Hypothèses de subdivision compatibles avec la réunion."
-          },
-          {
-            "id": 3,
-            "title": "Reconstruire les copies",
-            "action": "Diviser les grandeurs extensives par deux et conserver les intensives pour reconstituer chaque fiche initiale.",
-            "output": "Deux descriptions calculées à une mole chacune."
-          },
-          {
-            "id": 4,
-            "title": "Tester la recomposition",
-            "action": "Réunir les descriptions obtenues et vérifier le tableau global sans présenter cette opération comme une manipulation réalisée.",
-            "output": "Recomposition symbolique et numérique du système global.",
-            "comparison": "Comparer cette recomposition au résultat de 3 et au tableau reçu en 1, avec les mêmes règles."
-          },
-          {
-            "id": 5,
-            "title": "Limiter la conclusion",
-            "action": "Distinguer l’inversion d’un calcul de classement d’une transformation thermodynamique réversible, qui demanderait un protocole physique.",
-            "output": "Portée de la vérification limitée au modèle.",
-            "comparison": "Confronter cette distinction aux hypothèses de 2, qui ne définissent aucun chemin thermodynamique réel."
-          },
-          {
-            "id": 6,
-            "title": "Fermer le dossier",
-            "action": "Comparer les fiches reconstruites aux hypothèses originales et conserver séparément les échanges à documenter expérimentalement.",
-            "output": "Cohérence descriptive établie ; réalisation matérielle encore ouverte.",
-            "comparison": "Comparer le contrôle final à 3 et aux données de 1, sans transformer une identité en preuve expérimentale."
-          }
-        ],
-        "id": 6
-      }
-    ],
-    "version": "0.1",
-    "updated": "2026-09-09"
-  },
-  "gaz-parfait": {
-    "question": "Comment distinguer une prévision du gaz parfait, sa vérification interne et une confrontation à un gaz réel ?",
-    "basis": "Calcul théorique pour 1 mol à 300 K dans 10 L, puis 20 L. Les éventuelles mesures restent à fournir.",
-    "levels": [
-      {
-        "title": "Préparer l’état du gaz",
-        "system": "Le dossier d’état et d’unités nécessaire à une prévision de pression.",
-        "input": "Les valeurs supposées de n, T et V de l’exemple.",
-        "output": "Un état initial exploitable sans confusion d’unités.",
-        "section": "unites",
-        "comparison": "",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Recevoir l’état proposé",
-            "action": "Inscrire quantité de matière, température et volume de l’exemple, puis distinguer ces valeurs supposées de données instrumentales éventuelles.",
-            "output": "Dossier initial marqué comme exemple théorique seulement."
-          },
-          {
-            "id": 2,
-            "title": "Définir les variables",
-            "action": "Choisir n en moles, N en particules, T en kelvins et P comme pression absolue.",
-            "output": "Convention de notation et d’unités clairement établie."
-          },
-          {
-            "id": 3,
-            "title": "Convertir le volume",
-            "action": "Transformer les dix litres en mètres cubes et préparer la combinaison nRT sans introduire encore une pression mesurée.",
-            "output": "Volume utilisable : 0,010 m³ pour le calcul."
-          },
-          {
-            "id": 4,
-            "title": "Relire les conversions",
-            "action": "Reprendre le volume converti et vérifier le facteur entre litres et mètres cubes à partir de la valeur initiale.",
-            "output": "Conversion reconstruite indépendamment du futur calcul de pression.",
-            "comparison": "Comparer la conversion de 3 à la donnée de 1 avec un retour explicite vers les litres."
-          },
-          {
-            "id": 5,
-            "title": "Contrôler la quantité",
-            "action": "Vérifier que R accompagne les moles et que kB accompagnerait N, sans mélanger les deux descriptions.",
-            "output": "Couples quantité et constante rendus non ambigus.",
-            "comparison": "Confronter les associations retenues aux conventions de 2 avant de calculer une grandeur physique."
-          },
-          {
-            "id": 6,
-            "title": "Arrêter les entrées",
-            "action": "Conserver les valeurs converties et préciser que composition, équilibre et dilution sont supposés dans cette première application.",
-            "output": "Dossier prêt avec les conditions matérielles supposées.",
-            "comparison": "Comparer ce dossier à 3 et aux valeurs de 1, en distinguant conversions et hypothèses nouvelles."
-          }
-        ],
-        "id": 1
-      },
-      {
-        "title": "Construire l’équation d’état",
-        "system": "La relation théorique entre pression, volume, température et quantité fixée.",
-        "input": "Le dossier d’état du niveau 1 et les hypothèses du gaz parfait classique.",
-        "output": "Une expression de P et ses conditions d’emploi.",
-        "section": "modele",
-        "comparison": "",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Identifier les contraintes",
-            "action": "Reprendre n et T fixés, puis repérer le volume comme variable de contrôle et la pression comme inconnue.",
-            "output": "Rôles respectifs des données et de l’inconnue."
-          },
-          {
-            "id": 2,
-            "title": "Choisir le modèle",
-            "action": "Négliger interactions et volume moléculaire dans l’équation d’état, en restant dans le régime classique annoncé.",
-            "output": "Hypothèses physiques explicites du modèle de pression."
-          },
-          {
-            "id": 3,
-            "title": "Isoler la pression",
-            "action": "Réécrire PV = nRT sous la forme P = nRT/V et établir sa variation attendue avec V.",
-            "output": "Expression de pression et dépendance inverse au volume."
-          },
-          {
-            "id": 4,
-            "title": "Relire la dépendance",
-            "action": "Tester symboliquement un doublement de V et vérifier que la pression est divisée par deux à n et T fixés.",
-            "output": "Rapport de pressions calculé sans valeur instrumentale.",
-            "comparison": "Comparer ce test de 3 aux variables fixées en 1, sans laisser varier implicitement la température."
-          },
-          {
-            "id": 5,
-            "title": "Délimiter la portée",
-            "action": "Vérifier que l’équation d’état fournit des états d’équilibre mais ne décrit ni travail ni chemin d’expansion.",
-            "output": "Séparation entre description d’état et transformation physique.",
-            "comparison": "Confronter cette limite aux hypothèses de 2, qui ne prescrivent aucun protocole d’évolution du gaz."
-          },
-          {
-            "id": 6,
-            "title": "Retenir la relation",
-            "action": "Énoncer la prévision de pression avec ses conditions d’équilibre et signaler les informations nécessaires pour décrire une transformation.",
-            "output": "Relation utilisable accompagnée de ses limites explicites.",
-            "comparison": "Comparer la relation retenue à 3 et à l’inconnue de 1, sans lui attribuer d’autres prédictions."
-          }
-        ],
-        "id": 2
-      },
-      {
-        "title": "Calculer la pression attendue",
-        "system": "L’application numérique de l’équation d’état aux deux volumes proposés.",
-        "input": "Les entrées converties du niveau 1 et la relation du niveau 2.",
-        "output": "Deux pressions prévues et un rapport égal à deux.",
-        "section": "exemple",
-        "comparison": "",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Assembler le calcul",
-            "action": "Rassembler n = 1 mol, T = 300 K et les volumes de dix puis vingt litres.",
-            "output": "Deux états proposés avec quantité et température communes."
-          },
-          {
-            "id": 2,
-            "title": "Fixer la précision",
-            "action": "Employer la constante R donnée dans la fiche et conserver suffisamment de chiffres avant les conversions finales.",
-            "output": "Règle de calcul et d’arrondi explicitement annoncée."
-          },
-          {
-            "id": 3,
-            "title": "Produire les pressions",
-            "action": "Évaluer nRT/V pour chaque volume, puis exprimer les résultats en pascals et en kilopascals.",
-            "output": "Prévisions : environ 249,434 puis 124,717 kPa."
-          },
-          {
-            "id": 4,
-            "title": "Comparer les rapports",
-            "action": "Diviser les pressions calculées et vérifier le rapport inverse des volumes sans utiliser une nouvelle valeur physique.",
-            "output": "Rapport numérique compatible avec le doublement du volume.",
-            "comparison": "Comparer les résultats de 3 aux deux volumes de 1 par une méthode fondée sur les rapports."
-          },
-          {
-            "id": 5,
-            "title": "Auditer les arrondis",
-            "action": "Examiner si un petit écart au rapport exact provient des arrondis plutôt que d’une modification de l’équation d’état.",
-            "output": "Écart numérique distingué d’un écart au modèle.",
-            "comparison": "Confronter les écarts aux règles de précision de 2 avant d’invoquer une limite physique."
-          },
-          {
-            "id": 6,
-            "title": "Consigner les prévisions",
-            "action": "Présenter les deux pressions comme résultats calculés et conserver les valeurs non arrondies pour les contrôles inverses.",
-            "output": "Tableau de prévisions accompagné de sa provenance théorique.",
-            "comparison": "Comparer le tableau final à 3 et aux données de 1, en préservant leur statut supposé."
-          }
-        ],
-        "id": 3
-      },
-      {
-        "title": "Reconstituer les entrées",
-        "system": "Le contrôle inverse des pressions et le diagnostic du rapport PV/(nRT).",
-        "input": "Les résultats numériques du niveau 3 repris comme données calculées.",
-        "output": "Une cohérence interne distinguée d’une confrontation expérimentale.",
-        "section": "limites",
-        "comparison": "Comparer la reconstruction aux calculs du niveau 3 et aux entrées du niveau 1 ; un rapport unité calculé ne valide pas le modèle.",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Reprendre les résultats",
-            "action": "Importer les pressions précédentes avec leurs volumes associés et leur précision, sans les rebaptiser observations du gaz.",
-            "output": "Tableau de retour identifié comme sortie calculée."
-          },
-          {
-            "id": 2,
-            "title": "Choisir un contrôle inverse",
-            "action": "Poser V = nRT/P et définir Z = PV/(nRT), en précisant les grandeurs réellement indépendantes.",
-            "output": "Deux contrôles dont les dépendances sont explicites."
-          },
-          {
-            "id": 3,
-            "title": "Reconstruire les volumes",
-            "action": "Utiliser les pressions non arrondies pour retrouver les volumes et calculer le rapport Z pour chaque état.",
-            "output": "Volumes restitués et Z égal à un."
-          },
-          {
-            "id": 4,
-            "title": "Qualifier la concordance",
-            "action": "Relire la reconstruction et noter qu’elle réemploie la même relation ayant produit les pressions en entrée.",
-            "output": "Concordance identifiée comme test de calcul interne.",
-            "comparison": "Comparer les résultats de 3 aux données de 1 en rendant explicite leur origine algébrique commune."
-          },
-          {
-            "id": 5,
-            "title": "Préparer une comparaison indépendante",
-            "action": "Déterminer quelles valeurs de P, V, T et n devraient être obtenues indépendamment pour rendre Z expérimentalement informatif.",
-            "output": "Plan de données indépendantes encore à fournir.",
-            "comparison": "Confronter ce plan aux dépendances définies en 2, afin d’éviter une vérification circulaire du modèle."
-          },
-          {
-            "id": 6,
-            "title": "Distinguer les deux retours",
-            "action": "Séparer le contrôle inverse terminé d’un futur tableau expérimental avec incertitudes, laissé vide tant que les relevés manquent.",
-            "output": "Cohérence interne documentée ; confrontation expérimentale encore ouverte.",
-            "comparison": "Comparer ce bilan à 3 et aux données calculées de 1, sans inventer de mesures supplémentaires."
-          }
-        ],
-        "id": 4
-      },
-      {
-        "title": "Confronter la validité du modèle",
-        "system": "Le diagnostic conditionnel d’un éventuel écart au rapport idéal.",
-        "input": "Le plan de confrontation du niveau 4 et les approximations du niveau 2.",
-        "output": "Des critères pour conserver ou réviser le modèle sans décision prématurée.",
-        "section": "limites",
-        "comparison": "Confronter les écarts éventuels aux hypothèses du niveau 2, après avoir séparé unités, incertitudes et effets physiques possibles.",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Poser l’écart à examiner",
-            "action": "Prendre comme question un éventuel Z différent de un, sans lui attribuer une valeur expérimentale non disponible.",
-            "output": "Écart possible posé comme objet de diagnostic."
-          },
-          {
-            "id": 2,
-            "title": "Organiser les explications",
-            "action": "Séparer erreur d’unité, incertitude de mesure, défaut d’équilibre et effets intermoléculaires dans une grille de confrontation.",
-            "output": "Hypothèses concurrentes classées sans conclusion anticipée ici."
-          },
-          {
-            "id": 3,
-            "title": "Préparer les vérifications",
-            "action": "Associer chaque explication à une vérification : conversions, étalonnage, stabilisation thermique ou comparaison de plusieurs états dilués.",
-            "output": "Plan de tests ciblés pour chaque explication."
-          },
-          {
-            "id": 4,
-            "title": "Relire le pouvoir discriminant",
-            "action": "Vérifier quels tests distinguent réellement les causes et lesquels ne font que recalculer l’équation à partir d’elle-même.",
-            "output": "Tests indépendants séparés des contrôles purement algébriques.",
-            "comparison": "Comparer le plan de 3 à l’écart posé en 1, sans confondre test proposé et observation effectuée."
-          },
-          {
-            "id": 5,
-            "title": "Décider conditionnellement",
-            "action": "Conserver provisoirement le gaz parfait si les informations ne permettent pas d’isoler un écart significatif, tout en indiquant cette limite.",
-            "output": "Décision conditionnelle sans validation expérimentale indue du modèle.",
-            "comparison": "Confronter cette décision aux explications de 2, plutôt que retenir automatiquement une interaction moléculaire."
-          },
-          {
-            "id": 6,
-            "title": "Spécifier la suite",
-            "action": "Énoncer les informations qui permettraient de choisir entre meilleure mesure, meilleure préparation de l’état ou changement d’équation.",
-            "output": "Critères de poursuite précis pour une confrontation future.",
-            "comparison": "Comparer ces critères au plan de 3 et au diagnostic de 1, en laissant ouvertes les données absentes."
-          }
-        ],
-        "id": 5
-      },
-      {
-        "title": "Appliquer et vérifier le retour",
-        "system": "Une nouvelle prévision à vingt litres et sa reconstruction selon le cadre confronté.",
-        "input": "Le cadre du niveau 5, l’état initial et le contrôle par rapports.",
-        "output": "Une prévision réutilisable avec un protocole de confrontation identifié.",
-        "section": "controle",
-        "comparison": "Comparer le calcul par rapports à celui du niveau 3, puis vérifier les valeurs supposées du niveau 1 et les limites restantes.",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Choisir l’état de retour",
-            "action": "Reprendre la pression prévue à dix litres et poser vingt litres à quantité et température inchangées.",
-            "output": "Entrée du retour distincte d’un relevé instrumental."
-          },
-          {
-            "id": 2,
-            "title": "Choisir la relation relative",
-            "action": "Utiliser P2/P1 = V1/V2 dans les conditions conservées, sans réintroduire des conversions ou constantes inutiles.",
-            "output": "Méthode relative et contraintes maintenues explicitement définies."
-          },
-          {
-            "id": 3,
-            "title": "Calculer par proportion",
-            "action": "Diviser la pression initiale par deux et reconstruire ensuite le produit PV aux deux états proposés.",
-            "output": "Pression retrouvée et produits PV calculés identiques."
-          },
-          {
-            "id": 4,
-            "title": "Comparer les méthodes",
-            "action": "Mettre côte à côte le résultat relatif et le calcul absolu, en attribuant leurs différences éventuelles aux arrondis.",
-            "output": "Accord interne de deux présentations du même modèle.",
-            "comparison": "Comparer le calcul de 3 aux entrées de 1 en conservant les valeurs non arrondies disponibles."
-          },
-          {
-            "id": 5,
-            "title": "Préserver les limites",
-            "action": "Rappeler que l’accord de deux calculs ne remplace pas la confrontation indépendante et ne décrit aucun chemin thermodynamique.",
-            "output": "Conclusion limitée aux états et au calcul.",
-            "comparison": "Confronter cette réserve au modèle relatif de 2, qui suppose déjà la relation du gaz parfait."
-          },
-          {
-            "id": 6,
-            "title": "Fermer ou ouvrir la boucle",
-            "action": "Conclure à la cohérence des prévisions et joindre la liste des relevés requis pour poursuivre vers un gaz réel.",
-            "output": "Boucle de calcul fermée ; confrontation physique à compléter.",
-            "comparison": "Comparer le bilan final à 3 et aux conditions de 1, sans convertir les prévisions en résultats observés."
-          }
-        ],
-        "id": 6
-      }
-    ],
-    "version": "0.1",
-    "updated": "2026-09-09"
-  },
-  "premier-principe": {
-    "question": "Le bilan d’énergie reste-t-il cohérent lorsqu’on relit les échanges avec une autre méthode ou une autre frontière ?",
-    "basis": "Exemple comptable supposé : 500 J de chaleur reçue et 200 J de travail fourni. Aucune mesure calorimétrique.",
-    "levels": [
-      {
-        "title": "Inventorier les échanges annoncés",
-        "system": "Le dossier des frontières et transferts énergétiques du système fermé.",
-        "input": "L’énoncé des échanges et l’absence supposée de variation des énergies macroscopiques.",
-        "output": "Un registre des transferts et exclusions du bilan.",
-        "section": "conditions",
-        "comparison": "",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Dessiner les interfaces",
-            "action": "Représenter le système fermé et repérer les interfaces où pourraient traverser chaleur, travail mécanique ou travail électrique.",
-            "output": "Schéma des interfaces énergétiques du système étudié."
-          },
-          {
-            "id": 2,
-            "title": "Nommer les transferts",
-            "action": "Distinguer échange thermique, travail et énergie stockée avant de traduire les verbes recevoir et fournir.",
-            "output": "Catégories énergétiques associées aux termes de l’énoncé."
-          },
-          {
-            "id": 3,
-            "title": "Construire le registre",
-            "action": "Inscrire les cinq cents joules reçus thermiquement et les deux cents joules fournis mécaniquement comme données supposées.",
-            "output": "Registre initial conservant le sens des échanges."
-          },
-          {
-            "id": 4,
-            "title": "Relire les omissions",
-            "action": "Reprendre le registre et chercher si un canal mentionné dans le schéma initial est absent du futur bilan.",
-            "output": "Liste des canaux présents ou explicitement exclus.",
-            "comparison": "Comparer le registre de 3 aux interfaces de 1 pour distinguer absence supposée et oubli de comptage."
-          },
-          {
-            "id": 5,
-            "title": "Vérifier le stockage",
-            "action": "Contrôler que la chaleur reçue n’est pas décrite comme une chaleur contenue, mais comme un transfert contribuant à l’énergie.",
-            "output": "Vocabulaire séparant transfert et énergie interne stockée.",
-            "comparison": "Confronter cette lecture aux catégories de 2 avant d’attribuer une variation à une fonction d’état."
-          },
-          {
-            "id": 6,
-            "title": "Fixer le dossier",
-            "action": "Conserver le registre avec une frontière nommée et les variations cinétique et potentielle macroscopiques supposées négligeables.",
-            "output": "Entrées du bilan et approximations explicitement documentées.",
-            "comparison": "Comparer le dossier final à 3 et au système de 1, en identifiant chaque exclusion du bilan."
-          }
-        ],
-        "id": 1
-      },
-      {
-        "title": "Formaliser les signes et le stockage",
-        "system": "Le modèle de conservation associé au système fermé et à la convention reçue.",
-        "input": "Le registre du niveau 1 et les fonctions énergétiques nécessaires.",
-        "output": "Un bilan signé et une règle pour le travail de pression.",
-        "section": "bilan",
-        "comparison": "",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Identifier le stockage pertinent",
-            "action": "Reprendre la frontière fermée et déterminer si U suffit ou si les énergies macroscopiques doivent être ajoutées.",
-            "output": "Énergie à faire varier dans le bilan."
-          },
-          {
-            "id": 2,
-            "title": "Fixer la convention reçue",
-            "action": "Attribuer un signe positif aux transferts reçus et écrire la conservation avec les mêmes conventions pour tous les canaux.",
-            "output": "Convention commune pour chaleur et travaux reçus."
-          },
-          {
-            "id": 3,
-            "title": "Établir les expressions",
-            "action": "Écrire ΔU = Q + W dans le cadre retenu et identifier Wpression par la pression extérieure à la frontière.",
-            "output": "Bilan et expression du travail de pression."
-          },
-          {
-            "id": 4,
-            "title": "Vérifier une expansion",
-            "action": "Appliquer symboliquement l’expression du travail à une expansion contre une pression positive pour vérifier le signe obtenu.",
-            "output": "Signe négatif du travail reçu pendant l’expansion.",
-            "comparison": "Comparer ce test de 3 au stockage choisi en 1 en séparant variation d’état et transfert."
-          },
-          {
-            "id": 5,
-            "title": "Confronter les pressions",
-            "action": "Vérifier que remplacer la pression extérieure par celle du gaz exige les conditions mécaniquement réversibles annoncées dans la fiche.",
-            "output": "Substitution de pression autorisée seulement sous conditions.",
-            "comparison": "Confronter cette restriction à la convention de 2 : une convention de signe ne rend pas un chemin réversible."
-          },
-          {
-            "id": 6,
-            "title": "Retenir le bilan applicable",
-            "action": "Présenter les expressions avec les travaux inclus et les conditions qui autorisent la réduction à la seule énergie interne.",
-            "output": "Cadre de calcul adapté au registre initial.",
-            "comparison": "Comparer le cadre final à 3 et aux choix de stockage de 1, sans omettre un travail possible."
-          }
-        ],
-        "id": 2
-      },
-      {
-        "title": "Calculer la variation interne",
-        "system": "L’application comptable du premier principe aux échanges supposés de l’exemple.",
-        "input": "Q reçu de 500 J, travail fourni de 200 J et convention du niveau 2.",
-        "output": "Une variation interne calculée de +300 J.",
-        "section": "exemple",
-        "comparison": "",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Recevoir les valeurs orientées",
-            "action": "Reprendre les deux transferts de l’énoncé en conservant les mots reçue et fourni avant toute opération arithmétique.",
-            "output": "Entrées énergétiques munies de leur orientation physique."
-          },
-          {
-            "id": 2,
-            "title": "Traduire les orientations",
-            "action": "Associer Q = +500 J et W = −200 J aux orientations, puis conserver la même frontière pour les deux.",
-            "output": "Deux transferts signés dans une convention commune."
-          },
-          {
-            "id": 3,
-            "title": "Calculer le solde",
-            "action": "Additionner les transferts signés pour obtenir la variation d’énergie interne, sans supposer une valeur absolue de U.",
-            "output": "Variation calculée : ΔU égale plus 300 J."
-          },
-          {
-            "id": 4,
-            "title": "Relire par entrées et sorties",
-            "action": "Reformuler le calcul comme énergie entrante moins énergie sortante et vérifier que le solde reste positif.",
-            "output": "Solde retrouvé par une présentation comptable différente.",
-            "comparison": "Comparer cette relecture à 3 et aux orientations de 1, sans changer les signes au milieu du calcul."
-          },
-          {
-            "id": 5,
-            "title": "Contrôler l’interprétation",
-            "action": "Examiner si le résultat renseigne la température sans relation calorique supplémentaire, puis refuser cette inférence non disponible ici.",
-            "output": "Variation interne distinguée d’une variation de température.",
-            "comparison": "Confronter cette limite aux règles de 2, qui fixaient les signes mais aucune loi calorique."
-          },
-          {
-            "id": 6,
-            "title": "Consigner le résultat",
-            "action": "Conserver ΔU avec ses hypothèses et les transferts d’origine, en laissant l’état thermique final indéterminé.",
-            "output": "Bilan chiffré complet sans température finale inventée.",
-            "comparison": "Comparer ce résultat à 3 et aux données de 1, en distinguant ce qui est déterminé et ouvert."
-          }
-        ],
-        "id": 3
-      },
-      {
-        "title": "Reconstituer un transfert",
-        "system": "Le contrôle inverse du bilan à partir de ΔU et du travail calculés.",
-        "input": "Le solde du niveau 3, repris comme résultat théorique, et le travail initial.",
-        "output": "Une chaleur reconstruite de 500 J et un contrôle comptable interne explicitement identifié.",
-        "section": "signes",
-        "comparison": "Comparer la reconstruction au calcul du niveau 3 et au registre du niveau 1 ; l’accord ne constitue pas une mesure indépendante.",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Recevoir le solde calculé",
-            "action": "Prendre ΔU = +300 J et W = −200 J comme entrées du retour, en indiquant leur provenance comptable.",
-            "output": "Entrées du retour identifiées comme valeurs calculées."
-          },
-          {
-            "id": 2,
-            "title": "Choisir l’inversion",
-            "action": "Isoler Q dans la conservation et préciser qu’une chaleur reconstruite diffère d’un transfert mesuré indépendamment.",
-            "output": "Relation inverse et statut du résultat attendus."
-          },
-          {
-            "id": 3,
-            "title": "Reconstruire la chaleur",
-            "action": "Calculer Q = ΔU − W puis traduire le signe obtenu dans le langage reçu ou fourni.",
-            "output": "Chaleur reconstruite : plus 500 J pour le système."
-          },
-          {
-            "id": 4,
-            "title": "Vérifier le registre",
-            "action": "Comparer la chaleur reconstruite au transfert initial et contrôler que la frontière n’a pas changé entre les deux écritures.",
-            "output": "Concordance comptable avec le registre de départ.",
-            "comparison": "Comparer les résultats de 3 aux données de 1 en conservant exactement la même orientation des échanges."
-          },
-          {
-            "id": 5,
-            "title": "Identifier un contrôle indépendant",
-            "action": "Décrire ce qu’apporterait une mesure indépendante du transfert thermique ou de la variation interne, sans prétendre la posséder.",
-            "output": "Donnée indépendante nécessaire à une confrontation réelle.",
-            "comparison": "Confronter cette possibilité à l’inversion de 2, qui réutilise nécessairement le même principe de conservation."
-          },
-          {
-            "id": 6,
-            "title": "Qualifier la fermeture",
-            "action": "Conclure à l’absence d’erreur comptable repérée et réserver toute confrontation expérimentale à des transferts documentés indépendamment.",
-            "output": "Bilan interne fermé ; contrôle expérimental encore ouvert.",
-            "comparison": "Comparer la conclusion au calcul de 3 et à la provenance de 1, sans validation circulaire."
-          }
-        ],
-        "id": 4
-      },
-      {
-        "title": "Confronter le périmètre énergétique",
-        "system": "Le diagnostic des termes susceptibles de manquer au bilan réduit.",
-        "input": "Le contrôle du niveau 4 et les exclusions initiales du niveau 2.",
-        "output": "Une décision sur la pertinence de ΔU = Q + W.",
-        "section": "bilan",
-        "comparison": "Confronter le cadre du retour aux hypothèses du niveau 2, en examinant travaux supplémentaires et variations des énergies macroscopiques.",
-        "steps": [
-          {
-            "id": 1,
-            "title": "Recueillir les limites",
-            "action": "Reprendre les exclusions du bilan et poser un déplacement du système ou un travail électrique comme variantes théoriques.",
-            "output": "Deux situations possibles exigeant une attention supplémentaire."
-          },
-          {
-            "id": 2,
-            "title": "Élargir le stockage",
-            "action": "Écrire conceptuellement le bilan sur U, énergie cinétique et énergie potentielle, avec tous les travaux franchissant la frontière.",
-            "output": "Cadre général servant de référence au diagnostic."
-          },
-          {
-            "id": 3,
-            "title": "Classer les variantes",
-            "action": "Attribuer l’accélération à une variation de stockage macroscopique et l’alimentation électrique à un canal de travail supplémentaire.",
-            "output": "Termes ajoutés localisés selon leur nature énergétique."
+            "title": "Établir le dossier initial",
+            "input": "Le repérage A/B et les restrictions logiques du classement, sans renseignement supplémentaire sur les parois.",
+            "action": "Associer à chaque copie 1 mol, 300 K et 100 kPa absolus ; réserver V₀, U₀ et N₀ comme attributs symboliques.",
+            "output": "Dossier transmis à 2.1 : copies identiques, composition commune, attributs extensifs non chiffrés et propriétés des parois à documenter.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les données supposées sont séparées des paramètres non fournis ; aucun volume ou contenu énergétique n’est calculable avec ces seuls attributs."
+            }
           },
           {
             "id": 4,
             "title": "Relire les attributions",
-            "action": "Vérifier que la même énergie n’est pas comptée à la fois comme transfert entrant et variation indépendante supplémentaire.",
-            "output": "Comptage des variantes sans doublon énergétique introduit.",
-            "comparison": "Comparer les attributions de 3 aux situations de 1 avec une frontière inchangée et clairement nommée."
+            "input": "Le dossier de 1.3, repris avec ses labels A, B et A∪B.",
+            "action": "Relever pour chaque copie les valeurs et leur statut ; vérifier que 1 mol demeure une donnée individuelle.",
+            "output": "Même triplet supposé pour A et B ; aucune valeur globale ni propriété d’isolement ajoutée au dossier.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise conserve la provenance des données de 1.3 ; elle constitue le matériau du traitement inverse des catégories."
+            },
+            "comparison": "Comparer le dossier repris à 1.3, frontière par frontière et avec le même statut supposé.",
+            "evaluation": {
+              "object": "Les attributs individuels relus en 1.4 et le dossier produit en 1.3.",
+              "conditions": "Copies de même composition, données d’énoncé ; les parois n’ont fait l’objet d’aucune caractérisation.",
+              "criterion": "Pour i = A, B : nᵢ = 1 mol, Tᵢ = 300 K, Pᵢ = 100 kPa ; Vᵢ = V₀ inconnu.",
+              "finding": "Les données sont conservées ; aucun renseignement sur les échanges permis n’est obtenu par cette relecture."
+            }
           },
           {
             "id": 5,
-            "title": "Décider du bilan réduit",
-            "action": "Conserver ΔU = Q + W pour l’exemple, uniquement lorsque les variations macroscopiques restent négligeables et tous les travaux sont inclus.",
-            "output": "Réduction conservée avec ses conditions nécessaires explicites.",
-            "comparison": "Confronter cette réduction au cadre général de 2, plutôt que l’appliquer automatiquement à toute enceinte fermée."
+            "title": "Inverser le classement",
+            "input": "Les valeurs communes ne renseignent pas les parois ; on examine conditionnellement une enceinte déclarée fermée et adiabatique.",
+            "action": "Résoudre les contraintes de 1.2 : matière et chaleur interdites laissent encore le travail possible, notamment avec un piston mobile.",
+            "output": "Le cas fermé et adiabatique peut autoriser du travail ; l’isolement exige aussi d’exclure ce dernier canal.",
+            "relation": {
+              "nature": "logique",
+              "description": "Un contre-modèle de paroi transforme les définitions en test d’implication ; aucun travail effectif ni déplacement du piston n’est supposé."
+            },
+            "comparison": "Confronter l’inversion aux implications de 1.2 : fermé et adiabatique ne suffisent pas pour conclure isolé.",
+            "evaluation": {
+              "object": "Les implications de 1.2 et les propriétés compatibles obtenues par leur inversion en 1.5.",
+              "conditions": "Contrecas de pensée dans le cadre matière, chaleur, travail ; les parois réelles de l’exemple restent inconnues.",
+              "criterion": "Si matière = interdite et chaleur = interdite, travail = permis reste compatible ; l’ensemble des canaux n’est donc pas nécessairement vide.",
+              "finding": "L’implication vers l’isolement est réfutée logiquement ; cela ne prouve pas qu’un travail a été échangé."
+            }
           },
           {
             "id": 6,
-            "title": "Formuler les vérifications requises",
-            "action": "Énoncer ce qu’il faudrait documenter sur le mouvement et les interfaces avant d’appliquer le bilan à un dispositif réel.",
-            "output": "Liste ciblée de données matérielles encore nécessaires.",
-            "comparison": "Comparer cette liste aux variantes de 3 et aux exclusions de 1, sans inventer un dispositif observé."
+            "title": "Restituer les limites connues",
+            "input": "Dossier A/B et résultat logique distinguant valeurs d’état, échanges permis et échanges effectivement réalisés.",
+            "action": "Restituer les deux jeux initiaux et conserver les parois comme inconnues, sans confondre absence d’information et interdiction d’échange.",
+            "output": "Retour à 1.1 avec A, B, 1 mol, 300 K, 100 kPa et composition inchangés ; caractéristiques des parois toujours ouvertes.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le traitement du retour préserve les attributs d’entrée et borne ce que le dossier peut qualifier physiquement."
+            },
+            "comparison": "Comparer à 1.1 les domaines et attributs initiaux ; les catégories de parois restent conditionnelles.",
+            "evaluation": {
+              "object": "Le dossier final de 1.6 et les frontières, valeurs et inconnues posées en 1.1.",
+              "conditions": "Même état supposé ; les contrecas sur les parois ne remplacent aucune donnée initiale.",
+              "criterion": "Retrouver A et B avec n₀ = 1 mol, T₀ = 300 K, P₀ = 100 kPa ; ne fixer ni V₀ ni paroi.",
+              "finding": "Les attributs initiaux sont restitués. Fermeture, adiabaticité et isolement restent à documenter séparément."
+            }
           }
-        ],
-        "id": 5
+        ]
       },
       {
-        "title": "Appliquer au cas sans échanges",
-        "system": "L’expérience de pensée d’une détente libre adiabatique confrontée au premier exemple.",
-        "input": "Le cadre du niveau 5 et les conditions de détente dans le vide du checkpoint.",
-        "output": "Un bilan nul cohérent, distinct de l’exemple à échanges non nuls.",
-        "section": "controle",
-        "comparison": "Comparer la méthode de bilan au niveau 3, puis identifier précisément quelles entrées du niveau 1 ont changé.",
+        "id": 2,
+        "title": "Formaliser le changement de taille",
+        "system": "Le modèle de duplication de deux copies homogènes indépendantes, à état intensif et composition fixés.",
+        "input": "Dossier de 1.3 : A et B identiques, n₀, T₀, P₀ connus ; V₀, U₀ et masse m₀ non chiffrés.",
+        "output": "XΣ = 2X₀ pour les totaux extensifs ; PΣ = P₀ et TΣ = T₀ comme valeurs communes, sous les conditions annoncées.",
+        "section": "variables",
+        "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Les attributs des copies reçoivent une loi de changement d’échelle ; cette loi ne décrit pas une évolution du gaz."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Poser la détente libre",
-            "action": "Choisir une enceinte totale rigide et adiabatique avec une partie initialement vide, entre deux états sans mouvement macroscopique résiduel.",
-            "output": "Conditions nouvelles de l’expérience de pensée clairement posées."
+            "title": "Poser les deux copies",
+            "input": "Le dossier transmis par 1.3 et la composition commune des deux échantillons.",
+            "action": "Noter X₀ ∈ {n₀, V₀, N₀, m₀, U₀} pour une copie et distinguer P₀, T₀ des grandeurs à sommer.",
+            "output": "Variables de duplication : totaux candidats XΣ et valeurs intensives communes PΣ, TΣ ; aucune équation d’état choisie.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La notation rend la taille explicite tout en conservant l’état supposé et les paramètres non chiffrés."
+            }
           },
           {
             "id": 2,
-            "title": "Identifier les transferts absents",
-            "action": "Associer la paroi adiabatique à Q nul et l’absence de pression résistante au travail de détente nul.",
-            "output": "Absence de chaleur et de travail justifiée."
+            "title": "Construire la loi d’échelle",
+            "input": "Deux copies identiques et disjointes ; surfaces, interfaces et interactions à longue portée négligeables dans le modèle usuel.",
+            "action": "Additionner n, N, m, les volumes gazeux et U dans une référence commune ; identifier P et T à leurs valeurs locales égales.",
+            "output": "XΣ = X_A + X_B = 2X₀ ; PΣ = P_A = P_B = P₀ et TΣ = T_A = T_B = T₀.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’addition des quantités et l’égalité des intensives produisent deux opérations distinctes ; l’additivité énergétique est une approximation explicitée."
+            }
           },
           {
             "id": 3,
-            "title": "Appliquer la conservation",
-            "action": "Calculer ΔU nul entre les états retenus et ne pas en déduire une température finale sans modèle du gaz.",
-            "output": "Énergie interne conservée sans résultat thermique supplémentaire."
+            "title": "Établir la règle applicable",
+            "input": "La loi de duplication et ses conditions d’indépendance, d’homogénéité et de composition identique.",
+            "action": "Rassembler les règles X₀↦2X₀ et (P₀,T₀)↦(P₀,T₀), en maintenant les grandeurs non fournies sous forme symbolique.",
+            "output": "Règle transmise à 3.1 : doubler les totaux, conserver P et T ; aucune relation permettant de chiffrer V₀ ou U₀.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le modèle devient une donnée utilisable pour l’exemple, avec son domaine d’application et ses inconnues."
+            }
           },
           {
             "id": 4,
-            "title": "Comparer les bilans",
-            "action": "Mettre ce solde nul en regard des trois cents joules initiaux en reliant la différence aux transferts maintenant absents.",
-            "output": "Différence des résultats expliquée par les nouvelles entrées.",
-            "comparison": "Comparer le calcul de 3 aux conditions de 1, et non aux transferts différents du premier exemple."
+            "title": "Reprendre les deux opérations",
+            "input": "La règle de 2.3, désormais considérée comme résultat du modèle de duplication.",
+            "action": "Séparer dans cette règle les sommes de contributions et les égalités de valeurs locales ; conserver leurs conditions respectives.",
+            "output": "nΣ, VΣ, NΣ, mΣ et UΣ sont des totaux ; PΣ et TΣ désignent un état commun.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour reprend exactement la loi obtenue afin d’examiner ensuite ce que devient son inversion hors additivité énergétique."
+            },
+            "comparison": "Comparer à 2.3 chaque opération de duplication et son domaine d’application.",
+            "evaluation": {
+              "object": "Les règles relues en 2.4 et les relations produites en 2.3.",
+              "conditions": "Copies identiques ; énergie référencée de la même façon ; contributions d’interface et d’interaction négligées.",
+              "criterion": "Conserver XΣ − 2X₀ = 0 pour les extensives du modèle, ainsi que PΣ − P₀ = 0 et TΣ − T₀ = 0.",
+              "finding": "La relecture préserve les deux opérations ; elle n’ajoute aucune détermination numérique des grandeurs absentes."
+            }
           },
           {
             "id": 5,
-            "title": "Contrôler le mot adiabatique",
-            "action": "Vérifier qu’une compression adiabatique pourrait recevoir du travail, pour ne pas généraliser le bilan nul à tout système adiabatique.",
-            "output": "Distinction maintenue entre adiabatique et absence de travail.",
-            "comparison": "Confronter ce contrecas aux justifications de 2 : deux conditions distinctes rendaient ici Q et W nuls."
+            "title": "Introduire un défaut d’additivité",
+            "input": "UΣ = 2U₀ dans le modèle ; une contribution d’interaction ou d’interface δU est envisagée comme extension symbolique.",
+            "action": "Remplacer la loi énergétique par UΣ = 2U₀ + δU, puis résoudre U₀ = (UΣ − δU)/2.",
+            "output": "L’inversion U₀ = UΣ/2 exige δU négligeable ; UΣ seul ne détermine pas simultanément U₀ et δU.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le terme supplémentaire localise une limite de la duplication énergétique sans remettre arbitrairement en cause le comptage de matière."
+            },
+            "comparison": "Comparer la loi étendue à 2.2 : la restriction δU = 0 retrouve l’addition énergétique retenue.",
+            "evaluation": {
+              "object": "L’addition de U en 2.2 et son extension puis inversion en 2.5.",
+              "conditions": "Extension de pensée ; même référence énergétique ; δU non fourni et non présenté comme un écart observé.",
+              "criterion": "UΣ − 2U₀ = δU ; lorsque δU est négligeable à la précision retenue, U₀ = UΣ/2 dans le modèle.",
+              "finding": "La correction nécessaire est identifiée symboliquement ; sa valeur et même sa pertinence matérielle restent indéterminées."
+            }
           },
           {
             "id": 6,
-            "title": "Fermer la comparaison",
-            "action": "Présenter les deux registres côte à côte et expliciter que la même conservation s’applique à des situations énergétiques différentes.",
-            "output": "Comparaison terminée ; relation calorique éventuelle restant à choisir.",
-            "comparison": "Comparer la conclusion aux résultats de 3 et aux conditions de 1, en conservant les limites de chaque cas."
+            "title": "Restituer le domaine du modèle",
+            "input": "La loi extensive et son inversion énergétique conditionnelle, appliquées aux copies définies en 2.1.",
+            "action": "Retrouver X₀ = XΣ/2 dans le cadre retenu et conserver P₀ = PΣ, T₀ = TΣ, sans fixer les inconnues matérielles.",
+            "output": "Retour à 2.1 : même copie de référence ; l’égalité énergétique dépend toujours de l’approximation d’indépendance.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion restitue les attributs de la copie seulement avec les conditions qui ont permis de les dupliquer."
+            },
+            "comparison": "Comparer les attributs reconstruits à 2.1, avec la même composition et le même état intensif.",
+            "evaluation": {
+              "object": "La copie reconstruite en 2.6 et la liste d’attributs servant d’entrée en 2.1.",
+              "conditions": "Deux copies égales ; δU négligé ; volumes disjoints et contributions des parois exclues du domaine gazeux.",
+              "criterion": "XΣ/2 = X₀, PΣ = P₀ et TΣ = T₀ ; UΣ/2 = U₀ seulement dans l’approximation énergétique annoncée.",
+              "finding": "Le modèle retrouve sa copie d’entrée conditionnellement ; il ne chiffre ni V₀, ni m₀, ni U₀."
+            }
           }
-        ],
-        "id": 6
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Réunir les descriptions",
+        "system": "L’application de la loi extensive aux deux compartiments identiques de l’exemple.",
+        "input": "Règle de 2.3 ; chaque compartiment possède 1 mol, 300 K et 100 kPa, avec V₀, U₀ et m₀ non chiffrés.",
+        "output": "nΣ = 2 mol, VΣ = 2V₀, UΣ = 2U₀, mΣ = 2m₀ ; PΣ = 100 kPa et TΣ = 300 K.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les règles de duplication sont appliquées aux seules valeurs fournies ; le regroupement reste descriptif et sans mélange d’espèces différentes."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Rassembler les entrées de calcul",
+            "input": "La règle reçue de 2.3 et les valeurs supposées n_A = n_B = 1 mol, P_A = P_B = 100 kPa, T_A = T_B = 300 K.",
+            "action": "Fixer l’union des domaines gazeux comme périmètre global, en conservant les parois et les états initiaux dans l’expérience de pensée.",
+            "output": "Deux contributions identiques ; V_A = V_B = V₀ et U_A = U_B = U₀, sans valeurs numériques ajoutées.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le périmètre global rassemble les copies dont la loi d’addition suppose les propriétés ; aucune détente ni équilibration n’est prescrite."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Appliquer l’addition conditionnelle",
+            "input": "Deux fois 1 mol, les paramètres symboliques identiques et la loi de duplication du modèle.",
+            "action": "Calculer nΣ = 1 mol + 1 mol ; former VΣ = 2V₀ et UΣ = 2U₀, tout en conservant P₀ et T₀.",
+            "output": "La réunion porte la matière à 2 mol et les totaux symboliques au double ; pression et température restent communes.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les sommes modifient les quantités globales ; elles n’ajoutent pas les pressions ni les températures des copies."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir les résultats de réunion",
+            "input": "Les résultats de 3.2 et l’additivité analogue du comptage de particules et de la masse.",
+            "action": "Consigner nΣ = 2 mol, VΣ = 2V₀, UΣ = 2U₀, NΣ = 2N₀ et mΣ = 2m₀, avec PΣ et TΣ.",
+            "output": "Tableau calculé transmis à 4.1 : totaux doublés, PΣ = 100 kPa, TΣ = 300 K ; capacités thermiques non chiffrées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le tableau établit les conséquences de l’exemple en séparant résultats numériques, identités symboliques et propriétés encore non fournies."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les contributions",
+            "input": "Le tableau de 3.3, avec nΣ = 2 mol et les totaux symboliques de deux copies.",
+            "action": "Associer chaque total à ses deux contributions égales et chaque intensive à sa valeur commune, sans créer de nouvelles valeurs.",
+            "output": "Provenance conservée : nΣ vient de deux quantités de 1 mol ; PΣ et TΣ reprennent les données locales.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le tableau de sortie devient un dossier de retour dont chaque grandeur garde son type d’opération et son unité."
+            },
+            "comparison": "Comparer le dossier repris à 3.3, en distinguant valeurs numériques, relations symboliques et capacités non fournies.",
+            "evaluation": {
+              "object": "Les résultats repris en 3.4 et le tableau global produit en 3.3.",
+              "conditions": "Même expérience de pensée ; les résultats proviennent du modèle de duplication et non de mesures.",
+              "criterion": "nΣ = 2 mol ; VΣ = 2V₀ ; UΣ = 2U₀ ; PΣ = 100 kPa et TΣ = 300 K.",
+              "finding": "Les résultats et leur provenance concordent ; aucune valeur de volume, d’énergie ou de capacité ne peut être ajoutée."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver la copie de référence",
+            "input": "Le tableau global et l’information maintenue que ses contributions sont deux copies identiques.",
+            "action": "Inverser l’opération : n₀ = nΣ/2, V₀ = VΣ/2, U₀ = UΣ/2 ; reprendre directement P₀ = PΣ et T₀ = TΣ.",
+            "output": "Chaque copie retrouve 1 mol, 300 K et 100 kPa ; ses volume et énergie restent les paramètres symboliques d’entrée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La division s’applique aux totaux extensifs ; l’inversion des intensives consiste à conserver l’état commun, et non à le diviser."
+            },
+            "comparison": "Confronter les opérations inverses à 3.2 : diviser les totaux par deux et conserver P, T annule la duplication.",
+            "evaluation": {
+              "object": "Le traitement direct de 3.2 et le traitement inverse de 3.5.",
+              "conditions": "Nombre de copies et égalité de leurs états connus ; énergie additive dans le cadre retenu.",
+              "criterion": "(2n₀)/2 = n₀, (2V₀)/2 = V₀, (2U₀)/2 = U₀ ; P₀ et T₀ restent invariants.",
+              "finding": "L’inversion est cohérente avec le calcul direct ; elle utilise l’identité des copies au lieu de la déduire des totaux."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les données supposées",
+            "input": "Les attributs reconstruits par 3.5 et les conditions d’application de la réunion.",
+            "action": "Restituer séparément A et B à partir du résultat inverse, en conservant la composition commune et les parois non caractérisées.",
+            "output": "Retour à 3.1 : deux compartiments à 1 mol, 300 K, 100 kPa, avec les mêmes V₀ et U₀ inconnus.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les résultats du retour reproduisent les attributs initiaux sous les mêmes hypothèses, sans définir une transformation physique réversible."
+            },
+            "comparison": "Comparer à 3.1 les quantités individuelles, l’état commun et les inconnues conservées.",
+            "evaluation": {
+              "object": "Les descriptions individuelles de 3.6 et les données de calcul initiales de 3.1.",
+              "conditions": "Subdivision descriptive en deux copies identiques ; pas de création matérielle d’interfaces ni d’équilibration.",
+              "criterion": "Pour chaque copie : n = 1 mol, P = 100 kPa, T = 300 K, V = V₀ et U = U₀ ; composition inchangée.",
+              "finding": "Les données supposées sont retrouvées ; les propriétés des parois et les valeurs non fournies restent ouvertes."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Relire les grandeurs rapportées",
+        "system": "Les résultats globaux repris sous formes totale, molaire et massique, avec leurs unités et contraintes.",
+        "input": "Tableau transmis par 3.3 : nΣ = 2 mol, VΣ = 2V₀, UΣ = 2U₀ et mΣ = 2m₀ ; capacités non chiffrées.",
+        "output": "Quotients molaires et massiques invariants pour les copies ; totaux reconstruisibles lorsque quantité ou masse et contrainte sont précisées.",
+        "section": "capacites",
+        "comparison": "Comparer aux résultats globaux de 3 les grandeurs reprises et leurs reconstructions après normalisation, sans chiffrer les capacités absentes.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les conséquences calculées au niveau 3 deviennent des attributs de retour ; leur normalisation distingue les quantités globales de leurs valeurs rapportées."
+        },
+        "evaluation": {
+          "object": "Les totaux du niveau 3 et leurs représentations puis reconstructions au niveau 4.",
+          "conditions": "Même matière, même état et mêmes quantités ; capacités ajoutées seulement comme paramètres symboliques sous contraintes identiques.",
+          "criterion": "nΣ(UΣ/nΣ) = 2U₀ et nΣ(VΣ/nΣ) = 2V₀ ; nΣ = 2 mol, PΣ et TΣ restent inchangés.",
+          "finding": "La normalisation conserve le tableau calculé. Les capacités totales, molaires et massiques sont distinguées sans valeur numérique déduite."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les totaux et unités",
+            "input": "Les résultats de 3.3 et les définitions de capacités totales Cᵥ et Cₚ, sans valeurs fournies.",
+            "action": "Associer Cᵥ au volume fixé et Cₚ à la pression fixée, à quantité et composition constantes ; distinguer U et V.",
+            "output": "Dossier de retour : nΣ = 2 mol ; UΣ, VΣ, mΣ symboliques ; Cᵥ et Cₚ en J·K⁻¹, sous contraintes distinctes.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les capacités complètent la liste des attributs à décrire ; leur introduction ne fournit aucune loi calorique ni valeur matérielle."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Dériver les grandeurs rapportées",
+            "input": "Deux copies indépendantes, même état et composition ; capacité Cσ, avec σ = V ou P et même contrainte pour chaque copie.",
+            "action": "Sommer leurs réponses thermiques sous contrainte identique, puis diviser les totaux X ∈ {U,V,Cσ} par n ou m.",
+            "output": "CσΣ = 2Cσ₀ ; XΣ/nΣ = X₀/n₀ et XΣ/mΣ = X₀/m₀ pour ces grandeurs extensives dans le cadre retenu.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les facteurs deux se simplifient dans les quotients ; l’intensivité des grandeurs rapportées résulte de l’extensivité conditionnelle de leurs numérateurs."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir la correspondance des formes",
+            "input": "Les quotients calculés par 4.2, n₀ = 1 mol et m₀ inconnu.",
+            "action": "Distinguer Cσ total, Cσ,mol = Cσ/n et cσ = Cσ/m, en conservant les unités J·K⁻¹, J·mol⁻¹·K⁻¹ et J·kg⁻¹·K⁻¹.",
+            "output": "Dossier transmis à 5.1 : quotients invariants, CσΣ = 2Cσ₀, contraintes précisées ; énergie, masse, volume et capacités non chiffrés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les expressions obtenues précisent ce que la duplication conserve, sans confondre une unité molaire avec une unité totale."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les rapports obtenus",
+            "input": "La correspondance de 4.3 et les expressions XΣ/nΣ = X₀/n₀ et XΣ/mΣ = X₀/m₀.",
+            "action": "Conserver les dénominateurs et unités de chaque rapport ; relever que 1 mol ne rend pas capacité totale et capacité molaire identiques.",
+            "output": "Les valeurs rapportées sont inchangées par duplication ; les capacités totales doublent et gardent leur unité propre.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour reçoit les quotients comme résultats, avec les dimensions nécessaires à leur reconstruction ultérieure."
+            },
+            "comparison": "Comparer les rapports et unités repris à 4.3, sans effacer le facteur de quantité ou de masse.",
+            "evaluation": {
+              "object": "Les grandeurs rapportées relues en 4.4 et la correspondance établie en 4.3.",
+              "conditions": "Quotients symboliques ; mêmes contraintes et même matière, avec quantités et masses positives.",
+              "criterion": "CσΣ/nΣ = Cσ₀/n₀ en J·mol⁻¹·K⁻¹ ; CσΣ/mΣ = Cσ₀/m₀ en J·kg⁻¹·K⁻¹.",
+              "finding": "L’invariance des quotients est conservée ; même une égalité de valeurs numériques ne confondrait pas les grandeurs ni leurs unités."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Inverser les normalisations",
+            "input": "Les valeurs molaires et massiques symboliques, nΣ = 2 mol et la masse molaire commune M = mΣ/nΣ non chiffrée.",
+            "action": "Résoudre CσΣ = nΣCσ,mol = mΣcσ puis Cσ,mol = Mcσ ; appliquer la même reconstruction à U et V.",
+            "output": "Les totaux nécessitent leur quantité ou masse ; convertir une capacité massique en molaire nécessite M, absent numériquement.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion relie les trois descriptions par leurs facteurs dimensionnés ; elle montre quelles informations une valeur rapportée laisse indéterminées."
+            },
+            "comparison": "Confronter aux divisions de 4.2 les multiplications inverses et la conversion molaire–massique.",
+            "evaluation": {
+              "object": "Les normalisations de 4.2 et leurs inverses dimensionnés de 4.5.",
+              "conditions": "Même capacité Cσ sous la même contrainte ; n et m positifs ; composition commune fixant M symboliquement.",
+              "criterion": "n(Cσ/n) = Cσ, m(Cσ/m) = Cσ et (m/n)(Cσ/m) = Cσ/n ; kg·mol⁻¹ × J·kg⁻¹·K⁻¹ = J·mol⁻¹·K⁻¹.",
+              "finding": "Les opérations s’inversent symboliquement. Sans Cσ et sans M numériques, aucune capacité ni conversion chiffrée n’est disponible."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le tableau reçu",
+            "input": "Les reconstructions de 4.5 et les facteurs nΣ = 2 mol, mΣ = 2m₀ du dossier initial.",
+            "action": "Reconstituer UΣ et VΣ à partir des quotients, puis restituer les capacités totales sous leurs contraintes et leur statut inconnu.",
+            "output": "Retour à 4.1 : UΣ = 2U₀, VΣ = 2V₀, mΣ = 2m₀ ; Cᵥ et Cₚ restent distinctes et non chiffrées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La reconstruction retrouve les attributs du dossier reçu, tandis que les relations symboliques clarifient les capacités sans inventer leur valeur."
+            },
+            "comparison": "Comparer à 4.1 les totaux, leurs unités, leurs contraintes et leur statut non chiffré.",
+            "evaluation": {
+              "object": "Les totaux reconstruits en 4.6 et les grandeurs reçues en 4.1.",
+              "conditions": "Même tableau global et mêmes paramètres ; l’additivité des réponses thermiques est limitée aux copies indépendantes et aux contraintes identiques.",
+              "criterion": "nΣU_mol = UΣ = 2U₀ ; nΣV_mol = VΣ = 2V₀ ; restituer Cᵥ, Cₚ en J·K⁻¹ sans valeur ajoutée.",
+              "finding": "Les attributs d’entrée sont conservés ; la capacité totale demeure extensive dans ce cadre, ses formes molaire et massique intensives."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Confronter les hypothèses de réunion",
+        "system": "Un modèle de réunion élargi séparant propriétés des parois, égalité des copies et additivité énergétique.",
+        "input": "Quotients de 4.3, tableau global calculé et réserves sur les parois, l’identité des copies et les contributions négligées.",
+        "output": "Le modèle élargi retrouve la duplication sous restrictions explicites ; ses contrecas ne permettent aucun calcul d’équilibration ou d’échange réel.",
+        "section": "conditions",
+        "comparison": "Confronter le modèle étendu au traitement du niveau 2 en imposant l’identité des copies et des contributions d’interaction négligeables.",
+        "relation": {
+          "nature": "logique",
+          "description": "Les résultats rapportés sont replacés dans un modèle plus général afin de distinguer les conditions nécessaires à leur interprétation."
+        },
+        "evaluation": {
+          "object": "Le traitement conditionnel de duplication du niveau 2 et sa restriction depuis le modèle élargi du niveau 5.",
+          "conditions": "Les contrecas sont symboliques et indépendants ; aucune interaction ni différence de température n’est attribuée à l’exemple initial.",
+          "criterion": "Pour X_A = X_B = X₀, T_A = T_B, P_A = P_B et δU = 0 : XΣ = 2X₀, PΣ = P₀, TΣ = T₀.",
+          "finding": "Les traitements concordent dans le domaine commun ; les propriétés des parois et les écarts éventuels ne sont pas identifiés par cette concordance."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recueillir les résultats et réserves",
+            "input": "Dossier de 4.3 : quotients invariants, capacités sous contraintes définies et grandeurs non chiffrées.",
+            "action": "Reprendre les égalités obtenues en distinguant identité des copies, indépendance énergétique et propriétés des parois encore inconnues.",
+            "output": "Attributs reçus : invariance conditionnelle des quotients ; ni loi calorique, ni parois, ni interaction résiduelle caractérisées.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les résultats de normalisation sont des données du retour, et leurs conditions deviennent les objets du traitement théorique suivant."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Construire la réunion élargie",
+            "input": "Deux descriptions A/B potentiellement différentes et une contribution énergétique supplémentaire δU, toutes envisagées symboliquement.",
+            "action": "Former nΣ = n_A+n_B, VΣ = V_A+V_B, UΣ = U_A+U_B+δU ; conserver séparément (T_A,T_B) et (P_A,P_B).",
+            "output": "La matière et les volumes disjoints s’additionnent ; énergie, température globale et échanges nécessitent des conditions supplémentaires explicites.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les équations élargissent la réunion sans imposer une température moyenne ni assimiler un choix de frontière à un processus thermodynamique."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir trois contrecas délimités",
+            "input": "Le modèle élargi et les catégories de parois : fermé, adiabatique, isolé.",
+            "action": "Décliner séparément un piston mobile fermé, T_A ≠ T_B et δU non négligeable, en relevant la règle affectée dans chaque cas.",
+            "output": "Transmis à 6.1 : travail possible sans matière ; aucune T commune immédiate si T_A ≠ T_B ; défaut énergétique δU.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les conséquences hypothétiques isolent trois conditions distinctes ; elles ne forment ni une succession d’essais ni des anomalies mesurées."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les conséquences des variantes",
+            "input": "Les trois conséquences de 5.3, avec le tableau calculé des copies identiques maintenu séparément.",
+            "action": "Relever pour chaque contrecas la propriété modifiée et les conséquences non déterminées, notamment le travail effectif ou une température finale.",
+            "output": "Trois dossiers conditionnels : mobilité n’établit pas un travail ; hétérogénéité ne donne pas T finale ; δU demeure inconnu.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour reprend les attributs des variantes sans importer leurs changements dans le scénario de référence."
+            },
+            "comparison": "Comparer à 5.3 chaque contrecas et sa portée, sans inventer de transformation ou de valeur.",
+            "evaluation": {
+              "object": "Les dossiers relus en 5.4 et les conséquences des trois contrecas établies en 5.3.",
+              "conditions": "Variantes de pensée indépendantes ; même définition des canaux d’échange et même référence pour les énergies.",
+              "criterion": "Piston mobile fermé ⇏ isolement ; T_A ≠ T_B exclut une valeur locale commune ; UΣ−U_A−U_B = δU.",
+              "finding": "Les conséquences sont conservées ; ni bilan d’équilibration, ni valeur d’interaction, ni échange réalisé ne sont établis."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Réduire le modèle étendu",
+            "input": "Les équations de 5.2 et les différences symboliques entre copies reprises en 5.4.",
+            "action": "Imposer X_A−X_B = 0, T_A−T_B = 0, P_A−P_B = 0 et δU = 0, puis réduire les équations de réunion.",
+            "output": "La restriction retrouve XΣ = 2X₀ et PΣ = P₀, TΣ = T₀ ; elle n’impose aucune propriété supplémentaire aux parois.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La réduction algébrique reconstruit le modèle de duplication ; les conditions d’égalité sont des hypothèses conservées et non des mesures déduites."
+            },
+            "comparison": "Confronter la réduction à 5.2 : les sommes générales deviennent des doubles et les couples intensifs deviennent des valeurs communes.",
+            "evaluation": {
+              "object": "Le traitement élargi de 5.2 et sa réduction conditionnelle en 5.5.",
+              "conditions": "X désigne les totaux extensifs du modèle ; copies réellement identiques supposées, composition commune et contributions énergétiques supplémentaires négligées.",
+              "criterion": "U_A+U_B+δU = 2U₀ et n_A+n_B = 2n₀ lorsque les différences imposées sont nulles ; (T_A,T_B) = (T₀,T₀).",
+              "finding": "Le modèle initial est retrouvé. Les seuls totaux et quotients calculés ne prouvent pas que toutes ces différences sont nulles."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les conditions du dossier",
+            "input": "La réduction de 5.5 et les quotients conditionnels reçus de 5.1.",
+            "action": "Reporter les conditions restituées sur les quotients, puis maintenir séparément les inconnues matérielles et les contrecas non réalisés.",
+            "output": "Retour à 5.1 : quotients invariants pour les copies indépendantes ; parois, capacités thermiques et contributions résiduelles restent non documentées.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les résultats du retour retrouvent le statut conditionnel des attributs initiaux et situent précisément leurs limites d’utilisation."
+            },
+            "comparison": "Comparer à 5.1 les invariants reçus et les informations manquantes, sans convertir les restrictions du modèle en observations.",
+            "evaluation": {
+              "object": "Le cadre restitué en 5.6 et les invariants et réserves reçus en 5.1.",
+              "conditions": "Scénario de référence inchangé ; capacités comparées sous contraintes identiques, sans valeur ni relation calorique ajoutée.",
+              "criterion": "Dans le cadre restitué, XΣ/nΣ = X₀/n₀ ; les données disponibles ne déterminent ni paroi, ni δU réel, ni capacité numérique.",
+              "finding": "Les invariants et les inconnues d’entrée sont retrouvés ; le traitement étendu explique les limites sans résoudre les cas matériels non spécifiés."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Subdiviser puis recomposer",
+        "system": "La reconstruction descriptive des deux compartiments identiques depuis les totaux calculés et les limites du modèle.",
+        "input": "Conséquences de 5.3, tableau global de 3.3 et restriction aux copies identiques : nΣ = 2 mol, PΣ = 100 kPa, TΣ = 300 K.",
+        "output": "Deux copies reconstruites à 1 mol, 300 K, 100 kPa ; volumes et énergies symboliques, caractéristiques des parois toujours inconnues.",
+        "section": "controle",
+        "comparison": "Comparer aux attributs initiaux du niveau 1 les copies reconstruites, en conservant leur identité supposée et les informations matérielles absentes.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le modèle confronté produit des descriptions individuelles ; l’inversion dépend du nombre de copies et de leur égalité, déjà supposés à l’entrée."
+        },
+        "evaluation": {
+          "object": "Les copies reconstruites au niveau 6 et les systèmes individuels définis au niveau 1.",
+          "conditions": "Deux copies égales du même gaz ; modèle macroscopique additif, mêmes états supposés et aucune subdivision matérielle réalisée.",
+          "criterion": "Pour A et B, retrouver n = 1 mol, P = 100 kPa, T = 300 K, V = V₀, U = U₀ ; propriétés des parois indéterminées.",
+          "finding": "Les attributs initiaux sont restitués conditionnellement. Cette inversion ne prouve ni l’isolement des enceintes ni la validité expérimentale du modèle."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Poser l’inversion conditionnelle",
+            "input": "Les contrecas transmis par 5.3 et le tableau global des copies identiques, sans attribuer les variantes à l’exemple.",
+            "action": "Retenir nΣ = 2 mol, VΣ = 2V₀, UΣ = 2U₀, PΣ = 100 kPa, TΣ = 300 K et l’hypothèse de deux copies égales.",
+            "output": "Problème inverse avec égalité des copies imposée, totaux symboliques et parois non caractérisées.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le dossier sépare le scénario conservé des extensions non résolues ; l’inversion ne reçoit aucun nouveau renseignement matériel."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Résoudre la subdivision égale",
+            "input": "Les totaux et l’état commun, avec deux copies identiques, interfaces négligées et même référence énergétique.",
+            "action": "Résoudre X_A + X_B = XΣ avec X_A = X_B, d’où X_A = X_B = XΣ/2 ; conserver PΣ et TΣ.",
+            "output": "n_A = n_B = 1 mol, V_A = V_B = V₀, U_A = U_B = U₀ ; P et T restent communes.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’égalité des contributions ferme le problème inverse ; elle est indispensable à la division par deux des grandeurs extensives."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir les copies reconstruites",
+            "input": "La solution de 6.2 et les inconnues de composition détaillée, de masse, de volume et de parois conservées.",
+            "action": "Associer aux domaines A et B leurs valeurs individuelles reconstruites et indiquer que celles-ci proviennent de l’inversion du calcul.",
+            "output": "Transmis à 1.1 : A et B à 1 mol, 300 K, 100 kPa ; même composition supposée, V₀ et U₀ non chiffrés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les conséquences du retour reconstituent le dossier initial pour un nouveau parcours, sans créer ni mesure ni protocole de séparation."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les copies obtenues",
+            "input": "Les deux descriptions calculées de 6.3 et l’hypothèse d’égalité qui a permis leur reconstruction.",
+            "action": "Relever les attributs individuels reconstruits et distinguer explicitement cette subdivision descriptive d’une séparation physique des gaz.",
+            "output": "Deux descriptions égales issues d’un calcul ; aucune trajectoire, chaleur, travail ou propriété nouvelle de paroi déterminée.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour local reprend les résultats individuels avec leur provenance, avant de traiter l’unicité de leur reconstruction."
+            },
+            "comparison": "Comparer les descriptions reprises à 6.3, avec les mêmes valeurs et le même statut calculé.",
+            "evaluation": {
+              "object": "Les copies relues en 6.4 et les résultats individuels établis en 6.3.",
+              "conditions": "Même subdivision descriptive ; aucun protocole thermodynamique ni changement matériel de frontière.",
+              "criterion": "Chaque copie conserve 1 mol, 300 K, 100 kPa, V₀ et U₀ symboliques ; aucune quantité échangée n’est ajoutée.",
+              "finding": "Le dossier calculé est conservé ; l’inversion algébrique ne démontre pas la réversibilité d’une transformation physique."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Résoudre la non-unicité sans égalité",
+            "input": "Les copies relues en 6.4 ; on retire seulement l’égalité des tailles tout en conservant leur état intensif commun.",
+            "action": "Former X_A = θXΣ et X_B = (1−θ)XΣ ; leur somme est XΣ pour chaque θ admissible, puis imposer X_A = X_B.",
+            "output": "Les totaux seuls admettent une famille de répartitions ; l’égalité des quantités impose θ = 1/2 et retrouve la solution de 6.2.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La famille explicite l’indétermination d’une somme ; l’hypothèse supplémentaire de copies égales sélectionne la reconstruction utilisée."
+            },
+            "comparison": "Confronter cette famille à la résolution de 6.2 : la contrainte d’égalité fixe le paramètre libre de répartition.",
+            "evaluation": {
+              "object": "La solution égale de 6.2 et la famille de solutions obtenue sans cette contrainte en 6.5.",
+              "conditions": "Même composition et même état intensif ; modèle extensif ; 0 < θ < 1, choisi pour conserver deux échantillons macroscopiques, sans transformation matérielle.",
+              "criterion": "θXΣ+(1−θ)XΣ = XΣ ; n_A = n_B avec nΣ > 0 donne θ = 1/2, donc n_A = n_B = 1 mol.",
+              "finding": "La reconstruction initiale est retrouvée ; l’égalité des copies n’est pas identifiable à partir des seuls totaux et de PΣ, TΣ."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Recomposer le dossier de départ",
+            "input": "La famille de 6.5 restreinte à θ = 1/2 et les deux descriptions individuelles calculées.",
+            "action": "Additionner les extensives des copies retenues et reprendre leur état commun pour restituer le tableau global avec ses conditions d’inversion.",
+            "output": "Retour à 6.1 : 2 mol, 2V₀, 2U₀, 100 kPa, 300 K ; deux copies identiques requises, parois inconnues.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La recomposition retrouve les attributs globaux reçus ; les conditions qui sélectionnent leurs contributions sont restituées avec eux."
+            },
+            "comparison": "Comparer à 6.1 le tableau global, les inconnues et l’hypothèse d’égalité indispensable à l’inversion.",
+            "evaluation": {
+              "object": "Le dossier global recomposé en 6.6 et les attributs du problème inverse reçus en 6.1.",
+              "conditions": "Deux copies égales sélectionnées, même modèle additif et même statut de calcul pour les résultats globaux.",
+              "criterion": "n_A+n_B = 2 mol, V_A+V_B = 2V₀, U_A+U_B = 2U₀ ; P = 100 kPa et T = 300 K restent communes.",
+              "finding": "Les données globales et la contrainte d’égalité sont retrouvées ; les échanges et les propriétés des parois restent à documenter."
+            }
+          }
+        ]
       }
-    ],
-    "version": "0.1",
-    "updated": "2026-09-09"
+    ]
+  },
+  "gaz-parfait": {
+    "question": "Comment distinguer une prévision du gaz parfait, sa vérification interne et une confrontation à un gaz réel ?",
+    "basis": "Valeurs supposées : 1 mol à 300 K dans 10 L ; variante à 20 L au même n et T. Pressions calculées, aucune mesure fournie.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les conversions, les contrôles inverses et l’interprétation conditionnelle de Z sont explicités, avec leurs paramètres connus et leurs limites.",
+    "subject": {
+      "type": "physique",
+      "description": "Un gaz dilué à l’équilibre, décrit par sa quantité, sa température, son volume et la pression prévue dans le modèle parfait.",
+      "scope": "Deux états supposés, classiques et non relativistes ; aucun chemin imposé, aucune énergie calorique, chaleur ou travail déterminé par la seule équation d’état."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Préparer l’état du gaz",
+        "system": "Le dossier d’état et les conversions entre volume, quantité de matière et nombre de particules.",
+        "input": "n = 1 mol, T = 300 K et V1 = 10 L supposés ; la variante reçue de 6.3 reste distincte.",
+        "output": "Volume en mètres cubes, quantité en moles et nombre de particules compatibles ; pression absolue encore inconnue.",
+        "section": "unites",
+        "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Les attributs supposés définissent l’entrée du calcul ; leur conversion ne crée pas de données instrumentales."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les attributs supposés",
+            "input": "Exemple initial : n = 1 mol, T = 300 K, V1 = 10 L ; reprise locale de 1.6 ou variante de 6.3.",
+            "action": "Séparer l’état initial de la variante V2 = 20 L au même n,T ; conserver équilibre, dilution et composition fixée comme hypothèses.",
+            "output": "Deux dossiers possibles, identifiés séparément ; aucune pression mesurée ni incertitude instrumentale renseignée.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour peut préciser les mêmes attributs ; deux volumes comparés ne décrivent pas nécessairement une expansion effectivement réalisée."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Convertir volume et quantité",
+            "input": "Dossier de 1.1 ; 1 L = 10⁻³ m³ et NA = 6,02214076 × 10²³ mol⁻¹, constante exacte.",
+            "action": "Appliquer V[m³] = 10⁻³ V[L] et N = nNA ; distinguer N, nombre de particules sans unité, de n en moles.",
+            "output": "V1 = 0,010 m³, V2 = 0,020 m³ ; N = 6,02214076 × 10²³ dans chaque cas.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La conversion de volume et le changement d’échelle de quantité conservent les attributs physiques supposés."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir les entrées SI",
+            "input": "Conversions de 1.2 ; T = 300 K, sans conversion Celsius nécessaire, et pression à exprimer en pascals absolus.",
+            "action": "Consigner n,N,T,V et joindre kB = 1,380649 × 10⁻²³ J·K⁻¹ exact ; réserver la pression au modèle suivant.",
+            "output": "À 2.1 : n = 1 mol, T = 300 K, V1 = 0,010 m³ ; variante V2 séparée et constantes exactes.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les résultats de conversion constituent les entrées du modèle ; l’exactitude des constantes ne donne aucune précision instrumentale aux valeurs supposées."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les unités des états",
+            "input": "Dossier SI de 1.3, avec deux volumes distincts, n en moles et N comme nombre de particules.",
+            "action": "Reprendre les unités et leur statut ; associer chaque volume converti à son dossier sans transformer N en quantité de matière.",
+            "output": "Volumes et notations relus ; pression absolue et température kelvin conservées.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture porte sur les attributs convertis et leur signification, avant toute application de l’équation d’état."
+            },
+            "comparison": "1.4 ↔ 1.3 : conserver les volumes, quantités et unités des deux dossiers.",
+            "evaluation": {
+              "object": "1.4 ↔ 1.3 : volumes convertis et distinction n/N.",
+              "conditions": "Même exemple supposé ; conversions exactes, sans acquisition supplémentaire.",
+              "criterion": "Retrouver 0,010 m³ pour 10 L et 0,020 m³ pour 20 L ; n s’exprime en mol, N sans unité.",
+              "finding": "Les correspondances d’unités sont conservées ; aucune pression n’a encore été déduite."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Inverser et relier les constantes",
+            "input": "Attributs relus en 1.4 ; N = nNA et constantes SI NA,kB exactes.",
+            "action": "Calculer n = N/NA, puis R = NAkB = 8,31446261815324 J·mol⁻¹·K⁻¹ ; obtenir nR = NkB.",
+            "output": "n = 1 mol restitué ; les descriptions molaire et particulaire ont le même facteur thermique.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le produit des constantes et l’inversion du comptage relient les deux descriptions sans supposer encore PV = nRT."
+            },
+            "comparison": "1.5 ↔ 1.2 : l’inverse du comptage restitue la quantité ; R = NAkB raccorde les deux échelles.",
+            "evaluation": {
+              "object": "1.5 ↔ 1.2 : comptage direct et reconstruction de n.",
+              "conditions": "Même NA exact et mêmes entités comptées ; R désigne la constante molaire.",
+              "criterion": "Vérifier N/NA = 1 mol et nR = NkB, tous deux exprimés en J·K⁻¹.",
+              "finding": "La quantité supposée est retrouvée ; R accompagne n, tandis que kB accompagne N."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les unités initiales",
+            "input": "Quantité reconstruite en 1.5 et volumes SI conservés en 1.4 ; T reste donné en kelvins.",
+            "action": "Reconvertir V[L] = 10³ V[m³] ; restituer chaque dossier avec n = 1 mol et T = 300 K.",
+            "output": "À reprendre en 1.1 : état de 10 L et variante de 20 L séparés, avec hypothèses physiques inchangées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour retrouve les valeurs de départ par conversions réversibles ; équilibre et dilution restent des hypothèses du scénario."
+            },
+            "comparison": "1.6 ↔ 1.1 : retrouver quantité, température et volume de chaque dossier initial.",
+            "evaluation": {
+              "object": "1.6 ↔ 1.1 : attributs physiques et statut des valeurs restituées.",
+              "conditions": "Même composition supposée, même quantité et même température ; aucune mesure ajoutée.",
+              "criterion": "Retrouver n = 1 mol, T = 300 K et V1 = 10 L ; la variante demeure V2 = 20 L.",
+              "finding": "Les entrées initiales sont restituées, avec leur provenance supposée et leurs conditions matérielles."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Construire l’équation d’état",
+        "system": "Le traitement des attributs d’équilibre par PV = nRT, et sa dépendance au volume à quantité et température fixées.",
+        "input": "1.3 transmet n,T,V en SI ; interactions et volume propre moléculaire sont négligeables dans l’équation d’état.",
+        "output": "P = nRT/V et PV constant à n,T fixés ; aucun chemin ni bilan énergétique n’est fourni.",
+        "section": "modele",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le modèle relie les attributs d’équilibre et détermine la pression inconnue ; il ne décrit pas leur préparation matérielle."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les variables d’équilibre",
+            "input": "Dossier de 1.3 ou reprise de 2.6 : n > 0, T > 0 K, V > 0 et constantes SI.",
+            "action": "Retenir un gaz dilué classique, non relativiste et loin de la condensation ; désigner P absolue comme inconnue.",
+            "output": "n,T,V connus dans chaque état supposé ; pression à calculer sous les hypothèses annoncées.",
+            "relation": {
+              "nature": "logique",
+              "description": "L’entrée précise les attributs auxquels appliquer le modèle, sans déduire sa validité de leurs seules valeurs."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Relier moles, particules et pression",
+            "input": "Attributs de 2.1 ; le modèle pose PV = NkBT, avec N = nNA et R = NAkB.",
+            "action": "Substituer N = nNA pour obtenir PV = nRT ; diviser par V > 0 et contrôler [nRT/V] = J·m⁻³ = Pa.",
+            "output": "P = nRT/V = NkBT/V, identique dans les deux descriptions.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La substitution et l’isolement exploitent l’équation d’état adoptée ; ils ne constituent pas une dérivation microscopique du modèle."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir la prévision paramétrée",
+            "input": "Relation de 2.2 et deux volumes supposés au même n = 1 mol et T = 300 K.",
+            "action": "Consigner P1 = nRT/V1 et P2 = nRT/V2, en gardant R exact et les volumes SI pour l’application numérique.",
+            "output": "À 3.1 : deux pressions paramétrées par les mêmes n,T,R, avec V1 = 0,010 m³ et V2 = 0,020 m³.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les conséquences paramétrées transmettent une prévision d’état ; aucun déplacement de frontière ou échange d’énergie n’est spécifié."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre ce que prévoit la relation",
+            "input": "Expressions de 2.3 ; elles ne contiennent ni énergie interne U, ni chaleur Q, ni travail W.",
+            "action": "Reprendre les deux pressions et les variables fixées ; distinguer les produits PV, homogènes à une énergie, d’une énergie interne déterminée.",
+            "output": "Pressions d’équilibre prévues ; U(T), capacités, γ, Q et W restent non déterminés par cette seule relation.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "L’unité joule de PV ne permet pas d’identifier ce produit à U ni de choisir une relation calorique."
+            },
+            "comparison": "2.4 ↔ 2.3 : conserver la portée des expressions de pression sans leur attribuer de résultat énergétique.",
+            "evaluation": {
+              "object": "2.4 ↔ 2.3 : pressions paramétrées et grandeurs effectivement déterminées.",
+              "conditions": "Même équation d’état, sans loi calorique ni chemin thermodynamique supplémentaire.",
+              "criterion": "Les expressions déterminent P1 et P2 pour n,T,V donnés ; elles ne fournissent aucune valeur de U,Q ou W.",
+              "finding": "La prévision garde sa portée mécanique d’état ; aucune énergie n’est déduite de l’unité de PV."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Transformer la contrainte isotherme",
+            "input": "Relations relues en 2.4 ; n et T constants pour comparer des états d’équilibre idéaux à V > 0.",
+            "action": "Différentier PV = nRT : V dP + P dV = 0 ; intégrer dP/P = −dV/V entre deux états positifs.",
+            "output": "ln(P2/P1) = −ln(V2/V1), donc P2V2 = P1V1.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La transformation établit une relation entre états ; son intégration ne spécifie ni la durée, ni le travail d’une expansion."
+            },
+            "comparison": "2.5 ↔ 2.2 : la forme différentielle puis intégrée restitue l’équation d’état à n,T fixés.",
+            "evaluation": {
+              "object": "2.5 ↔ 2.2 : contrainte isotherme intégrée et équation directe.",
+              "conditions": "P,V,n,T positifs, mêmes n,T ; comparaison mathématique d’états d’équilibre.",
+              "criterion": "Retrouver P2/P1 = V1/V2 et la constante P1V1 = nRT.",
+              "finding": "Le traitement relatif est compatible avec l’équation directe ; l’existence d’un chemin réel reste non précisée."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les paramètres du modèle",
+            "input": "Produit constant obtenu en 2.5 et dossier reçu en 2.1, comprenant n,T,V connus.",
+            "action": "Remplacer la constante par nRT pour retrouver P = nRT/V ; conserver les variables d’entrée et les hypothèses classiques.",
+            "output": "À reprendre en 2.1 : même quantité, température et volumes ; seule la pression est déduite du modèle.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour réintroduit les paramètres physiques connus dans la relation relative sans ajouter de loi calorique."
+            },
+            "comparison": "2.6 ↔ 2.1 : retrouver les paramètres, l’inconnue et les conditions initiales du modèle.",
+            "evaluation": {
+              "object": "2.6 ↔ 2.1 : attributs connus et rôle de la pression.",
+              "conditions": "Même gaz supposé dilué à l’équilibre ; V1,V2 comparés à n,T fixés.",
+              "criterion": "Conserver n = 1 mol, T = 300 K, V1,V2 connus et P inconnue avant application de l’équation.",
+              "finding": "Le dossier initial du modèle est retrouvé ; aucune transformation ou propriété calorique n’a été ajoutée."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Calculer la pression attendue",
+        "system": "L’application numérique aux volumes de 10 L et 20 L, avec constantes exactes et affichage arrondi.",
+        "input": "2.3 transmet Pj = nRT/Vj ; n = 1 mol, T = 300 K et volumes SI sont supposés.",
+        "output": "P1 ≈ 249,434 kPa et P2 ≈ 124,717 kPa ; valeurs calculées conservées avant arrondi.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La substitution numérique produit deux prévisions dans le même modèle ; le changement de volume n’est pas un relevé chronologique."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Assembler les deux substitutions",
+            "input": "Expressions de 2.3 ou reprise de 3.6 ; n = 1 mol, T = 300 K, V1 = 0,010 m³, V2 = 0,020 m³.",
+            "action": "Associer chaque volume à son indice ; utiliser R = 8,31446261815324 J·mol⁻¹·K⁻¹, sans arrondir les valeurs intermédiaires.",
+            "output": "Deux substitutions préparées avec mêmes quantité, température et constante molaire.",
+            "relation": {
+              "nature": "logique",
+              "description": "L’assemblage fixe les dépendances du calcul ; les deux états partagent leurs données supposées, pas une observation commune."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Évaluer le produit puis les quotients",
+            "input": "Dossier de 3.1 ; les unités donnent mol × J·mol⁻¹·K⁻¹ × K = J.",
+            "action": "Calculer C = nRT = 2494,338785445972 J ; diviser séparément C par V1 et V2 pour produire des pressions en Pa.",
+            "output": "P1 = 249433,8785445972 Pa ; P2 = 124716,9392722986 Pa, avant arrondi d’affichage.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Un même numérateur alimente les deux quotients ; les chiffres écrits expriment le calcul sur valeurs supposées, pas une résolution instrumentale."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir les résultats affichés",
+            "input": "Quotients de 3.2 ; 1 kPa = 10³ Pa et 1 bar = 10⁵ Pa.",
+            "action": "Convertir les pressions et arrondir l’affichage en kPa à trois décimales ; conserver les quotients complets pour le retour.",
+            "output": "À 4.1 : P1 ≈ 249,434 kPa, soit 2,49434 bar ; P2 ≈ 124,717 kPa, associés à V1,V2.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La conversion change l’expression des résultats et l’arrondi leur affichage ; leur provenance reste l’équation appliquée aux mêmes données."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les pressions et leur rapport",
+            "input": "Résultats de 3.3 avec quotients complets disponibles ; les deux volumes sont dans le rapport V2/V1 = 2.",
+            "action": "Reprendre chaque pression et confronter P1/P2 = 2 au rapport des volumes, en distinguant affichage arrondi et valeurs internes.",
+            "output": "Le rapport inverse est retrouvé ; chaque pression reste une prévision calculée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le rapport contrôle les résultats issus d’un même numérateur ; il ne constitue pas une seconde caractérisation du gaz."
+            },
+            "comparison": "3.4 ↔ 3.3 : conserver les pressions affichées et retrouver leur rapport à partir des quotients.",
+            "evaluation": {
+              "object": "3.4 ↔ 3.3 : valeurs de pression et rapport numérique.",
+              "conditions": "Mêmes données supposées et mêmes constantes ; calculs complets avant arrondi.",
+              "criterion": "Retrouver P1/P2 = 2 et P1V1 = P2V2 = 2494,338785445972 J.",
+              "finding": "Les deux prévisions concordent avec la relation inverse des volumes, sans donnée physique supplémentaire."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Propager l’arrondi dans l’inverse",
+            "input": "Pressions relues en 3.4 ; afficher trois décimales en kPa introduit un arrondi δP avec |δP| ≤ 0,5 Pa.",
+            "action": "Poser Vaff = C/(P + δP) et V = C/P ; soustraire pour obtenir (Vaff − V)/V = −δP/(P + δP).",
+            "output": "Un écart de reconstruction peut résulter du seul affichage ; les quotients complets éliminent cette source d’écart.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion explicite l’effet numérique de l’arrondi ; la borne de 0,5 Pa n’est pas une incertitude de mesure."
+            },
+            "comparison": "3.5 ↔ 3.2 : la propagation de l’arrondi précise l’inversion des quotients numériques.",
+            "evaluation": {
+              "object": "3.5 ↔ 3.2 : quotient exact et inverse construit avec une pression arrondie.",
+              "conditions": "C inchangé, P > 0,5 Pa ; arrondi au 0,001 kPa le plus proche.",
+              "criterion": "Vérifier |Vaff − V|/V ≤ 0,5 Pa/(P − 0,5 Pa) ; si δP = 0, retrouver Vaff = V.",
+              "finding": "La différence éventuelle est quantifiée comme effet d’affichage, sans attribution à une imperfection physique du gaz."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les données numériques",
+            "input": "Relation d’arrondi de 3.5 et pressions complètes issues de 3.2 ; n,T,R connus.",
+            "action": "Employer Vj = C/Pj sans arrondi pour retrouver V1 = 0,010 m³ et V2 = 0,020 m³.",
+            "output": "À reprendre en 3.1 : mêmes volumes, n = 1 mol et T = 300 K ; affichage distingué du calcul.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La restitution inverse les quotients initiaux et conserve les paramètres connus ; elle contrôle le calcul réalisé."
+            },
+            "comparison": "3.6 ↔ 3.1 : retrouver les entrées numériques des deux substitutions.",
+            "evaluation": {
+              "object": "3.6 ↔ 3.1 : volumes restitués et paramètres communs.",
+              "conditions": "Même C = nRT et pressions calculées complètes ; aucune inversion à partir de mesures.",
+              "criterion": "Retrouver V1 = 10 L et V2 = 20 L, avec n = 1 mol et T = 300 K inchangés.",
+              "finding": "Le dossier numérique est reconstruit ; l’exactitude des constantes n’établit pas celle de données physiques non mesurées."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Reconstituer les entrées",
+        "system": "La reconstruction des volumes et du facteur Z, puis le calcul conditionnel de son incertitude avec données indépendantes.",
+        "input": "3.3 transmet les deux pressions prévues et leurs volumes ; les valeurs complètes et les paramètres supposés sont conservés.",
+        "output": "Volumes retrouvés et Z = 1 par calcul ; un Z expérimental demanderait des données et incertitudes non renseignées.",
+        "section": "limites",
+        "comparison": "4 ↔ 3 : reprendre les prévisions et inverser leur calcul ; Z = 1 ainsi obtenu ne confronte pas le modèle à un gaz réel.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les résultats calculés deviennent les entrées d’un contrôle inverse ; leur origine commune limite la portée de la concordance."
+        },
+        "evaluation": {
+          "object": "4 ↔ 3 : pressions reprises, volumes reconstruits et facteur Z.",
+          "conditions": "Même n,T,R ; pressions issues du calcul initial, utilisées avant arrondi.",
+          "criterion": "Retrouver V1 = 0,010 m³, V2 = 0,020 m³ et Z1 = Z2 = 1.",
+          "finding": "Les identités numériques sont retrouvées ; aucun relevé indépendant ne permet de conclure sur le comportement d’un gaz réel."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les sorties calculées",
+            "input": "Pressions de 3.3 ou reprise locale de 4.6 ; volumes associés, n,T,R et quotients complets restent disponibles.",
+            "action": "Identifier P1,P2 comme résultats calculés ; conserver leur association aux volumes sans les traiter comme valeurs instrumentales.",
+            "output": "Deux couples (Pj,Vj) calculés, avec origine et paramètres connus.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le dossier de retour conserve la provenance des valeurs ; l’emploi d’une sortie comme entrée ne la rend pas indépendante."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Inverser et former le facteur Z",
+            "input": "Couples de 4.1 ; n,T,R positifs et pressions calculées Pj = nRT/Vj.",
+            "action": "Former Vrec = nRT/P et Z = PV/(nRT) ; substituer P = nRT/V pour obtenir Vrec = V et Z = 1.",
+            "output": "Deux identités de reconstruction, dont l’origine algébrique commune est explicite.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La substitution montre pourquoi le contrôle réussit dans le modèle ; Z devient informatif physiquement avec des entrées obtenues autrement."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir le résultat du contrôle",
+            "input": "Relations de 4.2 et pressions complètes ; aucune valeur indépendante de P,V,n,T ni incertitude associée n’est fournie.",
+            "action": "Restituer les deux volumes et consigner Z1 = Z2 = 1, avec l’absence actuelle de confrontation instrumentale.",
+            "output": "À 5.1 : 10 L et 20 L retrouvés, Z calculé égal à 1 ; Z indépendant et incertitudes non renseignés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le résultat de retour porte sur la cohérence du calcul ; les éléments nécessaires à un diagnostic physique restent distincts."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les dépendances de Z",
+            "input": "Résultats de 4.3 ; la pression utilisée pour Z provient des mêmes n,T,V que son dénominateur.",
+            "action": "Reprendre Z = 1 et distinguer les quatre attributs à obtenir indépendamment de l’équation : P absolue, V, n et T kelvin.",
+            "output": "Le contrôle circulaire est identifié ; aucune valeur de Z mesuré n’est disponible.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "L’indépendance requise concerne l’obtention des données sans imposer PV = nRT ; elle ne garantit pas leur absence de corrélation statistique."
+            },
+            "comparison": "4.4 ↔ 4.3 : conserver la valeur calculée et qualifier exactement sa provenance.",
+            "evaluation": {
+              "object": "4.4 ↔ 4.3 : Z = 1 et volumes retrouvés, avec leurs dépendances.",
+              "conditions": "Même jeu de calcul ; P ne provient pas d’un instrument indépendant.",
+              "criterion": "Vérifier que remplacer P par nRT/V suffit à obtenir Z = 1, quel que soit le triplet n,T,V positif.",
+              "finding": "La concordance est algébrique ; elle ne mesure ni les interactions ni l’écart au gaz parfait."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Propager des incertitudes conditionnelles",
+            "input": "Données indépendantes de l’équation envisagées en 4.4 ; incertitudes types uP,uV,un,uT petites, sans corrélations, R exact.",
+            "action": "Différentier ln Z : dZ/Z = dP/P + dV/V − dn/n − dT/T ; sommer les variances relatives non corrélées.",
+            "output": "(uZ/Z)² ≈ (uP/P)² + (uV/V)² + (un/n)² + (uT/T)² ; aucun uZ numérique disponible.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La propagation au premier ordre traite une comparaison possible ; des corrélations exigeraient aussi les termes de covariance."
+            },
+            "comparison": "4.5 ↔ 4.2 : la propagation complète le calcul de Z lorsque ses entrées ne sont plus définies par l’équation idéale.",
+            "evaluation": {
+              "object": "4.5 ↔ 4.2 : Z algébrique et incertitude d’un Z construit avec données indépendantes.",
+              "conditions": "Grandeurs positives, faibles incertitudes types et absence de corrélation ; aucune acquisition fournie.",
+              "criterion": "Retrouver les quatre contributions relatives ; R exact n’ajoute pas de terme d’incertitude.",
+              "finding": "La relation d’incertitude est disponible sous conditions ; aucune barre d’erreur ni valeur expérimentale n’est inventée."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les deux statuts du retour",
+            "input": "Résultat conditionnel de 4.5 et couples calculés reçus en 4.1.",
+            "action": "Rattacher Z = 1 et les volumes reconstruits au dossier calculé ; laisser Z indépendant et uZ non renseignés.",
+            "output": "À reprendre en 4.1 : mêmes couples prévus, avec distinction entre contrôle terminé et comparaison instrumentale à documenter.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour conserve ce qui existe dans le dossier et distingue les attributs qu’une confrontation future devrait apporter."
+            },
+            "comparison": "4.6 ↔ 4.1 : retrouver couples, paramètres et provenance des valeurs initialement reprises.",
+            "evaluation": {
+              "object": "4.6 ↔ 4.1 : données du contrôle inverse et statut des incertitudes.",
+              "conditions": "Mêmes pressions prévues, mêmes n,T,V ; aucune mesure nouvelle.",
+              "criterion": "Conserver P1 ≈ 249,434 kPa, P2 ≈ 124,717 kPa et leurs volumes ; ne leur attribuer aucun uP instrumental.",
+              "finding": "Le dossier de calcul est restitué ; la formule conditionnelle n’a ajouté ni mesure ni précision supposée."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Confronter la validité du modèle",
+        "system": "Le traitement conditionnel d’un écart de Z à 1, et la distinction entre pression physique et décalage instrumental possible.",
+        "input": "4.3 transmet Z = 1 obtenu par calcul ; aucune valeur indépendante de Z ni incertitude associée n’est renseignée.",
+        "output": "Un critère d’écart et une indétermination explicites ; le modèle reste une hypothèse pour la variante, sans diagnostic matériel établi.",
+        "section": "limites",
+        "comparison": "5 ↔ 2 : confronter la condition idéale Z = 1 à un écart éventuel et à ses interprétations non uniques.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour transforme une comparaison possible en critères et en inconnues identifiables ; aucune donnée manquante n’est remplacée par une observation fictive."
+        },
+        "evaluation": {
+          "object": "5 ↔ 2 : prédiction Z = 1 et diagnostic conditionnel d’une autre valeur.",
+          "conditions": "Même définition P,V,n,T et mêmes unités ; équilibre et composition à documenter pour un gaz réel.",
+          "criterion": "Examiner |Zind − 1|/uZ sous uZ > 0 ; distinguer Zphys de Zind si un décalage de pression est possible.",
+          "finding": "Le contrôle calculé reste compatible par construction ; l’absence de données indépendantes laisse la comparaison physique ouverte."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le diagnostic incomplet",
+            "input": "Résultat de 4.3 ou reprise de 5.6 : Z calculé vaut 1, mais Zind et son incertitude type uZ sont non renseignés.",
+            "action": "Définir Zind = PindV/(nRT) pour des attributs obtenus sans imposer l’équation ; réserver ce symbole à une comparaison future.",
+            "output": "Écart indépendant à examiner symboliquement ; aucune valeur expérimentale attribuée au gaz.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le nouveau symbole distingue une construction à partir d’informations indépendantes du facteur calculé avec la pression idéale."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Normaliser un écart éventuel",
+            "input": "Facteur symbolique Zind de 5.1 ; son incertitude type uZ > 0 serait évaluée à partir des données et corrélations pertinentes.",
+            "action": "Calculer D = Zind − 1 et η = D/uZ ; pour un multiplicateur annoncé q > 0, écrire |D| ≤ q uZ ⇔ |η| ≤ q.",
+            "output": "Le critère compare un écart à son incertitude ; sans Zind,uZ ni q annoncés, aucune classification numérique n’est possible.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La normalisation rend explicite le critère de comparaison ; sa portée statistique dépendrait du modèle d’incertitude et du choix de q."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir ce qui reste indéterminé",
+            "input": "Critère de 5.2 et seul résultat disponible Zcalculé = 1 ; aucune incertitude instrumentale ni valeur de Zind.",
+            "action": "Consigner Dcalculé = 0 comme identité ; garder η indépendant indéterminé et conserver le gaz parfait comme hypothèse du prochain calcul.",
+            "output": "À 6.1 : modèle idéal supposé pour V2 = 20 L ; diagnostic indépendant et caractérisation du gaz restent ouverts.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le résultat disponible ferme le contrôle algébrique seulement ; il autorise une nouvelle prévision conditionnelle sans conclure sur un gaz réel."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le sens du critère",
+            "input": "Résultat de 5.3 et condition |η| ≤ q ; aucun écart indépendant n’est effectivement chiffré.",
+            "action": "Reprendre la distinction : un écart compatible avec l’incertitude ne prouve pas le modèle ; un écart marqué n’identifie pas sa cause.",
+            "output": "Ni interaction moléculaire ni erreur instrumentale n’est attribuée sur la base du seul contrôle actuel.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le critère compare des valeurs dans un cadre annoncé ; son éventuel dépassement demanderait aussi unités, équilibre et composition documentés."
+            },
+            "comparison": "5.4 ↔ 5.3 : conserver Dcalculé = 0 et l’indétermination du diagnostic indépendant.",
+            "evaluation": {
+              "object": "5.4 ↔ 5.3 : identité calculée, critère proposé et conclusion effectivement disponible.",
+              "conditions": "Même dossier sans acquisitions ; q et uZ ne sont pas fixés numériquement.",
+              "criterion": "Dcalculé = 0 n’impose ni η indépendant nul ni absence d’interactions ; aucune cause n’est identifiée.",
+              "finding": "Les limites du résultat sont conservées ; le critère reste proposé et aucune expérience n’est déclarée réalisée."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Démontrer une ambiguïté de pression",
+            "input": "Diagnostic relu en 5.4 ; poser symboliquement Pind = Pphys + b, avec Pind,Pphys > 0, donc Zind > 0, et b inconnu.",
+            "action": "Former Zind = Zphys + bV/(nRT), puis isoler Zphys = Zind − bV/(nRT), où Zphys = PphysV/(nRT).",
+            "output": "Un même Zind peut correspondre à Zphys = 1 avec b = (Zind − 1)nRT/V, ou à b = 0 avec Zphys = Zind.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La famille de solutions montre une non-unicité à un état donné ; elle ne décrit pas un défaut instrumental effectivement constaté."
+            },
+            "comparison": "5.5 ↔ 5.2 : le traitement d’interprétation complète le critère d’écart sans transformer celui-ci en identification causale.",
+            "evaluation": {
+              "object": "5.5 ↔ 5.2 : écart normalisé et partage possible entre pression physique et décalage.",
+              "conditions": "Même état positif n,T,V ; b est une inconnue symbolique, sans étalonnage ni mesure ajoutés.",
+              "criterion": "Substituer les deux couples (Zphys,b) proposés et retrouver le même Zind ; le critère η ne les distingue pas.",
+              "finding": "Un écart de Z ne suffit pas à choisir une cause ; même Z proche de 1 ne caractérise pas toutes les interactions."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer la question physique ouverte",
+            "input": "Famille de solutions de 5.5 et dossier initial de 5.1 ; pression indépendante et incertitudes toujours absentes.",
+            "action": "Conserver le calcul Z = 1 ; identifier un étalonnage indépendant et plusieurs états documentés comme informations pouvant contraindre les interprétations.",
+            "output": "À reprendre en 5.1 : même diagnostic incomplet, avec ambiguïté explicite et sans décision physique imposée.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour précise les informations manquantes ; plusieurs états ne garantissent pas à eux seuls l’identification de toutes les interactions."
+            },
+            "comparison": "5.6 ↔ 5.1 : retrouver le statut du facteur calculé et les inconnues de la comparaison indépendante.",
+            "evaluation": {
+              "object": "5.6 ↔ 5.1 : Z disponible, valeurs manquantes et hypothèse initiale.",
+              "conditions": "Même exemple supposé ; aucun étalonnage ni relevé supplémentaire fourni.",
+              "criterion": "Conserver Zcalculé = 1 ; laisser Zind,uZ et b non renseignés, sans adopter un écart ou une correction.",
+              "finding": "La question initiale est restituée avec une limite d’inférence démontrée ; le gaz parfait reste un modèle supposé."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Appliquer et vérifier le retour",
+        "system": "La prévision relative à 20 L et l’inversion du rapport des pressions, au même n et à la même température.",
+        "input": "5.3 conserve le modèle idéal comme hypothèse ; l’état à 10 L sert de référence calculée à la variante à 20 L.",
+        "output": "Pression divisée par deux, volumes reconstruits et produit nT identifié ; n et T séparés demandent une information connue supplémentaire.",
+        "section": "controle",
+        "comparison": "6 ↔ 1 : retrouver quantité, température et état de 10 L, en conservant séparément la variante de volume doublé.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour compare deux états supposés sous les mêmes contraintes ; leur relation ne fournit pas le déroulement d’une transformation."
+        },
+        "evaluation": {
+          "object": "6 ↔ 1 : attributs de l’état initial et variante de volume.",
+          "conditions": "Même composition supposée, n = 1 mol, T = 300 K et régime idéal ; pressions calculées.",
+          "criterion": "Retrouver V1 = 10 L et N = nNA ; isoler V2 = 20 L comme seule modification imposée, avec P2 = P1/2.",
+          "finding": "Les attributs initiaux sont conservés et les pressions concordent ; aucun chemin, U,Q ou W n’est reconstruit."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir l’état de retour",
+            "input": "Cadre transmis par 5.3 ou reprise de 6.6 ; P1 calculée pour V1 = 10 L et variante V2 = 20 L.",
+            "action": "Conserver n = 1 mol et T = 300 K ; distinguer les deux états supposés et l’absence de protocole d’expansion.",
+            "output": "Référence à 10 L et variante à 20 L, avec mêmes n,T et hypothèses du modèle.",
+            "relation": {
+              "nature": "logique",
+              "description": "La transmission maintient le scénario initial ; l’étude d’un autre volume ne constitue pas une évolution observée."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Former la relation entre les états",
+            "input": "Deux états de 6.1 ; P1V1 = nRT et P2V2 = nRT avec n,T communs.",
+            "action": "Diviser les équations pour obtenir P2/P1 = V1/V2 ; remplacer V2 par 2V1 et déduire P2 = P1/2.",
+            "output": "La pression est divisée par deux dans la variante ; aucun calcul de travail n’est inclus.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le rapport élimine nRT mais conserve l’hypothèse de sa constance ; les conditions ne sont pas déduites du rapport lui-même."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir les valeurs de retour",
+            "input": "Rapport de 6.2 et P1 = 249433,8785445972 Pa calculée avant arrondi.",
+            "action": "Évaluer P2 = 124716,9392722986 Pa ; restituer P1V1 = P2V2 = 2494,338785445972 J.",
+            "output": "À 1.1 : variante V2 = 20 L au même n = 1 mol, T = 300 K ; P2 ≈ 124,717 kPa reste calculée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les valeurs complètent le second dossier tout en conservant le premier ; les produits PV ne sont pas identifiés à des énergies internes."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le rapport et le produit",
+            "input": "Résultats de 6.3 ; les pressions complètes proviennent de deux expressions de la même équation d’état.",
+            "action": "Reprendre P2/P1 = 1/2 et P1V1 = P2V2 ; confronter la pression relative au quotient numérique de 3.2.",
+            "output": "Les deux méthodes donnent P2 ≈ 124,717 kPa avec le même statut de prévision.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le recalcul relatif et le quotient absolu partagent le modèle et les données ; leur accord contrôle les manipulations."
+            },
+            "comparison": "6.4 ↔ 6.3 : retrouver pression et produit calculés ; la comparaison avec 3.2 est complémentaire.",
+            "evaluation": {
+              "object": "6.4 ↔ 6.3 : pression relative, rapport et produit PV relus.",
+              "conditions": "Mêmes n,T,V1,V2, avec valeurs complètes avant arrondi.",
+              "criterion": "Retrouver P2/P1 = 1/2 et P2V2 = 2494,338785445972 J.",
+              "finding": "L’accord numérique est interne au modèle ; il ne documente ni travail fourni ni transfert thermique."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Inverser le rapport sans suridentifier",
+            "input": "Résultats repris en 6.4 ; P1,P2,V1 et R connus, avec T = 300 K fourni séparément.",
+            "action": "Isoler V2 = V1P1/P2 et nT = P1V1/R ; puis utiliser T connu pour retrouver n = P1V1/(RT).",
+            "output": "V2 = 20 L, nT = 300 mol·K et n = 1 mol ; le seul produit PV ne sépare pas n et T.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion restitue un volume relatif et un produit de paramètres ; retrouver n exige ici la température déjà connue."
+            },
+            "comparison": "6.5 ↔ 6.2 : l’inverse restitue le rapport direct et précise les paramètres éliminés par la division.",
+            "evaluation": {
+              "object": "6.5 ↔ 6.2 : relation relative et reconstruction des attributs.",
+              "conditions": "Même modèle idéal ; V1 et T sont connus indépendamment de cette inversion, mais supposés dans l’exemple.",
+              "criterion": "Vérifier V2/V1 = P1/P2 = 2 et nT = 300 mol·K ; sans n ou T connu, leur séparation reste indéterminée.",
+              "finding": "La transformation inverse retrouve le rapport et la quantité sous conditions ; elle ne mesure aucun paramètre supplémentaire."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les deux dossiers",
+            "input": "Reconstructions de 6.5 et paramètres reçus en 6.1 ; T connu, n = 1 mol retrouvé et NA exact.",
+            "action": "Rétablir N = nNA et les deux volumes en litres ; conserver T = 300 K et l’hypothèse d’équilibre pour chacun.",
+            "output": "À reprendre en 6.1 : état de 10 L et variante de 20 L restitués, avec pressions prévues et même quantité.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour réassocie les attributs physiques aux résultats inverses ; il ne déduit aucune trajectoire thermodynamique des deux états."
+            },
+            "comparison": "6.6 ↔ 6.1 : retrouver quantité, température et volumes des deux états de départ.",
+            "evaluation": {
+              "object": "6.6 ↔ 6.1 : attributs communs et différence de volume.",
+              "conditions": "Même gaz supposé ; température donnée, pressions calculées et NA exact.",
+              "criterion": "Retrouver n = 1 mol, N = 6,02214076 × 10²³, T = 300 K, V1 = 10 L et V2 = 20 L.",
+              "finding": "Les deux dossiers initiaux sont restitués ; la comparaison physique reste distincte de cette boucle de calcul."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "premier-principe": {
+    "question": "Le bilan d’énergie reste-t-il cohérent lorsqu’on relit les transferts et le périmètre des énergies comptées ?",
+    "basis": "Exemple comptable supposé : 500 J de chaleur reçue et 200 J de travail fourni. Aucune mesure calorimétrique.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Conventions, travail extérieur, inversions et termes macroscopiques sont explicités ; le bilan de détente libre reste distinct d’une loi calorique.",
+    "subject": {
+      "type": "physique",
+      "description": "Le bilan énergétique d’un système fermé recevant de la chaleur et fournissant du travail, comparé à une détente libre adiabatique.",
+      "scope": "Transferts supposés, tous travaux comptés et variations macroscopiques négligeables entre états ; aucune mesure, loi calorique ou réversibilité du chemin initial fournie."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Inventorier les échanges annoncés",
+        "system": "Le dossier du système fermé, des interfaces énergétiques et des orientations des transferts annoncés.",
+        "input": "Chaleur reçue de 500 J, travail fourni de 200 J ; variations cinétique et potentielle macroscopiques supposées négligeables.",
+        "output": "Registre signé des transferts, frontière conservée et exclusions explicites ; énergie transférée et énergie stockée distinguées.",
+        "section": "conditions",
+        "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Les données supposées définissent le registre ; la variante transmise au retour constitue un autre scénario, sans succession expérimentale présumée."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Délimiter le système fermé",
+            "input": "Énoncé des échanges ; au retour, 6.3 transmet séparément la détente libre et 1.6 restitue le registre local.",
+            "action": "Délimiter le même système matériel sans passage de matière ; repérer les échanges thermiques et tous les canaux de travail possibles.",
+            "output": "Système fermé identifié ; les transferts annoncés restent des données supposées.",
+            "relation": {
+              "nature": "logique",
+              "description": "L’absence de passage de matière n’interdit pas les transferts d’énergie ; aucune enceinte isolée n’est déduite du seul mot fermé."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Transformer les orientations en signes",
+            "input": "Frontière de 1.1 et magnitudes des échanges ; convention positive pour chaleur et travail reçus.",
+            "action": "Former Q = Q_entrant − Q_sortant et W = W_entrant − W_sortant ; les contributions de travail s’additionnent avec cette même orientation.",
+            "output": "Registre signé : une chaleur reçue est positive, un travail fourni est négatif.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La soustraction traduit le sens des flux ; elle ne transforme pas chaleur ou travail en grandeurs stockées dans le système."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir le registre numérique",
+            "input": "Règles de 1.2 et énoncé : 500 J reçus thermiquement, 200 J fournis sous forme de travail.",
+            "action": "Consigner Q = +500 J et W = −200 J comme totaux du scénario ; noter ΔEcin et ΔEpot négligeables entre les états.",
+            "output": "À 2.1 : deux transferts signés et hypothèses autorisant un bilan réduit.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le registre conserve les totaux annoncés ; aucun volume, trajet de pression ni canal supplémentaire chiffré n’est fourni."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre la complétude du registre",
+            "input": "Sorties de 1.3 ; frontière inchangée et ensemble des travaux compris dans W.",
+            "action": "Reprendre les orientations et les interfaces ; distinguer un canal effectivement inclus, un canal supposé absent et une information non renseignée.",
+            "output": "Q et W restent les totaux de l’exemple, sans omission ajoutée comme fait observé.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture porte sur le périmètre des échanges ; elle ne prouve pas que le dispositif réel satisferait toutes les exclusions."
+            },
+            "comparison": "1.4 ↔ 1.3 : totaux, orientations et exclusions relus face au registre numérique.",
+            "evaluation": {
+              "object": "1.4 ↔ 1.3 : totaux, orientations et exclusions relus face au registre numérique.",
+              "conditions": "Même système fermé et mêmes états extrêmes ; valeurs supposées, sans mesures ni inventaire matériel détaillé.",
+              "criterion": "Conserver Q = +500 J, W = −200 J et tous les travaux inclus ; distinguer absence supposée et information manquante.",
+              "finding": "Le registre est repris sans changer de frontière ; sa complétude matérielle n’a pas été vérifiée expérimentalement."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Changer de convention sans changer les flux",
+            "input": "Registre repris en 1.4 ; définir W_fourni comme l’opposé du travail net reçu.",
+            "action": "Poser W_fourni = −W et transformer le transfert net B = Q + W en B = Q − W_fourni ; revenir par W = −W_fourni.",
+            "output": "Deux écritures décrivent le même transfert net ; W_fourni = +200 J dans l’exemple.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le changement est algébrique ; il n’inverse pas physiquement le processus et ne définit pas une chaleur contenue."
+            },
+            "comparison": "1.5 ↔ 1.2 : convention du travail fourni comparée à la convention des transferts reçus.",
+            "evaluation": {
+              "object": "1.5 ↔ 1.2 : convention du travail fourni comparée à la convention des transferts reçus.",
+              "conditions": "Même processus supposé ; seul le signe attribué au travail change de définition, pas son orientation physique.",
+              "criterion": "Vérifier W_fourni = −W et Q − W_fourni = Q + W ; appliquer la conversion à tous les termes concernés.",
+              "finding": "Les conventions sont équivalentes si elles restent cohérentes ; additionner Q à W_fourni dans la convention reçue serait incorrect."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le dossier d’entrée",
+            "input": "Transformation de 1.5 et frontière reçue en 1.1 ; tous les travaux du scénario restent inclus.",
+            "action": "Restituer Q = +500 J, W = −200 J, fermeture à la matière et variations macroscopiques négligeables entre états.",
+            "output": "Dossier initial retrouvé avec sa convention et ses conditions supposées.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour conserve les transferts et le système ; les détails matériels nécessaires à une confrontation indépendante restent absents."
+            },
+            "comparison": "1.6 ↔ 1.1 : frontière, transferts et exclusions restitués face au système initial.",
+            "evaluation": {
+              "object": "1.6 ↔ 1.1 : frontière, transferts et exclusions restitués face au système initial.",
+              "conditions": "Même système matériel sans passage de matière, échanges annoncés et états sans variation macroscopique notable ; aucune mesure nouvelle.",
+              "criterion": "Retrouver 500 J de chaleur reçue et 200 J de travail fourni, sans transformer système fermé en système isolé.",
+              "finding": "Le dossier initial est restitué ; aucune valeur absolue d’énergie interne ni température n’est introduite."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Formaliser les signes et le stockage",
+        "system": "La conservation de l’énergie du système fermé et la contribution du travail de pression extérieure.",
+        "input": "1.3 transmet Q, W et les variations macroscopiques négligeables ; aucune trajectoire mécanique de l’exemple n’est renseignée.",
+        "output": "Bilan ΔU = Q + W et travail de pression Wp = −∫Pext dV, avec les conditions des substitutions possibles.",
+        "section": "bilan",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La conservation transforme le registre en variation d’état ; le travail de pression est un canal particulier, pas automatiquement le travail total annoncé."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le stockage et les échanges",
+            "input": "Registre de 1.3 ; lors d’une reprise, 2.6 restitue le bilan et ses conditions de réduction.",
+            "action": "Distinguer U et Em = Ecin + Epot ; conserver Q et W comme transferts reçus pendant le chemin entre états.",
+            "output": "Énergie Etotal = U + Em identifiée ; ΔEm négligeable dans l’exemple.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le choix du stockage précède la réduction du bilan ; une fonction d’état et un transfert n’ont pas le même rôle."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Déduire le bilan et le travail",
+            "input": "Grandeurs de 2.1 ; système fermé et tous les travaux comptés ; pour Wp, pression extérieure uniforme sur une frontière mobile.",
+            "action": "Écrire ΔU + ΔEm = Q + W puis isoler ΔU. Pour le travail de pression, transformer force et déplacement en δWp = −Pext dV.",
+            "output": "ΔU = Q + W − ΔEm ; Wp est reçu négativement lorsque le volume augmente contre une pression positive.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le travail des champs déjà représentés par Epot n’est pas recompté dans W. La conservation n’exige pas la réversibilité du processus."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir les expressions applicables",
+            "input": "Relations de 2.2 avec ΔEm négligeable ; W comprend tous les travaux, dont Wp lorsqu’il existe.",
+            "action": "Consigner ΔU = Q + W, Wp = −∫Vi^Vf Pext dV et W = Wp + Wautres.",
+            "output": "À 3.1 : bilan signé et totaux Q = +500 J, W = −200 J ; décomposition du travail non fournie.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégrale concerne le chemin de la frontière ; la valeur de W annoncée permet le bilan sans imposer un gaz parfait."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le signe de l’expansion",
+            "input": "Expressions de 2.3 ; expansion monotone dV > 0 avec pression extérieure positive, considérée symboliquement.",
+            "action": "Reprendre le signe de chaque contribution −Pext dV ; distinguer Wp négatif et signe du travail total si d’autres canaux existent.",
+            "output": "Une expansion fournit du travail de pression ; cela ne fixe pas à elle seule ΔU.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le contrôle porte sur le canal de pression ; une chaleur reçue ou un autre travail peuvent changer le solde énergétique."
+            },
+            "comparison": "2.4 ↔ 2.3 : signe de Wp et distinction des travaux relus face aux expressions établies.",
+            "evaluation": {
+              "object": "2.4 ↔ 2.3 : signe de Wp et distinction des travaux relus face aux expressions établies.",
+              "conditions": "Même convention reçue ; expansion monotone contre Pext > 0, exemple symbolique sans valeur de volume ajoutée.",
+              "criterion": "Retrouver Wp < 0 ; conserver W = Wp + Wautres et ΔU = Q + W sous ΔEm négligeable.",
+              "finding": "Le signe du canal de pression est cohérent ; ni le travail total ni l’énergie interne ne sont fixés par ce seul signe."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Transformer l’intégrale sous conditions",
+            "input": "Intégrale et signes repris en 2.4 sur une branche à volume monotone ; la pression extérieure reste la donnée mécanique pertinente.",
+            "action": "Si Pext est constante, intégrer Wp = −Pext(Vf − Vi). Si le chemin est mécaniquement réversible, substituer Pext = P ; pour un gaz parfait, Wp = −nR∫Vi^Vf T(V)dV/V.",
+            "output": "Les expressions simplifiées demandent leurs propres hypothèses ; aucune température constante n’est déduite de l’équation d’état.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La substitution exige une pression d’équilibre pertinente le long du chemin ; elle n’est pas valable pour la détente libre ni une expansion brutale."
+            },
+            "comparison": "2.5 ↔ 2.2 : intégrales simplifiées comparées au travail de frontière et au bilan généraux.",
+            "evaluation": {
+              "object": "2.5 ↔ 2.2 : intégrales simplifiées comparées au travail de frontière et au bilan généraux.",
+              "conditions": "Pression extérieure constante pour la première intégration ; équilibre mécanique réversible et gaz parfait pour la substitution nRT/V.",
+              "criterion": "Retrouver Wp = −∫Pext dV ; substituer P seulement sous les conditions annoncées, en conservant T(V) si elle varie.",
+              "finding": "Les formes particulières se déduisent du cadre général ; une convention de signe ne suffit pas à rendre une transformation réversible."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le cadre du bilan",
+            "input": "Traitements de 2.5 ; totaux et stockage reçus en 2.1, sans chemin mécanique renseigné pour l’exemple.",
+            "action": "Revenir à ΔU = Q + W avec ΔEm négligeable ; conserver W total, sans l’identifier arbitrairement à une intégrale de pression connue.",
+            "output": "Cadre initial retrouvé ; réversibilité et modèle du gaz ne sont pas ajoutés au scénario.",
+            "relation": {
+              "nature": "logique",
+              "description": "La conservation reste applicable aux échanges donnés ; l’absence de trajet de pression interdit seulement de reconstruire ce trajet à partir du seul total."
+            },
+            "comparison": "2.6 ↔ 2.1 : stockage et totaux restitués face au dossier énergétique reçu.",
+            "evaluation": {
+              "object": "2.6 ↔ 2.1 : stockage et totaux restitués face au dossier énergétique reçu.",
+              "conditions": "Même système fermé, tous travaux inclus et ΔEm négligeable ; aucune propriété calorique fournie.",
+              "criterion": "Retrouver ΔU = Q + W et les totaux +500 J, −200 J, sans supposer W = Wp ni un chemin isotherme.",
+              "finding": "Le cadre est restitué ; les hypothèses nécessaires au calcul de pression restent distinctes des données du bilan."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Calculer la variation interne",
+        "system": "L’application numérique du bilan et l’information que son solde apporte sur les échanges et les états.",
+        "input": "2.3 transmet ΔU = Q + W, Q = +500 J et W = −200 J, avec variations macroscopiques négligeables.",
+        "output": "ΔU = +300 J, sans énergie interne absolue ni température déterminée ; un solde seul ne sépare pas chaleur et travail.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les transferts signés donnent une différence d’énergie ; ils ne définissent ni une loi calorique ni le détail du chemin."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les valeurs orientées",
+            "input": "Bilan et données de 2.3 ; 3.6 restitue localement les mêmes orientations et exclusions.",
+            "action": "Reprendre Q = +500 J et W = −200 J pour la même frontière ; conserver U initial non renseignée.",
+            "output": "Deux transferts supposés et une origine d’énergie non fixée.",
+            "relation": {
+              "nature": "logique",
+              "description": "La frontière et la convention commune rendent les termes additionnables ; les magnitudes ne sont pas prises toutes positives."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Transformer les flux en variation",
+            "input": "Entrées de 3.1 et ΔEm négligeable ; premier principe applicable au système fermé.",
+            "action": "Calculer ΔU = Q + W = 500 + (−200) J ; écrire Uf = Ui + Q + W.",
+            "output": "L’état final possède 300 J d’énergie interne supplémentaires dans le cadre retenu.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le bilan transforme des échanges de chemin en variation d’état ; la valeur absolue de Ui n’est pas nécessaire au calcul."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir le résultat et sa portée",
+            "input": "Application de 3.2 aux totaux supposés ; aucun modèle calorique ni état thermique complet disponible.",
+            "action": "Consigner ΔU = +300 J et Uf = Ui + 300 J ; garder la température finale non déterminée.",
+            "output": "À 4.1 : variation calculée +300 J et travail reçu −200 J, avec leurs provenances.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’augmentation d’énergie interne est un résultat du bilan ; la chaleur reçue n’est pas assimilée à un stock de chaleur."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le solde comme entrées moins sorties",
+            "input": "Résultats de 3.3 et orientations conservées : 500 J entrants thermiquement et 200 J sortants par travail.",
+            "action": "Recomposer le solde 500 − 200 = 300 J ; relire son signe comme une augmentation de U.",
+            "output": "Même variation positive retrouvée par la présentation entrées moins sorties.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La relecture utilise les mêmes données ; elle ne constitue pas une seconde détermination indépendante de l’énergie interne."
+            },
+            "comparison": "3.4 ↔ 3.3 : solde repris et variation d’état face au résultat numérique.",
+            "evaluation": {
+              "object": "3.4 ↔ 3.3 : solde repris et variation d’état face au résultat numérique.",
+              "conditions": "Même système, transferts supposés et variations macroscopiques négligeables ; aucun relevé indépendant d’énergie.",
+              "criterion": "Vérifier 500 − 200 = +300 J et Uf − Ui = +300 J ; ne pas confondre U avec Q.",
+              "finding": "La relecture confirme le calcul et son signe ; elle n’apporte pas d’information calorique supplémentaire."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Déduire l’indétermination des échanges",
+            "input": "Solde de 3.4 tenu fixé à 300 J ; aucun transfert supplémentaire connu indépendamment.",
+            "action": "Isoler W = ΔU − Q ; remplacer (Q, W) par (Q + λ, W − λ), avec λ en joules, conserve ΔU.",
+            "output": "Un même solde admet plusieurs couples algébriques chaleur-travail ; leur réalisation demanderait des chemins physiques compatibles.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La transformation montre ce que la somme ne détermine pas ; elle n’affirme pas que tout couple correspond à un processus réalisable."
+            },
+            "comparison": "3.5 ↔ 3.2 : famille de couples à somme constante comparée à l’addition directe des transferts.",
+            "evaluation": {
+              "object": "3.5 ↔ 3.2 : famille de couples à somme constante comparée à l’addition directe des transferts.",
+              "conditions": "ΔU fixé, même convention et même frontière ; λ décrit une possibilité algébrique, sans trajectoire physique ajoutée.",
+              "criterion": "Vérifier (Q + λ) + (W − λ) = Q + W = 300 J ; connaître ΔU seul ne fixe pas Q et W séparément.",
+              "finding": "Le bilan est sous-déterminé si les transferts sont inconnus ; aucune température ne peut être inférée sans relation d’état calorique adaptée."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les transferts avec une donnée conservée",
+            "input": "Relation de 3.5, ΔU = +300 J et travail initial W = −200 J conservé depuis 3.1.",
+            "action": "Retrouver Q = ΔU − W = +500 J ; restituer le sens reçu de Q et fourni du travail de 200 J.",
+            "output": "Données initiales retrouvées sous W fixé ; Ui et température finale restent inconnues.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour choisit le couple initial grâce au travail conservé ; le seul solde +300 J ne l’aurait pas identifié."
+            },
+            "comparison": "3.6 ↔ 3.1 : chaleur reconstruite et travail conservé face aux deux entrées orientées.",
+            "evaluation": {
+              "object": "3.6 ↔ 3.1 : chaleur reconstruite et travail conservé face aux deux entrées orientées.",
+              "conditions": "Même travail −200 J et solde calculé +300 J ; l’inversion réutilise les résultats de l’aller.",
+              "criterion": "Retrouver Q = 300 − (−200) = +500 J avec W = −200 J et les orientations initiales.",
+              "finding": "Le couple annoncé est restitué sous la contrainte du travail connu ; aucune chaleur n’a été mesurée par cette opération."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Reconstituer un transfert",
+        "system": "Le contrôle inverse du bilan et la distinction entre une fermeture comptable et un résidu fondé sur des données indépendantes.",
+        "input": "3.3 transmet ΔU = +300 J calculé et W = −200 J supposé ; Q initial vaut +500 J.",
+        "output": "Q = +500 J reconstruit ; fermeture interne identifiée, sans résultat calorimétrique indépendant.",
+        "section": "signes",
+        "comparison": "4 ↔ 3 : comparer la chaleur reconstruite et le solde recomposé aux résultats calculés de l’aller, sans changer de provenance.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La variation calculée devient une entrée de l’inversion ; réutiliser le bilan ne crée pas une observation nouvelle."
+        },
+        "evaluation": {
+          "object": "4 ↔ 3 : chaleur reconstruite et solde recomposé face à la variation interne calculée.",
+          "conditions": "Même système et travail initial ; ΔU provient de Q + W, pas d’une détermination indépendante.",
+          "criterion": "Q_reconstruit = 300 − (−200) = 500 J ; vérifier ensuite 500 + (−200) = 300 J.",
+          "finding": "La fermeture comptable est exacte pour ces valeurs ; elle ne teste pas indépendamment le premier principe ni les hypothèses du dispositif."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la provenance du solde",
+            "input": "Dossier de 3.3 ; au retour local, 4.6 restitue le solde et les mêmes sources de données.",
+            "action": "Distinguer ΔU = +300 J calculé de W = −200 J donné ; conserver Q initial = +500 J comme référence du contrôle.",
+            "output": "Entrées de retour accompagnées de leur dépendance au calcul initial.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La variation interne dépend déjà des transferts de l’énoncé ; cette dépendance interdit de traiter son inversion comme une mesure séparée."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Construire la relation inverse",
+            "input": "Solde et travail reçus en 4.1 ; bilan réduit ΔU = Q + W, même convention.",
+            "action": "Isoler Q_reconstruit = ΔU − W ; substituer les entrées sans modifier le signe du travail fourni.",
+            "output": "Expression inverse de la chaleur reçue, sous W et ΔU fixés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion est unique lorsque ces deux grandeurs sont fixées ; elle ne détermine pas une chaleur à partir du seul solde."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir la chaleur reconstruite",
+            "input": "Relation de 4.2 avec ΔU = +300 J et W = −200 J.",
+            "action": "Consigner Q_reconstruit = 300 − (−200) = +500 J, orienté vers le système.",
+            "output": "À 5.1 : fermeture interne et exclusions à conserver, sans contrôle matériel indépendant.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le résultat retrouve la chaleur supposée ; aucun capteur ni protocole calorimétrique n’est introduit."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre la concordance des données",
+            "input": "Chaleur reconstruite en 4.3 et valeur initiale +500 J ; même travail et même solde.",
+            "action": "Reprendre Q_reconstruit − Q_initial = 0 J et la frontière commune ; identifier l’origine calculée de l’accord.",
+            "output": "Écart comptable nul pour les valeurs de l’exemple.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La concordance porte sur une valeur et sa reconstruction dépendante ; un écart nul ne signifie pas une incertitude instrumentale nulle."
+            },
+            "comparison": "4.4 ↔ 4.3 : chaleur reconstruite relue face au résultat de l’inversion.",
+            "evaluation": {
+              "object": "4.4 ↔ 4.3 : chaleur reconstruite relue face au résultat de l’inversion.",
+              "conditions": "Même système, ΔU calculé et travail supposé ; Q initial sert de référence comptable.",
+              "criterion": "Vérifier Q_reconstruit = +500 J et Q_reconstruit − Q_initial = 0 J, avec W = −200 J inchangé.",
+              "finding": "Les valeurs coïncident par l’algèbre du bilan ; aucun transfert réel n’a été déterminé indépendamment."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Formaliser un contrôle indépendant",
+            "input": "Accord de 4.4 ; envisager ΔU_ind, Q_ind et W_ind obtenus indépendamment du bilan testé, sans valeurs disponibles.",
+            "action": "Former R = ΔU_ind − Q_ind − W_ind = Q_reconstruit_ind − Q_ind, avec Q_reconstruit_ind = ΔU_ind − W_ind.",
+            "output": "Le résidu compare l’inversion à une chaleur indépendante ; sa valeur n’est pas renseignée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’expression prolonge la même inversion à des données de provenance différente ; réinjecter les valeurs calculées impose au contraire R = 0."
+            },
+            "comparison": "4.5 ↔ 4.2 : résidu indépendant comparé à l’inversion de la chaleur.",
+            "evaluation": {
+              "object": "4.5 ↔ 4.2 : résidu indépendant comparé à l’inversion de la chaleur.",
+              "conditions": "Grandeurs indépendantes seulement envisagées ; même frontière, même intervalle et convention, incertitudes à documenter.",
+              "criterion": "Vérifier R = (ΔU_ind − W_ind) − Q_ind ; le résultat devient automatiquement nul si ΔU_ind est construit comme Q_ind + W_ind.",
+              "finding": "La distinction dépend de la provenance des données ; un résidu éventuel exigerait aussi un contrôle des termes comptés et des incertitudes."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer la fermeture et sa limite",
+            "input": "Traitement de 4.5 et provenance de 4.1 ; aucune détermination indépendante disponible.",
+            "action": "Revenir aux données de l’exemple : Q_reconstruit = +500 J, W = −200 J et ΔU = +300 J ; conserver R indépendant non renseigné.",
+            "output": "Registre de retour restitué ; fermeture interne acquise, confrontation matérielle ouverte.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour sépare le zéro obtenu par construction du résidu qui demanderait d’autres données et leurs incertitudes."
+            },
+            "comparison": "4.6 ↔ 4.1 : solde, travail et provenance restitués face aux entrées du retour.",
+            "evaluation": {
+              "object": "4.6 ↔ 4.1 : solde, travail et provenance restitués face aux entrées du retour.",
+              "conditions": "Même exemple supposé ; aucune donnée indépendante remplacée par une valeur issue du calcul.",
+              "criterion": "Retrouver ΔU = +300 J et W = −200 J ; Q_reconstruit = +500 J reste relié au calcul initial.",
+              "finding": "Le dossier est restitué sans validation circulaire ; la valeur d’un résidu expérimental reste inconnue."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Confronter le périmètre énergétique",
+        "system": "Le bilan élargi aux stockages macroscopiques et aux travaux supplémentaires, puis sa réduction conditionnelle au scénario initial.",
+        "input": "4.3 transmet une fermeture comptable ; ΔEm négligeable et totalité des travaux restent des hypothèses du dossier.",
+        "output": "Le cadre ΔU = Q + W est restitué sous ses conditions ; un résidu ne sépare pas, à lui seul, stockage omis et travail omis.",
+        "section": "bilan",
+        "comparison": "5 ↔ 2 : comparer le bilan élargi puis réduit au stockage et aux travaux définis lors de la formalisation d’entrée.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour transforme les exclusions en termes explicites ; aucune accélération ni alimentation supplémentaire n’est attribuée au système réel."
+        },
+        "evaluation": {
+          "object": "5 ↔ 2 : bilan avec énergie macroscopique et travaux complets comparé au modèle réduit de l’aller.",
+          "conditions": "Même système fermé ; conventions de stockage et de travail cohérentes, tous les canaux énergétiques nécessaires pris en compte.",
+          "criterion": "À partir de ΔU = Q + W − ΔEm, retrouver ΔU = Q + W quand ΔEm est négligeable et W complet.",
+          "finding": "La réduction est cohérente sous les hypothèses annoncées ; la seule fermeture comptable ne démontre pas que ces hypothèses sont matériellement satisfaites."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les exclusions à examiner",
+            "input": "Fermeture interne de 4.3 et exclusions initiales ; 5.6 restitue les conditions lors de la reprise locale.",
+            "action": "Conserver le système fermé ; envisager symboliquement un changement d’énergie macroscopique ou un canal de travail supplémentaire, sans valeur attribuée.",
+            "output": "Stockage macroscopique et transfert supplémentaire distingués comme variantes possibles.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "L’accord arithmétique n’élimine pas ces possibilités ; les variantes servent à préciser le cadre, pas à décrire un événement observé."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Déduire le bilan élargi",
+            "input": "Attributs de 5.1 ; Em = Ecin + Epot, avec décomposition W = Wp + Wautres.",
+            "action": "Isoler ΔU = Q + Wp + Wautres − ΔEm ; un travail reçu supplémentaire augmente le solde, une hausse de Em le diminue à transferts fixés.",
+            "output": "Termes de transfert et variations de stockage placés explicitement dans le bilan.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le travail des champs représentés par Epot n’est pas recompté comme transfert ; la décomposition de W garde tous les autres canaux nécessaires."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir les conséquences des extensions",
+            "input": "Expression de 5.2 ; transferts de référence Q = +500 J et W = −200 J, supposés complets dans l’exemple.",
+            "action": "Consigner symboliquement ΔU_var = 300 J + W_ajout − ΔEm si un canal nouveau est ajouté ; restituer ΔU = +300 J lorsque les extensions sont nulles.",
+            "output": "À 6.1 : conservation générale et réduction initiale, à appliquer aux conditions distinctes de détente libre.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "W_ajout désigne un nouveau transfert dans une variante ; il n’est pas ajouté une seconde fois au travail total du scénario initial."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le comptage sans doublon",
+            "input": "Attributions de 5.3 ; frontière identique et travail initial déjà totalisé.",
+            "action": "Reprendre W_ajout comme changement de scénario ; distinguer ΔEm du transfert qui peut l’alimenter, sans ajouter le même travail deux fois.",
+            "output": "Variations de stockage et flux restent reliés par un seul bilan.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Un travail peut contribuer à plusieurs formes d’énergie ; cette contribution n’en fait pas plusieurs transferts indépendants."
+            },
+            "comparison": "5.4 ↔ 5.3 : attributions des variantes relues face à leurs conséquences sur ΔU.",
+            "evaluation": {
+              "object": "5.4 ↔ 5.3 : attributions des variantes relues face à leurs conséquences sur ΔU.",
+              "conditions": "Même frontière ; W_ajout décrit un canal ajouté à la variante, ΔEm une différence entre états, sans valeurs mesurées.",
+              "criterion": "Conserver ΔU_var = 300 J + W_ajout − ΔEm ; ne pas ajouter W_ajout si ce terme est déjà compris dans W total.",
+              "finding": "Les termes ont des rôles distincts ; la même énergie transférée n’est pas comptée deux fois."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Transformer un résidu en termes omis",
+            "input": "Attributions reprises en 5.4 ; noter W_listé les travaux explicitement enregistrés et W_omis un éventuel complément, sans valeur supposée.",
+            "action": "Poser W = W_listé + W_omis ; déduire R_listé = ΔU − Q − W_listé = W_omis − ΔEm.",
+            "output": "Un résidu fixe seulement la différence entre travail omis et variation macroscopique ; leur compensation peut donner zéro.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’identité découle du bilan élargi ; elle ne permet pas d’identifier deux inconnues à partir d’un seul solde."
+            },
+            "comparison": "5.5 ↔ 5.2 : identité du résidu comparée au bilan énergétique élargi.",
+            "evaluation": {
+              "object": "5.5 ↔ 5.2 : identité du résidu comparée au bilan énergétique élargi.",
+              "conditions": "Même système et convention ; seuls W_listé et W_omis découpent le travail total, sans changement des formes de stockage.",
+              "criterion": "Vérifier R_listé = W_omis − ΔEm ; R_listé = 0 n’impose pas séparément W_omis = 0 et ΔEm = 0.",
+              "finding": "Le résidu peut signaler un manque d’information ; une compensation empêche l’identification univoque des termes absents."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les hypothèses de réduction",
+            "input": "Identité de 5.5 et exclusions reçues en 5.1 ; W_omis = 0 et ΔEm négligeable supposés pour l’exemple.",
+            "action": "Restituer W_listé = W = −200 J et Q = +500 J ; retrouver ΔU = +300 J sous les deux exclusions.",
+            "output": "Bilan initial et conditions retrouvés, sans transformer leur compatibilité en constat matériel.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour pose les exclusions du dossier ; il ne les infère pas du seul fait que le résidu calculé est nul."
+            },
+            "comparison": "5.6 ↔ 5.1 : hypothèses et totaux restitués face aux exclusions du dossier de retour.",
+            "evaluation": {
+              "object": "5.6 ↔ 5.1 : hypothèses et totaux restitués face aux exclusions du dossier de retour.",
+              "conditions": "Travaux complets et variations macroscopiques négligeables sont supposés, non déterminés par la fermeture du calcul.",
+              "criterion": "Retrouver Q = +500 J, W = −200 J et ΔU = +300 J ; maintenir la fermeture à la matière.",
+              "finding": "Le périmètre initial est restitué ; une application réelle demanderait des informations sur mouvement, altitude pertinente et interfaces énergétiques."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Appliquer au cas sans échanges",
+        "system": "La détente libre adiabatique d’un gaz fermé, comparée au scénario initial par ses conditions et son bilan entre états.",
+        "input": "5.3 transmet le bilan ; le checkpoint impose détente dans le vide, Q nul, aucun autre travail et aucune variation macroscopique entre états.",
+        "output": "Q = W = ΔU = 0 dans la variante ; la température finale reste indéterminée sans relation calorique.",
+        "section": "controle",
+        "comparison": "6 ↔ 1 : comparer les registres initiaux et de détente libre, en identifiant les échanges modifiés et les conditions communes.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La même conservation s’applique à un autre scénario supposé ; la comparaison ne décrit pas la suite chronologique de l’exemple à +300 J."
+        },
+        "evaluation": {
+          "object": "6 ↔ 1 : transferts et exclusions de la détente libre comparés au dossier initial.",
+          "conditions": "Deux scénarios distincts de systèmes fermés ; tous travaux comptés et aucune variation macroscopique entre les états retenus.",
+          "criterion": "Remplacer Q = +500 J et W = −200 J par Q = W = 0 ; le solde passe de +300 J à 0.",
+          "finding": "La différence vient des conditions d’échange ; aucun état final commun, travail réversible ou maintien de température n’est déduit."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la détente libre distincte",
+            "input": "Cadre transmis par 5.3 ; 6.6 restitue localement les conditions de la variante, distincte de l’exemple initial.",
+            "action": "Prendre le gaz fermé comme système dans une enceinte rigide partiellement vide ; imposer Q = 0, aucun autre travail et ΔEm = 0 entre états.",
+            "output": "Détente libre supposée, avec frontière thermiquement isolante pour le gaz et états sans énergie macroscopique résiduelle.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les conditions fixent les échanges du gaz ; aucun modèle calorique, volume numérique ni essai réalisé n’est ajouté."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Déduire les échanges et le bilan nul",
+            "input": "Conditions de 6.1 ; pression résistante Pext = 0 dans la partie vide, sans autre canal de travail.",
+            "action": "Utiliser Q = 0 et Wp = −∫Vi^Vf 0 dV = 0 ; avec Wautres = 0 et ΔEm = 0, obtenir ΔU = 0.",
+            "output": "Absence de transfert total et conservation de l’énergie interne entre les états retenus.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La pression propre du gaz ne remplace pas celle du vide ; les mouvements transitoires n’imposent pas une variation macroscopique entre les états extrêmes."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir les résultats de la variante",
+            "input": "Bilan obtenu en 6.2 ; aucune relation calorique du gaz disponible.",
+            "action": "Consigner Q = 0, W = 0 et Uf = Ui ; laisser la température finale non déterminée par ce seul bilan.",
+            "output": "À 1.1 : registre de détente libre distinct du registre +500 J, −200 J, +300 J.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "ΔU = 0 est une conséquence des conditions choisies ; il ne définit pas la dépendance de U envers température et volume."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les zéros avec leurs causes",
+            "input": "Résultats de 6.3 et conditions qui les produisent ; pas de mesure des échanges.",
+            "action": "Reprendre séparément Q nul par adiabaticité, W nul par vide et absence d’autres travaux, puis ΔU nul par conservation entre états.",
+            "output": "Les trois zéros sont conservés sans assimiler leurs justifications.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture remonte aux conditions de chaque résultat ; adiabatique ne signifie pas absence de tout travail."
+            },
+            "comparison": "6.4 ↔ 6.3 : chaleur, travail et variation interne relus face aux résultats de la détente libre.",
+            "evaluation": {
+              "object": "6.4 ↔ 6.3 : chaleur, travail et variation interne relus face aux résultats de la détente libre.",
+              "conditions": "Même gaz fermé, frontière adiabatique, vide, absence d’autres travaux et mêmes états extrêmes sans variation macroscopique.",
+              "criterion": "Conserver Q = 0, Wp = W = 0 et ΔU = 0 ; ne pas remplacer Pext = 0 par la pression interne du gaz.",
+              "finding": "Les résultats correspondent aux conditions posées ; aucune valeur de température n’en découle sans hypothèse calorique supplémentaire."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Transformer le contrecas adiabatique",
+            "input": "Zéros repris en 6.4 ; conserver Q = 0 mais envisager une compression monotone contre Pext > 0, sans autre travail ni variation macroscopique.",
+            "action": "Pour Vf < Vi, calculer le signe de Wp = −∫Vi^Vf Pext dV > 0 ; déduire ΔU = Wp > 0 malgré Q = 0.",
+            "output": "Une compression adiabatique peut augmenter U ; le vide est une condition distincte du bilan nul de la détente libre.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le contrecas change le chemin mécanique et la pression résistante ; il n’attribue pas une compression au scénario de détente libre."
+            },
+            "comparison": "6.5 ↔ 6.2 : bilan de compression adiabatique comparé aux conditions qui annulent les échanges dans la détente libre.",
+            "evaluation": {
+              "object": "6.5 ↔ 6.2 : bilan de compression adiabatique comparé aux conditions qui annulent les échanges dans la détente libre.",
+              "conditions": "Q = 0, système fermé et ΔEm = 0 dans les deux cas ; pression extérieure et sens de variation du volume différents.",
+              "criterion": "Sous compression monotone et Pext > 0, retrouver Wp > 0 et ΔU > 0 ; avec Pext = 0, retrouver Wp = 0.",
+              "finding": "L’adiabaticité seule n’impose pas W = 0 ; la détente libre du checkpoint satisfait des conditions mécaniques suffisantes pour l’annuler."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les conditions du gaz libre",
+            "input": "Traitement de 6.5 ; revenir au gaz fermé de 6.1 avec Pext = 0, Q = 0 et aucun autre travail.",
+            "action": "Retirer la compression du contrecas ; restituer la détente dans le vide, ΔEm = 0 entre états et Q = W = ΔU = 0.",
+            "output": "Conditions initiales de la variante retrouvées ; relation calorique et température finale demeurent non fournies.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour isole les conditions responsables du bilan nul ; il ne présente pas le chemin irréversible comme une succession d’états d’équilibre."
+            },
+            "comparison": "6.6 ↔ 6.1 : conditions et résultats restitués face au gaz libre initialement défini.",
+            "evaluation": {
+              "object": "6.6 ↔ 6.1 : conditions et résultats restitués face au gaz libre initialement défini.",
+              "conditions": "Même enceinte rigide, gaz fermé et isolement thermique pour le gaz ; aucun travail supplémentaire ni variation macroscopique entre états.",
+              "criterion": "Retrouver Pext = 0, Q = W = 0 et Uf = Ui, sans supposer une pression interne d’équilibre pendant toute la détente.",
+              "finding": "Le dossier de la variante est restitué ; la température reste une question calorique distincte, sans mesure nouvelle."
+            }
+          }
+        ]
+      }
+    ]
   },
   "capacites-thermiques": {
     "question": "Comment comparer deux chauffages sans confondre contrainte, chaleur échangée et capacité totale ou rapportée ?",

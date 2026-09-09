@@ -1,6 +1,6 @@
 # Préciser les analyses existantes
 
-Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) aux fiches déjà rédigées. Elle conserve leurs coordonnées afin de permettre la reprise de chaque élément. Les lots **AP1 à AP5** concernent quatorze fiches :
+Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) aux fiches déjà rédigées. Elle conserve leurs coordonnées afin de permettre la reprise de chaque élément. Les lots **AP1 à AP6** concernent dix-sept fiches :
 
 | Lot | Fiche | Nature du sujet | Périmètre |
 | --- | --- | --- | --- |
@@ -18,14 +18,17 @@ Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) a
 | AP4 | `hydrostatique-archimede` | Phénomène physique | Liquide homogène au repos, pression puis bloc flottant librement ; équilibre vertical |
 | AP5 | `elasticite-lineaire` | Phénomène physique | Barre homogène en traction quasistatique ; petites déformations, raideur et travail élastique |
 | AP5 | `onde-acoustique` | Phénomène physique | Onde plane progressive sinusoïdale dans un fluide homogène ; pression, flux moyen et niveau d’intensité |
+| AP6 | `systeme-et-grandeurs` | Phénomène physique | Deux compartiments identiques ; frontières, extensivité et grandeurs rapportées |
+| AP6 | `gaz-parfait` | Phénomène physique | Gaz dilué à l’équilibre ; équation d’état, unités SI et inversion conditionnelle |
+| AP6 | `premier-principe` | Phénomène physique | Système fermé ; échanges signés, variation interne et variante de détente libre |
 
 ## Ce qui est précisé
 
-Les 504 sous-niveaux de ces cinq lots reprennent les attributs reçus, le traitement effectué et la sortie à conserver. Chacun des lots AP1 à AP4 en approfondit 108 ; AP5 en approfondit 72. Les fonctions 2 et 5 réalisent un traitement théorique propre au système local : le retour ne se limite pas à inviter à vérifier ou décider.
+Les 612 sous-niveaux de ces six lots reprennent les attributs reçus, le traitement effectué et la sortie à conserver. Chacun des lots AP1 à AP4 et AP6 en approfondit 108 ; AP5 en approfondit 72. Les fonctions 2 et 5 réalisent un traitement théorique propre au système local : le retour ne se limite pas à inviter à vérifier ou décider.
 
-Chaque niveau global et sous-niveau possède une relation entrante qualifiée. Les **588 relations** décrivent comment les entrées conduisent à l'élément étudié : dépendance logique, calcul, lecture, interprétation ou autre relation explicitée. Un contrôle de cohérence ne devient pas une mesure ; un changement de cas calculé ne devient pas une chronologie expérimentale.
+Chaque niveau global et sous-niveau possède une relation entrante qualifiée. Les **714 relations** décrivent comment les entrées conduisent à l'élément étudié : dépendance logique, calcul, lecture, interprétation ou autre relation explicitée. Un contrôle de cohérence ne devient pas une mesure ; un changement de cas calculé ne devient pas une chronologie expérimentale.
 
-Les trois comparaisons globales et les dix-huit comparaisons locales de chaque fiche possèdent quatre champs, soit **294 évaluations détaillées** au total :
+Les trois comparaisons globales et les dix-huit comparaisons locales de chaque fiche possèdent quatre champs, soit **357 évaluations détaillées** au total :
 
 1. **Éléments comparés** : références exactes, correspondant à 4/3, 5/2 ou 6/1.
 2. **Conditions de comparaison** : hypothèses communes, conventions et statut des données.
@@ -74,6 +77,16 @@ Le cinquième lot approfondit les deux dernières fiches du domaine « Fluides e
 - **Acoustique** : relier amplitude et pression efficace, vitesse particulaire, célérité et flux moyen, puis expliciter les hypothèses des conversions. L'intensité dépend conjointement de la pression et de la vitesse ; les ondes de sens opposés montrent pourquoi la pression seule ne suffit pas dans un champ inconnu. La variante double l'amplitude à milieu et fréquence constants ; les décibels restent un niveau d'intensité avec sa référence. [OpenStax, §17.2](https://openstax.org/books/university-physics-volume-1/pages/17-2-speed-of-sound) et [§17.3](https://openstax.org/books/university-physics-volume-1/pages/17-3-sound-intensity).
 
 Les références OpenStax ont été revérifiées le 9 septembre 2026. La bibliographie acoustique est complétée par le [cours 1 du MIT 6.551J](https://ocw.mit.edu/courses/6-551j-acoustics-of-speech-and-hearing-fall-2004/c45734e2684a8592c0600120a0b6584c_lec_1_2004.pdf), p. 6 pour le flux et le déphasage, p. 14 pour les deux sens de propagation. Les reconstructions sont des conséquences des relations annoncées, contrôlées par recalcul. Les repères des recueils et leurs documents privés sont conservés.
+
+## AP6 : système, gaz parfait et premier principe
+
+Le sixième lot reprend trois fiches de thermodynamique. Les 108 sous-niveaux explicitent les attributs supposés, les traitements théoriques et les résultats calculés, puis les conditions de leur réexamen. Les variantes et les informations encore nécessaires restent identifiées.
+
+- **Système et grandeurs** : distinguer frontières et échanges autorisés, puis additionner deux copies identiques dans le cadre macroscopique annoncé. Les grandeurs extensives et leurs rapports ne se confondent pas. Les volumes, énergies et capacités absents de l'énoncé restent symboliques ; aucun modèle de gaz parfait n'est ajouté. [MIT, systèmes thermodynamiques, p. 1–3](https://ocw.mit.edu/courses/8-044-statistical-physics-i-spring-2013/89308d5289b1c515392685be677fa330_MIT8_044S13_notes.def.pdf), [IUPAC, capacités thermiques](https://goldbook.iupac.org/terms/view/H02753).
+- **Gaz parfait** : relier quantité de matière et nombre d'entités, conserver pression absolue et température thermodynamique, puis inverser l'équation d'état avec les paramètres connus. Les constantes SI exactes ne rendent pas les données d'un futur essai exemptes d'incertitude. Un accord calculé de Z avec 1 ne constitue pas une observation indépendante. [BIPM, constantes du SI](https://www.bipm.org/fr/measurement-units/si-defining-constants), [MIT, équation d'état, p. 2](https://ocw.mit.edu/courses/8-044-statistical-physics-i-spring-2013/89308d5289b1c515392685be677fa330_MIT8_044S13_notes.def.pdf).
+- **Premier principe** : traduire les transferts dans la convention reçue positive, calculer le solde et examiner ce que permet sa reconstruction. Tous les travaux et les variations d'énergie macroscopique doivent être considérés. La détente libre adiabatique dans le vide est une variante distincte, sans autre travail ; ΔU = 0 ne fixe pas à elle seule la température finale. [MIT, cours 6, p. 6–8, 11, 16–18 et 23–24](https://ocw.mit.edu/courses/8-044-statistical-physics-i-spring-2013/ce5405cf466deea227c0bbdf350d19d2_MIT8_044S13_L6.pdf).
+
+Ces références existantes ont été revérifiées le 9 septembre 2026. Les exemples et les inversions sont recalculés dans leurs hypothèses. Les repères des deux recueils sont conservés ; leurs documents restent privés. Les comparaisons 4/3, 5/2 et 6/1 définissent leurs objets et critères aux deux étages, sans transformer une cohérence interne en validation expérimentale.
 
 ## Lecture dans le site
 

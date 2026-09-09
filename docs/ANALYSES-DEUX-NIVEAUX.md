@@ -56,7 +56,7 @@ Le couple identifiant de fiche + coordonnée n.p situe l'élément à répertori
 
 Pour ajouter une fiche, rédiger son analyse complète avec six niveaux et six sous-niveaux par niveau. Chaque niveau doit nommer son propre système, ses entrées, sa sortie, un passage associé et ses comparaisons. Les tests refusent une fiche sans analyse et vérifient la couverture, les coordonnées et les destinations des liens.
 
-Les [lots d'approfondissement analytique AP1 à AP5](PRECISIONS-ANALYTIQUES.md) précisent quatorze fiches : oscillateur, Bernoulli, Lagrange–Hamilton, travail-énergie, Poiseuille, corde, rotation axiale, roulement, référentiel tournant, Newton, orbite centrale, hydrostatique, élasticité et acoustique. Ils distinguent la nature et le périmètre du sujet, les entrées de chaque sous-niveau, les relations avec ces entrées et les quatre champs de chaque évaluation. Les huit autres fiches conservent leur première rédaction pendant cette progression.
+Les [lots d'approfondissement analytique AP1 à AP6](PRECISIONS-ANALYTIQUES.md) précisent dix-sept fiches : oscillateur, Bernoulli, Lagrange–Hamilton, travail-énergie, Poiseuille, corde, rotation axiale, roulement, référentiel tournant, Newton, orbite centrale, hydrostatique, élasticité, acoustique, système thermodynamique, gaz parfait et premier principe. Ils distinguent la nature et le périmètre du sujet, les entrées de chaque sous-niveau, les relations avec ces entrées et les quatre champs de chaque évaluation. Les cinq autres fiches conservent leur première rédaction pendant cette progression.
 
 ## Source de conception et confidentialité
 

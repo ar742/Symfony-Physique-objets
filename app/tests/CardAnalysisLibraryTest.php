@@ -58,7 +58,7 @@ final class CardAnalysisLibraryTest extends TestCase
     {
         $library = new CardAnalysisLibrary(dirname(__DIR__));
         $refined = array_filter($library->all(), static fn (array $analysis): bool => isset($analysis['refinement']));
-        foreach (['oscillateur-harmonique', 'continuite-bernoulli', 'lagrange-hamilton', 'travail-energie-mecanique', 'viscosite-poiseuille', 'onde-corde', 'rotation-axe-fixe', 'roulement-sans-glissement', 'referentiel-tournant', 'newton-referentiel', 'force-centrale-orbite', 'hydrostatique-archimede', 'elasticite-lineaire', 'onde-acoustique'] as $slug) { self::assertArrayHasKey($slug, $refined); }
+        foreach (['oscillateur-harmonique', 'continuite-bernoulli', 'lagrange-hamilton', 'travail-energie-mecanique', 'viscosite-poiseuille', 'onde-corde', 'rotation-axe-fixe', 'roulement-sans-glissement', 'referentiel-tournant', 'newton-referentiel', 'force-centrale-orbite', 'hydrostatique-archimede', 'elasticite-lineaire', 'onde-acoustique', 'systeme-et-grandeurs', 'gaz-parfait', 'premier-principe'] as $slug) { self::assertArrayHasKey($slug, $refined); }
         self::assertSame('theorique', $refined['lagrange-hamilton']['subject']['type']);
         $natures = ['logique', 'calculatoire', 'observationnelle', 'interprétative', 'chronologique', 'causale'];
         foreach ($refined as $slug => $analysis) {

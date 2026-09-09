@@ -149,3 +149,16 @@ Le site conserve 22 fiches et 792 sous-niveaux. L'approfondissement réutilise l
 - Validation : **12 tests et 13 279 assertions ; 15 167 contrôles fonctionnels sur 168 pages, sans erreur**. Les contrôles couvrent les quatorze analyses approfondies et les huit analyses initiales, leurs entrées, relations, évaluations, coordonnées, ancres, mentions dans les catalogues et réponses HTTP. Les dix fichiers du lot sont synchronisés avec le site local après sauvegarde. Aucune recette visuelle au navigateur effectuée.
 
 Le site conserve 22 fiches et 792 sous-niveaux. Le lot réutilise les schémas et les thèmes existants ; aucune nouvelle dépendance ni modification de la base. Les ouvrages complets, rendus et extractions privées, exports SQL et secrets restent hors du dépôt. E1 demeure planifié.
+
+
+## 9 septembre 2026 — AP6 : système, gaz parfait et premier principe
+
+- Trois analyses existantes sont approfondies : `systeme-et-grandeurs`, `gaz-parfait` et `premier-principe`. Leurs 18 systèmes globaux et 108 sous-niveaux conservent leurs coordonnées et leurs passages associés. Les 19 autres analyses, dont AP1 à AP5, sont conservées.
+- Le lot précise 108 entrées locales, 126 relations qualifiées et 63 évaluations détaillées. Les dix-sept analyses approfondies réunissent **612 sous-niveaux, 714 relations et 357 évaluations**. Cinq fiches thermodynamiques et statistiques gardent leur première rédaction analytique.
+- Les retours théoriques traitent les résultats reçus : catégories de parois et duplication conditionnelle, normalisation et reconstruction des grandeurs ; équation d’état, effet d’arrondi et interprétation non unique d’un écart ; conventions d’échange, fermeture énergétique et distinction des termes omis. Les comparaisons 4/3, 5/2 et 6/1 sont explicites aux deux étages.
+- Les copies identiques, le volume doublé et la détente libre gardent leurs hypothèses propres. Les variantes ne sont pas des étapes chronologiques d’un même essai. Un résultat reconstruit à partir du calcul initial ne devient pas une mesure indépendante.
+- Les exemples et les inversions sont recalculés. Les références MIT, BIPM et IUPAC existantes sont revérifiées ; [le suivi analytique](PRECISIONS-ANALYTIQUES.md) en précise la portée. Les fiches scientifiques, leurs références et les repères des deux recueils sont conservés.
+- La relecture croisée conserve les conditions d’additivité et de subdivision macroscopique, distingue l’arrondi d’une incertitude de mesure et borne les interprétations d’un résidu. Un système fermé est défini par l’absence de passage de matière ; l’adiabaticité seule ne suffit pas à conclure que le travail est nul.
+- Validation : **12 tests et 14 002 assertions ; 15 236 contrôles fonctionnels sur 168 pages, sans erreur**. Les contrôles couvrent les dix-sept analyses approfondies et les cinq analyses initiales, leurs entrées, relations, évaluations, coordonnées, ancres, mentions dans les catalogues et réponses HTTP. Les huit fichiers du lot sont synchronisés avec le site local après sauvegarde. Aucune recette visuelle au navigateur effectuée.
+
+Le site conserve 22 fiches et 792 sous-niveaux. Le lot réutilise les schémas et les thèmes existants ; aucune nouvelle dépendance ni modification de la base. Les ouvrages complets, rendus et extractions privées, exports SQL et secrets restent hors du dépôt. E1 demeure planifié.
