@@ -2465,311 +2465,647 @@
   },
   "newton-referentiel": {
     "question": "Comment relier le mouvement annoncé sur une pente aux interactions retenues et au référentiel choisi ?",
-    "basis": "Données de l’exemple posé : masse, angle, pesanteur et départ du repos ; les positions prévues sont calculées, aucune trajectoire mesurée n’est fournie.",
+    "basis": "Exemple calculé : m = 2,00 kg, α = 30°, g = 9,81 m·s⁻², départ du repos pendant 2,00 s ; variante à masse doublée.",
     "levels": [
       {
         "id": 1,
         "title": "Délimiter le mobile et sa pente",
-        "system": "Le dossier de description du mobile, de la piste et de la manière de repérer son mouvement.",
-        "input": "L’énoncé fournit une masse, une pente, un départ et une durée ; la géométrie du suivi reste à définir.",
-        "output": "Une entrée documentée distingue paramètres imposés, conventions de repérage et observations encore absentes.",
+        "system": "Le dossier du mobile, de la piste extérieure et des conventions spatiales et temporelles du suivi.",
+        "input": "Masse, pente, pesanteur, repos initial et durée donnés ; absence de frottement et référentiel galiléen supposés.",
+        "output": "Attributs matériels et conditions initiales définis, avec conventions distinctes d’éventuels relevés.",
         "section": "bilan",
         "comparison": "",
         "steps": [
           {
             "id": 1,
-            "title": "Choisir le mobile",
-            "action": "Repérer dans l’énoncé le corps suivi, la piste extérieure et les grandeurs nécessaires pour décrire son départ.",
-            "output": "Frontière du mobile et données initiales recensées."
+            "title": "Définir le système suivi",
+            "input": "Mobile ponctuel, piste fixe et paramètres de l’énoncé ; en reprise, 6.3 apporte une variante à masse doublée.",
+            "action": "Isoler le mobile de la piste ; recenser masse, pente et départ, puis conserver séparément la variante éventuelle.",
+            "output": "Frontière matérielle et scénario clairement identifiés.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La frontière détermine quelles actions seront extérieures. La variante ne change pas silencieusement le mobile de référence."
+            }
           },
           {
             "id": 2,
-            "title": "Définir les repères",
-            "action": "Choisir une origine sur la pente, un axe descendant et une horloge commune aux positions éventuellement relevées.",
-            "output": "Convention spatiale et temporelle du suivi explicite."
+            "title": "Formaliser le repérage",
+            "input": "Frontière de 1.1, pente rectiligne fixe et laboratoire supposé galiléen ; contact maintenu, aucun enregistrement de position disponible.",
+            "action": "Orienter x vers le bas et n vers l’extérieur ; poser x(0) = 0, v = dx/dt, a = d²x/dt². Le contact impose y constant : v_n = dy/dt = 0 et a_n = d²y/dt² = 0.",
+            "output": "Dérivées tangentielles définies ; y est la coordonnée normale, distincte du vecteur unitaire n, et a_n = 0 sous contact maintenu.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivation de la contrainte géométrique y constant fournit vitesse et accélération normales nulles dans le laboratoire."
+            }
           },
           {
             "id": 3,
-            "title": "Construire le dossier",
-            "action": "Organiser masse, inclinaison, pesanteur et vitesse initiale dans une fiche séparant données imposées et mesures futures.",
-            "output": "Tableau d’entrée sans observations artificiellement ajoutées."
+            "title": "Établir les entrées du mouvement",
+            "input": "Conventions de 1.2 et données imposées ; le départ du repos fixe v(0) = 0.",
+            "action": "Consigner m = 2,00 kg, α = 30°, g = 9,81 m·s⁻² et t = 2,00 s, avec origine et repos.",
+            "output": "Dossier transmis à 2.1, sans positions mesurées.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les paramètres sont associés au même départ. Les conditions initiales complètent les futures équations d’accélération."
+            }
           },
           {
             "id": 4,
-            "title": "Relire le repérage",
-            "action": "Reprendre ce tableau comme un nouvel objet et vérifier que chaque position éventuelle aurait une date et une unité.",
-            "output": "Ambiguïtés de position et de date signalées.",
-            "comparison": "Le tableau produit en 1.3 est relu selon le repérage adopté en 1.1, sans le transformer en relevé réel."
+            "title": "Reprendre positions et dates",
+            "input": "Dossier de 1.3, origine sur la pente et horloge commençant au départ supposé.",
+            "action": "Relever que chaque position serait associée au même axe, à une date et à une unité ; conserver les valeurs données.",
+            "output": "Attributs de repérage relus, observations toujours absentes.",
+            "relation": {
+              "nature": "logique",
+              "description": "La relecture vérifie la définition des données, non l’exactitude d’un suivi qui n’a pas été effectué."
+            },
+            "comparison": "4/3 : mêmes conventions et conditions initiales dans les données reprises.",
+            "evaluation": {
+              "object": "1.4/1.3 : dates, unités et conditions initiales relues face au dossier produit.",
+              "conditions": "Même origine, même horloge et même scénario de départ.",
+              "criterion": "Conserver x(0) = 0, v(0) = 0 et t = 2,00 s ; distinguer position et durée.",
+              "finding": "Le dossier est cohérent et aucun relevé supplémentaire n’est ajouté."
+            }
           },
           {
             "id": 5,
-            "title": "Éprouver les conventions",
-            "action": "Confronter la convention descendante au départ annoncé ; préciser ce que signifierait une vitesse initiale négative.",
-            "output": "Convention de signe conservée avec interprétation physique.",
-            "comparison": "La convention locale de 1.2 doit décrire aussi un départ remontant sans changer arbitrairement le sens de l’axe."
+            "title": "Transformer l’orientation de l’axe",
+            "input": "Repérage relu en 1.4 ; examiner une inversion de l’axe, sans changer le mouvement ni l’horloge.",
+            "action": "Poser x′ = −x ; dériver pour obtenir v′ = −v et a′ = −a, puis transformer les composantes des forces.",
+            "output": "Mêmes grandeurs physiques, composantes signées inversées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion transforme toutes les composantes ensemble. Elle ne représente pas un départ physique dans une autre direction."
+            },
+            "comparison": "5/2 : les relations cinématiques sont conservées après transformation cohérente des signes.",
+            "evaluation": {
+              "object": "1.5/1.2 : description inversée comparée aux définitions des dérivées dans l’axe descendant.",
+              "conditions": "Même laboratoire et même temps ; seule l’orientation de la coordonnée change.",
+              "criterion": "Retrouver v′ = dx′/dt et a′ = d²x′/dt² ; inverser aussi les projections tangentielles des forces.",
+              "finding": "Les définitions restent compatibles. Dans l’axe initial, une vitesse négative désignerait une remontée."
+            }
           },
           {
             "id": 6,
-            "title": "Arrêter les entrées",
-            "action": "Réécrire le dossier après cette vérification et identifier les données qu’un suivi réel devrait encore fournir.",
-            "output": "Entrées utilisables et relevés manquants clairement séparés.",
-            "comparison": "Le dossier final conserve les données de 1.1 et documente les choix ajoutés pendant sa construction en 1.3."
+            "title": "Restituer le dossier initial",
+            "input": "Transformation de 1.5 et attributs reçus en 1.1 ; la géométrie et la masse n’ont pas changé.",
+            "action": "Appliquer une seconde inversion ; restituer l’axe descendant, le repos initial et les paramètres, puis identifier les positions horodatées encore absentes.",
+            "output": "Données de référence retrouvées et réutilisables.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour restitue les conventions initiales. Une reprise locale pourrait ensuite ajouter des données en conservant leur provenance."
+            },
+            "comparison": "6/1 : même système et mêmes données après restitution des conventions.",
+            "evaluation": {
+              "object": "1.6/1.1 : mobile, géométrie et départ restitués comparés aux attributs initialement recensés.",
+              "conditions": "Même piste et même masse de référence ; aucune variante n’est substituée au dossier.",
+              "criterion": "Retrouver m = 2,00 kg, α = 30° et repos initial ; conserver la distinction entre mobile et piste.",
+              "finding": "Les attributs initiaux sont conservés, avec un repérage désormais explicite."
+            }
           }
-        ]
+        ],
+        "relation": {
+          "nature": "interprétative",
+          "description": "L’énoncé est organisé en données du système. Définir un repérage ne constitue pas une observation de trajectoire."
+        }
       },
       {
         "id": 2,
         "title": "Établir le modèle de la pente",
-        "system": "Le bilan des interactions et les équations reliant ce bilan à une accélération dans un référentiel déterminé.",
-        "input": "Le dossier du niveau 1 apporte les axes et paramètres ; l’absence de frottement est une hypothèse de l’exemple.",
-        "output": "Un système d’équations signé prédit accélération tangentielle et réaction normale sous des conditions déclarées.",
+        "system": "Le bilan des interactions et les projections de Newton distinguant accélération tangentielle et maintien du contact.",
+        "input": "1.3 fournit axes, paramètres et départ ; masse constante, piste fixe et absence de frottement sont supposées.",
+        "output": "a = g sinα et N = mg cosα, avec condition N ≥ 0 et référentiel d’application explicite.",
         "section": "loi",
         "comparison": "",
         "steps": [
           {
             "id": 1,
-            "title": "Inventorier les interactions",
-            "action": "Reprendre la frontière du mobile et identifier séparément le poids, le support et un éventuel frottement exclu du scénario.",
-            "output": "Liste des forces retenues et action exclue."
+            "title": "Recenser les actions reçues",
+            "input": "Frontière et dossier de 1.3 ; pesanteur, piste extérieure et frottement exclu de l’exemple.",
+            "action": "Nommer le poids exercé par la Terre et la réaction du support ; conserver l’absence de force tangentielle de contact.",
+            "output": "Deux actions extérieures retenues sur le mobile.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les interactions sont définies par leur destinataire. La force exercée sur la piste appartient au bilan d’un autre système."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir la loi",
-            "action": "Poser une masse constante, un référentiel supposé galiléen et deux projections de Newton suivant pente et normale.",
-            "output": "Deux équations projetées avec hypothèses d’emploi."
+            "title": "Projeter Newton sur les deux axes",
+            "input": "Actions de 2.1, masse constante, dérivées dans le laboratoire galiléen ; contact avec le plan rectiligne fixe.",
+            "action": "Projeter la relation vectorielle ma = P + Nn : maₓ = mg sinα et maₙ = N − mg cosα, avec aₙ = 0.",
+            "output": "Équations tangentielles et normales distinctes.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La contrainte géométrique impose l’accélération normale nulle. La résultante tangentielle détermine séparément l’accélération descendante."
+            }
           },
           {
             "id": 3,
-            "title": "Produire les relations",
-            "action": "Appliquer les projections au bilan sans frottement pour obtenir l’accélération descendante et la réaction maintenant le contact.",
-            "output": "Relations distinctes pour mouvement et maintien du contact."
+            "title": "Établir mouvement et réaction",
+            "input": "Deux projections de 2.2, m > 0 et pente de 30° ; contact maintenu à vérifier.",
+            "action": "Résoudre aₓ = g sinα et N = mg cosα ; relever N > 0 pour la pente considérée.",
+            "output": "Relations et condition de contact transmises à 3.1.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La résolution fournit accélération et réaction. La positivité de N rend le contact supposé admissible dans ce modèle."
+            }
           },
           {
             "id": 4,
-            "title": "Examiner le bilan obtenu",
-            "action": "Relire les deux relations comme résultats et rechercher une action du mobile sur la piste comptée par erreur.",
-            "output": "Bilan des actions extérieures corrigé si nécessaire.",
-            "comparison": "Les forces apparaissant en 2.3 doivent appartenir au mobile défini en 2.1, selon la même frontière matérielle."
+            "title": "Reprendre le destinataire des forces",
+            "input": "Résultats de 2.3 et inventaire de 2.1 ; la réaction N désigne l’action de la piste sur le mobile.",
+            "action": "Relever le destinataire de chaque force ; distinguer Nn sur le mobile de l’action opposée sur la piste.",
+            "output": "Réaction et contre-réaction séparées par système.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les forces opposées n’agissent pas sur le même objet. Les ajouter au bilan du mobile supprimerait incorrectement le support."
+            },
+            "evaluation": {
+              "object": "2.4/2.3 : forces et projections relues face aux relations obtenues pour le contact.",
+              "conditions": "Même frontière du mobile et même plan fixe.",
+              "criterion": "Conserver N − mg cosα = 0 ; exclure du bilan la force exercée par le mobile sur la piste.",
+              "finding": "Les projections utilisent uniquement les actions reçues par le système étudié."
+            },
+            "comparison": "4/3 : mêmes relations, sans addition de forces appartenant à des systèmes différents."
           },
           {
             "id": 5,
-            "title": "Confronter le référentiel",
-            "action": "Tester si les équations resteraient utilisables depuis un support accéléré et noter les termes d’inertie alors nécessaires.",
-            "output": "Domaine galiléen explicite et extension identifiée.",
-            "comparison": "Le cadre de 2.2 est conservé pour la piste fixe ; son extrapolation à un support accéléré est refusée."
+            "title": "Transformer vers un observateur accéléré",
+            "input": "Relations relues en 2.4 ; un autre repère se translate sans rotation, avec accélération A par rapport au laboratoire.",
+            "action": "Transformer les accélérations vectorielles a′ = a − A ; écrire ma′ = P + Nn − mA, avec a′ₙ = −Aₙ.",
+            "output": "Terme d’inertie et accélération relative du contact explicités.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le changement d’observateur transforme les dérivées. Le terme −mA ne représente pas une interaction physique supplémentaire."
+            },
+            "evaluation": {
+              "object": "2.5/2.2 : équations du repère accéléré comparées aux projections galiléennes d’entrée.",
+              "conditions": "Même mobile et même piste physique ; repère en translation seule, base sans rotation.",
+              "criterion": "Pour A = 0, retrouver les projections de 2.2 ; pour Aₙ ≠ 0, ne pas imposer a′ₙ = 0.",
+              "finding": "Les descriptions concordent si le mouvement relatif du support est conservé. La réaction physique reste N = mg cosα."
+            },
+            "comparison": "5/2 : les projections initiales sont retrouvées lorsque l’accélération du repère s’annule."
           },
           {
             "id": 6,
-            "title": "Stabiliser les équations",
-            "action": "Présenter les relations retenues avec la condition de contact et les données nécessaires pour intégrer ensuite le mouvement.",
-            "output": "Modèle prêt à recevoir les conditions initiales.",
-            "comparison": "Les équations révisées répondent aux interactions de 2.1 ; elles complètent les résultats de 2.3 sans ajouter de mesures."
+            "title": "Restituer le modèle du laboratoire",
+            "input": "Transformation de 2.5 et forces recensées en 2.1 ; le calcul numérique conserve le laboratoire supposé galiléen.",
+            "action": "Appliquer A = 0 ; restituer poids, réaction, aₓ et N, puis joindre x(0) = v(0) = 0.",
+            "output": "Modèle initial retrouvé avec contact et départ explicites.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La spécialisation revient au repère retenu sans déplacer la piste. Les interactions physiques restent celles de l’inventaire initial."
+            },
+            "evaluation": {
+              "object": "2.6/2.1 : forces et conditions restituées comparées à l’inventaire des interactions.",
+              "conditions": "Même masse, pente et support ; aucun frottement ni accélération du repère ajouté au scénario numérique.",
+              "criterion": "Retrouver P, Nn et N ≥ 0 ; le terme d’inertie doit disparaître pour A = 0.",
+              "finding": "L’inventaire initial est conservé et les équations disposent des conditions nécessaires à leur intégration."
+            },
+            "comparison": "6/1 : mêmes actions et même piste après retour au laboratoire."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les attributs de la pente alimentent la loi dynamique. Les deux projections traitent mouvement et contact séparément."
+        }
       },
       {
         "id": 3,
-        "title": "Calculer une trajectoire annoncée",
-        "system": "La chaîne de calcul transformant les équations de Newton en valeurs de position, vitesse et réaction.",
-        "input": "Les niveaux 1 et 2 fournissent les paramètres, conditions initiales et expressions à appliquer pendant deux secondes.",
-        "output": "Une trajectoire théorique horodatée et ses grandeurs associées constituent les résultats de l’aller.",
+        "title": "Calculer le mouvement annoncé",
+        "system": "L’intégration des équations puis la reconstruction des conditions initiales à partir des résultats calculés.",
+        "input": "2.3 fournit accélération et réaction ; m = 2,00 kg, α = 30°, g = 9,81 m·s⁻² et durée de 2,00 s.",
+        "output": "Accélération, réaction, vitesse et déplacement prévus ; deux reconstructions cinématiques disponibles pour la relecture.",
         "section": "exemple",
         "comparison": "",
         "steps": [
           {
             "id": 1,
-            "title": "Préparer les nombres",
-            "action": "Rassembler les paramètres de l’exemple et vérifier que la durée commence au départ du repos choisi dans le dossier.",
-            "output": "Jeu numérique cohérent et instant initial identifié."
+            "title": "Associer les paramètres au départ",
+            "input": "Relations de 2.3 et données initiales ; t = 0 correspond au repos en x = 0.",
+            "action": "Rassembler m, α, g et t ; conserver x₀ = v₀ = 0 et le contact avec la pente fixe.",
+            "output": "Entrées numériques et intervalle clairement associés.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les paramètres décrivent la même descente. La réaction sera calculée, non ajoutée comme mesure indépendante."
+            }
           },
           {
             "id": 2,
-            "title": "Définir le calcul",
-            "action": "Choisir l’intégration à accélération constante et conserver les expressions littérales avant toute substitution des unités SI.",
-            "output": "Procédure de calcul traçable depuis les équations."
+            "title": "Intégrer l’accélération constante",
+            "input": "Dossier de 3.1 et a = g sinα constant ; les dérivées sont celles du laboratoire.",
+            "action": "Intégrer pour obtenir v(t) = v₀ + at et x(t) = x₀ + v₀t + at²/2 ; conserver N = mg cosα.",
+            "output": "Expressions de vitesse, position et réaction établies.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Deux intégrations nécessitent deux conditions initiales. Une accélération seule ne fixe donc pas le mouvement complet."
+            }
           },
           {
             "id": 3,
-            "title": "Exécuter la prévision",
-            "action": "Calculer accélération, réaction, vitesse et déplacement à deux secondes en les étiquetant explicitement comme résultats du modèle.",
-            "output": "Prévisions calculées de mouvement et de contact."
+            "title": "Établir les prévisions numériques",
+            "input": "Expressions de 3.2 avec m = 2,00 kg, α = 30° et départ du repos.",
+            "action": "Calculer a = 4,905 m·s⁻², N ≈ 16,991 N ; à 2,00 s, v = 9,810 m·s⁻¹ et x = 9,810 m.",
+            "output": "Prévisions datées et expressions transmises à 4.1.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les valeurs sont calculées dans le scénario idéal. Position et vitesse ont ici la même valeur numérique, mais des unités différentes."
+            }
           },
           {
             "id": 4,
-            "title": "Contrôler les sorties",
-            "action": "Reprendre ces valeurs et retrouver le déplacement par la vitesse moyenne entre départ et arrivée du scénario.",
-            "output": "Accord ou écart entre deux calculs cinématiques.",
-            "comparison": "La reconstruction de 3.4 utilise le même intervalle que 3.1 et contrôle le déplacement annoncé en 3.3."
+            "title": "Reprendre le déplacement par la moyenne",
+            "input": "Vitesse et position de 3.3 ; même intervalle de deux secondes et accélération constante.",
+            "action": "Évaluer le déplacement par [(v₀ + v)/2]t ; retrouver 9,810 m en conservant la moyenne temporelle propre au mouvement uniformément accéléré.",
+            "output": "Déplacement retrouvé par la vitesse moyenne.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La reconstruction réutilise les vitesses calculées. Elle ne fournit pas une comparaison expérimentale indépendante."
+            },
+            "evaluation": {
+              "object": "3.4/3.3 : déplacement reconstruit comparé à la position annoncée à deux secondes.",
+              "conditions": "Même axe, même départ et accélération constante supposée.",
+              "criterion": "[(0 + 9,810)/2] × 2,00 doit retrouver 9,810 m.",
+              "finding": "Les deux calculs concordent et partagent leurs hypothèses."
+            },
+            "comparison": "4/3 : même déplacement par intégration et vitesse moyenne."
           },
           {
             "id": 5,
-            "title": "Vérifier l’hypothèse constante",
-            "action": "Confronter cette reconstruction à l’accélération constante supposée ; préciser pourquoi une force variable demanderait une autre intégration.",
-            "output": "Hypothèse d’intégration confirmée seulement pour ce scénario.",
-            "comparison": "La méthode de 3.2 reste valable avec angle fixe et forces constantes ; le contrôle arithmétique ne prouve pas ces hypothèses."
+            "title": "Reconstruire deux accélérations candidates",
+            "input": "Déplacement relu en 3.4, vitesse finale et durée t > 0 ; x₀ et v₀ connus.",
+            "action": "Isoler aᵥ = (v − v₀)/t et aₓ = 2(x − x₀ − v₀t)/t² dans les expressions intégrées.",
+            "output": "Deux valeurs identiques à 4,905 m·s⁻² sous le modèle constant.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les inversions traitent les deux sorties. Leur égalité est compatible avec une accélération constante, sans identifier une fonction arbitraire a(t)."
+            },
+            "evaluation": {
+              "object": "3.5/3.2 : accélérations reconstruites comparées à l’intégration sous accélération constante.",
+              "conditions": "Même t, x₀ et v₀ ; les valeurs finales proviennent du calcul direct.",
+              "criterion": "Retrouver aᵥ = aₓ = g sin30° = 4,905 m·s⁻².",
+              "finding": "Les inversions sont cohérentes. Deux valeurs finales compatibles ne prouvent pas toute l’histoire de la force."
+            },
+            "comparison": "5/2 : les deux inversions retrouvent le paramètre de l’intégration."
           },
           {
             "id": 6,
-            "title": "Conserver la prévision",
-            "action": "Recalculer les sorties après contrôle des arrondis et enregistrer les expressions permettant de varier durée ou masse.",
-            "output": "Résultat de l’aller reproductible et paramètres modifiables.",
-            "comparison": "Les sorties finales restent calculées à partir de 3.1 et conservent la provenance des nombres produits en 3.3."
+            "title": "Restituer les conditions initiales",
+            "input": "Accélération reconstruite en 3.5, valeurs finales et paramètres reçus en 3.1.",
+            "action": "Reformer v₀ = v − at puis x₀ = x − v₀t − at²/2 ; restituer repos et origine sans modifier m, α ou g.",
+            "output": "État initial retrouvé depuis les sorties théoriques.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’application inverse restitue les conditions données. Elle ne mesure ni le départ réel ni la masse."
+            },
+            "evaluation": {
+              "object": "3.6/3.1 : état initial et paramètres restitués comparés aux données numériques reçues.",
+              "conditions": "Même durée et même accélération exacte ; aucune donnée de départ supplémentaire.",
+              "criterion": "Retrouver x₀ = 0 et v₀ = 0, avec m = 2,00 kg et α = 30° conservés.",
+              "finding": "Les entrées sont retrouvées et la prévision peut être reprise depuis le même dossier."
+            },
+            "comparison": "6/1 : mêmes conditions initiales après inversion du calcul."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les équations reçoivent les conditions initiales et les paramètres. Les résultats ne constituent pas une trajectoire mesurée."
+        }
       },
       {
         "id": 4,
         "title": "Relire la trajectoire prévue",
-        "system": "Le dispositif de comparaison entre les résultats calculés et une trajectoire qui pourrait être observée.",
-        "input": "Les valeurs du niveau 3 servent de données du retour ; aucun relevé de position indépendant n’est actuellement disponible.",
-        "output": "Une grille distingue contrôles internes, observables accessibles et écarts qui resteraient à établir expérimentalement.",
+        "system": "La comparaison entre trajectoire calculée, conventions de repérage et informations qu’apporterait un suivi indépendant.",
+        "input": "3.3 transmet positions, vitesses, dates et réaction calculées ; aucune trajectoire indépendante n’est disponible.",
+        "output": "Références et résidus théoriques définis ; effets d’origine et d’accélération distingués sans diagnostic expérimental.",
         "section": "limites",
-        "comparison": "Le retour reprend les positions de 3 avec les axes de 1 ; un calcul cohérent ne devient pas une observation indépendante.",
+        "comparison": "4/3 : mêmes positions, vitesses et dates, avec provenance calculée conservée.",
         "steps": [
           {
             "id": 1,
-            "title": "Importer les prévisions",
-            "action": "Reprendre positions et vitesses calculées en conservant leurs dates, leurs unités et leur statut de données théoriques.",
-            "output": "Données du retour accompagnées de leur provenance."
+            "title": "Importer le mouvement de référence",
+            "input": "Sorties de 3.3 : a, N, x(t) et v(t), avec leurs conditions initiales et unités.",
+            "action": "Nommer x*(t) = at²/2 et v*(t) = at les références ; conserver a = 4,905 m·s⁻² et leur origine calculée.",
+            "output": "Mouvement de référence et provenance identifiés.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les expressions décrivent l’aller théorique. Elles ne deviennent pas des relevés parce qu’elles sont reprises au retour."
+            }
           },
           {
             "id": 2,
-            "title": "Définir une comparaison",
-            "action": "Prévoir une comparaison de positions horodatées et de pentes de vitesse, avec les mêmes axes et origine temporelle.",
-            "output": "Critères de comparaison avant tout relevé réel."
+            "title": "Formaliser les résidus",
+            "input": "Références de 4.1 ; X(t) et V(t) désignent des données indépendantes éventuelles, encore absentes.",
+            "action": "Définir z(t) = X(t) − x*(t) et w(t) = V(t) − v*(t) ; pour X deux fois dérivable, former aX = d²X/dt².",
+            "output": "Écarts de position et vitesse, accélération reconstruisible.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les différences nécessitent les mêmes axes et dates. La dérivation fournit une grandeur cinématique, pas l’identité d’une interaction."
+            }
           },
           {
             "id": 3,
-            "title": "Simuler la relecture",
-            "action": "Construire une grille vide de relevés et y inscrire uniquement la trajectoire prédite comme référence à comparer.",
-            "output": "Grille de confrontation sans résultats expérimentaux inventés."
+            "title": "Établir les références de comparaison",
+            "input": "Définitions de 4.2 ; seules les trajectoires calculées sont disponibles.",
+            "action": "Substituer X = x* et V = v* ; consigner z = w = 0 et aX = 4,905 m·s⁻².",
+            "output": "Références et absence d’écart indépendant transmises à 5.1.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les zéros sont construits avec les prévisions elles-mêmes. Ils fournissent des références, sans confirmer la piste idéale."
+            }
           },
           {
             "id": 4,
-            "title": "Examiner la grille",
-            "action": "Relire la grille produite et vérifier qu’une différence de position ne serait pas simplement un décalage d’origine.",
-            "output": "Biais de repérage distingués des écarts dynamiques.",
-            "comparison": "Les critères issus de 4.3 sont évalués avec la même méthode de datation et de positionnement que 4.1."
+            "title": "Reprendre les conventions des écarts",
+            "input": "Résidus de 4.3, même origine spatiale et horloge commune ; aucun repérage expérimental fourni.",
+            "action": "Relever que z compare des positions de même origine et w des vitesses aux mêmes dates ; conserver les zéros comme références.",
+            "output": "Conditions de comparaison et provenance reprises.",
+            "relation": {
+              "nature": "logique",
+              "description": "La relecture précise les attributs qui devraient être communs avant d’interpréter un écart comme dynamique."
+            },
+            "evaluation": {
+              "object": "4.4/4.3 : conventions et statut des résidus relus face aux références établies.",
+              "conditions": "Mêmes paramètres et expressions, sans positions ni vitesses enregistrées.",
+              "criterion": "Retrouver z = w = 0 uniquement pour les substitutions X = x* et V = v* effectuées ici.",
+              "finding": "Les zéros du calcul sont conservés ; aucune concordance expérimentale n’est annoncée."
+            },
+            "comparison": "4/3 : mêmes résidus de référence et même provenance."
           },
           {
             "id": 5,
-            "title": "Discuter les écarts possibles",
-            "action": "Confronter l’interprétation des résidus à un retard de départ ou à un frottement, sans choisir une cause sans données.",
-            "output": "Hypothèses concurrentes associées à des signatures possibles.",
-            "comparison": "Le cadre comparatif de 4.2 doit séparer un biais temporel d’une modification de l’accélération avant toute conclusion physique."
+            "title": "Décomposer des biais symboliques",
+            "input": "Conventions relues en 4.4 ; c représente un décalage spatial, δ un décalage temporel et ε une variation d’accélération.",
+            "action": "Substituer X = c + x*(t − δ) : z = c − aδt + aδ²/2 ; à départ identique, a + ε donne z = εt²/2.",
+            "output": "Signatures constante, linéaire ou quadratique distinguées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les substitutions montrent comment des causes différentes affectent le résidu. Aucune valeur de biais n’est attribuée à un instrument."
+            },
+            "evaluation": {
+              "object": "4.5/4.2 : résidus transformés comparés à leur définition par différence de trajectoires.",
+              "conditions": "Même laboratoire ; cas temporel limité à t − δ ≥ 0, et variation ε examinée séparément à départ inchangé.",
+              "criterion": "La substitution directe doit redonner chaque polynôme ; c constant n’altère pas la seconde dérivée.",
+              "finding": "Les signatures sont calculées. Un terme linéaire pourrait aussi provenir d’une vitesse initiale différente ; il n’identifie pas seul δ."
+            },
+            "comparison": "5/2 : les transformations précisent les différences définies sans attribuer une cause unique."
           },
           {
             "id": 6,
-            "title": "Produire le diagnostic ouvert",
-            "action": "Documenter quels relevés permettraient de départager ces causes et lesquels ne testeraient que la cohérence du calcul.",
-            "output": "Diagnostic conditionnel et besoin de données explicite.",
-            "comparison": "La relecture revient aux prévisions importées en 4.1 ; la grille de 4.3 n’établit encore aucun écart mesuré."
+            "title": "Restituer la référence sans biais",
+            "input": "Relations de 4.5 et mouvement importé en 4.1 ; aucun décalage ou changement d’accélération n’est établi.",
+            "action": "Appliquer c = δ = ε = 0 ; restituer x*, v* et a, puis distinguer les données de départ nécessaires à une confrontation.",
+            "output": "Référence initiale retrouvée, interprétation matérielle ouverte.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le cas sans biais retrouve le dossier calculé. Une reprise doit conserver dates, origine et statut des nouvelles données."
+            },
+            "evaluation": {
+              "object": "4.6/4.1 : mouvement et conditions restitués comparés aux prévisions importées.",
+              "conditions": "Même pente, même départ et même durée ; aucun biais réel estimé.",
+              "criterion": "Retrouver x*(2 s) = 9,810 m et v*(2 s) = 9,810 m·s⁻¹, avec a = 4,905 m·s⁻².",
+              "finding": "Le dossier est conservé ; datation et conditions initiales restent à documenter pour un suivi réel."
+            },
+            "comparison": "6/1 : mêmes prévisions et même repérage après spécialisation du retour."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les prévisions deviennent des références de comparaison. Leur relecture ne crée pas de nouvelle acquisition."
+        },
+        "evaluation": {
+          "object": "4/3 : références et résidus relus comparés aux résultats du niveau 3.",
+          "conditions": "Même laboratoire, même origine et mêmes dates ; les références restent issues du modèle idéal.",
+          "criterion": "À t = 2,00 s, retrouver x* = 9,810 m et v* = 9,810 m·s⁻¹ ; leur substitution dans les résidus donne zéro.",
+          "finding": "Les références sont cohérentes par construction. Aucun écart matériel n’est établi."
+        }
       },
       {
         "id": 5,
-        "title": "Confronter l’absence de frottement",
-        "system": "Le choix entre le modèle idéal de la pente et des modèles modifiés pour expliquer un éventuel écart.",
-        "input": "Le diagnostic du niveau 4 et les hypothèses du niveau 2 définissent les alternatives à examiner.",
-        "output": "Le cadre idéal est conservé pour l’exemple ; les conditions d’une révision sont rendues explicites.",
+        "title": "Confronter résultante et interactions",
+        "system": "L’inférence de la résultante depuis une accélération, puis l’examen des hypothèses nécessaires pour l’attribuer à des interactions particulières.",
+        "input": "4.3 transmet accélération et résidus calculés ; masse, pente et pesanteur restent données, sans interaction mesurée séparément.",
+        "output": "Résultante reconstruite ; frottement conditionnel et effet du référentiel distingués avant la variante de masse.",
         "section": "limites",
-        "comparison": "Le cadre du retour est comparé au niveau 2 : absence de frottement, référentiel et contact sont examinés séparément.",
+        "comparison": "5/2 : bilan inverse confronté aux projections galiléennes et à l’inventaire sans frottement.",
         "steps": [
           {
             "id": 1,
-            "title": "Rassembler les alternatives",
-            "action": "Recenser les causes proposées dans le diagnostic et les associer à la force, au référentiel ou au protocole concerné.",
-            "output": "Alternatives organisées selon la source de modification."
+            "title": "Reprendre données et hypothèses",
+            "input": "Références de 4.3 : aX calculée, résidus nuls et absence de suivi indépendant ; α et g sont imposés.",
+            "action": "Séparer accélération, masse et hypothèses d’interactions ; rattacher une incertitude éventuelle d’angle ou de référentiel à sa propre donnée.",
+            "output": "Cinématique et hypothèses physiques distinctes.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les alternatives concernent des entrées différentes. Aucune d’elles n’est choisie pour expliquer un écart qui n’a pas été observé."
+            }
           },
           {
             "id": 2,
-            "title": "Établir les critères",
-            "action": "Choisir de modifier une seule hypothèse à la fois et définir la signature attendue sur accélération ou réaction.",
-            "output": "Règles de confrontation évitant les changements simultanés."
+            "title": "Inverser le bilan sous inventaire fixé",
+            "input": "Données de 5.1, masse connue et laboratoire galiléen ; envisager une force résistante f orientée vers le haut.",
+            "action": "Déduire FΣx = ma ; sous l’inventaire P, Nn et −fex, isoler f = m(g sinα − a).",
+            "output": "Résultante déterminable, résistance reconstruite seulement sous hypothèses.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Newton fournit la somme des forces. L’identification de f exige en plus la géométrie, la pesanteur et l’exclusion d’autres actions tangentielles."
+            }
           },
           {
             "id": 3,
-            "title": "Comparer les prédictions",
-            "action": "Écrire qualitativement comment frottement résistant, pente mal estimée ou support accéléré changeraient les projections de Newton.",
-            "output": "Prédictions différenciées pour chaque alternative envisagée."
+            "title": "Établir le résultat conditionnel",
+            "input": "Relations de 5.2 avec m = 2,00 kg, α = 30° et a = 4,905 m·s⁻² calculée.",
+            "action": "Retrouver FΣx = 9,810 N et f = 0 dans l’inventaire supposé ; conserver N = mg cosα.",
+            "output": "Résultante et cadre idéal à g, α, départ et durée fixés transmis à 6.1.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion réutilise l’accélération produite par le modèle. La force résistante nulle n’est donc pas une mesure supplémentaire."
+            }
           },
           {
             "id": 4,
-            "title": "Relire la distinction",
-            "action": "Reprendre ces prédictions et vérifier qu’une signature commune ne serait pas présentée comme une cause identifiée uniquement.",
-            "output": "Ambiguïtés entre plusieurs explications rendues visibles.",
-            "comparison": "Les alternatives classées en 5.1 sont relues à travers les prédictions de 5.3 sans prétendre disposer d’un test discriminant."
+            "title": "Reprendre les conditions d’identification",
+            "input": "Résultante et f de 5.3 ; aucune détermination indépendante de force, d’angle ou d’accélération du repère.",
+            "action": "Relever que FΣx dépend de m et a, tandis que f dépend aussi de l’inventaire et de g sinα.",
+            "output": "Deux niveaux d’inférence clairement séparés.",
+            "relation": {
+              "nature": "logique",
+              "description": "Une même résultante peut correspondre à différentes combinaisons d’actions. Le résultat conditionnel conserve les hypothèses qui le rendent calculable."
+            },
+            "evaluation": {
+              "object": "5.4/5.3 : portée de la résultante et du frottement relus face aux valeurs reconstruites.",
+              "conditions": "Même masse et même accélération calculée ; inventaire de référence conservé.",
+              "criterion": "Conserver 9,810 N comme résultante tangentielle et f = 0 comme conséquence de l’inventaire choisi.",
+              "finding": "Les valeurs sont retrouvées sans assimiler une somme de forces à l’identification de chaque interaction."
+            },
+            "comparison": "4/3 : mêmes résultats, avec leurs conditions d’inférence distinctes."
           },
           {
             "id": 5,
-            "title": "Évaluer le choix théorique",
-            "action": "Confronter les critères locaux à la disponibilité réelle des données ; maintenir le modèle idéal faute de confrontation expérimentale.",
-            "output": "Décision théorique provisoire et justification de maintien.",
-            "comparison": "La règle de 5.2 interdit d’ajuster arbitrairement un frottement pour améliorer un accord qui n’a pas été mesuré."
+            "title": "Déduire l’ambiguïté avec le référentiel",
+            "input": "Conditions relues en 5.4 ; repère en translation parallèle à la pente, d’accélération signée A, sans rotation.",
+            "action": "Écrire a′ = g sinα − f/m − A ; transformer f en f + mq et A en A − q pour conserver a′.",
+            "output": "Une même accélération relative peut correspondre à plusieurs couples (f, A).",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La transformation expose une indétermination si force et mouvement du repère sont inconnus. Elle ne modifie pas le scénario de référence."
+            },
+            "evaluation": {
+              "object": "5.5/5.2 : bilan dans le repère accéléré comparé à l’inversion galiléenne de f.",
+              "conditions": "Même α et g ; q symbolique, avec valeurs admissibles de f et A, sans estimation réelle.",
+              "criterion": "Pour A = 0, retrouver f = m(g sinα − a′) ; la transformation doit conserver f/m + A.",
+              "finding": "L’inversion initiale est un cas particulier. Connaître séparément le référentiel et l’inventaire reste nécessaire."
+            },
+            "comparison": "5/2 : la transformation retrouve l’inversion et explicite une cause de non-unicité."
           },
           {
             "id": 6,
-            "title": "Formuler le cadre retenu",
-            "action": "Présenter l’hypothèse sans frottement comme scénario de référence et préciser le relevé nécessaire avant une adaptation du bilan.",
-            "output": "Modèle de référence conservé avec conditions de révision.",
-            "comparison": "La sélection répond aux alternatives de 5.1 et conserve les limites exposées par leur comparaison en 5.3."
+            "title": "Restituer le cadre du laboratoire",
+            "input": "Relation de 5.5 et hypothèses de 5.1 ; A = 0 et absence de frottement conservées dans l’exemple.",
+            "action": "Appliquer A = f = 0 ; retrouver a = g sinα, FΣx = mg sinα et N = mg cosα.",
+            "output": "Cadre initial restitué, avec interactions toujours supposées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La spécialisation retrouve l’aller. Elle ne transforme pas la cohérence des calculs en preuve du caractère galiléen du laboratoire."
+            },
+            "evaluation": {
+              "object": "5.6/5.1 : modèle et données restitués comparés à la cinématique et aux hypothèses reçues.",
+              "conditions": "Même pente fixe, même masse et même pesanteur ; aucun changement matériel du support.",
+              "criterion": "Retrouver a = 4,905 m·s⁻² et N = mg cos30° ; conserver A = f = 0 comme hypothèses.",
+              "finding": "Les attributs de référence sont restitués. Toute révision demanderait des informations distinctes sur mouvement, géométrie et interactions."
+            },
+            "comparison": "6/1 : même dossier physique et mêmes conditions de référence."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour inverse Newton sous des conditions déclarées. Une résultante ne suffit pas à identifier chacune des forces qui la composent."
+        },
+        "evaluation": {
+          "object": "5/2 : résultante et force résistante conditionnelle comparées au modèle direct de la pente.",
+          "conditions": "Même masse, même angle et même contact ; le laboratoire reste le repère de référence.",
+          "criterion": "Retrouver FΣx = ma ; déduire f = m(g sinα − a) seulement sous l’inventaire poids, normale et résistance tangentielle.",
+          "finding": "Le modèle idéal est retrouvé avec f = 0. Ce résultat calculé ne constitue pas une identification expérimentale des interactions."
+        }
       },
       {
         "id": 6,
-        "title": "Recalculer et fermer sous conditions",
-        "system": "Une application du cadre retenu qui éprouve l’indépendance de l’accélération envers la masse dans l’exemple idéal.",
-        "input": "Le modèle confronté du niveau 5 et le dossier initial permettent le calcul d’une seconde masse hypothétique.",
-        "output": "Le retour retrouve la trajectoire idéale et distingue son invariance calculée d’une validation par des mesures.",
+        "title": "Revenir avec une masse doublée",
+        "system": "La comparaison de deux masses dans le même modèle de pente, puis l’examen de la dépendance de l’invariance aux forces retenues.",
+        "input": "5.3 transmet le cadre idéal ; mêmes g, α, départ et durée, avec m′ = 2m.",
+        "output": "Trajectoire inchangée, poids et réaction doublés ; l’invariance reste une conséquence conditionnelle du bilan.",
         "section": "controle",
-        "comparison": "Le retour varie la masse à méthode identique à 3 ; les résultats sont confrontés aux conditions et données initiales de 1.",
+        "comparison": "6/1 : même pente, même départ et même durée ; la masse est la seule donnée physique modifiée.",
         "steps": [
           {
             "id": 1,
-            "title": "Poser une variante contrôlée",
-            "action": "Reprendre le départ, l’angle et la durée initiaux et proposer seulement de doubler la masse du mobile dans le calcul.",
-            "output": "Scénario théorique de comparaison à paramètres maîtrisés."
+            "title": "Définir la variante de masse",
+            "input": "Cadre transmis par 5.3 et données initiales ; mobile de référence à 2,00 kg.",
+            "action": "Poser m′ = 4,00 kg ; conserver pente, pesanteur, repos en x = 0 et durée de 2,00 s.",
+            "output": "Deux masses, mêmes conditions de départ.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La masse change entre deux scénarios. Chaque mobile demeure un système de masse constante pendant son évolution."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les grandeurs comparées",
-            "action": "Utiliser le cadre retenu pour comparer accélération, trajectoire, poids et réaction sans mélanger ces différentes dépendances en masse.",
-            "output": "Plan de comparaison des mouvements et forces."
+            "title": "Déduire les dépendances en masse",
+            "input": "Données de 6.1 et projections sans frottement ; les deux masses restent positives.",
+            "action": "Écrire m′a′ = m′g sinα et N′ = m′g cosα ; simplifier pour obtenir a′ = a puis intégrer aux mêmes conditions initiales.",
+            "output": "Mouvement indépendant de m ; poids et réaction proportionnels à m.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La masse figure dans chaque force avant simplification. L’invariance provient de cette dépendance commune et du bilan choisi."
+            }
           },
           {
             "id": 3,
-            "title": "Appliquer le cadre retenu",
-            "action": "Recalculer les deux projections puis la trajectoire avec la masse doublée, en conservant les mêmes conventions et unités.",
-            "output": "Trajectoire inchangée et forces calculées deux fois supérieures."
+            "title": "Établir les résultats de la variante",
+            "input": "Relations de 6.2, m′ = 4,00 kg et données du scénario initial.",
+            "action": "Calculer a′ = 4,905 m·s⁻², N′ ≈ 33,983 N et P′ = 39,240 N ; retrouver v′ = 9,810 m·s⁻¹ et x′ = 9,810 m.",
+            "output": "Variante calculée transmise au prochain dossier 1.1.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les forces utilisent les expressions non arrondies avant affichage. La réaction doublée ne se calcule pas en doublant son seul arrondi initial."
+            }
           },
           {
             "id": 4,
-            "title": "Relire l’invariance",
-            "action": "Comparer les sorties et vérifier que la masse a bien été doublée dans chaque force avant sa simplification dans l’accélération.",
-            "output": "Origine algébrique de l’invariance du mouvement identifiée.",
-            "comparison": "Les sorties de 6.3 sont relues à partir de la variante de 6.1 ; une masse oubliée n’est pas une invariance."
+            "title": "Reprendre mouvements et forces",
+            "input": "Résultats de 6.3 et référence de 3.3 ; même instant final et mêmes origines.",
+            "action": "Reprendre séparément les rapports des forces et du mouvement ; vérifier le doublement de m dans le poids et dans ma.",
+            "output": "Forces doublées, accélération et trajectoire conservées.",
+            "relation": {
+              "nature": "logique",
+              "description": "La relecture distingue une simplification justifiée d’une masse oubliée. Elle compare des grandeurs de même nature."
+            },
+            "evaluation": {
+              "object": "6.4/6.3 : rapports de forces et de mouvement relus face aux résultats de la variante.",
+              "conditions": "Même g, α et durée ; calculs avec expressions exactes avant arrondi.",
+              "criterion": "Retrouver P′/P = N′/N = 2 et a′ = a ; les mêmes intégrations donnent v′ = v et x′ = x.",
+              "finding": "Les rapports proviennent du bilan complet. Leur cohérence ne démontre pas l’absence réelle de frottement."
+            },
+            "comparison": "4/3 : les valeurs produites présentent les rapports attendus."
           },
           {
             "id": 5,
-            "title": "Confronter la portée",
-            "action": "Examiner si une force résistante indépendante du poids conserverait ce résultat et rappeler les hypothèses nécessaires à la simplification.",
-            "output": "Dépendance au modèle de l’invariance clairement exposée.",
-            "comparison": "Le plan de 6.2 ne permet l’invariance que dans le bilan retenu ; une autre loi de force exige un recalcul."
+            "title": "Traiter une résistance indépendante de m",
+            "input": "Invariance relue en 6.4 ; envisager une même force résistante constante f, indépendante de la masse, sur les deux descentes.",
+            "action": "Déduire a(m) = g sinα − f/m et a(2m) = g sinα − f/(2m) ; soustraire pour obtenir a(2m) − a(m) = f/(2m).",
+            "output": "Invariance perdue pour ce f non nul, retrouvée pour f = 0.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le traitement modifie une seule loi de force à titre symbolique. Aucun frottement nouveau n’est attribué aux calculs de référence."
+            },
+            "evaluation": {
+              "object": "6.5/6.2 : bilan avec résistance indépendante de m comparé à la simplification idéale.",
+              "conditions": "Même laboratoire et force tangentielle f identique ; descente maintenue, avec 0 ≤ f < mg sinα.",
+              "criterion": "Pour f = 0, retrouver a(2m) − a(m) = 0 ; pour f > 0 fixé, la différence vaut f/(2m).",
+              "finding": "La dépendance au modèle est établie. Une résistance proportionnelle à m pourrait, elle, préserver l’invariance."
+            },
+            "comparison": "5/2 : le calcul explicite quand la simplification en masse reste applicable."
           },
           {
             "id": 6,
-            "title": "Clore la boucle idéale",
-            "action": "Rapprocher le résultat de retour du dossier initial et annoncer les observations manquantes pour tester l’invariance sur une piste réelle.",
-            "output": "Boucle théorique close et validation expérimentale laissée ouverte.",
-            "comparison": "Le calcul de 6.3 répond au scénario de 6.1 et retrouve les hypothèses initiales sans prétendre confirmer leur réalité."
+            "title": "Restituer la comparaison idéale",
+            "input": "Relations de 6.5 et paramètres de 6.1 ; le scénario demandé conserve f = 0.",
+            "action": "Appliquer f = 0 aux deux masses ; restituer l’accélération commune, les forces propres à chaque masse et les mêmes conditions initiales.",
+            "output": "Deux dossiers cohérents, portée de l’invariance explicitée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La spécialisation retrouve la comparaison demandée. Elle conserve la distinction entre une propriété du modèle et une propriété mesurée."
+            },
+            "evaluation": {
+              "object": "6.6/6.1 : masses, conditions initiales et résultats restitués comparés aux deux scénarios définis.",
+              "conditions": "Même pente fixe, deux masses constantes et force résistante nulle supposée.",
+              "criterion": "Retrouver m = 2,00 kg, m′ = 4,00 kg, x₀ = v₀ = 0 et la même vitesse à 2,00 s.",
+              "finding": "Les dossiers initiaux sont conservés. Tester l’invariance demanderait de caractériser séparément masses, contact et mouvement."
+            },
+            "comparison": "6/1 : mêmes scénarios et même départ, avec hypothèses explicites."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour compare deux scénarios de masses différentes. Il ne décrit pas une variation de masse pendant une descente."
+        },
+        "evaluation": {
+          "object": "6/1 : paramètres et mouvement de la variante comparés au dossier initial.",
+          "conditions": "Deux masses constantes, m = 2,00 kg et m′ = 4,00 kg ; même laboratoire, sans frottement.",
+          "criterion": "Conserver α = 30° et t = 2,00 s ; P′/P = N′/N = 2, mais a′/a = v′/v = x′/x = 1.",
+          "finding": "Les forces doublent tandis que v et x restent numériquement 9,810 dans leurs unités respectives. Aucune comparaison matérielle n’est réalisée."
+        }
       }
     ],
-    "version": "0.1",
-    "updated": "2026-09-09"
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les conventions, les résidus de trajectoire et les inversions sont précisés ; une résultante déduite reste distincte des interactions supposées.",
+    "subject": {
+      "type": "physique",
+      "description": "Descente d’un mobile ponctuel sur une pente fixe sans frottement, puis comparaison avec une masse doublée.",
+      "scope": "Masse constante, vitesses classiques et laboratoire supposé galiléen ; contact maintenu, sans rotation propre ni échange de matière."
+    }
   },
   "travail-energie-mecanique": {
     "question": "Quel bilan permet de prévoir une variation de vitesse tout en suivant les transferts dus à la traction et au frottement ?",
@@ -4060,312 +4396,648 @@
     }
   },
   "force-centrale-orbite": {
-    "question": "Comment passer d’une interaction centrale à une orbite calculée, puis déterminer ce que ses invariants permettraient réellement de tester ?",
-    "basis": "L’exemple impose un paramètre gravitationnel et un rayon orbital arrondis ; positions, période et accélération sont théoriques et non des données astronomiques mesurées.",
+    "question": "Quelles hypothèses conduisent au cercle gravitationnel, et quels attributs peut-on retrouver à partir de ses grandeurs calculées ?",
+    "basis": "GM et le rayon sont des données pédagogiques arrondies ; circularité et champ newtonien sont supposés, vitesse, période et accélération sont calculées.",
     "levels": [
       {
         "id": 1,
         "title": "Définir centre et état orbital",
-        "system": "Le dossier géométrique et cinématique d’un mobile décrit relativement à un centre fixe.",
-        "input": "L’exemple apporte GM et un rayon ; l’hypothèse d’orbite circulaire complète une description qui demanderait autrement position et vitesse initiales.",
-        "output": "Le rayon, le référentiel et le statut de la circularité sont explicitement distingués des observations absentes.",
+        "system": "Le dossier géométrique et cinématique du mobile, décrit depuis un centre fixe dans le référentiel galiléen adopté.",
+        "input": "L’exemple donne GM et r, puis impose un cercle ; la reprise peut recevoir séparément le cercle de rayon double de 6.3.",
+        "output": "Le dossier distingue distance centrale, circularité supposée, vitesse tangentielle à déterminer et conditions physiques du champ extérieur.",
         "section": "conditions",
         "comparison": "",
         "steps": [
           {
             "id": 1,
-            "title": "Repérer le centre",
-            "action": "Identifier le centre de l’astre, le mobile extérieur et la distance entre eux, sans remplacer cette distance par une altitude.",
-            "output": "Géométrie du rayon orbital et centre explicités."
+            "title": "Situer le mobile et le centre",
+            "input": "Scénario initial : GM = 3,986 × 10¹⁴ m³·s⁻², r = 7,000 × 10⁶ m ; reprise distincte possible depuis 6.3 ou 1.6.",
+            "action": "Identifier O fixe, le point de masse constante m et l’astre sphérique ; conserver m négligeable devant M et l’extérieur de l’astre.",
+            "output": "La distance fournie part du centre ; champ newtonien, absence de perturbations et circularité sont supposés, sans altitude ni positions observées.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le dossier fixe le système et le référentiel ; le rayon orbital n’est pas une distance mesurée depuis la surface."
+            }
           },
           {
             "id": 2,
-            "title": "Décrire l’état initial",
-            "action": "Choisir le référentiel et distinguer position, direction de vitesse et norme de vitesse parmi les données nécessaires à une trajectoire.",
-            "output": "État cinématique et référentiel du problème identifiés."
+            "title": "Déduire la direction de vitesse",
+            "input": "La circularité impose r² = r · r constant ; r désigne ici le vecteur position lorsque le produit scalaire est écrit.",
+            "action": "Dériver r · r dans le référentiel galiléen, puis décomposer v en composantes radiale et tangentielle au cercle.",
+            "output": "d(r · r)/dt = 2r · v = 0 : v_r = 0 ; la vitesse est tangentielle, mais sa norme reste à établir.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivation de la contrainte géométrique impose la tangence ; elle ne donne pas, à elle seule, la norme de la vitesse."
+            }
           },
           {
             "id": 3,
-            "title": "Exprimer le scénario circulaire",
-            "action": "Compléter le dossier en annonçant que la circularité est imposée et que la vitesse compatible sera déterminée par le modèle.",
-            "output": "Circularité notée comme hypothèse et non observation."
+            "title": "Consigner le scénario circulaire",
+            "input": "La géométrie fournit v_r = 0 ; l’énoncé donne GM, le rayon extérieur et les hypothèses de centre fixe et masse dominante.",
+            "action": "Conserver ces attributs supposés et transmettre à 2.1 la détermination dynamique de la vitesse compatible avec le cercle.",
+            "output": "Cercle imposé : r = 7,000 × 10⁶ m, GM = 3,986 × 10¹⁴ m³·s⁻² et v_r = 0 ; norme tangentielle encore à calculer.",
+            "relation": {
+              "nature": "logique",
+              "description": "Cette sortie explicite les entrées de la dynamique ; aucune conservation générale n’a été utilisée pour prouver la circularité."
+            }
           },
           {
             "id": 4,
-            "title": "Relire la géométrie",
-            "action": "Reprendre ce dossier et vérifier qu’un changement d’origine au sol ne serait pas utilisé comme rayon dans la loi gravitationnelle.",
-            "output": "Distinction entre distance centrale et altitude conservée.",
-            "comparison": "La description de 1.3 doit rester mesurée depuis le centre choisi en 1.1, même lorsqu’une altitude serait communiquée."
+            "title": "Relire l’origine du rayon",
+            "input": "Le scénario 1.3 emploie la distance au centre ; une altitude h serait définie relativement à un rayon d’astre R.",
+            "action": "Confronter le rayon utilisé à r = R + h et conserver le statut extérieur supposé, sans attribuer de valeur absente à R.",
+            "output": "r reste la distance centrale de l’exemple ; aucune altitude numérique n’est déduite, puisque R n’est pas fourni.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture distingue deux grandeurs géométriques ; une conversion en altitude demanderait le rayon de l’astre."
+            },
+            "evaluation": {
+              "object": "1.4 ↔ 1.3 : distance centrale du scénario et convention géométrique relue.",
+              "conditions": "Même centre fixe et astre sphérique ; r est donné, tandis que R et h ne sont pas renseignés.",
+              "criterion": "La loi gravitationnelle doit recevoir r = R + h, jamais h seul ; le modèle extérieur suppose r > R.",
+              "finding": "Le rayon de 1.3 est conservé ; son caractère extérieur reste une hypothèse, sans calcul d’altitude fictive."
+            },
+            "comparison": "1.4 confronte le rayon de 1.3 à sa définition depuis O et maintient la distinction avec l’altitude."
           },
           {
             "id": 5,
-            "title": "Confronter les données cinématiques",
-            "action": "Examiner si un rayon seul détermine une orbite générale et identifier les informations rendues implicites par l’hypothèse de circularité.",
-            "output": "Données manquantes pour une trajectoire non circulaire.",
-            "comparison": "Le cadre de 1.2 demande position et vitesse ; le scénario de circularité apporte une contrainte supplémentaire, pas une mesure indépendante."
+            "title": "Déduire la vitesse compatible",
+            "input": "La géométrie relue garde r constant ; le champ supposé donne a = −(GM/r²)e_r, avec e_r radial sortant.",
+            "action": "Dériver encore r · v = 0 pour obtenir v² + r · a = 0, puis substituer l’accélération gravitationnelle.",
+            "output": "v² = GM/r ; la tangence et cette norme sont conjointement requises pour le cercle newtonien, avec r extérieur.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour combine la contrainte géométrique et la dynamique ; une position seule ne remplace pas ces conditions sur la vitesse."
+            },
+            "evaluation": {
+              "object": "1.5 ↔ 1.2 : compatibilité dynamique et contrainte de tangence.",
+              "conditions": "Même cercle supposé, centre fixe et gravitation newtonienne ; les deux dérivations portent sur la même position.",
+              "criterion": "La première dérivée impose r · v = 0 ; la seconde impose v² = GM/r, et non une norme tangentielle arbitraire.",
+              "finding": "La norme compatible complète la tangence de 1.2 ; le rayon seul ne fixe pas une orbite générale."
+            },
+            "comparison": "1.5 prolonge la contrainte dérivée en 1.2 et distingue la tangence de la condition dynamique de circularité."
           },
           {
             "id": 6,
-            "title": "Arrêter le dossier d’entrée",
-            "action": "Conserver paramètre gravitationnel, rayon et hypothèses de centre fixe, puis séparer les informations qu’exigerait une véritable observation orbitale.",
-            "output": "Entrées du scénario et observations nécessaires séparées.",
-            "comparison": "Le dossier final conserve la géométrie de 1.1 et le choix posé en 1.3 sans attribuer une vitesse mesurée au mobile."
+            "title": "Restituer les attributs du scénario",
+            "input": "Le retour fixe les conditions de vitesse compatibles avec GM et r ; le dossier initial n’apportait aucune trajectoire mesurée.",
+            "action": "Conserver paramètres, centre fixe et hypothèses physiques ; distinguer la vitesse calculable du plan orbital, du sens et de la phase non spécifiés.",
+            "output": "GM et r sont inchangés ; circularité et extérieur restent supposés. Orientation, phase et valeur numérique de m ne sont pas déterminées.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour précise ce que fournit le dossier et ce qu’il laisse libre ; 1.1 peut reprendre séparément le second cercle."
+            },
+            "evaluation": {
+              "object": "1.6 ↔ 1.1 : paramètres, centre et conditions du dossier initial.",
+              "conditions": "Retour sur le premier cercle ; la variante de rayon double, si reprise, demeure identifiée comme un scénario distinct.",
+              "criterion": "Retrouver GM = 3,986 × 10¹⁴ m³·s⁻² et r = 7,000 × 10⁶ m, avec O fixe, m ≪ M et champ extérieur sphérique.",
+              "finding": "Les attributs initiaux sont conservés ; les contraintes sur v les complètent sans transformer le scénario en observation."
+            },
+            "comparison": "1.6 confronte le dossier complété à 1.1 et conserve les informations qui ne sont pas identifiées par les paramètres."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "logique",
+          "description": "Les paramètres et hypothèses définissent un scénario orbital ; le rayon seul ne spécifie ni une trajectoire générale ni son orientation."
+        }
       },
       {
         "id": 2,
-        "title": "Formaliser la centralité et la circularité",
-        "system": "Le modèle reliant direction de force, moment cinétique et accélération nécessaire à une trajectoire circulaire.",
-        "input": "Le dossier du niveau 1 fournit le centre et les paramètres ; le modèle newtonien sphérique est supposé applicable.",
-        "output": "Les invariants généraux et les relations propres au cercle sont établis séparément.",
+        "title": "Séparer centralité et cercle gravitationnel",
+        "system": "Les déductions qui relient moment de force, conservations et conditions particulières d’une orbite circulaire newtonienne.",
+        "input": "Le dossier 1 fournit O, GM, r et la circularité ; la force gravitationnelle est un cas particulier de force centrale.",
+        "output": "La centralité conserve L ; la loi newtonienne et le cercle donnent v = √(GM/r), puis T = 2π√(r³/GM).",
         "section": "moment",
         "comparison": "",
         "steps": [
           {
             "id": 1,
-            "title": "Recenser les hypothèses centrales",
-            "action": "Reprendre la force dirigée suivant le rayon et distinguer centralité, loi inverse du carré et hypothèse de masse centrale dominante.",
-            "output": "Trois hypothèses physiques indépendantes explicitement recensées."
+            "title": "Recenser les hypothèses distinctes",
+            "input": "Le scénario 1.3 transmet le centre fixe, le cercle et ses paramètres ; les distinctions de 2.6 peuvent préciser leur portée.",
+            "action": "Séparer F colinéaire à r, la loi F = −GMm e_r/r² et le choix circulaire ; conserver m constant et m ≪ M.",
+            "output": "Centralité, gravitation en inverse du carré et circularité sont trois attributs distincts ; la masse m n’est pas chiffrée.",
+            "relation": {
+              "nature": "logique",
+              "description": "La force newtonienne satisfait la centralité ; une force centrale quelconque ne possède pas nécessairement sa dépendance en r."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les équations utiles",
-            "action": "Poser le moment de force autour du centre et la projection radiale de Newton pour le mouvement circulaire choisi.",
-            "output": "Équations d’invariance et de circularité séparées."
+            "title": "Dériver les deux relations dynamiques",
+            "input": "L = r × mv et τ = r × F ; la cinématique du cercle donne a_r = −v²/r et a_θ = dv/dt.",
+            "action": "Dériver L, puis projeter Newton : F_θ = 0 impose dv/dt = 0 ; radialement, −mv²/r = −GMm/r².",
+            "output": "dL/dt = r × F = 0 ; v constante, v² = GM/r et T = 2πr/v, sans masse supplémentaire dans τ.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le moment nul donne une conservation générale ; l’équation radiale exige en plus la gravitation et la circularité supposées."
+            }
           },
           {
             "id": 3,
-            "title": "Produire les conséquences",
-            "action": "Déduire conservation du moment cinétique pour une force centrale puis la vitesse et la période du cercle gravitationnel étudié.",
-            "output": "Conséquences générales distinguées des résultats propres au cercle."
+            "title": "Établir les conséquences séparées",
+            "input": "La dérivation 2.2 conserve L et donne les expressions circulaires ; le mouvement est plan lorsque L est non nul.",
+            "action": "Consigner les invariants généraux et transmettre à 3.1 les expressions de v, T et de la norme d’accélération a_c.",
+            "output": "L constant ; si L ≠ 0, plan fixe perpendiculaire à L. Pour le cercle newtonien : v = √(GM/r), T = 2π√(r³/GM), a_c = GM/r².",
+            "relation": {
+              "nature": "logique",
+              "description": "Les résultats gardent leurs hypothèses respectives ; le plan conservé n’impose pas un rayon constant."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les déductions",
-            "action": "Reprendre chaque conséquence et vérifier qu’aucune vitesse constante n’est attribuée automatiquement à toute trajectoire sous force centrale.",
-            "output": "Portée exacte des invariants explicitement vérifiée.",
-            "comparison": "Les résultats de 2.3 sont relus selon les hypothèses de 2.1 ; centralité seule ne signifie pas trajectoire circulaire."
+            "title": "Relire l’invariant central",
+            "input": "Le résultat 2.3 affirme L constant ; dans son plan, L ≠ 0 permet de choisir le sens positif suivant L.",
+            "action": "Exprimer ℓ = ‖L‖/m = r²θ̇ et distinguer la vitesse aréolaire constante de la vitesse angulaire.",
+            "output": "Ȧ = ℓ/2 ; si r varie, θ̇ = ℓ/r² varie aussi. Le cas L = 0 ne sélectionne pas un plan orbital unique.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La projection de l’invariant explicite son contenu géométrique ; des aires égales ne signifient des angles égaux que si r reste constant."
+            },
+            "evaluation": {
+              "object": "2.4 ↔ 2.3 : portée de la conservation de L.",
+              "conditions": "Centre fixe galiléen, masse constante ; pour la formule plane orientée, L ≠ 0 et θ croît suivant L.",
+              "criterion": "L constant implique r²θ̇ = ℓ constant, sans exiger séparément r constant ni θ̇ constant ; L = 0 reste distinct.",
+              "finding": "La relecture conserve le plan et la loi des aires de 2.3, sans conclure qu’une force centrale impose un cercle."
+            },
+            "comparison": "2.4 confronte l’interprétation de L constant aux conséquences de 2.3 et limite ce qui peut en être déduit."
           },
           {
             "id": 5,
-            "title": "Confronter les conservations",
-            "action": "Examiner le rôle d’une dépendance temporelle de la force pour distinguer conservation du moment cinétique et conservation de l’énergie mécanique.",
-            "output": "Conditions propres à chaque conservation rappelées.",
-            "comparison": "Le cadre de 2.2 doit séparer moment nul et potentiel indépendant du temps ; une conservation ne remplace pas l’autre."
+            "title": "Dériver les conditions énergétiques",
+            "input": "La relecture distingue centralité et circularité ; considérons une force radiale dérivable d’un potentiel U(r,t), F_r = −∂U/∂r.",
+            "action": "Calculer d(E_c + U)/dt = F_r ṙ + (∂U/∂r)ṙ + ∂U/∂t, puis appliquer U = −GMm/r.",
+            "output": "dE/dt = ∂U/∂t ; le potentiel newtonien indépendant du temps conserve E, tandis que le moment nul seul ne suffit pas.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La compensation du travail et de la variation spatiale du potentiel précise une condition énergétique distincte de r × F = 0."
+            },
+            "evaluation": {
+              "object": "2.5 ↔ 2.2 : conservation énergétique et conservation du moment cinétique.",
+              "conditions": "Masse constante, centre fixe ; le calcul énergétique suppose le potentiel radial indiqué, avec son éventuelle dépendance temporelle.",
+              "criterion": "Centralité : dL/dt = 0 ; potentiel indépendant du temps : dE/dt = 0. La première propriété n’impose pas la seconde.",
+              "finding": "Pour le champ newtonien retenu, L et E sont conservés ; ces propriétés n’imposent pas à elles seules la circularité."
+            },
+            "comparison": "2.5 ajoute les conditions énergétiques au calcul de 2.2 et distingue les hypothèses propres aux deux conservations."
           },
           {
             "id": 6,
-            "title": "Retenir le modèle orbital",
-            "action": "Présenter les relations circulaires avec leurs hypothèses et conserver les invariants centraux comme outils d’analyse d’un retour éventuel.",
-            "output": "Cadre circulaire prêt pour une application numérique.",
-            "comparison": "Le modèle final répond aux hypothèses de 2.1 et limite les déductions de 2.3 au centre fixe et au champ retenu."
+            "title": "Restituer le modèle à appliquer",
+            "input": "Le retour a séparé moment nul, potentiel stationnaire et contrainte circulaire ; les hypothèses physiques de 2.1 restent celles de l’exemple.",
+            "action": "Retenir les formules du cercle avec leur domaine, puis maintenir L et E comme attributs symboliques faute de masse et d’état complets.",
+            "output": "Le calcul numérique de v, T et a_c dépend de GM et r ; la valeur de L requiert notamment m.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour restitue les hypothèses de chaque résultat et prépare une reprise de 2.1 sans assimiler conservation et forme d’orbite."
+            },
+            "evaluation": {
+              "object": "2.6 ↔ 2.1 : force supposée, circularité et masse du mobile.",
+              "conditions": "Même modèle extérieur newtonien, centre fixe galiléen et m ≪ M ; aucune nouvelle mesure de force ou de masse.",
+              "criterion": "Conserver F = −GMm e_r/r² et le cercle supposé ; ne pas convertir L constant en condition suffisante de vitesse constante.",
+              "finding": "Le modèle de 2.1 est retrouvé ; ses résultats indépendants de m sont distingués des moments et énergies non chiffrés."
+            },
+            "comparison": "2.6 confronte les relations retenues aux hypothèses de 2.1 et préserve leur séparation."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La direction de la force détermine son moment ; sa dépendance radiale et la circularité interviennent séparément dans vitesse et période."
+        }
       },
       {
         "id": 3,
-        "title": "Calculer les grandeurs du cercle",
-        "system": "La chaîne numérique reliant le rayon imposé à la vitesse, à la période et à l’accélération orbitale.",
-        "input": "Les relations du niveau 2 reçoivent GM et le rayon fournis par le scénario du niveau 1.",
-        "output": "Les grandeurs orbitales calculées définissent les résultats de l’aller et leurs conventions d’unités.",
+        "title": "Calculer puis reconstruire les paramètres",
+        "system": "La chaîne numérique qui relie le rayon du cercle à sa vitesse, sa période et son accélération centrale.",
+        "input": "Les relations de 2 reçoivent GM = 3,986 × 10¹⁴ m³·s⁻² et r = 7,000 × 10⁶ m, fournis par le scénario.",
+        "output": "Le modèle donne v = 7546,049 m·s⁻¹, T = 5828,520 s, soit 97,142 min, et a_c = 8,134694 m·s⁻².",
         "section": "exemple",
         "comparison": "",
         "steps": [
           {
             "id": 1,
-            "title": "Préparer les paramètres orbitaux",
-            "action": "Reprendre GM et le rayon arrondis de l’exemple, conserver les mètres et secondes et identifier leur statut de données pédagogiques.",
-            "output": "Paramètres de calcul et précision initiale explicités."
+            "title": "Reprendre les paramètres du cercle",
+            "input": "Le résultat 2.3 fournit v = √(GM/r), T = 2π√(r³/GM) et a_c = GM/r² ; 3.6 peut préciser les paramètres restitués.",
+            "action": "Employer GM = 3,986 × 10¹⁴ m³·s⁻² et r = 7,000 × 10⁶ m en conservant leur statut de données pédagogiques.",
+            "output": "GM et r sont les deux entrées numériques ; ni la masse m du mobile ni une période observée ne sont fournies.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les unités rendent les expressions homogènes ; la provenance des paramètres limite l’interprétation physique des décimales calculées."
+            }
           },
           {
             "id": 2,
-            "title": "Définir la chaîne numérique",
-            "action": "Calculer vitesse puis période à partir de la circonférence et vérifier séparément l’accélération gravitationnelle à ce rayon.",
-            "output": "Procédure de calcul des trois grandeurs orbitales."
+            "title": "Effectuer les substitutions",
+            "input": "Les paramètres de 3.1 alimentent les expressions circulaires, avec r mesuré depuis le centre et GM positif.",
+            "action": "Calculer v, puis T = 2πr/v et a_c = GM/r² ; garder les valeurs internes avant l’arrondi de présentation.",
+            "output": "v = √[(3,986 × 10¹⁴)/(7,000 × 10⁶)] ; T = 2πr/v ; a_c = (3,986 × 10¹⁴)/(7,000 × 10⁶)².",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La chaîne produit successivement une vitesse, une durée et une norme d’accélération ; seule la division par 60 convertit T en minutes."
+            }
           },
           {
             "id": 3,
-            "title": "Exécuter le scénario",
-            "action": "Produire les valeurs prévues de vitesse, période et accélération, en distinguant une conversion en minutes d’une nouvelle précision physique.",
-            "output": "Grandeurs orbitales annoncées comme valeurs du modèle."
+            "title": "Consigner les grandeurs calculées",
+            "input": "Le traitement 3.2 produit les trois grandeurs du cercle ; les paramètres initiaux restent ceux de l’exemple.",
+            "action": "Présenter les valeurs arrondies avec leurs unités, la direction centrale de a et le statut calculé ; transmettre ce dossier à 4.1.",
+            "output": "v = 7546,049 m·s⁻¹ ; T = 5828,520 s = 97,142 min ; a = −8,134694 e_r m·s⁻², où e_r est radial sortant.",
+            "relation": {
+              "nature": "logique",
+              "description": "Ces grandeurs décrivent le cercle supposé ; la norme constante de v ne signifie pas que son vecteur reste constant."
+            }
           },
           {
             "id": 4,
-            "title": "Reconstruire l’accélération",
-            "action": "Reprendre vitesse et rayon obtenus pour calculer l’accélération centripète et la comparer à l’accélération gravitationnelle produite séparément.",
-            "output": "Cohérence dynamique du cercle contrôlée par deux expressions.",
-            "comparison": "La relecture utilise les paramètres de 3.1 et confronte les sorties de 3.3 sans y voir deux observations indépendantes."
+            "title": "Recomposer l’accélération centrale",
+            "input": "Le résultat 3.3 donne v et a ; le rayon de 3.1 permet de comparer v²/r à GM/r².",
+            "action": "Former a_c = v²/r avec la valeur non arrondie de v et conserver la direction −e_r pour la comparaison vectorielle.",
+            "output": "v²/r = GM/r² = 8,134694 m·s⁻² à l’arrondi affiché ; l’accélération demeure dirigée vers O.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour confronte deux expressions issues du même modèle, sans les transformer en deux déterminations expérimentales indépendantes."
+            },
+            "evaluation": {
+              "object": "3.4 ↔ 3.3 : accélération reconstruite et accélération annoncée.",
+              "conditions": "Même cercle, mêmes paramètres et valeurs internes non arrondies ; l’affichage final est arrondi comme celui de 3.3.",
+              "criterion": "v²/r doit égaler GM/r² ; le vecteur correspondant doit être −a_c e_r avec a_c ≈ 8,134694 m·s⁻².",
+              "finding": "Les expressions coïncident dans le calcul ; la comparaison vérifie la cohérence numérique et le signe central."
+            },
+            "comparison": "3.4 confronte la reconstruction v²/r à l’accélération de 3.3 dans les mêmes conventions."
           },
           {
             "id": 5,
-            "title": "Confronter les arrondis",
-            "action": "Examiner la précision des paramètres imposés et retenir des arrondis de présentation qui ne masquent pas leur caractère pédagogique.",
-            "output": "Précision de calcul distinguée de précision des données.",
-            "comparison": "La méthode numérique de 3.2 ne transforme pas des paramètres arrondis en mesure astronomique plus précise que leur provenance."
+            "title": "Inverser les grandeurs orbitales",
+            "input": "La relecture conserve v, T et a_c compatibles avec le cercle ; r est connu et les arrondis restent identifiés.",
+            "action": "Isoler GM dans chaque expression : GM_v = v²r, GM_T = 4π²r³/T² et GM_a = a_c r².",
+            "output": "Les trois inversions redonnent GM = 3,986 × 10¹⁴ m³·s⁻² avant arrondis ; r se retrouve aussi par vT/(2π).",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion restitue les entrées du calcul direct ; réutiliser ses propres sorties ne crée pas une détermination indépendante du champ."
+            },
+            "evaluation": {
+              "object": "3.5 ↔ 3.2 : inversion des résultats et substitutions directes.",
+              "conditions": "Même modèle circulaire et même rayon ; les identités exactes portent sur les valeurs internes avant arrondi.",
+              "criterion": "v²r = 4π²r³/T² = a_c r² = GM et vT/(2π) = r ; les seuls écarts issus des valeurs affichées sont des arrondis.",
+              "finding": "Les paramètres de 3.2 sont retrouvés ; aucune incertitude expérimentale ni masse centrale mesurée n’est déduite de cette concordance."
+            },
+            "comparison": "3.5 inverse la chaîne de 3.2 et distingue la reconstruction calculatoire d’une estimation astronomique."
           },
           {
             "id": 6,
-            "title": "Conserver les résultats du cercle",
-            "action": "Enregistrer les expressions et valeurs vérifiées, avec le rayon utilisé, pour permettre une comparaison à une seconde orbite théorique.",
-            "output": "Résultats reproductibles liés au rayon et au modèle.",
-            "comparison": "Les sorties finales reprennent les paramètres de 3.1 et la cohérence de 3.3 sans attribuer une période observée à l’astre."
+            "title": "Restituer le dossier numérique",
+            "input": "Le traitement inverse restitue GM et r ; la provenance pédagogique et les hypothèses circulaires restent celles de 3.1.",
+            "action": "Rapprocher les paramètres retrouvés des entrées et conserver expressions, unités et statut des valeurs pour une reprise en 3.1.",
+            "output": "GM = 3,986 × 10¹⁴ m³·s⁻² et r = 7,000 × 10⁶ m sont retrouvés ; m et les éléments d’orientation restent indéterminés.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour identifie les entrées reconstruisibles par les sorties, sans attribuer aux chiffres affichés une information absente du dossier."
+            },
+            "evaluation": {
+              "object": "3.6 ↔ 3.1 : paramètres et provenance du calcul.",
+              "conditions": "Retour sur le premier cercle, avec valeurs internes cohérentes et arrondis de présentation conservés.",
+              "criterion": "Retrouver GM et r initiaux en unités SI ; ne pas attribuer une valeur de m aux expressions où cette masse s’élimine.",
+              "finding": "Les deux paramètres numériques sont restitués ; ils restent des données pédagogiques, et non des mesures nouvelles."
+            },
+            "comparison": "3.6 confronte le dossier reconstruit aux entrées de 3.1 et conserve leurs limites d’information."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les valeurs calculées résultent de paramètres pédagogiques arrondis ; les décimales affichées n’ajoutent pas de précision astronomique."
+        }
       },
       {
         "id": 4,
-        "title": "Relire la géométrie orbitale annoncée",
-        "system": "Une grille de confrontation des résultats circulaires avec les positions et durées qui seraient nécessaires à une observation.",
-        "input": "Les sorties du niveau 3 deviennent données de retour ; aucune éphéméride ou série de positions n’est fournie.",
-        "output": "La relecture distingue cohérence d’un cercle calculé et indices indépendants de centralité ou de circularité.",
+        "title": "Relire rayon, angles et aires",
+        "system": "Les critères géométriques et temporels associés aux grandeurs du cercle calculé et à une éventuelle confrontation orbitale.",
+        "input": "Le retour reçoit v, T et a de 3, avec r supposé constant ; aucune série indépendante de positions datées n’est fournie.",
+        "output": "Le cercle prédit rayon et vitesse angulaire constants ; la loi des aires, moins restrictive, reste distinguée de la circularité.",
         "section": "limites",
-        "comparison": "Le retour reprend les grandeurs de 3 avec le centre et les conventions de 1 ; il ne transforme pas un cercle imposé en cercle observé.",
+        "comparison": "4 confronte les attentes géométriques et temporelles aux résultats de 3, sans convertir le cercle imposé en cercle observé.",
         "steps": [
           {
             "id": 1,
-            "title": "Importer les résultats orbitaux",
-            "action": "Reprendre vitesse, période et accélération calculées ainsi que le rayon supposé constant, en conservant les hypothèses ayant produit ces données.",
-            "output": "Dossier de retour avec provenance du cercle."
+            "title": "Reprendre les résultats et leur statut",
+            "input": "Le dossier 3.3 transmet v, T et a ; r = 7,000 × 10⁶ m reste supposé constant, avec les précisions éventuelles de 4.6.",
+            "action": "Identifier ces valeurs comme résultats du modèle et relever l’absence de positions indépendantes, de dates et d’orientation orbitale observées.",
+            "output": "Entrées calculées : v = 7546,049 m·s⁻¹, T = 5828,520 s, a_c = 8,134694 m·s⁻² ; aucune trajectoire suivie n’est disponible.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour conserve la provenance des résultats ; un critère futur ne devient pas une observation par sa seule formulation."
+            }
           },
           {
             "id": 2,
-            "title": "Définir les observables utiles",
-            "action": "Prévoir des positions datées autour du même centre et distinguer test de rayon constant, plan orbital et balayage des aires.",
-            "output": "Critères géométriques et temporels de comparaison définis."
+            "title": "Calculer angles et aires attendus",
+            "input": "Le cercle de rayon r est parcouru à vitesse v constante ; choisir θ orienté dans le sens du mouvement.",
+            "action": "Former ω = v/r = 2π/T, puis calculer Δθ = ωΔt et ΔA = r²Δθ/2 pour une durée positive Δt.",
+            "output": "Δθ/Δt = 2π/T ; ΔA/Δt = πr²/T = rv/2, avec angles déroulés et aire balayée cumulée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La géométrie du secteur relie les grandeurs de l’exemple à des attentes temporelles, sans fixer de dates ou d’angles observés."
+            }
           },
           {
             "id": 3,
-            "title": "Construire la grille orbitale",
-            "action": "Décrire les colonnes nécessaires pour rayon, angle et date, puis inscrire les attentes du modèle sans ajouter de positions mesurées.",
-            "output": "Grille orbitale à renseigner avec observations indépendantes."
+            "title": "Établir les attentes comparables",
+            "input": "Le calcul 4.2 prévoit les variations angulaires et les aires pour le même cercle ; des positions datées seraient nécessaires à une comparaison.",
+            "action": "Consigner les attentes et leur statut, puis transmettre à 5.1 les propriétés circulaires à distinguer des seules propriétés centrales.",
+            "output": "Attentes calculées : r constant, Δθ/Δt = 2π/T, ΔA/Δt = πr²/T ; données indépendantes de position et de date non renseignées.",
+            "relation": {
+              "nature": "logique",
+              "description": "Cette sortie fournit des critères distincts de rayon, d’angle et d’aire ; elle ne prétend pas disposer de leurs valeurs observées."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les critères",
-            "action": "Vérifier que des prises de vue espacées inégalement ne seraient pas interprétées comme variations de vitesse sans tenir compte de leurs dates.",
-            "output": "Biais de cadence distingué d’un effet orbital.",
-            "comparison": "La grille de 4.3 doit respecter le repérage temporel des données de 4.1 avant toute conclusion sur les vitesses."
+            "title": "Relire la dépendance à la durée",
+            "input": "Les attentes de 4.3 sont des rapports à la durée, et non des égalités entre déplacements pris à des dates arbitraires.",
+            "action": "Comparer symboliquement deux durées positives Δt₁ et Δt₂ ; conserver le même cercle et des angles cumulés sans ambiguïté de tour.",
+            "output": "Δθ₁/Δθ₂ = Δt₁/Δt₂ et ΔA₁/ΔA₂ = Δt₁/Δt₂ ; des intervalles inégaux donnent des déplacements inégaux.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les déplacements sont proportionnels à la durée dans ce cercle ; leur différence ne suffit pas à conclure à une variation de vitesse."
+            },
+            "evaluation": {
+              "object": "4.4 ↔ 4.3 : attentes angulaires et aréolaires avec leurs durées.",
+              "conditions": "Même cercle et même orientation ; Δt₁, Δt₂ sont positifs et symboliques, sans inventer de cadence d’observation.",
+              "criterion": "Retrouver Δθ₁/Δt₁ = Δθ₂/Δt₂ et ΔA₁/Δt₁ = ΔA₂/Δt₂, plutôt que Δθ₁ = Δθ₂ lorsque les durées diffèrent.",
+              "finding": "Les attentes de 4.3 sont conservées après normalisation par la durée ; aucune variation physique n’est attribuée à une cadence inconnue."
+            },
+            "comparison": "4.4 confronte les attentes de 4.3 à leur définition temporelle et distingue déplacement et vitesse."
           },
           {
             "id": 5,
-            "title": "Confronter la circularité supposée",
-            "action": "Examiner comment un rayon variable compatible avec une force centrale invaliderait le cercle sans invalider automatiquement le moment cinétique conservé.",
-            "output": "Portées distinctes des tests de cercle et centralité.",
-            "comparison": "Les critères de 4.2 ne doivent pas confondre un échec de circularité avec une absence nécessaire de force centrale."
+            "title": "Recalculer les critères sans cercle",
+            "input": "La relecture distingue angle et aire par unité de temps ; sous centralité et L ≠ 0, ℓ = ‖L‖/m reste constant.",
+            "action": "Remplacer r constant par r(t), puis résoudre r²θ̇ = ℓ pour θ̇ et exprimer v² à partir de ṙ et ℓ.",
+            "output": "θ̇ = ℓ/r² ; Ȧ = ℓ/2 ; v² = ṙ² + ℓ²/r². Un rayon variable reste compatible avec L constant.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le traitement retire seulement la circularité des critères ; il conserve conditionnellement la centralité sans affirmer qu’elle a été observée."
+            },
+            "evaluation": {
+              "object": "4.5 ↔ 4.2 : critères centraux généraux et critères du cercle.",
+              "conditions": "Même centre fixe et L non nul ; r(t) variable est une possibilité symbolique, sans nouvelle trajectoire chiffrée.",
+              "criterion": "Pour r constant et ṙ = 0, retrouver θ̇ = v/r et Ȧ = rv/2 de 4.2 ; sinon Ȧ constant n’impose pas θ̇ constant.",
+              "finding": "Les expressions générales restituent le cercle comme cas particulier ; la variation de r ne réfute pas à elle seule la centralité."
+            },
+            "comparison": "4.5 relâche la circularité de 4.2 et établit les propriétés qui subsistent sous centralité."
           },
           {
             "id": 6,
-            "title": "Produire une lecture conditionnelle",
-            "action": "Indiquer les observations permettant de tester chaque propriété et laisser ouvertes les conclusions impossibles à tirer des seuls calculs actuels.",
-            "output": "Besoin d’observations associé à chaque propriété orbitale.",
-            "comparison": "La relecture conserve les données de 4.1 et relativise les attentes de 4.3 puisqu’aucune série astronomique n’est disponible."
+            "title": "Restituer une comparaison conditionnelle",
+            "input": "Le retour a séparé rayon constant et aire balayée constante ; les seules grandeurs disponibles restent les résultats calculés de 4.1.",
+            "action": "Conserver r, v, T et a_c avec leur provenance ; préciser que les critères généraux demanderaient une trajectoire et des dates indépendantes.",
+            "output": "Le dossier calculé est inchangé ; centralité et circularité ne sont pas identifiées par une série de positions absente.",
+            "relation": {
+              "nature": "logique",
+              "description": "La sortie restitue les entrées et leurs limites de confrontation ; 4.1 peut être repris si une observation documentée devient disponible."
+            },
+            "evaluation": {
+              "object": "4.6 ↔ 4.1 : attributs du cercle et disponibilité des données.",
+              "conditions": "Retour au premier cercle calculé ; les relations pour un rayon variable restent des conséquences conditionnelles.",
+              "criterion": "Retrouver r = 7,000 × 10⁶ m, v = 7546,049 m·s⁻¹, T = 5828,520 s et a_c = 8,134694 m·s⁻², sans positions mesurées ajoutées.",
+              "finding": "Les résultats d’entrée sont préservés ; les critères précisés n’ajoutent ni orientation observée ni validation de la trajectoire."
+            },
+            "comparison": "4.6 confronte le dossier final à 4.1 et distingue attentes calculées et données nécessaires à leur confrontation."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les résultats calculés deviennent des attentes explicites ; leur confrontation à des positions réelles demeure absente du dossier."
+        },
+        "evaluation": {
+          "object": "4 ↔ 3 : grandeurs orbitales calculées et attentes géométriques du retour.",
+          "conditions": "Même centre et premier cercle ; r, v, T et a proviennent du calcul, sans éphéméride ni nouvelle observation.",
+          "criterion": "Les attentes doivent satisfaire ω = v/r = 2π/T et a_c = rω², avec r constant et accélération vers O.",
+          "finding": "Les attentes restituent les résultats de 3 ; elles ne permettent pas de conclure qu’une trajectoire réelle est circulaire ou centrale."
+        }
       },
       {
         "id": 5,
-        "title": "Confronter les hypothèses orbitales",
-        "system": "Le choix raisonné entre cercle idéal, trajectoire centrale non circulaire et effets extérieurs absents du modèle.",
-        "input": "Le diagnostic du niveau 4 est comparé aux hypothèses de centralité, de cercle et de gravitation du niveau 2.",
-        "output": "Le cercle reste le scénario de référence, avec des critères distincts pour le quitter ou enrichir la force.",
+        "title": "Reconstruire la force sans identifier le champ",
+        "system": "L’inversion des attributs cinématiques du cercle et la distinction entre force sur la trajectoire et loi valable à d’autres rayons.",
+        "input": "Le retour 4 décrit les attentes du cercle ; positions et accélérations indépendantes restent absentes, ainsi que la valeur numérique de m.",
+        "output": "Le cercle reconstruit F/m à son rayon ; il ne suffit pas à identifier toute la loi radiale, conservée comme hypothèse pour 2r.",
         "section": "limites",
-        "comparison": "Le cadre de retour confronte séparément centralité, circularité et centre fixe au niveau 2 ; leur révision ne se déduit pas du même indice.",
+        "comparison": "5 confronte l’inversion du cercle à la déduction newtonienne de 2 ; retrouver une valeur locale ne démontre pas la loi radiale supposée.",
         "steps": [
           {
             "id": 1,
-            "title": "Organiser les modifications possibles",
-            "action": "Reprendre les signatures discutées et classer leurs causes possibles entre état initial différent, force perturbatrice et approximation du centre fixe.",
-            "output": "Alternatives rattachées aux éléments précis du modèle."
+            "title": "Reprendre les propriétés à distinguer",
+            "input": "La sortie 4.3 transmet rayon, vitesse angulaire et aire balayée constants comme attentes calculées ; 5.6 précise la portée du retour.",
+            "action": "Distinguer la trajectoire supposée, sa résultante reconstruisible et la loi du champ ; rappeler que seule GM, et non m, est chiffrée.",
+            "output": "Le cercle fournit r, v et T calculés ; aucune série indépendante n’établit une perturbation, une variation de rayon ou de L.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le dossier de retour sépare les objets de reconstruction avant d’utiliser Newton ; une hypothèse de champ n’est pas une donnée cinématique."
+            }
           },
           {
             "id": 2,
-            "title": "Poser les critères de décision",
-            "action": "Choisir de conserver une force centrale lorsque seul le rayon varie et d’examiner les perturbations si les invariants centraux échouent.",
-            "output": "Règles conditionnelles de révision des hypothèses orbitales."
+            "title": "Inverser Newton sur la trajectoire",
+            "input": "Dans le référentiel galiléen à O fixe, une trajectoire suffisamment dérivable donnerait a = d²r/dt² ; le cercle calculé fournit a = −a_c e_r.",
+            "action": "Écrire F = ma puis dL/dt = mr × a ; substituer a_c = v²/r = 4π²r/T² pour le cercle.",
+            "output": "Sur le cercle : F/m = −(4π²r/T²)e_r et dL/dt = 0 ; une force absolue chiffrée demanderait m.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivation temporelle fournit une accélération le long de la trajectoire ; Newton en déduit une résultante, pas sa décomposition en interactions."
+            }
           },
           {
             "id": 3,
-            "title": "Comparer les cadres possibles",
-            "action": "Décrire ce qu’un cercle, une orbite centrale non circulaire et une trajectoire perturbée prédisent sur rayon et moment cinétique.",
-            "output": "Table conceptuelle des propriétés conservées par scénario."
+            "title": "Consigner la reconstruction et sa portée",
+            "input": "Le calcul 5.2 retrouve une accélération centrale au rayon r₀ du premier cercle ; la loi newtonienne complète reste celle de l’énoncé.",
+            "action": "Consigner cette portée locale, puis transmettre à 6.1 le choix explicite de conserver GM et la loi newtonienne pour un cercle à 2r₀.",
+            "output": "F/m = −8,134694 e_r m·s⁻² à r₀ ; la comparaison à 2r₀ conserve le champ newtonien par hypothèse, sans champ reconstruit ailleurs.",
+            "relation": {
+              "nature": "logique",
+              "description": "La sortie sépare la valeur retrouvée et l’extrapolation choisie ; le second rayon définit une nouvelle application du modèle fourni."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les contrastes",
-            "action": "Examiner la table et vérifier qu’un petit intervalle d’observation ne garantirait pas l’absence de perturbation sur des durées plus longues.",
-            "output": "Limite temporelle des comparaisons orbitales explicitée.",
-            "comparison": "Les contrastes de 5.3 sont relus selon les alternatives de 5.1 ; une concordance locale ne tranche pas toutes les causes."
+            "title": "Relire ce qui a été retrouvé",
+            "input": "La sortie 5.3 donne F/m à r₀, avec une loi conservée par hypothèse pour les autres rayons.",
+            "action": "Confronter la quantité reconstruite à son domaine : même cercle et mêmes calculs ; distinguer direction centrale, norme locale et dépendance radiale.",
+            "output": "La centralité de la résultante est compatible avec le cercle calculé ; ni m ni une loi valable hors de ce cercle ne sont retrouvés.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture ne confond pas un attribut local de la trajectoire avec une propriété identifiée du champ dans tout l’espace."
+            },
+            "evaluation": {
+              "object": "5.4 ↔ 5.3 : accélération locale reconstruite et portée annoncée.",
+              "conditions": "Même r₀, valeurs calculées et m non chiffrée ; aucun échantillon indépendant à un autre rayon.",
+              "criterion": "Conserver F/m = −8,134694 e_r m·s⁻² à r₀ et r × F = 0 ; ne pas déduire de ces valeurs une dépendance radiale unique.",
+              "finding": "La quantité de 5.3 est retrouvée avec son domaine ; sa valeur locale ne détermine pas le champ ailleurs."
+            },
+            "comparison": "5.4 confronte la lecture de la reconstruction aux résultats et limites indiqués en 5.3."
           },
           {
             "id": 5,
-            "title": "Confronter le choix disponible",
-            "action": "Maintenir le scénario circulaire pour les seules données imposées et refuser d’estimer une perturbation qui n’a pas été observée.",
-            "output": "Cadre de référence conservé sans paramètres inventés.",
-            "comparison": "Les critères de 5.2 exigent une confrontation indépendante ; les grandeurs calculées ne justifient pas un ajustement supplémentaire du champ."
+            "title": "Démontrer l’indétermination radiale",
+            "input": "La relecture ne dispose que du cercle r = r₀ ; son accélération y vaut −GM e_r/r₀² dans le modèle.",
+            "action": "Construire symboliquement a_κ(r) = [−GM/r² + κ(r − r₀)]e_r, avec κ en s⁻², puis évaluer cette expression à r₀.",
+            "output": "Pour tout κ, a_κ(r₀) = −GM e_r/r₀² ; ces champs centraux coïncident sur le cercle et diffèrent ailleurs.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le terme ajouté s’annule exactement sur la trajectoire considérée ; cette construction établit une non-unicité sans proposer de perturbation mesurée."
+            },
+            "evaluation": {
+              "object": "5.5 ↔ 5.2 : famille de champs compatibles et résultante inversée.",
+              "conditions": "Contre-exemple symbolique à un seul rayon ; κ n’est ni estimé ni adopté comme nouveau paramètre physique du scénario.",
+              "criterion": "Chaque a_κ(r₀) doit égaler l’accélération obtenue en 5.2 ; pour r ≠ r₀, le terme κ(r − r₀) peut différer.",
+              "finding": "L’inversion de 5.2 ne distingue pas cette famille ; un seul cercle ne détermine donc pas une loi radiale arbitraire."
+            },
+            "comparison": "5.5 démontre la limite de l’inversion de 5.2 en construisant des champs indiscernables sur le cercle."
           },
           {
             "id": 6,
-            "title": "Formuler le cadre de retour",
-            "action": "Retenir la loi circulaire pour comparer deux rayons théoriques et consigner les hypothèses qui resteraient à tester dans une observation réelle.",
-            "output": "Modèle retenu pour une comparaison strictement théorique.",
-            "comparison": "Le choix revient aux alternatives de 5.1 et aux propriétés de 5.3, avec une portée explicitement limitée au scénario."
+            "title": "Restituer le modèle effectivement fourni",
+            "input": "Le retour a démontré la limite de reconstruction ; le dossier 5.1 ne fournit aucune observation indépendante permettant de choisir un autre champ.",
+            "action": "Conserver le champ newtonien initial pour la comparaison des rayons ; garder la famille a_κ comme démonstration, sans l’insérer dans l’exemple.",
+            "output": "Les données calculées et le modèle donné sont inchangés ; ni une perturbation ni la masse m n’ont été estimées.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour restitue les attributs disponibles et leur portée ; 5.1 peut être repris avec des informations réellement supplémentaires."
+            },
+            "evaluation": {
+              "object": "5.6 ↔ 5.1 : attributs disponibles et statut du champ.",
+              "conditions": "Même dossier sans trajectoire indépendante ni masse du mobile chiffrée ; la construction a_κ reste strictement démonstrative.",
+              "criterion": "Retrouver r₀, v, T, GM et le cercle calculé de l’entrée ; ne pas introduire de valeur de κ ni de force absolue mesurée.",
+              "finding": "Les attributs de 5.1 sont conservés ; le champ newtonien demeure fourni par le scénario, sans être identifié par l’inversion."
+            },
+            "comparison": "5.6 confronte le dossier final à 5.1 et préserve la différence entre modèle donné et champ reconstruit."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Newton inverse la cinématique en résultante le long du mouvement ; extrapoler cette résultante à tout rayon demande une hypothèse supplémentaire."
+        },
+        "evaluation": {
+          "object": "5 ↔ 2 : force reconstruite sur le cercle et loi gravitationnelle de départ.",
+          "conditions": "Même centre fixe et rayon r₀ = 7,000 × 10⁶ m ; le retour utilise des résultats calculés sous le modèle de 2.",
+          "criterion": "Retrouver F/m = −GM e_r/r₀² sur le cercle ; une loi différente mais égale à ce rayon peut produire le même cercle.",
+          "finding": "La valeur centrale est retrouvée, mais la dépendance en r n’est pas identifiée ; la loi de 2 reste une hypothèse du scénario."
+        }
       },
       {
         "id": 6,
-        "title": "Revenir par un second rayon",
-        "system": "Une comparaison de deux cercles théoriques qui teste la dépendance des grandeurs envers le rayon.",
-        "input": "Le cadre retenu au niveau 5 conserve GM ; le rayon du dossier initial est comparé à son double.",
-        "output": "Les rapports de période et de vitesse ferment la boucle calculatoire et clarifient les variables réellement modifiées.",
+        "title": "Comparer puis retrouver les deux rayons",
+        "system": "La comparaison de deux orbites circulaires supposées autour du même centre, avec un second rayon égal au double du premier.",
+        "input": "Le cadre de 5 conserve GM et la loi newtonienne ; r₁ = 7,000 × 10⁶ m est comparé à r₂ = 2r₁.",
+        "output": "T₂/T₁ = 2√2 ≈ 2,828 et v₂/v₁ = 1/√2 ≈ 0,707 ; les rapports retrouvent r₂/r₁, mais pas GM.",
         "section": "controle",
-        "comparison": "Le retour compare des rapports plutôt que les valeurs absolues de 3, avec le même GM et les hypothèses de 1.",
+        "comparison": "6 confronte les attributs du second cercle à ceux de 1 : GM et le cadre sont conservés, tandis que le rayon est explicitement doublé.",
         "steps": [
           {
             "id": 1,
-            "title": "Poser les deux cercles",
-            "action": "Reprendre le rayon initial et définir un second cercle de rayon double, en gardant le même paramètre gravitationnel et aucune perturbation.",
-            "output": "Deux scénarios circulaires différant seulement par leur rayon."
+            "title": "Poser les deux états circulaires",
+            "input": "La sortie 5.3 conserve la loi newtonienne et GM ; le premier rayon r₁ est comparé au rayon r₂ = 2r₁.",
+            "action": "Définir deux cercles supposés avec le même GM et leurs vitesses compatibles ; conserver les distinctions rappelées en 6.6.",
+            "output": "r₁ = 7,000 × 10⁶ m et r₂ = 1,400 × 10⁷ m ; GM commun, sans transfert orbital ni seconde trajectoire mesurée.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le second cercle est un scénario distinct ; doubler son rayon entraîne des vitesses et périodes compatibles différentes."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les rapports utiles",
-            "action": "Former les rapports de périodes et de vitesses à partir des expressions littérales pour faire apparaître les puissances du rayon.",
-            "output": "Méthode de comparaison indépendante des unités choisies."
+            "title": "Former les rapports littéraux",
+            "input": "Les deux scénarios de 6.1 suivent v = √(GM/r) et T = 2π√(r³/GM), avec le même paramètre gravitationnel.",
+            "action": "Poser q = r₂/r₁, puis diviser les expressions de T et de v afin d’éliminer le facteur commun GM.",
+            "output": "T₂/T₁ = q^(3/2) ; v₂/v₁ = q^(−1/2), avec q = 2 dans la comparaison demandée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La division révèle les puissances du rayon ; l’élimination de GM rend les rapports indépendants de sa valeur numérique."
+            }
           },
           {
             "id": 3,
-            "title": "Calculer le retour orbital",
-            "action": "Appliquer cette méthode pour obtenir la période multipliée par deux racines de deux et la vitesse divisée par racine de deux.",
-            "output": "Rapports théoriques de période et vitesse établis."
+            "title": "Établir le retour à rayon double",
+            "input": "Le calcul 6.2 reçoit q = 2 ; les paramètres communs et les deux rayons restent ceux de 6.1.",
+            "action": "Évaluer les rapports, puis transmettre à 1.1 le dossier du second cercle en le distinguant du scénario initial.",
+            "output": "Pour r₂ = 1,400 × 10⁷ m : T₂/T₁ = 2√2 ≈ 2,828 et v₂/v₁ = 1/√2 ≈ 0,707, avec GM inchangé.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les rapports calculés accompagnent le rayon du nouveau dossier ; leur reprise ne présente pas le second cercle comme une évolution observée."
+            }
           },
           {
             "id": 4,
-            "title": "Relire la dépendance",
-            "action": "Reprendre ces rapports et vérifier leur compatibilité avec une circonférence doublée et une vitesse plus faible sur le second cercle.",
-            "output": "Cohérence géométrique et temporelle des rapports vérifiée.",
-            "comparison": "Les résultats de 6.3 sont relus à partir des deux rayons de 6.1, en conservant le même centre physique."
+            "title": "Recomposer le rapport des périodes",
+            "input": "La sortie 6.3 donne les rapports de vitesse et de période ; les deux circonférences sont dans le rapport r₂/r₁ = 2.",
+            "action": "Utiliser T = 2πr/v pour reformer T₂/T₁ à partir des deux autres rapports, sans comparer les directions des vecteurs vitesse.",
+            "output": "T₂/T₁ = (r₂/r₁)/(v₂/v₁) = 2/(1/√2) = 2√2 : circonférence doublée et vitesse plus faible.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La géométrie du cercle restitue la période relative ; seuls les modules des vitesses sont comparés entre les deux scénarios."
+            },
+            "evaluation": {
+              "object": "6.4 ↔ 6.3 : rapports de période et de vitesse annoncés.",
+              "conditions": "Deux cercles newtoniens au même GM ; les rapports sont calculés, avec le même sens de définition deuxième sur premier.",
+              "criterion": "Vérifier (T₂/T₁)(v₂/v₁) = r₂/r₁ = 2 ; conserver les valeurs exactes avant les approximations décimales.",
+              "finding": "Le rapport des périodes de 6.3 est retrouvé ; la vérification reste une recomposition interne des grandeurs du modèle."
+            },
+            "comparison": "6.4 confronte les rapports de 6.3 à la relation géométrique entre période, circonférence et vitesse."
           },
           {
             "id": 5,
-            "title": "Confronter l’extension du modèle",
-            "action": "Examiner si le second rayon reste extérieur à l’astre et si les perturbations négligées resteraient acceptables avant une application astronomique.",
-            "output": "Conditions physiques d’une extrapolation réelle identifiées.",
-            "comparison": "La méthode de 6.2 établit des rapports du modèle ; elle ne démontre pas sa validité sur toute distance autour d’un astre."
+            "title": "Inverser la dépendance au rayon",
+            "input": "Les rapports relus satisfont les relations de 6.2 ; GM est commun et a disparu de ces deux expressions.",
+            "action": "Résoudre q = (T₂/T₁)^(2/3) puis q = (v₁/v₂)², et distinguer le rapport retrouvé d’une échelle absolue.",
+            "output": "Les deux inversions donnent q = 2 ; avec r₁ connu, r₂ = 2r₁. Les seuls rapports ne déterminent pas GM.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion retrouve le rapport choisi ; les longueurs absolues et GM ne sont pas déterminés par ces seuls rapports."
+            },
+            "evaluation": {
+              "object": "6.5 ↔ 6.2 : inversions et puissances du rayon.",
+              "conditions": "Même famille de cercles, même GM, rayons positifs ; les rapports exacts proviennent du modèle, sans incertitude expérimentale attribuée.",
+              "criterion": "Retrouver q = (2√2)^(2/3) = (√2)² = 2 ; sans r₁ fourni, les valeurs absolues des rayons restent indéterminées.",
+              "finding": "Le calcul inverse retrouve le rapport de 6.2 ; GM reste donné et r₂ nécessite la référence absolue r₁."
+            },
+            "comparison": "6.5 inverse les relations de 6.2 et distingue l’information relative reconstruite des paramètres qui restent fournis."
           },
           {
             "id": 6,
-            "title": "Refermer la comparaison",
-            "action": "Rapprocher le retour des données initiales et rappeler qu’un autre état initial au même rayon pourrait produire une trajectoire non circulaire.",
-            "output": "Bilan du scénario et question orbitale générale séparés.",
-            "comparison": "Le retour de 6.3 répond aux deux scénarios de 6.1 et clôt la comparaison théorique sans prétendre valider une orbite réelle."
+            "title": "Restituer les attributs des deux cercles",
+            "input": "Le retour retrouve q = 2 ; r₁ et GM restent les données de 6.1, avec la même approximation de centre fixe.",
+            "action": "Rapprocher les rayons et hypothèses des entrées ; conserver les vitesses circulaires adaptées et la distinction entre comparaison et transfert réel.",
+            "output": "r₁ et r₂ sont restitués ; si r₁ > R, alors r₂ > R. GM reste commun, sans identification indépendante du champ.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour préserve les paramètres et le caractère extérieur supposé ; 6.1 peut être repris sans inventer un mécanisme de changement d’orbite."
+            },
+            "evaluation": {
+              "object": "6.6 ↔ 6.1 : rayons, paramètre commun et hypothèses des scénarios.",
+              "conditions": "Deux cercles extérieurs supposés autour du même astre ; le second rayon et ses rapports proviennent du calcul.",
+              "criterion": "Retrouver r₁ = 7,000 × 10⁶ m, r₂ = 1,400 × 10⁷ m et GM = 3,986 × 10¹⁴ m³·s⁻² conservé, avec m ≪ M.",
+              "finding": "Les attributs de 6.1 sont retrouvés ; phase, orientation et trajectoire d’un éventuel transfert ne sont pas déterminées."
+            },
+            "comparison": "6.6 confronte les résultats reconstruits aux deux états de 6.1 et conserve les attributs qui restent hors du dossier."
           }
-        ]
+        ],
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La comparaison change le rayon d’un cercle supposé ; elle ne décrit pas un transfert réel du mobile entre deux orbites."
+        },
+        "evaluation": {
+          "object": "6 ↔ 1 : paramètres initiaux et attributs du second cercle.",
+          "conditions": "Deux scénarios calculés, même centre, même GM, m ≪ M et champ extérieur ; aucune manœuvre ni observation orbitale n’est décrite.",
+          "criterion": "Conserver GM = 3,986 × 10¹⁴ m³·s⁻² et r₁ = 7,000 × 10⁶ m ; établir r₂ = 2r₁ avec T₂/T₁ = 2√2 et v₂/v₁ = 1/√2.",
+          "finding": "Le retour conserve les hypothèses initiales et retrouve le changement de rayon ; les rapports ne déterminent ni GM ni les orientations orbitales."
+        }
       }
     ],
-    "version": "0.1",
-    "updated": "2026-09-09"
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les conditions du cercle, les conservations centrales et les inversions des résultats sont distinguées, avec les limites de reconstruction de la force.",
+    "subject": {
+      "type": "physique",
+      "description": "Le mouvement d’un point sous force centrale, puis son application à une orbite circulaire dans un champ gravitationnel newtonien.",
+      "scope": "Centre fixe galiléen, masse centrale dominante, mobile extérieur à un astre sphérique ; deux cercles calculés, sans observation orbitale indépendante."
+    }
   },
   "rotation-axe-fixe": {
     "question": "Comment relier un couple appliqué à la rotation d’un objet en tenant compte de sa répartition de masse et de l’axe choisi ?",
@@ -6944,312 +7616,648 @@
     }
   },
   "hydrostatique-archimede": {
-    "question": "Comment reconstruire pression et flottaison à partir d’un bassin décrit, puis confronter le retour aux conditions initiales ?",
-    "basis": "Bassin et bloc de l’exemple calculé ; aucun relevé réel fourni. Les contrôles de pression et de volume sont des protocoles proposés.",
+    "question": "Comment reconstruire pression et flottaison à partir d’un bassin décrit, puis confronter les résultats aux références et limites initiales ?",
+    "basis": "Bassin supposé : ρf = 1 000 kg·m⁻³, ps = 101 325 Pa, h = 2,40 m. Bloc de 2,00 L à 600 kg·m⁻³ ; variante à 1 200 kg·m⁻³.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les références de pression, l’intégration des forces, les volumes et les conditions d’équilibre sont précisés, avec inversions conditionnelles.",
+    "subject": {
+      "type": "physique",
+      "description": "Pression dans un bassin ouvert au repos et équilibre vertical d’un bloc homogène libre, puis comparaison avec un corps plus dense.",
+      "scope": "Liquide homogène, g uniforme et repère galiléen. Capillarité, poussée de l’air et appuis exclus ; stabilité en inclinaison et mouvement de descente non calculés."
+    },
     "levels": [
       {
+        "id": 1,
         "title": "Bassin, bloc et références",
-        "system": "Le dossier d’entrée décrivant le bassin ouvert, le liquide, le bloc et les moyens de repérer profondeur et immersion.",
-        "input": "Masse volumique, pression de surface, profondeur, volume et masse volumique du bloc fournis par l’exemple.",
-        "output": "Une description exploitable distinguant valeurs données, conditions supposées et observations encore à produire.",
+        "system": "Le dossier du liquide, du bloc et des références permettant de distinguer altitude, pression et volume effectivement déplacé.",
+        "input": "L’énoncé fournit ρf, ps, h, V et ρb ; aucune mesure de profondeur, pression ou immersion n’est disponible.",
+        "output": "Paramètres SI et références définis ; masse du bloc calculée, volume immergé encore inconnu.",
         "section": "conditions",
         "comparison": "",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les données supposées sont organisées par objet et référence ; la description ne représente pas une installation expérimentale réalisée."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Délimiter le bassin",
-            "action": "Décrire le bassin ouvert, le bloc sans contact et les zones de liquide ou d’air entourant sa surface.",
-            "output": "Schéma des frontières et contacts supposés absents."
+            "title": "Délimiter bassin et corps",
+            "input": "Bassin ouvert, liquide au repos et bloc homogène de V = 2,00 L, ρb = 600 kg·m⁻³, libre de tout appui.",
+            "action": "Distinguer le liquide, l’air et les surfaces du bloc ; réserver V au volume total et Vimm au volume déplacé.",
+            "output": "Frontières et deux volumes identifiés ; la variante transmise par 6.3 reste séparée du bloc initial.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le découpage fixe les interactions à intégrer et empêche de confondre la partie immergée avec la totalité du corps."
+            }
           },
           {
             "id": 2,
-            "title": "Référencer les profondeurs",
-            "action": "Choisir la surface libre comme origine et distinguer altitude orientée, profondeur positive et pression atmosphérique donnée.",
-            "output": "Conventions de position et référence de pression."
+            "title": "Transformer les références et unités",
+            "input": "Frontières de 1.1 ; z vers le haut, surface z_s, profondeur h positive et pression de surface absolue ps.",
+            "action": "Former h = z_s − z et q_s = p_abs − ps ; convertir V en m³ puis appliquer m = ρbV.",
+            "output": "V = 0,00200 m³ et m = 1,200 kg ; q_s désigne la surpression relative à la surface.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les transformations exploitent les données de 1.1 ; pression absolue et surpression utilisent une différence de référence, pas deux pressions physiques locales."
+            }
           },
           {
             "id": 3,
-            "title": "Composer les données",
-            "action": "Convertir le volume du bloc en mètres cubes et calculer sa masse à partir de sa masse volumique.",
-            "output": "Tableau initial avec masse calculée de 1,200 kg."
+            "title": "Établir les deux jeux de données",
+            "input": "Conventions de 1.2 ; ρf = 1 000 kg·m⁻³, g = 9,81 m·s⁻², ps = 101 325 Pa et h = 2,40 m.",
+            "action": "Consigner séparément le point du liquide à profondeur donnée et le bloc flottant ; transmettre paramètres, masse et références à 2.1.",
+            "output": "h se rapporte à la surface actuelle ; Vimm du bloc reste inconnu et n’est pas une profondeur de 2,40 m.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les deux questions partagent le même liquide ; elles ne placent pas le bloc à la profondeur choisie pour la pression."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les grandeurs",
-            "action": "Relire les conversions de volume et la masse du bloc calculées en 3, puis prévoir leur contrôle indépendant par géométrie et pesée.",
-            "output": "Conversions contrôlées et relevés indépendants à effectuer.",
-            "comparison": "Comparer volume et masse de 3 aux données supposées de 1 ; les contrôles proposés ne constituent pas encore des mesures."
+            "title": "Reprendre la nature des grandeurs",
+            "input": "Dossier de 1.3 : V total donné, masse calculée et Vimm inconnu ; ps est une pression absolue.",
+            "action": "Reprendre ces statuts et conserver h depuis la surface actuelle ; distinguer données géométriques du bloc et localisation du point de pression.",
+            "output": "Deux objets de calcul relus sans attribuer une immersion mesurée au bloc.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture conserve le sens des entrées ; aucune lecture instrumentale ne remplace les valeurs supposées."
+            },
+            "comparison": "1.4 ↔ 1.3 : retrouver les références et inconnues propres au point du liquide et au bloc.",
+            "evaluation": {
+              "object": "1.4 ↔ 1.3 : références, masse et volumes relus face au dossier produit.",
+              "conditions": "Même bassin et bloc homogène ; les grandeurs restent données, calculées ou inconnues selon leur provenance.",
+              "criterion": "Conserver V = 2,00 L, m = 1,200 kg et Vimm inconnu ; h = 2,40 m ne désigne pas l’immersion du bloc.",
+              "finding": "Les deux jeux de données restent distincts ; la fraction immergée n’a pas encore été calculée."
+            }
           },
           {
             "id": 5,
-            "title": "Tester la description",
-            "action": "Examiner si homogénéité du liquide, liberté du flotteur et surface ouverte suffisent à rendre les données initiales cohérentes.",
-            "output": "Hypothèses conservées ou données supplémentaires à demander.",
-            "comparison": "Le cadre de repérage de 2 reste valable seulement si surface et contacts sont explicités."
+            "title": "Changer de référence sans changer le fluide",
+            "input": "Références relues en 1.4 ; p_ref est une autre pression de référence, uniforme, sans modification du bassin.",
+            "action": "Déduire q_ref = p_abs − p_ref = q_s + ps − p_ref ; déplacer aussi l’origine d’altitude par z′ = z + c.",
+            "output": "Changer de référence décale q ; h′ = (z_s + c) − (z + c) = h reste invariant.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les transformations distinguent description et modification physique ; un autre zéro ne change ni profondeur ni pression absolue."
+            },
+            "comparison": "1.5 ↔ 1.2 : les transformations de référence conservent la profondeur et permettent de restituer la pression absolue.",
+            "evaluation": {
+              "object": "1.5 ↔ 1.2 : changement de référence comparé aux définitions initiales de h et q_s.",
+              "conditions": "Même état physique ; p_ref et le déplacement d’origine c sont des paramètres de représentation.",
+              "criterion": "Retrouver p_abs = q_ref + p_ref = q_s + ps et h′ = h ; ne pas identifier q_ref à q_s si p_ref ≠ ps.",
+              "finding": "Les définitions sont réversibles ; une surpression seule ne donne pas la pression absolue sans sa référence."
+            }
           },
           {
             "id": 6,
-            "title": "Figer le dossier",
-            "action": "Reconstituer une fiche de préparation regroupant unités, frontières, paramètres supposés et informations manquantes avant tout calcul de poussée.",
-            "output": "Dossier d’entrée prêt pour le bilan hydrostatique.",
-            "comparison": "La nouvelle présentation reprend les données de 1 sans transformer les calculs de 3 en mesures."
+            "title": "Restituer les attributs du bassin",
+            "input": "Transformations de 1.5 et frontières de 1.1 ; aucun volume ni état physique n’a changé.",
+            "action": "Revenir à p_ref = ps et à l’origine choisie ; restituer V, ρb et m avec Vimm toujours à déterminer.",
+            "output": "Dossier initial restitué ; à la surface q_s = 0 alors que p_abs = ps.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La substitution retrouve les références de départ ; annuler la surpression ne supprime pas l’action atmosphérique."
+            },
+            "comparison": "1.6 ↔ 1.1 : retrouver le bassin, le bloc et les surfaces sans changement matériel dû aux conventions.",
+            "evaluation": {
+              "object": "1.6 ↔ 1.1 : frontières, paramètres du bloc et références restitués face aux objets initiaux.",
+              "conditions": "Même bloc libre, même air extérieur et même liquide ; les changements précédents portaient uniquement sur les références.",
+              "criterion": "Conserver V = 2,00 L, ρb = 600 kg·m⁻³ et les surfaces liquide/air ; q_s(surface) = 0 n’est pas un vide.",
+              "finding": "Les attributs initiaux sont préservés et les données nécessaires au bilan hydrostatique sont distinguées."
+            }
           }
-        ],
-        "id": 1
+        ]
       },
       {
+        "id": 2,
         "title": "Modèle hydrostatique et bilan des forces",
-        "system": "Le système théorique formé par l’équilibre local du liquide et l’équilibre vertical du bloc libre.",
-        "input": "Frontières et paramètres du niveau 1, avec z orienté vers le haut et liquide homogène.",
-        "output": "Des relations reliant profondeur, pression, volume immergé et poids sous des hypothèses contrôlables.",
+        "system": "L’équilibre local du liquide, la résultante des pressions sur le bloc et la condition de compensation verticale du poids.",
+        "input": "1.3 fournit paramètres et surfaces ; ρf et g sont constants, z croît vers le haut et l’air exerce ps uniforme.",
+        "output": "Pression et poussée reliées au liquide ; la fraction immergée d’équilibre est conditionnelle et doit appartenir à [0,1].",
         "section": "poussee",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les frontières et données alimentent les bilans du liquide et du corps ; une résultante de pression ne s’ajoute pas à sa propre intégrale."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Poser les interactions",
-            "action": "Reprendre les surfaces exposées du bloc et isoler le poids ainsi que les actions du liquide et de l’air.",
-            "output": "Inventaire des forces du modèle de flottaison."
+            "title": "Recevoir les interactions",
+            "input": "Dossier de 1.3 : poids du bloc, pression du liquide sur la partie immergée et pression de l’air sur la partie émergée.",
+            "action": "Fixer n extérieure au corps et dF = −p n dS ; exclure appui, capillarité et variation hydrostatique de pression dans l’air.",
+            "output": "Forces de pression et poids recensés, avec surface et orientation précisées.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le signe normal oriente les forces vers l’intérieur du corps ; la pression scalaire devient force après intégration sur une surface."
+            }
           },
           {
             "id": 2,
-            "title": "Construire les relations",
-            "action": "Associer dp/dz = −ρg au bilan des pressions, puis écrire l’équilibre vertical avec une seule résultante d’Archimède.",
-            "output": "Équations de pression et d’équilibre sans double comptage."
+            "title": "Déduire pression et poussée",
+            "input": "Actions de 2.1 ; le liquide homogène est au repos dans la pesanteur −g e_z, avec p(z_s) = ps.",
+            "action": "Équilibrer une tranche pour obtenir dp/dz = −ρfg ; intégrer, puis équilibrer le liquide fictivement remplacé par le volume immergé.",
+            "output": "p_abs = ps + ρfgh ; la résultante hydrostatique vaut F_A = ρfgVimm e_z.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le liquide remplacé fournit une première construction de la résultante ; le volume pertinent est celui qui déplace effectivement le liquide."
+            }
           },
           {
             "id": 3,
-            "title": "Essayer un cas limite",
-            "action": "Appliquer les relations à profondeur nulle puis à un bloc juste entièrement immergé, en maintenant les conventions choisies.",
-            "output": "Pression de surface et condition limite de flottaison."
+            "title": "Établir relations et limites",
+            "input": "Relations de 2.2 et masse m = ρbV ; le bloc flotte librement sous son poids et les seules pressions.",
+            "action": "Imposer F_A = mg pour déduire Vimm/V = ρb/ρf ; établir p_abs(h = 0) = ps et la limite Vimm = V.",
+            "output": "À 3.1 : pression et fraction d’équilibre ; l’immersion totale ne compense le poids que si ρb = ρf.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’égalité des forces produit une fraction à confronter à la géométrie ; elle traite la translation verticale, sans établir une stabilité angulaire."
+            }
           },
           {
             "id": 4,
-            "title": "Vérifier les résultantes",
-            "action": "Réexaminer le cas limite en séparant pression uniforme extérieure et surpression hydrostatique sur la surface immergée.",
-            "output": "Contrôle du rôle de la pression atmosphérique.",
-            "comparison": "Les essais de 3 reprennent toutes les interactions de 1, y compris sur la partie émergée."
+            "title": "Reprendre les surfaces soumises à ps",
+            "input": "Limites de 2.3 et frontières de 2.1 ; ps uniforme agit sur toute la surface fermée, directement ou comme partie constante de p.",
+            "action": "Reprendre la pression de surface et le cas immergé ; distinguer l’action atmosphérique uniforme de la surpression sur la partie mouillée.",
+            "output": "La partie émergée reste dans le bilan des pressions absolues.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour conserve les limites calculées tout en explicitant l’action de l’air ; omettre la surface émergée déséquilibrerait le bilan absolu."
+            },
+            "comparison": "2.4 ↔ 2.3 : retrouver les limites en conservant toutes les surfaces et la référence de pression.",
+            "evaluation": {
+              "object": "2.4 ↔ 2.3 : pression de surface et immersion limite relues face aux conséquences du modèle.",
+              "conditions": "Même bloc, pression atmosphérique uniforme et poussée de l’air négligée ; aucun appui ne masque une surface.",
+              "criterion": "À h = 0, conserver p_abs = ps ; à Vimm = V, conserver F_A = ρfgV, sans terme atmosphérique résultant ajouté.",
+              "finding": "Les limites sont conservées ; la résultante dépend du gradient de pression, pas d’une pression uniforme appliquée sur toute la frontière."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter deux écritures",
-            "action": "Comparer l’intégration des forces de pression au raccourci d’Archimède et repérer les hypothèses nécessaires à leur équivalence.",
-            "output": "Justification du choix entre intégrale et résultante.",
-            "comparison": "Les deux bilans sont confrontés au modèle de 2 et ne sont jamais additionnés ensemble."
+            "title": "Intégrer les surpressions",
+            "input": "Surfaces reprises en 2.4 ; q_s = p_abs − ps vaut ρfg(z_s − z) dans le liquide et zéro dans l’air.",
+            "action": "Utiliser ∮n dS = 0 pour éliminer ps ; fermer le volume immergé par une section à q_s = 0 et appliquer la divergence.",
+            "output": "F_A = −∫surface_mouillée q_s n dS = −∫Vimm ∇q_s dV = ρfgVimm e_z.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégration constitue une seconde construction de la même poussée ; la section fictive de fermeture n’ajoute aucune force puisque q_s y est nulle."
+            },
+            "comparison": "2.5 ↔ 2.2 : l’intégrale des pressions retrouve la résultante obtenue par remplacement du liquide.",
+            "evaluation": {
+              "object": "2.5 ↔ 2.2 : intégration des surpressions comparée à l’équilibre du volume de liquide remplacé.",
+              "conditions": "Même liquide homogène, même surface libre et mêmes surfaces accessibles ; air de pression uniforme, capillarité négligée.",
+              "criterion": "∇q_s = −ρfg e_z doit produire F_A = ρfgVimm e_z ; ne pas ajouter cette poussée à l’intégrale qui la définit.",
+              "finding": "Les deux constructions concordent ; les pressions absolues du seul liquide ne suffisent pas pour un corps partiellement émergé."
+            }
           },
           {
             "id": 6,
-            "title": "Retenir le modèle",
-            "action": "Réécrire le système minimal retenu avec ses critères de sortie : stratification, contact avec le fond ou force capillaire notable.",
-            "output": "Modèle utilisable et causes explicites de révision.",
-            "comparison": "Les relations retenues respectent les interactions de 1 et reproduisent les cas limites calculés en 3."
+            "title": "Restituer le bilan minimal",
+            "input": "Résultante de 2.5 et inventaire de 2.1 ; poids −mg e_z et absence d’interaction supplémentaire.",
+            "action": "Remplacer les actions de pression par leur unique résultante et restituer (ρfVimm − m)g = 0 pour la translation verticale.",
+            "output": "Même bilan physique sous forme réduite ; les moments et la stabilité restent à examiner séparément.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour condense les forces reçues sans en supprimer une ni en ajouter ; l’écriture réduite garde les conditions du contact libre."
+            },
+            "comparison": "2.6 ↔ 2.1 : retrouver poids et pressions avec une seule représentation de la résultante du fluide.",
+            "evaluation": {
+              "object": "2.6 ↔ 2.1 : actions et conditions restituées face à l’inventaire initial.",
+              "conditions": "Même corps libre ; aucun contact, lien mécanique ou effort capillaire n’a été ajouté au calcul.",
+              "criterion": "Conserver le poids et une seule résultante des pressions ; obtenir l’équilibre vertical uniquement si Vimm = m/ρf est possible.",
+              "finding": "Le bilan initial est restitué ; aucune orientation stable du bloc n’est déduite de la seule compensation verticale."
+            }
           }
-        ],
-        "id": 2
+        ]
       },
       {
+        "id": 3,
         "title": "Pression et immersion prévues",
-        "system": "La chaîne de calcul qui produit les prédictions du bassin et du flotteur à partir du modèle retenu.",
-        "input": "Relations du niveau 2 et données numériques du niveau 1 : profondeur 2,40 m et bloc de 2,00 L.",
-        "output": "Pression absolue, surpression, volume immergé et poussée annoncés comme résultats calculés.",
+        "system": "Le calcul des deux prévisions, puis les reconstructions conditionnelles de profondeur, pression de surface et masse volumique du bloc.",
+        "input": "2.3 transmet pression et fraction d’équilibre ; le bassin et le bloc reprennent les valeurs supposées du dossier initial.",
+        "output": "Pression absolue, surpression, masse, immersion et poussée calculées ; leurs inversions conservent les paramètres tenus connus.",
         "section": "exemple",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les équations reçoivent les valeurs de l’énoncé ; la prédiction de pression et celle d’immersion répondent à deux questions distinctes."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Préparer le calcul",
-            "action": "Rassembler les données du bassin et du bloc en séparant celles utiles à la pression et celles utiles à l’immersion.",
-            "output": "Deux jeux de paramètres et unités SI."
+            "title": "Recevoir les paramètres en SI",
+            "input": "Relations de 2.3 ; ρf = 1 000 kg·m⁻³, g = 9,81 m·s⁻², ps = 101 325 Pa, h = 2,40 m.",
+            "action": "Associer au bloc V = 0,00200 m³ et ρb = 600 kg·m⁻³ ; conserver les deux jeux de données et leur surface de référence.",
+            "output": "Paramètres de pression et d’immersion prêts, sans volume immergé imposé.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le classement conserve les dépendances physiques ; la masse volumique du bloc n’intervient pas dans la pression à profondeur fixée."
+            }
           },
           {
             "id": 2,
-            "title": "Organiser les dépendances",
-            "action": "Établir successivement surpression, pression absolue, masse du bloc, volume immergé et poids, en indiquant les paramètres partagés.",
-            "output": "Ordre de calcul et dépendances entre résultats."
+            "title": "Former les chaînes de calcul",
+            "input": "Données de 3.1 ; flottaison verticale candidate sous les seules actions du poids et des pressions.",
+            "action": "Calculer q_s = ρfgh et p_abs = ps + q_s ; former m = ρbV, Vimm = m/ρf et F_A = mg.",
+            "output": "Pression additive et immersion proportionnelle à la masse ; vérifier 0 ≤ Vimm ≤ V.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La chaîne garde ps dans la pression absolue et utilise ρf pour le volume déplacé ; le rapport des densités donne l’admissibilité."
+            }
           },
           {
             "id": 3,
-            "title": "Produire les prédictions",
-            "action": "Calculer 124 869 Pa de pression absolue, 1,200 L immergé et 11,772 N de poussée dans les conditions données.",
-            "output": "Résultats numériques du modèle initial explicitement calculés."
+            "title": "Établir les prévisions numériques",
+            "input": "Expressions de 3.2 et valeurs SI ; le bloc initial est moins dense que le liquide.",
+            "action": "Consigner q_s = 23 544 Pa, p_abs = 124 869 Pa, m = 1,200 kg, Vimm = 1,200 L et F_A = 11,772 N.",
+            "output": "À 4.1 : fraction immergée 0,600, poids 11,772 N et deux pressions calculées avec leurs références.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les substitutions produisent les valeurs de la fiche ; la fraction concerne un volume et ne définit pas une hauteur sans géométrie."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les résultats",
-            "action": "Recalculer la surpression par différence et exprimer le volume immergé comme fraction du volume total du bloc.",
-            "output": "Surpression de 23 544 Pa et immersion de 60 %.",
-            "comparison": "Les résultats de 3 utilisent les références de 1 ; aucune lecture instrumentale n’a encore eu lieu."
+            "title": "Reprendre pression et fraction",
+            "input": "Sorties de 3.3 ; V total vaut 2,00 L et ps vaut 101 325 Pa.",
+            "action": "Reprendre p_abs − ps et Vimm/V ; conserver les 60 % comme fraction volumique, puis comparer la poussée au poids calculé.",
+            "output": "q_s = 23 544 Pa, Vimm/V = 0,600 et F_A = mg retrouvés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La relecture reconstitue les attributs des résultats ; elle ne fournit ni hauteur d’immersion ni observation d’équilibre."
+            },
+            "comparison": "3.4 ↔ 3.3 : retrouver surpression, fraction volumique et force à partir des sorties annoncées.",
+            "evaluation": {
+              "object": "3.4 ↔ 3.3 : références de pression et fraction immergée relues face aux prévisions.",
+              "conditions": "Mêmes paramètres, même profondeur référencée à la surface et même bloc libre ; toutes les valeurs restent calculées.",
+              "criterion": "124 869 − 101 325 = 23 544 Pa ; 1,200/2,00 = 0,600 ; poussée et poids valent 11,772 N.",
+              "finding": "Les résultats se recomposent ; l’accord arithmétique ne prouve pas matériellement l’homogénéité du liquide ou l’équilibre du bloc."
+            }
           },
           {
             "id": 5,
-            "title": "Contrôler la cohérence",
-            "action": "Vérifier dimensions, signe du gradient de pression et égalité poussée-poids, puis tester que la fraction immergée reste physiquement admissible.",
-            "output": "Contrôles algébriques et borne du volume immergé.",
-            "comparison": "Le graphe de dépendance établi en 2 doit produire les mêmes résultats par les calculs indépendants."
+            "title": "Inverser les résultats sous contraintes",
+            "input": "Pressions et fraction de 3.4 ; ρf, g et V sont tenus connus dans les reconstructions.",
+            "action": "Isoler h = q_s/(ρfg), ps = p_abs − q_s et ρb = ρfVimm/V ; déclarer les paramètres fixés pour chaque inversion.",
+            "output": "Profondeur, pression de surface et masse volumique du bloc retrouvables séparément.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les inversions utilisent des résultats issus du modèle ; q_s seul ne sépare pas ρf et h, et Vimm/V ne fixe qu’un rapport de densités."
+            },
+            "comparison": "3.5 ↔ 3.2 : les expressions inverses restituent les entrées lorsque les autres paramètres restent connus.",
+            "evaluation": {
+              "object": "3.5 ↔ 3.2 : reconstructions conditionnelles comparées aux deux chaînes directes.",
+              "conditions": "ρf = 1 000 kg·m⁻³ et g connus pour h ; références connues pour ps ; même volume total pour ρb.",
+              "criterion": "Réinsérer les reconstructions dans q_s = ρfgh et Vimm/V = ρb/ρf ; ne pas identifier simultanément deux facteurs inconnus.",
+              "finding": "Les relations sont réversibles sous contraintes ; les résultats réutilisés ne deviennent pas des déterminations expérimentales indépendantes."
+            }
           },
           {
             "id": 6,
-            "title": "Publier les prévisions",
-            "action": "Présenter les prédictions avec leurs hypothèses et préparer les différences qui seraient calculées après un relevé de pression ou d’immersion.",
-            "output": "Tableau prévisionnel et colonnes de comparaison encore vides.",
-            "comparison": "Le tableau revient aux paramètres de 1 et conserve la distinction entre résultats de 3 et observations futures."
+            "title": "Restituer les entrées numériques",
+            "input": "Relations de 3.5 et résultats de 3.3 ; les grandeurs fixées restent celles reçues en 3.1.",
+            "action": "Retrouver h = 2,40 m, ps = 101 325 Pa et ρb = 600 kg·m⁻³ ; restituer m = ρbV = 1,200 kg.",
+            "output": "Entrées du bassin et du bloc retrouvées dans les deux calculs.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour distingue les paramètres reconstruits de ρf, g et V conservés ; aucune caractérisation supplémentaire du liquide n’est produite."
+            },
+            "comparison": "3.6 ↔ 3.1 : confronter les paramètres restitués et ceux conservés aux deux jeux d’entrées.",
+            "evaluation": {
+              "object": "3.6 ↔ 3.1 : profondeur, référence de pression, masse volumique et volume du bloc.",
+              "conditions": "Même bassin homogène, g fixé et V = 2,00 L ; les reconstructions portent sur l’exemple calculé.",
+              "criterion": "Retrouver les trois valeurs h, ps et ρb initiales, avec ρf = 1 000 kg·m⁻³ et V = 0,00200 m³ inchangés.",
+              "finding": "Le dossier initial est restitué ; sa confrontation à des pressions ou volumes indépendants reste ouverte."
+            }
           }
-        ],
-        "id": 3
+        ]
       },
       {
+        "id": 4,
         "title": "Relecture des pressions et volumes",
-        "system": "Le dossier de retour qui transforme les prédictions de pression et d’immersion en grandeurs comparables à un protocole.",
-        "input": "Résultats du niveau 3 et descriptions des repérages du niveau 1 ; mesures éventuelles à renseigner séparément.",
-        "output": "Écarts définis sans mesures inventées et diagnostic des confusions possibles dans la comparaison.",
+        "system": "La comparaison des références de pression et de l’immersion, avec séparation entre réponse instrumentale idéale et éventuel décalage de zéro.",
+        "input": "3.3 transmet deux pressions, Vimm et m calculés ; aucun instrument ni relevé d’immersion n’est fourni.",
+        "output": "Références manométrique et absolue distinguées ; gradient et décalage constant ont des effets séparés sur une comparaison.",
         "section": "pression",
-        "comparison": "Comparer les sorties calculées au niveau 3 avec les mêmes références de profondeur et de pression qu’au niveau 1.",
+        "comparison": "4 ↔ 3 : reprendre pressions et volume dans leurs références, sans attribuer une origine expérimentale aux prévisions.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les résultats deviennent les entrées d’une analyse de comparabilité ; une réponse instrumentale hypothétique reste une conséquence du modèle."
+        },
+        "evaluation": {
+          "object": "4 ↔ 3 : pressions, références et volume repris face aux prévisions numériques.",
+          "conditions": "Même profondeur de 2,40 m et même bloc libre ; les valeurs utilisées sont celles du calcul de l’aller.",
+          "criterion": "Conserver p_abs = 124 869 Pa, q_s = 23 544 Pa et Vimm = 1,200 L ; la différence des pressions vaut ps.",
+          "finding": "Les prévisions se correspondent après choix de référence ; aucun relevé ne permet encore d’établir un écart matériel."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Recevoir les sorties",
-            "action": "Importer pression absolue, surpression et fraction immergée calculées, puis réserver des champs distincts pour d’éventuelles lectures expérimentales.",
-            "output": "Dossier de retour séparant prévisions et observations."
+            "title": "Recevoir les sorties référencées",
+            "input": "3.3 fournit p_abs, q_s, Vimm, V et m ; ps est connu et la masse est calculée depuis ρbV.",
+            "action": "Associer chaque pression à sa référence et Vimm au liquide déplacé ; distinguer ces prévisions des observations qui resteraient à recueillir.",
+            "output": "Dossier de retour avec pressions et volumes étiquetés selon leur définition.",
+            "relation": {
+              "nature": "logique",
+              "description": "La transmission préserve le sens des sorties ; les moyens de mesure et leurs caractéristiques ne sont pas renseignés."
+            }
           },
           {
             "id": 2,
-            "title": "Définir la comparaison",
-            "action": "Définir les écarts avec une référence commune de pression, une profondeur identique et une conversion unique des volumes.",
-            "output": "Règles de comparaison et unités des écarts."
+            "title": "Modéliser une lecture et un écart",
+            "input": "Attributs de 4.1 ; p_ref est une pression de référence et b un décalage additif constant, uniquement symbolique.",
+            "action": "Former x(h) = p_abs(h) − p_ref + b = ps − p_ref + b + ρfgh ; poser aussi Δm = ρfVimm − m.",
+            "output": "Lecture de pression modélisée ; Δm compare masse de liquide déplacé et masse du bloc.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La relation distingue valeur physique, référence et décalage de lecture ; Δm est une comparaison de masses, pas de pressions."
+            }
           },
           {
             "id": 3,
-            "title": "Simuler une lecture",
-            "action": "Construire une lecture idéale calculée : un capteur différentiel afficherait la surpression, tandis qu’un capteur absolu inclurait la pression de surface.",
-            "output": "Deux lectures idéales étiquetées selon le capteur."
+            "title": "Établir les réponses idéales",
+            "input": "Relations de 4.2 ; prendre b = 0 pour deux descriptions idéales, avec p_ref = 0 ou p_ref = ps.",
+            "action": "Consigner x_abs = 124 869 Pa et x_surface = 23 544 Pa ; calculer Δm = 1 000 × 0,001200 − 1,200 = 0 kg.",
+            "output": "À 5.1 : réponses idéales distinctes et compensation massique, sous homogénéité et liberté supposées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Ces valeurs sont calculées pour des références définies ; elles ne constituent ni lectures réalisées ni données saisies."
+            }
           },
           {
             "id": 4,
-            "title": "Auditer le protocole",
-            "action": "Reprendre ces lectures fictives en vérifiant emplacement du capteur, niveau de la surface et absence de contact du bloc.",
-            "output": "Causes instrumentales ou géométriques d’écart à vérifier.",
-            "comparison": "La simulation de 3 est relue avec les modes de recueil de 1, sans prétendre disposer de mesures."
+            "title": "Reprendre le rôle du zéro",
+            "input": "Réponses de 4.3 ; la même pression locale donne deux nombres différents selon p_ref, avec b = 0.",
+            "action": "Reprendre la différence x_abs − x_surface et l’écart Δm ; conserver la référence et les unités de chaque comparaison.",
+            "output": "Différence de pression égale à ps ; compensation massique conservée.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture rapporte les différences à leurs objets ; une différence de référence ne révèle pas une modification du gradient hydrostatique."
+            },
+            "comparison": "4.4 ↔ 4.3 : retrouver les réponses idéales en distinguant changement de zéro et écart physique.",
+            "evaluation": {
+              "object": "4.4 ↔ 4.3 : deux réponses de pression et compensation massique relues.",
+              "conditions": "Même point, réponses idéales sans décalage b et même bloc ; aucune calibration réelle n’est fournie.",
+              "criterion": "Retrouver x_abs − x_surface = 101 325 Pa et Δm = 0 kg ; ne pas comparer directement une lecture manométrique à p_abs.",
+              "finding": "La différence attendue vient des références ; les données calculées ne signalent aucune anomalie du bassin."
+            }
           },
           {
             "id": 5,
-            "title": "Réviser le comparateur",
-            "action": "Distinguer un changement de zéro du capteur d’un changement du gradient hydrostatique afin d’éviter une fausse réfutation du modèle.",
-            "output": "Comparaison corrigée des offsets et des gradients.",
-            "comparison": "La règle de 2 est conservée après harmonisation des références, ou corrigée si elles diffèrent."
+            "title": "Séparer pente et décalage",
+            "input": "Modèle de lecture repris en 4.4 ; deux profondeurs symboliques h1 ≠ h2, même instrument et références constantes.",
+            "action": "Soustraire les deux lectures : x(h2) − x(h1) = ρfg(h2 − h1) ; isoler ρf si g et l’écart de profondeur sont connus.",
+            "output": "La pente détermine ρfg ; l’ordonnée à l’origine ne sépare pas ps − p_ref et b.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La différence élimine les constantes de 4.2 ; aucune paire de lectures mesurées n’est ajoutée au dossier."
+            },
+            "comparison": "4.5 ↔ 4.2 : la différence de lectures retrouve le gradient et précise les informations perdues sur les références.",
+            "evaluation": {
+              "object": "4.5 ↔ 4.2 : relation entre deux profondeurs comparée au modèle affine de lecture.",
+              "conditions": "ρf, g, ps, p_ref et b constants entre les deux positions ; profondeurs connues, comparaison seulement symbolique.",
+              "criterion": "Retrouver [x(h2) − x(h1)]/(h2 − h1) = ρfg ; une constante b ne change pas cette pente.",
+              "finding": "La pente et le décalage sont distingués ; une seule lecture avec zéro inconnu ne détermine pas indépendamment densité et référence."
+            }
           },
           {
             "id": 6,
-            "title": "Constituer le retour",
-            "action": "Reporter les écarts définissables et les informations encore absentes, puis associer chaque écart potentiel à une vérification concrète.",
-            "output": "Tableau de retour exploitable ou explicitement incomplet.",
-            "comparison": "Les sorties de retour répondent au dossier de 1 et gardent visibles les lectures idéales produites en 3."
+            "title": "Restituer les références du dossier",
+            "input": "Distinction obtenue en 4.5 ; le dossier de 4.1 conserve ps connu et les prévisions sans biais instrumental attribué.",
+            "action": "Réappliquer b = 0 et les deux références idéales ; restituer p_abs, q_s et Vimm sans corriger une mesure inexistante.",
+            "output": "Dossier initial retrouvé ; calibration et caractérisation physique restent des données à fournir séparément.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La spécialisation revient aux prévisions reçues ; l’analyse du décalage n’attribue pas une correction effective à un instrument."
+            },
+            "comparison": "4.6 ↔ 4.1 : retrouver les pressions référencées et le volume reçu, avec leur provenance calculée.",
+            "evaluation": {
+              "object": "4.6 ↔ 4.1 : références, pressions et volume restitués face aux sorties importées.",
+              "conditions": "Même ps = 101 325 Pa, profondeur et volume total ; les réponses instrumentales demeurent hypothétiques.",
+              "criterion": "Retrouver 124 869 Pa, 23 544 Pa et 1,200 L ; conserver ρfVimm = m = 1,200 kg.",
+              "finding": "Le dossier est restitué ; distinguer un biais instrumental d’une densité différente demanderait des informations indépendantes."
+            }
           }
-        ],
-        "id": 4
+        ]
       },
       {
+        "id": 5,
         "title": "Homogénéité et flottaison confrontées",
-        "system": "Le choix théorique de retour entre le modèle homogène libre et des bilans adaptés à stratification ou contact.",
-        "input": "Dossier comparatif du niveau 4, modèle du niveau 2 et informations disponibles sur densité, surface et contacts.",
-        "output": "Une décision argumentée de conserver le modèle ou d’ouvrir une variante exigeant de nouvelles données.",
+        "system": "La généralisation conditionnelle du bilan hydrostatique et la distinction entre équilibre des forces, équilibre des moments et stabilité.",
+        "input": "4.3 transmet les réponses idéales et la compensation massique ; homogénéité, surfaces accessibles et liberté du bloc restent supposées.",
+        "output": "Le cadre homogène libre est restitué comme cas particulier ; les données géométriques nécessaires à l’étude de l’inclinaison sont identifiées.",
         "section": "limites",
-        "comparison": "Confronter les hypothèses du retour au liquide homogène et au flotteur libre posés au niveau 2.",
+        "comparison": "5 ↔ 2 : la généralisation restitue le modèle homogène libre et précise ce que son équilibre vertical ne détermine pas.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les conditions du retour alimentent des bilans élargis puis leur restriction ; aucune stratification ni force supplémentaire n’est attribuée au bassin."
+        },
+        "evaluation": {
+          "object": "5 ↔ 2 : bilans généralisés et limite homogène libre comparés au modèle de pression et de poussée.",
+          "conditions": "Même g et même référence de surface ; les extensions symboliques sont retirées pour retrouver le scénario initial.",
+          "criterion": "Avec ρ(z) = ρf et K = 0, retrouver p_abs = ps + ρfgh et Vimm/V = ρb/ρf, sans conclure à la stabilité.",
+          "finding": "Les relations de l’aller sont retrouvées ; l’équilibre des moments nécessite une information géométrique distincte."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Isoler les hypothèses",
-            "action": "Rassembler les anomalies potentielles du retour et identifier celles concernant densité, référence de pression, capillarité ou appui mécanique.",
-            "output": "Hypothèses candidates classées par interaction concernée."
+            "title": "Recevoir les conditions du retour",
+            "input": "4.3 transmet q_s, p_abs et Δm = 0, obtenus avec un liquide homogène et un bloc libre.",
+            "action": "Associer chaque résultat à ses hypothèses : densité constante, pression de surface uniforme, surfaces accessibles et absence de force additionnelle.",
+            "output": "Hypothèses matérielles distinguées des réponses idéales qu’elles ont produites.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le dossier contient un accord calculé sous conditions ; cet accord ne transforme pas ces conditions en propriétés mesurées."
+            }
           },
           {
             "id": 2,
-            "title": "Formuler les variantes",
-            "action": "Poser, selon le cas envisagé, une densité dépendant de l’altitude ou une réaction de contact dans le bilan du bloc.",
-            "output": "Variantes théoriques accompagnées de paramètres supplémentaires."
+            "title": "Intégrer un bilan plus général",
+            "input": "Données de 5.1 ; envisager symboliquement ρ(z) et une force verticale K, sans modification des surfaces mouillées accessibles.",
+            "action": "Intégrer dp/dz = −ρ(z)g puis les pressions : F_h = g∫Vimmρ(z)dV ; poser l’équilibre vertical F_h + K = mg.",
+            "output": "p(z) = ps + g∫_z^zsρ(ζ)dζ ; K est signée vers le haut et absente de l’exemple.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les intégrales remplacent les produits constants ; une force additionnelle ne conserve cette expression de poussée que si le domaine de pression reste applicable."
+            }
           },
           {
             "id": 3,
-            "title": "Explorer les conséquences",
-            "action": "Déduire qualitativement comment une stratification modifierait le gradient de pression et comment un appui changerait l’égalité poussée-poids.",
-            "output": "Signatures distinctes calculables pour chaque hypothèse alternative."
+            "title": "Établir les conséquences conditionnelles",
+            "input": "Relations de 5.2 ; aucune fonction ρ(z) ni force K n’est fournie matériellement.",
+            "action": "Consigner l’effet d’une densité variable sur dp/dz et celui de K sur le volume d’équilibre ; restituer séparément ρ = ρf et K = 0.",
+            "output": "À 6.1 : cadre homogène libre conservé pour comparer le bloc initial à celui de même volume, ρb = 1 200 kg·m⁻³.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les conséquences des bilans définissent les limites du cadre ; la variante choisie change seulement la masse volumique du corps."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les signatures",
-            "action": "Vérifier que chaque conséquence envisagée pourrait être distinguée par une lecture de pression ou une observation du contact.",
-            "output": "Correspondance entre signature et observation discriminante proposée.",
-            "comparison": "Les conséquences de 3 sont confrontées aux anomalies possibles de 1, sans les traiter comme déjà observées."
+            "title": "Reprendre la portée des bilans",
+            "input": "Conséquences de 5.3 ; l’égalité verticale dépend de ρ(z), du domaine mouillé et de l’éventuelle force K.",
+            "action": "Reprendre ces dépendances ; si un appui masque une surface, réclamer un nouveau bilan des pressions avant d’utiliser F_h.",
+            "output": "Une force ajoutée et une surface retirée du liquide sont deux modifications distinctes.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture préserve les conditions des intégrales ; un contact avec le fond ne se traite pas automatiquement en ajoutant K à Archimède."
+            },
+            "comparison": "5.4 ↔ 5.3 : conserver les conséquences des extensions avec leurs conditions sur les forces et les surfaces.",
+            "evaluation": {
+              "object": "5.4 ↔ 5.3 : portée des modifications de densité et d’appui face aux conséquences établies.",
+              "conditions": "Variantes seulement symboliques ; le scénario de référence reste homogène et sans contact.",
+              "criterion": "Conserver F_h + K = mg seulement avec F_h adapté aux surfaces réellement pressurisées ; ne pas substituer ρfVimmg sans ses conditions.",
+              "finding": "Les dépendances sont explicites ; aucune modification de densité ou de contact n’est diagnostiquée à partir des seules prévisions."
+            }
           },
           {
             "id": 5,
-            "title": "Arbitrer les modèles",
-            "action": "Conserver l’hydrostatique homogène si aucun élément ne la contredit, ou préciser quelles données rendraient nécessaire un bilan élargi.",
-            "output": "Décision provisoire et justification des hypothèses retenues.",
-            "comparison": "Les variantes de 2 doivent apporter un effet identifiable ; aucune complexité supplémentaire n’est imposée sans raison."
+            "title": "Déduire le bilan des moments",
+            "input": "Relecture de 5.4, restreinte au liquide homogène et au bloc libre ; B est le centre du volume déplacé, G le centre de masse.",
+            "action": "Ramener la poussée en B et calculer M_G = (B − G) × F_A ; projeter ce moment selon un axe d’inclinaison.",
+            "output": "F_A = mg ne détermine pas M_G ; géométrie et déplacement de B conditionnent l’équilibre angulaire et le rappel.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le moment utilise la même résultante que 5.2, mais ajoute son point d’application ; une somme de forces n’en contient pas l’information."
+            },
+            "comparison": "5.5 ↔ 5.2 : le bilan des moments complète le bilan vertical sans remplacer ni modifier la résultante hydrostatique.",
+            "evaluation": {
+              "object": "5.5 ↔ 5.2 : moment de la poussée comparé au bilan vertical des forces.",
+              "conditions": "ρf constante, K = 0, air et capillarité négligés ; forme et positions de G et B non spécifiées.",
+              "criterion": "L’équilibre angulaire exige M_G = 0 ; un rappel après petite inclinaison φ demanderait φM_φ(φ) < 0, à déterminer géométriquement.",
+              "finding": "Le calcul de Vimm ne suffit pas : ni l’orientation d’équilibre ni son rappel ne sont établis par le rapport des densités."
+            }
           },
           {
             "id": 6,
-            "title": "Préparer une vérification",
-            "action": "Construire un protocole comparant plusieurs profondeurs et un contrôle de liberté du flotteur, avec les paramètres requis par le modèle choisi.",
-            "output": "Plan de vérification du modèle de retour.",
-            "comparison": "Ce plan vise les hypothèses de 1 et les signatures de 3 ; son exécution reste à documenter."
+            "title": "Restituer le cadre et ses inconnues",
+            "input": "Bilans de 5.5 et conditions reçues en 5.1 ; la forme nécessaire au calcul des moments reste absente.",
+            "action": "Restituer ρ = ρf et K = 0 ; conserver les pressions calculées et Vimm = m/ρf comme condition d’équilibre vertical.",
+            "output": "Hypothèses initiales retrouvées, avec géométrie d’inclinaison explicitement non déterminée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La restriction restitue les relations initiales ; les informations nouvelles concernent leur portée, pas une stabilité démontrée."
+            },
+            "comparison": "5.6 ↔ 5.1 : retrouver homogénéité, liberté et références en précisant les attributs encore nécessaires pour l’inclinaison.",
+            "evaluation": {
+              "object": "5.6 ↔ 5.1 : hypothèses et résultats restitués face aux conditions du dossier de retour.",
+              "conditions": "Même bassin supposé, même bloc à 600 kg·m⁻³ et aucune extension adoptée dans le calcul numérique.",
+              "criterion": "Conserver ρf = 1 000 kg·m⁻³, ps = 101 325 Pa, K = 0 et Vimm = 1,200 L ; laisser la stabilité ouverte.",
+              "finding": "Le cadre initial est retrouvé ; les résultats concernent la pression et la compensation verticale, sans valider un équilibre complet."
+            }
           }
-        ],
-        "id": 5
+        ]
       },
       {
+        "id": 6,
         "title": "Retour au bassin initial",
-        "system": "La nouvelle application du modèle confronté au bassin initial et à une variante de masse volumique du bloc.",
-        "input": "Modèle retenu au niveau 5, données initiales et variante théorique d’un bloc plus dense que le liquide.",
-        "output": "Comparaison finale entre prédictions de retour, données initiales et limites de la flottaison libre.",
+        "system": "La comparaison du bassin inchangé et de deux masses volumiques du corps, avec test de la limite du volume déplacé.",
+        "input": "5.3 conserve le liquide homogène libre ; la variante remplace ρb = 600 par 1 200 kg·m⁻³ à volume total constant.",
+        "output": "Pression à profondeur fixée conservée ; le second corps ne possède pas le volume déplacé nécessaire à la compensation verticale.",
         "section": "controle",
-        "comparison": "Comparer les résultats de retour aux paramètres du niveau 1 et au calcul du niveau 3, sans conclure à une validation expérimentale.",
+        "comparison": "6 ↔ 1 : conserver bassin, références et volume total, puis isoler le changement de masse volumique et ses conséquences.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le modèle est appliqué à un autre corps supposé ; la comparaison ne constitue pas une chronologie mesurée de remplacement ou de descente."
+        },
+        "evaluation": {
+          "object": "6 ↔ 1 : paramètres du bassin et des deux corps comparés au dossier initial.",
+          "conditions": "Mêmes ρf, g, ps et V ; h reste mesuré sous la surface actuelle. Seule ρb change, donc aussi la masse.",
+          "criterion": "Retrouver h = 2,40 m, ps = 101 325 Pa et V = 2,00 L ; distinguer ρb = 600 de 1 200 kg·m⁻³.",
+          "finding": "Le premier corps demande 1,200 L immergé, le second 2,400 L impossibles. Les références sont conservées, sans stabilité ou mouvement ultérieur établis."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Reprendre le bassin",
-            "action": "Reprendre exactement liquide, profondeur et volume initiaux, puis distinguer le bloc initial du bloc alternatif de masse volumique supérieure.",
-            "output": "Conditions communes et seule variation du scénario."
+            "title": "Recevoir les conditions de la variante",
+            "input": "Cadre transmis par 5.3 : bassin initial et V = 2,00 L ; comparer les corps de ρb = 600 et 1 200 kg·m⁻³.",
+            "action": "Conserver ρf = 1 000 kg·m⁻³, g = 9,81 m·s⁻², ps = 101 325 Pa et la profondeur de pression h = 2,40 m.",
+            "output": "Conditions communes séparées du changement de densité ; aucune constance du niveau absolu du bassin n’est supposée.",
+            "relation": {
+              "nature": "logique",
+              "description": "La comparaison garde la même profondeur sous la surface de chaque cas ; sans géométrie du bassin, un déplacement de niveau n’est pas calculé."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les critères",
-            "action": "Fixer comme critères la pression au même point, l’équilibre vertical et la possibilité géométrique du volume immergé prédit.",
-            "output": "Critères de fermeture de la boucle hydrostatique."
+            "title": "Déduire le test de volume disponible",
+            "input": "Données de 6.1 ; chaque corps possède V total et une masse m = ρbV, avec absence d’appui.",
+            "action": "Former Vrequis = ρbV/ρf puis imposer Vrequis ≤ V ; calculer aussi la poussée maximale hydrostatique Fmax = ρfgV.",
+            "output": "La compensation verticale exige ρb ≤ ρf ; la pression à h fixé dépend toujours de ps, ρf et g.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le volume requis est une solution algébrique candidate ; la borne géométrique décide si elle peut représenter un volume immergé."
+            }
           },
           {
             "id": 3,
-            "title": "Calculer le retour",
-            "action": "Réappliquer le modèle conservé et calculer, pour le bloc alternatif, le volume immergé requis de 2,400 L.",
-            "output": "Reproduction du cas initial et impossibilité du cas alternatif."
+            "title": "Établir les deux résultats de retour",
+            "input": "Expressions de 6.2 ; mêmes bassin et volume total, avec masses 1,200 kg et 2,400 kg pour les deux corps.",
+            "action": "Consigner Vrequis = 1,200 L puis 2,400 L ; pour le second corps, comparer mg = 23,544 N à Fmax = 19,620 N.",
+            "output": "À 1.1 : pression 124 869 Pa à h fixé ; variante plus dense sans flottaison libre, avec déficit de poussée 3,924 N.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les résultats reprennent les attributs communs et isolent la variante ; 2,400 L n’est pas présenté comme un volume effectivement immergé."
+            }
           },
           {
             "id": 4,
-            "title": "Interpréter la limite",
-            "action": "Relire le volume requis supérieur au volume total comme absence de flottaison libre, sans prolonger artificiellement la formule géométrique.",
-            "output": "Conclusion de descente attendue, sous les hypothèses retenues.",
-            "comparison": "Le calcul de 3 est comparé aux volumes de 1 ; aucune immersion supérieure au corps n’est représentée."
+            "title": "Reprendre l’impossibilité géométrique",
+            "input": "6.3 demande 2,400 L pour un corps de 2,00 L ; la poussée maximale reste inférieure au poids.",
+            "action": "Relire Vrequis comme résultat formel inadmissible et conserver Vimm ≤ V ; distinguer tendance à descendre et trajectoire dynamique calculée.",
+            "output": "Absence de flottaison libre pour le second corps ; aucun taux d’immersion de 120 % réalisé.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture qualifie le dépassement de volume ; la limite provient de la géométrie, sans réfuter la loi de pression."
+            },
+            "comparison": "6.4 ↔ 6.3 : conserver les deux volumes candidats en rejetant l’interprétation physique de celui qui dépasse V.",
+            "evaluation": {
+              "object": "6.4 ↔ 6.3 : volumes requis et déficit de poussée relus face aux résultats de la variante.",
+              "conditions": "Même liquide homogène, corps libre et absence de capillarité ; aucun mouvement du fluide n’a été modélisé.",
+              "criterion": "Conserver 2,400 L > 2,00 L et 23,544 N > 19,620 N ; ne pas prolonger la fraction calculée au-delà de 1.",
+              "finding": "La compensation verticale est impossible ; une vitesse de descente exigerait une dynamique du corps et du fluide absente du dossier."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter la conclusion",
-            "action": "Vérifier que la limite révèle une condition d’application de l’équilibre flottant, plutôt qu’une contradiction de la loi hydrostatique.",
-            "output": "Bilan théorique entre domaine valide et scénario exclu.",
-            "comparison": "Les critères de 2 distinguent validité de la pression et existence d’un équilibre de flottaison."
+            "title": "Borner puis inverser le déficit",
+            "input": "Dépassement repris en 6.4 ; pour tout volume déplacé possible, 0 ≤ Vimm ≤ V dans le bilan hydrostatique.",
+            "action": "Déduire Fz = ρfgVimm − ρbVg ≤ (ρf − ρb)Vg ; à immersion totale, isoler ρb − ρf = (mg − Fmax)/(gV).",
+            "output": "La variante vérifie Fz ≤ −3,924 N dans ce bilan ; le déficit restitue la différence de densité sous V et g connus.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La borne confirme l’inexistence de l’équilibre candidat ; l’inversion ne détermine pas deux densités inconnues à partir d’un seul déficit."
+            },
+            "comparison": "6.5 ↔ 6.2 : la borne des forces retrouve le test de volume, et l’inversion explicite les paramètres nécessaires.",
+            "evaluation": {
+              "object": "6.5 ↔ 6.2 : borne hydrostatique et inversion du déficit comparées au critère Vrequis ≤ V.",
+              "conditions": "Même g, V et ρf connus ; aucune force hydrodynamique de mouvement ni d’appui n’est incluse.",
+              "criterion": "ρb > ρf doit donner Vrequis > V et Fz maximal négatif ; 3,924/(9,81 × 0,00200) = 200 kg·m⁻³.",
+              "finding": "Les deux critères excluent le même équilibre ; le déficit calculé restitue une différence de densité, sans prédire une accélération réelle."
+            }
           },
           {
             "id": 6,
-            "title": "Fermer ou prolonger",
-            "action": "Consigner les résultats reproduits, la variante exclue et les relevés nécessaires pour confronter réellement pression et immersion aux prédictions.",
-            "output": "Boucle calculatoire fermée ; confrontation expérimentale encore ouverte.",
-            "comparison": "Les résultats reviennent aux données de 1 et au calcul de 3, avec les limites désormais explicites."
+            "title": "Restituer les paramètres et la limite",
+            "input": "Inversion de 6.5, ρf = 1 000 kg·m⁻³ et V = 2,00 L connus ; le premier corps demeure la référence distincte.",
+            "action": "Retrouver ρb = 1 200 kg·m⁻³ puis m = 2,400 kg ; conserver h et ps, ainsi que le bloc initial à 600 kg·m⁻³.",
+            "output": "Attributs des deux cas restitués ; pression et limite de flottaison correspondent au même bassin décrit.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour reconstruit la densité de la variante à partir d’un résultat déjà calculé ; les autres paramètres restent ceux de 6.1."
+            },
+            "comparison": "6.6 ↔ 6.1 : retrouver volume, densités et références en conservant l’étiquette des deux corps.",
+            "evaluation": {
+              "object": "6.6 ↔ 6.1 : masse volumique, masse et paramètres communs restitués face aux deux corps reçus.",
+              "conditions": "Même volume total, liquide et profondeur référencée ; l’inversion réutilise le déficit du calcul, sans pesée nouvelle.",
+              "criterion": "Retrouver ρb = 1 200 kg·m⁻³ et m = 2,400 kg pour la variante, puis conserver la référence 600 kg·m⁻³ et 1,200 kg.",
+              "finding": "Les attributs initiaux de chaque cas sont retrouvés ; seule la compensation verticale du bloc léger reste admissible dans le cadre annoncé."
+            }
           }
-        ],
-        "id": 6
+        ]
       }
-    ],
-    "version": "0.1",
-    "updated": "2026-09-09"
+    ]
   },
   "continuite-bernoulli": {
     "question": "Comment décrire débit et pression dans un tube, produire une prévision, puis confronter le retour aux données et aux hypothèses d’entrée ?",

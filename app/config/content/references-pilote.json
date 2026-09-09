@@ -50,7 +50,7 @@
   "mit-orbite": {
     "title": "MIT 8.01SC — Mécanique céleste",
     "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter25new.pdf",
-    "note": "Chapitre 25, §25.2–25.5 : réduction à un corps, moment cinétique et lois de Kepler.",
+    "note": "Chapitre 25, §25.2–25.3 : réduction à un corps et moment cinétique ; §25.4.1 : orbite circulaire ; §25.6 : lois de Kepler.",
     "checked": "2026-09-09"
   },
   "mit-rotation": {

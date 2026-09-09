@@ -1,6 +1,6 @@
 # Préciser les analyses existantes
 
-Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) aux fiches déjà rédigées. Elle conserve leurs coordonnées afin de permettre la reprise de chaque élément. Les lots **AP1 à AP3** concernent neuf fiches :
+Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) aux fiches déjà rédigées. Elle conserve leurs coordonnées afin de permettre la reprise de chaque élément. Les lots **AP1 à AP4** concernent douze fiches :
 
 | Lot | Fiche | Nature du sujet | Périmètre |
 | --- | --- | --- | --- |
@@ -13,14 +13,17 @@ Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) a
 | AP3 | `rotation-axe-fixe` | Phénomène physique | Disque puis cerceau autour du même axe central fixe ; couple constant, palier idéal |
 | AP3 | `roulement-sans-glissement` | Phénomène physique | Cylindre homogène sur plan incliné fixe ; contact idéal et condition de frottement statique |
 | AP3 | `referentiel-tournant` | Phénomène physique | Même point matériel décrit dans deux repères ; origine commune fixe et rotation uniforme |
+| AP4 | `newton-referentiel` | Phénomène physique | Mobile ponctuel sur pente fixe sans frottement ; bilan des forces, intégration et conditions initiales |
+| AP4 | `force-centrale-orbite` | Phénomène physique | Force centrale puis gravitation newtonienne ; orbite circulaire et paramètres conditionnels |
+| AP4 | `hydrostatique-archimede` | Phénomène physique | Liquide homogène au repos, pression puis bloc flottant librement ; équilibre vertical |
 
 ## Ce qui est précisé
 
-Les 324 sous-niveaux de ces trois lots reprennent les attributs reçus, le traitement effectué et la sortie à conserver. Chaque lot en approfondit 108. Les fonctions 2 et 5 réalisent un traitement théorique propre au système local : le retour ne se limite pas à inviter à vérifier ou décider.
+Les 432 sous-niveaux de ces quatre lots reprennent les attributs reçus, le traitement effectué et la sortie à conserver. Chaque lot en approfondit 108. Les fonctions 2 et 5 réalisent un traitement théorique propre au système local : le retour ne se limite pas à inviter à vérifier ou décider.
 
-Chaque niveau global et sous-niveau possède une relation entrante qualifiée. Les **378 relations** décrivent comment les entrées conduisent à l'élément étudié : dépendance logique, calcul, lecture, interprétation ou autre relation explicitée. Un contrôle de cohérence ne devient pas une mesure ; un changement de cas calculé ne devient pas une chronologie expérimentale.
+Chaque niveau global et sous-niveau possède une relation entrante qualifiée. Les **504 relations** décrivent comment les entrées conduisent à l'élément étudié : dépendance logique, calcul, lecture, interprétation ou autre relation explicitée. Un contrôle de cohérence ne devient pas une mesure ; un changement de cas calculé ne devient pas une chronologie expérimentale.
 
-Les trois comparaisons globales et les dix-huit comparaisons locales de chaque fiche possèdent quatre champs, soit **189 évaluations détaillées** au total :
+Les trois comparaisons globales et les dix-huit comparaisons locales de chaque fiche possèdent quatre champs, soit **252 évaluations détaillées** au total :
 
 1. **Éléments comparés** : références exactes, correspondant à 4/3, 5/2 ou 6/1.
 2. **Conditions de comparaison** : hypothèses communes, conventions et statut des données.
@@ -50,6 +53,16 @@ Le troisième lot approfondit trois autres sujets physiques. Chaque chaîne de r
 - **Référentiel tournant** : reconstruire les vitesses et accélérations du même point dans les deux descriptions. Les termes centrifuge et de Coriolis sont séparés des interactions matérielles. La variante v′ = 0 concerne un instant ; elle ne suffit pas à conclure à un équilibre relatif. Les dérivées sont rattachées au repère utilisé. [MIT, chapitre 31](https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter31.pdf).
 
 Ces références existantes ont été revérifiées le 9 septembre 2026. Les exemples et les contrôles inverses sont recalculés dans les hypothèses indiquées ; les passages des deux recueils gardent leurs repères existants et leurs documents privés.
+
+## AP4 : forces, orbites et équilibre d'un fluide
+
+Le quatrième lot reprend trois sujets physiques existants. Les modèles et leurs conditions initiales conduisent à des résultats calculés, ensuite utilisés pour retrouver certains attributs d'entrée. Les données indépendantes nécessaires pour confronter ces modèles au réel restent à recueillir.
+
+- **Newton** : distinguer les interactions extérieures de leur résultante, projeter le bilan dans les axes de la pente et intégrer avec les conditions initiales. Le retour sépare reconstruction de l'accélération, du départ et d'une force conditionnelle. Doubler la masse conserve le mouvement idéal, tout en doublant le poids et la réaction. [MIT, chapitre 7, §7.2–7.4](https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter7.pdf).
+- **Orbite centrale** : distinguer conservation du moment cinétique, hypothèse gravitationnelle et conditions du cercle. Retrouver GM depuis un rayon et une période suppose le modèle annoncé ; un seul cercle n'identifie pas toute une loi radiale. Le second rayon est un scénario distinct, avec ses propres conditions circulaires. [MIT, chapitre 25, §25.2–25.3, §25.4.1 et §25.6](https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter25new.pdf).
+- **Hydrostatique et Archimède** : distinguer pression absolue et surpression, puis relier la résultante des pressions au volume déplacé. Les inversions de profondeur ou de masse volumique gardent leurs paramètres connus explicites. La variante du corps plus dense demande un volume immergé supérieur au volume total ; le bilan de flottaison libre n'a donc pas de solution. L'équilibre vertical reste distinct de la stabilité en inclinaison. [MIT, chapitre 27, §27.3–27.4 et §27.6](https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter27.pdf).
+
+Ces références ont été revérifiées le 9 septembre 2026. Le repère de la référence orbitale a été corrigé pour situer les lois de Kepler au §25.6. Les exemples et les inversions sont recalculés ; les repères des recueils sont conservés et leurs documents restent privés.
 
 ## Lecture dans le site
 
