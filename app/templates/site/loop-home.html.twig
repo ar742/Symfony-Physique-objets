@@ -1,19 +1,23 @@
 {% extends 'site/layout.html.twig' %}
 {% block title %}La boucle d’étude — Physique objets{% endblock %}
 {% block body %}
-    <div class="loop-heading"><p class="eyebrow">Observer · Modéliser · Confronter</p><h1>Explorer la physique par sa boucle d’étude</h1><p class="lead">Six étapes pour relier les observations, les modèles et leurs applications.</p></div>
+    <div class="loop-heading"><p class="eyebrow">Expression du système · Théorie · Résultats · Retour</p><h1>Explorer la physique par sa boucle d’étude</h1><p class="lead">Six systèmes, chacun analysé par six sous-niveaux de même conception. Les chaînes aller et retour confrontent résultats, théories et données initiales.</p></div>
     <section class="interactive-loop" aria-labelledby="boucle-titre">
         <div class="loop-toolbar"><h2 id="boucle-titre">La boucle générale</h2><a href="{{ path('sitephys_physmvc_presentation', {_fragment: 'niveaux'}) }}">Voir le schéma d’origine</a></div>
-        {% include 'site/_loop.html.twig' %}
+        {% include 'site/_loop.html.twig' with {comparison_links: [
+            {href: '#etape-6', label: '1 ↔ 6 · Entrées et retour final'},
+            {href: '#etape-5', label: '2 ↔ 5 · Théories'},
+            {href: '#etape-4', label: '3 ↔ 4 · Résultats'}
+        ]} %}
         <p class="loop-help">Cliquez sur une étape pour la parcourir. Survolez-la ou utilisez Tab pour son explication. Sur mobile, touchez « i ». Échap ferme l’info-bulle.</p>
     </section>
-    <section class="source-entry-strip" aria-label="Parcours par domaine"><div><h2>Appliquer la boucle à un domaine</h2><p>Mécanique, thermodynamique et physique statistique : choisissez un parcours de fiches.</p></div><a class="primary-link" href="{{ path('learning_domains') }}">Explorer les domaines</a></section>
-    <div class="guide-heading"><p class="eyebrow">Un premier parcours de lecture</p><h2>Thermodynamique et physique statistique</h2><p>Explorez les 36 sous-étapes de la méthode et les huit premières fiches web : hypothèses, formules, exemples calculés et sources précises.</p><a class="primary-link" href="{{ path('learning_domain', {slug: 'thermodynamique-statistique'}) }}">Lire les huit fiches</a> <a href="{{ path('learning_corrections') }}">Voir les corrections documentées</a></div>
+    <section class="source-entry-strip" aria-label="Analyses par fiche"><div><h2>{{ card_count }} fiches, chacune avec sa propre analyse</h2><p>Chaque fiche dispose de six niveaux et de 36 sous-niveaux rédigés pour son sujet. Un clic ouvre l’étage suivant du schéma.</p></div><a class="primary-link" href="{{ path('learning_index') }}">Choisir une fiche à analyser</a></section>
+    <div class="guide-heading"><p class="eyebrow">Parcours transversal initial</p><h2>Thermodynamique et physique statistique</h2><p>Le premier exemple commun à plusieurs fiches reste accessible ci-dessous. Les analyses propres à chaque fiche se trouvent désormais directement en tête de celle-ci.</p><a class="primary-link" href="{{ path('learning_domain', {slug: 'thermodynamique-statistique'}) }}">Lire les huit fiches</a> <a href="{{ path('learning_corrections') }}">Voir les corrections documentées</a></div>
     {% for step in steps %}
         <section class="guide-step tone-{{ step.color }}" id="etape-{{ step.id }}" tabindex="-1">
             <div class="guide-step-heading"><span class="step-number">0{{ step.id }}</span><div><p class="eyebrow">{{ step.subtitle }}</p><h2>{{ step.heading }}</h2></div></div>
             <p>{{ step.text }}</p><p class="deliverable"><strong>À obtenir :</strong> {{ step.deliverable }}</p>
-            <p><a class="primary-link" href="{{ path('learning_subloop', {base: step.id}) }}">Explorer la sous-boucle {{ step.id }} · six sous-étapes</a></p>
+            <p><a class="primary-link" href="{{ path('learning_subloop', {base: step.id}) }}">Exemple transversal initial · sous-boucle {{ step.id }}</a></p>
             <ul class="source-pointers">{% for source in step.sources %}<li><a href="{{ path('source_document', {key: source.doc}) }}#page={{ source.page }}">{{ source.label }} <span>{{ source.doc == 'cpge' ? 'CPGE' : 'Physique théorique' }} · {{ source.code }} · p. {{ source.page }}</span></a></li>{% endfor %}</ul>
             <div class="step-actions"><a href="{{ path('source_index', {_fragment: 'recueil-' ~ (step.id < 4 ? 'cpge' : 'theorique')}) }}">Situer ces fiches dans le recueil</a><a href="#boucle-titre">Revenir à la boucle</a></div>
         </section>

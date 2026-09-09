@@ -4,7 +4,9 @@ Un site pour étudier la physique en reliant observations, modèles et applicati
 
 ## Contenu disponible
 
-- Une boucle générale interactive et six sous-boucles : **36 sous-étapes** avec explications au survol, accès clavier et boutons d'information tactiles.
+- **Chaque fiche possède six systèmes globaux et six sous-niveaux par système** : 132 systèmes et **792 sous-niveaux rédigés pour les 22 fiches**. Un clic ouvre la sous-boucle, puis la description du point choisi ; survol, clavier et boutons d'information tactiles donnent accès aux explications.
+- La même chaîne analytique se répète aux deux échelles : expression du système, formalisation, résultats, relecture, confrontation théorique, résultats de retour. Les liens comparent les résultats, les théories et les données initiales. Voir [la méthode à deux niveaux](docs/ANALYSES-DEUX-NIVEAUX.md).
+- La boucle générale et ses six sous-boucles transversales initiales restent accessibles comme parcours d'introduction.
 - **Huit fiches web** de thermodynamique et physique statistique : hypothèses, 13 équations MathML, exemples calculés, questions corrigées et références de pages.
 - **Quatre fiches de mécanique** : Newton et référentiel, travail-énergie, oscillateur amorti, force centrale et orbite. Une boucle de mécanique à six entrées ouvre directement les sections des fiches.
 - **Quatre fiches de mécanique supplémentaires** : rotation autour d'un axe fixe, roulement sans glissement, référentiel tournant, Lagrange et Hamilton. Une seconde boucle de six entrées conserve l'accès à la première et relie les nouveaux sujets.

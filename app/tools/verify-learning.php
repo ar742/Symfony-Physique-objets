@@ -14,7 +14,10 @@ $check = function (bool $ok, string $message) use (&$checks, &$errors): void {
 $paths = ['/', '/recueils/', '/fiches/', '/fiches/corrections', '/domaines/'];
 foreach ($domains->available() as $domain) { $paths[] = '/domaines/'.$domain['slug']; }
 foreach (range(1, 6) as $base) { $paths[] = '/boucle/'.$base; }
-foreach ($library->all() as $card) { $paths[] = '/fiches/'.$card['slug']; }
+foreach ($library->all() as $card) {
+    $paths[] = '/fiches/'.$card['slug'];
+    foreach (range(1, 6) as $base) { $paths[] = '/fiches/'.$card['slug'].'/analyse/'.$base; }
+}
 $documents = [];
 foreach ($paths as $path) {
     $response = $kernel->handle(Symfony\Component\HttpFoundation\Request::create($path), Symfony\Component\HttpKernel\HttpKernelInterface::SUB_REQUEST);
@@ -51,8 +54,15 @@ foreach ($paths as $path) {
             $check($xpath->query('.//*[@role="tooltip"]', $panel)->length === 6, 'Six infos '.$group['anchor']);
         }
     }
-    if (str_starts_with($path, '/fiches/') && $path !== '/fiches/' && $path !== '/fiches/corrections') {
-        $card = $library->find(substr($path, strlen('/fiches/')));
+    if (preg_match('~^/fiches/([a-z][a-z0-9-]*)$~', $path, $match) && $path !== '/fiches/corrections') {
+        $card = $library->find($match[1]);
+        $xpath = new DOMXPath($document);
+        $nodes = $xpath->query('//section[@id="analyse"]//*[@data-loop-node]/a');
+        $check($nodes->length === 6, 'Six systèmes globaux '.$path);
+        foreach ($nodes as $index => $node) {
+            $check($node->getAttribute('href') === $path.'/analyse/'.($index + 1), 'Entrée dans le bon système '.$path);
+        }
+        $check($xpath->query('//details[contains(@class,"analysis-matrix")]//ol/li')->length === 36, 'Vue complète des 36 sous-niveaux '.$path);
         $domainCards = $domains->find($card['domain'])['cards'];
         $index = array_search($card['slug'], array_column($domainCards, 'slug'), true);
         $expected = [];
@@ -61,6 +71,25 @@ foreach ($paths as $path) {
         $actual = [];
         foreach ((new DOMXPath($document))->query('//nav[@aria-label="Parcours de lecture"]/a') as $link) { $actual[] = $link->getAttribute('href'); }
         $check($expected === $actual, 'Pagination du domaine '.$card['slug']);
+    }
+    if (preg_match('~^/fiches/([a-z][a-z0-9-]*)/analyse/([1-6])$~', $path, $match)) {
+        $base = (int) $match[2];
+        $xpath = new DOMXPath($document);
+        $nodes = $xpath->query('//*[@data-loop-node]/a');
+        $check($nodes->length === 6, 'Six sous-niveaux graphiques '.$path);
+        $check($xpath->query('//*[@role="tooltip"]')->length === 6, 'Six explications '.$path);
+        $check($xpath->query('//section[@data-analysis-point]')->length === 6, 'Six descriptions rédigées '.$path);
+        foreach ($nodes as $index => $node) {
+            $check($node->getAttribute('href') === '#point-'.$base.'.'.($index + 1), 'Clic vers le sous-niveau '.$path);
+        }
+        foreach ([4, 5, 6] as $point) {
+            $actual = [];
+            foreach ($xpath->query('//section[@id="point-'.$base.'.'.$point.'"]//div[@class="comparison-targets"]/a') as $link) { $actual[] = $link->getAttribute('href'); }
+            $check($actual === ['#point-'.$base.'.'.(7-$point), '#point-'.$base.'.'.($point-3)], 'Comparaisons de valeurs et de méthodes '.$path.'#'.$point);
+        }
+        $next = $base === 6 ? 1 : $base + 1;
+        $handoff = $xpath->query('//p[@class="analysis-handoff"]/a');
+        $check($handoff->length === 1 && $handoff->item(0)->getAttribute('href') === '/fiches/'.$match[1].'/analyse/'.$next.'#point-'.$next.'.1', 'Transmission entre systèmes '.$path);
     }
 }
 foreach ($documents as $path => $document) {
@@ -81,11 +110,11 @@ foreach ($documents as $path => $document) {
         }
     }
 }
-foreach (['/boucle/0', '/boucle/7', '/fiches/inconnue', '/fiches/..%2F.env', '/domaines/inconnu', '/domaines/optique', '/domaines/..%2F.env'] as $path) {
+foreach (['/boucle/0', '/boucle/7', '/fiches/inconnue', '/fiches/..%2F.env', '/domaines/inconnu', '/domaines/optique', '/domaines/..%2F.env', '/fiches/gaz-parfait/analyse/0', '/fiches/gaz-parfait/analyse/7', '/fiches/inconnue/analyse/1', '/fiches/..%2F.env/analyse/1'] as $path) {
     $response = $kernel->handle(Symfony\Component\HttpFoundation\Request::create($path), Symfony\Component\HttpKernel\HttpKernelInterface::SUB_REQUEST);
     $check($response->getStatusCode() === 404, 'Route invalide '.$path);
 }
-foreach (['/boucle/2', '/fiches/boltzmann', '/domaines/mecanique', '/fiches/lagrange-hamilton', '/domaines/fluides-ondes', '/fiches/onde-acoustique', '/styles/science.css', '/scripts/theme.js'] as $path) {
+foreach (['/boucle/2', '/fiches/boltzmann', '/domaines/mecanique', '/fiches/lagrange-hamilton', '/domaines/fluides-ondes', '/fiches/onde-acoustique', '/fiches/oscillateur-harmonique/analyse/5', '/fiches/gaz-parfait/analyse/1', '/fiches/onde-acoustique/analyse/6', '/styles/science.css', '/scripts/theme.js'] as $path) {
     $curl = curl_init('http://127.0.0.1'.$path);
     curl_setopt_array($curl, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 30]);
     $html = curl_exec($curl);
@@ -93,7 +122,7 @@ foreach (['/boucle/2', '/fiches/boltzmann', '/domaines/mecanique', '/fiches/lagr
     $check(is_string($html) && strlen($html) > 100, 'Contenu HTTP '.$path);
     unset($curl);
 }
-$result = ['checks' => $checks, 'pages' => count($documents), 'substeps' => 36, 'domain_steps' => array_sum(array_map(static fn (array $domain): int => count($domain['steps']), $domains->all())), 'cards' => count($library->all()), 'corrections' => array_sum(array_map(static fn (array $card): int => count($card['corrections']), $library->all())), 'browser_visual_test' => false, 'errors' => $errors];
+$result = ['checks' => $checks, 'pages' => count($documents), 'substeps' => 36, 'analysis_levels' => count($library->all()) * 6, 'analysis_sublevels' => count($library->all()) * 36, 'domain_steps' => array_sum(array_map(static fn (array $domain): int => count($domain['steps']), $domains->all())), 'cards' => count($library->all()), 'corrections' => array_sum(array_map(static fn (array $card): int => count($card['corrections']), $library->all())), 'browser_visual_test' => false, 'errors' => $errors];
 file_put_contents(dirname(__DIR__).'/var/learning-verification.json', json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)."\n";
 exit($errors ? 1 : 0);

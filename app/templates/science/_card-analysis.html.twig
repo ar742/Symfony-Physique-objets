@@ -1,0 +1,28 @@
+<section class="card-analysis" id="analyse" aria-labelledby="analyse-titre" tabindex="-1">
+    <div class="loop-toolbar"><h2 id="analyse-titre">Ce système en 6 niveaux et 36 sous-niveaux</h2><a href="#lecture">Accéder au contenu scientifique</a></div>
+    <p class="lead">{{ analysis.question }}</p>
+    <p class="analysis-basis"><strong>Point de départ :</strong> {{ analysis.basis }}</p>
+    <p>Chaque niveau est lui-même un système à analyser. Cliquez sur un niveau pour ouvrir sa boucle à six sous-niveaux.</p>
+    <section class="interactive-loop analysis-loop" aria-label="Six systèmes globaux de cette fiche">
+        {% include 'site/_loop.html.twig' with {
+            steps: analysis.levels, tip_prefix: 'analysis-tip-', marker_id: 'analysis-arrow',
+            board_label: 'Six niveaux de ' ~ card.title, evaluation_href: '#comparaisons-globales',
+            comparison_links: [
+                {href: path('learning_card_analysis', {slug: card.slug, base: 6}), label: '1 ↔ 6 · Entrées et retour final'},
+                {href: path('learning_card_analysis', {slug: card.slug, base: 5}), label: '2 ↔ 5 · Théories'},
+                {href: path('learning_card_analysis', {slug: card.slug, base: 4}), label: '3 ↔ 4 · Résultats'}
+            ]
+        } only %}
+        <p class="loop-help">Clic : ouvrir les six sous-niveaux. Survol ou Tab : identifier le système. Sur mobile : bouton « i ». Les pointillés relient les comparaisons aller/retour.</p>
+    </section>
+    {% include 'science/_analysis-method.html.twig' %}
+    <section class="analysis-comparisons" id="comparaisons-globales" aria-labelledby="comparaisons-titre">
+        <h3 id="comparaisons-titre">Ce que la chaîne de retour doit comparer</h3>
+        <div class="analysis-comparison-grid">
+            {% for item in analysis.levels|slice(3) %}<article><h4>{{ 7 - item.id }} ↔ {{ item.id }} · {{ item.name }}</h4><p>{{ item.comparison }}</p><a href="{{ item.href }}">Ouvrir le niveau {{ item.id }}</a></article>{% endfor %}
+        </div>
+    </section>
+    <details class="analysis-matrix"><summary>Vue d’ensemble des 36 sous-niveaux de cette fiche</summary><div class="subloop-overview">
+        {% for item in analysis.levels %}<section><h3><a href="{{ item.href }}">{{ item.id }}.0 · {{ item.title }}</a></h3><p>{{ item.system }}</p><ol>{% for point in item.steps %}<li><a href="{{ path('learning_card_analysis', {slug: card.slug, base: item.id, _fragment: 'point-' ~ point.coordinate}) }}">{{ point.coordinate }} · {{ point.label }} · {{ point.title }}</a></li>{% endfor %}</ol></section>{% endfor %}
+    </div></details>
+</section>

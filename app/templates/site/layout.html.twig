@@ -33,7 +33,7 @@
                 sitephys_physmvc_symbolization: 'Niveaux',
                 sitephys_physmvc_links: 'Liens'
             } %}
-                <a href="{{ path(route) }}"{% if current == route %} aria-current="page"{% elseif route == 'learning_domains' and current == 'learning_domain' %} aria-current="true"{% elseif route == 'learning_index' and current in ['learning_card', 'learning_corrections'] %} aria-current="true"{% elseif route == 'sitephys_physmvc_home' and current == 'learning_subloop' %} aria-current="true"{% elseif route == 'sitephys_physmvc_topic' and current in ['sitephys_physmvc_phys_hometopic', 'sitephys_physmvc_phys_view'] %} aria-current="true"{% endif %}>{{ label }}</a>
+                <a href="{{ path(route) }}"{% if current == route %} aria-current="page"{% elseif route == 'learning_domains' and current == 'learning_domain' %} aria-current="true"{% elseif route == 'learning_index' and current in ['learning_card', 'learning_card_analysis', 'learning_corrections'] %} aria-current="true"{% elseif route == 'sitephys_physmvc_home' and current == 'learning_subloop' %} aria-current="true"{% elseif route == 'sitephys_physmvc_topic' and current in ['sitephys_physmvc_phys_hometopic', 'sitephys_physmvc_phys_view'] %} aria-current="true"{% endif %}>{{ label }}</a>
             {% endfor %}
         </nav>
     </div>

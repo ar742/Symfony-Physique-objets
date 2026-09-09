@@ -4,6 +4,8 @@ Chantier ouvert le 9 septembre 2026 à la demande de l'auteur. La thermodynamiqu
 
 ## Ordre des lots
 
+**Priorité depuis le 9 septembre 2026 : la structure analytique de chaque fiche.** Les 22 fiches existantes disposent de six systèmes globaux, chacun décliné selon la même boucle de six sous-niveaux (792 points). La première rédaction et les schémas constituent une base de relecture avec l'auteur, avant l'approfondissement scientifique. E1 reste planifié après cette étape. Voir [la méthode et les règles d'extension](ANALYSES-DEUX-NIVEAUX.md).
+
 Les pages ci-dessous sont les repères des éditions locales déjà indexées. Une fiche du recueil n'est pas considérée comme transposée intégralement dès qu'une première fiche web l'utilise.
 
 | Lot | Domaine et contenu à construire | Recueil CPGE | Recueil théorique | Première interaction envisagée |
@@ -27,7 +29,7 @@ Les sujets de recherche du lot A1 seront distingués des résultats expérimenta
 
 1. Choisir un ensemble limité de notions et relever les passages exacts des deux recueils. Examiner visuellement les formules, unités et conventions.
 2. Rédiger une synthèse web originale : objectif, prérequis, système, hypothèses, lois, limites, exemple recalculé, question corrigée, références précises.
-3. Ajouter un schéma de navigation cohérent avec la boucle générale : clic vers une fiche ou une section, explication au survol et au clavier, bouton d'information tactile. N'ajouter une simulation que si elle apporte un apprentissage identifiable.
+3. Définir les six systèmes globaux de chaque fiche et les six sous-niveaux de chacun selon la même chaîne analytique. Rédiger les 36 actions, sorties et comparaisons spécifiques au sujet. Relier le schéma global aux six schémas locaux, puis aux descriptions et passages scientifiques : clic, survol, clavier et bouton tactile. N'ajouter une simulation que si elle apporte un apprentissage identifiable.
 4. Contrôler les formules avec des sources primaires, puis vérifier calculs, liens, ancres, affichage serveur et absence de régression sur les parcours existants. Documenter les erreurs de source identifiées sans modifier les PDF.
 5. Actualiser le journal, synchroniser les fichiers concernés avec l'application locale, créer un commit lisible et l'envoyer sur `master`. Vérifier que la branche distante pointe sur ce commit. Aucune réécriture de l'historique.
 
@@ -47,4 +49,4 @@ Le site fonctionne localement ; `physicstopics.fr` n'a plus d'hébergement. L'en
 
 ## Suivi
 
-Voir [le journal des avancées](AVANCEES.md). M1 et M2 ont livré huit fiches de mécanique et deux boucles. F1 ajoute six fiches et deux boucles pour les fluides, l'élasticité, la corde et l'acoustique. Ces livraisons constituent des premiers parcours délimités ; elles ne transposent pas l'intégralité des chapitres sources. M2 se limite notamment à une introduction analytique sur un système à un degré de liberté. La relecture de l'auteur reste à faire. Le prochain lot est E1 (champs et électromagnétisme). Les autres lots restent planifiés tant que le journal ne mentionne pas une livraison effective.
+Voir [le journal des avancées](AVANCEES.md). M1 et M2 ont livré huit fiches de mécanique et deux boucles. F1 ajoute six fiches et deux boucles pour les fluides, l'élasticité, la corde et l'acoustique. Ces livraisons constituent des premiers parcours délimités ; elles ne transposent pas l'intégralité des chapitres sources. M2 se limite notamment à une introduction analytique sur un système à un degré de liberté. La priorité actuelle est la relecture des analyses à deux niveaux des 22 fiches, y compris la thermodynamique et la physique statistique. E1 (champs et électromagnétisme) viendra ensuite. Les autres lots restent planifiés tant que le journal ne mentionne pas une livraison effective.

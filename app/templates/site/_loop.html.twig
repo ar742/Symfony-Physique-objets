@@ -1,7 +1,7 @@
 {% set tip_prefix = tip_prefix|default('loop-tip-') %}
 {% set anchor_prefix = anchor_prefix|default('etape-') %}
 {% set marker_id = marker_id|default('flow-arrow') %}
-<div class="loop-board" aria-label="{{ board_label|default('Boucle générale à six niveaux') }}">
+<div class="loop-board" role="group" aria-label="{{ board_label|default('Boucle générale à six niveaux') }}">
     <svg class="loop-wires" viewBox="0 0 1000 430" preserveAspectRatio="none" aria-hidden="true" focusable="false">
         <defs><marker id="{{ marker_id }}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
         <g class="loop-flow" fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#{{ marker_id }})">
@@ -11,6 +11,7 @@
             <path d="M30 327 H15 V103 H23"/>
         </g>
         <path class="evaluation-wire" d="M500 176 V254" stroke-dasharray="5 6" fill="none" stroke-width="2"/>
+        {% if comparison_links|default([]) %}<path class="evaluation-wire" d="M165 176 V254 M835 176 V254" stroke-dasharray="5 6" fill="none" stroke-width="2"/>{% endif %}
     </svg>
     {% for step in steps %}
         <div class="loop-node node-{{ step.id }} tone-{{ step.color }}" data-loop-node>
@@ -23,3 +24,4 @@
     {% endfor %}
     <a class="loop-evaluation" href="{{ evaluation_href|default('#' ~ anchor_prefix ~ '4') }}">Évaluations et comparaisons</a>
 </div>
+{% if comparison_links|default([]) %}<nav class="loop-comparisons" aria-label="Comparaisons entre aller et retour">{% for link in comparison_links %}<a href="{{ link.href }}">{{ link.label }}</a>{% endfor %}</nav>{% endif %}

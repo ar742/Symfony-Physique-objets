@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\CatalogRepository;
-use App\Content\LoopGuide;
+use App\Content\{LearningLibrary, LoopGuide};
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -11,9 +11,9 @@ use Symfony\Component\Routing\Attribute\Route;
 final class SiteController extends AbstractController
 {
     #[Route('/', name: 'sitephys_physmvc_home', methods: ['GET'])]
-    public function home(LoopGuide $guide): Response
+    public function home(LoopGuide $guide, LearningLibrary $library): Response
     {
-        return $this->render('site/loop-home.html.twig', ['steps' => $guide->steps()]);
+        return $this->render('site/loop-home.html.twig', ['steps' => $guide->steps(), 'card_count' => count($library->all())]);
     }
 
     #[Route('/presentation/', name: 'sitephys_physmvc_presentation', methods: ['GET'])]

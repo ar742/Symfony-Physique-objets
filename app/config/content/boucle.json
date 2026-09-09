@@ -1,13 +1,13 @@
 [
   {
     "id": 1,
-    "title": "Observer",
-    "subtitle": "Entrées expérimentales",
+    "title": "Exprimer le système",
+    "subtitle": "Exp. IN · Système initial",
     "color": "blue",
-    "tip": "Définir le système, les grandeurs observables et le protocole. Le clic ouvre cette étape.",
-    "heading": "Définir ce que l’on observe",
-    "text": "Délimiter le système et son environnement, choisir les grandeurs à mesurer, préciser les unités et les conditions de l’expérience.",
-    "deliverable": "Un système défini, des variables nommées et un protocole explicite.",
+    "tip": "Exprimer le système complet observé, prédit ou supposé, ses données et ses hypothèses.",
+    "heading": "Exprimer le système à étudier",
+    "text": "Délimiter le système et son environnement, nommer les grandeurs et distinguer les données observées, calculées ou supposées. Le sujet peut être physique ou théorique : les conditions initiales doivent permettre une comparaison avec le retour final.",
+    "deliverable": "Un système défini et un dossier initial explicite.",
     "sources": [
       {
         "doc": "cpge",
@@ -24,7 +24,7 @@
   {
     "id": 2,
     "title": "Modéliser",
-    "subtitle": "Théorie",
+    "subtitle": "TH · Formalisation d’entrée",
     "color": "orange",
     "tip": "Choisir les hypothèses, les lois et les outils mathématiques. Le modèle doit annoncer ce qu’il permet de prévoir.",
     "heading": "Formuler les hypothèses et les lois",
@@ -45,13 +45,13 @@
   },
   {
     "id": 3,
-    "title": "Confronter",
-    "subtitle": "Sorties expérimentales",
+    "title": "Établir les résultats",
+    "subtitle": "Exp. OUT · Résultats d’entrée",
     "color": "green",
-    "tip": "Comparer les résultats attendus et obtenus, avec leurs unités et leurs incertitudes.",
-    "heading": "Comparer les prédictions aux résultats",
-    "text": "Rassembler les résultats de calcul, de simulation ou d’expérience. Comparer les ordres de grandeur et vérifier les conditions dans lesquelles cette comparaison a un sens.",
-    "deliverable": "Une comparaison documentée entre prédictions et observations.",
+    "tip": "Produire les résultats de l’expérience, du calcul ou de l’expérience de pensée en indiquant leur statut.",
+    "heading": "Produire une sortie examinable",
+    "text": "Appliquer le cadre d’entrée à la situation choisie et conserver les résultats, les unités et les conditions de production. Un calcul ou une expérience de pensée constitue une sortie à analyser ; il ne vaut pas mesure expérimentale.",
+    "deliverable": "Des résultats traçables, prêts à être relus dans la chaîne de retour.",
     "sources": [
       {
         "doc": "cpge",
@@ -67,13 +67,13 @@
   },
   {
     "id": 4,
-    "title": "Analyser les écarts",
-    "subtitle": "Retour · observations",
+    "title": "Relire les résultats",
+    "subtitle": "Retour · Exp. IN",
     "color": "blue",
-    "tip": "Identifier les écarts et leur origine possible : mesure, calcul, protocole ou hypothèse.",
-    "heading": "Interpréter les différences",
-    "text": "Distinguer une erreur de mesure, une approximation de calcul et une limite du modèle. Conserver les conditions de l’essai et les éléments qui permettent de reproduire l’analyse.",
-    "deliverable": "Des écarts caractérisés et des hypothèses à examiner.",
+    "tip": "Prendre les sorties du niveau 3 comme nouveau système d’entrée, les contrôler et formuler les écarts éventuels.",
+    "heading": "Constituer le dossier de retour",
+    "text": "Relire les résultats avec leur protocole, leurs conventions et leurs limites. Comparer cette lecture aux sorties du niveau 3 sans imposer l’existence d’un désaccord. Les résultats deviennent les données d’une nouvelle analyse théorique.",
+    "deliverable": "Un dossier de retour confronté aux résultats de la chaîne d’entrée.",
     "sources": [
       {
         "doc": "cpge",
@@ -89,13 +89,13 @@
   },
   {
     "id": 5,
-    "title": "Réviser le modèle",
-    "subtitle": "Retour · théorie",
+    "title": "Confronter les théories",
+    "subtitle": "Retour · TH",
     "color": "orange",
-    "tip": "Réexaminer les hypothèses et changer de description lorsque le cadre utilisé ne suffit plus.",
-    "heading": "Préciser ou changer le cadre théorique",
-    "text": "Réviser une hypothèse, préciser une approximation ou adopter une description plus adaptée. Le passage de la thermodynamique à la physique statistique fournit un exemple de changement de point de vue.",
-    "deliverable": "Un cadre révisé, avec les raisons de ce changement.",
+    "tip": "Interpréter le dossier de retour et confronter sa formulation au modèle d’entrée du niveau 2.",
+    "heading": "Établir la confrontation théorique de retour",
+    "text": "Analyser théoriquement les résultats relus, puis comparer ce cadre au niveau 2 : cohérence, hypothèses, approximations et portée. La confrontation peut confirmer, préciser ou modifier le modèle ; une révision n’est pas obligatoire.",
+    "deliverable": "Une conclusion théorique argumentée par comparaison avec la formulation d’entrée.",
     "sources": [
       {
         "doc": "theorique",
@@ -111,13 +111,13 @@
   },
   {
     "id": 6,
-    "title": "Reprendre l’expérience",
-    "subtitle": "Retour · applications",
+    "title": "Établir le retour final",
+    "subtitle": "Retour · Exp. OUT",
     "color": "green",
-    "tip": "Déduire un nouvel essai du cadre révisé, puis revenir aux observations. La boucle peut recommencer.",
-    "heading": "Préparer une nouvelle confrontation",
-    "text": "Choisir une nouvelle situation, adapter le protocole et définir les résultats attendus. Noter ce qui a changé pour pouvoir comparer les deux passages dans la boucle.",
-    "deliverable": "Un nouvel essai et une trace des modifications apportées.",
+    "tip": "Déduire les résultats de retour et les comparer aux données, hypothèses et attentes initiales du niveau 1.",
+    "heading": "Revenir au système et aux hypothèses initiales",
+    "text": "Tirer du cadre de retour des résultats expérimentaux, calculés ou issus d’une expérience de pensée. Les confronter au dossier du niveau 1, conserver ce qui est établi et ce qui reste à examiner, puis définir les entrées d’un nouveau tour si nécessaire.",
+    "deliverable": "Un bilan comparé au système initial et des conditions explicites pour poursuivre.",
     "sources": [
       {
         "doc": "cpge",

@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Content\{DomainLibrary, LearningLibrary, LoopGuide};
+use App\Content\{CardAnalysisLibrary, DomainLibrary, LearningLibrary, LoopGuide};
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -43,19 +43,39 @@ final class LearningController extends AbstractController
     }
 
     #[Route('/fiches/{slug}', name: 'learning_card', requirements: ['slug' => '[a-z][a-z0-9-]*'], methods: ['GET'])]
-    public function card(string $slug, LearningLibrary $library, LoopGuide $guide, DomainLibrary $domains): Response
+    public function card(string $slug, LearningLibrary $library, LoopGuide $guide, DomainLibrary $domains, CardAnalysisLibrary $analyses): Response
     {
         $card = $library->find($slug) ?? throw $this->createNotFoundException('Fiche introuvable.');
         $domain = $domains->find($card['domain']) ?? throw new \LogicException('Domaine de fiche absent.');
         $cards = $domain['cards'];
         $index = array_search($slug, array_column($cards, 'slug'), true);
+        $analysis = $analyses->find($slug) ?? throw new \LogicException('Analyse de fiche absente.');
+        foreach ($analysis['levels'] as &$level) {
+            $level['href'] = $this->generateUrl('learning_card_analysis', ['slug' => $slug, 'base' => $level['id']]);
+        }
+        unset($level);
         return $this->render('science/card.html.twig', [
             'card' => $card,
+            'analysis' => $analysis,
             'locations' => $guide->locationsFor($slug),
             'domain' => $domain,
             'domain_locations' => array_values(array_filter($domain['steps'], static fn (array $step): bool => $step['card'] === $slug)),
             'previous' => $cards[$index - 1] ?? null,
             'next' => $cards[$index + 1] ?? null,
+        ]);
+    }
+
+    #[Route('/fiches/{slug}/analyse/{base}', name: 'learning_card_analysis', requirements: ['slug' => '[a-z][a-z0-9-]*', 'base' => '[1-6]'], methods: ['GET'])]
+    public function analysis(string $slug, int $base, LearningLibrary $library, CardAnalysisLibrary $analyses): Response
+    {
+        $card = $library->find($slug) ?? throw $this->createNotFoundException('Fiche introuvable.');
+        $analysis = $analyses->find($slug) ?? throw $this->createNotFoundException('Analyse introuvable.');
+        $level = $analysis['levels'][$base - 1];
+        foreach ($level['steps'] as &$step) { $step['href'] = '#point-'.$step['coordinate']; }
+        unset($step);
+        return $this->render('science/card-analysis.html.twig', [
+            'card' => $card, 'analysis' => $analysis, 'level' => $level, 'base' => $base,
+            'stages' => $analyses->stages(),
         ]);
     }
 

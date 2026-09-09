@@ -50,7 +50,7 @@
       parent = parent.parentElement;
     }
     if (opened) requestAnimationFrame(() => target.scrollIntoView({block: 'start'}));
-    if (target.matches('.guide-step, .learning-article [tabindex="-1"]')) target.focus({preventScroll: true});
+    if (target.matches('.guide-step, .learning-article [tabindex="-1"], .card-analysis, #lecture')) target.focus({preventScroll: true});
   }
   window.addEventListener('hashchange', revealHash);
   revealHash();
