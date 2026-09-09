@@ -184,5 +184,47 @@
     "url": "https://openstax.org/books/university-physics-volume-2/pages/6-3-applying-gausss-law",
     "note": "§6.3, exemple 6.6 et figures 6.24–6.25 : symétrie sphérique, charge enfermée et profils intérieur/extérieur d’une sphère non conductrice.",
     "checked": "2026-09-09"
+  },
+  "nist-permeabilite": {
+    "title": "NIST — Constantes fondamentales CODATA 2022 : perméabilité du vide",
+    "url": "https://physics.nist.gov/cuu/pdf/all.pdf",
+    "note": "Tableau p. 1 : μ0 possède une incertitude. La valeur 4π × 10⁻⁷ T·m/A utilisée pour les exemples est approchée, non exacte dans le SI actuel.",
+    "checked": "2026-09-09"
+  },
+  "openstax-force-magnetique": {
+    "title": "OpenStax — Champ magnétique et force (§11.2)",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/11-2-magnetic-fields-and-lines",
+    "note": "Produit vectoriel de la force magnétique, unité tesla et sens selon le signe de la charge.",
+    "checked": "2026-09-09"
+  },
+  "openstax-trajectoire-magnetique": {
+    "title": "OpenStax — Mouvement d’une charge en champ magnétique (§11.3)",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/11-3-motion-of-a-charged-particle-in-a-magnetic-field",
+    "note": "Travail magnétique nul ; mouvement circulaire, rayon, période et décomposition hélicoïdale en champ uniforme.",
+    "checked": "2026-09-09"
+  },
+  "openstax-ampere-fil": {
+    "title": "OpenStax, University Physics Volume 2 — Théorème d’Ampère et fil épais",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/12-5-amperes-law",
+    "note": "§12.5, exemple 12.7 : courant uniforme dans une section circulaire, profils intérieur et extérieur ; orientation algébrique du courant.",
+    "checked": "2026-09-09"
+  },
+  "openstax-maxwell-ampere": {
+    "title": "OpenStax, University Physics Volume 2 — Terme de déplacement de Maxwell–Ampère",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/16-1-maxwells-equations-and-electromagnetic-waves",
+    "note": "§16.1, équations 16.3–16.4 et 16.11 : contribution ε0 dΦE/dt et réduction au régime permanent.",
+    "checked": "2026-09-09"
+  },
+  "openstax-biot-savart": {
+    "title": "OpenStax, University Physics Volume 2 — Loi de Biot–Savart",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/12-1-the-biot-savart-law",
+    "note": "§12.1, équations 12.1 et 12.4 : contribution orientée et intégration du courant. La valeur de μ0 annoncée exacte dans ce passage est employée ici seulement comme approximation, conformément au SI actuel.",
+    "checked": "2026-09-09"
+  },
+  "openstax-spire": {
+    "title": "OpenStax, University Physics Volume 2 — Champ axial d’une spire",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/12-4-magnetic-field-of-a-current-loop",
+    "note": "§12.4, équations 12.13–12.19 : annulation transverse, champ axial, centre et limite dipolaire. L’axe y de la source est nommé z dans la fiche ; |z|³ rend explicites les deux côtés de l’axe.",
+    "checked": "2026-09-09"
   }
 }

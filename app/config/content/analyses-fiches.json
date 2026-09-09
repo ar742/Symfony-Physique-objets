@@ -16098,5 +16098,1955 @@
         ]
       }
     ]
+  },
+  "force-lorentz-trajectoire": {
+    "question": "Comment déduire le mouvement d’un proton dans un champ magnétique, puis retrouver les attributs initiaux sans confondre rayon, énergie et sens de rotation ?",
+    "basis": "Proton de paramètres approchés q ≈ +1,60 × 10⁻¹⁹ C, m ≈ 1,67 × 10⁻²⁷ kg ; B = 0,100 e_z T, E = 0. Référence v₀ = 10⁵ e_x m·s⁻¹ ; variante v₀ = 10⁵(e_x + e_z) m·s⁻¹. Données supposées, résultats calculés.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les composantes, invariants, solutions temporelles et inversions sont explicités ; le cercle et l’hélice conservent des conditions initiales distinctes.",
+    "subject": {
+      "type": "physique",
+      "description": "La dynamique d’un proton dans un champ magnétique uniforme prescrit, à partir de deux états initiaux comparables.",
+      "scope": "Mécanique non relativiste, E = 0, autres forces et rayonnement négligés ; source du champ extérieure, sans mesure ni dispositif de production du champ modélisé."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Définir l’état initial et ses composantes",
+        "system": "Le proton, le champ prescrit et la géométrie des deux états initiaux à comparer.",
+        "input": "Référence : r(0) = 0, v₀ = 10⁵ e_x m·s⁻¹ ; q, m approchés, B = 0,100 e_z T et E = 0.",
+        "output": "État de référence avec v⊥ = 10⁵ m·s⁻¹ et v∥ = 0 ; variante axiale conservée séparément.",
+        "section": "conditions",
+        "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Les attributs supposés fixent le problème dynamique ; le sens des axes et le statut des deux états précèdent le calcul."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le proton et le champ",
+            "input": "Données de la référence ; 6.3 transmet séparément la variante avec v∥ = +10⁵ m·s⁻¹.",
+            "action": "Identifier le proton et le champ extérieur ; choisir un repère direct et r(0) = 0 pour chaque cas distinct.",
+            "output": "Source du champ non modélisée, B constant, E nul et conditions initiales supposées.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La position initiale est un choix de repère ; les deux vitesses initiales ne sont pas les étapes d’une accélération observée."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Projeter la vitesse sur le champ",
+            "input": "Vitesse v₀ de référence, vecteur e_z = B/B et paramètres q,m en unités SI.",
+            "action": "Calculer v∥ = v₀·e_z et v⊥ = ||v₀ − v∥e_z|| ; contrôler [qvB] = N.",
+            "output": "v∥ = 0, v⊥ = 10⁵ m·s⁻¹ ; composante transverse dirigée suivant +x.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La projection sépare la composante qui subit la déviation magnétique de celle parallèle au champ."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre l’état décomposé",
+            "input": "Composantes de 1.2, position initiale et hypothèses de force unique.",
+            "action": "Conserver q positif, m constant et le champ orienté ; transmettre les composantes avec leur direction initiale.",
+            "output": "À 2.1 : q,m,B, r(0) = 0, v₀ = 10⁵ e_x m·s⁻¹ ; autres forces et rayonnement négligés.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Les composantes seules en norme ne fixeraient pas la phase initiale ; la direction +x reste une donnée."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les rôles des composantes",
+            "input": "Dossier décomposé en 1.3 et même convention e_z.",
+            "action": "Relire v∥ comme composante signée et v⊥ comme norme ; maintenir la direction transverse +x.",
+            "output": "État transverse de référence préservé, sans remplacer sa vitesse par celle de la variante.",
+            "comparison": "1.4 ↔ 1.3 : conserver composantes, signes et conditions physiques.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour vérifie que l’information directionnelle accompagne les valeurs scalaires."
+            },
+            "evaluation": {
+              "object": "Dossier reçu et état décomposé de 1.3.",
+              "conditions": "Même proton, champ et repère direct.",
+              "criterion": "v∥ = 0, v⊥ = 10⁵ m·s⁻¹ et vitesse dirigée vers +x.",
+              "finding": "La référence est conservée ; la composante axiale supplémentaire reste une variante."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstituer le vecteur initial",
+            "input": "v∥, v⊥ et direction transverse e_x conservés en 1.4.",
+            "action": "Former v₀ = v⊥e_x + v∥e_z ; utiliser l’orthogonalité pour calculer ||v₀||² = v⊥² + v∥².",
+            "output": "Le vecteur 10⁵ e_x m·s⁻¹ et sa norme sont retrouvés pour la référence.",
+            "comparison": "1.5 ↔ 1.2 : confronter recomposition vectorielle et projections.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La recomposition inverse la projection sans identifier une direction à partir des seules normes."
+            },
+            "evaluation": {
+              "object": "Projection de 1.2 et reconstruction de 1.5.",
+              "conditions": "Direction transverse connue ; axes orthonormés.",
+              "criterion": "(v⊥e_x + v∥e_z)·e_z = v∥ et ||v₀|| = 10⁵ m·s⁻¹.",
+              "finding": "Le vecteur initial est restitué, pas seulement sa vitesse scalaire."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer l’état à étudier",
+            "input": "Vecteur reconstruit et q,m,B,r(0) conservés.",
+            "action": "Rendre l’état de référence avec E = 0 et le cadre non relativiste ; garder les valeurs du proton comme approchées.",
+            "output": "Retour à 1.1 : mêmes position, vitesse, charge, masse et champ ; variante toujours séparée.",
+            "comparison": "1.6 ↔ 1.1 : retrouver attributs et statut de départ.",
+            "relation": {
+              "nature": "logique",
+              "description": "La restitution numérique ne démontre pas les hypothèses de champ uniforme ou de force unique."
+            },
+            "evaluation": {
+              "object": "État restitué et données de 1.1.",
+              "conditions": "Paramètres approximés identiques, aucune observation ajoutée.",
+              "criterion": "r(0) = 0, v₀ = 10⁵ e_x, B = 0,100 e_z, q > 0 et même m.",
+              "finding": "Les attributs initiaux sont retrouvés ; les idéalisations restent explicites."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Déduire les équations et les invariants",
+        "system": "L’équation de Newton avec la seule force magnétique et sa solution pour la vitesse.",
+        "input": "1.3 transmet l’état initial, q,m et B ; la loi F = qv×B est adoptée avec E = 0.",
+        "output": "Vitesse transverse en rotation, composante axiale constante et énergie cinétique conservée.",
+        "section": "force",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le produit vectoriel et l’équation de Newton transforment l’état initial en lois d’évolution dans le champ prescrit."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le modèle dynamique",
+            "input": "Dossier de 1.3 ou reprise de 2.6 ; m constant, q positif, champ B e_z uniforme.",
+            "action": "Poser m dv/dt = qv×B et conserver la vitesse initiale +x ; écarter les forces exclues du scénario.",
+            "output": "Une équation vectorielle initialisée, dont le terme magnétique dépend de la vitesse.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le champ est une entrée imposée ; sa production et sa modification par le proton ne sont pas calculées."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Projeter la force et la puissance",
+            "input": "Équation vectorielle de 2.1 et repère direct e_x,e_y,e_z.",
+            "action": "Développer v×B : v̇_x = (qB/m)v_y, v̇_y = −(qB/m)v_x, v̇_z = 0 ; former m v·v̇ = 0.",
+            "output": "v∥ et K = m||v||²/2 sont constants ; à t = 0, la force pointe vers −y.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’antisymétrie du produit vectoriel annule la puissance ; sa projection axiale donne un invariant distinct."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les lois à exploiter",
+            "input": "Composantes et invariants obtenus en 2.2.",
+            "action": "Définir ωc = |q|B/m > 0 ; distinguer cette pulsation du sens horaire imposé ici par q > 0 et B suivant +z.",
+            "output": "À 3.1 : equations de rotation, v⊥ constant, v∥ = 0 et puissance magnétique nulle.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La norme de la pulsation fixe l’échelle temporelle ; le signe du produit vectoriel fixe séparément le sens."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les invariants sans figer le vecteur",
+            "input": "Les lois transmises en 2.3, dont K et v∥ constants.",
+            "action": "Distinguer conservation de ||v|| et constance de v ; conserver l’accélération transverse non nulle.",
+            "output": "La direction de v peut tourner à norme constante ; v∥ reste nul dans la référence.",
+            "comparison": "2.4 ↔ 2.3 : conserver équations, invariants et direction de force.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour sépare absence de travail et absence de force, qui ne sont pas équivalentes."
+            },
+            "evaluation": {
+              "object": "Invariants relus et résultats de 2.3.",
+              "conditions": "v⊥ non nul, B non nul, q positif.",
+              "criterion": "F·v = 0 et v̇_z = 0, tandis que v̇_y(0) = −qBv⊥/m ≠ 0.",
+              "finding": "Le proton est dévié sans variation d’énergie cinétique."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Résoudre la rotation de la vitesse",
+            "input": "Équations de 2.4 ; u = v_x + i v_y et u(0) = v⊥ réel positif.",
+            "action": "Résoudre u̇ = −i(qB/m)u : u(t) = v⊥ exp[−i(qB/m)t] ; garder v_z = v∥ constant.",
+            "output": "v_x = v⊥ cos(ωct), v_y = −v⊥ sin(ωct) pour ce proton ; la norme transverse reste fixe.",
+            "comparison": "2.5 ↔ 2.2 : confronter solution temporelle et équations projetées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La solution traite le système différentiel et permet de vérifier ses invariants, au-delà de leur simple annonce."
+            },
+            "evaluation": {
+              "object": "Système différentiel de 2.2 et solution explicite de 2.5.",
+              "conditions": "q > 0, B > 0 et paramètres constants ; phase initiale fixée.",
+              "criterion": "Différencier u(t) redonne u̇ = −i(qB/m)u et |u(t)|² = v⊥².",
+              "finding": "La solution satisfait le modèle adopté ; ce contrôle ne valide pas sa réalisation physique."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Retrouver l’état à l’origine du temps",
+            "input": "Solution de vitesse de 2.5 et position initiale conservée.",
+            "action": "Évaluer cos 0 = 1 et sin 0 = 0 ; restituer v(0), r(0), q,m et B.",
+            "output": "Retour à 2.1 : v(0) = 10⁵ e_x m·s⁻¹, position à l’origine et même équation de Newton.",
+            "comparison": "2.6 ↔ 2.1 : retrouver vitesse initiale et cadre dynamique.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La solution retrouve l’initialisation ; la position reste une donnée à joindre lors de l’intégration de la vitesse."
+            },
+            "evaluation": {
+              "object": "État de départ et vitesse restituée par la solution.",
+              "conditions": "Même phase, même q/m et même champ prescrit.",
+              "criterion": "u(0) = 10⁵ m·s⁻¹, v_z(0) = 0 et r(0) = 0 conservé.",
+              "finding": "Les attributs dynamiques initiaux sont restitués sans ajouter de force."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Calculer le mouvement circulaire de référence",
+        "system": "Les grandeurs calculées pour le proton dont la vitesse initiale est perpendiculaire au champ.",
+        "input": "De 2.3 : rotation transverse et énergie constante ; q ≈ 1,60 × 10⁻¹⁹ C, m ≈ 1,67 × 10⁻²⁷ kg, B = 0,100 T, v⊥ = 10⁵ m·s⁻¹.",
+        "output": "F(0) = −1,60 × 10⁻¹⁵ e_y N ; R = 0,0104375 m et T ≈ 6,55807 × 10⁻⁷ s ; cercle parcouru à énergie constante.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les lois issues du modèle produisent les valeurs du cas transverse, avec les coefficients approchés du proton."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le cas transverse à chiffrer",
+            "input": "Expressions de 2.3 et données numériques de référence, avec v∥ = 0.",
+            "action": "Associer qB/m à la rotation et |q|Bv⊥ à la norme de force ; conserver les valeurs du proton comme approchées.",
+            "output": "Paramètres communs au calcul du rayon, de la période et de l’énergie.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Les chiffres à calculer proviennent d’un exemple supposé ; ils n’ont pas une précision instrumentale."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Évaluer force et échelles du cercle",
+            "input": "q,m,B,v⊥ reçus, et position initiale à l’origine.",
+            "action": "Calculer F_y(0) = −qBv⊥, ωc = qB/m, R = v⊥/ωc, T = 2π/ωc et K = mv⊥²/2.",
+            "output": "ωc ≈ 9,58084 × 10⁶ rad·s⁻¹ ; R = 0,0104375 m, T ≈ 6,55807 × 10⁻⁷ s et K = 8,35 × 10⁻¹⁸ J.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La force centripète dévie la vitesse ; R est positif tandis que le sens se déduit de F_y(0) < 0."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Conserver le dossier circulaire",
+            "input": "Valeurs de 3.2 et direction initiale +x.",
+            "action": "Consigner la force −1,60 × 10⁻¹⁵ e_y N, le rayon, la période et K ; garder la phase et r(0) = 0.",
+            "output": "À 4.1 : cercle de référence, grandeurs calculées et conditions initiales nécessaires à sa reconstruction temporelle.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les résultats conservent une orientation et une initialisation ; un rayon seul ne décrirait pas toute la trajectoire."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le rayon et la période",
+            "input": "Dossier circulaire établi en 3.3.",
+            "action": "Distinguer R en mètres, T en secondes et ωc en radians par seconde ; conserver K malgré la rotation de v.",
+            "output": "Échelles du cercle reprises avec force initiale vers −y et énergie constante.",
+            "comparison": "3.4 ↔ 3.3 : retrouver nombres, unités et statut calculé.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour distingue pulsation positive et sens du parcours, ainsi que vitesse et accélération."
+            },
+            "evaluation": {
+              "object": "Dossier circulaire repris et résultats de 3.3.",
+              "conditions": "Même champ, même proton et mêmes arrondis d’affichage.",
+              "criterion": "R = 0,0104375 m ; T ≈ 6,55807 × 10⁻⁷ s ; F_y(0) = −1,60 × 10⁻¹⁵ N.",
+              "finding": "Les valeurs et le sens sont conservés ; aucune observation de trajectoire n’est ajoutée."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver la vitesse depuis le cercle",
+            "input": "R et T repris, connus avant arrondi ; m et direction initiale +x conservés.",
+            "action": "Former v⊥ = 2πR/T puis K = m(2πR/T)²/2 ; vérifier que la vitesse restituée est celle du calcul direct.",
+            "output": "v⊥ = 10⁵ m·s⁻¹ et K = 8,35 × 10⁻¹⁸ J sont retrouvés.",
+            "comparison": "3.5 ↔ 3.2 : inverser le calcul du rayon et de la période.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La longueur d’un tour divisée par sa durée reconstruit une norme ; la phase initiale demeure une donnée séparée."
+            },
+            "evaluation": {
+              "object": "Évaluation directe de 3.2 et inversion cinématique de 3.5.",
+              "conditions": "Cercle transverse, R > 0, T > 0 ; valeurs non arrondies.",
+              "criterion": "2πR/T = 10⁵ m·s⁻¹ et m(2πR/T)²/2 = 8,35 × 10⁻¹⁸ J.",
+              "finding": "Le calcul inverse restitue la vitesse supposée ; il ne constitue pas sa mesure."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les entrées numériques",
+            "input": "Vitesse restituée et q,m,B,v∥ conservés depuis 3.1.",
+            "action": "Rattacher v⊥ à la direction initiale e_x ; rendre r(0) = 0 et les paramètres du proton.",
+            "output": "Retour à 3.1 : v₀ = 10⁵ e_x m·s⁻¹, v∥ = 0 et mêmes q,m,B.",
+            "comparison": "3.6 ↔ 3.1 : confronter les paramètres restitués aux entrées du calcul.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les échelles calculées retrouvent la norme initiale, complétée par les attributs directionnels conservés."
+            },
+            "evaluation": {
+              "object": "Données numériques reçues et état reconstitué.",
+              "conditions": "Phase et position initiales conservées ; aucun paramètre supplémentaire estimé.",
+              "criterion": "Retrouver v⊥ = 10⁵ m·s⁻¹, v∥ = 0, B = 0,100 T et les mêmes q,m approchés.",
+              "finding": "Les attributs du cas de référence sont restitués."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Recomposer la trajectoire et son paramètre dynamique",
+        "system": "Le cercle calculé repris comme dossier cinématique, avec sa phase et son sens de parcours.",
+        "input": "De 3.3 : R,T,K, force initiale, r(0) = 0 et v₀ suivant +x ; champ et masse connus.",
+        "output": "La position et la vitesse satisfont la loi de Lorentz ; q/m est retrouvé avec son signe sous les hypothèses retenues.",
+        "section": "trajectoire",
+        "comparison": "4 ↔ 3 : comparer la cinématique reconstruite aux grandeurs du cercle calculées à l’aller.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les résultats du cercle servent à recomposer la trajectoire et ses dérivées ; cette reconstruction reste interne au modèle."
+        },
+        "evaluation": {
+          "object": "Dossier numérique du niveau 3 et cinématique reconstruite au niveau 4.",
+          "conditions": "Même phase, même champ et même masse ; résultats calculés, non mesurés.",
+          "criterion": "La trajectoire reconstruite possède R = 0,0104375 m, T ≈ 6,55807 × 10⁻⁷ s et F_y(0) = −1,60 × 10⁻¹⁵ N.",
+          "finding": "Les grandeurs de l’aller sont retrouvées avec leur direction et leur énergie."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le cercle orienté",
+            "input": "Dossier de 3.3 ou reprise de 4.6 ; ωc = 2π/T positif et v₀ suivant +x.",
+            "action": "Conserver R,T, r(0) = 0 et le sens horaire vu depuis +z ; maintenir m et B connus.",
+            "output": "Un mouvement circulaire orienté à reconstruire, avec origine temporelle fixée.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Rayon et période sans phase ni sens ne suffiraient pas à retrouver ce vecteur vitesse initial."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Intégrer la vitesse du cercle",
+            "input": "v_x = v⊥ cos(ωct), v_y = −v⊥ sin(ωct), R = v⊥/ωc et r(0) = 0.",
+            "action": "Intégrer : x = R sin(ωct), y = R[cos(ωct)−1], z = 0 ; en déduire x²+(y+R)² = R².",
+            "output": "Cercle centré en (0,−R,0), départ à l’origine et vitesse initiale dirigée suivant +x.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégration restitue la position avec ses constantes ; le centre n’est pas la position initiale du proton."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la cinématique reconstruite",
+            "input": "Position de 4.2 et valeurs R,T,v⊥ de référence.",
+            "action": "Différencier pour retrouver v puis a ; conserver a(0) = −ωcv⊥e_y et K = mv⊥²/2.",
+            "output": "À 5.1 : trajectoire transverse, R,T,v⊥ et modèle contrôlé ; composante axiale nulle dans la référence.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le dossier de retour conserve la solution transverse qui pourra être comparée à une autre condition initiale axiale."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre centre, sens et accélération",
+            "input": "Cinématique transmise en 4.3, dont centre (0,−R,0) et vitesse tangentielle.",
+            "action": "Vérifier que l’accélération pointe vers le centre, tandis que v lui est perpendiculaire.",
+            "output": "Le rayon reste positif et le mouvement horaire ; la puissance magnétique demeure nulle.",
+            "comparison": "4.4 ↔ 4.3 : conserver la cinématique obtenue par dérivation.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour distingue position initiale, centre géométrique et direction instantanée de la force."
+            },
+            "evaluation": {
+              "object": "Trajectoire et dérivées relues, comparées à 4.3.",
+              "conditions": "Même phase et même orientation du champ.",
+              "criterion": "À t = 0, r = 0, v = v⊥e_x et a = −ωcv⊥e_y ; a·v = 0.",
+              "finding": "La reprise conserve le cercle, son sens et son initialisation."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire le rapport charge-masse",
+            "input": "v et a repris, B connu ; v×B non nul pour ce cercle.",
+            "action": "Projeter a = (q/m)(v×B) : q/m = [a·(v×B)]/||v×B||² ; avec m connu, calculer q.",
+            "output": "q/m ≈ +9,58084 × 10⁷ C·kg⁻¹ et q ≈ +1,60 × 10⁻¹⁹ C sont retrouvés.",
+            "comparison": "4.5 ↔ 4.2 : confronter la cinématique intégrée au coefficient dynamique reconstruit.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le sens de la trajectoire fixe le signe ; R et T seuls n’identifieraient que |q|/m et ne sépareraient pas q de m."
+            },
+            "evaluation": {
+              "object": "Solution de position de 4.2 et inversion du coefficient en 4.5.",
+              "conditions": "Champ vectoriel et masse connus ; la force magnétique est seule responsable de a.",
+              "criterion": "Le quotient vaut +ωc/B = +q/m ; avec m donné, qrec B/m = ωc.",
+              "finding": "Le coefficient est restitué conditionnellement ; sa reconstruction ne détermine pas simultanément une masse inconnue."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le dossier circulaire",
+            "input": "Rapport q/m reconstruit et initialisation reçue en 4.1.",
+            "action": "Recalculer ωc = qrec B/m, T = 2π/ωc et R = v⊥/ωc ; conserver le sens obtenu et r(0) = 0.",
+            "output": "Retour à 4.1 : mêmes rayon, période, phase et orientation ; paramètres de référence cohérents.",
+            "comparison": "4.6 ↔ 4.1 : retrouver le cercle orienté reçu.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion referme la comparaison avec les entrées cinématiques sans produire une mesure indépendante."
+            },
+            "evaluation": {
+              "object": "Dossier cinématique initial et paramètres restitués.",
+              "conditions": "m,B et v⊥ connus ; qrec positif et même initialisation.",
+              "criterion": "R = 0,0104375 m, T ≈ 6,55807 × 10⁻⁷ s, v(0) suivant +x et centre suivant −y.",
+              "finding": "Le cercle d’entrée est restitué ; l’hypothèse de force unique demeure nécessaire."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Traiter une composante axiale supplémentaire",
+        "system": "Le même modèle magnétique appliqué à une variante de vitesse initiale, avec translation axiale et rotation transverse.",
+        "input": "4.3 fournit la cinématique du cercle ; la variante suppose séparément v∥(0) = +10⁵ m·s⁻¹, mêmes v⊥,q,m et B.",
+        "output": "L’ajout axial donne z = v∥t, un pas h = v∥T et une énergie initiale différente ; le modèle conserve cette énergie.",
+        "section": "trajectoire",
+        "comparison": "5 ↔ 2 : confronter la solution hélicoïdale aux équations et invariants du modèle magnétique.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La chaîne de retour traite une autre condition initiale ; elle conserve le même modèle et distingue comparaison de cas et évolution d’un seul état."
+        },
+        "evaluation": {
+          "object": "Équations et invariants du niveau 2, confrontés au traitement de la variante au niveau 5.",
+          "conditions": "Même champ uniforme et même proton ; seule la vitesse axiale initiale change.",
+          "criterion": "z̈ = 0 et a = (q/m)(v×B) restent satisfaits ; K = m(v⊥²+v∥²)/2 est constant dans chaque cas.",
+          "finding": "Le modèle admet cercle et hélice ; leur différence d’énergie provient des états initiaux, sans travail magnétique."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la variante axiale",
+            "input": "Solution transverse transmise en 4.3 ; donnée supplémentaire du scénario : v∥(0) = +10⁵ m·s⁻¹.",
+            "action": "Maintenir r(0) = 0, v⊥ suivant +x, q,m,B ; distinguer cet état initial du cercle où v∥ = 0.",
+            "output": "Variante initialisée avec v₀ = 10⁵(e_x + e_z) m·s⁻¹ dans le même champ.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La composante ajoutée est fournie pour un autre cas ; elle n’est pas créée par l’action magnétique."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Construire la solution hélicoïdale",
+            "input": "Rotation transverse de référence et équation v̇_z = 0, avec nouvelle valeur initiale de v_z.",
+            "action": "Intégrer z = v∥t ; garder x = R sin(ωct), y = R[cos(ωct)−1] ; calculer Δz sur T.",
+            "output": "Même cercle projeté et même période ; h = z(t+T)−z(t) = v∥T, signé suivant +z.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La composante parallèle disparaît de v×B ; elle s’ajoute à la position sans modifier la rotation transverse."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la prédiction d’hélice",
+            "input": "Solution paramétrique de 5.2, mêmes R,T et v∥ = +10⁵ m·s⁻¹.",
+            "action": "Associer au mouvement le pas h = v∥T et K = m(v⊥²+v∥²)/2 ; conserver séparément K du cercle.",
+            "output": "À 6.1 : hélice prédite, même R,T, déplacement axial positif et énergie propre à la variante.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La nouvelle sortie fournit des conséquences calculables du nouvel état initial, sans ajouter de puissance magnétique."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre projection et mouvement spatial",
+            "input": "Prédiction d’hélice de 5.3 avec v⊥ et v∥ non nuls.",
+            "action": "Distinguer le cercle projeté de la trajectoire spatiale ; relire h comme déplacement signé par période.",
+            "output": "R et T sont inchangés, mais z avance ; R n’est pas le rayon de courbure spatial de l’hélice.",
+            "comparison": "5.4 ↔ 5.3 : conserver les conséquences spatiales de la variante.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Une projection identique ne signifie pas que positions, vitesses totales ou énergies soient identiques."
+            },
+            "evaluation": {
+              "object": "Prédiction relue et solution transmise en 5.3.",
+              "conditions": "Même phase transverse, B suivant +z et v∥ positif.",
+              "criterion": "x(t+T) = x(t), y(t+T) = y(t), z(t+T)−z(t) = h > 0.",
+              "finding": "La projection se referme à chaque tour ; la trajectoire spatiale ne se referme pas."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire composantes et énergie",
+            "input": "Rayon R, période T et pas h repris en 5.4 ; masse connue.",
+            "action": "Résoudre v⊥ = 2πR/T et v∥ = h/T ; calculer K = m[(2πR/T)²+(h/T)²]/2.",
+            "output": "Les deux composantes initiales sont retrouvées ; K_var − K_ref = m(h/T)²/2.",
+            "comparison": "5.5 ↔ 5.2 : confronter reconstruction des composantes et intégration de la position.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion géométrique restitue une vitesse axiale signée ; la différence d’énergie compare deux conditions initiales."
+            },
+            "evaluation": {
+              "object": "Solution paramétrique de 5.2 et inversion géométrique de 5.5.",
+              "conditions": "R,T,h définis pour la même hélice ; masse et sens axial connus.",
+              "criterion": "2πR/T = v⊥ et h/T = v∥ ; l’énergie ainsi obtenue est constante puisque ces composantes le sont.",
+              "finding": "L’inversion retrouve les paramètres du mouvement ; aucune énergie n’a été fournie au cours d’un tour."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer l’état initial de la variante",
+            "input": "Composantes reconstruites et phase reçue en 5.1.",
+            "action": "Former v₀ = v⊥e_x + v∥e_z ; conserver r(0) = 0 et les mêmes q,m,B.",
+            "output": "Retour à 5.1 : v₀ = 10⁵(e_x+e_z) m·s⁻¹ ; état transverse de référence toujours distinct.",
+            "comparison": "5.6 ↔ 5.1 : retrouver les attributs de la variante reçue.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La reconstruction réunit les composantes avec l’orientation conservée ; les invariants ne fixeraient pas seuls la phase."
+            },
+            "evaluation": {
+              "object": "État de variante restitué et données initiales de 5.1.",
+              "conditions": "Même source du champ et même phase initiale ; aucun travail d’injection modélisé.",
+              "criterion": "v⊥ = 10⁵ m·s⁻¹ et v∥ = +10⁵ m·s⁻¹, avec q,m,B,r(0) inchangés.",
+              "finding": "La vitesse initiale propre à la variante est retrouvée sous le cadre conservé."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Chiffrer l’hélice et comparer les états initiaux",
+        "system": "Les résultats de la variante hélicoïdale confrontés au dossier initial du proton et du cercle.",
+        "input": "5.3 transmet mêmes R,T et v⊥, avec v∥ = +10⁵ m·s⁻¹ ; modèle magnétique et valeurs approchées inchangés.",
+        "output": "h ≈ +0,0655807 m et K_var = 1,67 × 10⁻¹⁷ J ; les reconstructions distinguent les deux vitesses initiales.",
+        "section": "controle",
+        "comparison": "6 ↔ 1 : confronter les paramètres restitués aux attributs initiaux, en séparant cercle et variante axiale.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les conséquences de la variante rejoignent le dossier initial pour comparaison ; elles ne décrivent pas un passage réel du cercle à l’hélice."
+        },
+        "evaluation": {
+          "object": "Attributs physiques du niveau 1, confrontés aux résultats et reconstructions du niveau 6.",
+          "conditions": "Masse et champ connus ; phase initiale et force unique conservées, données issues du calcul.",
+          "criterion": "v⊥ = 2πR/T = 10⁵ m·s⁻¹ ; v∥ vaut 0 pour le cercle et h/T = +10⁵ m·s⁻¹ pour l’hélice ; q = 2πm/(BT) > 0 grâce au sens connu.",
+          "finding": "Les paramètres communs sont retrouvés ; la différence axiale et énergétique est rattachée explicitement aux deux états initiaux."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir l’hélice à évaluer",
+            "input": "Dossier de 5.3 ou reprise de 6.6 ; R = 0,0104375 m, T non arrondi et v∥ = +10⁵ m·s⁻¹.",
+            "action": "Rassembler la variante avec la référence v∥ = 0 ; garder m,q,B identiques et les énergies distinguées.",
+            "output": "Deux états comparables, même rotation transverse et composantes axiales différentes.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le calcul porte sur deux cas supposés ; aucune vitesse d’injection ni trajectoire n’a été mesurée."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer pas et énergie de la variante",
+            "input": "R,T et composantes de 6.1 ; masse approchée m ≈ 1,67 × 10⁻²⁷ kg.",
+            "action": "Évaluer h = v∥T, ||v|| = √(v⊥²+v∥²) et K_var = m||v||²/2 ; calculer r(T) et v(T).",
+            "output": "h ≈ +0,0655807 m, ||v|| ≈ 1,41421 × 10⁵ m·s⁻¹, K_var = 1,67 × 10⁻¹⁷ J ; r(T) = h e_z, v(T) = v₀.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Après une période de giration, la vitesse se répète mais la position axiale avance ; K reste égale à sa valeur initiale."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les deux cas séparés",
+            "input": "Valeurs de 6.2 et référence circulaire de K_ref = 8,35 × 10⁻¹⁸ J.",
+            "action": "Consigner mêmes R,T et force initiale, avec h_ref = 0 et h_var > 0 ; conserver la provenance des énergies.",
+            "output": "À 1.1 : variante hélicoïdale séparée, h ≈ +0,0655807 m et K_var = 2K_ref, sans remplacement de la référence.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le dossier s’enrichit d’une comparaison entre états initiaux ; le rapport d’énergie ne représente pas un travail du champ."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre ce qui change entre les cas",
+            "input": "Deux cas transmis en 6.3, même vitesse transverse et même champ.",
+            "action": "Comparer pas, vitesse totale et énergie ; maintenir la même force magnétique initiale puisque v∥e_z×B = 0.",
+            "output": "L’hélice possède une énergie initiale double, mais même force initiale, même rayon transverse et même période.",
+            "comparison": "6.4 ↔ 6.3 : conserver les valeurs comparées et leur attribution aux deux états.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La force dépend de la composante transverse ; l’énergie dépend des deux composantes de vitesse."
+            },
+            "evaluation": {
+              "object": "Dossier comparatif relu et résultats transmis en 6.3.",
+              "conditions": "Même q,m,B,v⊥ ; v∥ nul ou +10⁵ m·s⁻¹ selon le cas.",
+              "criterion": "h_ref = 0, h_var ≈ +0,0655807 m ; K_var/K_ref = 2 et F_y(0) = −1,60 × 10⁻¹⁵ N dans les deux cas.",
+              "finding": "Les différences sont préservées ; l’énergie supplémentaire appartient à l’initialisation de la variante."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver les données depuis les résultats",
+            "input": "R,T,h calculés, masse m et champ B connus ; sens horaire conservé.",
+            "action": "Reconstruire |q| = 2πm/(BT), v⊥ = 2πR/T et v∥ = h/T ; attribuer q > 0 à partir du sens orienté.",
+            "output": "q ≈ +1,60 × 10⁻¹⁹ C, v⊥ = 10⁵ m·s⁻¹ et v∥ = +10⁵ m·s⁻¹ sont retrouvés.",
+            "comparison": "6.5 ↔ 6.2 : inverser les paramètres du mouvement chiffré.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La période seule ne fixe pas le signe de q ; masse connue et sens du parcours complètent l’inversion."
+            },
+            "evaluation": {
+              "object": "Évaluation de la variante en 6.2 et reconstruction de 6.5.",
+              "conditions": "T > 0, R > 0, m et B connus ; orientation et phase conservées.",
+              "criterion": "2πm/(BT) = 1,60 × 10⁻¹⁹ C ; 2πR/T = h/T = 10⁵ m·s⁻¹ pour cette variante.",
+              "finding": "Les entrées sont retrouvées sous conditions ; q,m,B ne sont pas déterminés simultanément par la seule période."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les états à comparer",
+            "input": "Paramètres reconstruits en 6.5 et initialisation des deux cas reçue en 6.1.",
+            "action": "Recomposer chaque v₀ avec sa composante axiale ; conserver r(0) = 0 et le même champ extérieur.",
+            "output": "Retour à 6.1 : états transverse et hélicoïdal distingués, mêmes q,m,B ; aucun gain d’énergie magnétique.",
+            "comparison": "6.6 ↔ 6.1 : retrouver les entrées de la comparaison et leurs hypothèses.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour confronte les attributs initiaux et leurs différences plutôt que de ramener artificiellement les deux états à une énergie commune."
+            },
+            "evaluation": {
+              "object": "Deux états restitués et dossier reçu en 6.1.",
+              "conditions": "Même phase +x, m et B connus ; E = 0 et forces exclues toujours négligées.",
+              "criterion": "v₀,ref = 10⁵ e_x et v₀,var = 10⁵(e_x+e_z) m·s⁻¹ ; r(0) = 0 dans les deux cas.",
+              "finding": "Le dossier initial est restitué, avec les idéalisations nécessaires au modèle de cercle et d’hélice."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "champ-fil-ampere": {
+    "question": "Comment le courant enlacé détermine-t-il le champ d’un fil, et pourquoi deux contours peuvent-ils porter le même champ sans enlacer le même courant ?",
+    "basis": "Cylindre infini de rayon a = 0,010 m, I = +4,0 A uniforme et permanent ; r₁ = 0,0050 m puis r₂ = 0,020 m. μ0 ≈ 4π × 10⁻⁷ ; aucun résultat mesuré.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Courant, circulation et composante azimutale sont séparés ; profils, inversion par branches et limite d’un champ ajouté structurent les retours.",
+    "subject": {
+      "type": "physique",
+      "description": "Le champ magnétostatique d’une densité de courant axiale uniforme, prescrite dans un cylindre droit infini.",
+      "scope": "Modèle μ0 partout, source seule, sans nappe de courant ni aimantation supplémentaire. Régime permanent sans supposer E nul ; variantes séparées, fil réel non décrit globalement."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Définir courant, section et orientation",
+        "system": "La distribution de courant prescrite et le contour circulaire utilisé pour l’analyse.",
+        "input": "Cylindre infini de rayon a = 0,010 m, courant I = +4,0 A suivant +z ; point initial r₁ = 0,0050 m.",
+        "output": "Densité uniforme, géométrie et orientation du contour définies ; courant permanent et champ de cette source seule.",
+        "section": "conditions",
+        "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Le dossier fixe la source et les conventions avant tout calcul du champ ; la surface choisie n’est pas une nouvelle source."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le cylindre et le contour",
+            "input": "Données générales ; 1.6 restitue la référence et 6.3 transmet séparément le point extérieur r₂ = 0,020 m.",
+            "action": "Distinguer a, rayon de la distribution, de r₁, rayon du contour ; fixer I positif suivant +z et le régime permanent.",
+            "output": "Source inchangée ; référence intérieure r₁ = a/2 et variante extérieure conservée séparément.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les nombres décrivent un modèle supposé, sans déplacement du contour réellement effectué ni mesure du courant."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Passer du courant à sa densité",
+            "input": "I = +4,0 A uniformément réparti sur la section de rayon a = 0,010 m.",
+            "action": "Calculer A = πa² puis J = I/A ; former J vecteur = J e_z et vérifier l’unité A·m⁻².",
+            "output": "J ≈ 12 732,395 A·m⁻², constant dans la section ; courant nul à l’extérieur.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La conversion utilise une aire, non un volume ; J est prescrit et ne provient pas d’une mesure locale."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir les conventions géométriques",
+            "input": "Densité de 1.2, axe z et contour circulaire centré, dans un plan perpendiculaire à l’axe.",
+            "action": "Orienter le disque suivant +z et son bord dans le sens antihoraire vu depuis +z ; définir la tangente eθ.",
+            "output": "À 2.1 : I, a, J, contour centré et orientation ; μ0 ≈ 4π × 10⁻⁷ T·m·A⁻¹, aucun champ ajouté.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le sens du courant enlacé est associé à la normale de surface ; il ne se déduit pas d’un champ encore inconnu."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre courant et convention",
+            "input": "Attributs transmis en 1.3 : I positif, J uniforme, rayon matériel a et contour orienté.",
+            "action": "Relire séparément sens physique du courant, sens de parcours et normale ; conserver leur association par la main droite.",
+            "output": "Le courant traversant le disque est compté positivement ; I désigne le courant total de la section, et le contour positif suit eθ.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise évite de confondre inversion d’orientation et inversion physique du courant."
+            },
+            "comparison": "1.4 ↔ 1.3 : préserver distribution, géométrie et conventions.",
+            "evaluation": {
+              "object": "1.4 ↔ 1.3 : courant prescrit et orientation du contour.",
+              "conditions": "Même cylindre et même axe, sans source magnétique supplémentaire.",
+              "criterion": "Retrouver I = +4,0 A, a = 0,010 m et J = I/(πa²) ; normale +z et contour associé.",
+              "finding": "Les attributs sont conservés ; le champ n’a pas encore été déterminé."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Inverser la section puis son orientation",
+            "input": "I total et J repris en 1.4 ; section complète d’aire πa² et rayon positif.",
+            "action": "Résoudre a = √[I/(πJ)] ; inverser ensuite l’orientation de la section complète et celle de son bord pour changer les signes algébriques.",
+            "output": "a = 0,010 m ; à travers la section complète orientée vers −z, Ialg = −4,0 A sans changer le courant physique suivant +z.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le calcul inverse retrouve la section ; le changement de convention modifie les signes algébriques, pas la source."
+            },
+            "comparison": "1.5 ↔ 1.2 : confronter conversion I/J et restitution de l’aire.",
+            "evaluation": {
+              "object": "1.5 ↔ 1.2 : densité et section reconstruites.",
+              "conditions": "I et J positifs dans la convention initiale ; calcul avant arrondi, racine positive.",
+              "criterion": "πa² = I/J ; inverser la normale change le signe du flux de J, pas la valeur du rayon.",
+              "finding": "Le rayon est retrouvé et le rôle de l’orientation est précisé sans nouvel état physique."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer la source de référence",
+            "input": "Rayon reconstruit en 1.5 et conventions initiales de 1.1.",
+            "action": "Revenir au disque normal à +z ; restituer I, a, J uniforme et r₁ = a/2, avec sources permanentes.",
+            "output": "Retour à 1.1 : cylindre et point intérieur inchangés ; le dossier extérieur reste distinct.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour referme le dossier géométrique sans prétendre déterminer le champ électrique du matériau."
+            },
+            "comparison": "1.6 ↔ 1.1 : retrouver source, point et régime.",
+            "evaluation": {
+              "object": "1.6 ↔ 1.1 : attributs initiaux du modèle.",
+              "conditions": "Même courant prescrit, μ0 partout et absence d’autres sources.",
+              "criterion": "I = +4,0 A, a = 0,010 m, r₁ = 0,0050 m ; régime permanent.",
+              "finding": "La référence est conservée ; aucune mesure ni propriété de conduction supplémentaire n’est inférée."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Déduire le profil par Ampère",
+        "system": "La symétrie complète du courant et le calcul du champ depuis la circulation.",
+        "input": "Dossier de 1.3 : densité axiale uniforme, cylindre infini et contour circulaire orienté, source seule.",
+        "output": "B vecteur = Bθ(r)eθ ; branche linéaire intérieure et branche extérieure en 1/r, avec axe régulier.",
+        "section": "courant",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La circulation devient un champ local grâce à la symétrie ; Ampère seul ne fournit pas cette réduction."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les symétries de la source",
+            "input": "Courant et contour de 1.3 ; 2.6 restitue les hypothèses après reconstruction de J.",
+            "action": "Utiliser translations suivant z, rotations et plans de symétrie contenant l’axe ; B, vecteur axial, est perpendiculaire à ces plans.",
+            "output": "Pour r > 0, B = Bθ(r)eθ ; les composantes radiale et axiale sont nulles pour cette source seule.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les seules rotations n’excluraient pas une composante axiale ; la symétrie complète et le périmètre de source sont nécessaires."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Intégrer le courant puis la circulation",
+            "input": "J = I/(πa²), contour tangent à eθ et sources permanentes.",
+            "action": "Intégrer Ienl = ∫₀^min(r,a) J 2πs ds ; résoudre 2πrBθ = μ0Ienl.",
+            "output": "Ienl = I(r/a)² et Bθ = μ0Ir/(2πa²) pour 0 < r ≤ a ; Ienl = I et Bθ = μ0I/(2πr) pour r > a.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La fraction de section impose le courant intérieur ; tous les signes suivent le même contour orienté."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir les branches et le centre",
+            "input": "Résultats de 2.2 et densité volumique de courant finie, sans courant filiforme singulier à l’axe.",
+            "action": "Conserver le domaine des branches et prolonger B vecteur par zéro sur l’axe, où eθ n’est pas défini.",
+            "output": "À 3.1 : loi intérieure pour r₁ = a/2, loi extérieure pour r > a et B vecteur(0) = 0.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le centre se traite par régularité et symétrie, sans diviser par un contour de longueur nulle."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre courant enlacé et champ",
+            "input": "Branches de 2.3 et domaine du modèle.",
+            "action": "Relire la croissance de Ienl en r² à l’intérieur et sa constance extérieure ; distinguer cette dépendance de celle de Bθ.",
+            "output": "Courant intérieur variable, champ intérieur linéaire ; courant extérieur constant, champ extérieur en 1/r.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture conserve les deux objets reliés par la longueur du contour."
+            },
+            "comparison": "2.4 ↔ 2.3 : retrouver branches et domaines.",
+            "evaluation": {
+              "object": "2.4 ↔ 2.3 : profils de courant et de champ.",
+              "conditions": "Même courant uniforme et même orientation positive.",
+              "criterion": "Ienl = I(r/a)² dans le cylindre ; Bθ = μ0Ienl/(2πr), r > 0.",
+              "finding": "Les lois sont conservées ; Ienl n’est pas remplacé partout par I."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire la densité par rotationnel",
+            "input": "Champ azimutal repris en 2.4 ; pour r > 0 hors interface, (rot B)z = (1/r)d(rBθ)/dr.",
+            "action": "Différencier les branches et utiliser Jz = (rot B)z/μ0.",
+            "output": "Jz = I/(πa²) à l’intérieur et zéro à l’extérieur ; la loi locale retrouve la densité prescrite.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La différentiation inverse le calcul intégral dans les régions régulières ; Jz nul localement ne signifie pas B nul."
+            },
+            "comparison": "2.5 ↔ 2.2 : confronter calcul intégral et reconstruction locale.",
+            "evaluation": {
+              "object": "2.5 ↔ 2.2 : densité intégrée et densité retrouvée.",
+              "conditions": "Magnétostatique, μ0 constant ; dérivées prises pour 0 < r < a ou r > a.",
+              "criterion": "(1/μ0r)d(rBθ)/dr = I/(πa²) dans la source, zéro au-dehors.",
+              "finding": "Les deux écritures concordent par cohérence interne, sans observation indépendante."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le courant initial",
+            "input": "Densité reconstruite en 2.5 et géométrie conservée en 2.1.",
+            "action": "Intégrer Jz sur la section de rayon a ; restituer I suivant +z et maintenir source seule et symétrie complète.",
+            "output": "Retour à 2.1 : courant total I, densité uniforme et mêmes conventions.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La restitution retrouve les paramètres intégrés ; elle ne déduit pas la symétrie à partir d’une seule valeur de champ."
+            },
+            "comparison": "2.6 ↔ 2.1 : retrouver source et cadre du calcul.",
+            "evaluation": {
+              "object": "2.6 ↔ 2.1 : courant, densité et hypothèses d’entrée.",
+              "conditions": "Même section, même μ0 et régime permanent ; aucune nappe supplémentaire.",
+              "criterion": "∫₀ᵃ Jz 2πs ds = I ; direction +z et contour positif conservés.",
+              "finding": "Le dossier de source est restitué sous les hypothèses maintenues."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Calculer à l’intérieur du fil",
+        "system": "Le champ, la circulation et le courant enlacé au rayon intérieur r₁ = 0,0050 m.",
+        "input": "Branche intérieure transmise par 2.3 ; a = 0,010 m, I = +4,0 A et μ0 approximé.",
+        "output": "Ienl,1 = 1,0 A ; Bθ,1 = 40 µT ; Γ₁ ≈ 1,256637 × 10⁻⁶ T·m.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’application numérique distingue les trois grandeurs ; les valeurs supposées ne deviennent pas des mesures."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le rayon intérieur",
+            "input": "Branche intérieure de 2.3 et point r₁ = 0,0050 m ; 3.6 restitue ce dossier.",
+            "action": "Vérifier r₁/a = 1/2 et sélectionner le courant de la section partielle, avec I = +4,0 A.",
+            "output": "Le contour est intérieur ; la fraction de section est 1/4.",
+            "relation": {
+              "nature": "logique",
+              "description": "La géométrie choisit la branche avant toute évaluation du champ."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer les trois grandeurs",
+            "input": "Fraction de section 1/4 et μ0 ≈ 4π × 10⁻⁷ T·m·A⁻¹.",
+            "action": "Calculer Ienl,1 = I/4, Bθ,1 = μ0Ienl,1/(2πr₁), puis Γ₁ = 2πr₁Bθ,1.",
+            "output": "Ienl,1 = 1,0 A ; Bθ,1 = 4,0 × 10⁻⁵ T ; Γ₁ ≈ 1,256637 × 10⁻⁶ T·m.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les facteurs π se simplifient dans le champ avec la valeur approchée de μ0 ; les unités restent distinctes."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir le dossier du point intérieur",
+            "input": "Résultats de 3.2 et orientation eθ positive autour de +z.",
+            "action": "Associer le champ de 40 µT à r₁, et conserver séparément courant enlacé et circulation positive.",
+            "output": "À 4.1 : r₁ = a/2, Bθ,1 = 40 µT, Ienl,1 = 1,0 A et Γ₁ ≈ 1,256637 × 10⁻⁶ T·m.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La sortie attache les nombres au contour et à leur origine calculée, sans relevé instrumental."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les valeurs et leurs unités",
+            "input": "Dossier de 3.3 : point intérieur, composante tangentielle et circulation.",
+            "action": "Relire Bθ en teslas, Γ en tesla-mètres et Ienl en ampères ; conserver l’orientation positive.",
+            "output": "Le champ et la circulation sont positifs dans cette convention, sans être la même grandeur.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture empêche de confondre valeur locale et intégrale sur un contour."
+            },
+            "comparison": "3.4 ↔ 3.3 : préserver valeurs, unités et sens.",
+            "evaluation": {
+              "object": "3.4 ↔ 3.3 : résultats intérieurs.",
+              "conditions": "Même r₁ et même contour ; arrondi de Γ indiqué.",
+              "criterion": "Bθ,1 = 40 µT ; Ienl,1 = 1,0 A ; Γ₁ = 2πr₁Bθ,1.",
+              "finding": "Les trois résultats sont conservés sans attribuer à l’arrondi une précision expérimentale."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire le courant total",
+            "input": "Champ tangent et circulation repris en 3.4 ; r₁ et a connus, densité uniforme supposée.",
+            "action": "Déduire Ienl,1 = Γ₁/μ0 = 2πr₁Bθ,1/μ0, puis I = Ienl,1(a/r₁)².",
+            "output": "Le calcul retrouve Ienl,1 = 1,0 A et I = 4,0 A avant arrondi.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La première inversion porte sur le courant enlacé ; la seconde requiert la répartition uniforme et la section totale."
+            },
+            "comparison": "3.5 ↔ 3.2 : confronter calcul direct et reconstruction.",
+            "evaluation": {
+              "object": "3.5 ↔ 3.2 : courant de section et champ intérieur.",
+              "conditions": "Même a, r₁ et μ0 ; source unique, uniformité et valeurs non arrondies.",
+              "criterion": "I = 2πa²Bθ,1/(μ0r₁) = 4,0 A ; réapplication redonne 40 µT.",
+              "finding": "Les paramètres sont retrouvés par identité interne ; l’uniformité n’est pas mesurée."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer l’application intérieure",
+            "input": "Courant reconstruit en 3.5 et géométrie reçue en 3.1.",
+            "action": "Conserver a = 0,010 m, r₁ = 0,0050 m et I positif ; rétablir le contour normal à +z.",
+            "output": "Retour à 3.1 : même point intérieur, même source et même branche.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour restitue le dossier qui rendait le calcul applicable."
+            },
+            "comparison": "3.6 ↔ 3.1 : retrouver rayon, courant et convention.",
+            "evaluation": {
+              "object": "3.6 ↔ 3.1 : attributs de l’application numérique.",
+              "conditions": "Même modèle permanent ; géométrie connue, aucune modification de source.",
+              "criterion": "I = +4,0 A ; a = 0,010 m ; r₁/a = 1/2.",
+              "finding": "Le dossier intérieur est restitué avec son statut théorique."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Relire le profil et ses ambiguïtés",
+        "system": "Le résultat intérieur replacé dans le profil complet, avec ses limites et ses positions compatibles.",
+        "input": "Dossier de 3.3 : Bθ,1 = 40 µT à a/2, circulation et courant enlacé distincts ; branches connues.",
+        "output": "Profil continu, maximum de 80 µT ; une demi-amplitude correspond à deux rayons, dont les contours restent distincts.",
+        "section": "profil",
+        "comparison": "4 ↔ 3 : préserver valeur intérieure, rayon, circulation et statut avant d’examiner le profil complet.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les conséquences calculées sont reprises comme entrées du retour ; leur contexte évite une identification de position injustifiée."
+        },
+        "evaluation": {
+          "object": "4 ↔ 3 : résultat intérieur et dossier relu.",
+          "conditions": "Même I, a et μ0 ; le profil complet ne remplace pas le point de référence.",
+          "criterion": "Retrouver 40 µT à r₁ = 0,0050 m, Ienl,1 = 1,0 A et Γ₁ ≈ 1,256637 × 10⁻⁶ T·m.",
+          "finding": "La valeur et ses attributs sont conservés ; une valeur de champ seule ne localise pas un point dans ce profil."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le résultat avec sa position",
+            "input": "Valeurs et rayon transmis par 3.3 ; 4.6 restitue la branche intérieure après comparaison.",
+            "action": "Garder r₁ = a/2 attaché à Bθ,1 = 40 µT ; recevoir aussi les deux expressions du profil.",
+            "output": "Résultat intérieur identifié, avec courant enlacé et contour connus.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise ne supprime pas l’information géométrique nécessaire pour interpréter le champ."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Normaliser puis raccorder le profil",
+            "input": "Branches de 2.3, point reçu en 4.1 et I > 0.",
+            "action": "Poser u = r/a et b = Bθ/Bθ(a) ; obtenir b = u à l’intérieur, b = 1/u à l’extérieur.",
+            "output": "Bθ(a) = 80 µT ; b(0) = 0 et b(1−) = b(1+) = 1, maximum continu.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La normalisation compare les branches sans unités ; la continuité est compatible avec l’absence de nappe de courant surfacique."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir les attributs du profil",
+            "input": "Profil réduit de 4.2 et référence b = 1/2 à u = 1/2.",
+            "action": "Consigner centre nul, maximum à a et décroissance extérieure ; conserver le point de référence explicitement intérieur.",
+            "output": "À 5.1 : profil azimutal continu, Bθ(a) = 80 µT, référence 40 µT à a/2 et géométrie connue.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le profil fournit le dossier nécessaire au calcul inverse, sans établir l’existence d’une mesure spatiale."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les domaines de variation",
+            "input": "Attributs de 4.3 : branche croissante, maximum et branche décroissante.",
+            "action": "Relire le domaine de chaque branche et distinguer continuité de Bθ et continuité de sa dérivée.",
+            "output": "Bθ reste continu à a ; sa pente change au passage de la région parcourue par le courant à l’extérieur.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La densité de courant discontinue n’exige pas une dérivée du champ continue."
+            },
+            "comparison": "4.4 ↔ 4.3 : conserver profil, maximum et domaines.",
+            "evaluation": {
+              "object": "4.4 ↔ 4.3 : points caractéristiques et branches.",
+              "conditions": "Courant uniforme intérieur, nul extérieur ; aucune nappe supplémentaire.",
+              "criterion": "Bθ(0) = 0 ; Bθ(a−) = Bθ(a+) = 80 µT ; croissance puis décroissance.",
+              "finding": "Le profil est conservé sans imposer une régularité de pente absente du modèle."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Inverser une amplitude intermédiaire",
+            "input": "Profil réduit repris en 4.4 ; amplitude b fixée avec 0 < b < 1, source connue.",
+            "action": "Résoudre u = b dans la branche intérieure et u = 1/b dans la branche extérieure ; en déduire rint rext = a².",
+            "output": "Pour b = 1/2, rint = 0,0050 m et rext = 0,020 m ; même composante de 40 µT, positions distinctes.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion est double si la branche est inconnue ; la position ne se déduit pas uniquement de la norme du champ."
+            },
+            "comparison": "4.5 ↔ 4.2 : confronter profil direct et inversion par branches.",
+            "evaluation": {
+              "object": "4.5 ↔ 4.2 : fonction radiale et positions compatibles.",
+              "conditions": "I et a connus, I positif, 0 < b < 1 ; composante azimutale ou norme sous source seule.",
+              "criterion": "b = u int et b = 1/u ext ; pour b = 1/2, u = 1/2 ou 2.",
+              "finding": "Les deux positions sont mathématiquement compatibles ; le rayon fourni sélectionne la référence."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le point intérieur reçu",
+            "input": "Deux rayons obtenus en 4.5 et information r₁ < a conservée depuis 4.1.",
+            "action": "Choisir la branche intérieure u = b = 1/2 ; retrouver Ienl,1 = Iu² et la circulation du contour.",
+            "output": "Retour à 4.1 : r₁ = 0,0050 m, 40 µT, 1,0 A enlacé et Γ₁ ≈ 1,256637 × 10⁻⁶ T·m.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La restitution utilise l’information géométrique conservée ; elle ne supprime pas l’autre solution du problème moins renseigné."
+            },
+            "comparison": "4.6 ↔ 4.1 : retrouver rayon et grandeurs reçues.",
+            "evaluation": {
+              "object": "4.6 ↔ 4.1 : résultat intérieur et sélection de branche.",
+              "conditions": "Source et rayon connus ; la solution extérieure reste un cas séparé.",
+              "criterion": "u = 1/2, Ienl = I/4 = 1,0 A et Γ = μ0Ienl.",
+              "finding": "Le dossier reçu est retrouvé ; l’ambiguïté apparaissait seulement après retrait de la position connue."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Reconstruire le courant et délimiter l’inversion",
+        "system": "La reconstruction de I et J depuis un profil connu, et la portée de la circulation magnétique.",
+        "input": "Profil et géométrie transmis par 4.3 ; champ azimutal de la source seule, données calculées.",
+        "output": "I et J restitués sous conditions ; une composante supplémentaire à circulation nulle échappe au seul contour d’Ampère.",
+        "section": "circulation",
+        "comparison": "5 ↔ 2 : confronter l’inversion courant-champ au calcul direct et préciser ce que la circulation ne détermine pas.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour reconstruit les paramètres du modèle puis retire une hypothèse dans un contre-exemple clairement séparé."
+        },
+        "evaluation": {
+          "object": "5 ↔ 2 : profil direct et reconstruction conditionnelle de la source.",
+          "conditions": "a connu, μ0 constant et régime permanent ; champ azimutal de la source seule pour l’inversion initiale.",
+          "criterion": "I = 2πrBθ/μ0 à l’extérieur ; la pente intérieure c donne J = 2c/μ0.",
+          "finding": "Le courant est retrouvé dans son cadre ; Ampère ne suffit pas à exclure un champ axial extérieur ajouté."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les informations de reconstruction",
+            "input": "Profil continu et point intérieur transmis par 4.3 ; 5.6 restitue ce cadre après comparaison.",
+            "action": "Conserver a, μ0 et orientation ; distinguer composante azimutale Bθ, norme du champ et circulation du contour.",
+            "output": "Dans le modèle initial, ||B|| = Bθ > 0 pour r > 0 ; cette égalité dépend de l’absence d’autre composante.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour précise quelles informations sont nécessaires pour exploiter une valeur locale comme donnée de circulation."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Inverser le profil et sa pente",
+            "input": "Profil de 5.1 ; Bθ = cr à l’intérieur, a connu, I positif.",
+            "action": "Calculer c = Bθ,1/r₁, puis J = 2c/μ0 et I = πa²J ; confronter à I = 2πaBθ(a)/μ0.",
+            "output": "c = 0,008 T·m⁻¹ ; J ≈ 12 732,395 A·m⁻² et I = 4,0 A.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La pente intérieure identifie J dans le modèle uniforme ; la section relie cette densité au courant total."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir le dossier reconstruit",
+            "input": "Paramètres obtenus en 5.2 et hypothèses de source conservées.",
+            "action": "Consigner I = +4,0 A, J uniforme et a = 0,010 m ; transmettre la branche extérieure pour un nouveau contour.",
+            "output": "À 6.1 : même source, μ0 et loi extérieure ; variante r₂ = 0,020 m, distincte de r₁.",
+            "relation": {
+              "nature": "logique",
+              "description": "La source reconstruite sert à une autre application, sans devenir une source mesurée indépendamment."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre paramètres et composantes",
+            "input": "Dossier de 5.3 avec courant reconstruit, géométrie et champ tangent.",
+            "action": "Relire J en A·m⁻² et I en A ; maintenir la différence entre une norme connue et une composante tangentielle connue.",
+            "output": "Le dossier suppose B = Bθeθ ; I et J ont été obtenus dans ce cadre.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture conserve les hypothèses qui rendent le contour exploitable."
+            },
+            "comparison": "5.4 ↔ 5.3 : préserver paramètres et conditions d’inversion.",
+            "evaluation": {
+              "object": "5.4 ↔ 5.3 : courant, densité et cadre du champ.",
+              "conditions": "Même section, orientation et μ0 ; valeurs issues du profil calculé.",
+              "criterion": "I = +4,0 A ; J = I/(πa²) ; composantes radiale et axiale nulles pour la source initiale.",
+              "finding": "Les paramètres et hypothèses sont conservés, sans mesure nouvelle."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Ajouter un champ invisible à la circulation",
+            "input": "Profil repris en 5.4 ; contre-exemple distinct Btotal = Bθeθ + B0e_z, avec B0 constant non nul produit par une autre source.",
+            "action": "Calculer ∮ B0e_z · dl = 0 sur le cercle ; obtenir ||Btotal|| = √(Bθ²+B0²).",
+            "output": "La circulation et Ienl sont inchangés, mais le vecteur total et sa norme diffèrent de ceux du fil seul.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’ajout quitte le périmètre de source unique et sa symétrie complète ; une circulation ne fournit pas toutes les composantes locales."
+            },
+            "comparison": "5.5 ↔ 5.2 : confronter inversion du profil azimutal et insuffisance d’une norme non décomposée.",
+            "evaluation": {
+              "object": "5.5 ↔ 5.2 : reconstruction depuis Bθ et portée du seul contour.",
+              "conditions": "Champ axial ajouté uniforme ; courant prescrit du fil inchangé et régime permanent maintenu.",
+              "criterion": "Γtotal = 2πrBθ ; ||Btotal|| ≠ Bθ pour B0 ≠ 0, donc la norme ne remplace plus Bθ dans l’inversion.",
+              "finding": "Ampère conserve Ienl mais ne détermine pas B0 ; une circulation nulle n’implique pas un champ local nul."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le champ de la source seule",
+            "input": "Contre-exemple de 5.5 et dossier initial de 5.1.",
+            "action": "Revenir à B0 = 0 ; restituer le champ azimutal, sa pente intérieure et les paramètres I, J, a.",
+            "output": "Retour à 5.1 : norme égale à Bθ positif et source initiale seule ; le champ axial ajouté reste un cas séparé.",
+            "relation": {
+              "nature": "logique",
+              "description": "La restitution rétablit explicitement l’hypothèse retirée ; elle ne prétend pas la déduire d’une circulation."
+            },
+            "comparison": "5.6 ↔ 5.1 : retrouver profil et informations disponibles.",
+            "evaluation": {
+              "object": "5.6 ↔ 5.1 : champ reçu et source restituée.",
+              "conditions": "Absence de champ ajouté, mêmes a, μ0 et courant uniforme.",
+              "criterion": "B = Bθeθ ; Bθ(r₁) = 40 µT, Bθ(a) = 80 µT et I = 4,0 A.",
+              "finding": "Le dossier initial est restitué avec ses conditions ; une validation physique demeure ouverte."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Comparer le contour extérieur à la référence",
+        "system": "Le résultat à r₂ = 0,020 m et sa comparaison avec la source initiale et le contour intérieur.",
+        "input": "Source reconstruite de 5.3 ; a = 0,010 m, I = +4,0 A et contour extérieur r₂ = 2a.",
+        "output": "Bθ,2 = 40 µT comme à r₁, mais Ienl,2 = 4,0 A et Γ₂ = 4Γ₁ ; courant total et section conservés.",
+        "section": "controle",
+        "comparison": "6 ↔ 1 : retrouver source, section et orientation, en distinguant les deux rayons et leurs courants enlacés.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Une nouvelle application compare des contours du même champ ; elle ne modifie pas la source et n’impose aucune chronologie physique."
+        },
+        "evaluation": {
+          "object": "6 ↔ 1 : source et géométrie initiales confrontées à la variante.",
+          "conditions": "Même I, a, μ0 et distribution uniforme ; r₁ = a/2 et r₂ = 2a conservés séparément.",
+          "criterion": "Les inversions intérieures et extérieures donnent I = +4,0 A ; a = 0,010 m et J inchangés, malgré Ienl,1 = 1,0 A et Ienl,2 = 4,0 A.",
+          "finding": "La source est retrouvée ; l’égalité des champs ne confond ni les positions ni les courants traversant leurs disques."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le contour extérieur",
+            "input": "Loi extérieure et source transmises par 5.3 ; 6.6 restitue ce dossier après reconstruction.",
+            "action": "Choisir r₂ = 0,020 m = 2a sur la même demi-droite radiale que r₁ ; conserver le contour positif normal à +z.",
+            "output": "La surface du contour englobe toute la section du fil ; Ienl,2 = I.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le nouveau rayon change le contour de calcul ; le courant total, la source et son régime restent identiques."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer champ et circulation extérieurs",
+            "input": "r₂ = 0,020 m, Ienl,2 = 4,0 A et μ0 ≈ 4π × 10⁻⁷ T·m·A⁻¹.",
+            "action": "Calculer Bθ,2 = μ0I/(2πr₂), puis Γ₂ = 2πr₂Bθ,2 ; comparer aux valeurs intérieures non arrondies.",
+            "output": "Bθ,2 = 40 µT ; Γ₂ ≈ 5,026548 × 10⁻⁶ T·m ; Γ₂/Γ₁ = 4.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le champ égal au point intérieur accompagne un contour quatre fois plus long et un courant enlacé quadruple."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir la variante avec ses attributs",
+            "input": "Résultats de 6.2 et référence intérieure conservée depuis 3.3.",
+            "action": "Associer 40 µT au rayon extérieur r₂, avec Ienl,2 = 4,0 A ; garder les deux contours séparés.",
+            "output": "À 1.1, distinctement : r₂ = 0,020 m, Bθ,2 = 40 µT, Ienl,2 = 4,0 A et Γ₂ ≈ 5,026548 × 10⁻⁶ T·m.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour global reçoit une nouvelle conséquence calculée, sans remplacer le dossier initial à r₁."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre la comparaison des contours",
+            "input": "Variante de 6.3 et données intérieures pour comparaison complémentaire.",
+            "action": "Relire les deux champs égaux, puis vérifier que les longueurs de contour et les courants enlacés diffèrent.",
+            "output": "Bθ,2/Bθ,1 = 1 ; r₂/r₁ = Γ₂/Γ₁ = Ienl,2/Ienl,1 = 4.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise situe l’égalité du champ parmi les autres attributs, qui ne sont pas égaux."
+            },
+            "comparison": "6.4 ↔ 6.3 : préserver la variante avant comparaison avec l’intérieur.",
+            "evaluation": {
+              "object": "6.4 ↔ 6.3 : valeurs et contour extérieurs.",
+              "conditions": "Même orientation, même source et même μ0 ; arrondis réservés à l’affichage.",
+              "criterion": "r₂ = 0,020 m ; Bθ,2 = 40 µT ; Ienl,2 = 4,0 A ; Γ₂ = μ0I.",
+              "finding": "Le dossier extérieur est conservé ; l’égalité des champs n’implique pas l’égalité des circulations."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire les courants des deux disques",
+            "input": "Bθ,1, Bθ,2 et rayons connus repris en 6.4 ; densité uniforme et a conservés.",
+            "action": "Calculer Ienl,j = 2πrⱼBθ,j/μ0 ; restituer I par Ienl,1(a/r₁)² et directement par Ienl,2.",
+            "output": "Ienl,1 = 1,0 A, Ienl,2 = 4,0 A ; les deux expressions du courant total donnent 4,0 A.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La reconstruction utilise le rayon de chaque contour ; le passage intérieur au courant total nécessite l’uniformité."
+            },
+            "comparison": "6.5 ↔ 6.2 : confronter calcul extérieur et inversions des courants.",
+            "evaluation": {
+              "object": "6.5 ↔ 6.2 : application d’Ampère et courant retrouvé.",
+              "conditions": "Source seule, rⱼ connus et μ0 identique ; branche intérieure assortie de a et de l’uniformité.",
+              "criterion": "2πr₂Bθ,2/μ0 = 4,0 A ; [2πr₁Bθ,1/μ0](a/r₁)² = 4,0 A.",
+              "finding": "Le courant total est restitué par cohérence interne, malgré les courants enlacés distincts."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les attributs extérieurs",
+            "input": "Courant total reconstruit en 6.5 et rayon extérieur connu reçu en 6.1.",
+            "action": "Rétablir I = +4,0 A, a = 0,010 m, r₂ = 0,020 m et l’orientation positive ; conserver J = I/(πa²).",
+            "output": "Retour à 6.1 : même source et même contour extérieur, avec Ienl,2 = I ; référence intérieure distincte.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture locale restitue le cas extérieur ; la comparaison globale conserve les attributs de la source initiale."
+            },
+            "comparison": "6.6 ↔ 6.1 : retrouver courant, section et contour.",
+            "evaluation": {
+              "object": "6.6 ↔ 6.1 : attributs du cas extérieur.",
+              "conditions": "Même régime permanent, source unique et géométrie connue.",
+              "criterion": "I = +4,0 A, a = 0,010 m et r₂ = 2a ; J uniforme et normale +z.",
+              "finding": "Le dossier est restitué ; les hypothèses de fil infini et de source seule restent à confronter à une réalisation physique."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "champ-axe-spire": {
+    "question": "Comment le courant orienté fixe-t-il le champ axial, et quelles informations les calculs inverses ou dipolaires permettent-ils de retrouver ?",
+    "basis": "Spire filiforme R = 0,10 m, I = +2,0 A, normale +z ; comparaison z = 0 puis z = R, et cas séparé z = −R.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "La somme vectorielle, les inversions et l’approximation dipolaire sont explicitées ; direction axiale, données connues et domaine de validité restent distincts.",
+    "subject": {
+      "type": "physique",
+      "description": "Le champ magnétostatique d’une spire circulaire parcourue par un courant permanent imposé.",
+      "scope": "Contribution de la seule spire filiforme dans le vide, uniquement sur son axe ; μ0 approché pour les chiffres, aucune mesure ni trajectoire."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Définir la spire et l’axe orienté",
+        "system": "La géométrie circulaire, le courant permanent et les positions du calcul magnétique.",
+        "input": "R = 0,10 m, I = +2,0 A ; courant antihoraire vu du côté +z, centre O et positions z = 0 puis z = R.",
+        "output": "Spire unique dans xy, normale +e_z et coordonnées axiales signées ; aire et paramètres du calcul conservés.",
+        "section": "conditions",
+        "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Les attributs supposés définissent une source et des positions de comparaison ; changer z ne déplace aucune charge dans le modèle."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la source et ses positions",
+            "input": "Scénario initial ou retour local de 1.6 ; 6.3 transmet séparément les résultats aux positions +R et −R.",
+            "action": "Placer la spire dans xy ; définir +z par le sens antihoraire du courant vu depuis ce côté et nommer les points axiaux.",
+            "output": "R positif, I positif suivant l’orientation choisie ; centre et points ±R restent distingués.",
+            "relation": {
+              "nature": "logique",
+              "description": "La normale est fixée avec le sens positif du courant ; elle ne se retourne pas lorsque le point de calcul change de côté."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Construire l’aire et les distances",
+            "input": "Géométrie et courant de 1.1 ; point source P(φ) sur le cercle et point M = z e_z.",
+            "action": "Calculer S = πR² et PM² = R²+z² ; former la coordonnée réduite x = z/R sans confondre z avec PM.",
+            "output": "S ≈ 0,031416 m² ; PM = √(R²+z²) ; x = 0 au centre et x = 1 au point +R.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Chaque élément de courant se trouve à la même distance de M sur l’axe ; cette propriété permettra de factoriser le dénominateur."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir le dossier orienté",
+            "input": "Aire et distances de 1.2 ; spire immobile et courant constant de 1.1.",
+            "action": "Conserver le fil circulaire, I,R et les positions ; adopter μ0 ≈ 4π × 10⁻⁷ T·m·A⁻¹ pour les valeurs numériques.",
+            "output": "À 2.1 : I,R,PM = √(R²+z²), normale +e_z et source unique dans le vide.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le dossier permet une intégration magnétostatique ; le champ des fils d’alimentation éventuels est exclu de ce modèle de contribution."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le courant et l’orientation",
+            "input": "Dossier de 1.3 avec courant permanent signé et abscisses 0,+R.",
+            "action": "Relire +e_z comme normale de la spire et z comme coordonnée de M ; conserver le même courant aux deux positions.",
+            "output": "Une seule source et deux points d’évaluation ; aucune modification de I ni permutation du sens de vue.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise sépare orientation du courant et localisation du point où son champ est calculé."
+            },
+            "comparison": "1.4 ↔ 1.3 : conserver source, orientation et géométrie.",
+            "evaluation": {
+              "object": "1.4 ↔ 1.3 : courant, rayon et axe de référence.",
+              "conditions": "Même spire immobile ; contribution d’aucune autre source ajoutée.",
+              "criterion": "Retrouver I = +2,0 A,R = 0,10 m et les positions 0,+R avec la même normale +e_z.",
+              "finding": "Le dossier orienté est conservé ; les points de calcul ne définissent pas deux courants."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Restituer le rayon depuis l’aire",
+            "input": "Aire S et coordonnée réduite reprises en 1.4 ; valeurs géométriques conservées avant arrondi.",
+            "action": "Résoudre R = √(S/π), racine positive, puis z = Rx ; retrouver PM en substituant ces valeurs dans √(R²+z²).",
+            "output": "R = 0,10 m retrouvé ; z = 0 ou 0,10 m selon le point, avec PM toujours strictement positif.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion utilise la forme circulaire supposée ; une aire seule n’identifierait pas une géométrie arbitraire de circuit."
+            },
+            "comparison": "1.5 ↔ 1.2 : inverser aire et coordonnée réduite.",
+            "evaluation": {
+              "object": "1.5 ↔ 1.2 : relations S = πR² et x = z/R.",
+              "conditions": "Rayon positif, aire non arrondie et géométrie circulaire conservée.",
+              "criterion": "Retrouver R = 0,10 m, puis PM = R au centre et PM = √2 R à z = R.",
+              "finding": "Les distances d’entrée sont restituées par calcul, sans observation géométrique indépendante."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le dossier de source",
+            "input": "Rayon et positions reconstruits en 1.5, orientation et courant reçus en 1.1.",
+            "action": "Rendre I, R, le plan xy et la normale +e_z ; conserver permanence du courant, vide et limitation à la seule spire.",
+            "output": "À reprendre en 1.1 : même source orientée et mêmes positions, avec variante −R explicitement séparée.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les conversions géométriques restituent les paramètres ; elles ne vérifient pas la réalisation matérielle d’un courant idéalement permanent."
+            },
+            "comparison": "1.6 ↔ 1.1 : retrouver géométrie, courant et statut des entrées.",
+            "evaluation": {
+              "object": "1.6 ↔ 1.1 : R,I,orientation et points de calcul.",
+              "conditions": "Le cas −R reste une comparaison distincte ; aucune évolution temporelle déduite des liens.",
+              "criterion": "Retrouver R = 0,10 m,I = +2,0 A,les positions 0,+R et le sens antihoraire vu depuis +z.",
+              "finding": "Les attributs initiaux sont conservés ; les valeurs restent supposées."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Intégrer les contributions de Biot–Savart",
+        "system": "La somme vectorielle du champ des éléments du cercle au point axial M.",
+        "input": "1.3 transmet la spire orientée, I,R et PM ; Biot–Savart est appliqué au courant permanent.",
+        "output": "B(z) = μ0IR²/[2(R²+z²)^(3/2)] e_z ; les contributions transversales se compensent.",
+        "section": "biotsavart",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le modèle de courant et la géométrie déterminent une intégrale vectorielle ; la symétrie intervient dans la somme, pas comme uniformité spatiale du champ."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le cercle paramétré",
+            "input": "Source et distances de 1.3 ou reprise de 2.6 ; paramètre φ croissant dans le sens positif du courant.",
+            "action": "Écrire OP = R e_r(φ), dℓ = R dφ e_φ et PM = −R e_r(φ)+z e_z.",
+            "output": "Vecteurs source-déplacement définis ; dℓ suit l’orientation positive, indépendamment du signe de z.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les bases cylindriques au point P servent au produit vectoriel ; le champ final sera exprimé dans la direction fixe e_z."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Former et intégrer le produit vectoriel",
+            "input": "Vecteurs de 2.1, avec e_r,e_φ,e_z formant une base directe et φ allant de 0 à 2π.",
+            "action": "Calculer dℓ × PM = [R²e_z+Rz e_r(φ)]dφ ; intégrer Biot–Savart en utilisant ∫₀²π e_r(φ)dφ = 0.",
+            "output": "B(z) = μ0IR²/[2(R²+z²)^(3/2)] e_z ; les composantes transversales disparaissent dans l’intégrale.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le dénominateur PM³ est constant sur le cercle ; le terme axial s’intègre en 2πR² et garde le signe de I."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre le profil axial",
+            "input": "Résultat vectoriel de 2.2 ; R > 0 et I constant.",
+            "action": "Nommer Bz(z) la composante signée selon e_z ; établir B0 = Bz(0) = μ0I/(2R).",
+            "output": "À 3.1 : formule axiale et valeur centrale symbolique, avec I = +2,0 A,R = 0,10 m.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les expressions sont exactes dans le modèle de spire filiforme ; elles ne décrivent pas le champ hors de l’axe."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les contributions annulées",
+            "input": "Profil et composante axiale de 2.3 ; intégrande paramétré de 2.2.",
+            "action": "Conserver les termes R²e_z et Rz e_r(φ) ; distinguer une contribution transverse individuelle de leur somme nulle.",
+            "output": "Le champ total est axial ; les éléments isolés n’ont pas tous une contribution purement axiale quand z ≠ 0.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La comparaison garde la structure vectorielle du calcul, au lieu d’attribuer à chaque élément la direction du résultat total."
+            },
+            "comparison": "2.4 ↔ 2.3 : retrouver le profil et sa provenance vectorielle.",
+            "evaluation": {
+              "object": "2.4 ↔ 2.3 : Bz(z), direction et compensation transverse.",
+              "conditions": "Cercle complet, courant uniforme le long du fil et point sur Oz.",
+              "criterion": "Conserver le dénominateur (R²+z²)^(3/2), la direction e_z et l’annulation de la somme transverse.",
+              "finding": "Le profil est repris sans supprimer artificiellement les termes élémentaires avant sommation."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Recomposer la somme par demi-cercles",
+            "input": "Contributions conservées en 2.4 ; points P(φ) et P(φ+π) diamétralement opposés.",
+            "action": "Utiliser e_r(φ+π) = −e_r(φ) ; additionner les intégrandes appariés puis intégrer 2R²e_z sur φ de 0 à π.",
+            "output": "Même intégrale axiale 2πR²e_z ; le coefficient μ0I/(4πPM³) restitue la formule de B(z).",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le regroupement en paires constitue un autre calcul de la même somme ; il contrôle le facteur deux et la compensation transverse."
+            },
+            "comparison": "2.5 ↔ 2.2 : comparer intégration complète et somme des paires.",
+            "evaluation": {
+              "object": "2.5 ↔ 2.2 : produit vectoriel et coefficient de l’intégrale.",
+              "conditions": "Chaque élément du cercle est compté une fois ; R,z et I sont communs aux deux demi-cercles.",
+              "criterion": "Retrouver μ0IR²/[2(R²+z²)^(3/2)] e_z sans facteur deux supplémentaire.",
+              "finding": "Les deux sommations concordent ; elles reposent sur les mêmes hypothèses de source."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer la géométrie de l’intégration",
+            "input": "Somme recomposée en 2.5 et paramétrage reçu en 2.1.",
+            "action": "Rendre les deux termes du produit vectoriel, le cercle complet et le sens de φ ; garder PM source-vers-point.",
+            "output": "À reprendre en 2.1 : courant orienté, intervalle 0–2π et point axial M inchangés.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour restitue le cadre de Biot–Savart ; intervertir PM et MP inverserait à tort le champ."
+            },
+            "comparison": "2.6 ↔ 2.1 : retrouver courant, vecteurs et domaine d’intégration.",
+            "evaluation": {
+              "object": "2.6 ↔ 2.1 : orientation des éléments et géométrie du cercle.",
+              "conditions": "Point axial quelconque, R > 0 et spire unique.",
+              "criterion": "Conserver dℓ = R dφ e_φ, PM = −R e_r+z e_z et un tour complet dans le sens positif.",
+              "finding": "La géométrie initiale est restituée avec le sens correct du produit vectoriel."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Établir le champ au centre et à un rayon",
+        "system": "Les valeurs calculées du champ axial pour z = 0 et z = R.",
+        "input": "2.3 fournit Bz(z),B0 et les paramètres R = 0,10 m,I = +2,0 A avec μ0 approché.",
+        "output": "B0 ≈ 12,566371 µT ; Bz(R) ≈ 4,442883 µT, dans le même sens +z ; rapport 1/(2√2).",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le modèle est évalué en deux points connus ; les décimales résultent du calcul et non d’une résolution instrumentale."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les deux évaluations",
+            "input": "Formules et paramètres de 2.3 ou reprise de 3.6 ; positions z = 0 puis z = R.",
+            "action": "Associer chaque position à son dénominateur et conserver la composante signée Bz plutôt que la seule norme.",
+            "output": "Au centre, dénominateur 2R³ ; à z = R, dénominateur 2(2R²)^(3/2).",
+            "relation": {
+              "nature": "logique",
+              "description": "Les deux nombres concernent une même source, avec une normale inchangée ; ils ne correspondent pas à deux mesures successives."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Évaluer puis comparer les champs",
+            "input": "I,R et dénominateurs de 3.1 ; μ0 ≈ 4π × 10⁻⁷ T·m·A⁻¹.",
+            "action": "Calculer B0 = μ0I/(2R), puis Bz(R) = B0/(2√2) ; convertir les teslas en microteslas.",
+            "output": "B0 ≈ 12,566371 µT ; Bz(R) ≈ 4,442883 µT ; f = Bz(R)/B0 = 1/(2√2) ≈ 0,353553.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’unité μ0I/R est le tesla ; la conversion 1 µT = 10⁻⁶ T conserve le rapport sans dimension."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Consigner les résultats orientés",
+            "input": "Valeurs et rapport de 3.2 ; courant positif et axe définis au départ.",
+            "action": "Conserver les deux positions, B0,Bz(R) et f ; attribuer aux deux champs la direction +e_z.",
+            "output": "À 4.1 : champs calculés 12,566371 et 4,442883 µT, rapport exact 1/(2√2), positions 0,+R.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le résultat comprend la géométrie et l’orientation ; un nombre positif isolé ne suffirait pas à définir un vecteur."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre l’écart au centre",
+            "input": "Dossier numérique de 3.3 avec composantes positives et rayons inchangés.",
+            "action": "Relire f < 1 comme une diminution du champ axial ; conserver les valeurs non arrondies pour l’inversion.",
+            "output": "Le point +R possède environ 35,36 % du champ central ; I et R restent identiques dans les deux calculs.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La diminution concerne la position d’évaluation ; aucune baisse du courant n’a été introduite."
+            },
+            "comparison": "3.4 ↔ 3.3 : conserver valeurs, positions et direction.",
+            "evaluation": {
+              "object": "3.4 ↔ 3.3 : B0,Bz(R),rapport et normale.",
+              "conditions": "Même μ0 approché et même courant ; rapport exact conservé avant arrondi.",
+              "criterion": "Retrouver f = 1/(2√2), avec B0 et Bz(R) tous deux positifs selon e_z.",
+              "finding": "Les résultats concordent ; ils montrent une variation spatiale dans le modèle."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver la distance depuis le rapport",
+            "input": "Rapport f repris en 3.4 et R connu ; loi f = [1+(z/R)²]^(−3/2).",
+            "action": "Résoudre |z| = R√(f^(−2/3)−1), pour 0 < f ≤ 1 ; substituer f = 1/(2√2).",
+            "output": "|z| = R = 0,10 m retrouvé ; le rapport seul ne distingue pas z = +R de z = −R.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La loi est paire en z : son inversion fournit une distance au plan de la spire, pas le côté de l’axe."
+            },
+            "comparison": "3.5 ↔ 3.2 : inverser le rapport axial normalisé.",
+            "evaluation": {
+              "object": "3.5 ↔ 3.2 : facteur géométrique et distance reconstruite.",
+              "conditions": "R positif connu, I non nul commun aux deux valeurs ; rapport exact positif au plus égal à 1.",
+              "criterion": "Obtenir |z|/R = 1 puis retrouver f = 1/(2√2) en réappliquant la formule.",
+              "finding": "La distance est restituée ; le signe + de z demeure une donnée de position."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les deux points d’entrée",
+            "input": "Distance reconstruite en 3.5 et côté +z reçu en 3.1.",
+            "action": "Retenir z = +R avec l’information initiale de position ; rendre I,R,μ0 et le point central z = 0.",
+            "output": "À reprendre en 3.1 : même source et mêmes deux évaluations ; le cas −R reste possible mais séparé.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour combine une distance calculée et un côté connu ; il ne présente pas la symétrie ±z comme une localisation unique."
+            },
+            "comparison": "3.6 ↔ 3.1 : retrouver source, centre et position +R.",
+            "evaluation": {
+              "object": "3.6 ↔ 3.1 : paramètres et positions des évaluations.",
+              "conditions": "L’orientation +z du second point est conservée depuis l’entrée, pas inférée du rapport.",
+              "criterion": "Restituer R = 0,10 m,I = +2,0 A,z = 0 et z = +0,10 m avec μ0 approché.",
+              "finding": "Le dossier d’entrée est retrouvé sous les conditions explicitées."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Relire le profil axial et sa variation",
+        "system": "Les résultats chiffrés replacés dans la parité, les limites et la variation du profil exact.",
+        "input": "3.3 transmet B0,Bz(R) et leur rapport ; l’expression axiale exacte demeure disponible.",
+        "output": "Profil pair, maximum axial au centre et décroissance vers zéro avec |z| ; uniformité limitée à une approximation locale.",
+        "section": "axe",
+        "comparison": "4 ↔ 3 : préserver les deux valeurs avant de les replacer dans le profil.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les résultats calculés deviennent les données de retour ; l’examen de leur profil n’ajoute pas une observation indépendante."
+        },
+        "evaluation": {
+          "object": "4 ↔ 3 : positions et champs de référence.",
+          "conditions": "Même spire et formule axiale ; I > 0 et normale +e_z conservée.",
+          "criterion": "Retrouver B0 ≈ 12,566371 µT et Bz(R) = B0/(2√2), avec les mêmes positions.",
+          "finding": "Le dossier est conservé ; la variation spatiale s’accorde avec les propriétés du profil exact."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les champs dans leur profil",
+            "input": "Dossier de 3.3 ou reprise de 4.6 ; Bz(z) exact pour tout point de l’axe.",
+            "action": "Situer B0 au centre et Bz(R) sur le demi-axe positif ; garder le coefficient μ0IR²/2 fixé.",
+            "output": "Deux résultats conservés ; parité, pente et limite à grande distance restent à examiner.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le profil complet fournit le contexte des valeurs ; l’expression axiale ne devient pas une formule hors de l’axe."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Dériver et prendre les limites",
+            "input": "Profil exact de 4.1, avec I > 0,R > 0 et z signé.",
+            "action": "Calculer dBz/dz = −3μ0IR²z/[2(R²+z²)^(5/2)] ; utiliser Bz(−z) = Bz(z) et la limite Bz → 0 pour |z| → ∞.",
+            "output": "Maximum sur l’axe en z = 0 ; décroissance pour z > 0 et croissance vers le centre pour z < 0.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le signe de la dérivée vient de −z ; une pente nulle au centre n’implique pas un profil constant autour de lui."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir le dossier de profil",
+            "input": "Propriétés de 4.2 et valeurs de référence conservées en 4.1.",
+            "action": "Joindre parité et décroissance au rapport f ; conserver les positions connues pour reconstruire courant ou rayon.",
+            "output": "À 5.1 : B0,Bz(R),z = R connu et profil exact pair ; I et R à retrouver conditionnellement.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le dossier peut alimenter un problème inverse dans la famille circulaire ; deux valeurs ne démontrent pas à elles seules cette famille."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre la non-uniformité",
+            "input": "Dossier de 4.3, avec maximum central et différence entre B0 et Bz(R).",
+            "action": "Relire Bz′(0) = 0 comme une propriété locale ; conserver Bz(R)/B0 = 1/(2√2) et la limite nulle au loin.",
+            "output": "Le champ n’est pas constant sur l’axe ; son maximum central reste un résultat du modèle.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture distingue symétrie autour du centre et uniformité spatiale ; elle conserve les deux valeurs initiales."
+            },
+            "comparison": "4.4 ↔ 4.3 : préserver profil, rapport et domaines.",
+            "evaluation": {
+              "object": "4.4 ↔ 4.3 : maximum axial, parité et rapport calculé.",
+              "conditions": "Spire unique à courant positif ; aucune approximation dipolaire ni de solénoïde.",
+              "criterion": "Retrouver Bz(−z) = Bz(z),Bz′(0) = 0 et f = 1/(2√2) à |z| = R.",
+              "finding": "Les attributs du profil sont conservés ; le centre ne représente pas toutes les positions."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Construire l’approximation près du centre",
+            "input": "Profil normalisé de 4.4 : Bz/B0 = (1+x²)^(−3/2), avec x = z/R.",
+            "action": "Développer pour |x| ≪ 1 : Bz/B0 = 1 − 3x²/2 + O(x⁴) ; retrouver Bz″(0) = −3B0/R².",
+            "output": "Le terme uniforme B0 n’est que l’ordre zéro près du centre ; la première correction est quadratique et négative.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le développement local traduit la courbure du profil exact ; son domaine exclut l’emploi sans contrôle à z = R."
+            },
+            "comparison": "4.5 ↔ 4.2 : comparer développement central et dérivées du profil.",
+            "evaluation": {
+              "object": "4.5 ↔ 4.2 : pente centrale, courbure et approximation locale.",
+              "conditions": "|z|/R très petit ; I,R fixés et B0 positif.",
+              "criterion": "Retrouver Bz′(0) = 0 et Bz″(0) = −3B0/R² ; ne pas étendre le terme constant à tout l’axe.",
+              "finding": "L’approximation concorde localement avec le profil ; elle ne remplace pas le calcul exact à un rayon."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les résultats exacts",
+            "input": "Approximation locale de 4.5 et dossier reçu en 4.1.",
+            "action": "Revenir à l’expression exacte aux positions 0 et +R ; conserver l’approximation centrale avec son domaine propre.",
+            "output": "À reprendre en 4.1 : les deux champs exacts du modèle et leur profil, sans uniformité globale ajoutée.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour rétablit la formule utilisée pour les valeurs de référence ; une approximation possède son domaine distinct."
+            },
+            "comparison": "4.6 ↔ 4.1 : retrouver les valeurs et la portée de la loi axiale.",
+            "evaluation": {
+              "object": "4.6 ↔ 4.1 : B0,Bz(R) et expression exacte.",
+              "conditions": "Les deux positions initiales sont conservées ; le développement central reste réservé à |z| ≪ R.",
+              "criterion": "Restituer 12,566371 et 4,442883 µT avec le rapport 1/(2√2), sans utiliser 1−3x²/2 à x = 1.",
+              "finding": "Le dossier initial est restitué ; l’approximation ne remplace pas les attributs exacts."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Reconstruire la spire et passer au dipôle",
+        "system": "Les inversions conditionnelles du profil exact et l’information conservée par son approximation lointaine.",
+        "input": "4.3 transmet B0 et une valeur Bz(z*) à z* = 0,10 m connu ; famille de spires circulaires et axe supposés.",
+        "output": "R = 0,10 m et I = +2,0 A retrouvés ; au loin, le coefficient ne conserve que m = IπR² et son orientation.",
+        "section": "dipole",
+        "comparison": "5 ↔ 2 : confronter reconstruction et approximation à l’intégration exacte.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour exploite les champs calculés pour inverser des paramètres ; la limite dipolaire réduit l’information et possède un domaine distinct."
+        },
+        "evaluation": {
+          "object": "5 ↔ 2 : profil exact, paramètres reconstruits et approximation dipolaire.",
+          "conditions": "Même famille de source ; position non nulle connue et deux champs exacts pour l’inversion, |z| ≫ R pour l’approximation.",
+          "criterion": "Retrouver R,I depuis B0 et leur rapport ; obtenir au loin μ0m/(2π|z|³), sans appliquer cette limite au centre.",
+          "finding": "Les paramètres concordent conditionnellement ; le seul moment dipolaire ne sépare pas I et R et ne valide pas la forme de la source."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les informations de reconstruction",
+            "input": "Dossier de 4.3 ou reprise de 5.6 ; champs calculés et position z* = +0,10 m connue.",
+            "action": "Nommer f = Bz(z*)/B0 ; considérer R et I comme paramètres à retrouver dans la famille circulaire conservée.",
+            "output": "B0 positif, 0 < f < 1 et z* non nul ; hypothèses de source distinguées des deux valeurs du champ.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le problème inverse utilise des positions connues ; les résultats proviennent encore du modèle initial, sans données indépendantes."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Résoudre rayon puis courant",
+            "input": "B0 et rapport f de 5.1 ; μ0 connu pour le modèle et z* ≠ 0.",
+            "action": "Résoudre R = |z*|/√(f^(−2/3)−1), puis I = 2RB0/μ0 ; substituer le rapport exact 1/(2√2).",
+            "output": "R = 0,10 m et I = +2,0 A retrouvés ; le signe du courant vient de B0 dans l’axe fixé.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Deux valeurs à positions connues séparent ici R et I ; la seule valeur centrale déterminerait seulement le rapport I/R."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir les attributs reconstruits",
+            "input": "R et I retrouvés en 5.2 ; normale de la source inchangée.",
+            "action": "Former m = IπR²e_z et conserver le profil exact, ainsi que les deux positions initiales et leur statut supposé.",
+            "output": "À 6.1 : R = 0,10 m,I = +2,0 A,m ≈ 0,062832 A·m² e_z et profil axial exact.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les attributs reconstruits alimentent les comparaisons finales ; ils ne constituent pas une identification expérimentale du circuit."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre rayon, courant et moment",
+            "input": "Dossier de 5.3 et hypothèses permettant la séparation de R et I.",
+            "action": "Relire le moment comme produit courant-aire ; conserver les deux valeurs axiales utilisées avant de prendre une limite lointaine.",
+            "output": "R,I et m restent distincts ; connaître m seul ne fournit pas les deux paramètres de la spire.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise prépare la comparaison entre le profil complet et le coefficient d’une approximation."
+            },
+            "comparison": "5.4 ↔ 5.3 : conserver paramètres reconstruits et moment orienté.",
+            "evaluation": {
+              "object": "5.4 ↔ 5.3 : R,I,m et portée de l’inversion.",
+              "conditions": "Même spire circulaire ; champs de référence calculés et positions connues.",
+              "criterion": "Retrouver R = 0,10 m,I = +2,0 A et m = IπR²e_z avec orientation +z.",
+              "finding": "Les attributs sont conservés ; le produit IπR² n’est pas confondu avec ses facteurs."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Isoler la limite dipolaire et sa non-unicité",
+            "input": "Paramètres et moment de 5.4 ; z ≠ 0, puis domaine |z| ≫ R.",
+            "action": "Factoriser B = [μ0m/(2π|z|³)][1+(R/z)²]^(−3/2) ; pour λ > 0, transformer R en λR et I en I/λ².",
+            "output": "Le terme dipolaire conserve m pour toute cette famille ; le profil exact et le champ central changent quand λ ≠ 1.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Au loin, le facteur correctif tend vers 1. À moment fixé, B0 devient B0/λ³ ; le domaine lointain doit rester vérifié pour chaque rayon."
+            },
+            "comparison": "5.5 ↔ 5.2 : comparer l’inversion exacte et l’information du seul terme dipolaire.",
+            "evaluation": {
+              "object": "5.5 ↔ 5.2 : séparation de I,R et conservation de leur produit IπR².",
+              "conditions": "|z| ≫ R pour la source initiale ; |z| ≫ λR pour comparer aussi la spire transformée.",
+              "criterion": "Vérifier m′ = (I/λ²)π(λR)²e_z = m ; les deux valeurs exactes requises en 5.2 ne sont pas conservées en général.",
+              "finding": "Le terme dipolaire perd l’information séparant I et R ; il ne remplace pas l’inversion du profil exact."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les données nécessaires",
+            "input": "Limite et famille de paramètres de 5.5 ; dossier exact reçu en 5.1.",
+            "action": "Revenir à B0,Bz(z*) et z* pour l’inversion ; conserver la limite dipolaire comme approximation supplémentaire, avec domaine annoncé.",
+            "output": "À reprendre en 5.1 : deux valeurs exactes, position connue et famille circulaire ; m seul ne suffit pas.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour remet les informations effectivement nécessaires à disposition ; il ne traite pas une approximation lointaine comme une nouvelle mesure."
+            },
+            "comparison": "5.6 ↔ 5.1 : retrouver les informations et hypothèses du problème inverse.",
+            "evaluation": {
+              "object": "5.6 ↔ 5.1 : champs, position et famille supposée.",
+              "conditions": "La source initiale est distinguée des familles de même moment ; valeurs conservées avant arrondi.",
+              "criterion": "Restituer B0 ≈ 12,566371 µT,f = 1/(2√2),z* = 0,10 m et l’hypothèse de spire unique.",
+              "finding": "Le dossier inverse est retrouvé ; aucune unicité n’est attribuée au seul coefficient dipolaire."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Comparer les deux côtés et revenir à la source",
+        "system": "La variante z = −R, les limites d’approximation et la restitution des attributs initiaux.",
+        "input": "5.3 transmet R,I,m et le profil exact ; les cas z = 0,+R sont conservés et −R est examiné séparément.",
+        "output": "Bz(−R) = Bz(R) ≈ +4,442883 µT ; mêmes source et orientation, domaine dipolaire distinct des points à un rayon.",
+        "section": "controle",
+        "comparison": "6 ↔ 1 : confronter source, axe, géométrie et statut des cas aux données initiales.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La comparaison change la position évaluée tout en conservant le courant ; elle ne constitue ni inversion du courant ni déplacement réellement effectué."
+        },
+        "evaluation": {
+          "object": "6 ↔ 1 : R,I,orientation et points de calcul.",
+          "conditions": "Spire unique et courant permanent ; attributs retrouvés dans le modèle, cas −R séparé de 0,+R.",
+          "criterion": "Retrouver R = 0,10 m,I = +2,0 A,la normale +e_z et le vide ; conserver les positions initiales en ajoutant −R.",
+          "finding": "Les attributs d’entrée concordent ; la parité du champ et les inversions restent des contrôles internes, sans vérification matérielle indépendante."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la source pour le cas opposé",
+            "input": "Attributs de 5.3 ou reprise de 6.6 ; positions de référence 0,+R conservées.",
+            "action": "Placer un nouveau point en z = −R ; garder I positif, R fixe et le même vecteur e_z.",
+            "output": "Le point change de côté ; la normale du circuit et le moment m gardent le sens +z.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le signe de z caractérise le point ; il ne définit ni le sens du courant ni une nouvelle normale de la spire."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer le champ au point opposé",
+            "input": "Profil exact et position −R de 6.1 ; même μ0 approché.",
+            "action": "Substituer z = −R dans z² ; calculer Bz(−R) = B0/(2√2), puis comparer formellement au terme dipolaire μ0m/(2πR³).",
+            "output": "Champ exact +4,442883 µT ; terme dipolaire seul 12,566371 µT, soit 2√2 fois plus, hors de son domaine lointain.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le champ exact garde le sens +z. L’emploi formel du dipôle à |z| = R sert à quantifier son inadéquation, pas à valider cette approximation."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les cas et leurs limites",
+            "input": "Résultats de 6.2, paramètres reconstruits et valeurs initiales au centre et à +R.",
+            "action": "Conserver trois positions distinctes ; joindre la parité et l’exclusion de |z| = R du régime dipolaire précis.",
+            "output": "À 1.1 : mêmes R,I et normale ; centre,+R et variante −R séparés, Bz(−R) = Bz(R).",
+            "relation": {
+              "nature": "logique",
+              "description": "La nouvelle boucle reprend les attributs de source ; la succession des points n’impose aucune chronologie de mesure."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre direction et approximation",
+            "input": "Cas transmis en 6.3, avec Bz positif des deux côtés et comparaison dipolaire explicitement formelle à R.",
+            "action": "Conserver Bz(−R) = Bz(R) ; distinguer erreur de l’approximation lointaine et erreur de signe due à z³ sans valeur absolue.",
+            "output": "Le terme dipolaire correct utilise |z|³ ; son sens est correct ici, mais sa valeur à |z| = R est trop grande.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le contrôle distingue deux questions : orientation du champ et validité quantitative de l’approximation."
+            },
+            "comparison": "6.4 ↔ 6.3 : conserver les deux côtés et le statut des formules.",
+            "evaluation": {
+              "object": "6.4 ↔ 6.3 : direction, valeurs exactes et limite dipolaire.",
+              "conditions": "I positif et axe inchangé ; la formule exacte est applicable à ±R.",
+              "criterion": "Retrouver +4,442883 µT aux deux points ; le terme dipolaire ne doit ni devenir négatif à −R ni être déclaré précis à R.",
+              "finding": "La parité est conservée ; le domaine de l’approximation reste distinct de celui de la loi exacte."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Définir un critère de distance pour le dipôle",
+            "input": "Composantes axiales positives Bdip et Bexact de 6.4, liées par [1+(R/z)²]^(−3/2) ; tolérance relative δ > 0 symbolique.",
+            "action": "Calculer η = (Bdip−Bexact)/Bexact = [1+(R/z)²]^(3/2)−1 ; résoudre η ≤ δ en |z|/R.",
+            "output": "|z|/R ≥ [(1+δ)^(2/3)−1]^(−1/2) ; aucune tolérance numérique n’est imposée au lecteur.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le critère compare deux expressions du même modèle pour z ≠ 0 ; il borne l’approximation, pas l’écart à une mesure absente."
+            },
+            "comparison": "6.5 ↔ 6.2 : confronter l’écart à un rayon au critère général d’approximation.",
+            "evaluation": {
+              "object": "6.5 ↔ 6.2 : erreur du terme dipolaire par rapport au champ exact.",
+              "conditions": "R > 0,z ≠ 0,I > 0 ; erreur relative définie avec Bexact au dénominateur.",
+              "criterion": "À |z| = R, retrouver η = 2√2−1 ≈ 1,828427 ; pour une petite δ, exiger une distance bien supérieure à R.",
+              "finding": "L’écart à un rayon est confirmé ; une précision choisie permet de déterminer un domaine admissible."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le système avec ses domaines",
+            "input": "Critère de 6.5, paramètres de source et points reçus en 6.1.",
+            "action": "Rendre R = 0,10 m,I = +2,0 A et normale +e_z ; conserver loi exacte aux trois points et dipôle au loin seulement.",
+            "output": "À reprendre en 6.1 : même spire et variante −R ; le cadre de calcul et ses limites restent explicites.",
+            "relation": {
+              "nature": "logique",
+              "description": "La restitution conserve les attributs retrouvés en amont et la portée de chaque formule ; aucun champ uniforme global n’est introduit."
+            },
+            "comparison": "6.6 ↔ 6.1 : retrouver la source et le point opposé.",
+            "evaluation": {
+              "object": "6.6 ↔ 6.1 : R,I,m,axe et position de la variante.",
+              "conditions": "Courant constant, vide et source unique maintenus comme hypothèses ; aucune sonde réellement déplacée.",
+              "criterion": "Restituer R = 0,10 m,I = +2,0 A,z = −R et m = IπR²e_z, avec positions 0,+R conservées.",
+              "finding": "Le dossier de variante est retrouvé ; les hypothèses physiques restent à confronter à des données indépendantes."
+            }
+          }
+        ]
+      }
+    ]
   }
 }

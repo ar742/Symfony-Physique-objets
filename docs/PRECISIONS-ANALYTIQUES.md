@@ -122,7 +122,7 @@ Les 22 fiches disposent désormais de ces entrées, relations et évaluations d�
 
 ## Nouvelles fiches dès leur création
 
-Le [volet E1a](ELECTROSTATIQUE-E1A.md) ajoute trois fiches d’électrostatique rédigées directement avec les entrées, relations et évaluations détaillées. Le catalogue comporte donc 25 analyses, 900 sous-niveaux, 1 050 relations et 525 évaluations. Les comptes AP1 à AP8 ci-dessus décrivent les 22 fiches approfondies lors de ces lots.
+Le [volet E1a](ELECTROSTATIQUE-E1A.md) ajoute trois fiches d’électrostatique rédigées directement avec les entrées, relations et évaluations détaillées. Le [volet E1b](MAGNETOSTATIQUE-E1B.md) poursuit avec trois fiches de champ magnétique : Lorentz, Ampère et la spire. Le catalogue comporte donc 28 analyses, 1 008 sous-niveaux, 1 176 relations et 588 évaluations. Les comptes AP1 à AP8 ci-dessus décrivent les 22 fiches approfondies lors de ces lots.
 
 ## Rédaction et données
 

@@ -2957,5 +2957,339 @@
     "version": "1.0",
     "updated": "2026-09-09",
     "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "force-lorentz-trajectoire",
+    "title": "Force de Lorentz : du cercle à l’hélice",
+    "level": "CPGE · Magnétostatique",
+    "summary": "Relier le produit vectoriel à la trajectoire d’une charge, sans confondre déviation et gain d’énergie.",
+    "objective": "Calculer force, rayon et période, puis reconstruire les conditions initiales d’un mouvement circulaire ou hélicoïdal.",
+    "prerequisites": [
+      "Produit vectoriel et repère orthonormé direct",
+      "Deuxième loi de Newton et énergie cinétique",
+      "Mouvement circulaire uniforme"
+    ],
+    "system": "Un proton non relativiste évolue dans un champ magnétique extérieur uniforme et statique, sans champ électrique.",
+    "conditions": [
+      "Référentiel galiléen et masse constante ; B = 0,100 e_z T prescrit dans toute la région parcourue, E = 0.",
+      "Autres forces, collisions, rayonnement et rétroaction du proton sur la source du champ négligés.",
+      "Pour le calcul, q ≈ +1,60 × 10⁻¹⁹ C et m ≈ 1,67 × 10⁻²⁷ kg sont des valeurs approchées du proton.",
+      "À t = 0, position à l’origine et vitesse 1,00 × 10⁵ e_x m·s⁻¹. La variante ajoute séparément 1,00 × 10⁵ e_z m·s⁻¹ à cette vitesse initiale."
+    ],
+    "sections": [
+      {
+        "id": "force",
+        "title": "La force dévie la vitesse",
+        "paragraphs": [
+          "La force de Lorentz générale comprend un terme électrique qE. Ici E = 0 : seule sa partie magnétique intervient. Avec B = B e_z et B > 0, le produit vectoriel donne F = qB(v_y e_x − v_x e_y), sans composante suivant z.",
+          "La norme de la force vaut |q|Bv⊥, où v⊥ est la norme de la vitesse perpendiculaire à B. Le signe de q fixe le sens de déviation. Pour une charge positive initialement dirigée suivant +x, la force est dirigée suivant −y."
+        ],
+        "equations": [
+          {
+            "id": "lorentzforce",
+            "reading": "La force magnétique vectorielle égale q multiplié par le produit vectoriel de la vitesse et du champ magnétique."
+          }
+        ]
+      },
+      {
+        "id": "energie",
+        "title": "Une vitesse déviée sans travail magnétique",
+        "paragraphs": [
+          "La force magnétique est perpendiculaire à la vitesse : sa puissance est nulle. Sous les hypothèses retenues, l’énergie cinétique et la norme de la vitesse restent constantes, tandis que sa direction peut varier.",
+          "L’absence de force suivant B conserve aussi la composante signée v∥ = v·e_z. Une vitesse strictement parallèle au champ donne une force nulle et un mouvement rectiligne. La seule conservation de l’énergie ne suffit pas à établir une trajectoire circulaire."
+        ],
+        "equations": [
+          {
+            "id": "lorentzpuissance",
+            "reading": "La puissance égale le produit scalaire de la force par la vitesse, soit la dérivée temporelle de m v au carré sur deux ; elle vaut zéro dans ce modèle."
+          }
+        ]
+      },
+      {
+        "id": "trajectoire",
+        "title": "Cercle transverse et déplacement axial",
+        "paragraphs": [
+          "Pour v⊥ > 0, la projection dans le plan perpendiculaire au champ décrit un cercle de rayon R. La pulsation cyclotron positive vaut ωc = |q|B/m = 2π/T. Son signe ne renseigne pas sur le sens de rotation : pour q > 0 et B suivant +z, la projection tourne dans le sens horaire vue depuis +z vers l’origine.",
+          "Si v∥ = 0, la trajectoire est ce cercle. Si v∥ ≠ 0, elle est une hélice : h = v∥T est son déplacement axial signé par tour. R est le rayon de sa projection circulaire, pas son rayon de courbure spatial.",
+          "Un rayon et une période, sans sens de parcours, ne déterminent pas le signe de q. À B connu, la période identifie seulement |q|/m ; séparer q et m exige une information supplémentaire. Les équations supposent un champ uniforme et le régime non relativiste."
+        ],
+        "equations": [
+          {
+            "id": "lorentzhelice",
+            "reading": "Le rayon transverse R vaut m multiplié par v perpendiculaire, divisé par le produit de la valeur absolue de q et de B. La période T vaut deux pi m divisé par ce même produit. Le pas axial signé h vaut v parallèle fois T."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "Avec les données du proton et du champ, calculer la force initiale, le rayon et la période. Comparer au cas où la vitesse initiale possède aussi une composante +1,00 × 10⁵ m·s⁻¹ suivant z.",
+      "steps": [
+        "Le produit e_x × e_z = −e_y donne F(0) = −1,60 × 10⁻¹⁵ e_y N. La pulsation calculée est ωc ≈ 9,58084 × 10⁶ rad·s⁻¹.",
+        "Pour la référence transverse : R = 0,0104375 m et T ≈ 6,55807 × 10⁻⁷ s. Le cercle est centré en (0, −R, 0) avec la position initiale choisie.",
+        "La variante garde les mêmes R, T et force initiale ; son déplacement axial par tour est h ≈ +0,0655807 m. Son énergie initiale vaut 1,67 × 10⁻¹⁷ J, contre 8,35 × 10⁻¹⁸ J pour la référence."
+      ],
+      "result": "Chaque cas conserve sa propre énergie initiale. La variante hélicoïdale est un autre état initial, sans énergie fournie par la force magnétique ; les chiffres résultent des constantes approchées."
+    },
+    "checkpoint": {
+      "question": "Une hélice de rayon transverse R a-t-elle nécessairement le même mouvement et la même énergie que le cercle de rayon R dans ce champ ?",
+      "answer": "Non. À mêmes q, m et B, le rayon fixe v⊥, tandis que v∥ peut varier. La période de giration reste identique, mais le pas axial et l’énergie changent avec l’état initial. Si v⊥ = 0, il n’y a plus de giration effective."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P14",
+        "page": 379,
+        "section": "Force magnétique de Lorentz et produit vectoriel"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 266,
+        "section": "Terme magnétique et pulsation cyclotron ; le modèle de conducteur n’est pas transposé"
+      }
+    ],
+    "references": [
+      "openstax-force-magnetique",
+      "openstax-trajectoire-magnetique"
+    ],
+    "corrections": [],
+    "number": 26,
+    "domain": "electromagnetisme",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "champ-fil-ampere",
+    "title": "Champ magnétique d’un fil et théorème d’Ampère",
+    "level": "CPGE · Magnétostatique",
+    "summary": "Distinguer courant enlacé, circulation et champ autour d’un fil de rayon non nul.",
+    "objective": "Calculer les profils intérieur et extérieur, puis expliquer comment deux distances donnent le même champ avec des courants enlacés différents.",
+    "prerequisites": [
+      "Courant électrique et densité de courant",
+      "Coordonnées cylindriques et orientation",
+      "Intégrale curviligne"
+    ],
+    "system": "Un cylindre droit infini de rayon a porte une densité de courant uniforme et permanente, dirigée suivant +z, de courant total I.",
+    "conditions": [
+      "Courant prescrit : J vecteur = J e_z dans la section, nul à l’extérieur, avec J = I/(πa²). Aucune nappe de courant surfacique supplémentaire.",
+      "Régime magnétostatique : sources et champs indépendants du temps. On étudie B sans supposer que le champ électrique dans le matériau est nul.",
+      "Champ créé par cette source seule, vide extérieur et modèle de perméabilité μ0 partout ; aucun champ extérieur ni aimantation supplémentaire.",
+      "Contour circulaire centré sur l’axe ; normale du disque suivant +z, parcours positif antihoraire vu depuis +z. Le rayon r est distinct de a.",
+      "Données supposées : a = 0,010 m, I = +4,0 A ; μ0 ≈ 4π × 10⁻⁷ T·m·A⁻¹ utilisé comme approximation numérique, non comme constante SI exacte."
+    ],
+    "sections": [
+      {
+        "id": "circulation",
+        "title": "Orienter le contour et compter le courant enlacé",
+        "paragraphs": [
+          "En régime permanent, la circulation Γ du champ magnétique sur un contour fermé vaut μ0 fois le courant traversant algébriquement une surface bordée par ce contour. Le sens du parcours et la normale de la surface sont associés par la règle de la main droite.",
+          "Γ s’exprime en T·m ; le champ local s’exprime en T. Une circulation nulle n’impose pas un champ nul en chaque point du contour. Hors du régime permanent, Maxwell–Ampère comporte aussi le terme de déplacement lié à la dérivée première du flux électrique."
+        ],
+        "equations": [
+          {
+            "id": "amperecirculation",
+            "reading": "La circulation Gamma égale l’intégrale sur le contour fermé C du produit scalaire de B vecteur par d ell vecteur ; elle vaut mu zéro multiplié par le courant enlacé, en régime permanent."
+          }
+        ]
+      },
+      {
+        "id": "courant",
+        "title": "Utiliser la répartition uniforme et les symétries",
+        "paragraphs": [
+          "Le courant enlacé dépend du disque choisi. Pour r < a, sa section est une fraction r²/a² de la section totale ; pour r ≥ a, tout le courant I est enlacé.",
+          "La distribution est invariante par translation suivant z et par rotation autour de l’axe. Ses plans de symétrie contenant l’axe imposent au champ magnétique, vecteur axial, d’être perpendiculaire à ces plans. Pour cette seule source, B vecteur = Bθ(r) eθ ; le champ est tangent aux cercles, sans composante axiale ni radiale.",
+          "La composante Bθ est constante sur chaque cercle et positive pour I > 0 dans l’orientation choisie. La circulation devient donc Γ(r) = 2πrBθ(r), pour r > 0."
+        ],
+        "equations": [
+          {
+            "id": "amperecourant",
+            "reading": "J vaut I divisé par pi a au carré. Le courant enlacé vaut I multiplié par le carré du rapport r sur a pour zéro inférieur ou égal à r inférieur ou égal à a ; il vaut I pour r supérieur à a."
+          }
+        ]
+      },
+      {
+        "id": "profil",
+        "title": "Raccorder l’intérieur et l’extérieur",
+        "paragraphs": [
+          "Ampère donne un champ croissant linéairement avec r dans le cylindre, puis décroissant comme 1/r à l’extérieur. À l’axe, le champ vectoriel est nul ; le vecteur eθ n’y est pas défini.",
+          "Les branches sont continues à r = a, sans nappe de courant surfacique. Le maximum vaut Bθ(a) = μ0I/(2πa), soit 80 µT avec les données proposées.",
+          "Le modèle infini décrit une idéalisation. Pour un circuit réel, les extrémités, le retour du courant, les autres sources et une éventuelle répartition non uniforme doivent être examinés. Une valeur locale de B sans géométrie ni modèle de source ne suffit pas à reconstruire I."
+        ],
+        "equations": [
+          {
+            "id": "ampereprofil",
+            "reading": "B indice theta de r vaut mu zéro I r divisé par deux pi a au carré pour zéro inférieur ou égal à r inférieur ou égal à a ; il vaut mu zéro I divisé par deux pi r pour r supérieur à a."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "Pour a = 0,010 m et I = +4,0 A, calculer le champ au point intérieur r₁ = 0,0050 m, avec μ0 ≈ 4π × 10⁻⁷ T·m·A⁻¹.",
+      "steps": [
+        "r₁/a = 1/2 ; le courant enlacé vaut I(r₁/a)² = 1,0 A.",
+        "Bθ(r₁) = μ0Ienl/(2πr₁) = 4,0 × 10⁻⁵ T = 40 µT.",
+        "Γ₁ = 2πr₁Bθ(r₁) = μ0 × 1,0 A ≈ 1,256637 × 10⁻⁶ T·m."
+      ],
+      "result": "Le champ calculé a une norme de 40 µT et suit eθ, antihoraire vu depuis +z. La circulation et le courant enlacé sont des grandeurs distinctes."
+    },
+    "checkpoint": {
+      "question": "À r₂ = 0,020 m, le champ vaut-il encore 40 µT ? Cela impose-t-il le même courant enlacé ?",
+      "answer": "Oui pour le champ : Bθ(r₂) = μ0I/(2πr₂) = 40 µT. Le courant enlacé vaut cette fois 4,0 A et Γ₂ ≈ 5,026548 × 10⁻⁶ T·m. Le contour quatre fois plus long donne une circulation quadruple malgré la même norme du champ."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P14",
+        "page": 379,
+        "section": "Circulation magnétique et théorème d’Ampère"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 269,
+        "section": "Circulation magnétique et théorème d’Ampère"
+      }
+    ],
+    "references": [
+      "openstax-ampere-fil",
+      "openstax-maxwell-ampere",
+      "nist-permeabilite"
+    ],
+    "corrections": [
+      {
+        "id": "C19",
+        "title": "Dérivée temporelle dans Maxwell–Ampère",
+        "detail": "La ligne de circulation de CPGE P14 p. 379 emploie une dérivée seconde de E. Le terme correct est ε0 ∂E/∂t, dérivée première, comme dans le recueil théorique p. 269. Il est nul dans le cadre permanent de cette fiche ; la circulation se réduit alors à μ0Ienl. Cette correction ciblée ne valide pas les autres lignes de la page.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P14",
+            "page": 379,
+            "section": "Circulation magnétique : terme de déplacement"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC2",
+            "page": 269,
+            "section": "Circulation magnétique : dérivée première du champ électrique"
+          }
+        ]
+      }
+    ],
+    "number": 27,
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire",
+    "domain": "electromagnetisme"
+  },
+  {
+    "slug": "champ-axe-spire",
+    "title": "Calculer le champ magnétique dans l’axe d’une spire",
+    "level": "CPGE · Magnétostatique",
+    "summary": "Additionner les contributions du courant pour obtenir le champ axial, puis comparer le centre, un point décalé et la limite dipolaire.",
+    "objective": "Calculer le champ d’une spire, contrôler son orientation et préciser les conditions d’une reconstruction ou d’une approximation dipolaire.",
+    "prerequisites": [
+      "Produit vectoriel et règle de la main droite",
+      "Courant électrique permanent",
+      "Intégration et symétries"
+    ],
+    "system": "Une spire circulaire filiforme, centrée en O dans le plan xy, porte un courant permanent I ; le champ de cette seule source est étudié sur l’axe Oz.",
+    "conditions": [
+      "Spire immobile de rayon R = 0,10 m, dans le vide ; courant I = +2,0 A dans le sens antihoraire vu depuis le côté +z vers le centre.",
+      "Le sens positif du courant est associé à la normale +e_z. L’abscisse z est signée ; le champ axial se projette sur le même vecteur e_z des deux côtés.",
+      "Seule la contribution de la spire idéale est calculée ; les champs d’éventuels fils d’alimentation et toute réponse magnétique du matériau sont exclus.",
+      "Pour les chiffres, μ0 ≈ 4π × 10⁻⁷ T·m·A⁻¹ : cette valeur est approchée, non exacte dans le SI actuel. Les données sont supposées, sans mesure fournie."
+    ],
+    "sections": [
+      {
+        "id": "biotsavart",
+        "title": "Additionner les contributions orientées",
+        "paragraphs": [
+          "Dans la loi de Biot–Savart, P est un point de la spire et M le point de calcul. Le vecteur PM va de la source vers M ; dℓ est orienté dans le sens positif du courant. L’ordre dℓ × PM fixe le sens de la contribution magnétique.",
+          "Sur l’axe, PM a la même norme √(R²+z²) pour chaque élément. Les composantes transversales provenant d’éléments diamétralement opposés s’annulent. Leurs composantes axiales s’ajoutent ; le champ résultant reste dirigé selon +z pour le courant positif retenu."
+        ],
+        "equations": [
+          {
+            "id": "spirebiot",
+            "reading": "La contribution vectorielle d B vaut mu zéro I divisé par quatre pi, multiplié par le produit vectoriel de d ell avec P M, puis divisé par la norme de P M au cube."
+          }
+        ]
+      },
+      {
+        "id": "axe",
+        "title": "Obtenir le profil et le champ au centre",
+        "paragraphs": [
+          "L’intégration sur le cercle donne B(z) = Bz(z)e_z avec Bz(z) = μ0IR²/[2(R²+z²)^(3/2)]. Le dénominateur dépend de z² : le champ a même valeur et même sens aux positions z et −z.",
+          "Au centre, Bz(0) = μ0I/(2R). Pour I > 0, cette valeur est le maximum sur l’axe ; le champ décroît lorsque |z| augmente. Un champ connu au centre n’est donc pas un champ uniforme dans l’espace.",
+          "Si R et z sont connus dans ce modèle, une composante Bz signée permet de retrouver I. Au centre seul, Bz(0) ne fixe que I/R si ces deux paramètres sont inconnus. Une paire de valeurs axiales, avec leurs positions connues, apporte une contrainte supplémentaire."
+        ],
+        "equations": [
+          {
+            "id": "spireaxe",
+            "reading": "Sur l’axe, B vecteur de z vaut mu zéro I R au carré divisé par deux fois la somme R au carré plus z au carré élevée à la puissance trois demis, multiplié par le vecteur unitaire e z."
+          }
+        ]
+      },
+      {
+        "id": "dipole",
+        "title": "Délimiter l’approximation dipolaire",
+        "paragraphs": [
+          "La spire possède un moment magnétique m = IπR²e_z, en A·m². À grande distance sur l’axe, |z| ≫ R, le champ est approché par μ0m/(2π|z|³). La valeur absolue conserve le sens +z du champ sur les deux demi-axes pour I > 0.",
+          "Le facteur exact qui multiplie ce champ dipolaire est [1+(R/z)²]^(−3/2), pour z ≠ 0. Il tend vers 1 à grande distance ; le terme relatif dominant écarté est d’ordre (R/z)². Cette approximation est inapplicable au centre et n’est pas précise à |z| = R.",
+          "Un coefficient dipolaire ne détermine que le moment IπR² ; il ne sépare pas le courant et le rayon. La formule axiale exacte ne décrit pas les points hors de l’axe : ceux-ci demandent une autre évaluation de Biot–Savart."
+        ],
+        "equations": [
+          {
+            "id": "spiredipole",
+            "reading": "Le moment magnétique vectoriel m vaut I pi R au carré fois e z. Pour la valeur absolue de z très supérieure à R, B vecteur de z est approximativement égal à B dipolaire vecteur de z, qui vaut mu zéro m vecteur divisé par deux pi fois la valeur absolue de z au cube."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "Pour R = 0,10 m et I = +2,0 A, comparer le champ au centre à celui du point axial z = R = 0,10 m.",
+      "steps": [
+        "Au centre : Bz(0) = μ0I/(2R) ≈ 12,566371 µT, suivant +z.",
+        "À z = R, R²+z² = 2R² : Bz(R) = Bz(0)/(2√2) ≈ 4,442883 µT, toujours suivant +z.",
+        "Le rapport Bz(R)/Bz(0) vaut 1/(2√2) ≈ 0,353553. Le moment magnétique vaut IπR² ≈ 0,062832 A·m² suivant +z."
+      ],
+      "result": "Le point situé à un rayon du centre reçoit environ 35,36 % du champ central. Les chiffres résultent du μ0 approché fourni ; ils ne représentent pas une précision de mesure."
+    },
+    "checkpoint": {
+      "question": "À z = −R, le champ change-t-il de sens ? L’approximation dipolaire convient-elle à cette distance ?",
+      "answer": "Bz(−R) = Bz(R) ≈ +4,442883 µT : le sens reste +z. Le terme dipolaire seul donnerait 12,566371 µT à |z| = R, soit 2√2 fois la valeur exacte ; la condition |z| ≫ R n’est pas satisfaite. Aucun déplacement de la spire ou d’une sonde n’est supposé."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P14",
+        "page": 379,
+        "section": "Loi de Biot et Savart pour une distribution linéaire"
+      },
+      {
+        "doc": "cpge",
+        "code": "P14",
+        "page": 383,
+        "section": "Corrigé 2 : champ axial d’une spire circulaire"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 269,
+        "section": "Biot–Savart linéaire, moment d’un circuit et champ dipolaire"
+      }
+    ],
+    "references": [
+      "openstax-biot-savart",
+      "openstax-spire",
+      "nist-permeabilite"
+    ],
+    "corrections": [],
+    "number": 28,
+    "domain": "electromagnetisme",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
   }
 ]

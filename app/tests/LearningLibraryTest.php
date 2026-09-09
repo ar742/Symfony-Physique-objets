@@ -40,8 +40,8 @@ final class LearningLibraryTest extends TestCase
     public function testCardsHavePreciseSourcesAndWellFormedMath(): void
     {
         $cards = $this->library()->all();
-        self::assertCount(25, $cards);
-        self::assertCount(25, array_unique(array_column($cards, 'slug')));
+        self::assertCount(28, $cards);
+        self::assertCount(28, array_unique(array_column($cards, 'slug')));
         $corrections = [];
         foreach ($cards as $card) {
             $anchors = ['conditions', 'exemple', 'controle', 'corrections', 'sources', 'dans-la-boucle', ...array_column($card['sections'], 'id')];
@@ -85,7 +85,7 @@ final class LearningLibraryTest extends TestCase
                 $corrections[] = $correction['id'];
             }
         }
-        self::assertCount(18, $corrections);
+        self::assertCount(19, $corrections);
     }
 
     public function testDisplayedExamplesMatchIndependentCalculations(): void
@@ -163,5 +163,33 @@ final class LearningLibraryTest extends TestCase
         $containsNumber('gauss-sphere-chargee', $enclosedCharge * 1e9, 3);
         $containsNumber('gauss-sphere-chargee', $sphereField, 0);
         $containsNumber('gauss-sphere-chargee', 4 * pi() * .05**2 * $sphereField, 3);
+        $protonCharge = 1.60e-19;
+        $protonMass = 1.67e-27;
+        $magneticField = .100;
+        $transverseSpeed = 1e5;
+        $cyclotronPeriod = 2 * pi() * $protonMass / ($protonCharge * $magneticField);
+        $containsNumber('force-lorentz-trajectoire', $protonMass * $transverseSpeed / ($protonCharge * $magneticField), 7);
+        $containsNumber('force-lorentz-trajectoire', $cyclotronPeriod / 1e-7, 5);
+        $containsNumber('force-lorentz-trajectoire', $transverseSpeed * $cyclotronPeriod, 7);
+        $lorentzExample = implode(' ', $library->find('force-lorentz-trajectoire')['example']['steps']);
+        $forceMagnitude = $protonCharge * $transverseSpeed * $magneticField;
+        self::assertStringContainsString('−'.number_format($forceMagnitude / 1e-15, 2, ',', '').' × 10⁻¹⁵ e_y N', $lorentzExample);
+        $helicalEnergy = .5 * $protonMass * (2 * $transverseSpeed**2);
+        self::assertStringContainsString(number_format($helicalEnergy / 1e-17, 2, ',', '').' × 10⁻¹⁷ J', $lorentzExample);
+        $mu0Approx = 4 * pi() * 1e-7;
+        $wireCurrent = 4;
+        $wireRadius = .010;
+        $enclosedCurrent = $wireCurrent * (.005 / $wireRadius)**2;
+        $containsNumber('champ-fil-ampere', $mu0Approx * $enclosedCurrent / (2 * pi() * .005) * 1e6, 0);
+        $containsNumber('champ-fil-ampere', $mu0Approx * $enclosedCurrent / 1e-6, 6);
+        self::assertStringContainsString(number_format($mu0Approx * $wireCurrent / 1e-6, 6, ',', '').' × 10⁻⁶ T·m', $library->find('champ-fil-ampere')['checkpoint']['answer']);
+        $loopRadius = .10;
+        $loopCurrent = 2;
+        $centralField = $mu0Approx * $loopCurrent / (2 * $loopRadius);
+        $axialField = $mu0Approx * $loopCurrent * $loopRadius**2 / (2 * (2 * $loopRadius**2)**1.5);
+        $containsNumber('champ-axe-spire', $centralField * 1e6, 6);
+        $containsNumber('champ-axe-spire', $axialField * 1e6, 6);
+        $containsNumber('champ-axe-spire', $axialField / $centralField, 6);
+        $containsNumber('champ-axe-spire', $loopCurrent * pi() * $loopRadius**2, 6);
     }
 }

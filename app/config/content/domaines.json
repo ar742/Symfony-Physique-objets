@@ -317,8 +317,8 @@
   {
     "slug": "electromagnetisme",
     "title": "Électromagnétisme",
-    "summary": "Charges, champ électrique, potentiel et flux : premier parcours d’électrostatique.",
-    "scope": "E1a : trois fiches avec leurs analyses à deux étages. Magnétostatique, induction, Maxwell et milieux restent à développer.",
+    "summary": "Charges et champ électrique, puis force magnétique et champs de courants permanents.",
+    "scope": "Deux parcours de trois fiches : électrostatique (E1a), puis force de Lorentz, fil et spire en magnétostatique (E1b). Induction, compléments de Maxwell et milieux restent à développer.",
     "sources": [
       {
         "doc": "cpge",
@@ -397,7 +397,69 @@
         "color": "green"
       }
     ],
-    "loop_title": "Charges, champ, énergie et flux"
+    "loop_title": "Charges, champ, énergie et flux",
+    "loops": [
+      {
+        "anchor": "boucle-magnetostatique",
+        "title": "Force magnétique, fil et spire",
+        "steps": [
+          {
+            "id": 1,
+            "title": "Définir la charge mobile",
+            "subtitle": "Champ imposé et vitesse",
+            "tip": "Distinguer le champ prescrit et les conditions initiales du mouvement.",
+            "card": "force-lorentz-trajectoire",
+            "section": "conditions",
+            "color": "blue"
+          },
+          {
+            "id": 2,
+            "title": "Déduire la déviation",
+            "subtitle": "Force magnétique",
+            "tip": "Le produit vectoriel fixe la direction de la force ; la charge signée en fixe le sens.",
+            "card": "force-lorentz-trajectoire",
+            "section": "force",
+            "color": "orange"
+          },
+          {
+            "id": 3,
+            "title": "Calculer le mouvement",
+            "subtitle": "Cercle puis hélice",
+            "tip": "La force magnétique ne travaille pas ; une composante parallèle change la trajectoire.",
+            "card": "force-lorentz-trajectoire",
+            "section": "exemple",
+            "color": "green"
+          },
+          {
+            "id": 4,
+            "title": "Réexaminer un champ",
+            "subtitle": "Courant enlacé",
+            "tip": "Dans le modèle du fil, une même norme du champ peut correspondre à deux rayons et deux courants enlacés.",
+            "card": "champ-fil-ampere",
+            "section": "exemple",
+            "color": "blue"
+          },
+          {
+            "id": 5,
+            "title": "Intégrer les contributions",
+            "subtitle": "Géométrie de la spire",
+            "tip": "Biot–Savart et la symétrie permettent de calculer le champ sur l’axe d’une spire.",
+            "card": "champ-axe-spire",
+            "section": "axe",
+            "color": "orange"
+          },
+          {
+            "id": 6,
+            "title": "Borner l’approximation",
+            "subtitle": "Loin de la spire",
+            "tip": "Comparer le champ axial exact dans le modèle filiforme et son approximation dipolaire.",
+            "card": "champ-axe-spire",
+            "section": "controle",
+            "color": "green"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "circuits-signaux",
