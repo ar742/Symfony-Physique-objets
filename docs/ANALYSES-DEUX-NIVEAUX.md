@@ -56,7 +56,7 @@ Le couple identifiant de fiche + coordonnée n.p situe l'élément à répertori
 
 Pour ajouter une fiche, rédiger son analyse complète avec six niveaux et six sous-niveaux par niveau. Chaque niveau doit nommer son propre système, ses entrées, sa sortie, un passage associé et ses comparaisons. Les tests refusent une fiche sans analyse et vérifient la couverture, les coordonnées et les destinations des liens.
 
-Le [premier lot d'approfondissement analytique](PRECISIONS-ANALYTIQUES.md) précise trois fiches : oscillateur, Bernoulli et Lagrange–Hamilton. Il distingue la nature et le périmètre du sujet, les entrées de chaque sous-niveau, les relations avec ces entrées et les quatre champs de chaque évaluation. Les autres fiches conservent leur première rédaction pendant cette progression.
+Les [lots d'approfondissement analytique AP1 et AP2](PRECISIONS-ANALYTIQUES.md) précisent six fiches : oscillateur, Bernoulli, Lagrange–Hamilton, travail-énergie, Poiseuille et corde. Ils distinguent la nature et le périmètre du sujet, les entrées de chaque sous-niveau, les relations avec ces entrées et les quatre champs de chaque évaluation. Les seize autres fiches conservent leur première rédaction pendant cette progression.
 
 ## Source de conception et confidentialité
 
