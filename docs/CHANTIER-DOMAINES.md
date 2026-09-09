@@ -27,6 +27,8 @@ Les sujets de recherche du lot A1 seront distingués des résultats expérimenta
 
 ## Méthode de chaque livraison
 
+Lire d'abord [les fondements du projet](FONDEMENTS-DU-PROJET.md) : la nature du sujet ne change pas les fonctions théoriques de 2 et 5 ; les évaluations 6/1, 5/2 et 4/3 sont à définir aux deux étages. Chaque livraison enrichit une analyse qui reste perfectible et repérable par ses coordonnées.
+
 1. Choisir un ensemble limité de notions et relever les passages exacts des deux recueils. Examiner visuellement les formules, unités et conventions.
 2. Rédiger une synthèse web originale : objectif, prérequis, système, hypothèses, lois, limites, exemple recalculé, question corrigée, références précises.
 3. Définir les six systèmes globaux de chaque fiche et les six sous-niveaux de chacun selon la même chaîne analytique. Rédiger les 36 actions, sorties et comparaisons spécifiques au sujet. Relier le schéma global aux six schémas locaux, puis aux descriptions et passages scientifiques : clic, survol, clavier et bouton tactile. N'ajouter une simulation que si elle apporte un apprentissage identifiable.

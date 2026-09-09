@@ -79,3 +79,12 @@ Prochain lot : **E1**, champs et électromagnétisme.
 Cette livraison constitue une **première proposition analytique à relire avec l'auteur**. Elle ne prétend pas achever l'analyse scientifique de chaque phénomène. Les ouvrages complets, rendus privés, extractions, exports SQL et secrets restent locaux. Aucune nouvelle dépendance ou modification de la base de données ; les fichiers modifiés sont synchronisés avec le site local, avec sauvegarde préalable.
 
 La prochaine étape est d'affiner cette structure avec l'auteur avant d'appliquer la même règle aux nouvelles fiches. E1 reste planifié.
+
+## 9 septembre 2026 — Consignation du fondement du projet
+
+- Les précisions de l'auteur sont consignées dans [FONDEMENTS-DU-PROJET.md](FONDEMENTS-DU-PROJET.md), référence de sens pour les prochaines évolutions, reliée au README, à la méthode technique et au chantier. Le fichier `AGENTS.md` invite les futurs intervenants à lire cette référence avant de modifier l'analyse.
+- Le sujet est généralement un phénomène physique à ancrage expérimental, mais peut être théorique dès le départ : les éléments Exp. sont alors les attributs de ce sujet. Les positions 2 et 5 restent toujours théoriques aux deux étages, utilisant respectivement Exp. 1 et Exp. 4 pour produire Exp. 3 et Exp. 6.
+- Les trois évaluations 6/1 (Exp.), 5/2 (TH) et 4/3 (Exp.) sont à définir systématiquement, avec objets, conditions, critère et constat ou question ouverte. Les relations peuvent être causales, chronologiques, logiques ou autres ; l'ordre graphique ne suffit pas à les qualifier.
+- La finalité est de répertorier les éléments et de les retravailler par leurs coordonnées, avec une précision toujours perfectible. Le périmètre peut s'élargir à un champ de sujets. La complétude technique des 792 points ne vaut pas qualification scientifique achevée de chacun.
+- L'explication « Lire les deux étages de la boucle », commune aux fiches et à leurs pages d'analyse, expose ces distinctions. Cette livraison consigne la référence de conception ; la relecture progressive de chaque analyse se poursuit selon celle-ci.
+- Validation : relecture de fidélité au propos de l'auteur, liens locaux des six documents vérifiés, gabarit Twig modifié valide et réponses HTTP 200 avec les six distinctions principales sur une fiche et sur sa page d'analyse. Les fiches individuelles et les relations techniques ne sont pas modifiées par cette consignation.

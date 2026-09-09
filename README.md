@@ -2,6 +2,8 @@
 
 Un site pour étudier la physique en reliant observations, modèles et applications. Cette version remplace l'ancien projet Symfony par une application Symfony 7.4, PHP 8.5, MySQL 8.4 et Twig, démarrée avec Docker Compose.
 
+**Le fondement du projet est une analyse continuellement précisée, à deux étages de six fonctions**, pour répertorier les éléments d'un sujet physique ou théorique et y revenir. Les positions 2 et 5 sont toujours les traitements théoriques ; les évaluations 6/1 (Exp.), 5/2 (TH) et 4/3 (Exp.) sont systématiques. Le sens d'« Exp. », les relations causales, chronologiques ou logiques et l'extension à un champ de sujets sont consignés dans [les fondements du projet](docs/FONDEMENTS-DU-PROJET.md), référence pour les prochaines évolutions.
+
 ## Contenu disponible
 
 - **Chaque fiche possède six systèmes globaux et six sous-niveaux par système** : 132 systèmes et **792 sous-niveaux rédigés pour les 22 fiches**. Un clic ouvre la sous-boucle, puis la description du point choisi ; survol, clavier et boutons d'information tactiles donnent accès aux explications.
