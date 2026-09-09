@@ -2587,7 +2587,8 @@
     ],
     "references": [
       "openstax-celerite-son",
-      "openstax-intensite-son"
+      "openstax-intensite-son",
+      "mit-acoustique-flux"
     ],
     "corrections": [
       {

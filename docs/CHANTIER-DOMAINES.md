@@ -6,7 +6,7 @@ Chantier ouvert le 9 septembre 2026 à la demande de l'auteur. La thermodynamiqu
 
 **Priorité depuis le 9 septembre 2026 : la structure analytique de chaque fiche.** Les 22 fiches existantes disposent de six systèmes globaux, chacun décliné selon la même boucle de six sous-niveaux (792 points). La première rédaction et les schémas constituent une base de relecture avec l'auteur, avant l'approfondissement scientifique. E1 reste planifié après cette étape. Voir [la méthode et les règles d'extension](ANALYSES-DEUX-NIVEAUX.md).
 
-Les [lots AP1 à AP4 de perfectionnement](PRECISIONS-ANALYTIQUES.md) précisent douze analyses : oscillateur, Bernoulli, Lagrange–Hamilton, travail-énergie, Poiseuille, corde, rotation axiale, roulement, référentiel tournant, Newton, orbite centrale et hydrostatique. Entrées, fonctions théoriques, relations et évaluations sont définies aux deux étages. Dix fiches conservent leur première rédaction analytique ; leur reprise et les nouvelles fiches suivront les mêmes exigences de sens.
+Les [lots AP1 à AP5 de perfectionnement](PRECISIONS-ANALYTIQUES.md) précisent quatorze analyses : oscillateur, Bernoulli, Lagrange–Hamilton, travail-énergie, Poiseuille, corde, rotation axiale, roulement, référentiel tournant, Newton, orbite centrale, hydrostatique, élasticité et acoustique. Entrées, fonctions théoriques, relations et évaluations sont définies aux deux étages. Huit fiches conservent leur première rédaction analytique ; leur reprise et les nouvelles fiches suivront les mêmes exigences de sens.
 
 Les pages ci-dessous sont les repères des éditions locales déjà indexées. Une fiche du recueil n'est pas considérée comme transposée intégralement dès qu'une première fiche web l'utilise.
 

@@ -1,6 +1,6 @@
 # Préciser les analyses existantes
 
-Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) aux fiches déjà rédigées. Elle conserve leurs coordonnées afin de permettre la reprise de chaque élément. Les lots **AP1 à AP4** concernent douze fiches :
+Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) aux fiches déjà rédigées. Elle conserve leurs coordonnées afin de permettre la reprise de chaque élément. Les lots **AP1 à AP5** concernent quatorze fiches :
 
 | Lot | Fiche | Nature du sujet | Périmètre |
 | --- | --- | --- | --- |
@@ -16,14 +16,16 @@ Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) a
 | AP4 | `newton-referentiel` | Phénomène physique | Mobile ponctuel sur pente fixe sans frottement ; bilan des forces, intégration et conditions initiales |
 | AP4 | `force-centrale-orbite` | Phénomène physique | Force centrale puis gravitation newtonienne ; orbite circulaire et paramètres conditionnels |
 | AP4 | `hydrostatique-archimede` | Phénomène physique | Liquide homogène au repos, pression puis bloc flottant librement ; équilibre vertical |
+| AP5 | `elasticite-lineaire` | Phénomène physique | Barre homogène en traction quasistatique ; petites déformations, raideur et travail élastique |
+| AP5 | `onde-acoustique` | Phénomène physique | Onde plane progressive sinusoïdale dans un fluide homogène ; pression, flux moyen et niveau d’intensité |
 
 ## Ce qui est précisé
 
-Les 432 sous-niveaux de ces quatre lots reprennent les attributs reçus, le traitement effectué et la sortie à conserver. Chaque lot en approfondit 108. Les fonctions 2 et 5 réalisent un traitement théorique propre au système local : le retour ne se limite pas à inviter à vérifier ou décider.
+Les 504 sous-niveaux de ces cinq lots reprennent les attributs reçus, le traitement effectué et la sortie à conserver. Chacun des lots AP1 à AP4 en approfondit 108 ; AP5 en approfondit 72. Les fonctions 2 et 5 réalisent un traitement théorique propre au système local : le retour ne se limite pas à inviter à vérifier ou décider.
 
-Chaque niveau global et sous-niveau possède une relation entrante qualifiée. Les **504 relations** décrivent comment les entrées conduisent à l'élément étudié : dépendance logique, calcul, lecture, interprétation ou autre relation explicitée. Un contrôle de cohérence ne devient pas une mesure ; un changement de cas calculé ne devient pas une chronologie expérimentale.
+Chaque niveau global et sous-niveau possède une relation entrante qualifiée. Les **588 relations** décrivent comment les entrées conduisent à l'élément étudié : dépendance logique, calcul, lecture, interprétation ou autre relation explicitée. Un contrôle de cohérence ne devient pas une mesure ; un changement de cas calculé ne devient pas une chronologie expérimentale.
 
-Les trois comparaisons globales et les dix-huit comparaisons locales de chaque fiche possèdent quatre champs, soit **252 évaluations détaillées** au total :
+Les trois comparaisons globales et les dix-huit comparaisons locales de chaque fiche possèdent quatre champs, soit **294 évaluations détaillées** au total :
 
 1. **Éléments comparés** : références exactes, correspondant à 4/3, 5/2 ou 6/1.
 2. **Conditions de comparaison** : hypothèses communes, conventions et statut des données.
@@ -63,6 +65,15 @@ Le quatrième lot reprend trois sujets physiques existants. Les modèles et leur
 - **Hydrostatique et Archimède** : distinguer pression absolue et surpression, puis relier la résultante des pressions au volume déplacé. Les inversions de profondeur ou de masse volumique gardent leurs paramètres connus explicites. La variante du corps plus dense demande un volume immergé supérieur au volume total ; le bilan de flottaison libre n'a donc pas de solution. L'équilibre vertical reste distinct de la stabilité en inclinaison. [MIT, chapitre 27, §27.3–27.4 et §27.6](https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter27.pdf).
 
 Ces références ont été revérifiées le 9 septembre 2026. Le repère de la référence orbitale a été corrigé pour situer les lois de Kepler au §25.6. Les exemples et les inversions sont recalculés ; les repères des recueils sont conservés et leurs documents restent privés.
+
+## AP5 : élasticité et acoustique
+
+Le cinquième lot approfondit les deux dernières fiches du domaine « Fluides et ondes » encore dans leur première rédaction. Leurs 72 sous-niveaux conservent les scénarios et les coordonnées existants. Les valeurs restent supposées et calculées ; les retours explicitent les informations nécessaires à une confrontation indépendante.
+
+- **Élasticité** : distinguer module du matériau, géométrie et raideur de la barre. La somme des forces opposées peut être nulle alors que leurs points d'application se déplacent et que le chargement stocke de l'énergie. Les retours examinent les conditions de reconstruction du module et les limites d'une déduction fondée sur un seul allongement. La longueur doublée définit une autre barre à section, module et effort conservés. [OpenStax, §12.3](https://openstax.org/books/university-physics-volume-1/pages/12-3-stress-strain-and-elastic-modulus).
+- **Acoustique** : relier amplitude et pression efficace, vitesse particulaire, célérité et flux moyen, puis expliciter les hypothèses des conversions. L'intensité dépend conjointement de la pression et de la vitesse ; les ondes de sens opposés montrent pourquoi la pression seule ne suffit pas dans un champ inconnu. La variante double l'amplitude à milieu et fréquence constants ; les décibels restent un niveau d'intensité avec sa référence. [OpenStax, §17.2](https://openstax.org/books/university-physics-volume-1/pages/17-2-speed-of-sound) et [§17.3](https://openstax.org/books/university-physics-volume-1/pages/17-3-sound-intensity).
+
+Les références OpenStax ont été revérifiées le 9 septembre 2026. La bibliographie acoustique est complétée par le [cours 1 du MIT 6.551J](https://ocw.mit.edu/courses/6-551j-acoustics-of-speech-and-hearing-fall-2004/c45734e2684a8592c0600120a0b6584c_lec_1_2004.pdf), p. 6 pour le flux et le déphasage, p. 14 pour les deux sens de propagation. Les reconstructions sont des conséquences des relations annoncées, contrôlées par recalcul. Les repères des recueils et leurs documents privés sont conservés.
 
 ## Lecture dans le site
 

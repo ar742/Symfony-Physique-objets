@@ -9549,311 +9549,647 @@
   },
   "elasticite-lineaire": {
     "question": "Comment modéliser la traction d’une barre, puis revenir aux dimensions et au chargement initiaux pour distinguer élasticité et autres réponses ?",
-    "basis": "Barre et traction de l’exemple calculé. Un cycle de chargement-déchargement est proposé ; aucune courbe expérimentale n’a été fournie.",
+    "basis": "Barre de 2,00 m, section 4,00 mm², module supposé 200 GPa, effort final 80,0 N. Le cycle reste calculé ; aucune mesure fournie.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Effort transmis, travail de traction, identification de raideur, cycle de décharge et effet de longueur sont distingués avec leurs conditions.",
+    "subject": {
+      "type": "physique",
+      "description": "Une barre homogène soumise à une traction axiale quasistatique, puis une barre de longueur doublée à charge identique.",
+      "scope": "Petites déformations, élasticité linéaire supposée, température fixe et côtés libres ; poids, flexion, inertie et propagation exclus. Domaine matériau réel non confirmé."
+    },
     "levels": [
       {
-        "title": "Barre, attaches et chargement",
-        "system": "Le dossier d’entrée décrivant la barre non chargée, ses attaches et le mode d’application des efforts.",
-        "input": "Longueur de 2,00 m, section de 4,00 mm², module supposé de 200 GPa et traction finale de 80,0 N.",
-        "output": "Une description séparant propriétés du matériau, géométrie de l’objet et protocole de sollicitation.",
+        "id": 1,
+        "title": "Barre et chargement décrits",
+        "system": "Le dossier physique de la barre, de ses extrémités et de sa longueur utile, avec un effort final supposé.",
+        "input": "Barre homogène de longueur 2,00 m, section 4,00 mm², module supposé 200 GPa et traction finale 80,0 N.",
+        "output": "Géométrie, effort transmis et conventions de déplacement séparés ; une résultante nulle ne signifie pas un travail nul.",
         "section": "conditions",
         "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Les attributs supposés définissent le système ; la reprise de la variante conserve son étiquette et ne décrit pas une transformation réelle."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Délimiter l’éprouvette",
-            "action": "Repérer la longueur initiale utile, la section et les attaches, puis distinguer déformation de la barre et déplacements du dispositif.",
-            "output": "Schéma des repères et de la zone étudiée."
+            "title": "Délimiter la longueur utile",
+            "input": "Dossier de l’exemple ; au retour, 6.3 transmet la barre de longueur doublée, tandis que 1.6 restitue les conventions locales.",
+            "action": "Repérer les deux extrémités utiles de la barre et les attaches ; distinguer positions de la matière et déplacements éventuels du dispositif.",
+            "output": "Barre initiale et variante identifiées ; aucune mesure entre repères n’est fournie.",
+            "relation": {
+              "nature": "logique",
+              "description": "La frontière précise où s’appliquent les efforts et quelle longueur est étudiée ; les attaches ne sont pas assimilées au matériau utile."
+            }
           },
           {
             "id": 2,
-            "title": "Qualifier la sollicitation",
-            "action": "Définir une traction axiale lente, des efforts opposés de même norme et une température supposée fixe durant le chargement.",
-            "output": "Conditions mécaniques et thermiques de l’essai envisagé."
+            "title": "Déduire l’effort transmis",
+            "input": "Frontière de 1.1 ; axe x vers l’extrémité droite, efforts axiaux quasistatiques et poids propre négligé.",
+            "action": "Écrire −F + F = 0 pour la barre ; couper une section et déduire un effort interne de traction N = F.",
+            "output": "Chaque extrémité porte une force de norme F ; leur somme vectorielle s’annule dans l’approximation quasistatique.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’équilibre d’une partie isolée donne l’effort transmis ; les deux forces extérieures agissent sur la même barre, à des points distincts."
+            }
           },
           {
             "id": 3,
-            "title": "Composer les entrées",
-            "action": "Convertir section et module en unités SI puis associer la force donnée à une seule extrémité de la barre.",
-            "output": "Paramètres numériques sans double comptage de l’effort."
+            "title": "Établir les paramètres en SI",
+            "input": "Effort transmis de 1.2, dimensions utiles et module supposé de l’énoncé ; chargement depuis l’état sans traction.",
+            "action": "Consigner L0 = 2,00 m, A0 = 4,00 × 10⁻⁶ m², E = 2,00 × 10¹¹ Pa et F final = 80,0 N.",
+            "output": "À 2.1 : paramètres SI, ΔL = L − L0 positif en traction et effort de 80,0 N par extrémité.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les conversions conservent les grandeurs initiales ; 160 N n’est ni l’effort transmis ni la résultante des actions extérieures."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les repères",
-            "action": "Vérifier si l’allongement envisagé serait mesuré entre repères de la barre ou par déplacement global des mors de fixation.",
-            "output": "Différence entre déformation utile et déplacement des attaches.",
-            "comparison": "Les entrées de 3 sont reliées aux repères de 1 afin d’éviter une longueur initiale mal définie."
+            "title": "Reprendre les repères et efforts",
+            "input": "Sorties de 1.3 ; positions xL et xR des extrémités utiles, distinctes des déplacements des mors.",
+            "action": "Reprendre L = xR − xL et ΔL = L − L0 ; rattacher F à chaque effort axial, sans additionner leurs normes.",
+            "output": "Longueur utile et force de traction conservent leurs définitions.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture porte sur la provenance géométrique et mécanique des paramètres, pas sur la présence d’un essai réalisé."
+            },
+            "comparison": "1.4 ↔ 1.3 : effort de traction et paramètres géométriques relus face au dossier SI.",
+            "evaluation": {
+              "object": "1.4 ↔ 1.3 : effort de traction et paramètres géométriques relus face au dossier SI.",
+              "conditions": "Mêmes extrémités utiles, chargement axial lent et valeurs supposées ; aucune longueur relevée sur un appareil.",
+              "criterion": "Conserver F = 80,0 N, A0 = 4,00 × 10⁻⁶ m² et L0 = 2,00 m ; ΔL concerne la barre.",
+              "finding": "Les conversions et définitions sont cohérentes ; un déplacement de mors ne serait pas automatiquement l’allongement utile."
+            }
           },
           {
             "id": 5,
-            "title": "Tester les conditions",
-            "action": "Examiner l’alignement des efforts et la liberté latérale, puis signaler qu’une faible déformation ne prouve pas à elle seule l’élasticité.",
-            "output": "Hypothèses d’uniaxialité et de matériau à confirmer.",
-            "comparison": "Le chargement défini en 2 doit exclure flexion notable et déformation des attaches pour le modèle choisi."
+            "title": "Transformer le travail des extrémités",
+            "input": "Repères et efforts repris en 1.4 ; même F à gauche et à droite pendant chaque état quasistatique.",
+            "action": "Calculer δW = −F dxL + F dxR = F d(ΔL) ; une translation commune des deux extrémités s’élimine.",
+            "output": "La somme des forces peut être nulle alors que le travail de déformation est positif.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le travail utilise chaque point d’application ; l’équilibre de 1.2 ne permet pas de remplacer leurs déplacements par un déplacement unique."
+            },
+            "comparison": "1.5 ↔ 1.2 : travail des deux efforts comparé à leur équilibre et à l’effort interne transmis.",
+            "evaluation": {
+              "object": "1.5 ↔ 1.2 : travail des deux efforts comparé à leur équilibre et à l’effort interne transmis.",
+              "conditions": "Même barre et mêmes forces opposées, avec inertie négligée ; les déplacements des extrémités peuvent différer.",
+              "criterion": "Retrouver ΣFx = 0 et δW = F d(ΔL) ; si dxR = dxL, le travail total s’annule.",
+              "finding": "Équilibre des forces et travail de déformation sont compatibles ; la résultante nulle n’exclut pas un stockage d’énergie."
+            }
           },
           {
             "id": 6,
-            "title": "Figer l’état initial",
-            "action": "Constituer une fiche avec géométrie de référence, effort final, température à documenter et module fourni comme propriété supposée.",
-            "output": "État initial séparant données et conditions non observées.",
-            "comparison": "La fiche reprend les repères de 1 et les conversions de 3 sans inventer un essai déjà effectué."
+            "title": "Restituer la description physique",
+            "input": "Travail de 1.5 et conventions reçues en 1.1 ; état initial sans traction, température supposée fixe et surface latérale libre.",
+            "action": "Restituer L0, A0, E et F final ; conserver deux forces opposées de 80,0 N et la longueur entre repères utiles.",
+            "output": "Dossier initial retrouvé ; l’allongement et le travail restent à déduire du comportement supposé.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour restaure les attributs du système ; aucune valeur de température ni caractérisation expérimentale du matériau n’est ajoutée."
+            },
+            "comparison": "1.6 ↔ 1.1 : géométrie, chargement et frontière restitués face au système initial.",
+            "evaluation": {
+              "object": "1.6 ↔ 1.1 : géométrie, chargement et frontière restitués face au système initial.",
+              "conditions": "Barre initiale distincte de la variante ; propriétés du matériau et régime quasistatique restent supposés.",
+              "criterion": "Retrouver L0 = 2,00 m, A0 = 4,00 mm², E = 200 GPa et effort final 80,0 N par extrémité.",
+              "finding": "Le dossier est restitué sans essai inventé ; la liberté latérale et l’appartenance au domaine élastique restent à documenter."
+            }
           }
-        ],
-        "id": 1
+        ]
       },
       {
+        "id": 2,
         "title": "Matériau et raideur formalisés",
-        "system": "Le système théorique qui relie contrainte et déformation puis traduit la propriété du matériau en réponse de la barre.",
-        "input": "Géométrie et chargement du niveau 1 ; hypothèses de petites déformations, homogénéité et élasticité linéaire.",
-        "output": "Une loi effort-allongement et une énergie stockée distinguant module de Young et raideur de l’objet.",
+        "system": "Le modèle de traction uniaxiale qui transforme le module du matériau en raideur et énergie de la barre.",
+        "input": "1.3 transmet L0, A0, E et F ; petites déformations, homogénéité et élasticité linéaire sont supposées.",
+        "output": "Loi F = kΔL, raideur k = EA0/L0 et énergie U = k(ΔL)²/2 pour le chargement réversible.",
         "section": "hooke",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La loi constitutive et la géométrie produisent la réponse globale ; l’intégration du travail exige le chemin quasistatique depuis l’état non déformé."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Poser les grandeurs",
-            "action": "Reprendre force, section initiale et longueur initiale pour définir contrainte nominale et déformation relative de la partie utile.",
-            "output": "Variables du matériau reliées aux observations de l’objet."
+            "title": "Recevoir les grandeurs constitutives",
+            "input": "Paramètres SI de 1.3, conventions restituées en 2.6 lors d’une reprise ; section et longueur initiales de la partie utile.",
+            "action": "Poser σ = F/A0 et ε = ΔL/L0 ; préciser qu’il s’agit de contrainte nominale et de déformation longitudinale relative.",
+            "output": "Variables σ en Pa et ε sans dimension, positives en traction.",
+            "relation": {
+              "nature": "logique",
+              "description": "La force à une extrémité et la géométrie de référence définissent les variables ; aucune contraction latérale n’est calculée."
+            }
           },
           {
             "id": 2,
-            "title": "Construire la loi",
-            "action": "Associer contrainte égale à module fois déformation, puis obtenir la raideur équivalente en tenant compte de la longueur et de la section.",
-            "output": "Loi constitutive et loi globale distinguées explicitement."
+            "title": "Construire raideur et potentiel",
+            "input": "Variables de 2.1 ; σ = Eε, E constant à température fixée et travail élémentaire F d(ΔL).",
+            "action": "Substituer les définitions dans σ = Eε : F = (EA0/L0)ΔL ; intégrer U = ∫₀^ΔL kℓ dℓ = k(ΔL)²/2.",
+            "output": "k = EA0/L0 ; U est le travail stocké depuis l’état non déformé, sous réversibilité supposée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le paramètre ℓ parcourt les allongements intermédiaires ; la force augmente avec ℓ et n’est pas constamment égale à sa valeur finale."
+            }
           },
           {
             "id": 3,
-            "title": "Déduire le travail",
-            "action": "Intégrer la force croissante depuis l’état non déformé afin de calculer l’énergie réversiblement stockée dans le modèle linéaire.",
-            "output": "Énergie théorique égale à la moitié de FΔL."
+            "title": "Établir les relations exploitables",
+            "input": "Raideur et potentiel obtenus en 2.2 ; volume initial V0 = A0L0 et état de référence U(0) = 0.",
+            "action": "Consigner ΔL = FL0/(EA0), U = FΔL/2 = F²/(2k) et U/V0 = σε/2.",
+            "output": "À 3.1 : chaînes contrainte-déformation, effort-allongement et énergie, avec leurs paramètres géométriques.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les expressions décrivent le même état final dans le modèle linéaire ; l’énergie volumique se rapporte au volume initial."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les dimensions",
-            "action": "Contrôler les unités du module, de la raideur et de l’énergie, puis vérifier que la force finale n’a pas été appliquée instantanément.",
-            "output": "Contrôle dimensionnel et interprétation du travail de chargement.",
-            "comparison": "Le résultat de 3 dépend du chemin de chargement associé aux grandeurs posées en 1."
+            "title": "Reprendre unités et chargement",
+            "input": "Relations de 2.3 ; module E, raideur k, énergie U et force finale F distingués.",
+            "action": "Reprendre E en N·m⁻², k en N·m⁻¹ et U en joules ; comparer l’intégrale à F final × ΔL.",
+            "output": "Le produit force finale-allongement vaut deux fois l’énergie du chargement linéaire depuis zéro.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le contrôle concerne les dimensions et le chemin de chargement ; il ne remplace pas une vérification du comportement réel."
+            },
+            "comparison": "2.4 ↔ 2.3 : unités et travail de chargement relus face aux relations établies.",
+            "evaluation": {
+              "object": "2.4 ↔ 2.3 : unités et travail de chargement relus face aux relations établies.",
+              "conditions": "Même barre, force croissante depuis zéro et valeurs de référence A0, L0 ; aucun chargement brusque modélisé.",
+              "criterion": "Vérifier [E] = Pa, [k] = N·m⁻¹ et U = FΔL/2, avec F pris à l’état final.",
+              "finding": "Les unités et le facteur un demi sont cohérents ; FΔL décrirait un autre travail si F restait constante."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter les descriptions",
-            "action": "Comparer la formulation matériau en contrainte-déformation et la formulation objet en effort-allongement, en explicitant leur équivalence géométrique.",
-            "output": "Correspondance entre module intrinsèque et raideur géométrique.",
-            "comparison": "Les deux lois de 2 coïncident dans leurs hypothèses communes ; E ne remplace jamais directement une raideur."
+            "title": "Retrouver les lois par dérivation",
+            "input": "Potentiel et conventions repris en 2.4 ; E, A0 et L0 constants, énergie réversible et déformation homogène.",
+            "action": "Dériver F = ∂U/∂(ΔL) = kΔL ; écrire U = V0Eε²/2 puis σ = (1/V0)∂U/∂ε = Eε.",
+            "output": "Les formulations par force et par contrainte retrouvent les lois de l’aller.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La différentiation utilise les variables conjuguées appropriées ; E devient une raideur seulement après multiplication par A0/L0."
+            },
+            "comparison": "2.5 ↔ 2.2 : lois issues des dérivées du potentiel comparées aux lois constitutive et globale directes.",
+            "evaluation": {
+              "object": "2.5 ↔ 2.2 : lois issues des dérivées du potentiel comparées aux lois constitutive et globale directes.",
+              "conditions": "Même élasticité linéaire réversible, géométrie de référence et température ; les deux traitements utilisent le même modèle.",
+              "criterion": "Retrouver ∂U/∂(ΔL) = (EA0/L0)ΔL et (1/V0)∂U/∂ε = Eε.",
+              "finding": "Les formulations se correspondent ; cet accord interne ne confirme pas expérimentalement le module ni la réversibilité."
+            }
           },
           {
             "id": 6,
-            "title": "Retenir les limites",
-            "action": "Joindre à la formulation les critères de réexamen : plasticité, chargement non axial, grandes déformations ou comportement dépendant de la durée.",
-            "output": "Modèle retenu et signes de sortie du domaine.",
-            "comparison": "Les limites précisent quand les variables de 1 et l’énergie réversible calculée en 3 deviennent insuffisantes."
+            "title": "Restituer l’état de référence",
+            "input": "Relations dérivées en 2.5 ; mêmes définitions de σ, ε, L0 et A0 qu’en 2.1.",
+            "action": "À F = 0, retrouver σ = 0, ΔL = 0, ε = 0 et U = 0 ; conserver k = EA0/L0.",
+            "output": "État sans traction restitué ; le retour à L0 est une prévision du modèle.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La solution utilise E > 0 et une décharge réversible ; un résidu réel ne pourrait pas être déduit de ce potentiel linéaire."
+            },
+            "comparison": "2.6 ↔ 2.1 : variables restituées sans traction face aux définitions et à l’état de référence reçus.",
+            "evaluation": {
+              "object": "2.6 ↔ 2.1 : variables restituées sans traction face aux définitions et à l’état de référence reçus.",
+              "conditions": "E positif constant, température fixe et absence de déformation permanente supposée ; décharge seulement calculée.",
+              "criterion": "Pour F = 0, retrouver σ = ε = ΔL = U = 0 et L = L0, avec A0 conservée comme référence.",
+              "finding": "L’état initial est retrouvé par la loi retenue ; aucun retour matériel à la longueur initiale n’a été observé."
+            }
           }
-        ],
-        "id": 2
+        ]
       },
       {
+        "id": 3,
         "title": "Allongement et énergie calculés",
-        "system": "La chaîne de calcul appliquant le modèle de traction linéaire à la barre et à la force données.",
-        "input": "Lois du niveau 2 et entrées du niveau 1 en unités SI.",
-        "output": "Prédictions de contrainte, déformation, allongement, raideur et énergie, avec contrôles d’ordre de grandeur.",
+        "system": "La chaîne numérique de l’exemple, avec reconstruction conditionnelle du module à partir de ses résultats.",
+        "input": "2.3 transmet les relations de traction et d’énergie ; L0 = 2,00 m, A0 = 4,00 mm², E = 200 GPa, F = 80,0 N.",
+        "output": "Contrainte, déformation, allongement, raideur et énergie calculés ; la reconstruction du module conserve les dimensions connues.",
         "section": "exemple",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les valeurs supposées sont substituées dans les expressions du modèle ; aucune donnée indépendante n’est ajoutée par leur recalcul."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Préparer les calculs",
-            "action": "Rassembler les valeurs de longueur, section, module et force, puis fixer le signe positif de l’allongement en traction.",
-            "output": "Tableau d’entrée et convention de déformation positive."
+            "title": "Recevoir les paramètres numériques",
+            "input": "Relations de 2.3 ; au retour local, 3.6 restitue les paramètres supposés de la même barre.",
+            "action": "Rassembler L0 = 2,00 m, A0 = 4,00 × 10⁻⁶ m², E = 2,00 × 10¹¹ Pa et F = 80,0 N.",
+            "output": "Données SI et convention ΔL > 0 fixées pour le calcul.",
+            "relation": {
+              "nature": "logique",
+              "description": "L’effort reçu est celui d’une extrémité ; les dimensions initiales demeurent les références de contrainte et de déformation."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les parcours",
-            "action": "Prévoir un calcul par contrainte-déformation et un calcul direct par raideur, afin de comparer deux chemins algébriques vers l’allongement.",
-            "output": "Deux parcours indépendants au sein du même modèle."
+            "title": "Calculer par les deux écritures",
+            "input": "Paramètres de 3.1, élasticité linéaire et chargement quasistatique depuis zéro.",
+            "action": "Former σ = F/A0 puis ε = σ/E et ΔL = εL0 ; calculer aussi k = EA0/L0, ΔL = F/k et U = FΔL/2.",
+            "output": "Deux écritures du même modèle donnent l’allongement et l’énergie.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les parcours partagent hypothèses et données ; leur accord est un contrôle algébrique, pas une confrontation expérimentale indépendante."
+            }
           },
           {
             "id": 3,
-            "title": "Appliquer la traction",
-            "action": "Calculer une contrainte de 20,000 MPa, une déformation de 0,000100, un allongement de 0,200 mm et une énergie de 0,008000 J.",
-            "output": "Valeurs prévues pour la barre idéale chargée."
+            "title": "Établir les valeurs prévues",
+            "input": "Chaînes de 3.2 appliquées aux paramètres supposés de l’exemple.",
+            "action": "Consigner σ = 20,000 MPa, ε = 0,000100, ΔL = 0,200 mm, k = 400 000 N·m⁻¹ et U = 0,008000 J.",
+            "output": "À 4.1 : réponse calculée à 80,0 N ; ε faible, sans limite élastique du matériau fournie.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les résultats sont conditionnels à la loi ; la petitesse de ε concerne la géométrie, pas la confirmation du domaine élastique."
+            }
           },
           {
             "id": 4,
-            "title": "Recalculer par raideur",
-            "action": "Déterminer la raideur de 400 000 N·m⁻¹ et retrouver l’allongement en divisant la force finale par cette raideur.",
-            "output": "Allongement reproduit par une seconde écriture du modèle.",
-            "comparison": "Les valeurs de 3 sont relues à partir des dimensions initiales de 1 et du même effort final."
+            "title": "Recomposer force et énergie",
+            "input": "Valeurs de 3.3, allongement reconverti en 0,000200 m et raideur en N·m⁻¹.",
+            "action": "Reprendre kΔL = 80,0 N et k(ΔL)²/2 = 0,008000 J ; conserver σ = F/A0 et ε = ΔL/L0.",
+            "output": "Force et énergie retrouvées à partir des résultats affichés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La recomposition vérifie les unités et l’allongement ; elle réutilise les sorties de la même chaîne de calcul."
+            },
+            "comparison": "3.4 ↔ 3.3 : force recomposée et énergie recalculée face aux valeurs prévues.",
+            "evaluation": {
+              "object": "3.4 ↔ 3.3 : force recomposée et énergie recalculée face aux valeurs prévues.",
+              "conditions": "Même état final supposé, allongement en mètres et raideur inchangée ; chiffres issus du calcul de l’aller.",
+              "criterion": "400 000 × 0,000200 = 80,0 N et 400 000 × (0,000200)²/2 = 0,008000 J.",
+              "finding": "Les valeurs se recomposent ; leur précision d’affichage n’exprime pas une incertitude expérimentale renseignée."
+            }
           },
           {
             "id": 5,
-            "title": "Évaluer la portée",
-            "action": "Distinguer la petitesse de la déformation calculée de l’appartenance effective au domaine élastique du matériau réel, encore à établir.",
-            "output": "Cohérence géométrique acquise ; domaine matériau à confirmer.",
-            "comparison": "L’accord des deux parcours de 2 vérifie le calcul, sans constituer une preuve expérimentale de la loi constitutive."
+            "title": "Inverser la réponse sous contraintes",
+            "input": "Force, allongement et énergie repris en 3.4 ; L0 et A0 sont tenus connus, avec ΔL > 0.",
+            "action": "Isoler k = F/ΔL, E = FL0/(A0ΔL) et F = 2U/ΔL ; réinsérer ces expressions dans les lois directes.",
+            "output": "Module et effort reconstructibles séparément lorsque géométrie, allongement et énergie nécessaires sont fixés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion transforme les résultats calculés ; une pente seule identifie EA0/L0, sans séparer trois paramètres simultanément inconnus."
+            },
+            "comparison": "3.5 ↔ 3.2 : expressions inverses comparées aux chaînes contrainte-déformation et effort-allongement.",
+            "evaluation": {
+              "object": "3.5 ↔ 3.2 : expressions inverses comparées aux chaînes contrainte-déformation et effort-allongement.",
+              "conditions": "L0 et A0 connus pour E ; ΔL non nul ; U et ΔL fixés pour reconstruire F.",
+              "criterion": "Vérifier E = FL0/(A0ΔL), k = F/ΔL et F = 2U/ΔL ; préciser les paramètres conservés.",
+              "finding": "Les inversions restituent la chaîne directe sous contraintes ; sans géométrie connue, le module ne serait pas identifiable par la seule raideur."
+            }
           },
           {
             "id": 6,
-            "title": "Conserver les prévisions",
-            "action": "Présenter les résultats avec leurs hypothèses et préparer une comparaison à un allongement relevé entre les mêmes repères initiaux.",
-            "output": "Tableau de résultats et protocole de comparaison défini.",
-            "comparison": "Les prévisions reprennent les données de 1 et la méthode de 3 sans leur attribuer une valeur mesurée."
+            "title": "Restituer les données de l’exemple",
+            "input": "Inversions de 3.5 et paramètres conservés de 3.1 ; résultats non indépendants du modèle.",
+            "action": "Retrouver E = 200 GPa et F = 80,0 N ; conserver L0 = 2,00 m et A0 = 4,00 mm².",
+            "output": "Jeu d’entrée restitué, avec une déformation calculée de 0,000100.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour retrouve les valeurs injectées ; aucune mesure de module ni limite élastique ne résulte de cette reconstruction."
+            },
+            "comparison": "3.6 ↔ 3.1 : module et force reconstruits, dimensions conservées, face aux données initiales.",
+            "evaluation": {
+              "object": "3.6 ↔ 3.1 : module et force reconstruits, dimensions conservées, face aux données initiales.",
+              "conditions": "Même barre idéale, allongement et énergie calculés ; aucun résultat de traction mesuré.",
+              "criterion": "Retrouver E = 200 GPa et F = 80,0 N avec L0 = 2,00 m et A0 = 4,00 mm².",
+              "finding": "Le jeu de paramètres est retrouvé ; ε = 0,000100 ne renseigne pas à lui seul la limite élastique réelle."
+            }
           }
-        ],
-        "id": 3
+        ]
       },
       {
+        "id": 4,
         "title": "Allongement et chargement relus",
-        "system": "Le dossier de retour comparant les prédictions à un éventuel relevé de force et de longueur pendant un cycle.",
-        "input": "Résultats du niveau 3, repères de longueur du niveau 1 et description d’un chargement-déchargement à réaliser.",
-        "output": "Des critères distinguant pente, défaut de zéro, déformation des attaches et allongement résiduel éventuel.",
+        "system": "Le dossier de comparaison entre allongement de la barre, déplacement d’attaches et retour après décharge, sans relevé disponible.",
+        "input": "3.3 transmet ΔL = 0,200 mm à 80,0 N et U = 0,008000 J ; un cycle de charge-décharge reste à réaliser.",
+        "output": "Pente, décalage de zéro et allongement résiduel distingués ; la réponse idéale ne remplace pas une mesure entre repères.",
         "section": "raideur",
-        "comparison": "Reprendre les sorties du niveau 3 avec la même longueur utile qu’au niveau 1 et distinguer allongement de barre et déplacement des mors.",
+        "comparison": "4 ↔ 3 : reprendre effort, allongement et énergie comme prévisions, avec les mêmes repères et conditions de chargement.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les sorties alimentent un modèle explicite de lecture et de cycle ; les termes instrumentaux sont symboliques, sans correction attribuée à un appareil."
+        },
+        "evaluation": {
+          "object": "4 ↔ 3 : allongement, effort et énergie repris face aux prévisions de l’exemple.",
+          "conditions": "Même barre, repères utiles et chargement lent ; aucun relevé ni caractéristique instrumentale disponible.",
+          "criterion": "À 80,0 N, conserver ΔL = 0,200 mm et U = 0,008000 J ; la décharge idéale revient à ΔL = 0.",
+          "finding": "Les résultats se prolongent en un cycle calculé ; aucun écart matériel ni retour expérimental n’est établi."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Recevoir la réponse",
-            "action": "Importer l’allongement prévu et la force correspondante, puis ouvrir un tableau pour les longueurs éventuelles pendant chargement et déchargement.",
-            "output": "Tableau de retour avec observations laissées à renseigner."
+            "title": "Recevoir la réponse et ses repères",
+            "input": "Valeurs de 3.3 ; au retour, 4.6 restitue la réponse idéale et les informations indépendantes absentes.",
+            "action": "Rattacher ΔL = 0,200 mm à la barre utile et F = 80,0 N à l’effort transmis ; distinguer un éventuel déplacement des attaches.",
+            "output": "Prévision de référence conservée ; force et longueur observées ne sont pas renseignées.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La transmission garde la provenance calculée et la frontière de mesure ; aucune interface de saisie ni expérience effectuée n’est supposée."
+            }
           },
           {
             "id": 2,
-            "title": "Définir les écarts",
-            "action": "Définir l’écart à l’allongement prévu, la pente effort-allongement et le déplacement résiduel après retour à force nulle.",
-            "output": "Indicateurs distincts de raideur et de réversibilité."
+            "title": "Formaliser lecture et compliance",
+            "input": "Réponse de 4.1 ; b est un décalage constant, Ca ≥ 0 une compliance d’attaches linéaire réversible, seulement envisagés symboliquement.",
+            "action": "Écrire D(F) = ΔL(F) + CaF + b = (1/k + Ca)F + b ; poser R(F) = D(F) − b − CaF − F/k.",
+            "output": "Modèle de déplacement global D ; Ca en m·N⁻¹ et R compare la part utile à F/k.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Des attaches en série subissent le même effort et ajoutent leur déplacement ; le décalage b change l’origine sans modifier la pente."
+            }
           },
           {
             "id": 3,
-            "title": "Rejouer le cycle idéal",
-            "action": "Calculer un chargement puis un déchargement suivant la même droite, ce qui prévoit un retour à la longueur initiale.",
-            "output": "Cycle théorique sans allongement résiduel ni hystérésis."
+            "title": "Établir le cycle idéal",
+            "input": "Relations de 4.2 avec Ca = b = 0 ; même loi F = kΔL à la charge et à la décharge.",
+            "action": "Consigner D(80,0 N) = 0,200 mm puis D(0) = 0 ; établir R = 0 et ∮ F d(ΔL) = 0.",
+            "output": "À 5.1 : droite idéale retracée, résidu nul et travail net nul ; l’énergie 0,008000 J est restituée à la décharge.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les deux branches sont calculées à partir de la même loi réversible ; leur superposition n’est pas un cycle observé."
+            }
           },
           {
             "id": 4,
-            "title": "Auditer les lectures",
-            "action": "Réexaminer ce retour idéal en listant les effets possibles du zéro instrumental, des mors et d’une température différente entre lectures.",
-            "output": "Causes de décalage à contrôler avant interprétation mécanique.",
-            "comparison": "Le cycle de 3 est rapporté aux données de 1 ; une translation des lectures n’établit pas seule une plasticité."
+            "title": "Reprendre pente et retour à zéro",
+            "input": "Cycle de 4.3 ; éventuels b et Ca restent constants, avec attaches supposées réversibles.",
+            "action": "Reprendre séparément la pente dD/dF, la différence des positions avant/après décharge et l’aire du cycle.",
+            "output": "La référence idéale a pente 1/k, aucun résidu et aucune aire entre les branches.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture distingue trois attributs ; un décalage constant de lecture n’est pas, à lui seul, une déformation permanente."
+            },
+            "comparison": "4.4 ↔ 4.3 : pente, résidu et aire relus face au cycle idéal établi.",
+            "evaluation": {
+              "object": "4.4 ↔ 4.3 : pente, résidu et aire relus face au cycle idéal établi.",
+              "conditions": "Même chargement-déchargement calculé, repères fixes et Ca = b = 0 pour les valeurs de référence.",
+              "criterion": "Retrouver dD/dF = 1/k, D(0) = 0 après décharge et ∮ F d(ΔL) = 0.",
+              "finding": "Les trois attributs sont cohérents avec la droite retracée ; ils ne sont pas des résultats instrumentaux."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter le comparateur",
-            "action": "Vérifier que pente et retour à zéro sont évalués avec les mêmes repères, sans confondre déformation permanente et déplacement des attaches.",
-            "output": "Comparateur corrigé des ambiguïtés de repérage.",
-            "comparison": "Les indicateurs définis en 2 n’ont de sens commun que pour une même longueur utile et un zéro documenté."
+            "title": "Séparer barre et dispositif",
+            "input": "Attributs repris en 4.4 ; modèle affine de 4.2, repères inchangés et force connue.",
+            "action": "Dériver dD/dF = 1/k + Ca ; en déduire k = 1/(dD/dF − Ca). À F = 0, soustraire D_après − D_avant pour éliminer b.",
+            "output": "La pente identifie k si Ca est connue ; le résidu entre repères exige zéro stable et attaches sans glissement ni résidu.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La différentiation élimine b, pas Ca ; la différence à force nulle isole le résidu de la barre seulement sous les conditions du dispositif."
+            },
+            "comparison": "4.5 ↔ 4.2 : déduction de raideur et élimination du zéro comparées au modèle affine de déplacement.",
+            "evaluation": {
+              "object": "4.5 ↔ 4.2 : déduction de raideur et élimination du zéro comparées au modèle affine de déplacement.",
+              "conditions": "b constant, Ca constante et réversible ; pour k positif, la pente dD/dF doit dépasser Ca.",
+              "criterion": "Retrouver (dD/dF − Ca)⁻¹ = k ; à force nulle, un b inchangé s’élimine dans D_après − D_avant.",
+              "finding": "La pente seule ne sépare pas raideur de barre et compliance des attaches ; la lecture initiale du zéro reste nécessaire."
+            }
           },
           {
             "id": 6,
-            "title": "Former le retour",
-            "action": "Regrouper courbe idéale, lectures nécessaires et vérifications instrumentales pour préparer une confrontation de la loi et de la réversibilité.",
-            "output": "Dossier de retour distinguant calcul et essai futur.",
-            "comparison": "Le dossier répond aux entrées de 1 et conserve le statut calculé du cycle produit en 3."
+            "title": "Restituer la comparaison idéale",
+            "input": "Traitements de 4.5 ; même réponse et repères qu’en 4.1, Ca et b non mesurés.",
+            "action": "Revenir à Ca = b = 0 : dD/dF = 1/400 000 m·N⁻¹, D final = 0,200 mm et D après décharge = 0.",
+            "output": "Prévisions initiales retrouvées ; pente réelle, zéro et retour après décharge demeurent non renseignés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour spécialise le modèle de lecture à la référence idéale ; il ne corrige pas une mesure inexistante."
+            },
+            "comparison": "4.6 ↔ 4.1 : réponse idéale restituée face à l’effort et à l’allongement reçus.",
+            "evaluation": {
+              "object": "4.6 ↔ 4.1 : réponse idéale restituée face à l’effort et à l’allongement reçus.",
+              "conditions": "Même barre et mêmes repères ; aucun glissement ou changement de zéro attribué au dispositif réel.",
+              "criterion": "À 80,0 N, retrouver 0,200 mm et k = 400 000 N·m⁻¹ ; après décharge idéale, retrouver la longueur L0.",
+              "finding": "Le dossier calculé est restitué ; l’identification matérielle de k et d’un éventuel résidu reste ouverte."
+            }
           }
-        ],
-        "id": 4
+        ]
       },
       {
+        "id": 5,
         "title": "Linéarité et réversibilité confrontées",
-        "system": "Le choix théorique de retour entre élasticité linéaire et modèles adaptés aux signatures éventuelles de non-linéarité ou d’irréversibilité.",
-        "input": "Comparateurs du niveau 4, loi du niveau 2 et conditions connues de matériau, température et sollicitation.",
-        "output": "Une décision de domaine distinguant petites déformations, linéarité, réversibilité et paramètres encore inconnus.",
+        "system": "Les traitements conditionnels qui distinguent module, non-linéarité, allongement résiduel et travail du cycle à partir du dossier de retour.",
+        "input": "4.3 transmet un cycle idéal sans résidu ; domaine matériau, réponse réelle et effets dépendant du temps restent inconnus.",
+        "output": "La loi linéaire initiale est retrouvée comme cas particulier ; petites déformations, pente constante et réversibilité restent des conditions distinctes.",
         "section": "limites",
-        "comparison": "Confronter le retour à la loi du niveau 2 en traitant séparément linéarité de la courbe et retour à l’état initial.",
+        "comparison": "5 ↔ 2 : confronter les descriptions de retour au modèle linéaire et à son énergie, en restituant explicitement son cas particulier.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Des relations de décharge et de travail transforment les attributs du cycle ; aucune variante matérielle n’est diagnostiquée sur des données absentes."
+        },
+        "evaluation": {
+          "object": "5 ↔ 2 : loi de décharge et traitement énergétique du retour comparés à Hooke et au potentiel initial.",
+          "conditions": "Même géométrie de référence et température ; les extensions sont symboliques, puis E_r = E, ε_r = 0 et s(ε) = Eε.",
+          "criterion": "Retrouver σ = Eε, k = EA0/L0 et U = V0Eε²/2 ; la décharge idéale restitue L0.",
+          "finding": "Le modèle de l’aller est un cas commun des traitements ; ε faible ne confirme ni domaine élastique ni absence de dépendance temporelle."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Isoler les signatures",
-            "action": "Distinguer les écarts possibles de pente, courbure, allongement résiduel et dépendance temporelle, après contrôle du dispositif de mesure.",
-            "output": "Signatures classées selon propriété mécanique concernée."
+            "title": "Recevoir les signatures disponibles",
+            "input": "Cycle de 4.3 et retour local de 5.6 ; pente constante et résidu nul calculés, sans courbe réelle.",
+            "action": "Distinguer σ(ε), déformation résiduelle et travail du cycle ; conserver les repères utiles et les conditions instrumentales de la comparaison.",
+            "output": "Attributs calculés séparés des propriétés du matériau encore à établir.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le cycle idéal ne fournit pas une mesure de limite élastique ; une éventuelle signature réelle demanderait sa propre provenance."
+            }
           },
           {
             "id": 2,
-            "title": "Poser les alternatives",
-            "action": "Envisager séparément un module différent, une élasticité non linéaire, une plasticité ou une réponse dépendant du temps de chargement.",
-            "output": "Hypothèses concurrentes avec prédictions conceptuellement différentes."
+            "title": "Transformer les lois de décharge",
+            "input": "Attributs de 5.1 ; branche de décharge affine avec E_r > 0 et ε_r constant, partant d’un pic compatible (ε_final, σ_final).",
+            "action": "Poser σ = E_r(ε − ε_r) et imposer σ_final = E_r(ε_final − ε_r), donc ε_r = ε_final − σ_final/E_r ; comparer à une réponse réversible σ = s(ε), s(0) = 0.",
+            "output": "À contrainte nulle, ε = ε_r ; le pic, la pente et le résidu de décharge ne sont pas trois paramètres indépendants.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le raccord impose la continuité au départ de la branche ; ni cette branche affine ni la fonction s retracée ne sont une loi complète de plasticité."
+            }
           },
           {
             "id": 3,
-            "title": "Prévoir un contraste",
-            "action": "Déduire qu’un module différent peut changer la pente sans créer de résidu, tandis qu’une déformation permanente empêche le retour initial.",
-            "output": "Signatures de pente et de réversibilité distinguées."
+            "title": "Établir les contrastes conditionnels",
+            "input": "Relations de 5.2 et raccord au pic ; variantes supposées, sans courbe mesurée ni modification du calcul initial.",
+            "action": "Consigner qu’un E_r différent sans résidu exige un autre pic compatible ; au pic initial conservé, ε_r = ε_final − σ_final/E_r. Une réponse s non linéaire retracée peut également revenir à zéro.",
+            "output": "À 6.1 : référence σ = Eε conservée pour la longueur doublée ; pente, résidu et non-linéarité restent distincts.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le contraste sans résidu change le chargement et son pic de manière compatible ; il ne conserve pas simultanément les deux coordonnées du pic initial."
+            }
           },
           {
             "id": 4,
-            "title": "Relire la discrimination",
-            "action": "Vérifier que le cycle envisagé et les relevés après décharge permettraient réellement de distinguer changement de pente et déformation permanente.",
-            "output": "Observations discriminantes proposées pour les variantes retenues.",
-            "comparison": "Les contrastes de 3 sont rapprochés des signatures de 1 ; aucun comportement réel n’est présumé observé."
+            "title": "Reprendre les limites d’identification",
+            "input": "Contrastes de 5.3 ; aucune branche réelle ni durée de récupération après décharge n’est renseignée.",
+            "action": "Reprendre séparément changement de pente, courbure et résidu ; rattacher tout résidu éventuel à une durée d’observation et aux repères stables.",
+            "output": "Une signature isolée ne détermine pas à elle seule le mécanisme matériau.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Un retour différé, une modification des attaches ou un comportement irréversible demanderaient des informations distinctes ; aucun n’est attribué à la barre."
+            },
+            "comparison": "5.4 ↔ 5.3 : pente, résidu et retour à zéro relus face aux contrastes conditionnels.",
+            "evaluation": {
+              "object": "5.4 ↔ 5.3 : pente, résidu et retour à zéro relus face aux contrastes conditionnels.",
+              "conditions": "Géométrie et température communes ; pics compatibles propres aux variantes, ou pic initial conservé avec ε_r imposé par le raccord ; aucune branche observée.",
+              "criterion": "Au pic initial σ_final = Eε_final ≠ 0, ε_r = 0 impose E_r = E ; E_r différent sans résidu exige un autre pic compatible.",
+              "finding": "Le raccord contraint pente et résidu ; un retour à zéro ne prouve pas la linéarité, et aucun mécanisme réel n’est identifié."
+            }
           },
           {
             "id": 5,
-            "title": "Arbitrer le modèle",
-            "action": "Maintenir la loi linéaire comme hypothèse de l’exemple et préciser quels constats imposeraient un autre modèle ou une nouvelle valeur du module.",
-            "output": "Choix provisoire et conditions de révision explicites.",
-            "comparison": "Les alternatives de 2 sont confrontées aux éléments disponibles ; aucune limite élastique numérique n’est inventée."
+            "title": "Intégrer le retour énergétique",
+            "input": "Contrastes de 5.4, volume V0 et lois de 5.2 ; le départ de décharge (ε_final, σ_final > 0) satisfait σ_final = E_r(ε_final − ε_r).",
+            "action": "Calculer W_cycle = V0(∫charge σ dε + ∫décharge σ dε), nul pour s retracée ; sur la branche affine, W_décharge = −V0σ_final²/(2E_r) = −U_rec.",
+            "output": "U_rec est la valeur positive rendue ; W_décharge est le travail reçu par la barre, négatif. Le chargement complet reste nécessaire à W_cycle.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégrale orientée de décharge va de ε_r + σ_final/E_r à ε_r ; elle est négative, tandis que son aire positive vaut U_rec."
+            },
+            "comparison": "5.5 ↔ 5.2 : intégrales de travail comparées aux relations de décharge et à la réponse réversible envisagées.",
+            "evaluation": {
+              "object": "5.5 ↔ 5.2 : intégrales de travail comparées aux relations de décharge et à la réponse réversible envisagées.",
+              "conditions": "E_r et ε_r constants sur la décharge affine, raccord au pic imposé ; pour s, trajet retracé sans dépendance à l’histoire ; aucune courbe réelle.",
+              "criterion": "Retrouver U_rec = V0σ_final²/(2E_r) et W_décharge = −U_rec ; pour s retracée, ∮σ dε = 0, même si s est non linéaire.",
+              "finding": "Le travail net est distingué du travail récupéré ; une aire non nulle nécessiterait un bilan complet avant attribution à une dissipation."
+            }
           },
           {
             "id": 6,
-            "title": "Préparer l’épreuve suivante",
-            "action": "Proposer des amplitudes de traction graduelles et des retours à force nulle, avec mêmes repères et conditions thermiques documentées.",
-            "output": "Protocole de comparaison de linéarité et réversibilité.",
-            "comparison": "L’épreuve vise les signatures de 1 et les contrastes de 3 ; elle reste un protocole à réaliser."
+            "title": "Restituer le cas linéaire initial",
+            "input": "Traitements de 5.5 et attributs de 5.1 ; spécialiser E_r = E, ε_r = 0 et s(ε) = Eε.",
+            "action": "Retrouver U_rec = 0,008000 J depuis 80,0 N, W_cycle = 0 et ε après décharge = 0 ; conserver E = 200 GPa.",
+            "output": "Cycle idéal et module supposé retrouvés ; domaine élastique réel et dépendance temporelle demeurent ouverts.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour restitue les résultats de la référence ; une loi réversible non linéaire pourrait aussi donner un travail cyclique nul."
+            },
+            "comparison": "5.6 ↔ 5.1 : propriétés du cycle restituées face au dossier idéal reçu.",
+            "evaluation": {
+              "object": "5.6 ↔ 5.1 : propriétés du cycle restituées face au dossier idéal reçu.",
+              "conditions": "Même barre à 80,0 N, température fixée et modèle initial ; toutes les données de cycle demeurent calculées.",
+              "criterion": "Retrouver E = 200 GPa, résidu nul, travail net nul et récupération de 0,008000 J dans la décharge idéale.",
+              "finding": "Le dossier de référence est retrouvé ; aucune valeur de limite élastique ni réponse après une durée donnée n’est ajoutée."
+            }
           }
-        ],
-        "id": 5
+        ]
       },
       {
+        "id": 6,
         "title": "Retour à la barre et géométrie",
-        "system": "La nouvelle application du modèle confronté à la barre initiale puis à une barre de longueur doublée.",
-        "input": "Modèle du niveau 5, paramètres initiaux et variante à longueur doublée avec force, section et matériau maintenus.",
-        "output": "Une comparaison finale séparant propriétés du matériau et réponse géométrique de l’objet.",
+        "system": "La comparaison de la barre initiale et d’une barre deux fois plus longue, sous le même effort et les mêmes hypothèses.",
+        "input": "5.3 conserve le modèle linéaire ; L0 passe de 2,00 à 4,00 m, avec A0, E et F final inchangés.",
+        "output": "Allongement et énergie doublés, raideur divisée par deux ; contrainte et déformation relative conservées, sans matériau nouveau identifié.",
         "section": "controle",
-        "comparison": "Comparer aux données du niveau 1 et aux sorties du niveau 3 en conservant le matériau et la force dans la variante.",
+        "comparison": "6 ↔ 1 : comparer les deux géométries au dossier initial en conservant effort, section, matériau et conditions de traction.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le modèle s’applique à une seconde barre supposée ; la comparaison de longueurs n’est pas l’allongement réel d’une même barre."
+        },
+        "evaluation": {
+          "object": "6 ↔ 1 : longueurs, paramètres communs et résultats de la variante comparés au système initial.",
+          "conditions": "Deux barres supposées, mêmes A0 = 4,00 mm², E = 200 GPa et F = 80,0 N ; chargements quasistatiques depuis zéro.",
+          "criterion": "L0 initial vaut 2,00 m, L0′ vaut 4,00 m ; conserver σ = 20 MPa et ε = 0,000100 dans les deux cas.",
+          "finding": "La longueur modifiée explique ΔL = 0,400 mm et U = 0,016000 J ; aucun changement du module ni essai de domaine élastique n’est établi."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Fixer les invariants",
-            "action": "Reprendre la barre initiale, puis construire une variante théorique deux fois plus longue, avec même section, même module et même force.",
-            "output": "Paramètres communs et changement de longueur isolé."
+            "title": "Recevoir les deux géométries",
+            "input": "Référence linéaire transmise par 5.3 ; 6.6 restitue localement les deux barres avec leurs attributs distincts.",
+            "action": "Garder L0 = 2,00 m puis poser L0′ = 4,00 m ; conserver A0 = 4,00 mm², E = 200 GPa et F = 80,0 N.",
+            "output": "Seule la longueur initiale change ; chaque barre est chargée depuis son propre état sans traction.",
+            "relation": {
+              "nature": "logique",
+              "description": "La variante conserve le matériau, la section et l’effort d’une extrémité ; elle ne décrit pas une déformation de 100 % de la barre initiale."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les observables",
-            "action": "Retenir contrainte, déformation relative, allongement et énergie pour distinguer les grandeurs du matériau des conséquences de la géométrie.",
-            "output": "Critères de comparaison entre les deux barres."
+            "title": "Déduire les rapports de réponse",
+            "input": "Paramètres des deux barres de 6.1 ; loi linéaire à température fixe et même force finale.",
+            "action": "Substituer L0′ = 2L0 dans k = EA0/L0, ΔL = FL0/(EA0) et U = F²L0/(2EA0).",
+            "output": "k′ = k/2, ΔL′ = 2ΔL, U′ = 2U ; σ′ = σ et ε′ = ε.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "À charge imposée, doubler la longueur double le volume et le travail stocké ; la déformation par unité de longueur reste identique."
+            }
           },
           {
             "id": 3,
-            "title": "Calculer la variante",
-            "action": "Obtenir le même effort par section et la même déformation relative, mais un allongement de 0,400 mm et une énergie de 0,016000 J.",
-            "output": "Résultats théoriques à longueur doublée et charge identique."
+            "title": "Établir les résultats de la variante",
+            "input": "Rapports de 6.2 et valeurs de la barre initiale ; section, module et effort conservés.",
+            "action": "Consigner k′ = 200 000 N·m⁻¹, ΔL′ = 0,400 mm, U′ = 0,016000 J, σ′ = 20,000 MPa et ε′ = 0,000100.",
+            "output": "À 1.1 : seconde barre de 4,00 m identifiée ; résultats comparables à la référence de 2,00 m.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les résultats sont calculés pour une autre géométrie ; la petitesse des deux déformations ne confirme pas le domaine matériau réel."
+            }
           },
           {
             "id": 4,
-            "title": "Relire le changement",
-            "action": "Comparer les longueurs utiles et vérifier qu’un allongement doublé ne signifie pas une déformation relative doublée du matériau.",
-            "output": "Distinction entre allongement absolu et déformation relative.",
-            "comparison": "Les résultats de 3 reviennent aux invariants de 1 et ne supposent aucun changement de module."
+            "title": "Reprendre allongement et déformation",
+            "input": "Valeurs de 6.3 ; allongements rapportés à la longueur initiale propre à chaque barre.",
+            "action": "Comparer 0,000400/4,00 et 0,000200/2,00 ; reprendre aussi U′/U et k′/k sans modifier la force.",
+            "output": "Même ε = 0,000100, énergie doublée et raideur divisée par deux.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La normalisation sépare allongement absolu et déformation relative ; la différence de raideur ne désigne pas automatiquement un autre matériau."
+            },
+            "comparison": "6.4 ↔ 6.3 : rapports de déformation, d’énergie et de raideur relus face à la variante calculée.",
+            "evaluation": {
+              "object": "6.4 ↔ 6.3 : rapports de déformation, d’énergie et de raideur relus face à la variante calculée.",
+              "conditions": "Même effort et même section ; chaque allongement est exprimé en mètres et rapporté à sa propre longueur initiale.",
+              "criterion": "Vérifier 0,000400/4,00 = 0,000200/2,00 = 0,000100 ; U′/U = 2 et k′/k = 1/2.",
+              "finding": "Les rapports reproduisent les résultats ; l’allongement doublé ne signifie ni déformation relative ni contrainte doublée."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter la réponse",
-            "action": "Vérifier que la raideur divisée par deux résulte de la géométrie, puis garder ouverte la vérification du domaine élastique réel.",
-            "output": "Réponse géométrique expliquée et condition matériau conservée.",
-            "comparison": "Les critères de 2 empêchent d’interpréter la nouvelle raideur comme un nouveau matériau sans autre donnée."
+            "title": "Inverser la dépendance géométrique",
+            "input": "Rapports repris en 6.4 ; raideurs positives et module, section connus pour reconstruire les longueurs.",
+            "action": "Isoler L0 = EA0/k et L0′ = EA0/k′ ; généraliser k′/k = (E′/E)(A0′/A0)(L0/L0′).",
+            "output": "Une raideur divisée par deux implique une longueur doublée seulement lorsque E et A0 sont conservés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion retrouve le changement choisi ; si matériau, section et longueur étaient inconnus, le rapport des raideurs ne les séparerait pas."
+            },
+            "comparison": "6.5 ↔ 6.2 : longueurs reconstruites et rapport généralisé comparés aux dépendances directes.",
+            "evaluation": {
+              "object": "6.5 ↔ 6.2 : longueurs reconstruites et rapport généralisé comparés aux dépendances directes.",
+              "conditions": "E′ = E et A0′ = A0 pour l’inversion choisie ; ces invariants sont supposés, pas déduits du rapport k′/k.",
+              "criterion": "Avec k′/k = 1/2 et paramètres communs, retrouver L0′/L0 = 2 ; sinon conserver les trois facteurs du rapport.",
+              "finding": "La géométrie explique la variante sous invariants fixés ; deux raideurs seules n’identifient pas séparément module, section et longueur."
+            }
           },
           {
             "id": 6,
-            "title": "Boucler la comparaison",
-            "action": "Regrouper les deux prédictions et indiquer les essais requis pour comparer réellement longueur, effort et retour après déchargement.",
-            "output": "Boucle de calcul complète et confrontation expérimentale ouverte.",
-            "comparison": "La synthèse rejoint l’objet de 1 et les résultats de 3 en distinguant hypothèses, calculs et futurs constats."
+            "title": "Restituer les paramètres des deux barres",
+            "input": "Relations de 6.5 avec E = 200 GPa, A0 = 4,00 mm² et les deux raideurs calculées.",
+            "action": "Retrouver L0 = 2,00 m et L0′ = 4,00 m ; conserver F = 80,0 N et les conditions de traction de 6.1.",
+            "output": "Les deux jeux d’entrée sont restitués ; confrontation aux longueurs et décharges réelles toujours ouverte.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour reconstruit les géométries à partir de résultats déjà calculés ; aucune mesure nouvelle du module ou des longueurs n’est produite."
+            },
+            "comparison": "6.6 ↔ 6.1 : longueurs restituées et paramètres conservés face aux deux géométries reçues.",
+            "evaluation": {
+              "object": "6.6 ↔ 6.1 : longueurs restituées et paramètres conservés face aux deux géométries reçues.",
+              "conditions": "Deux barres distinctes, même matériau supposé, température fixe et charge quasistatique ; valeurs uniquement calculées.",
+              "criterion": "Retrouver 2,00 m et 4,00 m avec A0 = 4,00 mm², E = 200 GPa et F = 80,0 N inchangés.",
+              "finding": "Les dossiers sont restitués ; la réversibilité et le domaine élastique de chacune restent à confronter à des informations indépendantes."
+            }
           }
-        ],
-        "id": 6
+        ]
       }
-    ],
-    "version": "0.1",
-    "updated": "2026-09-09"
+    ]
   },
   "onde-corde": {
     "question": "Comment relier propagation, modes et phases de la même corde, puis distinguer les propriétés du support de la sélection des modes par l’excitation ?",
@@ -10500,311 +10836,647 @@
     }
   },
   "onde-acoustique": {
-    "question": "Comment passer d’une perturbation sonore décrite à un flux et à un niveau, puis confronter le retour à la nature de l’onde initialement supposée ?",
-    "basis": "Onde plane progressive sinusoïdale de l’exemple calculé. Les acquisitions de pression et de vitesse proposées ne correspondent à aucune mesure fournie.",
+    "question": "Comment relier un signal acoustique supposé à son flux moyen, puis retrouver ses attributs sans confondre pression, propagation et niveau d’intensité ?",
+    "basis": "Onde plane progressive supposée : pmax = 0,200 Pa, f = 1 000 Hz, ρ0 = 1,20 kg·m⁻³ et c = 340 m·s⁻¹ ; variante d’amplitude doublée.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les conventions d’amplitude, les signes de propagation et les moyennes sont précisés, puis confrontés aux réflexions et aux inversions conditionnelles.",
+    "subject": {
+      "type": "physique",
+      "description": "Une perturbation acoustique sinusoïdale plane dans un fluide homogène au repos, avec calcul du flux moyen et du niveau d’intensité.",
+      "scope": "Acoustique linéaire sans pertes, onde unique vers +x pour les exemples ; ondes opposées seulement symboliques, aucune acquisition ni caractérisation instrumentale."
+    },
     "levels": [
       {
+        "id": 1,
         "title": "Milieu, source et signal acoustique",
-        "system": "Le dossier d’entrée décrivant le milieu au repos, la perturbation sonore et les accès possibles à sa pression et sa propagation.",
-        "input": "Amplitude de pression de 0,200 Pa, fréquence de 1 000 Hz, masse volumique de 1,20 kg·m⁻³ et célérité donnée de 340 m·s⁻¹.",
-        "output": "Une description distinguant état moyen, fluctuation, vitesse particulaire et propagation du signal.",
+        "system": "Le dossier du milieu et du signal, avec séparation entre état moyen, amplitude maximale, valeur efficace et paramètres de propagation.",
+        "input": "pmax, f, ρ0 et c sont fournis ; pression moyenne p0 et phase initiale ne sont pas chiffrées.",
+        "output": "Conventions d’amplitude établies et perturbations étiquetées ; la nature progressive et la validité physique des approximations restent supposées.",
         "section": "conditions",
         "comparison": "",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les attributs de l’énoncé décrivent le milieu et sa perturbation ; ils ne constituent pas un signal enregistré."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Délimiter le milieu",
-            "action": "Décrire le fluide initialement au repos, la zone de propagation et les frontières susceptibles de réfléchir l’onde vers le point étudié.",
-            "output": "Schéma du milieu, de la source et des frontières."
+            "title": "Délimiter le milieu et la perturbation",
+            "input": "Fluide au repos de ρ0 = 1,20 kg·m⁻³ ; onde unique de pmax = 0,200 Pa, f = 1 000 Hz, c = 340 m·s⁻¹.",
+            "action": "Distinguer p = p0 + p′, masse volumique moyenne et fluctuation ; orienter +x dans le sens de propagation supposé.",
+            "output": "Milieu et perturbation distingués ; une reprise depuis 6.3 garde l’amplitude doublée dans un scénario séparé.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le repérage associe les données au même milieu ; la direction choisie ne signifie pas que ses particules avancent à c."
+            }
           },
           {
             "id": 2,
-            "title": "Nommer le signal",
-            "action": "Distinguer pression moyenne et fluctuation, amplitude maximale et valeur efficace, puis fixer un sens de propagation pour l’onde supposée unique.",
-            "output": "Grandeurs acoustiques et conventions de description du signal."
+            "title": "Dériver la valeur efficace",
+            "input": "p′ = P cos(ωt − kx + φ), avec P = pmax, ω = 2πf et k = ω/c ; φ reste arbitraire.",
+            "action": "Moyenner p′ et p′² sur une période à position fixe ; utiliser ⟨cos²⟩ = 1/2 pour obtenir peff = P/√2.",
+            "output": "⟨p′⟩ = 0 et peff² = P²/2 ; le carré porte sur la fluctuation, pas sur p0 + p′.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La moyenne traite le signal posé en 1.1 ; la valeur efficace concerne son amplitude acoustique, indépendamment de la phase absolue."
+            }
           },
           {
             "id": 3,
-            "title": "Préparer les entrées",
-            "action": "Rassembler amplitude, fréquence, masse volumique et célérité données, puis marquer comme supposées la sinusoïdalité, la planéité et l’absence de pertes.",
-            "output": "Paramètres numériques et nature du signal annoncé."
+            "title": "Établir les attributs du signal",
+            "input": "Conversion de 1.2 et paramètres du milieu ; planéité, sinusoïdalité, propagation unique et faibles fluctuations sont supposées.",
+            "action": "Consigner P = 0,200 Pa, peff = 0,200/√2 Pa et f = 1 000 Hz ; transmettre milieu et conventions à 2.1.",
+            "output": "Dossier transmis : amplitudes distinctes, c donnée et vitesse particulaire u encore à déterminer.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les résultats de moyenne complètent les données initiales ; aucune vitesse du fluide n’est confondue avec la célérité fournie."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les accès",
-            "action": "Examiner ce qu’un microphone renseignerait sur la pression, et distinguer cette acquisition d’un suivi de propagation ou d’une mesure de vitesse particulaire.",
-            "output": "Observables accessibles et limites de chaque moyen envisagé.",
-            "comparison": "Les paramètres de 3 sont rapprochés de la zone définie en 1 ; mesurer une pression ne suffit pas à établir un flux."
+            "title": "Reprendre les grandeurs accessibles",
+            "input": "Dossier de 1.3 ; P et peff décrivent la pression, tandis que c décrit le transport du motif sonore.",
+            "action": "Reprendre leur signification et identifier les informations absentes : vitesse particulaire, pression moyenne chiffrée et relevé spatial du champ.",
+            "output": "Une amplitude de pression n’est ni une vitesse particulaire ni une mesure directe du flux.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture conserve les attributs disponibles et leurs limites ; elle ne transforme pas une pression supposée en observation de propagation."
+            },
+            "comparison": "1.4 ↔ 1.3 : conserver amplitudes, fréquence et célérité, sans leur attribuer les informations manquantes sur le milieu.",
+            "evaluation": {
+              "object": "1.4 ↔ 1.3 : nature des amplitudes et de la célérité dans le dossier repris.",
+              "conditions": "Même onde supposée ; aucune pression moyenne p0 ni acquisition indépendante de vitesse n’est fournie.",
+              "criterion": "Conserver peff = P/√2 et c = 340 m·s⁻¹ ; u et p0 ne deviennent pas connus par leur seule dénomination.",
+              "finding": "Les attributs sont repris sans confusion ; la condition P ≪ p0 n’est pas vérifiable numériquement avec ces seules données."
+            }
           },
           {
             "id": 5,
-            "title": "Tester la description",
-            "action": "Vérifier quelles données permettraient de contrôler les petites fluctuations devant l’équilibre et l’absence de réflexion, sans considérer ces conditions comme déjà établies.",
-            "output": "Hypothèses acoustiques et données complémentaires nécessaires.",
-            "comparison": "Le vocabulaire posé en 2 doit garder séparées fluctuation, pression moyenne, vitesse du fluide et célérité."
+            "title": "Déduire la fluctuation de densité",
+            "input": "Amplitude relue en 1.4 ; la réponse localement isentropique linéarisée donne p′ = c²ρ′ autour de l’équilibre.",
+            "action": "Isoler ρ′max = P/c² puis former ρ′max/ρ0 = P/(ρ0c²), en conservant c et ρ0 comme paramètres fournis.",
+            "output": "Fluctuation relative calculée ≈ 1,44 × 10⁻⁶ ; la petitesse de P/p0 reste une condition distincte.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La loi constitutive transforme l’amplitude acoustique en perturbation de densité ; ce calcul suppose la linéarisation qu’il permet seulement de contrôler intérieurement."
+            },
+            "comparison": "1.5 ↔ 1.2 : la loi constitutive utilise la même amplitude maximale et distingue son rapport à l’état moyen.",
+            "evaluation": {
+              "object": "1.5 ↔ 1.2 : amplitude de densité déduite et conventions d’amplitude de pression.",
+              "conditions": "Même sinusoïde et dérivée isentropique évaluée à l’équilibre ; aucune loi thermodynamique supplémentaire n’est chiffrée.",
+              "criterion": "Retrouver c²ρ′max = P et c²ρ′eff = peff ; le facteur √2 doit relier les amplitudes des deux champs.",
+              "finding": "Les conventions sont compatibles avec la loi linéarisée ; le calcul ne vérifie ni les pertes ni l’absence de réflexion."
+            }
           },
           {
             "id": 6,
-            "title": "Fixer l’entrée",
-            "action": "Produire une fiche du signal avec amplitude maximale, fréquence, paramètres du milieu et conditions encore supposées pour la relation pression-intensité.",
-            "output": "Dossier initial prêt pour une modélisation acoustique explicite.",
-            "comparison": "La fiche reprend le milieu de 1 et les données de 3 sans inventer de signal effectivement enregistré."
+            "title": "Restituer le dossier initial",
+            "input": "Relations de 1.5, valeurs de 1.1 et conversion efficace ; le milieu et la fréquence restent inchangés.",
+            "action": "Restituer P = c²ρ′max = √2peff puis conserver f, ρ0, c et les hypothèses de l’onde annoncée.",
+            "output": "Amplitude initiale retrouvée ; p0 et phase absolue demeurent non chiffrées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour reconstruit l’amplitude sous c donné ; il restitue le milieu sans prétendre identifier indépendamment ses paramètres."
+            },
+            "comparison": "1.6 ↔ 1.1 : retrouver amplitude et milieu initiaux avec leurs propriétés supposées et leurs inconnues conservées.",
+            "evaluation": {
+              "object": "1.6 ↔ 1.1 : paramètres du signal et du milieu restitués face au dossier initial.",
+              "conditions": "Même onde de référence, mêmes c et ρ0 ; la variante d’amplitude ne remplace pas encore cette entrée.",
+              "criterion": "Retrouver P = 0,200 Pa, f = 1 000 Hz, ρ0 = 1,20 kg·m⁻³ et c = 340 m·s⁻¹.",
+              "finding": "Les attributs initiaux sont restitués ; les champs sont décrits par calcul, sans signal matériel nouvellement acquis."
+            }
           }
-        ],
-        "id": 1
+        ]
       },
       {
+        "id": 2,
         "title": "Propagation et flux formalisés",
-        "system": "Le système théorique reliant compressibilité, célérité, impédance, pression efficace et moyenne du flux d’énergie.",
-        "input": "Milieu du niveau 1 ; acoustique linéaire, onde plane progressive unique et réponse localement isentropique.",
-        "output": "Une chaîne de relations distinguant définition générale du flux et expression particulière en fonction de la pression seule.",
+        "system": "Les équations acoustiques linéaires reliant pression, vitesse particulaire, propagation et flux moyen, avec une direction explicitement choisie.",
+        "input": "1.3 transmet signal et milieu ; u désigne la composante de vitesse suivant +x, de moyenne nulle.",
+        "output": "Pour l’onde unique vers +x, p′ = Zu et I = peff²/Z ; changer de sens change le signe de la composante du flux.",
         "section": "intensite",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les champs du dossier alimentent les bilans linéarisés ; la relation entre pression et vitesse dépend de la propagation retenue."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Poser les champs",
-            "action": "Représenter fluctuations de pression et vitesse particulaire, puis distinguer ces champs du déplacement du motif sonore à la célérité donnée.",
-            "output": "Variables locales et propagation clairement séparées."
+            "title": "Recevoir les champs acoustiques",
+            "input": "Dossier de 1.3 : p′, ρ′, u suivant x, milieu uniforme au repos et onde sinusoïdale unique vers +x.",
+            "action": "Conserver les perturbations de moyenne nulle ; distinguer la vitesse vectorielle u e_x de la célérité positive c.",
+            "output": "Champs locaux définis ; les particules oscillent tandis que le motif sonore se propage.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le repère et les champs fixent le sens des relations signées ; la vitesse du milieu n’est pas celle d’un front d’onde."
+            }
           },
           {
             "id": 2,
-            "title": "Construire les relations",
-            "action": "Associer célérité et compressibilité, définir l’impédance du milieu et relier pression à vitesse pour l’onde progressive suivant le sens choisi.",
-            "output": "Relations de propagation et d’impédance avec leurs hypothèses."
+            "title": "Déduire l’impédance progressive",
+            "input": "ρ0∂tu = −∂xp′, ∂tρ′ + ρ0∂xu = 0 et p′ = c²ρ′, avec c² = 1/(ρ0κS).",
+            "action": "Éliminer u et ρ′ pour obtenir l’équation d’onde ; substituer p′ = P cos(ωt − kx + φ) dans Euler.",
+            "output": "∂t²p′ = c²∂x²p′ ; avec k = ω/c et moyenne nulle, u = p′/(ρ0c), donc Z = ρ0c.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les bilans de quantité de mouvement et de masse produisent la propagation ; le choix de l’onde vers +x fixe le signe d’impédance."
+            }
           },
           {
             "id": 3,
-            "title": "Déduire le flux",
-            "action": "Calculer la moyenne du produit pression-vitesse pour une sinusoïde progressive et en déduire l’expression utilisant le carré de la pression efficace.",
-            "output": "Intensité moyenne du modèle et conversion d’amplitude correcte."
+            "title": "Établir le flux moyen",
+            "input": "Relation p′ = Zu de 2.2, convention efficace de 1.3 et définition vectorielle I⃗ = ⟨p′u⟩e_x.",
+            "action": "Remplacer u par p′/Z puis moyenner sur une période : I_x = ⟨p′²⟩/Z = P²/(2Z).",
+            "output": "À 3.1 : I⃗ = I e_x, I = peff²/Z > 0 ; umax = P/Z et λ = c/f.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La moyenne transforme le flux instantané en intensité ; la norme I coïncide ici avec sa composante positive I_x."
+            }
           },
           {
             "id": 4,
-            "title": "Relire la phase",
-            "action": "Vérifier que pression et vitesse sont en phase dans le sens choisi, puis expliciter le rôle de cette relation dans la moyenne temporelle.",
-            "output": "Condition de phase nécessaire au calcul du flux.",
-            "comparison": "Le flux déduit en 3 revient aux champs de 1 ; une pression non nulle ne garantit pas seule un transport net."
+            "title": "Reprendre phase et orientation",
+            "input": "Flux de 2.3 ; p′ et u sont en phase pour l’onde vers +x, bien que chacun change de signe.",
+            "action": "Reprendre p′u = p′²/Z et le sens du flux moyen ; distinguer les oscillations du fluide du transport net d’énergie.",
+            "output": "Produit instantané non négatif dans cette onde ; direction moyenne suivant +x.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture relie le signe du flux à la relation entre les champs ; le signe instantané de u seul ne définit pas la direction de propagation."
+            },
+            "comparison": "2.4 ↔ 2.3 : conserver moyenne, phase et orientation associées au flux établi.",
+            "evaluation": {
+              "object": "2.4 ↔ 2.3 : phase relative et composante d’intensité relues face au flux calculé.",
+              "conditions": "Onde plane unique vers +x, Z réel positif et moyenne sur une période ; pas de composante réfléchie.",
+              "criterion": "Retrouver ⟨p′u⟩ = P²/(2Z) > 0 ; le changement de signe simultané de p′ et u ne renverse pas ce flux.",
+              "finding": "Le flux reprend sa direction annoncée ; les particules ne transportent pas le motif à la célérité c."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter les définitions",
-            "action": "Comparer intensité définie comme moyenne du flux et raccourci utilisant la pression seule, puis distinguer niveau d’intensité et niveau de pression.",
-            "output": "Domaine du raccourci et nature du niveau logarithmique.",
-            "comparison": "Les relations de 2 ne doivent pas étendre la formule progressive à un champ réfléchi ou stationnaire quelconque."
+            "title": "Recalculer pour le sens opposé",
+            "input": "Relation relue en 2.4 ; considérer seulement comme comparaison p′_− = P cos(ωt + kx + φ), dans le même axe x.",
+            "action": "Substituer cette onde dans Euler pour déduire u_− = −p′_−/Z, puis calculer I_x,− = ⟨p′_−u_−⟩.",
+            "output": "I_x,− = −P²/(2Z) ; sa norme reste P²/(2Z), tandis que pression et vitesse signée sont en opposition.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La direction opposée modifie le signe de la relation locale ; le milieu et l’impédance caractéristique restent identiques."
+            },
+            "comparison": "2.5 ↔ 2.2 : le même bilan donne une relation d’impédance signée selon le sens de propagation.",
+            "evaluation": {
+              "object": "2.5 ↔ 2.2 : solutions progressives de sens opposés et relation pression-vitesse.",
+              "conditions": "Même c, ρ0, fréquence et amplitude ; u reste projetée sur +x dans les deux descriptions.",
+              "criterion": "Retrouver p′ = Zu pour +x et p′ = −Zu pour −x ; leurs intensités moyennes ont des composantes opposées.",
+              "finding": "Le signe dépend du sens annoncé ; une pression efficace seule ne distingue pas ces deux directions."
+            }
           },
           {
             "id": 6,
-            "title": "Retenir le cadre",
-            "action": "Joindre les références de niveau et les critères de révision : réflexions, champ proche, signal non sinusoïdal, pertes ou grandes fluctuations.",
-            "output": "Modèle acoustique retenu et limites de conversion explicites.",
-            "comparison": "Le cadre conserve les champs de 1 et précise quand le résultat de 3 exige une autre moyenne ou d’autres données."
+            "title": "Restituer l’onde de référence",
+            "input": "Résultats de 2.5 ; le dossier de 2.1 conserve une seule onde vers +x et des champs de moyenne nulle.",
+            "action": "Réappliquer ce sens, restituer p′ = Zu et I = I_x > 0 ; définir LI = 10log10(I/I0).",
+            "output": "Onde initiale retrouvée ; I0 = 10⁻¹² W·m⁻² référence le niveau d’intensité.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La restriction retrouve les champs initiaux ; le logarithme décrit un rapport d’intensités positif, sans devenir une pression ou une puissance."
+            },
+            "comparison": "2.6 ↔ 2.1 : retrouver les champs et le sens de l’onde initiale avec une référence explicite pour le niveau.",
+            "evaluation": {
+              "object": "2.6 ↔ 2.1 : champs, direction et hypothèses restitués face à l’onde reçue.",
+              "conditions": "Même milieu linéaire sans pertes et même propagation +x ; la solution opposée reste un cas comparatif.",
+              "criterion": "Conserver u e_x, c > 0 et p′ = Zu ; l’intensité vectorielle reste dirigée vers +x et LI emploie I0.",
+              "finding": "Le dossier de référence est conservé ; aucun niveau de pression n’est déduit sans sa propre définition et référence."
+            }
           }
-        ],
-        "id": 2
+        ]
       },
       {
+        "id": 3,
         "title": "Intensité et niveau calculés",
-        "system": "La chaîne de calcul qui convertit l’amplitude de pression et les propriétés du milieu en flux moyen et niveau d’intensité.",
-        "input": "Relations du niveau 2 et données de l’onde du niveau 1 ; référence d’intensité de 10⁻¹² W·m⁻².",
-        "output": "Longueur d’onde, impédance, intensité, niveau et vitesse particulaire prédits avec leurs références explicites.",
+        "system": "La chaîne numérique reliant amplitude et milieu à l’intensité, au niveau et à la vitesse particulaire, puis ses inversions conditionnelles.",
+        "input": "2.3 fournit les relations progressives ; les valeurs du signal et I0 = 10⁻¹² W·m⁻² restent données.",
+        "output": "Grandeurs de la fiche calculées avec unités et références ; l’intensité inversement reconstruite reste issue du même modèle.",
         "section": "exemple",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les paramètres supposés produisent des prévisions ; la relation pression-intensité est utilisée dans son domaine progressif déclaré."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Préparer les références",
-            "action": "Rassembler pression maximale, fréquence, masse volumique, célérité et intensité de référence, puis identifier les unités avant toute conversion logarithmique.",
-            "output": "Entrées numériques avec référence du niveau précisée."
+            "title": "Recevoir amplitudes et références",
+            "input": "P = 0,200 Pa, f = 1 000 Hz, ρ0 = 1,20 kg·m⁻³, c = 340 m·s⁻¹ et I0 = 10⁻¹² W·m⁻².",
+            "action": "Conserver P comme amplitude maximale, la propagation vers +x et les relations de 2.3 ; séparer I0 des paramètres du milieu.",
+            "output": "Cinq entrées numériques distinguées de peff, u et I encore à calculer.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le classement empêche de traiter une référence logarithmique comme une propriété matérielle ou une pression efficace."
+            }
           },
           {
             "id": 2,
-            "title": "Ordonnancer les conversions",
-            "action": "Calculer longueur d’onde et impédance, passer de pression maximale à efficace, puis déterminer intensité moyenne, niveau et vitesse particulaire maximale.",
-            "output": "Séquence séparant amplitude, flux et niveau relatif."
+            "title": "Effectuer les conversions physiques",
+            "input": "Valeurs de 3.1 et onde progressive unique ; moyenne sinusoïdale et unités SI fixées.",
+            "action": "Former λ = c/f, Z = ρ0c, peff = P/√2, umax = P/Z et I = P²/(2Z), puis LI = 10log10(I/I0).",
+            "output": "Amplitude, vitesse, flux et niveau reliés sans perdre le facteur 1/2.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La chaîne applique la moyenne avant le logarithme ; celui-ci reçoit uniquement le rapport sans dimension I/I0."
+            }
           },
           {
             "id": 3,
-            "title": "Appliquer le modèle",
-            "action": "Calculer une intensité de 49,019608 µW·m⁻² et un niveau d’intensité de 76,903698 dB pour l’onde progressive donnée.",
-            "output": "Intensité et niveau calculés sous les hypothèses annoncées."
+            "title": "Établir les prévisions numériques",
+            "input": "Expressions de 3.2 ; les valeurs internes sont conservées avant arrondi.",
+            "action": "Consigner λ = 0,340 m, Z = 408,000 Pa·s·m⁻¹, I = 49,019608 µW·m⁻² et LI = 76,903698 dB.",
+            "output": "À 4.1 : peff ≈ 0,141421 Pa, umax = 0,490196 mm·s⁻¹ et I⃗ = I e_x ; prévisions calculées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les résultats gardent leur provenance supposée ; l’écart entre umax et c concerne deux grandeurs cinématiques différentes."
+            }
           },
           {
             "id": 4,
-            "title": "Reconstituer les grandeurs",
-            "action": "Reconstruire l’intensité depuis le niveau et sa référence, puis retrouver la pression maximale depuis cette intensité et l’impédance du milieu.",
-            "output": "Intensité et pression maximale reconstruites par calcul inverse.",
-            "comparison": "Comparer la reconstruction aux sorties de 3 et aux données de 1, en distinguant pression maximale et pression efficace."
+            "title": "Reprendre moyenne et niveau",
+            "input": "Résultats de 3.3, avec P donné et Z calculé ; LI est un niveau d’intensité.",
+            "action": "Reformer I = peff²/Z puis le rapport I/I0 ; distinguer l’intensité en W·m⁻² du nombre logarithmique exprimé en dB.",
+            "output": "Même intensité retrouvée avec peff ; le niveau garde sa référence I0.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La reprise utilise une autre écriture de la même moyenne ; l’accord ne constitue pas une mesure indépendante du flux."
+            },
+            "comparison": "3.4 ↔ 3.3 : retrouver intensité et niveau avec leurs unités et la conversion efficace correcte.",
+            "evaluation": {
+              "object": "3.4 ↔ 3.3 : intensité, valeur efficace et niveau relus face aux valeurs annoncées.",
+              "conditions": "Même Z, moyenne sinusoïdale et référence I0 ; utiliser les valeurs internes pour éviter les écarts d’arrondi.",
+              "criterion": "Retrouver peff²/Z = 49,019608 µW·m⁻² et 10log10(I/I0) = 76,903698 dB à l’arrondi affiché.",
+              "finding": "Les valeurs se recomposent ; employer P²/Z donnerait deux fois l’intensité correcte."
+            }
           },
           {
             "id": 5,
-            "title": "Contrôler la conversion",
-            "action": "Vérifier le facteur deux entre carré de pression maximale et carré de pression efficace, puis contrôler que le logarithme porte sur un rapport.",
-            "output": "Contrôles du facteur d’amplitude et de la référence.",
-            "comparison": "La séquence de 2 doit préserver les unités d’intensité ; les décibels ne deviennent ni pression ni puissance."
+            "title": "Inverser les conversions sous conditions",
+            "input": "I, LI et λ repris en 3.4 ; Z, I0 et c sont tenus connus, et l’amplitude P est non négative.",
+            "action": "Isoler I = I0 × 10^(LI/10), P = √(2ZI) et f = c/λ ; distinguer chaque reconstruction de ses paramètres fixes.",
+            "output": "Amplitude et fréquence reconstruisibles ; le niveau seul ne détermine ni le sens de propagation ni ρ0 et c séparément.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les inversions restituent les entrées du calcul ; Z = ρ0c est un produit, pas une détermination séparée de ses deux facteurs."
+            },
+            "comparison": "3.5 ↔ 3.2 : les transformations inverses retrouvent les entrées sous les mêmes conventions et paramètres connus.",
+            "evaluation": {
+              "object": "3.5 ↔ 3.2 : inversions de niveau, d’amplitude et de longueur d’onde comparées aux conversions directes.",
+              "conditions": "Même onde unique, Z et c donnés ou calculés depuis les entrées ; I0 reste inchangé.",
+              "criterion": "Retrouver P² = 2ZI, fλ = c et I/I0 = 10^(LI/10) ; une amplitude positive ne contient pas la phase.",
+              "finding": "Les relations sont réversibles sous contraintes ; leurs résultats n’identifient pas indépendamment milieu, direction ou phase."
+            }
           },
           {
             "id": 6,
-            "title": "Conserver les prévisions",
-            "action": "Présenter ensemble célérité et vitesse particulaire calculée, puis préciser que le niveau fourni concerne l’intensité physique définie avec la référence annoncée.",
-            "output": "Tableau prévisionnel distinguant flux, niveau et mouvement du fluide.",
-            "comparison": "Le tableau revient aux entrées de 1 et conserve le statut calculé des valeurs produites en 3."
+            "title": "Restituer le signal et le milieu",
+            "input": "Reconstructions de 3.5 ; ρ0, c et I0 demeurent les valeurs de 3.1.",
+            "action": "Retrouver P = 0,200 Pa et f = 1 000 Hz ; conserver ρ0, c, I0 et le sens progressif initial.",
+            "output": "Entrées numériques restituées ; umax reste ≈ 0,000490196 m·s⁻¹ face à c = 340 m·s⁻¹.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour confronte les paramètres retrouvés aux données conservées ; le quotient umax/c ne transforme pas l’une des vitesses en l’autre."
+            },
+            "comparison": "3.6 ↔ 3.1 : retrouver amplitude, fréquence et paramètres conservés, avec leur signification physique.",
+            "evaluation": {
+              "object": "3.6 ↔ 3.1 : amplitude et fréquence reconstruites face au signal et au milieu reçus.",
+              "conditions": "Même modèle linéaire, propagation vers +x et valeurs internes avant arrondi ; aucune acquisition supplémentaire.",
+              "criterion": "Retrouver P, f, ρ0 = 1,20 kg·m⁻³, c = 340 m·s⁻¹ et I0 = 10⁻¹² W·m⁻².",
+              "finding": "Les entrées sont conservées ; le faible umax calculé ne démontre pas à lui seul la nature du champ réel."
+            }
           }
-        ],
-        "id": 3
+        ]
       },
       {
+        "id": 4,
         "title": "Pression, phase et niveau relus",
-        "system": "Le dossier de retour qui confronte les prédictions aux acquisitions possibles de pression et de vitesse, avec leurs conventions.",
-        "input": "Résultats du niveau 3 et descriptions instrumentales possibles du niveau 1 ; aucun enregistrement réel transmis.",
-        "output": "Un comparateur qui ne déduit pas automatiquement l’intensité d’une seule pression efficace dans un champ inconnu.",
+        "system": "La comparaison des moyennes de pression et de vitesse, puis des définitions logarithmiques associées au flux et à la pression.",
+        "input": "3.3 transmet les prévisions et leur direction ; aucun enregistrement conjoint de pression et de vitesse n’est disponible.",
+        "output": "Le rôle du déphasage est calculé ; le niveau d’intensité annoncé reste distinct d’un niveau de pression non renseigné.",
         "section": "decibels",
-        "comparison": "Reprendre les résultats du niveau 3 en conservant la référence du niveau et en vérifiant la nature du champ supposée au niveau 1.",
+        "comparison": "4 ↔ 3 : reprendre flux et niveau avec la même moyenne, la même référence et les hypothèses de phase.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les résultats deviennent des objets de comparaison ; une pression efficace ne donne un flux qu’avec les informations supplémentaires du champ."
+        },
+        "evaluation": {
+          "object": "4 ↔ 3 : pression, intensité et niveau relus face aux résultats numériques.",
+          "conditions": "Même onde unique vers +x, Z réel et référence I0 ; les valeurs proviennent du calcul initial.",
+          "criterion": "Retrouver I⃗ = 49,019608 e_x µW·m⁻² et LI = 76,903698 dB, avec u en phase avec p′.",
+          "finding": "Les moyennes et le niveau concordent ; aucune phase mesurée ni valeur de niveau de pression n’est ajoutée."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Recevoir les valeurs",
-            "action": "Importer pression, intensité et niveau calculés, puis réserver des champs distincts pour un signal de microphone et une éventuelle vitesse particulaire mesurée.",
-            "output": "Dossier de retour séparant calculs et acquisitions absentes."
+            "title": "Recevoir les prévisions distinctes",
+            "input": "Sorties de 3.3 : peff, umax, intensité vers +x et LI, avec λ, Z et paramètres connus.",
+            "action": "Associer le niveau à I0 et la pression à sa convention efficace ; conserver l’absence de signaux temporels indépendants.",
+            "output": "Pression, vitesse, flux et niveau identifiés selon leur définition.",
+            "relation": {
+              "nature": "logique",
+              "description": "La transmission préserve les grandeurs comparables ; un nombre en décibels ne détermine pas à lui seul la nature de la grandeur référencée."
+            }
           },
           {
             "id": 2,
-            "title": "Définir la comparaison",
-            "action": "Fixer durée de moyenne, conversion efficace, référence logarithmique et indicateur de phase pour comparer des grandeurs réellement de même nature.",
-            "output": "Conventions communes pour pression, flux et niveau."
+            "title": "Moyenner deux champs déphasés",
+            "input": "À un point, poser p′ = √2peff cosωt et u = √2ueff cos(ωt − δ), avec valeurs efficaces positives.",
+            "action": "Multiplier les deux champs et moyenner sur une période ; utiliser l’identité du produit de cosinus pour isoler cosδ.",
+            "output": "I⃗ = peff ueff cosδ e_x ; sa norme vaut |peff ueff cosδ|, et non toujours peff²/Z.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La moyenne exploite amplitude et phase relatives ; cette représentation locale ne prétend pas décrire une acquisition réalisée."
+            }
           },
           {
             "id": 3,
-            "title": "Simuler deux lectures",
-            "action": "Construire une acquisition idéale de pression sinusoïdale et la vitesse en phase correspondante, puis retrouver leur flux moyen par produit temporel.",
-            "output": "Lecture idéale reproduisant l’intensité annoncée du modèle."
+            "title": "Établir le cas de référence",
+            "input": "Expression de 4.2 ; l’onde de l’exemple impose δ = 0 et ueff = peff/Z dans le sens +x.",
+            "action": "Substituer ces conditions pour retrouver I_x = peff²/Z > 0, puis réappliquer la définition du niveau avec I0.",
+            "output": "À 5.1 : flux positif et LI retrouvés, avec phase nulle et impédance progressive comme hypothèses déterminantes.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La spécialisation restitue la prévision ; les relations de phase et d’amplitude sont imposées par le modèle plutôt qu’observées."
+            }
           },
           {
             "id": 4,
-            "title": "Auditer les conventions",
-            "action": "Examiner si un appareil rapporterait amplitude maximale, pression efficace ou niveau référencé, puis relever toute pondération ou transformation du signal affiché.",
-            "output": "Informations instrumentales nécessaires avant comparaison des niveaux.",
-            "comparison": "Les lectures de 3 sont confrontées aux acquisitions de 1 ; des affichages différents peuvent représenter des grandeurs différentes."
+            "title": "Reprendre la grandeur mise en niveau",
+            "input": "Résultat de 4.3 et référence I0 = 10⁻¹² W·m⁻² ; aucune pression de référence d’un niveau acoustique n’a été donnée.",
+            "action": "Reprendre LI = 10log10(I/I0) ; distinguer la pression efficace, son éventuel niveau référencé et le flux moyen effectivement calculé.",
+            "output": "Les 76,903698 dB qualifient un niveau d’intensité.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture conserve la définition du nombre annoncé ; des niveaux de même unité peuvent référencer des grandeurs différentes."
+            },
+            "comparison": "4.4 ↔ 4.3 : conserver l’intensité et sa référence au lieu de réétiqueter le résultat en niveau de pression.",
+            "evaluation": {
+              "object": "4.4 ↔ 4.3 : nature du niveau et référence utilisées dans le résultat.",
+              "conditions": "Même intensité positive et même I0 ; aucun appareil, pondération ou pression de référence n’est renseigné.",
+              "criterion": "Le logarithme doit porter sur I/I0 ; LI ne devient pas automatiquement 20log10(peff/p_ref).",
+              "finding": "Le niveau annoncé garde sa définition ; une comparaison avec un niveau de pression demanderait sa référence explicite."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter le comparateur",
-            "action": "Vérifier que la moyenne du produit et la formule issue de la pression seule concordent uniquement sous les hypothèses de phase et de propagation annoncées.",
-            "output": "Conditions de concordance des deux méthodes de flux.",
-            "comparison": "Les conventions de 2 ne remplacent pas la connaissance du champ ; la même pression efficace peut accompagner différents flux nets."
+            "title": "Relier deux définitions sous conditions",
+            "input": "LI repris en 4.4 ; définir seulement symboliquement Lp = 20log10(peff/p_ref), avec p_ref > 0.",
+            "action": "Substituer I = peff²/Z dans LI puis soustraire Lp pour obtenir LI − Lp = 10log10[p_ref²/(ZI0)].",
+            "output": "Les deux niveaux coïncident seulement si p_ref² = ZI0, dans le modèle progressif retenu.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La différence calculée relie deux définitions ; aucune pression de référence ni valeur numérique de Lp n’est inventée."
+            },
+            "comparison": "4.5 ↔ 4.2 : la relation des niveaux utilise la spécialisation progressive de la moyenne générale, sans l’étendre à un déphasage arbitraire.",
+            "evaluation": {
+              "object": "4.5 ↔ 4.2 : conversion des niveaux comparée aux conditions de la moyenne pression-vitesse.",
+              "conditions": "Onde unique vers +x, δ = 0, ueff = peff/Z et références positives fixées ; Lp reste symbolique.",
+              "criterion": "Retrouver LI − Lp = 10log10[p_ref²/(ZI0)] ; si phase ou impédance locale changent, cette substitution n’est plus acquise.",
+              "finding": "La conversion est conditionnelle ; le niveau de la fiche reste LI, sans identification implicite à un niveau de pression."
+            }
           },
           {
             "id": 6,
-            "title": "Constituer le retour",
-            "action": "Regrouper les calculs comparables et les données manquantes sur phase, réflexions et instrument pour préparer une interprétation du signal éventuel.",
-            "output": "Dossier de confrontation avec incertitudes conceptuelles identifiées.",
-            "comparison": "Le dossier répond aux besoins de 1 et distingue l’acquisition idéale de 3 d’un enregistrement véritable."
+            "title": "Restituer les valeurs comparables",
+            "input": "Distinction des niveaux de 4.5 ; le dossier reçu en 4.1 ne fournissait que I0 et les prévisions progressives.",
+            "action": "Conserver peff, ueff = peff/Z, I et LI ; retirer toute valeur numérique de Lp tant que sa référence manque.",
+            "output": "Dossier initial retrouvé avec phase et définition du niveau explicitement conservées.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour précise la signification des valeurs reçues ; la comparaison symbolique ne fournit pas une nouvelle mesure ou une référence manquante."
+            },
+            "comparison": "4.6 ↔ 4.1 : retrouver les prévisions initiales et leurs références sans ajouter de niveau acoustique non défini.",
+            "evaluation": {
+              "object": "4.6 ↔ 4.1 : pression, vitesse, flux et niveau restitués face aux sorties importées.",
+              "conditions": "Même Z = 408,000 Pa·s·m⁻¹, direction +x et I0 ; aucune donnée temporelle supplémentaire.",
+              "criterion": "Retrouver peff ≈ 0,141421 Pa, I = 49,019608 µW·m⁻² et LI = 76,903698 dB, avec leur provenance calculée.",
+              "finding": "Les attributs du dossier sont conservés ; la nature réelle du champ et sa phase nécessitent toujours des informations indépendantes."
+            }
           }
-        ],
-        "id": 4
+        ]
       },
       {
+        "id": 5,
         "title": "Onde progressive et réflexions confrontées",
-        "system": "Le choix théorique de retour portant sur la nature progressive, réfléchie ou stationnaire du champ sonore et son contenu fréquentiel.",
-        "input": "Comparateur du niveau 4 et hypothèses de phase, propagation unique et sinusoïdalité du niveau 2.",
-        "output": "Une décision sur la conversion pression-intensité et les observations requises pour une description plus générale.",
+        "system": "La superposition de deux ondes opposées et l’inversion des champs locaux, pour préciser ce qu’une pression seule permet d’identifier.",
+        "input": "4.3 transmet le flux progressif et ses conditions ; les deux sens de propagation servent ici de comparaison théorique.",
+        "output": "Une pression efficace non nulle peut accompagner un flux moyen net nul ; reconstruire les signaux opposés demande pression et vitesse synchronisées dans le temps.",
         "section": "limites",
-        "comparison": "Confronter le cadre de retour à l’onde progressive du niveau 2 et distinguer invalidité d’un raccourci de flux et invalidité de l’acoustique linéaire.",
+        "comparison": "5 ↔ 2 : la superposition conserve la définition du flux et retrouve la formule progressive lorsque l’onde opposée est absente.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour traite une extension linéaire du champ ; l’échec d’un raccourci pression-intensité n’invalide pas les équations acoustiques."
+        },
+        "evaluation": {
+          "object": "5 ↔ 2 : flux de deux ondes opposées et relation progressive unique de l’aller.",
+          "conditions": "Même milieu linéaire sans pertes, même Z réel et même fréquence ; la réflexion n’est qu’une possibilité théorique.",
+          "criterion": "Retrouver I_x = (A² − B²)/(2Z) ; pour B = 0, obtenir I = peff²/Z, et pour A = B obtenir I_x = 0.",
+          "finding": "Le modèle initial est un cas particulier ; la pression seule ne fournit pas universellement le flux ni son sens."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Isoler les hypothèses",
-            "action": "Classer les écarts possibles selon présence de réflexions, contenu fréquentiel, pertes, réponse instrumentale ou fluctuations trop fortes pour la linéarisation.",
-            "output": "Hypothèses concurrentes sur champ, milieu et acquisition."
+            "title": "Recevoir les conditions du flux",
+            "input": "4.3 fournit δ = 0 et ueff = peff/Z pour l’exemple ; aucune information indépendante n’établit l’absence de réflexion.",
+            "action": "Distinguer le champ retenu d’une superposition possible ; conserver la définition I⃗ = ⟨p′u⟩e_x pour comparer les deux.",
+            "output": "Même définition du flux ; nombre et sens des ondes explicitement séparés.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les conditions reçues définissent la limite progressive ; examiner une autre configuration ne signifie pas qu’elle est présente dans l’exemple."
+            }
           },
           {
             "id": 2,
-            "title": "Formuler les alternatives",
-            "action": "Envisager une superposition d’ondes opposées ou un signal composé de plusieurs fréquences, en conservant la définition du flux comme moyenne du produit.",
-            "output": "Cadres alternatifs avec grandeur énergétique commune."
+            "title": "Calculer deux ondes opposées",
+            "input": "Poser p_+ = A cos(ωt − kx) et p_− = B cos(ωt + kx + ψ), avec A,B ≥ 0 et k = ω/c.",
+            "action": "Superposer p′ = p_+ + p_− et u = (p_+ − p_−)/Z ; moyenner p′u et p′² sur une période.",
+            "output": "I_x = (A² − B²)/(2Z) ; peff² = (A² + B²)/2 + AB cos(2kx + ψ).",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les termes croisés du flux s’annulent, contrairement à ceux de pression quadratique ; la pression locale dépend de l’interférence spatiale."
+            }
           },
           {
             "id": 3,
-            "title": "Produire un contre-exemple",
-            "action": "Construire une onde stationnaire idéale avec pression efficace non nulle mais flux moyen net nul, sans l’assimiler au scénario effectivement décrit.",
-            "output": "Contre-exemple théorique au raccourci fondé sur la pression seule."
+            "title": "Établir le contre-exemple stationnaire",
+            "input": "Expressions de 5.2 ; prendre seulement pour comparaison A = B = P/2 et ψ = 0.",
+            "action": "Déduire p′ = P cos(kx)cosωt et u = (P/Z)sin(kx)sinωt ; à x = 0, retrouver peff = P/√2 malgré I_x = 0.",
+            "output": "À 6.1 : contre-exemple séparé ; l’exemple conserve B = 0 avant sa variante d’amplitude doublée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le champ stationnaire reproduit localement la pression efficace initiale sans flux moyen net ; il ne représente pas une réflexion observée."
+            }
           },
           {
             "id": 4,
-            "title": "Relire la portée",
-            "action": "Examiner quels relevés de phase ou quelles variations spatiales permettraient de distinguer ce contre-exemple d’une onde progressive unique.",
-            "output": "Observations discriminantes proposées pour la nature du champ.",
-            "comparison": "Le cas de 3 est rapproché des hypothèses de 1 ; il montre une possibilité et non une réflexion réellement constatée."
+            "title": "Reprendre pression et quadrature",
+            "input": "Contre-exemple de 5.3 : champs temporels en cosinus et sinus ; au ventre de pression x = 0, u est nul.",
+            "action": "Reprendre la moyenne nulle du produit ; distinguer quadrature lorsque les deux amplitudes sont non nulles et phase indéfinie d’un champ nul.",
+            "output": "Pression efficace non nulle possible sans intensité nette ; aucun niveau d’intensité fini n’en découle si I = 0.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture conserve les conditions du contre-exemple ; les nœuds ne reçoivent pas une phase de vibration inexistante."
+            },
+            "comparison": "5.4 ↔ 5.3 : retrouver pression non nulle et flux moyen nul, en précisant le statut des phases.",
+            "evaluation": {
+              "object": "5.4 ↔ 5.3 : moyennes, phases et nœuds relus face au champ stationnaire calculé.",
+              "conditions": "Deux ondes idéales de même amplitude ; comparaison conditionnelle, sans paroi ou signal mesuré.",
+              "criterion": "Retrouver ⟨cosωt sinωt⟩ = 0 ; à x = 0, peff = P/√2 et u = 0, sans phase assignée à u.",
+              "finding": "Le contre-exemple conserve son flux nul ; la formule progressive appliquée à cette pression donnerait un transport net fictif."
+            }
           },
           {
             "id": 5,
-            "title": "Arbitrer la description",
-            "action": "Conserver le modèle progressif pour l’exemple annoncé et préciser quand des champs supplémentaires ou une analyse fréquentielle deviendraient nécessaires.",
-            "output": "Modèle retenu et données requises pour l’étendre.",
-            "comparison": "Les alternatives de 2 gardent la définition du flux ; une décomposition fréquentielle reste possible pour un signal complexe."
+            "title": "Inverser les deux champs locaux",
+            "input": "Superposition reprise en 5.4 ; pression p′ et vitesse signée u considérées au même point et au même instant, Z connu.",
+            "action": "Résoudre les deux équations pour obtenir p_+ = (p′ + Zu)/2 et p_− = (p′ − Zu)/2.",
+            "output": "À un point et un instant, p′ et u déterminent seulement les contributions locales p_+ et p_− ; leurs signaux complets demandent un suivi temporel.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion s’applique point par point dans le cadre plan unidimensionnel ; une décomposition temporelle exige les deux champs synchronisés sur la durée pertinente."
+            },
+            "comparison": "5.5 ↔ 5.2 : les équations inverses restituent la superposition et montrent quelles informations sont nécessaires.",
+            "evaluation": {
+              "object": "5.5 ↔ 5.2 : séparation conditionnelle des ondes comparée à leur superposition directe.",
+              "conditions": "Même milieu sans pertes, Z connu et seulement deux sens plans ; p′ et u sont des champs symboliques, non des acquisitions fournies.",
+              "criterion": "Retrouver p_+ + p_− = p′ et p_+ − p_− = Zu ; connaître p′ seule ne suffit pas à fixer les deux contributions.",
+              "finding": "Les contributions locales sont retrouvables à chaque instant ; amplitudes et phases nécessitent un suivi synchronisé, tandis qu’une pression efficace seule laisse le flux indéterminé."
+            }
           },
           {
             "id": 6,
-            "title": "Préparer la confrontation",
-            "action": "Proposer un relevé spatial de pression et, si accessible, une acquisition de vitesse synchronisée pour tester les relations de phase et le flux.",
-            "output": "Plan de discrimination entre propagation et stationnarité.",
-            "comparison": "Le plan vise les causes de 1 et le contraste de 3, sans prétendre qu’un essai ait déjà eu lieu."
+            "title": "Restituer la limite progressive",
+            "input": "Inversion de 5.5 et relation p′ = Zu conservée dans l’exemple reçu en 5.1.",
+            "action": "Substituer u = p′/Z pour retrouver p_− = 0 et p_+ = p′, puis restituer I = peff²/Z.",
+            "output": "Champ de référence retrouvé sous sa condition ; le contre-exemple reste une démonstration distincte.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour utilise la relation progressive supposée, non une vitesse mesurée ; il ne prouve donc pas l’absence matérielle de réflexion."
+            },
+            "comparison": "5.6 ↔ 5.1 : retrouver le flux et les conditions initiaux sans adopter le champ stationnaire comme observation.",
+            "evaluation": {
+              "object": "5.6 ↔ 5.1 : champs, flux et hypothèses restitués face au dossier progressif reçu.",
+              "conditions": "Même P, f, ρ0 et c ; l’exemple garde une onde vers +x, les alternatives demeurent symboliques.",
+              "criterion": "Retrouver p_− = 0, δ = 0 et ueff = peff/Z ; la pression initiale conduit alors à I = 49,019608 µW·m⁻².",
+              "finding": "Les attributs du scénario sont restitués ; une caractérisation du champ demanderait des informations indépendantes de ces hypothèses."
+            }
           }
-        ],
-        "id": 5
+        ]
       },
       {
+        "id": 6,
         "title": "Retour au son et amplitude doublée",
-        "system": "L’application du modèle confronté au signal initial et à une amplitude de pression doublée dans le même milieu.",
-        "input": "Cadre du niveau 5, paramètres initiaux et variante à fréquence et propriétés du milieu maintenues.",
-        "output": "Une comparaison finale des amplitudes, flux et niveaux, avec séparation entre célérité et vitesse du fluide.",
+        "system": "La comparaison de deux amplitudes dans le même milieu progressif, puis la reconstruction de leur rapport et des pressions initiales.",
+        "input": "5.3 conserve l’onde unique vers +x ; fréquence, milieu et référence d’intensité restent identiques lorsque P double.",
+        "output": "Intensité quadruplée et niveau augmenté de 6,020600 dB ; célérité inchangée et vitesse particulaire doublée.",
         "section": "controle",
-        "comparison": "Comparer aux entrées du niveau 1 et au calcul du niveau 3 en conservant fréquence, milieu et nature progressive du signal.",
+        "comparison": "6 ↔ 1 : conserver fréquence, milieu et nature de l’onde en isolant le changement explicite d’amplitude.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les deux signaux sont des scénarios supposés distincts ; leur comparaison ne décrit pas une augmentation effectivement appliquée à une source."
+        },
+        "evaluation": {
+          "object": "6 ↔ 1 : amplitudes et paramètres des deux signaux comparés au dossier initial.",
+          "conditions": "Même onde plane progressive vers +x et même milieu linéaire ; la seconde amplitude ne remplace pas les données du premier cas.",
+          "criterion": "Conserver f = 1 000 Hz, ρ0 = 1,20 kg·m⁻³ et c = 340 m·s⁻¹ ; retrouver P1 = 0,200 Pa et P2 = 0,400 Pa.",
+          "finding": "Les attributs initiaux sont conservés sauf l’amplitude déclarée ; les niveaux et vitesses particulaires changent, sans modifier c dans ce modèle."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Fixer les variantes",
-            "action": "Reprendre fréquence et milieu initiaux, puis doubler seulement la pression maximale dans une seconde onde supposée toujours linéaire et progressive.",
-            "output": "Deux scénarios partageant les mêmes conditions de propagation."
+            "title": "Recevoir les deux amplitudes",
+            "input": "Le cadre transmis par 5.3 garde une seule onde progressive ; P1 = 0,200 Pa et P2 = 2P1 à fréquence inchangée.",
+            "action": "Conserver f, ρ0, c et I0 ; distinguer les deux signaux, leurs amplitudes positives et les hypothèses de linéarité.",
+            "output": "Deux cas supposés : P1 = 0,200 Pa, P2 = 0,400 Pa, avec Z commun et propagation +x.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le changement porte uniquement sur l’amplitude ; le champ stationnaire examiné au retour n’est adopté dans aucun des deux cas."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les critères",
-            "action": "Comparer intensité, niveau, vitesse particulaire et célérité, en maintenant explicitement la même référence logarithmique et la même convention d’amplitude.",
-            "output": "Critères de retour cohérents entre grandeurs physiques différentes."
+            "title": "Déduire les rapports et l’écart de niveau",
+            "input": "Dossiers de 6.1 ; I = P²/(2Z), umax = P/Z, peff = P/√2 et références communes.",
+            "action": "Diviser les relations entre les deux cas ; déduire I2/I1 = 4, u2,max/u1,max = 2 et LI2 − LI1 = 10log10(4).",
+            "output": "Pression efficace doublée ; λ = c/f et c restent inchangées dans le modèle linéaire.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La division élimine Z dans les rapports et I0 dans la différence des niveaux ; les paramètres matériels restent néanmoins imposés."
+            }
           },
           {
             "id": 3,
-            "title": "Calculer le retour",
-            "action": "Obtenir une intensité quadruplée et une hausse de 6,020600 dB, donnant 82,924298 dB, avec vitesse particulaire doublée et célérité inchangée.",
-            "output": "Prédictions de la variante à pression maximale doublée."
+            "title": "Établir les valeurs de retour",
+            "input": "Rapports de 6.2 et prévision LI1 = 76,903698 dB ; mêmes c = 340 m·s⁻¹ et f = 1 000 Hz.",
+            "action": "Consigner ΔLI = 6,020600 dB, LI2 = 82,924298 dB, I2 = 4I1 et u2,max = 2u1,max.",
+            "output": "À 1.1 : variante P2 = 0,400 Pa, λ = 0,340 m et célérité inchangée, avec intensité et vitesse particulaire accrues.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les résultats accompagnent le nouvel attribut d’amplitude ; leurs différences sont calculées et ne représentent pas une observation chronologique."
+            }
           },
           {
             "id": 4,
-            "title": "Relire la variation",
-            "action": "Vérifier que les décibels n’ont pas été doublés directement et que l’hypothèse de petites fluctuations reste distincte du simple calcul des rapports.",
-            "output": "Contrôle logarithmique et condition de linéarité encore explicite.",
-            "comparison": "Les rapports de 3 sont confrontés aux invariants de 1 ; seul le changement d’amplitude annoncé est appliqué."
+            "title": "Reprendre le changement logarithmique",
+            "input": "Sorties de 6.3 : intensité quadruplée, pression et vitesse particulaire doublées, niveau augmenté d’une quantité additive.",
+            "action": "Reprendre ces rapports et conserver ΔLI plutôt qu’un doublement du niveau ; distinguer leur calcul de la vérification matérielle des faibles fluctuations.",
+            "output": "LI2 = LI1 + 6,020600 dB ; les hypothèses acoustiques restent supposées pour les deux amplitudes.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour distingue rapports physiques et différence logarithmique ; la simplicité du changement d’amplitude ne démontre pas l’absence de pertes ou de réflexion."
+            },
+            "comparison": "6.4 ↔ 6.3 : retrouver les rapports et l’écart de niveau sans multiplier directement les décibels.",
+            "evaluation": {
+              "object": "6.4 ↔ 6.3 : variations d’amplitude, d’intensité et de niveau relues face aux résultats.",
+              "conditions": "Même Z, I0 et nature progressive ; la pression moyenne p0 reste non chiffrée.",
+              "criterion": "Conserver I2/I1 = 4 et ΔLI = 10log10(4) ; ni LI2 = 2LI1 ni c2 = 2c1 ne résultent du calcul.",
+              "finding": "Les variations sont cohérentes dans le cadre linéaire ; leur valeur ne vérifie pas indépendamment P2 ≪ p0."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter la portée",
-            "action": "Vérifier que la relation quadratique concerne le même champ progressif et ne permet pas de déduire une intensité universelle de tout signal de pression.",
-            "output": "Domaine de validité du résultat de retour.",
-            "comparison": "Les critères de 2 restent conditionnés par nature du champ et références communes, même lorsque les rapports sont simples."
+            "title": "Inverser l’écart de niveau",
+            "input": "Écart relu en 6.4 ; les deux ondes ont le même Z, le même I0 et des amplitudes maximales positives.",
+            "action": "Isoler P2/P1 = 10^(ΔLI/20), puis reconstruire séparément Pj = √[2ZI0 × 10^(LIj/10)] pour chaque signal.",
+            "output": "Rapport d’amplitude égal à 2 et deux pressions retrouvables sous Z et I0 connus.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion du logarithme retrouve les amplitudes mais pas leurs phases ; si Z changeait entre les cas, la différence de niveau seule ne suffirait plus."
+            },
+            "comparison": "6.5 ↔ 6.2 : l’inversion restitue les rapports directs avec les mêmes paramètres et conventions efficaces.",
+            "evaluation": {
+              "object": "6.5 ↔ 6.2 : reconstruction des amplitudes comparée aux rapports quadratiques et logarithmiques.",
+              "conditions": "Mêmes Z et I0, propagation unique pour chaque signal ; les identités portent sur les valeurs internes avant arrondi.",
+              "criterion": "Retrouver 10^[10log10(4)/20] = 2 et Pj²/(2Z) = I0 × 10^(LIj/10).",
+              "finding": "Les transformations directes sont retrouvées ; l’écart de niveau ne détermine pas séparément le milieu, la phase ou le sens de propagation."
+            }
           },
           {
             "id": 6,
-            "title": "Fermer ou prolonger",
-            "action": "Consigner la prévision initiale retrouvée, la variante calculée et les acquisitions nécessaires pour confronter effectivement milieu, amplitude et flux annoncé.",
-            "output": "Boucle calculatoire complète ; nature réelle du champ à vérifier.",
-            "comparison": "La synthèse revient aux données de 1 et à la méthode de 3 sans transformer les calculs en validation expérimentale."
+            "title": "Restituer les signaux de départ",
+            "input": "Reconstructions de 6.5 et paramètres reçus en 6.1 ; Z = 408,000 Pa·s·m⁻¹ et I0 restent connus.",
+            "action": "Retrouver P1 = 0,200 Pa et P2 = 0,400 Pa ; conserver f, ρ0, c et la distinction entre vitesse particulaire et célérité.",
+            "output": "Deux dossiers restitués avec c commun ; le résultat de niveau concerne toujours l’intensité.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour reconstitue les attributs des scénarios à partir des sorties calculées ; il ne fournit pas une acquisition indépendante de pression."
+            },
+            "comparison": "6.6 ↔ 6.1 : retrouver les amplitudes et les paramètres communs, avec leurs conditions de propagation conservées.",
+            "evaluation": {
+              "object": "6.6 ↔ 6.1 : amplitudes, fréquence, milieu et référence des deux cas.",
+              "conditions": "Même f = 1 000 Hz, ρ0 = 1,20 kg·m⁻³, c = 340 m·s⁻¹ et I0 = 10⁻¹² W·m⁻².",
+              "criterion": "Retrouver P1 et P2 ainsi que u2,max/u1,max = 2 ; conserver c2/c1 = 1 et λ2/λ1 = 1.",
+              "finding": "Les attributs initiaux de chaque signal sont restitués ; leur confrontation physique nécessite toujours des informations sur le champ réel."
+            }
           }
-        ],
-        "id": 6
+        ]
       }
-    ],
-    "version": "0.1",
-    "updated": "2026-09-09"
+    ]
   }
 }

@@ -131,6 +131,12 @@
     "note": "§17.3 : pression sinusoïdale, intensité moyenne et niveau en décibels.",
     "checked": "2026-09-09"
   },
+  "mit-acoustique-flux": {
+    "title": "MIT 6.551J — Pression, vitesse et flux acoustique",
+    "url": "https://ocw.mit.edu/courses/6-551j-acoustics-of-speech-and-hearing-fall-2004/c45734e2684a8592c0600120a0b6584c_lec_1_2004.pdf",
+    "note": "Cours 1, p. 6, équations 1.12–1.15 : flux moyen et déphasage ; p. 14, équations 1.2.22 : ondes de sens opposés et signes de vitesse.",
+    "checked": "2026-09-09"
+  },
   "mit-hydrostatique": {
     "title": "MIT 8.01SC — Fluides au repos",
     "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter27.pdf",
