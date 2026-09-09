@@ -14,7 +14,7 @@ final class DomainLibraryTest extends TestCase
         $learning = new LearningLibrary($root, $sources);
         $domains = new DomainLibrary($root, $learning, $sources);
         self::assertNull($domains->find('../.env'));
-        self::assertCount(2, $domains->available());
+        self::assertCount(3, $domains->available());
         self::assertSame([], $domains->find('optique')['cards']);
         $assigned = [];
         $codes = [];
@@ -61,5 +61,8 @@ final class DomainLibraryTest extends TestCase
         self::assertCount(12, $domains->find('mecanique')['steps']);
         self::assertCount(8, $domains->find('mecanique')['cards']);
         self::assertCount(8, $domains->find('thermodynamique-statistique')['cards']);
+        self::assertCount(6, $domains->find('fluides-ondes')['cards']);
+        self::assertCount(2, $domains->find('fluides-ondes')['loops']);
+        self::assertCount(12, $domains->find('fluides-ondes')['steps']);
     }
 }

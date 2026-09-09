@@ -1817,5 +1817,822 @@
     "version": "1.0",
     "updated": "2026-09-09",
     "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "hydrostatique-archimede",
+    "title": "Relier pression, profondeur et flottabilité",
+    "level": "CPGE · Fluides au repos",
+    "summary": "Calculer une pression et la résultante des forces exercées par un liquide au repos.",
+    "objective": "Distinguer pression absolue, surpression et poussée d’Archimède, puis vérifier un équilibre de flottaison.",
+    "prerequisites": [
+      "Bilan des forces",
+      "Masse volumique",
+      "Unités de pression et de volume"
+    ],
+    "system": "Un liquide au repos dans un bassin ouvert, puis un bloc homogène flottant librement à sa surface.",
+    "conditions": [
+      "Référentiel galiléen ; pesanteur uniforme de norme g, axe z orienté vers le haut.",
+      "Liquide de masse volumique ρ constante ; pression de surface ps uniforme.",
+      "Pour la flottaison : absence de contact avec le fond, effets capillaires et poussée de l’air négligés."
+    ],
+    "sections": [
+      {
+        "id": "pression",
+        "title": "Une pression locale et une convention d’altitude",
+        "paragraphs": [
+          "La pression p est une grandeur scalaire en pascals. Sur une petite surface, le fluide au repos exerce une force normale à la surface, dirigée vers l’intérieur du système étudié. La pression ne se confond pas avec cette force : pour une paroi étendue, il faut intégrer les forces locales.",
+          "L’équilibre d’une tranche de fluide donne dp/dz = −ρg. À une profondeur h positive sous la surface, z a diminué de h : la pression vaut ps + ρgh. La pression absolue inclut ps ; la surpression par rapport à la surface vaut seulement ρgh."
+        ],
+        "equations": [
+          {
+            "id": "hydropression",
+            "reading": "Avec z vers le haut, dp sur dz vaut moins rhô g. À la profondeur h, p vaut p indice s plus rhô g h."
+          }
+        ]
+      },
+      {
+        "id": "poussee",
+        "title": "Additionner les forces de pression",
+        "paragraphs": [
+          "La résultante des forces de pression du liquide et de l’air sur toute la surface du corps est verticale vers le haut, en négligeant la poussée de l’air. Sa norme FA est égale au poids du volume de liquide déplacé. Pour un flotteur, on peut aussi intégrer seulement les surpressions p − ps sur sa surface immergée ; intégrer les seules pressions absolues du liquide oublierait l’action atmosphérique sur la partie émergée.",
+          "Archimède est déjà la résultante du bilan des pressions. On utilise ce résultat ou l’intégrale des pressions ; les additionner compterait deux fois la même interaction."
+        ],
+        "equations": [
+          {
+            "id": "archimede",
+            "reading": "La norme de la poussée F indice A vaut rhô indice f, masse volumique du fluide, fois le volume immergé, fois g."
+          }
+        ]
+      },
+      {
+        "id": "flottaison",
+        "title": "Chercher le volume immergé d’équilibre",
+        "paragraphs": [
+          "Pour un bloc flottant librement, FA = mg. Avec m = ρbV et un liquide homogène, Vimm/V = ρb/ρf. La fraction immergée est inférieure à 1 si la masse volumique moyenne du bloc est plus faible que celle du liquide.",
+          "Cette égalité des forces règle l’équilibre vertical. La stabilité en inclinaison dépend aussi de la forme du corps et des positions des centres de masse et de poussée ; elle n’est pas déduite du seul rapport des masses volumiques."
+        ],
+        "equations": []
+      },
+      {
+        "id": "limites",
+        "title": "Adapter le modèle au milieu",
+        "paragraphs": [
+          "Dans un fluide compressible ou stratifié, ρ dépend de la position : on conserve dp/dz = −ρ(z)g et on intègre avec la loi appropriée. Dans un repère accéléré, le bilan doit inclure les effets du référentiel.",
+          "Un corps appuyé sur le fond, collé à une paroi ou soumis à une force de surface exige un nouveau bilan des forces. La formule de flottaison libre ne s’applique plus directement."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Un bassin contient un liquide de masse volumique 1 000 kg·m⁻³ ; g = 9,81 m·s⁻² et ps = 101 325 Pa. Calculer p à h = 2,40 m. Un bloc de volume 2,00 L et de masse volumique 600 kg·m⁻³ flotte ensuite librement.",
+      "steps": [
+        "Surpression : ρgh = 23 544,000 Pa ; pression absolue : 124 869,000 Pa.",
+        "Masse du bloc : 600 × 0,002 = 1,200 kg. Le volume immergé vaut m/ρf = 0,001200 m³, soit 1,200 L.",
+        "La fraction immergée vaut 0,600, soit 60 %. La poussée vaut 11,772 N, égale au poids."
+      ],
+      "result": "La pression absolue inclut la pression de surface. La flottaison verticale équilibre le poids par la résultante des pressions."
+    },
+    "checkpoint": {
+      "question": "En remplaçant le bloc par un corps homogène de même volume mais de masse volumique 1 200 kg·m⁻³, peut-on conserver la flottaison libre ?",
+      "answer": "Non : le calcul demanderait un volume immergé de 2,400 L pour un volume total de 2,000 L. Même complètement immergé, le corps subit un poids supérieur à la poussée et tend à descendre."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P6",
+        "page": 306,
+        "section": "Pression, masse volumique et centre de poussée"
+      },
+      {
+        "doc": "cpge",
+        "code": "P6",
+        "page": 308,
+        "section": "Équilibre hydrostatique et poussée d’Archimède"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 252,
+        "section": "Statique des fluides et corps immergé"
+      }
+    ],
+    "references": [
+      "mit-hydrostatique"
+    ],
+    "corrections": [],
+    "number": 17,
+    "domain": "fluides-ondes",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "continuite-bernoulli",
+    "title": "Relier débit, vitesse et pression avec Bernoulli",
+    "level": "CPGE · Écoulement idéal",
+    "summary": "Associer conservation de la masse et bilan mécanique dans un tube de section variable.",
+    "objective": "Déduire les vitesses du débit puis calculer une différence de pression sous des hypothèses explicites.",
+    "prerequisites": [
+      "Masse volumique",
+      "Conservation de la masse",
+      "Énergie cinétique et potentielle"
+    ],
+    "system": "Un tube de courant fixe parcouru par un fluide homogène, sans branchement ni apport de masse.",
+    "conditions": [
+      "Écoulement stationnaire ; fluide incompressible de masse volumique ρ constante.",
+      "Pour Bernoulli : viscosité négligeable, pesanteur uniforme, pas de pompe ni turbine entre les points.",
+      "Comparer deux points d’une même ligne de courant ; dans l’exemple, les vitesses sont assimilées aux vitesses moyennes sur les sections."
+    ],
+    "sections": [
+      {
+        "id": "debit",
+        "title": "Conserver le débit massique",
+        "paragraphs": [
+          "Le débit volumique Q est un volume traversant une section par unité de temps, en m³·s⁻¹. Sur une section normale au tube, Q = A v̄ définit la vitesse moyenne v̄. Le débit massique vaut ρQ, en kg·s⁻¹.",
+          "La masse se conserve même pour un fluide compressible. L’égalité des débits volumiques entre deux sections exige ici la même masse volumique et l’absence d’accumulation : une section plus petite impose alors une vitesse moyenne plus grande."
+        ],
+        "equations": [
+          {
+            "id": "continuitefluide",
+            "reading": "Le débit volumique Q vaut A indice 1 fois v moyenne indice 1, et A indice 2 fois v moyenne indice 2."
+          }
+        ]
+      },
+      {
+        "id": "bernoulli",
+        "title": "Faire le bilan mécanique le long d’une ligne de courant",
+        "paragraphs": [
+          "Les trois termes p, ρv²/2 et ρgz ont l’unité d’une énergie par volume, donc celle d’une pression. Sous les hypothèses annoncées, leur somme est constante sur une ligne de courant. La constante peut différer entre lignes de courant si l’écoulement est rotationnel.",
+          "À même altitude dans ce modèle, une augmentation de vitesse s’accompagne d’une diminution de pression statique. Une variation d’altitude ou une dissipation modifie cette conclusion : « plus vite, donc moins de pression » n’est pas une règle universelle."
+        ],
+        "equations": [
+          {
+            "id": "bernoullifluide",
+            "reading": "p plus rhô v carré sur deux plus rhô g z est constant le long d’une même ligne de courant."
+          }
+        ]
+      },
+      {
+        "id": "methode",
+        "title": "Séparer la masse du bilan d’énergie",
+        "paragraphs": [
+          "Convertir d’abord les sections en m² et le débit en m³·s⁻¹, puis calculer les vitesses. Fixer ensuite les altitudes et une pression de référence avant d’appliquer Bernoulli.",
+          "Dans un écoulement réel dont le profil de vitesse n’est pas uniforme, substituer la vitesse moyenne dans un bilan global d’énergie exige des corrections. La continuité reste valable avec la moyenne définie par le débit."
+        ],
+        "equations": []
+      },
+      {
+        "id": "limites",
+        "title": "Repérer ce que le modèle néglige",
+        "paragraphs": [
+          "Une perte de charge traduit la dissipation mécanique. Une pompe apporte de l’énergie. Un écoulement instationnaire ou fortement compressible requiert également une forme plus générale du bilan.",
+          "Une pression absolue calculée trop faible peut annoncer une vaporisation locale. On confronte alors le résultat aux propriétés du liquide et aux conditions expérimentales, avant de prolonger le modèle idéal."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Un écoulement idéal horizontal de masse volumique 1 000 kg·m⁻³ a un débit de 0,400 L·s⁻¹. Les sections valent A1 = 4,00 cm² et A2 = 1,00 cm² ; p1 = 150,0 kPa absolus.",
+      "steps": [
+        "Conversions : Q = 0,000400 m³·s⁻¹ ; A1 = 0,000400 m² et A2 = 0,000100 m².",
+        "Vitesses : v1 = 1,000 m·s⁻¹ et v2 = 4,000 m·s⁻¹.",
+        "La baisse de pression vaut ρ(v2² − v1²)/2 = 7 500,000 Pa. Donc p2 = 142,500 kPa absolus."
+      ],
+      "result": "La continuité fixe les vitesses ; Bernoulli fournit la différence de pression, avec une altitude identique et sans perte mécanique."
+    },
+    "checkpoint": {
+      "question": "À débit imposé inchangé, si la seconde section est située 1,00 m plus haut, quelle pression prévoit le même modèle ?",
+      "answer": "Il faut retrancher aussi ρg × 1,00 = 9,810 kPa, avec g = 9,81 m·s⁻². La pression p2 devient 132,690 kPa absolus. Le débit est ici supposé maintenu par les conditions extérieures."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P7",
+        "page": 312,
+        "section": "Débits volumique et massique"
+      },
+      {
+        "doc": "cpge",
+        "code": "P7",
+        "page": 314,
+        "section": "Équation de continuité"
+      },
+      {
+        "doc": "cpge",
+        "code": "P7",
+        "page": 316,
+        "section": "Théorème de Bernoulli"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 254,
+        "section": "Débits et description du fluide"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 255,
+        "section": "Conservation de la masse"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 257,
+        "section": "Bernoulli et pertes de charge"
+      }
+    ],
+    "references": [
+      "openstax-continuite",
+      "openstax-bernoulli"
+    ],
+    "corrections": [],
+    "number": 18,
+    "domain": "fluides-ondes",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "viscosite-poiseuille",
+    "title": "Calculer un débit visqueux avec Poiseuille",
+    "level": "CPGE · Fluide newtonien",
+    "summary": "Relier la chute de pression au profil de vitesse et tester le régime laminaire.",
+    "objective": "Calculer un débit dans un tube fin, puis vérifier le nombre de Reynolds et la dissipation.",
+    "prerequisites": [
+      "Débit volumique",
+      "Dérivée d’un profil de vitesse",
+      "Unités SI"
+    ],
+    "system": "Un fluide newtonien dans un tube horizontal rectiligne, rigide et circulaire de rayon R et longueur L.",
+    "conditions": [
+      "Écoulement stationnaire, incompressible, laminaire et pleinement développé, loin de l’entrée.",
+      "Viscosité dynamique η uniforme et constante ; adhérence du fluide à la paroi immobile.",
+      "Δp = pentrée − psortie > 0 ; absence de glissement à la paroi et d’apport mécanique interne."
+    ],
+    "sections": [
+      {
+        "id": "viscosite",
+        "title": "Distinguer gradient de vitesse et vitesse",
+        "paragraphs": [
+          "La viscosité dynamique η, en Pa·s, relie une contrainte de cisaillement au gradient de vitesse dans un fluide newtonien. Un fluide visqueux ne se déplace pas à la même vitesse partout dans la section.",
+          "La viscosité cinématique ν = η/ρ s’exprime en m²·s⁻¹. Les deux grandeurs ne sont pas interchangeables : écrire l’unité permet souvent de repérer une erreur de formule.",
+          "Pour un cisaillement simple orienté avec u selon x et son gradient selon y, la composante de contrainte vaut τxy = η ∂u/∂y. La viscosité dynamique est nécessaire pour obtenir une contrainte en pascals."
+        ],
+        "equations": []
+      },
+      {
+        "id": "profil",
+        "title": "Du profil parabolique au débit",
+        "paragraphs": [
+          "En notant r la distance à l’axe, u(r) s’annule en r = R et atteint son maximum au centre. L’intégration de u sur la section donne la loi de Poiseuille ; la vitesse moyenne vaut la moitié de la vitesse axiale maximale.",
+          "Pour un même Δp, le débit varie comme R⁴. Le rayon doit être distingué du diamètre ; une erreur de facteur deux sur cette grandeur devient un facteur seize sur le débit.",
+          "Avec x orienté de l’entrée vers la sortie et Δp = pentrée − psortie, le gradient établi est dp/dx = −Δp/L. Cette convention rend le profil et le débit positifs dans le sens de l’écoulement."
+        ],
+        "equations": [
+          {
+            "id": "profilpoiseuille",
+            "reading": "La vitesse u à la distance r de l’axe vaut delta p sur quatre êta L, multiplié par R carré moins r carré."
+          },
+          {
+            "id": "debitpoiseuille",
+            "reading": "Q vaut pi R puissance quatre delta p divisé par huit êta L."
+          }
+        ]
+      },
+      {
+        "id": "regime",
+        "title": "Vérifier les hypothèses après le calcul",
+        "paragraphs": [
+          "Le nombre de Reynolds compare inertie et viscosité à l’échelle choisie. Ici Re = ρ v̄ D/η avec D = 2R et v̄ = Q/(πR²). Un petit Re est compatible avec l’hypothèse laminaire ; il ne dispense pas de vérifier le développement du profil.",
+          "La transition dépend aussi des perturbations, de l’entrée et de la géométrie. On ne prend pas un seuil numérique unique pour une garantie valable dans toutes les situations."
+        ],
+        "equations": [
+          {
+            "id": "reynoldsfluide",
+            "reading": "Re vaut rhô fois la vitesse moyenne fois le diamètre D, divisé par la viscosité dynamique êta."
+          }
+        ]
+      },
+      {
+        "id": "dissipation",
+        "title": "Une chute de pression alimente la dissipation",
+        "paragraphs": [
+          "La puissance mécanique dissipée dans le tronçon horizontal pleinement développé vaut Δp Q, positive dans le sens de l’écoulement. Le débit constant n’implique donc pas une pression constante.",
+          "Cette situation ne se décrit pas en imposant la conservation de p + ρv²/2 le long du tube : Bernoulli sans pertes a précisément négligé l’effet visqueux qui fixe ici le débit."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "R = 0,500 mm, L = 1,00 m, η = 1,00 mPa·s, ρ = 1 000 kg·m⁻³ et Δp = 400 Pa. Ces valeurs de modèle sont supposées constantes.",
+      "steps": [
+        "Q = π(0,000500)⁴ × 400 /(8 × 0,00100 × 1,00) = 9,817477 × 10⁻⁹ m³·s⁻¹, soit 0,589049 mL·min⁻¹.",
+        "La vitesse moyenne vaut 0,012500 m·s⁻¹ ; la vitesse au centre vaut 0,025000 m·s⁻¹.",
+        "Avec D = 0,00100 m, Re = 12,500. La puissance Δp Q vaut 3,926991 µW."
+      ],
+      "result": "Le faible Reynolds est cohérent avec le régime laminaire annoncé. Le profil pleinement développé et l’adhérence restent des hypothèses du calcul."
+    },
+    "checkpoint": {
+      "question": "Que prévoit le modèle si le rayon double, à mêmes Δp, η et L ?",
+      "answer": "Le débit est multiplié par 16, la vitesse moyenne par 4 et Reynolds par 8, soit Re = 100 ici. Il faut vérifier à nouveau que le régime et les conditions d’entrée permettent toujours Poiseuille."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P7",
+        "page": 315,
+        "section": "Viscosités et nombre de Reynolds"
+      },
+      {
+        "doc": "cpge",
+        "code": "P7",
+        "page": 316,
+        "section": "Fluide newtonien et pertes de charge"
+      },
+      {
+        "doc": "cpge",
+        "code": "P7",
+        "page": 321,
+        "section": "Écoulement de Poiseuille"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 256,
+        "section": "Viscosité et régime d’écoulement"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 257,
+        "section": "Contrainte newtonienne et dissipation"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 259,
+        "section": "Poiseuille en tube circulaire"
+      }
+    ],
+    "references": [
+      "openstax-poiseuille"
+    ],
+    "corrections": [
+      {
+        "id": "C14",
+        "title": "Employer la viscosité dynamique dans la contrainte",
+        "detail": "La contrainte newtonienne est écrite avec ν, défini comme viscosité cinématique dans les passages précédents. Une contrainte en Pa exige η en Pa·s : τxy = η ∂u/∂y dans le cisaillement simple. La version web distingue explicitement η de ν = η/ρ.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P7",
+            "page": 316,
+            "section": "Contrainte du fluide newtonien"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC1",
+            "page": 257,
+            "section": "Contrainte du fluide newtonien"
+          }
+        ]
+      },
+      {
+        "id": "C15",
+        "title": "Fixer le signe de la chute de pression",
+        "detail": "Les passages Poiseuille définissent ΔP = P(L) − P(0), mais les profils et débits affichés portent le signe correspondant à la différence opposée. La version web adopte Δp = pentrée − psortie > 0, d’où dp/dx = −Δp/L et un débit positif de l’entrée vers la sortie.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P7",
+            "page": 321,
+            "section": "Poiseuille : définition de ΔP et profil"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC1",
+            "page": 259,
+            "section": "Poiseuille : définition de ΔP et profil"
+          }
+        ]
+      }
+    ],
+    "number": 19,
+    "domain": "fluides-ondes",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "elasticite-lineaire",
+    "title": "Relier traction et allongement d’une barre",
+    "level": "CPGE · Élasticité linéaire",
+    "summary": "Passer d’une propriété du matériau à la raideur d’un objet et à son énergie élastique.",
+    "objective": "Calculer contrainte, déformation, allongement et énergie stockée, sans confondre E et une raideur.",
+    "prerequisites": [
+      "Force et surface",
+      "Travail d’une force",
+      "Petites variations"
+    ],
+    "system": "Une barre homogène de longueur initiale L0 et de section initiale A0, soumise à une traction axiale.",
+    "conditions": [
+      "Petites déformations dans le domaine élastique linéaire ; température fixée et module de Young E constant.",
+      "Chargement quasistatique, efforts opposés de même norme F aux extrémités ; contraintes uniformes loin des attaches.",
+      "Traction uniaxiale, surface latérale libre ; poids propre et effets de flexion négligés."
+    ],
+    "sections": [
+      {
+        "id": "hooke",
+        "title": "Mesurer une contrainte et une déformation",
+        "paragraphs": [
+          "La contrainte nominale σ = F/A0 s’exprime en pascals ; F est la norme de l’effort à une extrémité, pas la somme des deux forces. La déformation relative ε = ΔL/L0 est sans dimension.",
+          "Dans le régime étudié, σ = Eε. E caractérise le matériau pour les conditions choisies, tandis que la déformation décrit sa réponse. L’allongement ΔL = L − L0 est positif en traction."
+        ],
+        "equations": [
+          {
+            "id": "youngbarre",
+            "reading": "Sigma vaut F sur A indice zéro et E epsilon ; epsilon vaut delta L sur L indice zéro."
+          }
+        ]
+      },
+      {
+        "id": "raideur",
+        "title": "Distinguer matériau et géométrie",
+        "paragraphs": [
+          "La loi précédente devient F = keq ΔL avec keq = EA0/L0, en N·m⁻¹. Une barre plus longue est moins raide à section et matériau fixés ; augmenter sa section augmente sa raideur.",
+          "Le module de Young E s’exprime en Pa : il ne peut pas remplacer directement la constante k d’un ressort. La conversion utilise la longueur et la section de l’objet."
+        ],
+        "equations": []
+      },
+      {
+        "id": "energie",
+        "title": "Intégrer le travail de chargement",
+        "paragraphs": [
+          "Pour charger progressivement depuis l’état non déformé, la force croît de zéro à F. Le travail réversible stocké est U = F ΔL/2, et non F ΔL.",
+          "La densité volumique d’énergie correspondante vaut σε/2 dans cette approximation. On peut relier la même élasticité à une onde longitudinale dans une barre mince : le modèle unidimensionnel donne c = √(E/ρ), avec des hypothèses supplémentaires de propagation."
+        ],
+        "equations": [
+          {
+            "id": "energiebarre",
+            "reading": "U vaut F delta L sur deux, ou E A indice zéro sur deux L indice zéro multiplié par delta L au carré."
+          }
+        ]
+      },
+      {
+        "id": "limites",
+        "title": "Savoir quitter le régime linéaire",
+        "paragraphs": [
+          "Au-delà du domaine élastique, un retour à force nulle peut laisser une déformation permanente. Une loi linéaire ne prédit ni la rupture ni l’ensemble d’une courbe contrainte-déformation.",
+          "La compression d’une barre élancée peut provoquer un flambement ; la traction non uniforme, la flexion, le cisaillement et les grandes déformations nécessitent d’autres modèles."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Une barre de longueur L0 = 2,00 m et section A0 = 4,00 mm² a un module E = 200 GPa. On applique lentement une traction de 80,0 N en supposant le domaine linéaire.",
+      "steps": [
+        "A0 = 4,00 × 10⁻⁶ m². La contrainte σ vaut 20,000 MPa et la déformation ε vaut 0,000100.",
+        "L’allongement ΔL vaut 0,200 mm. La raideur équivalente EA0/L0 vaut 400 000,000 N·m⁻¹.",
+        "L’énergie élastique stockée vaut U = 80,0 × 0,000200 / 2 = 0,008000 J."
+      ],
+      "result": "La faible déformation est cohérente avec l’approximation géométrique. L’appartenance au domaine élastique doit aussi être confirmée pour le matériau réel."
+    },
+    "checkpoint": {
+      "question": "Si la longueur initiale double à section, module et force identiques, que deviennent l’allongement et la déformation relative ?",
+      "answer": "La raideur est divisée par deux et l’allongement double : 0,400 mm. La contrainte et la déformation relative restent identiques ; l’énergie stockée double à 0,016000 J."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P4",
+        "page": 292,
+        "section": "Déformations et module de Young"
+      },
+      {
+        "doc": "cpge",
+        "code": "P4",
+        "page": 295,
+        "section": "Loi de Hooke et propagation dans un barreau"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 249,
+        "section": "Élasticité et déformations longitudinales"
+      }
+    ],
+    "references": [
+      "openstax-elasticite"
+    ],
+    "corrections": [],
+    "number": 20,
+    "domain": "fluides-ondes",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "onde-corde",
+    "title": "Décrire la propagation et les modes d’une corde",
+    "level": "CPGE · Ondes mécaniques",
+    "summary": "Relier tension, masse linéique, célérité et fréquences propres d’une corde tendue.",
+    "objective": "Distinguer déplacement de la corde et propagation de l’onde, puis imposer les conditions aux extrémités.",
+    "prerequisites": [
+      "Dérivées partielles",
+      "Oscillateur harmonique",
+      "Fonctions sinusoïdales"
+    ],
+    "system": "Une corde homogène tendue suivant x ; y(x,t) décrit son petit déplacement transversal.",
+    "conditions": [
+      "Tension T positive, uniforme et constante ; masse linéique μ constante en kg·m⁻¹.",
+      "Petites pentes |∂y/∂x| ≪ 1 ; poids propre, rigidité de flexion, dissipation et variation de tension négligés.",
+      "Pour les modes propres : longueur L, deux extrémités fixes, modèle linéaire sans amortissement."
+    ],
+    "sections": [
+      {
+        "id": "propagation",
+        "title": "Une déformation se propage",
+        "paragraphs": [
+          "L’équation de d’Alembert relie courbure spatiale et accélération transversale. La célérité c = √(T/μ) dépend de la tension et de la masse par unité de longueur, pas de l’amplitude dans ce modèle.",
+          "Une onde progressive vers +x s’écrit y(x,t) = f(x − ct). Un point matériel de la corde oscille transversalement ; il ne voyage pas à la célérité c le long de la corde. La lettre T désigne ici une tension en newtons, pas une période."
+        ],
+        "equations": [
+          {
+            "id": "ondecorde",
+            "reading": "La dérivée seconde de y par rapport au temps vaut c carré fois sa dérivée seconde par rapport à x ; c vaut la racine de T sur mu."
+          }
+        ]
+      },
+      {
+        "id": "modes",
+        "title": "Imposer deux extrémités fixes",
+        "paragraphs": [
+          "Les conditions y(0,t) = y(L,t) = 0 sélectionnent les nombres d’onde kn = nπ/L. Pour chaque entier n ≥ 1, la longueur d’onde est λn = 2L/n et la fréquence fn = nc/(2L).",
+          "Un mode stationnaire est produit par la superposition appropriée de deux ondes progressives opposées. Ses nœuds restent immobiles ; ses ventres oscillent avec la plus grande amplitude.",
+          "Un mouvement général peut superposer plusieurs modes. Chaque mode possède sa propre fréquence fn et ses coefficients fixés par les conditions initiales ; on ne factorise pas une oscillation temporelle unique devant toute la somme."
+        ],
+        "equations": [
+          {
+            "id": "modescorde",
+            "reading": "La fréquence f indice n vaut n c sur deux L, avec n entier supérieur ou égal à un."
+          }
+        ]
+      },
+      {
+        "id": "phase",
+        "title": "Comparer les phases entre deux points",
+        "paragraphs": [
+          "Dans un mode sinusoïdal, les points d’un même fuseau oscillent en phase. Deux fuseaux voisins sont en opposition de phase parce que le facteur spatial change de signe en traversant un nœud.",
+          "À un nœud, l’amplitude est nulle : attribuer une phase à son oscillation n’a pas de sens. Tous les points d’une onde stationnaire ne sont donc pas nécessairement en phase."
+        ],
+        "equations": []
+      },
+      {
+        "id": "limites",
+        "title": "Fréquence propre et réponse forcée",
+        "paragraphs": [
+          "Les fréquences propres appartiennent au modèle de la corde. L’amplitude de réponse à une excitation dépend aussi de l’amortissement, du point d’excitation et du mode sollicité.",
+          "De grandes pentes ou une rigidité de flexion notable modifient le modèle. La forme d’une onde stationnaire ne doit pas être interprétée comme une matière qui se déplace longitudinalement."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Une corde de longueur L = 1,20 m, de masse linéique μ = 5,00 g·m⁻¹ et de tension T = 72,0 N vibre avec ses extrémités fixes.",
+      "steps": [
+        "La célérité vaut √(72,0/0,00500) = 120,000 m·s⁻¹.",
+        "Le fondamental vaut f1 = 120/(2 × 1,20) = 50,000 Hz ; le troisième mode a f3 = 150,000 Hz et λ3 = 0,800 m.",
+        "Un signal parcourt la longueur L en 0,010000 s. Pour une amplitude maximale de 1,00 mm au troisième mode, la pente maximale vaut 0,007854, petite devant un."
+      ],
+      "result": "Les fréquences résultent à la fois de la propagation dans le milieu et des conditions aux limites. Une corde peut être tendue identiquement tout en ayant des fréquences différentes si sa longueur change."
+    },
+    "checkpoint": {
+      "question": "À même longueur et masse linéique, que deviennent la célérité et le fondamental lorsque la tension est multipliée par quatre ?",
+      "answer": "Ils sont multipliés par deux : c = 240,000 m·s⁻¹ et f1 = 100,000 Hz. Doubler seulement l’amplitude ne change pas ces valeurs dans l’approximation linéaire."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P4",
+        "page": 291,
+        "section": "Ondes progressives et stationnaires"
+      },
+      {
+        "doc": "cpge",
+        "code": "P4",
+        "page": 295,
+        "section": "Équation de la corde tendue"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 249,
+        "section": "Corde et équation de d’Alembert"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 250,
+        "section": "Modes propres et conditions aux limites"
+      }
+    ],
+    "references": [
+      "openstax-corde",
+      "openstax-modes"
+    ],
+    "corrections": [
+      {
+        "id": "C12",
+        "title": "Préciser les phases d’une onde stationnaire",
+        "detail": "Le passage CPGE p. 291 indique que tous les points d’une onde stationnaire oscillent en phase. Pour un mode sinusoïdal de corde, cette propriété vaut dans un même fuseau ; les fuseaux voisins sont en opposition de phase, et les nœuds ont une amplitude nulle. La version web distingue ces cas.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P4",
+            "page": 291,
+            "section": "Définition des ondes stationnaires"
+          }
+        ]
+      },
+      {
+        "id": "C16",
+        "title": "Attribuer à chaque mode sa fréquence",
+        "detail": "La solution présentée comme générale p. 250 factorise un même facteur temporel devant la somme des modes spatiaux. Pour une corde à extrémités fixes, les modes ont des fréquences propres différentes : chacun doit porter ses propres coefficients temporels. Un facteur unique ne décrit qu’un mode ou un cas particulier.",
+        "sources": [
+          {
+            "doc": "theorique",
+            "code": "PC1",
+            "page": 250,
+            "section": "Solution générale des modes de corde"
+          }
+        ]
+      }
+    ],
+    "number": 21,
+    "domain": "fluides-ondes",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "onde-acoustique",
+    "title": "Relier pression acoustique, intensité et décibels",
+    "level": "CPGE · Acoustique linéaire",
+    "summary": "Passer d’une petite fluctuation de pression à une intensité moyenne sans confondre vitesse du milieu et célérité.",
+    "objective": "Calculer longueur d’onde, intensité moyenne et niveau d’intensité pour une onde plane progressive.",
+    "prerequisites": [
+      "Ondes sinusoïdales",
+      "Masse volumique",
+      "Moyenne temporelle et logarithme décimal"
+    ],
+    "system": "Une petite perturbation sonore dans un fluide initialement homogène et au repos, de pression p0 et masse volumique ρ0.",
+    "conditions": [
+      "Acoustique linéaire : fluctuations de pression et de masse volumique faibles devant les valeurs d’équilibre.",
+      "Propagation sans pertes dans un milieu uniforme ; réponse localement isentropique pour la célérité.",
+      "Pour la relation pression-intensité : onde plane progressive sinusoïdale unique, loin des complications de réflexion ou de champ proche."
+    ],
+    "sections": [
+      {
+        "id": "celerite",
+        "title": "Distinguer compression et transport",
+        "paragraphs": [
+          "Le son dans ce modèle est une onde longitudinale : pression, masse volumique et vitesse du fluide varient autour de l’équilibre. La vitesse u des particules de fluide est distincte de la célérité c de la perturbation.",
+          "La compressibilité isentropique κS relie une variation de pression à une variation de volume à entropie massique constante. La célérité vérifie c² = (∂p/∂ρ)s = 1/(ρ0κS), avec les dérivées évaluées à l’équilibre."
+        ],
+        "equations": [
+          {
+            "id": "celeriteson",
+            "reading": "c carré vaut la dérivée de p par rapport à rhô à entropie massique constante, évaluée à l’équilibre, soit un sur rhô indice zéro kappa indice S."
+          }
+        ]
+      },
+      {
+        "id": "intensite",
+        "title": "Moyenner le flux d’énergie",
+        "paragraphs": [
+          "Pour une onde progressive suivant +x, p′ et u sont en phase et p′ = ρ0 c u. L’impédance acoustique caractéristique est Z = ρ0 c. L’intensité moyenne est la moyenne temporelle de p′u.",
+          "Pour une sinusoïde, la pression efficace peff vaut pmax/√2. Employer pmax à la place de peff sans le facteur 1/2 surestime l’intensité d’un facteur deux."
+        ],
+        "equations": [
+          {
+            "id": "intensiteson",
+            "reading": "L’intensité moyenne vaut p efficace au carré sur rhô zéro c, ou p maximum au carré sur deux rhô zéro c."
+          }
+        ]
+      },
+      {
+        "id": "decibels",
+        "title": "Nommer la grandeur dont on donne le niveau",
+        "paragraphs": [
+          "Le niveau d’intensité LI est défini par 10 log10(Ī/I0), avec I0 = 10⁻¹² W·m⁻². L’argument du logarithme est un rapport sans dimension. Les décibels expriment ici un niveau relatif, pas une puissance.",
+          "Un niveau de pression acoustique utilise une pression de référence et une autre définition. On précise donc toujours la grandeur et la référence. Doubler l’amplitude de pression multiplie l’intensité par quatre et augmente LI d’environ 6,02 dB."
+        ],
+        "equations": [
+          {
+            "id": "niveauson",
+            "reading": "L indice I vaut dix fois le logarithme décimal du rapport de l’intensité moyenne à I indice zéro."
+          }
+        ]
+      },
+      {
+        "id": "limites",
+        "title": "Réflexions, spectres et bruits",
+        "paragraphs": [
+          "Dans une onde stationnaire idéale, pression et vitesse peuvent être en quadrature et le flux moyen net peut être nul malgré une pression efficace non nulle. La formule Ī = peff²/(ρ0c) est donc réservée ici à l’onde progressive unique.",
+          "Un bruit peut être décrit par des composantes fréquentielles : une série ou une transformée de Fourier selon le signal, et un spectre statistique pour un bruit aléatoire. La différence avec un son pur tient au contenu spectral, pas à une impossibilité de décomposition.",
+          "L’absorption, la géométrie de propagation, les fortes amplitudes et la réponse d’un instrument demandent des compléments. Le calcul ci-dessous est un exemple physique idéal."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Une onde plane sinusoïdale a pmax = 0,200 Pa et f = 1 000 Hz. Pour ce modèle, ρ0 = 1,20 kg·m⁻³ et c = 340 m·s⁻¹ sont donnés.",
+      "steps": [
+        "La longueur d’onde est λ = c/f = 0,340 m ; Z = ρ0c = 408,000 Pa·s·m⁻¹.",
+        "L’intensité moyenne vaut 0,200²/(2 × 408) = 49,019608 µW·m⁻².",
+        "Avec I0 = 10⁻¹² W·m⁻², LI = 76,903698 dB. La vitesse particulaire maximale pmax/Z vaut seulement 0,490196 mm·s⁻¹."
+      ],
+      "result": "Le son se propage à 340 m·s⁻¹, tandis que les particules du fluide n’oscillent ici qu’à une vitesse maximale inférieure à 1 mm·s⁻¹."
+    },
+    "checkpoint": {
+      "question": "À mêmes fréquence et milieu, que devient le niveau d’intensité si pmax double ?",
+      "answer": "L’intensité est multipliée par quatre. Le niveau augmente de 10 log10(4) = 6,020600 dB, pour atteindre 82,924298 dB. La célérité reste inchangée dans le modèle linéaire."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P8",
+        "page": 322,
+        "section": "Acoustique, signaux et célérité"
+      },
+      {
+        "doc": "cpge",
+        "code": "P8",
+        "page": 324,
+        "section": "Impédance, intensité et énergie acoustique"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 260,
+        "section": "Ondes sonores et approximation acoustique"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC1",
+        "page": 261,
+        "section": "Énergie, impédance et transmission"
+      }
+    ],
+    "references": [
+      "openstax-celerite-son",
+      "openstax-intensite-son"
+    ],
+    "corrections": [
+      {
+        "id": "C13",
+        "title": "Distinguer bruit et absence de décomposition harmonique",
+        "detail": "Les définitions de CPGE P8 p. 322 et théorie PC1 p. 260 présentent le bruit comme non décomposable en sons sinusoïdaux. Une représentation fréquentielle reste possible dans le cadre approprié, souvent avec un spectre continu ou non harmonique. La version web distingue son pur, signal périodique et bruit sans exclure Fourier.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P8",
+            "page": 322,
+            "section": "Définition du bruit"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC1",
+            "page": 260,
+            "section": "Définition du bruit"
+          }
+        ]
+      },
+      {
+        "id": "C17",
+        "title": "Définir exactement l’intensité acoustique",
+        "detail": "Les passages indiquent une proportionnalité entre intensité et moyenne du flux d’énergie. Avec les unités SI et dans l’approximation acoustique, le vecteur intensité moyenne est défini par la moyenne de p′u, u étant ici le vecteur vitesse particulaire. La version web utilise une égalité et précise le sens de propagation avant d’en prendre la composante ou la norme.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P8",
+            "page": 324,
+            "section": "Intensité sonore et flux moyen"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC1",
+            "page": 261,
+            "section": "Intensité sonore et flux moyen"
+          }
+        ]
+      }
+    ],
+    "number": 22,
+    "domain": "fluides-ondes",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
   }
 ]

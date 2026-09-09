@@ -82,5 +82,59 @@
     "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf",
     "note": "§1.2, p. imprimée 2 (page PDF 7) : la trajectoire rend l’action stationnaire.",
     "checked": "2026-09-09"
+  },
+  "openstax-continuite": {
+    "title": "OpenStax, University Physics Volume 1 — Débit et conservation de la masse",
+    "url": "https://openstax.org/books/university-physics-volume-1/pages/14-5-fluid-dynamics",
+    "note": "§14.5 : débit volumique, débit massique et continuité.",
+    "checked": "2026-09-09"
+  },
+  "openstax-bernoulli": {
+    "title": "OpenStax, University Physics Volume 1 — Bilan de Bernoulli",
+    "url": "https://openstax.org/books/university-physics-volume-1/pages/14-6-bernoullis-equation",
+    "note": "§14.6 : bilan mécanique pour un fluide incompressible sans viscosité.",
+    "checked": "2026-09-09"
+  },
+  "openstax-poiseuille": {
+    "title": "OpenStax, University Physics Volume 1 — Viscosité et Poiseuille",
+    "url": "https://openstax.org/books/university-physics-volume-1/pages/14-7-viscosity-and-turbulence",
+    "note": "§14.7 : viscosité et débit laminaire dans un tube circulaire.",
+    "checked": "2026-09-09"
+  },
+  "openstax-elasticite": {
+    "title": "OpenStax, University Physics Volume 1 — Contrainte et module de Young",
+    "url": "https://openstax.org/books/university-physics-volume-1/pages/12-3-stress-strain-and-elastic-modulus",
+    "note": "§12.3 : contrainte de traction, déformation relative et module de Young.",
+    "checked": "2026-09-09"
+  },
+  "openstax-corde": {
+    "title": "OpenStax, University Physics Volume 1 — Célérité sur une corde",
+    "url": "https://openstax.org/books/university-physics-volume-1/pages/16-3-wave-speed-on-a-stretched-string",
+    "note": "§16.3 : approximation des petites pentes, tension et masse linéique.",
+    "checked": "2026-09-09"
+  },
+  "openstax-modes": {
+    "title": "OpenStax, University Physics Volume 1 — Modes propres de la corde",
+    "url": "https://openstax.org/books/university-physics-volume-1/pages/16-6-standing-waves-and-resonance",
+    "note": "§16.6 : conditions aux limites, nœuds et fréquences propres.",
+    "checked": "2026-09-09"
+  },
+  "openstax-celerite-son": {
+    "title": "OpenStax, University Physics Volume 1 — Célérité du son",
+    "url": "https://openstax.org/books/university-physics-volume-1/pages/17-2-speed-of-sound",
+    "note": "§17.2 : compressibilité du fluide, masse volumique et célérité.",
+    "checked": "2026-09-09"
+  },
+  "openstax-intensite-son": {
+    "title": "OpenStax, University Physics Volume 1 — Intensité sonore",
+    "url": "https://openstax.org/books/university-physics-volume-1/pages/17-3-sound-intensity",
+    "note": "§17.3 : pression sinusoïdale, intensité moyenne et niveau en décibels.",
+    "checked": "2026-09-09"
+  },
+  "mit-hydrostatique": {
+    "title": "MIT 8.01SC — Fluides au repos",
+    "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter27.pdf",
+    "note": "Chapitre 27, §27.3–27.4 et 27.6 : pression, profondeur et principe d’Archimède.",
+    "checked": "2026-09-09"
   }
 }

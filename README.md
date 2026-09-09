@@ -8,8 +8,9 @@ Un site pour étudier la physique en reliant observations, modèles et applicati
 - **Huit fiches web** de thermodynamique et physique statistique : hypothèses, 13 équations MathML, exemples calculés, questions corrigées et références de pages.
 - **Quatre fiches de mécanique** : Newton et référentiel, travail-énergie, oscillateur amorti, force centrale et orbite. Une boucle de mécanique à six entrées ouvre directement les sections des fiches.
 - **Quatre fiches de mécanique supplémentaires** : rotation autour d'un axe fixe, roulement sans glissement, référentiel tournant, Lagrange et Hamilton. Une seconde boucle de six entrées conserve l'accès à la première et relie les nouveaux sujets.
-- Une page **Domaines** : deux domaines disponibles, dix autres planifiés avec repères dans les recueils ; seize fiches et vingt-neuf équations MathML au total.
-- Un journal de **onze corrections ou clarifications** des passages utilisés des recueils.
+- **Six fiches de fluides et ondes** : hydrostatique et Archimède, continuité et Bernoulli, viscosité et Poiseuille, élasticité linéaire, corde tendue et acoustique. Deux boucles relient les hypothèses, les calculs et leurs limites.
+- Une page **Domaines** : trois domaines disponibles, neuf autres planifiés avec repères dans les recueils ; vingt-deux fiches et quarante-trois équations MathML au total.
+- Un journal de **dix-sept corrections ou clarifications** des passages utilisés des recueils.
 - Les sommaires de deux recueils d'Aurélien Roudier : **91 points d'entrée** pour 1 433 pages sources.
 - Le code de consultation et d'import des archives scientifiques de 2018.
 - Un bouton **Mode sombre** en haut de chaque page : choix clair/sombre mémorisé sur le navigateur, préférence système au premier accès et impression sur fond clair.
@@ -51,7 +52,7 @@ docker compose up -d --wait
 
 Ouvrir [le site local](http://localhost:8080/), [les domaines](http://localhost:8080/domaines/), [la mécanique](http://localhost:8080/domaines/mecanique) ou [le diagnostic](http://localhost:8080/installation). Adapter le port dans les liens s'il a été changé.
 
-La boucle, les deux domaines et les seize fiches sont présents dès le démarrage. Les tables d'archives sont initialement vides ; leur import est facultatif. Sur un PC où le projet modernisé fonctionne déjà, publier ce dépôt ne nécessite pas de réinstaller le site.
+La boucle, les trois domaines et les vingt-deux fiches sont présents dès le démarrage. Les tables d'archives sont initialement vides ; leur import est facultatif. Sur un PC où le projet modernisé fonctionne déjà, publier ce dépôt ne nécessite pas de réinstaller le site.
 
 ## Ajouter les documents et les archives
 

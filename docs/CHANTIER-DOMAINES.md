@@ -10,7 +10,7 @@ Les pages ci-dessous sont les repères des éditions locales déjà indexées. U
 | --- | --- | --- | --- | --- |
 | M1 | Mécanique du point : Newton, travail-énergie, oscillateur, force centrale | P1 p. 265–274 ; P2 p. 275–282 | PC1 p. 237–247 | Boucle à six entrées reliant les hypothèses aux calculs |
 | M2 | Solides, rotations, référentiels ; prolongement lagrangien et hamiltonien | P1–P3 p. 265–290 | PC1 et outils mathématiques, passages à vérifier | Bilan des moments et liens vers les conservations |
-| F1 | Fluides, élasticité, ondes mécaniques et acoustique | P4 p. 291–299 ; P6–P8 p. 306–324 | PC1 p. 248–261 | Écoulement et propagation : conditions, grandeurs, limites |
+| F1 | Fluides, élasticité, ondes mécaniques et acoustique | P4 p. 291–299 : ondes et élasticité ; P6 p. 306–311 : statique des fluides ; P7 p. 312–321 : dynamique ; P8 p. 322–324 : acoustique | PC1 p. 248–261 | Deux boucles : pression et écoulements ; déformation et propagation |
 | E1 | Champs, électrostatique, magnétostatique, induction, Maxwell et milieux | P11–P14 p. 351–385 | PC2 p. 262–286 | Charges, champs et flux reliés aux lois |
 | E2 | Circuits, signaux, filtres, composants et technologies | P15–P19 p. 386–433 | PC2 pour les fondements ; compléter avec des sources spécialisées | Circuit RLC et réponse fréquentielle |
 | O1 | Optique géométrique et ondulatoire | P9–P10 p. 325–350 | PC2, passages à vérifier | Rayons, conjugaison, interférences et diffraction |
@@ -47,4 +47,4 @@ Le site fonctionne localement ; `physicstopics.fr` n'a plus d'hébergement. L'en
 
 ## Suivi
 
-Voir [le journal des avancées](AVANCEES.md). Les lots M1 et M2 sont réalisés : huit fiches de mécanique, deux boucles et l'entrée par domaines. M2 introduit les formalismes de Lagrange et de Hamilton sur un système à un degré de liberté ; il ne transpose pas tout le contenu avancé des recueils. La relecture de l'auteur reste à faire. Le prochain lot est F1 (fluides et ondes). Les autres lots restent planifiés tant que le journal ne mentionne pas une livraison effective.
+Voir [le journal des avancées](AVANCEES.md). M1 et M2 ont livré huit fiches de mécanique et deux boucles. F1 ajoute six fiches et deux boucles pour les fluides, l'élasticité, la corde et l'acoustique. Ces livraisons constituent des premiers parcours délimités ; elles ne transposent pas l'intégralité des chapitres sources. M2 se limite notamment à une introduction analytique sur un système à un degré de liberté. La relecture de l'auteur reste à faire. Le prochain lot est E1 (champs et électromagnétisme). Les autres lots restent planifiés tant que le journal ne mentionne pas une livraison effective.

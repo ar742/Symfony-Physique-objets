@@ -170,8 +170,8 @@
   {
     "slug": "fluides-ondes",
     "title": "Fluides et ondes mécaniques",
-    "summary": "Hydrostatique, écoulements, élasticité et acoustique.",
-    "scope": "Lot F1 planifié : fiches web à rédiger.",
+    "summary": "Relier pression, débit et dissipation, puis déformation, propagation et intensité sonore.",
+    "scope": "Six fiches et deux boucles : fluides au repos et en mouvement, puis élasticité, corde et acoustique.",
     "sources": [
       {
         "doc": "cpge",
@@ -194,7 +194,125 @@
         "code": "PC1"
       }
     ],
-    "steps": []
+    "steps": [
+      {
+        "id": 1,
+        "title": "Définir l’équilibre",
+        "subtitle": "Pression et profondeur",
+        "tip": "Orienter l’axe vertical et distinguer pression absolue et surpression.",
+        "card": "hydrostatique-archimede",
+        "section": "pression",
+        "color": "blue"
+      },
+      {
+        "id": 2,
+        "title": "Identifier les actions",
+        "subtitle": "Poussée d’Archimède",
+        "tip": "La poussée est la résultante des pressions ; ne pas la compter deux fois.",
+        "card": "hydrostatique-archimede",
+        "section": "poussee",
+        "color": "orange"
+      },
+      {
+        "id": 3,
+        "title": "Conserver la masse",
+        "subtitle": "Débit et section",
+        "tip": "La continuité impose les vitesses moyennes dans le tube incompressible.",
+        "card": "continuite-bernoulli",
+        "section": "debit",
+        "color": "green"
+      },
+      {
+        "id": 4,
+        "title": "Vérifier le régime",
+        "subtitle": "Reynolds et limites",
+        "tip": "Contrôler les hypothèses du débit visqueux avant de retenir le résultat.",
+        "card": "viscosite-poiseuille",
+        "section": "regime",
+        "color": "blue"
+      },
+      {
+        "id": 5,
+        "title": "Calculer une prévision",
+        "subtitle": "Pression et énergie",
+        "tip": "Appliquer Bernoulli sur une ligne de courant sous les hypothèses annoncées.",
+        "card": "continuite-bernoulli",
+        "section": "bernoulli",
+        "color": "orange"
+      },
+      {
+        "id": 6,
+        "title": "Relier les bilans",
+        "subtitle": "Dissipation mécanique",
+        "tip": "Une chute de pression peut alimenter une dissipation même à débit constant.",
+        "card": "viscosite-poiseuille",
+        "section": "dissipation",
+        "color": "green"
+      }
+    ],
+    "loop_title": "Pression et écoulements",
+    "loops": [
+      {
+        "anchor": "boucle-ondes",
+        "title": "Déformation et propagation",
+        "steps": [
+          {
+            "id": 1,
+            "title": "Décrire le milieu",
+            "subtitle": "Élasticité de la barre",
+            "tip": "Nommer le module du matériau, la section et la longueur avant de calculer une raideur.",
+            "card": "elasticite-lineaire",
+            "section": "hooke",
+            "color": "blue"
+          },
+          {
+            "id": 2,
+            "title": "Identifier le rappel",
+            "subtitle": "Tension de la corde",
+            "tip": "La tension transmet la perturbation ; la masse linéique règle son inertie.",
+            "card": "onde-corde",
+            "section": "propagation",
+            "color": "orange"
+          },
+          {
+            "id": 3,
+            "title": "Choisir le modèle",
+            "subtitle": "Compressibilité et son",
+            "tip": "La célérité du son diffère de la vitesse d’oscillation des particules.",
+            "card": "onde-acoustique",
+            "section": "celerite",
+            "color": "green"
+          },
+          {
+            "id": 4,
+            "title": "Confronter les valeurs",
+            "subtitle": "Pression et décibels",
+            "tip": "Vérifier comment une amplitude de pression modifie l’intensité moyenne.",
+            "card": "onde-acoustique",
+            "section": "controle",
+            "color": "blue"
+          },
+          {
+            "id": 5,
+            "title": "Imposer les limites",
+            "subtitle": "Modes propres",
+            "tip": "Les extrémités fixes sélectionnent les fréquences possibles de la corde.",
+            "card": "onde-corde",
+            "section": "modes",
+            "color": "orange"
+          },
+          {
+            "id": 6,
+            "title": "Suivre l’énergie",
+            "subtitle": "Chargement élastique",
+            "tip": "Le travail intégré depuis l’état non déformé donne l’énergie stockée.",
+            "card": "elasticite-lineaire",
+            "section": "energie",
+            "color": "green"
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "electromagnetisme",

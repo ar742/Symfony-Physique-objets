@@ -85,7 +85,7 @@ foreach (['/boucle/0', '/boucle/7', '/fiches/inconnue', '/fiches/..%2F.env', '/d
     $response = $kernel->handle(Symfony\Component\HttpFoundation\Request::create($path), Symfony\Component\HttpKernel\HttpKernelInterface::SUB_REQUEST);
     $check($response->getStatusCode() === 404, 'Route invalide '.$path);
 }
-foreach (['/boucle/2', '/fiches/boltzmann', '/domaines/mecanique', '/fiches/lagrange-hamilton', '/styles/science.css'] as $path) {
+foreach (['/boucle/2', '/fiches/boltzmann', '/domaines/mecanique', '/fiches/lagrange-hamilton', '/domaines/fluides-ondes', '/fiches/onde-acoustique', '/styles/science.css', '/scripts/theme.js'] as $path) {
     $curl = curl_init('http://127.0.0.1'.$path);
     curl_setopt_array($curl, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 30]);
     $html = curl_exec($curl);

@@ -40,8 +40,8 @@ final class LearningLibraryTest extends TestCase
     public function testCardsHavePreciseSourcesAndWellFormedMath(): void
     {
         $cards = $this->library()->all();
-        self::assertCount(16, $cards);
-        self::assertCount(16, array_unique(array_column($cards, 'slug')));
+        self::assertCount(22, $cards);
+        self::assertCount(22, array_unique(array_column($cards, 'slug')));
         $corrections = [];
         foreach ($cards as $card) {
             $anchors = ['conditions', 'exemple', 'controle', 'corrections', 'sources', 'dans-la-boucle', ...array_column($card['sections'], 'id')];
@@ -85,7 +85,7 @@ final class LearningLibraryTest extends TestCase
                 $corrections[] = $correction['id'];
             }
         }
-        self::assertCount(11, $corrections);
+        self::assertCount(17, $corrections);
     }
 
     public function testDisplayedExamplesMatchIndependentCalculations(): void
@@ -126,5 +126,24 @@ final class LearningLibraryTest extends TestCase
         $containsNumber('lagrange-hamilton', .1 / .2, 3);
         $containsNumber('lagrange-hamilton', .1**2 / (2 * .2) + .5 * 20 * .05**2, 3);
         $containsNumber('lagrange-hamilton', sqrt(.05**2 + (.1 / (.2 * 10))**2), 6);
+        $containsNumber('hydrostatique-archimede', 101325 + 1000 * 9.81 * 2.4, 3);
+        $containsNumber('hydrostatique-archimede', 600 * .002 / 1000 * 1e3, 3);
+        $containsNumber('hydrostatique-archimede', 600 * .002 * 9.81, 3);
+        $containsNumber('continuite-bernoulli', .0004 / .0001, 3);
+        $containsNumber('continuite-bernoulli', .5 * 1000 * (4**2 - 1**2), 3);
+        $containsNumber('continuite-bernoulli', (150000 - .5 * 1000 * (4**2 - 1**2)) / 1000, 3);
+        $flow = pi() * .0005**4 * 400 / (8 * .001 * 1);
+        $containsNumber('viscosite-poiseuille', $flow * 1e6 * 60, 6);
+        $containsNumber('viscosite-poiseuille', 1000 * ($flow / (pi() * .0005**2)) * .001 / .001, 3);
+        $containsNumber('viscosite-poiseuille', 400 * $flow * 1e6, 6);
+        $containsNumber('elasticite-lineaire', 80 * 2 / (200e9 * 4e-6) * 1e3, 3);
+        $containsNumber('elasticite-lineaire', .5 * 80 * (80 * 2 / (200e9 * 4e-6)), 6);
+        $containsNumber('onde-corde', sqrt(72 / .005), 3);
+        $containsNumber('onde-corde', 3 * sqrt(72 / .005) / (2 * 1.2), 3);
+        $containsNumber('onde-corde', .001 * 3 * pi() / 1.2, 6);
+        $soundIntensity = .2**2 / (2 * 1.2 * 340);
+        $containsNumber('onde-acoustique', $soundIntensity * 1e6, 6);
+        $containsNumber('onde-acoustique', 10 * log10($soundIntensity / 1e-12), 6);
+        $containsNumber('onde-acoustique', .2 / (1.2 * 340) * 1e3, 6);
     }
 }

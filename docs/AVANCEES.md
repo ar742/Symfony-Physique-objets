@@ -47,3 +47,18 @@ Prochain lot : **F1**, hydrostatique et écoulements, puis ondes mécaniques et 
 - Validation : syntaxe JavaScript et 58 fichiers Twig valides ; 1 302 contrôles fonctionnels sur 29 pages, sans erreur. Présence unique du bouton vérifiée par HTTP sur 11 pages représentatives et disponibilité de ses quatre ressources. Revue ciblée du code de mémorisation et d'accessibilité. La vérification visuelle au navigateur reste à faire.
 
 Le prochain lot scientifique reste **F1**.
+
+## 9 septembre 2026 — F1 : fluides, élasticité et ondes
+
+- Six fiches (17–22) : `hydrostatique-archimede`, `continuite-bernoulli`, `viscosite-poiseuille`, `elasticite-lineaire`, `onde-corde`, `onde-acoustique`. Chacune comporte système, hypothèses, lois, limites, exemple recalculé, question corrigée et références précises.
+- Troisième domaine disponible, `/domaines/fluides-ondes`, avec deux boucles à six entrées : pression et écoulements (`boucle-domaine`), déformation et propagation (`boucle-ondes`). Les clics ouvrent les sections ; les info-bulles, l'accès clavier, le bouton tactile et les retours vers la boucle réutilisent les composants existants, en clair et en sombre.
+- Quatorze équations MathML supplémentaires. Le site compte 22 fiches, 43 équations, trois domaines disponibles et neuf domaines planifiés.
+- Corrections ou précisions C12–C17 : phase entre fuseaux stationnaires ; décomposition fréquentielle d'un bruit ; viscosité dynamique dans la contrainte ; signe de la chute de pression dans Poiseuille ; fréquence propre de chaque mode ; définition SI de l'intensité acoustique. Le journal compte 17 entrées.
+- Sources examinées visuellement : CPGE P4 p. 291–292 et 295 ; P6 p. 306 et 308 ; P7 p. 312, 314–316 et 321 ; P8 p. 322 et 324. Recueil théorique PC1 p. 249–250, 252, 254–257 et 259–261. P4 concerne les ondes et l'élasticité ; P6 et P7 concernent les fluides.
+- Compléments vérifiés : MIT 8.01SC, chapitre 27 ; OpenStax, *University Physics Volume 1*, §12.3, 14.5–14.7, 16.3, 16.6, 17.2–17.3. Les références sont datées du 9 septembre 2026 ; aucun texte long ni illustration externe n'est reproduit.
+- Une seconde lecture scientifique a recalculé les exemples et vérifié les équations. Elle a précisé la pression atmosphérique dans le bilan du flotteur, le poids propre négligé de la corde et le renvoi à l'impédance acoustique, puis corrigé un arrondi à six décimales.
+- Validation : 10 tests et 1 692 assertions ; 72 fichiers Twig valides ; 1 542 contrôles fonctionnels sur 36 pages, sans erreur. Les vérifications couvrent les sources, calculs, ancres, identifiants, info-bulles, pagination, retours vers les boucles et réponses HTTP, dont le nouveau domaine et la fiche acoustique. Les fichiers du lot sont synchronisés avec le site local, avec sauvegarde préalable.
+
+Portée : fluide au repos de masse volumique constante, Bernoulli idéal, Poiseuille établi, traction uniaxiale linéaire, corde idéale et acoustique plane progressive. Les écoulements turbulents, les géométries générales, la plasticité, les milieux dispersifs et l'acoustique des salles ne sont pas couverts par ce premier ensemble. La relecture scientifique de l'auteur et la recette visuelle au navigateur restent à faire. Les ouvrages complets, rendus et extractions restent locaux ; aucune nouvelle dépendance ni modification de la base.
+
+Prochain lot : **E1**, champs et électromagnétisme.
