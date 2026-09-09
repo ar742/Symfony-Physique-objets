@@ -1934,926 +1934,1934 @@
   "capacites-thermiques": {
     "question": "Comment comparer deux chauffages sans confondre contrainte, chaleur échangée et capacité totale ou rapportée ?",
     "basis": "Deux calculs pour 1 mol de gaz parfait monoatomique, de 300 à 310 K. Capacités constantes supposées, aucune calorimétrie réalisée.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les contraintes, normalisations et inversions des deux chauffages sont précisées, en distinguant capacité constante, moyenne d’intervalle et états mécaniques.",
+    "subject": {
+      "type": "physique",
+      "description": "Le chauffage d’une mole de gaz parfait monoatomique classique, à volume fixé ou sous pression extérieure constante.",
+      "scope": "Composition fixée, excitations électroniques négligeables, travail de pression seul et énergies macroscopiques négligeables ; extensions calorifiques examinées conditionnellement."
+    },
     "levels": [
       {
+        "id": 1,
         "title": "Définir les deux chauffages",
-        "system": "Le dossier comparatif d’une enceinte rigide et d’une enceinte à pression extérieure constante.",
-        "input": "Les mêmes quantité, composition et températures initiale et finale supposées.",
-        "output": "Deux protocoles théoriques partageant des entrées comparables.",
+        "system": "Les attributs et contraintes d’une enceinte rigide et d’une enceinte soumise à une pression extérieure constante.",
+        "input": "Deux chauffages supposés : n = 1 mol, Tᵢ = 300 K et T𝒇 = 310 K ; gaz parfait monoatomique classique.",
+        "output": "Deux dossiers à ΔT = 10 K, avec contraintes mécaniques différentes et états extrêmes d’équilibre ; aucune valeur de volume ou pression fournie.",
         "section": "conditions",
         "comparison": "",
+        "relation": {
+          "nature": "interprétative",
+          "description": "L’exemple est réparti en deux protocoles comparables par matière et températures, sans assimiler leurs états mécaniques ni supposer leur réalisation."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Identifier les dispositifs",
-            "action": "Dessiner une enceinte rigide et un piston soumis à une pression extérieure constante pour le même échantillon proposé.",
-            "output": "Deux schémas de chauffage avec contraintes distinctes."
+            "title": "Identifier les deux contraintes",
+            "input": "Une mole de même composition, chauffée de 300 à 310 K dans deux dispositifs distincts.",
+            "action": "Distinguer volume fixé et Pext constante depuis un même état initial d’équilibre symbolique ; conserver quantité et composition, sans chiffrer Pᵢ ni Vᵢ.",
+            "output": "Deux dossiers supposés ; états extrêmes d’équilibre, avec Pᵢ = P𝒇 = Pext pour le cas à pression extérieure constante.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les attributs définissent les contraintes et les états de comparaison ; le piston n’est pas présenté comme une manipulation effectuée."
+            }
           },
           {
             "id": 2,
-            "title": "Séparer les contraintes",
-            "action": "Fixer quantité et composition pour les deux cas, puis distinguer volume imposé et pression extérieure imposée.",
-            "output": "Table des conditions communes et conditions différentes."
+            "title": "Réduire les bilans aux contraintes",
+            "input": "Système fermé, ΔE macroscopique négligeable, travail de pression seul ; ΔU = Q + W avec énergie reçue positive.",
+            "action": "Déduire Wᵥ = 0 à volume fixé ; pour Pext constante, intégrer Wₚ = −PextΔV et utiliser les équilibres extrêmes.",
+            "output": "Qᵥ = ΔU ; Qₚ = ΔU + PextΔV = ΔH puisque Δ(PV) = PextΔV entre les états extrêmes.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les contraintes réduisent le premier principe ; l’égalité Qₚ = ΔH ne requiert pas de supposer un équilibre interne à chaque instant."
+            }
           },
           {
             "id": 3,
-            "title": "Constituer les entrées",
-            "action": "Reporter une mole et les températures de trois cents à trois cent dix kelvins dans chaque dossier.",
-            "output": "Deux dossiers partageant une augmentation de dix kelvins."
+            "title": "Établir les entrées thermiques",
+            "input": "Les relations obtenues et les mêmes températures initiale et finale pour les deux chauffages.",
+            "action": "Associer ΔT = 310−300 = 10 K aux deux dossiers et conserver les conditions nécessaires à Qᵥ = ΔU et Qₚ = ΔH.",
+            "output": "Transmis à 2.1 : n = 1 mol, ΔT = 10 K, fonctions U/H appropriées, travail de pression seul et états extrêmes précisés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La différence de température devient une donnée commune ; les variations d’autres attributs d’état restent dépendantes de la contrainte."
+            }
           },
           {
             "id": 4,
-            "title": "Comparer les dossiers",
-            "action": "Vérifier que seule la contrainte mécanique annoncée différencie les deux chauffages, sans modifier discrètement quantité ou composition.",
-            "output": "Comparabilité des entrées rendue explicitement vérifiable ici.",
-            "comparison": "Comparer les dossiers de 3 aux dispositifs de 1 en gardant les paramètres communs inchangés."
+            "title": "Reprendre les dossiers contraints",
+            "input": "Les deux dossiers de 1.3, avec leurs bilans réduits et leur intervalle thermique commun.",
+            "action": "Relever les conditions propres à chaque égalité, notamment l’équilibre mécanique aux deux extrémités du chauffage sous Pext constante.",
+            "output": "Même quantité et même ΔT ; volume fixé d’un côté, Pext constante avec Pᵢ = P𝒇 = Pext de l’autre.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour reçoit les contraintes qui ont permis les bilans, sans transformer une température commune en identité d’états complets."
+            },
+            "comparison": "Comparer les conditions reprises à 1.3, en conservant les contraintes propres à chaque dispositif.",
+            "evaluation": {
+              "object": "Les attributs des dossiers relus en 1.4 et les entrées constituées en 1.3.",
+              "conditions": "Même matière supposée et mêmes températures ; les deux chauffages constituent des cas distincts.",
+              "criterion": "Conserver n = 1 mol, ΔT = 10 K ; pour Qᵥ, V fixé ; pour Qₚ, Pext constante et Pᵢ = P𝒇 = Pext.",
+              "finding": "Les conditions sont conservées ; les pressions et volumes numériques restent non fournis."
+            }
           },
           {
             "id": 5,
-            "title": "Examiner les interfaces",
-            "action": "Rechercher si un travail autre que celui de pression ou une fuite de matière rendrait la comparaison proposée inapplicable.",
-            "output": "Canaux exclus du modèle signalés pour chaque dispositif.",
-            "comparison": "Confronter ces exclusions aux contraintes de 2 plutôt que les déduire de la seule température imposée."
+            "title": "Calculer l’effet d’un canal exclu",
+            "input": "Les bilans relus et, uniquement comme extension, un travail supplémentaire Wautre reçu ou une variation macroscopique ΔEmac.",
+            "action": "Réécrire ΔU + ΔEmac = Q + Wpression + Wautre, puis isoler les défauts Qᵥ−ΔU et Qₚ−ΔH.",
+            "output": "Sous les contraintes mécaniques conservées, chaque défaut vaut ΔEmac−Wautre ; le cadre initial l’annule en excluant ces deux termes.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le bilan élargi montre pourquoi un transfert thermique seul ne caractérise une capacité que si les canaux énergétiques sont maîtrisés. Les travaux des champs déjà représentés dans ΔEmac ne sont pas comptés une seconde fois."
+            },
+            "comparison": "Confronter le bilan élargi à 1.2 : ΔEmac = Wautre = 0 retrouve les égalités utilisées.",
+            "evaluation": {
+              "object": "Les bilans réduits de 1.2 et les défauts calculés par extension en 1.5.",
+              "conditions": "Système toujours fermé ; mêmes contraintes mécaniques ; termes supplémentaires hypothétiques, sans mesure ni valeur ajoutée.",
+              "criterion": "Qᵥ−ΔU = ΔEmac−Wautre et Qₚ−ΔH = ΔEmac−Wautre ; leur annulation suffit algébriquement, sans identifier séparément les termes.",
+              "finding": "Le cadre initial retrouve les deux égalités ; un défaut nul ne prouverait pas, à lui seul, l’absence de contributions compensées."
+            }
           },
           {
             "id": 6,
-            "title": "Fixer les protocoles supposés",
-            "action": "Conserver les dossiers avec les états mécaniques aux extrémités et signaler les caractéristiques matérielles restant à documenter.",
-            "output": "Protocoles théoriques complets sans prétention de réalisation expérimentale.",
-            "comparison": "Comparer les protocoles finaux à 3 et aux dispositifs de 1, en nommant les conditions ajoutées."
+            "title": "Restituer les protocoles de référence",
+            "input": "Les conséquences du bilan élargi et les exclusions énergétiques posées dans l’énoncé.",
+            "action": "Restituer les deux chauffages avec ΔEmac et Wautre négligés, puis conserver leurs attributs initiaux et extrêmes distinctement.",
+            "output": "Retour à 1.1 : une mole, 300→310 K ; volume fixé ou Pext constante, sans autre travail ni nouvelles données matérielles.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour explicite les conditions des protocoles reçus ; il ne déduit pas leur réalisation d’une identité de bilan."
+            },
+            "comparison": "Comparer à 1.1 les données de matière, les températures et les contraintes, avec les mêmes inconnues de pression et volume.",
+            "evaluation": {
+              "object": "Les protocoles restitués en 1.6 et les dispositifs et attributs posés en 1.1.",
+              "conditions": "Retour au modèle de référence ; le contrecas énergétique ne remplace aucun des deux chauffages.",
+              "criterion": "Retrouver n = 1 mol, Tᵢ = 300 K, T𝒇 = 310 K et les deux contraintes ; aucun volume ou pression numérique ajouté.",
+              "finding": "Les données et contraintes initiales sont conservées, avec les conditions énergétiques nécessaires à leur exploitation."
+            }
           }
-        ],
-        "id": 1
+        ]
       },
       {
+        "id": 2,
         "title": "Associer capacité et contrainte",
-        "system": "Le modèle reliant U ou H à la température dans chacun des protocoles.",
-        "input": "Les contraintes du niveau 1 et le modèle monoatomique classique.",
-        "output": "Les capacités appropriées et les expressions des transferts thermiques.",
+        "system": "Le modèle calorique reliant les variations de U et H aux températures sous les deux contraintes.",
+        "input": "Dossier de 1.3 ; gaz parfait monoatomique classique, n fixé et excitations électroniques négligeables.",
+        "output": "Cᵥ = 3nR/2, Cₚ = 5nR/2 ; Qᵥ = CᵥΔT et Qₚ = CₚΔT sous leurs conditions respectives.",
         "section": "definitions",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le modèle calorique fournit les dérivées des fonctions d’état ; les contraintes déjà établies permettent ensuite de les relier aux chaleurs."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Choisir les fonctions d’état",
-            "action": "Associer l’enceinte rigide à la variation de U et examiner pourquoi H devient utile à pression extérieure constante.",
-            "output": "Fonctions d’état choisies pour chaque contrainte thermique."
+            "title": "Recevoir les fonctions d’état",
+            "input": "Qᵥ = ΔU, Qₚ = ΔH et les conditions transmises par 1.3 ; quantité et composition fixes.",
+            "action": "Retenir le modèle calorique U(T) = Uref + 3nRT/2 et l’enthalpie H = U + PV, avec PV = nRT.",
+            "output": "U dépend de T seul dans le modèle adopté ; Uref est indépendant de T à n fixé ; les deux fonctions restent des fonctions d’état.",
+            "relation": {
+              "nature": "logique",
+              "description": "La dépendance calorique est une hypothèse explicite du modèle monoatomique, et non une conséquence de la seule équation PV = nRT."
+            }
           },
           {
             "id": 2,
-            "title": "Définir les capacités",
-            "action": "Retenir les dérivées à quantité et composition fixées, puis distinguer capacités totales et capacités par mole.",
-            "output": "Définitions et unités adaptées aux grandeurs retenues."
+            "title": "Dériver les capacités totales",
+            "input": "Les fonctions U(T), H(T) et les définitions Cᵥ = (∂U/∂T)V,n, Cₚ = (∂H/∂T)P,n.",
+            "action": "Dériver U et H à quantité et composition fixes, puis soustraire les deux dérivées en utilisant H−U = nRT.",
+            "output": "Cᵥ = 3nR/2 et Cₚ = 5nR/2, en J·K⁻¹ ; Cₚ−Cᵥ = nR pour ce gaz parfait.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les dérivées donnent des capacités totales constantes ; le facteur n appartient déjà aux coefficients obtenus."
+            }
           },
           {
             "id": 3,
-            "title": "Construire les relations",
-            "action": "Utiliser les capacités constantes monoatomiques pour former QV = CᵥΔT et QP = CₚΔT sous les conditions annoncées.",
-            "output": "Relations de chauffage associées aux deux protocoles."
+            "title": "Établir les lois de chauffage",
+            "input": "Les capacités constantes obtenues et les égalités Qᵥ = ΔU, Qₚ = ΔH sous contraintes.",
+            "action": "Intégrer les dérivées constantes entre 300 et 310 K, puis associer chaque variation à la chaleur de son protocole.",
+            "output": "Transmis à 3.1 : Qᵥ = 3nRΔT/2, Qₚ = 5nRΔT/2 et Wₚ = −nRΔT ; ΔU = 3nRΔT/2.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les intégrales des fonctions d’état deviennent les chaleurs des protocoles autorisés ; les expressions ne valent pas pour un chauffage arbitraire."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les conditions",
-            "action": "Vérifier que les états extrêmes du chauffage isobare sont à l’équilibre mécanique avec la pression extérieure retenue.",
-            "output": "Conditions nécessaires à Q égal ΔH explicitées.",
-            "comparison": "Comparer les relations de 3 aux fonctions choisies en 1, sans identifier arbitrairement chaleur et énergie interne."
+            "title": "Reprendre les lois et leur portée",
+            "input": "Les expressions produites en 2.3, avec leurs capacités totales et leurs conditions mécaniques.",
+            "action": "Conserver le lien de chaque chaleur avec U ou H et relever que les deux variations internes utilisent la même loi U(T).",
+            "output": "Qᵥ correspond à ΔU ; Qₚ correspond à ΔH ; l’égalité des ΔU ne suppose pas des états mécaniques finaux identiques.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les lois calculées sont reprises avec leur signification thermodynamique, avant d’examiner une dépendance thermique plus générale des capacités."
+            },
+            "comparison": "Comparer à 2.3 les expressions reprises, les fonctions d’état concernées et les conditions d’utilisation.",
+            "evaluation": {
+              "object": "Les lois relues en 2.4 et les expressions obtenues en 2.3.",
+              "conditions": "Même gaz parfait monoatomique, capacités constantes et travail de pression seul, selon les deux protocoles.",
+              "criterion": "Qᵥ = 3nRΔT/2, Qₚ = 5nRΔT/2, Wₚ = −nRΔT et Qₚ+Wₚ = Qᵥ.",
+              "finding": "Les lois et leurs signes sont conservés ; l’égalité des variations internes provient ici de U(T)."
+            }
           },
           {
             "id": 5,
-            "title": "Tester la constance",
-            "action": "Poser une capacité dépendante de T et identifier le remplacement du produit par une intégrale sur l’intervalle thermique.",
-            "output": "Réserve précise concernant une capacité thermique variable.",
-            "comparison": "Confronter ce remplacement aux définitions de 2, qui restent valables lorsque les valeurs varient avec T."
+            "title": "Intégrer une capacité variable",
+            "input": "Les lois reprises ; extension calorique conditionnelle d’un gaz parfait à U(T), avec Cᵥ(T) variable et Cₚ(T)−Cᵥ(T) = nR.",
+            "action": "Former Qᵥ = ∫Cᵥ(T)dT et Qₚ = ∫Cₚ(T)dT entre les mêmes températures, puis soustraire les intégrales.",
+            "output": "Qₚ−Qᵥ = nRΔT reste vrai dans cette extension idéale ; remplacer chaque intégrale par CΔT demande une capacité constante ou moyenne précisée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les définitions différentielles sont intégrées sans supposer des capacités constantes ; la relation de Mayer conserve son domaine de gaz parfait."
+            },
+            "comparison": "Confronter les intégrales aux dérivées de 2.2 : les coefficients constants du modèle monoatomique redonnent les produits initiaux.",
+            "evaluation": {
+              "object": "Les dérivées et capacités constantes de 2.2 et leur intégration conditionnelle en 2.5.",
+              "conditions": "Extension de gaz parfait, n fixé et mêmes bornes thermiques ; elle n’est pas attribuée au gaz monoatomique classique de référence.",
+              "criterion": "Si Cᵥ(T) = 3nR/2, alors ∫CᵥdT = 3nRΔT/2 ; ∫(Cₚ−Cᵥ)dT = nRΔT dans le cadre idéal.",
+              "finding": "Le modèle initial est retrouvé comme cas constant ; la différence des chaleurs ne suffit donc pas à démontrer cette constance."
+            }
           },
           {
             "id": 6,
-            "title": "Retenir les lois utiles",
-            "action": "Présenter les deux expressions de chaleur avec leurs capacités et préciser l’approximation constante utilisée dans l’application suivante.",
-            "output": "Modèle calculatoire avec unités et contraintes conservées.",
-            "comparison": "Comparer ce modèle à 3 et aux fonctions de 1, en séparant définition générale et approximation numérique."
+            "title": "Restituer les fonctions et contraintes",
+            "input": "Les variations intégrées et leur réduction aux capacités constantes de référence.",
+            "action": "Retrouver les variations de U et H de 2.1, en maintenant l’arbitraire de la référence énergétique et les contraintes de chaque chaleur.",
+            "output": "Retour à 2.1 : ΔU = 3nRΔT/2 et ΔH = 5nRΔT/2 ; Uref demeure indéterminé et sans effet sur les bilans.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégration restitue les variations des fonctions d’entrée, mais les chaleurs ne fixent pas leur origine énergétique absolue."
+            },
+            "comparison": "Comparer aux fonctions de 2.1 les variations reconstruites et les hypothèses qui autorisent leur association aux chaleurs.",
+            "evaluation": {
+              "object": "Les fonctions d’état et conditions d’entrée de 2.1, confrontées aux variations restituées en 2.6.",
+              "conditions": "Retour au modèle monoatomique classique à n fixé ; même référence pour chaque différence d’énergie.",
+              "criterion": "U(T𝒇)−U(Tᵢ) = 3nRΔT/2 ; H(T𝒇)−H(Tᵢ) = 5nRΔT/2 ; Uref s’annule dans chaque différence.",
+              "finding": "La dépendance thermique d’entrée est restituée au niveau des variations ; aucune valeur absolue de U ou H n’est déterminée."
+            }
           }
-        ],
-        "id": 2
+        ]
       },
       {
+        "id": 3,
         "title": "Comparer les chaleurs prévues",
-        "system": "Le calcul des deux chauffages pour l’échantillon monoatomique proposé.",
-        "input": "Les entrées communes du niveau 1 et les capacités du niveau 2.",
-        "output": "Deux chaleurs différentes et une même variation interne.",
+        "system": "Les bilans numériques et les états mécaniques des deux chauffages du gaz monoatomique.",
+        "input": "Lois de 2.3 ; n = 1 mol, 300→310 K et R = 8,31446261815324 J·mol⁻¹·K⁻¹.",
+        "output": "Qᵥ ≈ 124,717 J ; Qₚ ≈ 207,862 J ; Wₚ ≈ −83,145 J ; même ΔU, avec états finaux mécaniquement différents.",
         "section": "exemple",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les coefficients théoriques donnent les échanges prévus ; la loi calorique explique l’égalité des variations internes malgré des contraintes différentes."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Rassembler l’intervalle thermique",
-            "action": "Reprendre la mole de gaz et l’augmentation de dix kelvins, en conservant la même constante R pour les deux calculs.",
-            "output": "Intervalle et quantité communs aux deux applications."
+            "title": "Rassembler les données numériques",
+            "input": "Les expressions transmises par 2.3, n = 1 mol, Tᵢ = 300 K, T𝒇 = 310 K et R.",
+            "action": "Retenir ΔT = 10 K et les valeurs initiales symboliques Pᵢ, Vᵢ d’un même état d’équilibre pour comparer les deux contraintes.",
+            "output": "Entrées communes de calcul ; PᵢVᵢ = nRTᵢ, sans valeur numérique choisie pour Pᵢ ou Vᵢ.",
+            "relation": {
+              "nature": "logique",
+              "description": "Un état initial commun sert à distinguer les états finaux ; sa pression et son volume n’interviennent pas dans les chaleurs calculées."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les coefficients",
-            "action": "Employer les capacités totales 3nR/2 et 5nR/2, avec la convention positive pour l’énergie reçue.",
-            "output": "Coefficients thermiques et convention de signe fixés."
+            "title": "Calculer chaleurs et changements mécaniques",
+            "input": "Les lois monoatomiques, ΔT = 10 K et l’équation du gaz parfait aux états extrêmes.",
+            "action": "Évaluer Qᵥ = 3nRΔT/2, Qₚ = 5nRΔT/2 et Wₚ = −nRΔT ; appliquer PV = nRT sous chaque contrainte.",
+            "output": "ΔU ≈ 124,717 J ; à V fixé, P𝒇/Pᵢ = 31/30 ; à P constante, V𝒇/Vᵢ = 31/30.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les capacités déterminent les bilans énergétiques ; l’équation d’état détermine séparément les rapports de pression ou de volume."
+            }
           },
           {
             "id": 3,
-            "title": "Calculer les bilans",
-            "action": "Évaluer les chaleurs des deux chauffages et le travail fourni lors de l’expansion à pression constante.",
-            "output": "QV ≈ 124,717 J ; QP ≈ 207,862 J."
+            "title": "Établir le tableau comparatif",
+            "input": "Les valeurs énergétiques et les rapports d’états obtenus par 3.2.",
+            "action": "Associer Qᵥ ≈ 124,717 J et Wᵥ = 0 au volume fixé ; Qₚ ≈ 207,862 J et Wₚ ≈ −83,145 J à Pext constante.",
+            "output": "Transmis à 4.1 : ΔT = 10 K et deux bilans calculés ; Q+W ≈ 124,717 J chacun, états finaux distincts.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Depuis l’état initial commun, les états finaux sont (Vᵢ,31Pᵢ/30,310 K) et (31Vᵢ/30,Pᵢ,310 K), malgré la même variation de U."
+            }
           },
           {
             "id": 4,
-            "title": "Retrouver la variation interne",
-            "action": "Additionner la chaleur isobare au travail de −83,145 J et comparer au chauffage réalisé à volume constant.",
-            "output": "Même ΔU retrouvée dans les deux calculs.",
-            "comparison": "Comparer le bilan de 3 aux entrées thermiques de 1, en explicitant le rôle du travail fourni."
+            "title": "Reprendre les résultats et leurs signes",
+            "input": "Le tableau de 3.3, incluant les chaleurs, travaux et variations internes des deux calculs.",
+            "action": "Relever les valeurs signées et leur provenance ; conserver les pressions et volumes finaux sous forme de rapports.",
+            "output": "Deux chaleurs positives, un travail d’expansion reçu négatif ; égalité des ΔU calculées, sans identité des états finaux.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le tableau de sortie devient une entrée de retour en conservant la distinction entre énergie échangée et variation d’état."
+            },
+            "comparison": "Comparer à 3.3 les bilans repris, les signes et les états mécaniques associés.",
+            "evaluation": {
+              "object": "Les résultats repris en 3.4 et le tableau énergétique et mécanique établi en 3.3.",
+              "conditions": "Résultats du modèle, avec arrondis affichés ; les identités exactes utilisent R avant arrondi.",
+              "criterion": "Qᵥ+Wᵥ = 3nRΔT/2 = Qₚ+Wₚ ; V𝒇 = Vᵢ pour l’isochore, P𝒇 = Pᵢ pour l’autre chauffage.",
+              "finding": "Les bilans concordent avec leurs calculs d’origine. L’égalité de ΔU vient de U(T), et non d’états complets identiques."
+            }
           },
           {
             "id": 5,
-            "title": "Interpréter la différence",
-            "action": "Vérifier que l’excès de chaleur isobare finance le travail d’expansion plutôt qu’une variation interne supplémentaire dans ce modèle.",
-            "output": "Différence des chaleurs attribuée au travail mécanique.",
-            "comparison": "Confronter cette interprétation aux coefficients de 2 et à la dépendance thermique de U retenue pour le gaz parfait."
+            "title": "Inverser la différence des chaleurs",
+            "input": "Les deux chaleurs calculées et leur différence Qₚ−Qᵥ = nRΔT, avec n maintenu à 1 mol.",
+            "action": "Résoudre ΔT = (Qₚ−Qᵥ)/(nR), puis appliquer aussi l’expression inverse ΔT = 2ΔU/(3nR).",
+            "output": "Les deux inversions donnent 10 K ; Qₚ−Qᵥ = −Wₚ est le travail fourni, sans supplément de variation interne.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La relation de Mayer et le bilan interne fournissent deux reconstructions algébriques du même intervalle, à partir de résultats calculés."
+            },
+            "comparison": "Confronter ces inversions aux produits de 3.2, à quantité fixée et avec R non arrondi.",
+            "evaluation": {
+              "object": "Les expressions directes de 3.2 et les reconstructions de ΔT par 3.5.",
+              "conditions": "n connu ; gaz parfait monoatomique, capacités constantes ; aucune des valeurs utilisées n’est une mesure indépendante.",
+              "criterion": "(5nRΔT/2−3nRΔT/2)/(nR) = ΔT et [2/(3nR)](3nRΔT/2) = ΔT = 10 K.",
+              "finding": "L’intervalle initial est retrouvé. Si n était aussi inconnu, ces seuls produits ne détermineraient pas séparément n et ΔT."
+            }
           },
           {
             "id": 6,
-            "title": "Consigner la comparaison",
-            "action": "Présenter Q, W et ΔU pour chaque chauffage, en conservant les signes et les mêmes limites de précision.",
-            "output": "Tableau de bilans comparables pour les deux contraintes.",
-            "comparison": "Comparer le tableau final aux calculs de 3 et aux données communes de 1, sans assimiler les chemins."
+            "title": "Restituer les attributs communs",
+            "input": "ΔT = 10 K reconstruit, Tᵢ = 300 K conservée et les paramètres conservés n = 1 mol, Pᵢ, Vᵢ, avec PᵢVᵢ = nRTᵢ.",
+            "action": "Retrouver T𝒇 = Tᵢ+ΔT = 310 K, puis conserver les contraintes qui conduisent aux deux états finaux distincts.",
+            "output": "Retour à 3.1 : une mole, 300→310 K, mêmes paramètres initiaux symboliques ; aucune pression ou volume absolu déterminé.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour reconstruit l’intervalle et la température finale en gardant explicites les attributs qui demeurent fournis ou symboliques."
+            },
+            "comparison": "Comparer à 3.1 les températures, la quantité conservée et les paramètres mécaniques non chiffrés.",
+            "evaluation": {
+              "object": "Les attributs restitués en 3.6 et les données de calcul reçues en 3.1.",
+              "conditions": "Quantité et température initiale connues ; la reconstruction réutilise les bilans du même modèle.",
+              "criterion": "Tᵢ = 300 K, ΔT = 10 K donnent T𝒇 = 310 K ; n reste 1 mol ; Pᵢ et Vᵢ restent symboliques.",
+              "finding": "Les données initiales sont retrouvées conditionnellement ; ni leurs valeurs mécaniques ni le chemin réel ne sont identifiés par les chaleurs seules."
+            }
           }
-        ],
-        "id": 3
+        ]
       },
       {
-        "title": "Auditer les capacités utilisées",
-        "system": "Le contrôle des unités et des normalisations dans les résultats thermiques calculés.",
-        "input": "Les bilans du niveau 3 et une capacité totale déjà fournie en J·K⁻¹.",
-        "output": "Un diagnostic excluant le double comptage de matière.",
+        "id": 4,
+        "title": "Reconstruire et normaliser les capacités",
+        "system": "Les chaleurs calculées, reprises pour déterminer les capacités totales et distinguer leurs formes molaire et massique.",
+        "input": "Bilans de 3.3 : Qᵥ ≈ 124,717 J, Qₚ ≈ 207,862 J, ΔT = 10 K ; n = 1 mol.",
+        "output": "Cᵥ ≈ 12,471694 J·K⁻¹, Cₚ ≈ 20,786157 J·K⁻¹ ; les formes molaires et massiques exigent leurs facteurs propres.",
         "section": "controle",
-        "comparison": "Comparer les résultats du niveau 3 par reconstruction des capacités, puis retrouver la quantité et l’intervalle du niveau 1.",
+        "comparison": "Comparer aux bilans du niveau 3 les chaleurs reconstruites depuis les capacités, en conservant contraintes et unités.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les chaleurs produites deviennent des entrées de reconstruction ; leurs quotients par ΔT précisent la nature des capacités utilisées."
+        },
+        "evaluation": {
+          "object": "Les chaleurs du niveau 3 et les reconstructions obtenues à partir des capacités au niveau 4.",
+          "conditions": "Même n, mêmes contraintes et ΔT = 10 K ; capacités constantes supposées, valeurs non arrondies pour les identités.",
+          "criterion": "CᵥΔT = Qᵥ = 3nRΔT/2 et CₚΔT = Qₚ = 5nRΔT/2, sans facteur de matière supplémentaire.",
+          "finding": "Les chaleurs calculées sont restituées. Cette inversion vérifie la normalisation sans constituer une mesure calorimétrique."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Reprendre les chaleurs calculées",
-            "action": "Importer les deux chaleurs et la variation de température, en les gardant identifiées comme résultats du modèle.",
-            "output": "Données du retour avec provenance calculatoire clairement indiquée."
+            "title": "Recevoir les chaleurs calculées",
+            "input": "Les deux bilans de 3.3 et leurs températures extrêmes, avec quantité et contraintes documentées.",
+            "action": "Reprendre Qᵥ et Qₚ comme résultats du modèle, puis conserver ΔT = 10 K et l’unité joule pour chaque chaleur.",
+            "output": "Deux couples (Q,ΔT) sous contraintes distinctes ; n = 1 mol connu, masse de l’échantillon non fournie.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les valeurs calculées sont reçues avec leur provenance et leurs unités ; aucune masse n’est déduite du seul nombre de moles."
+            }
           },
           {
             "id": 2,
-            "title": "Définir l’inversion thermique",
-            "action": "Choisir C = Q/ΔT seulement sous la contrainte correspondante et vérifier l’unité de capacité totale obtenue.",
-            "output": "Relation inverse attachée au protocole de chauffage."
+            "title": "Inverser chaque relation thermique",
+            "input": "Les chaleurs reprises, ΔT non nul et capacités constantes sous les conditions du chauffage correspondant.",
+            "action": "Résoudre Cᵥ = Qᵥ/ΔT et Cₚ = Qₚ/ΔT ; identifier leurs unités J·K⁻¹ avant toute normalisation.",
+            "output": "Les quotients fournissent les capacités totales de l’échantillon ; sans constance supposée, ils représenteraient des moyennes d’intervalle.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion distingue un coefficient total d’une valeur rapportée à la matière, et explicite le rôle de l’hypothèse de constance."
+            }
           },
           {
             "id": 3,
-            "title": "Reconstruire les capacités",
-            "action": "Calculer les capacités apparentes à partir des chaleurs prévues, puis les comparer aux coefficients totaux utilisés à l’aller.",
-            "output": "Capacités reconstruites compatibles avec les valeurs initiales."
+            "title": "Établir les capacités reconstruites",
+            "input": "Les quotients de 4.2 évalués depuis les chaleurs calculées sans arrondi intermédiaire.",
+            "action": "Établir Cᵥ = 3nR/2 ≈ 12,471694 J·K⁻¹ et Cₚ = 5nR/2 ≈ 20,786157 J·K⁻¹ pour n = 1 mol.",
+            "output": "Transmis à 5.1 : capacités totales reconstruites, n = 1 mol et ΔT = 10 K ; constance hypothétique, masse non renseignée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les valeurs reconstituées deviennent des attributs du retour ; leur accord avec les coefficients initiaux est interne au calcul."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les dimensions",
-            "action": "Tester l’ajout d’un facteur de masse à une capacité déjà totale et montrer l’incohérence des unités finales.",
-            "output": "Facteur de matière superflu repéré par les unités.",
-            "comparison": "Comparer les quotients de 3 aux données de 1 avec la même unité de chaleur et de température."
+            "title": "Reprendre les dimensions obtenues",
+            "input": "Les capacités totales de 4.3, leurs unités et l’absence de masse numérique.",
+            "action": "Relever séparément Cσ, Cσ,mol = Cσ/n et cσ = Cσ/m, avec σ = V ou P.",
+            "output": "Cσ : J·K⁻¹ ; Cσ,mol : J·mol⁻¹·K⁻¹ ; cσ : J·kg⁻¹·K⁻¹, non chiffrable sans masse.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les résultats sont repris sous trois formes identifiées ; une mole peut masquer numériquement une confusion qui subsiste dimensionnellement."
+            },
+            "comparison": "Comparer à 4.3 les capacités totales et conserver leur distinction avec les quotients molaires ou massiques.",
+            "evaluation": {
+              "object": "Les capacités relues en 4.4 et les résultats totaux établis en 4.3.",
+              "conditions": "Même échantillon, mêmes contraintes ; normalisations définies sans nouvelle donnée matérielle.",
+              "criterion": "Cᵥ = 3nR/2 et Cₚ = 5nR/2 en J·K⁻¹ ; diviser par n ou m change l’unité.",
+              "finding": "Les totaux sont conservés. La masse absente interdit une valeur numérique des capacités massiques."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter la normalisation",
-            "action": "Distinguer le cas d’une capacité massique, qui exige une masse, de celui d’une capacité totale directement exploitable.",
-            "output": "Règle de normalisation choisie sans ambiguïté ici.",
-            "comparison": "Confronter cette distinction à la capacité définie en 2, sans changer d’unité implicitement pendant le calcul."
+            "title": "Reconstruire sans double facteur",
+            "input": "Les trois formes de capacités et leurs unités, avec quantité ou masse comme facteurs dimensionnés.",
+            "action": "Dériver Q = CσΔT = nCσ,molΔT = mcσΔT ; comparer les dimensions de ces produits à celles de nCσΔT ou mCσΔT.",
+            "output": "Les trois écritures correctes donnent des joules ; multiplier une capacité déjà totale par n ou m laisse respectivement mol·J ou kg·J.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les identités de normalisation donnent les facteurs nécessaires ; l’analyse dimensionnelle rejette le double comptage même lorsque n vaut numériquement un."
+            },
+            "comparison": "Confronter ces produits aux quotients de 4.2 : seule la multiplication par ΔT inverse directement une capacité totale.",
+            "evaluation": {
+              "object": "L’inversion thermique de 4.2 et les reconstructions totale, molaire et massique de 4.5.",
+              "conditions": "Capacité constante appropriée à la contrainte ; n et m sont des quantités dimensionnées, non des nombres nus.",
+              "criterion": "[CσΔT] = [nCσ,molΔT] = [mcσΔT] = J ; [nCσΔT] = mol·J et [mCσΔT] = kg·J.",
+              "finding": "La normalisation correcte restitue la chaleur ; l’ajout d’un facteur de matière à une capacité totale est dimensionnellement incorrect."
+            }
           },
           {
             "id": 6,
-            "title": "Établir le contrôle pratique",
-            "action": "Produire une fiche de calcul indiquant toujours la nature de C et les facteurs de matière effectivement nécessaires.",
-            "output": "Contrôle des unités prêt pour une nouvelle application.",
-            "comparison": "Comparer cette fiche à 3 et aux données de 1, sans présenter une inversion algébrique comme une mesure."
+            "title": "Restituer les entrées thermiques",
+            "input": "Les capacités reconstruites et les produits corrects de 4.5, avec ΔT = 10 K.",
+            "action": "Recalculer Qᵥ et Qₚ sous leurs contraintes, puis restituer la quantité connue et la masse toujours non fournie.",
+            "output": "Retour à 4.1 : Qᵥ ≈ 124,717 J et Qₚ ≈ 207,862 J sur 10 K ; n = 1 mol conservé.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les produits inverses reproduisent les chaleurs reçues et préservent les données matérielles nécessaires à chaque normalisation."
+            },
+            "comparison": "Comparer à 4.1 les chaleurs, l’intervalle thermique, la quantité et l’absence de donnée de masse.",
+            "evaluation": {
+              "object": "Les chaleurs et attributs restitués en 4.6 et les couples (Q,ΔT) reçus en 4.1.",
+              "conditions": "Reconstruction avec les capacités exactes du modèle avant arrondi ; contraintes inchangées.",
+              "criterion": "(3nR/2)×10 K = Qᵥ et (5nR/2)×10 K = Qₚ ; n reste 1 mol, sans masse déduite.",
+              "finding": "Les données d’entrée sont retrouvées. L’accord ne transforme pas les quotients calculés en capacités mesurées."
+            }
           }
-        ],
-        "id": 4
+        ]
       },
       {
-        "title": "Confronter les approximations thermiques",
-        "system": "Le diagnostic de la constance des capacités et du choix de contrainte.",
-        "input": "L’audit du niveau 4 et les hypothèses monoatomiques du niveau 2.",
-        "output": "Les conditions sous lesquelles les deux bilans restent applicables.",
+        "id": 5,
+        "title": "Confronter constance et moyenne thermique",
+        "system": "L’identification d’une capacité à partir des chaleurs sur un intervalle, et les limites de cette inversion.",
+        "input": "Capacités reconstruites en 4.3 sur 300–310 K ; hypothèse monoatomique classique, n fixé et contraintes énergétiques conservées.",
+        "output": "Les chaleurs déterminent des moyennes d’intervalle ; la constance reste une hypothèse du modèle, retrouvée comme cas particulier explicite.",
         "section": "monoatomique",
-        "comparison": "Confronter le retour au modèle du niveau 2, en séparant changement de capacité, travail supplémentaire et erreur de normalisation.",
+        "comparison": "Confronter l’intégration d’une réponse calorique variable au modèle du niveau 2 ; sa restriction constante retrouve les capacités monoatomiques.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les quotients reconstruits sont traités comme moyennes possibles pour déterminer quelles propriétés de la réponse thermique restent indéterminées."
+        },
+        "evaluation": {
+          "object": "Les capacités constantes du niveau 2 et le modèle calorique élargi traité au niveau 5.",
+          "conditions": "Contre-modèle conditionnel de gaz parfait à U(T), distinct du gaz monoatomique classique retenu ; quantité et contraintes inchangées.",
+          "criterion": "Pour Cᵥ(T) = C̄ᵥ + a(T−Tm), ∫CᵥdT = C̄ᵥΔT ; a = 0 et C̄ᵥ = 3nR/2 retrouvent le modèle initial.",
+          "finding": "Le modèle constant est inclus dans le modèle élargi ; les chaleurs intégrées calculées ne permettent pas de sélectionner seules a = 0."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Recueillir les hypothèses sensibles",
-            "action": "Lister capacité constante, composition fixée, régime monoatomique classique et travail de pression seul comme hypothèses à examiner.",
-            "output": "Liste des hypothèses sensibles du calcul précédent."
+            "title": "Recevoir les moyennes candidates",
+            "input": "Les capacités totales reconstruites par 4.3, n = 1 mol et l’intervalle 300–310 K.",
+            "action": "Reprendre C̄ᵥ = Qᵥ/ΔT et C̄ₚ = Qₚ/ΔT comme attributs d’intervalle, en séparant leur valeur de l’hypothèse de constance.",
+            "output": "Moyennes calculées : C̄ᵥ = 3nR/2 et C̄ₚ = 5nR/2 ; aucune information thermique résolue à l’intérieur de l’intervalle.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les résultats du retour changent d’interprétation conditionnelle : une moyenne peut être connue sans que la fonction thermique complète le soit."
+            }
           },
           {
             "id": 2,
-            "title": "Organiser les variantes",
-            "action": "Distinguer une variation de capacité avec T d’un autre canal de travail ou d’un changement de composition.",
-            "output": "Variantes physiques séparées des erreurs de notation."
+            "title": "Construire une réponse non constante",
+            "input": "Les moyennes d’intervalle ; extension calorique idéale avec Tm = (Tᵢ+T𝒇)/2 = 305 K et coefficient a symbolique en J·K⁻².",
+            "action": "Poser Cᵥ(T) = C̄ᵥ+a(T−Tm), Cₚ(T) = Cᵥ(T)+nR, puis intégrer entre les bornes symétriques autour de Tm.",
+            "output": "L’intégrale du terme linéaire s’annule : Qᵥ = C̄ᵥΔT et Qₚ = (C̄ᵥ+nR)ΔT, même si a ≠ 0.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Cette famille de contre-modèles montre une non-unicité de l’intégration ; elle ne remplace pas les capacités constantes de l’exemple."
+            }
           },
           {
             "id": 3,
-            "title": "Construire les conséquences",
-            "action": "Pour chaque variante, identifier si le calcul exige une intégrale, un terme de travail supplémentaire ou un nouveau modèle matériel.",
-            "output": "Modifications du bilan associées à chaque variante."
+            "title": "Établir ce que les chaleurs identifient",
+            "input": "La famille de 5.2, limitée à des capacités positives sur l’intervalle thermique.",
+            "action": "Conserver les mêmes chaleurs pour les coefficients a vérifiant |a|ΔT/2 < C̄ᵥ, et distinguer ces solutions du cas a = 0.",
+            "output": "Transmis à 6.1 : mêmes chaleurs, capacités possiblement variables ; une capacité constante fournie peut être utilisée seulement avec cette hypothèse explicite.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le résultat établit la limite de l’inversion d’une intégrale ; la borne choisie assure ici des capacités positives, sans donnée expérimentale ajoutée."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les effets",
-            "action": "Vérifier qu’une différence de chaleur n’est pas automatiquement interprétée comme une nouvelle capacité lorsque le protocole mécanique change.",
-            "output": "Causes concurrentes conservées dans l’analyse des écarts.",
-            "comparison": "Comparer les conséquences de 3 aux hypothèses de 1 avant d’attribuer un écart à une propriété du gaz."
+            "title": "Reprendre les solutions compatibles",
+            "input": "Les conséquences de 5.3 et le caractère hypothétique de la réponse affine.",
+            "action": "Relever les invariants Qᵥ, Qₚ et leurs moyennes ; garder a comme paramètre non identifié par ces seuls résultats.",
+            "output": "Les chaleurs totales restent compatibles avec a nul ou non nul ; ni constance ni pente calorique n’est mesurée.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les conséquences du contre-modèle sont reprises comme données de retour, avec leur domaine et leur indétermination."
+            },
+            "comparison": "Comparer les invariants repris aux conséquences de 5.3, sans attribuer la capacité variable au scénario de référence.",
+            "evaluation": {
+              "object": "Les chaleurs et paramètres relus en 5.4 et la famille compatible établie en 5.3.",
+              "conditions": "Famille affine conditionnelle, gaz parfait à n fixé ; |a|ΔT/2 < C̄ᵥ ; les contraintes des deux chauffages restent applicables.",
+              "criterion": "∫a(T−Tm)dT = 0 sur [Tᵢ,T𝒇] ; Qᵥ/ΔT = C̄ᵥ et (Qₚ−Qᵥ)/ΔT = nR pour toute la famille.",
+              "finding": "Les résultats sont conservés ; même l’accord avec Mayer ne démontre pas la constance des capacités."
+            }
           },
           {
             "id": 5,
-            "title": "Décider du cadre retenu",
-            "action": "Conserver les capacités monoatomiques constantes dans l’intervalle supposé et rappeler que cette décision ne résulte pas d’une mesure calorimétrique.",
-            "output": "Cadre initial conservé avec son statut théorique.",
-            "comparison": "Confronter cette décision aux variantes de 2 et aux informations réellement disponibles sur le système."
+            "title": "Résoudre une information supplémentaire",
+            "input": "La famille affine et, comme relevés proposés mais absents, deux chaleurs isochoriques Qbas et Qhaut sur les demi-intervalles.",
+            "action": "Intégrer séparément Cᵥ(T) avant et après Tm ; soustraire pour obtenir Qhaut−Qbas = aΔT²/4, puis isoler a.",
+            "output": "a = 4(Qhaut−Qbas)/ΔT² ; deux intégrales séparées permettraient d’identifier la pente dans la famille affine, sans données actuelles pour l’évaluer.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le traitement inverse précise l’information supplémentaire requise ; il ne présente pas les chaleurs partielles comme des mesures déjà disponibles."
+            },
+            "comparison": "Confronter cette inversion à la famille de 5.2 : l’intégrale totale élimine a, tandis que leur différence peut le déterminer.",
+            "evaluation": {
+              "object": "L’intégration globale de 5.2 et l’inversion par intégrales partielles de 5.5.",
+              "conditions": "Même isochore et n fixé ; capacités affines supposées ; température médiane connue ; les chaleurs partielles restent à obtenir.",
+              "criterion": "Qbas = C̄ᵥΔT/2−aΔT²/8 et Qhaut = C̄ᵥΔT/2+aΔT²/8 ; leur différence donne aΔT²/4.",
+              "finding": "L’inversion est établie symboliquement. Une différence nulle imposerait a = 0 dans cette famille, sans prouver la constance d’une fonction arbitraire."
+            }
           },
           {
             "id": 6,
-            "title": "Préparer la confrontation future",
-            "action": "Indiquer quels relevés de température, chaleur et déplacement du piston permettraient de départager les causes dans un dispositif réel.",
-            "output": "Plan de relevés ciblés encore à renseigner.",
-            "comparison": "Comparer ce plan aux conséquences de 3 et aux hypothèses de 1, sans annoncer de résultats expérimentaux."
+            "title": "Restituer les résultats et l’inconnue",
+            "input": "Les relations inverses de 5.5, les seules chaleurs totales disponibles et le modèle monoatomique initial.",
+            "action": "Reconstituer C̄ᵥ = (Qbas+Qhaut)/ΔT formellement, puis conserver les moyennes connues et a indéterminé faute de chaleurs séparées.",
+            "output": "Retour à 5.1 : mêmes moyennes calculées ; le cas constant reste une hypothèse explicite, et les relevés partiels sont seulement proposés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le traitement retrouve les attributs d’intervalle reçus et distingue ce qui reste non identifiable de ce qui est retenu comme hypothèse."
+            },
+            "comparison": "Comparer à 5.1 les moyennes, la quantité et le statut non résolu de la constance.",
+            "evaluation": {
+              "object": "Les moyennes et limites restituées en 5.6 et les attributs d’intervalle reçus en 5.1.",
+              "conditions": "Aucun relevé supplémentaire effectué ; le scénario de référence conserve les capacités constantes du modèle monoatomique.",
+              "criterion": "(Qbas+Qhaut)/ΔT = Qᵥ/ΔT = C̄ᵥ = 3nR/2 ; C̄ₚ = C̄ᵥ+nR ; les valeurs disponibles ne fixent pas a.",
+              "finding": "Les attributs initiaux sont retrouvés ; seule la réponse moyenne est reconstruite par les chaleurs totales, la constance étant supposée."
+            }
           }
-        ],
-        "id": 5
+        ]
       },
       {
+        "id": 6,
         "title": "Recalculer sans facteur superflu",
-        "system": "La nouvelle application à partir d’une capacité totale directement fournie.",
-        "input": "Le cadre confronté et Cᵥ = 12,472 J·K⁻¹ du checkpoint.",
-        "output": "Un calcul cohérent et une comparaison avec la voie molaire.",
+        "system": "Le chauffage isochorique recalculé avec la capacité totale arrondie fournie par le checkpoint.",
+        "input": "Limite d’identification de 5.3 ; Cᵥ* = 12,472 J·K⁻¹ fourni pour tout l’échantillon, supposé constant, n = 1 mol et 300→310 K.",
+        "output": "Qᵥ* = ΔU* = 124,72 J ; intervalle reconstruit de 10 K, compatible avec le dossier initial et l’arrondi de capacité.",
         "section": "controle",
-        "comparison": "Comparer la voie utilisant une capacité totale au calcul du niveau 3, puis retrouver l’intervalle thermique du niveau 1.",
+        "comparison": "Comparer aux attributs du niveau 1 la température finale reconstruite, la quantité conservée et les contraintes, sans confondre les deux états finaux.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le modèle confronté est appliqué à une capacité totale explicitement fournie ; sa constance est supposée et son arrondi doit être conservé."
+        },
+        "evaluation": {
+          "object": "Les attributs reconstruits au niveau 6 et les données et contraintes initiales du niveau 1.",
+          "conditions": "Même échantillon de 1 mol, chauffage isochorique et capacité constante arrondie ; le second protocole reste distinct.",
+          "criterion": "Qᵥ*/Cᵥ* = 10 K et 300 K+10 K = 310 K ; arrondir 3nR/2 à 0,001 J·K⁻¹ donne 12,472 J·K⁻¹.",
+          "finding": "Les températures et la capacité attendue pour la quantité fournie sont retrouvées ; les états mécaniques et canaux du dossier restent des conditions conservées."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Recevoir la capacité totale",
-            "action": "Prendre la capacité totale annoncée et reprendre dix kelvins de chauffage à volume constant pour le même échantillon.",
-            "output": "Données de retour avec capacité déjà extensive."
+            "title": "Recevoir le coefficient déjà total",
+            "input": "La réserve transmise par 5.3 et le checkpoint Cᵥ* = 12,472 J·K⁻¹ pour l’échantillon entier.",
+            "action": "Retenir Cᵥ* constant sur 300–310 K, n = 1 mol et volume fixé, avec travail de pression seul et ΔEmac négligeable.",
+            "output": "Données de retour : capacité totale arrondie, ΔT = 10 K et conditions autorisant Qᵥ* = ΔU*.",
+            "relation": {
+              "nature": "logique",
+              "description": "La valeur totale est une entrée fournie ; la comparaison précédente oblige à distinguer sa constance supposée d’une constance mesurée."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir le produit pertinent",
-            "action": "Utiliser ΔU = CᵥΔT à capacité constante, sans multiplier par une masse ou une quantité de matière supplémentaire.",
-            "output": "Expression directement adaptée aux unités fournies ici."
+            "title": "Appliquer le produit total",
+            "input": "Cᵥ* = 12,472 J·K⁻¹, ΔT = 10 K et les conditions du chauffage isochorique.",
+            "action": "Former ΔU* = Cᵥ*ΔT, puis utiliser Wᵥ = 0 et Qᵥ* = ΔU*, sans multiplier de nouveau par n ou m.",
+            "output": "Qᵥ* = ΔU* = 12,472×10 = 124,72 J pour l’ensemble de l’échantillon.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le produit d’une capacité totale par une différence de température possède directement l’unité d’énergie requise."
+            }
           },
           {
             "id": 3,
-            "title": "Calculer la variation",
-            "action": "Multiplier 12,472 J·K⁻¹ par dix kelvins et conserver le résultat comme prévision sous les conditions du chauffage rigide.",
-            "output": "Variation calculée : 124,72 J pour l’échantillon entier."
+            "title": "Établir la nouvelle application",
+            "input": "Le résultat de 6.2 et les températures et contraintes du dossier initial.",
+            "action": "Consigner Qᵥ* = 124,72 J, Wᵥ = 0 et ΔU* = 124,72 J avec la provenance arrondie du coefficient.",
+            "output": "Transmis à 1.1 : chauffage isochorique de 1 mol de 300 à 310 K, bilan recalculé ; second protocole du dossier conservé séparément.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La nouvelle application enrichit le dossier initial par un résultat identifié, sans modifier sa quantité ni assimiler ses deux chauffages."
+            }
           },
           {
             "id": 4,
-            "title": "Comparer les deux voies",
-            "action": "Comparer le produit direct à la voie 3nR/2 et attribuer la petite différence à l’arrondi de capacité fourni.",
-            "output": "Concordance numérique dans la précision des données.",
-            "comparison": "Comparer le résultat de 3 aux entrées de 1 en tenant compte de leurs chiffres significatifs limités."
+            "title": "Reprendre le résultat arrondi",
+            "input": "Le bilan de 6.3 et, pour comparaison complémentaire, la valeur 3nRΔT/2 calculée au niveau 3.",
+            "action": "Relever les 124,72 J obtenus avec Cᵥ* et exprimer l’écart à la voie molaire par (Cᵥ*−3nR/2)ΔT.",
+            "output": "Le bilan de 6.3 est conservé ; l’écart avec la voie molaire provient du coefficient total arrondi fourni.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le résultat est repris avec sa précision ; la comparaison complémentaire conserve le même périmètre matériel et le même intervalle."
+            },
+            "comparison": "Comparer d’abord le bilan repris à 6.3, puis relier sa différence avec 3.3 à l’arrondi de capacité.",
+            "evaluation": {
+              "object": "Le résultat repris en 6.4 et le bilan recalculé en 6.3.",
+              "conditions": "Même capacité totale fournie, même ΔT ; la valeur issue de R conserve davantage de chiffres que le checkpoint.",
+              "criterion": "Qᵥ* = ΔU* = 124,72 J et Wᵥ = 0 ; Qᵥ*−3nRΔT/2 = (Cᵥ*−3nR/2)ΔT.",
+              "finding": "Le bilan de 6.3 est identique à sa reprise ; l’écart complémentaire est un effet d’arrondi, sans écart physique observé."
+            }
           },
           {
             "id": 5,
-            "title": "Vérifier le périmètre",
-            "action": "Confirmer que la capacité fournie concerne bien tout l’échantillon et que la contrainte reste le volume constant.",
-            "output": "Périmètre matériel et contrainte thermique conservés explicitement.",
-            "comparison": "Confronter ce contrôle à la relation de 2 avant de réutiliser la capacité dans un autre protocole."
+            "title": "Inverser avec une donnée fixée",
+            "input": "Qᵥ* = 124,72 J et les données Cᵥ* ou ΔT, maintenues séparément connues pour chaque inversion.",
+            "action": "À capacité connue, résoudre ΔT = Qᵥ*/Cᵥ* ; à intervalle connu, résoudre Cᵥ* = Qᵥ*/ΔT, puis retrouver T𝒇 depuis Tᵢ.",
+            "output": "Les inversions donnent respectivement 10 K et 12,472 J·K⁻¹ ; avec Tᵢ = 300 K, la température finale vaut 310 K.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les relations inverses exploitent chacune une donnée fixée ; une chaleur seule ne déterminerait pas simultanément capacité et intervalle."
+            },
+            "comparison": "Confronter ces inversions au produit de 6.2, avec les mêmes valeurs arrondies et sans facteur supplémentaire.",
+            "evaluation": {
+              "object": "Le produit direct de 6.2 et les inversions conditionnelles de 6.5.",
+              "conditions": "Capacité constante et positive, chauffage isochorique ; une des deux variables du produit est fixée à chaque inversion.",
+              "criterion": "124,72 J/(12,472 J·K⁻¹) = 10 K ; 124,72 J/10 K = 12,472 J·K⁻¹ ; 300 K+10 K = 310 K.",
+              "finding": "Le produit est inversé exactement avec ses données. La quantité reste fournie par le dossier, elle n’est pas déduite d’une chaleur seule."
+            }
           },
           {
             "id": 6,
-            "title": "Fermer la comparaison thermique",
-            "action": "Conclure à la cohérence des deux descriptions de capacité et conserver séparément les données nécessaires à un chauffage réel.",
-            "output": "Boucle calculatoire fermée avec limites expérimentales identifiées.",
-            "comparison": "Comparer la conclusion à 3 et aux données de 1, sans généraliser à une capacité variable."
+            "title": "Restituer les données du checkpoint",
+            "input": "Les résultats inverses de 6.5, la quantité connue et les conditions énergétiques conservées.",
+            "action": "Restituer Cᵥ*, l’intervalle de 10 K et les températures 300–310 K, puis maintenir le périmètre de tout l’échantillon.",
+            "output": "Retour à 6.1 : Cᵥ* = 12,472 J·K⁻¹, n = 1 mol, ΔT = 10 K ; capacité constante supposée et volume fixé.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour retrouve les attributs de l’application, tout en maintenant les hypothèses nécessaires à l’identification de la chaleur et de ΔU."
+            },
+            "comparison": "Comparer à 6.1 la capacité totale, la quantité, l’intervalle et les conditions du chauffage.",
+            "evaluation": {
+              "object": "Les données restituées en 6.6 et les entrées du checkpoint reçues en 6.1.",
+              "conditions": "Même coefficient arrondi et même échantillon ; constance hypothétique, aucun relevé calorimétrique effectué.",
+              "criterion": "Retrouver 12,472 J·K⁻¹, 10 K et une mole ; conserver volume fixé, travail de pression seul et ΔEmac négligeable.",
+              "finding": "Les données initiales sont restituées sans double facteur de matière ; la cohérence obtenue reste interne au calcul."
+            }
           }
-        ],
-        "id": 6
+        ]
       }
-    ],
-    "version": "0.1",
-    "updated": "2026-09-09"
+    ]
   },
   "detente-isotherme": {
     "question": "Deux mêmes états extrêmes imposent-ils les mêmes échanges, et que signifie le retour vers l’état initial ?",
-    "basis": "Comparaison de deux chemins théoriques pour 1 mol de gaz parfait, de 10 à 20 L, avec états extrêmes à 300 K.",
+    "basis": "Deux chemins supposés pour 1 mol de gaz parfait, de 10 à 20 L, entre états à 300 K ; échanges calculés, sans mesures.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les intégrales de travail, l’inversion calorique et les bilans des partenaires distinguent mêmes états, chemins différents et restauration de l’environnement.",
+    "subject": {
+      "type": "physique",
+      "description": "Les détentes réversible isotherme et libre d’un gaz parfait, puis son retour par compression isotherme réversible.",
+      "scope": "Même quantité et mêmes états extrêmes ; U = U(T) adopté avec capacité positive, travail de pression seul et variations macroscopiques nulles entre états."
+    },
     "levels": [
       {
+        "id": 1,
         "title": "Définir deux chemins comparables",
-        "system": "Le dossier des états extrêmes et des dispositifs théoriques de détente.",
-        "input": "Les volumes et températures de l’exemple, un thermostat ou une enceinte adiabatique rigide.",
-        "output": "Deux chemins distincts reliant des états extrêmes comparables.",
+        "system": "Le dossier des états d’équilibre communs et des contraintes extérieures propres aux deux détentes.",
+        "input": "n = 1 mol, T0 = 300 K, V1 = 10 L et V2 = 20 L ; dispositifs réversible et libre supposés.",
+        "output": "États extrêmes comparables ; thermostat et piston pour un chemin, enceinte rigide adiabatique avec vide initial pour l’autre.",
         "section": "conditions",
         "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Les deux dispositifs définissent des chemins comparés ; leur présentation successive ne constitue pas une succession d’expériences."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Poser les états extrêmes",
-            "action": "Décrire une mole de gaz dans dix puis vingt litres avec la même température initiale et finale supposée.",
-            "output": "Deux états d’équilibre donnés pour la comparaison."
+            "title": "Poser les états et les dispositifs",
+            "input": "Exemple initial ; 1.6 reprend ces attributs et 6.3 restitue l’état de départ après une compression explicitement distincte.",
+            "action": "Définir le même gaz fermé entre (T0,V1) et (T0,V2) ; séparer piston avec thermostat et enceinte totale rigide adiabatique, partiellement vide.",
+            "output": "Deux chemins supposés ; mêmes n et états extrêmes, partenaires extérieurs différents.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les frontières et contraintes appartiennent à chaque dossier ; revenir au même état ne les rend pas interchangeables."
+            }
           },
           {
             "id": 2,
-            "title": "Distinguer les environnements",
-            "action": "Associer le chemin réversible à un thermostat et la détente libre à une enceinte totale rigide et adiabatique.",
-            "output": "Deux environnements et contraintes extérieures séparément décrits."
+            "title": "Transformer les coordonnées d’état",
+            "input": "États de 1.1 ; modèle mécanique PV = nRT pour les seuls états d’équilibre, température absolue T0 positive.",
+            "action": "Convertir V1 = 0,010 m³ et V2 = 0,020 m³ ; diviser les équations d’état pour obtenir P2/P1 = V1/V2 = 1/2.",
+            "output": "Rapport volumique égal à 2 et pression finale moitié de l’initiale, sous le modèle adopté.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La transformation porte sur les coordonnées des états ; elle ne définit aucune pression pendant la relaxation libre."
+            }
           },
           {
             "id": 3,
-            "title": "Construire les dossiers",
-            "action": "Établir pour chaque chemin une fiche des états extrêmes, parois, échanges autorisés et informations disponibles pendant l’évolution.",
-            "output": "Deux fiches de chemins sans mesures intermédiaires inventées."
+            "title": "Établir les dossiers comparables",
+            "input": "Coordonnées obtenues en 1.2 ; aucun travail autre que celui de pression ni variation macroscopique entre états.",
+            "action": "Consigner les mêmes extrémités ; réserver l’équilibre successif au chemin réversible et l’isolement thermique à l’enceinte de détente libre.",
+            "output": "À 2.1 : états et contraintes séparés ; U(T) et sa capacité positive doivent être adoptés explicitement pour le traitement calorique.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les dossiers transmettent les hypothèses nécessaires au bilan, sans compléter le trajet libre par des états d’équilibre fictifs."
+            }
           },
           {
             "id": 4,
-            "title": "Relire la comparabilité",
-            "action": "Vérifier que les dossiers conservent la même quantité de gaz et les mêmes volumes et températures aux extrémités.",
-            "output": "Comparabilité des états extrêmes explicitement contrôlée ici.",
-            "comparison": "Comparer les fiches de 3 aux états de 1, sans assimiler les évolutions entre ces états."
+            "title": "Reprendre les attributs communs",
+            "input": "Dossiers de 1.3 : n et coordonnées extrêmes identiques, contraintes mécaniques et thermiques différentes.",
+            "action": "Reprendre chaque donnée et sa portée ; distinguer T1 = T2 de la condition plus forte T = T0 le long d’un chemin.",
+            "output": "Même gaz et mêmes extrémités ; seule la détente réversible est imposée isotherme en chaque état intermédiaire.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "L’égalité de deux températures d’équilibre ne fournit pas une température thermodynamique globale pendant une évolution hors équilibre."
+            },
+            "comparison": "1.4 ↔ 1.3 : conserver les extrémités communes sans assimiler les contraintes intermédiaires.",
+            "evaluation": {
+              "object": "1.4 ↔ 1.3 : quantité, volumes et températures des deux dossiers.",
+              "conditions": "Mêmes valeurs supposées ; chaque dispositif conserve ses propres conditions d’échange.",
+              "criterion": "Retrouver n = 1 mol, V1 = 10 L, V2 = 20 L et T1 = T2 = 300 K ; ne pas imposer un équilibre intermédiaire libre.",
+              "finding": "Les états sont comparables ; leur égalité ne transforme pas la détente libre en chemin réversible."
+            }
           },
           {
             "id": 5,
-            "title": "Examiner l’équilibre intermédiaire",
-            "action": "Refuser une pression ou température globale d’équilibre pendant la détente libre, contrairement à la suite d’états du chemin réversible.",
-            "output": "Statut des grandeurs intermédiaires distingué pour chaque chemin.",
-            "comparison": "Confronter cette distinction aux environnements de 2, qui n’imposent pas les mêmes conditions mécaniques."
+            "title": "Tester une égalité mécanique importée",
+            "input": "Dossiers relus en 1.4 ; au front libre, la pression résistante est nulle, tandis qu’un état idéal équilibré aurait P = nRT0/V > 0.",
+            "action": "Tester l’imposition simultanée Pext = 0 et Pext = P = nRT0/V : elle exigerait nRT0 = 0 à volume fini.",
+            "output": "L’égalité mécanique du chemin réversible ne peut pas être transférée à la relaxation dans le vide.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La contradiction teste une substitution illégitime ; elle n’attribue pas au gaz libre la pression d’équilibre utilisée dans ce test."
+            },
+            "comparison": "1.5 ↔ 1.2 : distinguer l’équation des états extrêmes d’une égalité mécanique imposée pendant la détente.",
+            "evaluation": {
+              "object": "1.5 ↔ 1.2 : pressions d’équilibre et extension hypothétique au front libre.",
+              "conditions": "n,T0,V positifs ; Pext = 0 au front libre, sans pression interne globale définie pendant la relaxation.",
+              "criterion": "La substitution Pext = P imposerait 0 = nRT0/V > 0 ; l’équation d’état des extrémités ne résout pas cette contradiction.",
+              "finding": "L’extension est rejetée ; les deux états d’équilibre restent décrits par la même équation d’état."
+            }
           },
           {
             "id": 6,
-            "title": "Fixer les conditions initiales",
-            "action": "Conserver les dossiers et nommer explicitement les hypothèses permettant de comparer les températures finales dans le modèle parfait.",
-            "output": "Dossiers comparables accompagnés de leurs hypothèses thermiques.",
-            "comparison": "Comparer les dossiers finaux à 3 et aux états de 1, sans appeler toute la détente libre isotherme."
+            "title": "Restituer les deux descriptions",
+            "input": "Résultat de 1.5 et coordonnées communes de 1.1 ; contraintes physiques des dispositifs conservées.",
+            "action": "Restituer les extrémités et le rapport V2/V1 = 2 ; conserver la différence entre états successifs réversibles et relaxation libre.",
+            "output": "À reprendre en 1.1 : mêmes n,T0,V1,V2, sans pression ou température globale d’équilibre attribuée au trajet libre.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour retrouve les attributs initiaux et maintient leur domaine d’emploi ; aucune cinétique de relaxation n’est reconstruite."
+            },
+            "comparison": "1.6 ↔ 1.1 : retrouver les états et les contraintes propres aux dispositifs initiaux.",
+            "evaluation": {
+              "object": "1.6 ↔ 1.1 : gaz, extrémités et frontières des deux descriptions.",
+              "conditions": "Mêmes scénarios supposés ; le test mécanique n’a modifié aucune donnée d’état.",
+              "criterion": "Retrouver 1 mol, 300 K, 10 L et 20 L ; thermostat/piston et enceinte rigide adiabatique restent distincts.",
+              "finding": "Les dossiers initiaux sont restitués avec leurs hypothèses, sans transformation observée ajoutée."
+            }
           }
-        ],
-        "id": 1
+        ]
       },
       {
+        "id": 2,
         "title": "Formaliser travail et état",
-        "system": "Le modèle reliant échanges dépendant du chemin et variation interne entre états.",
-        "input": "Les deux chemins du niveau 1 et la convention d’énergie reçue.",
-        "output": "Deux expressions de travail et une même variation interne nulle.",
+        "system": "Le premier principe et les lois mécanique et calorique appliqués aux deux chemins entre états d’équilibre.",
+        "input": "1.3 transmet états et dispositifs ; U = U(T) et Cv(T) = dU/dT > 0 sont adoptés pour ce gaz parfait.",
+        "output": "Wrév = −nRT0 ln(V2/V1), Qrév = −Wrév ; Wlibre = Qlibre = ΔUlibre = 0 et T2 = T1.",
         "section": "reversible",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les lois transforment les contraintes en bilans ; la propriété calorique U(T) n’est pas déduite de la seule équation PV = nRT."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Identifier ce qui varie",
-            "action": "Reprendre les deux chemins et distinguer les volumes successifs des seules températures d’équilibre connues aux extrémités.",
-            "output": "Informations utilisables pour chaque expression du travail."
+            "title": "Recevoir les lois et contraintes",
+            "input": "Dossiers de 1.3 ou reprise de 2.6 ; système fermé, travail de pression seul et variations macroscopiques nulles entre états.",
+            "action": "Adopter ΔU = Q + W, PV = nRT et séparément U = U(T), avec Cv(T) > 0 dans le domaine considéré.",
+            "output": "Cadre énergétique commun ; chaleur et travail reçus positifs, capacité totale non chiffrée.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les propriétés mécaniques et caloriques sont des hypothèses distinctes ; aucune valeur de capacité ni nature monoatomique n’est nécessaire."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir les lois applicables",
-            "action": "Employer le premier principe et U dépendant seulement de T pour le gaz parfait, avec travail reçu positif.",
-            "output": "Cadre énergétique commun et convention de signe."
+            "title": "Intégrer chaque interaction permise",
+            "input": "Cadre de 2.1 ; sur le chemin réversible, Pext = P = nRT0/V ; dans le vide, aucun travail extérieur.",
+            "action": "Calculer Wrév = −∫V1^V2 nRT0 dV/V = −nRT0 ln(V2/V1). Pour la détente libre adiabatique, poser Wlibre = Qlibre = 0.",
+            "output": "Travail logarithmique pour le chemin réversible, échanges nuls pour le libre ; le premier principe s’applique à chaque bilan.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Seul le chemin réversible emploie une pression interne d’équilibre dans l’intégrale ; l’absence de travail libre provient des conditions extérieures."
+            }
           },
           {
             "id": 3,
-            "title": "Former les deux expressions",
-            "action": "Intégrer la pression d’équilibre seulement sur le chemin réversible ; fixer W nul pour l’expansion libre dans le vide.",
-            "output": "Travail logarithmique réversible et travail libre nul."
+            "title": "Établir les bilans de chemins",
+            "input": "Expressions de 2.2 ; U(T) donne ΔUrév = 0 puisque T reste T0, tandis que le bilan libre donne ΔUlibre = 0.",
+            "action": "Déduire Qrév = −Wrév et consigner séparément les trois zéros du cas libre, avant l’inversion calorique.",
+            "output": "À 3.1 : deux bilans, même ΔU = 0 ; R exact, n = 1 mol, T0 = 300 K et V2/V1 = 2.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les bilans sont des conséquences du modèle ; leurs sommes égales n’imposent pas l’égalité des transferts séparés."
+            }
           },
           {
             "id": 4,
-            "title": "Vérifier les conditions d’intégration",
-            "action": "Relire les expressions et contrôler que l’intégrale ne reçoit aucune pression globale fictive pour la relaxation libre.",
-            "output": "Expressions conservant les informations propres à chaque chemin.",
-            "comparison": "Comparer les expressions de 3 aux données disponibles en 1, sans interpoler un état hors équilibre."
+            "title": "Reprendre les conditions des zéros",
+            "input": "Bilans de 2.3 ; isothermie réversible d’un côté, enceinte adiabatique et absence de travail de l’autre.",
+            "action": "Associer chaque zéro à sa justification : ΔUrév vient de U(T) à T fixe ; ΔUlibre vient de Q = W = 0.",
+            "output": "Deux variations internes nulles, obtenues avec des contraintes d’échange différentes.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture distingue les raisons des égalités avant d’utiliser la loi calorique dans le sens inverse."
+            },
+            "comparison": "2.4 ↔ 2.3 : conserver bilans et provenance de chaque variation interne nulle.",
+            "evaluation": {
+              "object": "2.4 ↔ 2.3 : ΔU, Q et W établis pour les deux chemins.",
+              "conditions": "Mêmes états et convention reçue ; gaz parfait avec U(T), sans autre travail.",
+              "criterion": "Retrouver Qrév + Wrév = 0 et Qlibre = Wlibre = 0 ; ne pas remplacer le travail libre par l’intégrale réversible.",
+              "finding": "Les résultats sont conservés, avec les conditions thermiques et mécaniques qui les produisent."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter température et énergie",
-            "action": "Vérifier que ΔU nul conduit à des températures extrêmes égales pour le gaz parfait, sans imposer l’équilibre durant la détente.",
-            "output": "Implication thermique limitée aux états extrêmes du gaz.",
-            "comparison": "Confronter cette lecture aux lois de 2, qui portent sur l’énergie et non sur une relaxation instantanément équilibrée."
+            "title": "Inverser la relation calorique",
+            "input": "ΔUlibre = 0 repris en 2.4 ; U(T) adopté et capacité totale Cv(T) strictement positive entre températures possibles.",
+            "action": "Écrire U(T2) − U(T1) = ∫T1^T2 Cv(T)dT = 0 ; la positivité impose T2 = T1.",
+            "output": "La détente libre retrouve T2 = 300 K aux extrémités, sans imposer une température d’équilibre pendant la relaxation.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion utilise la monotonie de U(T) ; elle ne suppose pas Cv constant et ne s’étend pas automatiquement à un gaz réel."
+            },
+            "comparison": "2.5 ↔ 2.2 : compléter le bilan libre par l’inversion calorique, sans modifier le calcul des échanges.",
+            "evaluation": {
+              "object": "2.5 ↔ 2.2 : bilan énergétique et reconstruction de la température finale.",
+              "conditions": "U = U(T), Cv(T) > 0, même quantité ; états extrêmes d’équilibre et modèle calorique explicitement adopté.",
+              "criterion": "Si T2 > T1, l’intégrale est positive ; si T2 < T1, elle est négative ; son annulation impose T2 = T1.",
+              "finding": "Les températures extrêmes coïncident conditionnellement ; aucune valeur globale intermédiaire n’est déterminée."
+            }
           },
           {
             "id": 6,
-            "title": "Retenir les bilans",
-            "action": "Associer à chaque travail la chaleur compatible avec ΔU nul, en maintenant distinctes les deux conditions d’échange.",
-            "output": "Deux bilans énergétiques prêts pour l’application numérique.",
-            "comparison": "Comparer ces bilans aux expressions de 3 et aux informations de 1, sans confondre leurs chemins."
+            "title": "Restituer les attributs du bilan",
+            "input": "Température finale reconstruite en 2.5 et chemins reçus en 2.1.",
+            "action": "Restituer les deux états à 300 K avec leurs échanges respectifs ; conserver Cv(T) positive mais non chiffrée et les contraintes extérieures.",
+            "output": "À reprendre en 2.1 : mêmes états et lois adoptées ; isothermie réversible distincte de l’égalité des températures extrêmes libres.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le résultat inverse confirme la comparabilité annoncée des extrémités dans ce modèle ; il ne reconstruit pas le déroulement du processus."
+            },
+            "comparison": "2.6 ↔ 2.1 : retrouver états, conventions et hypothèses énergétiques reçus.",
+            "evaluation": {
+              "object": "2.6 ↔ 2.1 : contraintes, température et contenu des deux modèles de chemin.",
+              "conditions": "Même quantité, U(T) monotone, travail de pression seul et variations macroscopiques nulles entre états.",
+              "criterion": "Conserver n = 1 mol, T1 = T2 = 300 K, V1,V2 et convention reçue ; maintenir les dispositifs distincts.",
+              "finding": "Le cadre initial est restitué ; aucune équation calorique numérique ni cinétique n’a été ajoutée."
+            }
           }
-        ],
-        "id": 2
+        ]
       },
       {
+        "id": 3,
         "title": "Calculer les échanges des détentes",
-        "system": "L’application numérique aux chemins réversible et libre du même gaz parfait.",
-        "input": "Les données de l’exemple et les expressions du niveau 2.",
-        "output": "Des travaux différents pour les mêmes états extrêmes.",
+        "system": "L’application numérique des bilans et le contrôle inverse du rapport volumique sous hypothèse réversible.",
+        "input": "2.3 transmet les deux bilans pour 1 mol à 300 K ; V2/V1 = 2 et R = 8,31446261815324 J·mol⁻¹·K⁻¹.",
+        "output": "Wrév ≈ −1728,944 J et Qrév ≈ +1728,944 J ; échanges libres nuls, malgré mêmes états extrêmes.",
         "section": "exemple",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les données supposées produisent deux répartitions calculées ; les valeurs ne proviennent pas de mesures de travail ou de chaleur."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Préparer le rapport volumique",
-            "action": "Reprendre les volumes de dix et vingt litres et former leur rapport sans changer la quantité de matière ni la température.",
-            "output": "Rapport V2/V1 égal à deux, sans dimension."
+            "title": "Recevoir le rapport et les constantes",
+            "input": "Bilans de 2.3 ou reprise de 3.6 ; n = 1 mol, T0 = 300 K, V1 = 0,010 m³, V2 = 0,020 m³.",
+            "action": "Former r = V2/V1 = 2 et C = nRT0, en gardant R = 8,31446261815324 J·mol⁻¹·K⁻¹ avant arrondi.",
+            "output": "Entrées de calcul : rapport sans dimension, facteur C en joules et chemins explicitement distingués.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les rapports éliminent l’unité commune des volumes ; les deux bilans gardent les mêmes paramètres sans partager leurs conditions d’échange."
+            }
           },
           {
             "id": 2,
-            "title": "Fixer le calcul reçu",
-            "action": "Conserver le signe moins devant le logarithme pour le travail réversible et la relation Q = −W dans ce cas.",
-            "output": "Règles de signe et bilan pour chaque chemin."
+            "title": "Évaluer les deux répartitions",
+            "input": "Entrées de 3.1 ; Wrév = −C ln r et Qrév = −Wrév ; Wlibre = Qlibre = 0.",
+            "action": "Calculer C = 2494,338785445972 J puis A = C ln 2 ≈ 1728,943896 J ; poser Wrév = −A et Qrév = +A.",
+            "output": "Un travail fourni et une chaleur reçue de même magnitude A ; zéro pour chaque échange libre.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le logarithme est positif pour l’expansion ; son signe dans le travail vient de la convention reçue."
+            }
           },
           {
             "id": 3,
-            "title": "Évaluer les échanges",
-            "action": "Calculer le travail logarithmique et la chaleur opposée, puis inscrire séparément les échanges nuls de la détente libre.",
-            "output": "Wrév ≈ −1 728,944 J ; Wlibre et Qlibre nuls."
+            "title": "Établir la comparaison numérique",
+            "input": "Valeurs de 3.2, associées aux mêmes n,T0,V1,V2 ; A conservé avant arrondi pour les contrôles.",
+            "action": "Consigner pour le réversible (W,Q,ΔU) = (−A,+A,0) et pour le libre (0,0,0).",
+            "output": "À 4.1 : Wrév ≈ −1728,944 J, Qrév ≈ +1728,944 J ; échanges libres nuls, tous calculés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les résultats établissent une différence de transferts entre chemins, tout en préservant la variation de la fonction d’état U."
+            }
           },
           {
             "id": 4,
-            "title": "Relire le sens physique",
-            "action": "Vérifier que l’expansion réversible fournit du travail au milieu extérieur et reçoit une chaleur compensatrice dans le modèle.",
-            "output": "Sens physique cohérent avec les signes calculés.",
-            "comparison": "Comparer les résultats de 3 au rapport de 1, qui décrit une expansion et non une compression."
+            "title": "Reprendre signes et sommes",
+            "input": "Comparaison de 3.3 ; r = 2 décrit une expansion, et A est positif.",
+            "action": "Reprendre Wrév < 0 et Qrév > 0 ; recomposer Q + W = 0 pour chaque chemin sans égaliser leurs termes.",
+            "output": "Le gaz réversible fournit du travail et reçoit de la chaleur ; le gaz libre n’échange ni l’un ni l’autre.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le contrôle des sommes utilise les mêmes sorties numériques ; leur annulation ne rend pas les répartitions identiques."
+            },
+            "comparison": "3.4 ↔ 3.3 : retrouver les valeurs signées et le solde interne de chaque chemin.",
+            "evaluation": {
+              "object": "3.4 ↔ 3.3 : travaux, chaleurs et variations internes calculés.",
+              "conditions": "Mêmes conventions et données supposées ; résultats complets avant arrondi.",
+              "criterion": "Vérifier (−A)+A = 0 et 0+0 = 0, avec A > 0 et Wrév ≠ Wlibre.",
+              "finding": "Les signes et les sommes concordent ; l’égalité de ΔU laisse les échanges dépendre du chemin."
+            }
           },
           {
             "id": 5,
-            "title": "Contrôler l’énergie interne",
-            "action": "Additionner Q et W sur chaque chemin pour contrôler ΔU nul sans conclure à l’égalité des échanges individuels.",
-            "output": "Conservation vérifiée pour deux répartitions énergétiques différentes.",
-            "comparison": "Confronter cette vérification aux règles de 2 : égalité des sommes ne signifie pas égalité de chaque terme."
+            "title": "Inverser le logarithme sous sa condition",
+            "input": "Wrév = −A repris en 3.4 ; n et T0 connus, chemin réversible isotherme conservé.",
+            "action": "Isoler r = exp[−Wrév/(nRT0)] puis substituer Wrév = −nRT0 ln 2 pour retrouver r = 2.",
+            "output": "Le travail réversible restitue le rapport volumique sous ses hypothèses ; la même inversion n’est pas celle du chemin libre.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’exponentielle inverse la formule adoptée ; l’inversion ne transforme pas une valeur calculée de travail en mesure géométrique."
+            },
+            "comparison": "3.5 ↔ 3.2 : l’exponentielle restitue le rapport utilisé par le logarithme direct.",
+            "evaluation": {
+              "object": "3.5 ↔ 3.2 : calcul logarithmique et reconstruction du rapport.",
+              "conditions": "Même n,T0, même chemin réversible ; valeurs avant arrondi.",
+              "criterion": "Retrouver exp[ln 2] = 2 ; insérer Wlibre = 0 dans cette formule donnerait 1, avec une hypothèse de chemin inapplicable.",
+              "finding": "Le rapport initial est retrouvé conditionnellement ; le travail libre nul n’implique pas l’absence d’expansion."
+            }
           },
           {
             "id": 6,
-            "title": "Présenter la comparaison",
-            "action": "Conserver un tableau des échanges par chemin et rappeler que ses nombres sont des résultats calculés, non mesurés.",
-            "output": "Tableau comparatif des échanges avec leur provenance.",
-            "comparison": "Comparer le tableau final à 3 et aux données de 1, en distinguant chemin et états extrêmes."
+            "title": "Restituer les données volumétriques",
+            "input": "Rapport r = 2 obtenu en 3.5 ; V1 = 10 L, n = 1 mol et T0 = 300 K conservés depuis 3.1.",
+            "action": "Reconstituer V2 = rV1 = 20 L et maintenir séparément les deux répartitions énergétiques calculées.",
+            "output": "À reprendre en 3.1 : mêmes volumes et paramètres ; différence de chemin conservée, sans nouvelle donnée expérimentale.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La restitution combine le rapport reconstruit avec le volume de référence connu ; le travail seul ne fournirait pas les deux volumes absolus."
+            },
+            "comparison": "3.6 ↔ 3.1 : retrouver volumes, quantité et température des substitutions initiales.",
+            "evaluation": {
+              "object": "3.6 ↔ 3.1 : rapport reconstruit et attributs numériques des deux détentes.",
+              "conditions": "V1,n,T0 connus ; seules les identités du calcul réversible ont été inversées.",
+              "criterion": "Retrouver V1 = 10 L, V2 = 20 L, n = 1 mol et T0 = 300 K.",
+              "finding": "Le dossier initial est restitué avec ses paramètres imposés ; aucune mesure de volume ni de température n’est produite."
+            }
           }
-        ],
-        "id": 3
+        ]
       },
       {
+        "id": 4,
         "title": "Relire par bilans extérieurs",
-        "system": "Le contrôle des échanges à partir du point de vue de l’environnement.",
-        "input": "Les travaux et chaleurs calculés au niveau 3, repris comme entrées du retour.",
-        "output": "Des échanges opposés pour gaz et environnement, avec une comparaison de méthodes.",
+        "system": "Les variations d’énergie des partenaires thermique et mécanique, et leur recomposition avec le bilan du gaz.",
+        "input": "3.3 transmet les échanges calculés ; partenaires idéaux, sans autre échange ni stockage résiduel dans les interfaces.",
+        "output": "Réversible : partenaire mécanique reçoit A, thermostat cède A ; libre : échanges extérieurs nuls. Chaque partenaire garde son bilan.",
         "section": "comparaison",
-        "comparison": "Comparer les résultats du niveau 3 en inversant le point de vue, puis retrouver les contraintes d’échange du niveau 1.",
+        "comparison": "4 ↔ 3 : changer de destinataire pour retrouver les échanges du gaz, avec mêmes interfaces et provenance calculée.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les bilans extérieurs reprennent les résultats du gaz ; changer de frontière analytique ne change pas le chemin physique supposé."
+        },
+        "evaluation": {
+          "object": "4 ↔ 3 : échanges du gaz et variations d’énergie de ses partenaires.",
+          "conditions": "Mêmes chemins, partenaires idéaux sans autre échange ; Q et W sont les valeurs calculées initialement.",
+          "criterion": "Réversible : ΔEth = −A et ΔEméc = +A ; retrouver Qgaz = +A et Wgaz = −A. Libre : tous ces termes sont nuls.",
+          "finding": "Les bilans se compensent aux interfaces ; cette relecture n’est pas une détermination indépendante des échanges."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Recevoir les bilans du gaz",
-            "action": "Reprendre les valeurs de travail et chaleur pour les deux chemins et nommer le thermostat et l’environnement mécanique concernés.",
-            "output": "Bilans calculés associés à des partenaires extérieurs distincts."
+            "title": "Recevoir les transferts du gaz",
+            "input": "Échanges de 3.3 ou reprise de 4.6 ; A = nRT0 ln 2 > 0, gaz nommé G.",
+            "action": "Nommer H le thermostat et M le partenaire mécanique idéal ; supposer aucune autre entrée d’énergie ni stockage final aux interfaces.",
+            "output": "Deux partenaires distincts ; H n’est pas couplé thermiquement au gaz pendant la détente libre adiabatique.",
+            "relation": {
+              "nature": "logique",
+              "description": "La liste des partenaires fixe les périmètres du contrôle ; les mécanismes de transfert ne sont pas fusionnés dans un unique solde extérieur."
+            }
           },
           {
             "id": 2,
-            "title": "Changer le destinataire",
-            "action": "Attribuer à chaque partenaire l’échange opposé à celui du gaz, sans modifier la convention reçue dans chaque bilan.",
-            "output": "Convention cohérente pour les systèmes maintenant comparés."
+            "title": "Transformer les échanges en bilans partenaires",
+            "input": "Dossier de 4.1 ; QG,WG reçus par le gaz, énergie des interfaces sans variation entre états.",
+            "action": "Attribuer ΔEH = −QG et ΔEM = −WG ; substituer (QG,WG) = (+A,−A) pour le réversible et (0,0) pour le libre.",
+            "output": "Réversible : ΔEH = −A, ΔEM = +A ; libre : ΔEH = ΔEM = 0.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La conservation de chaque transfert donne son opposé au partenaire ; les égalités concernent ici leurs bilans complets par hypothèse."
+            }
           },
           {
             "id": 3,
-            "title": "Construire les bilans extérieurs",
-            "action": "Inscrire le travail reçu extérieurement et la chaleur cédée par le thermostat, puis les échanges nuls du cas libre.",
-            "output": "Tableau d’échanges opposés entre gaz et partenaires."
+            "title": "Établir les changements extérieurs",
+            "input": "Bilans partenaires de 4.2 ; A ≈ 1728,944 J.",
+            "action": "Consigner la perte d’énergie du thermostat et le gain mécanique pour le chemin réversible ; conserver les deux zéros du libre.",
+            "output": "À 5.1 : partenaires modifiés différemment malgré les mêmes états du gaz ; valeurs calculées et contraintes de chemin conservées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le résultat précise où l’énergie a circulé ; la somme extérieure peut être nulle sans que chaque partenaire retrouve son énergie initiale."
+            }
           },
           {
             "id": 4,
-            "title": "Vérifier les compensations",
-            "action": "Additionner chaque échange avec son opposé pour contrôler qu’aucune énergie traversant une frontière n’est créée ou comptée deux fois.",
-            "output": "Échanges internes compensés dans le bilan élargi.",
-            "comparison": "Comparer les compensations de 3 aux bilans de 1 avec les mêmes interfaces physiques explicitement nommées."
+            "title": "Reprendre les compensations par interface",
+            "input": "Résultats de 4.3 ; le thermostat et le partenaire mécanique sont traités séparément.",
+            "action": "Additionner QG + ΔEH et WG + ΔEM ; retrouver zéro pour chaque interface et pour chaque chemin.",
+            "output": "Chaque transfert est compté une fois par système, avec des signes opposés chez les deux partenaires.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La compensation teste la cohérence des comptes, sans annuler le transfert effectivement supposé entre les partenaires."
+            },
+            "comparison": "4.4 ↔ 4.3 : reprendre les variations extérieures et vérifier leur opposition aux transferts du gaz.",
+            "evaluation": {
+              "object": "4.4 ↔ 4.3 : variations de H,M et compensations aux deux interfaces.",
+              "conditions": "Même période de bilan et mêmes partenaires ; aucun autre canal d’énergie.",
+              "criterion": "Vérifier A−A = 0 et −A+A = 0 dans le cas réversible ; retrouver deux zéros dans le cas libre.",
+              "finding": "Les comptes concordent ; la compensation entre systèmes ne signifie pas que les partenaires sont chacun inchangés."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter la frontière",
-            "action": "Vérifier que déplacer la frontière change la comptabilité des échanges mais pas le travail physique fourni par le gaz au piston.",
-            "output": "Effet du changement de frontière correctement interprété.",
-            "comparison": "Confronter cette lecture au changement de destinataire de 2, sans modifier le chemin de transformation initial."
+            "title": "Recomposer les frontières énergétiques",
+            "input": "Comptes repris en 4.4 ; ΔUG = QG + WG, ΔEH = −QG et ΔEM = −WG.",
+            "action": "Additionner : ΔE(G+H) = WG, ΔE(G+M) = QG et ΔE(G+H+M) = 0.",
+            "output": "Le système élargi conserve l’énergie ; pour le réversible, ses sous-ensembles changent de −A et +A.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le regroupement retire les transferts internes de la frontière élargie ; il laisse visibles les variations de ses différentes parties."
+            },
+            "comparison": "4.5 ↔ 4.2 : les sommes des bilans partenaires retrouvent les transferts franchissant chaque nouvelle frontière.",
+            "evaluation": {
+              "object": "4.5 ↔ 4.2 : attribution aux partenaires et bilans des regroupements.",
+              "conditions": "Même chemin, ΔUG = 0 et partenaires sans autres échanges ; aucune modification physique du dispositif.",
+              "criterion": "Retrouver ΔE(G+H) = −A et ΔE(G+M) = +A pour le réversible, avec somme totale nulle.",
+              "finding": "Le changement de frontière conserve les résultats ; une énergie extérieure totale inchangée ne restaure pas nécessairement chacun de ses partenaires."
+            }
           },
           {
             "id": 6,
-            "title": "Qualifier le contrôle croisé",
-            "action": "Consigner l’accord des bilans internes et extérieurs en précisant qu’il s’agit d’une relecture des mêmes calculs.",
-            "output": "Contrôle de conservation obtenu sans donnée expérimentale nouvelle.",
-            "comparison": "Comparer ce contrôle à 3 et aux bilans de 1, sans lui attribuer une indépendance expérimentale absente."
+            "title": "Restituer les échanges du gaz",
+            "input": "Regroupements de 4.5 et bilans de H,M reçus en 4.1.",
+            "action": "Retrouver QG = −ΔEH et WG = −ΔEM ; restituer les deux bilans originaux du gaz avec leurs partenaires distincts.",
+            "output": "À reprendre en 4.1 : réversible (+A,−A) pour (QG,WG), libre (0,0), sans acquisition supplémentaire.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion des comptes récupère la convention reçue par le gaz ; elle réutilise les résultats de l’aller."
+            },
+            "comparison": "4.6 ↔ 4.1 : retrouver partenaires, échanges et statut des données initiales du contrôle.",
+            "evaluation": {
+              "object": "4.6 ↔ 4.1 : bilans du gaz reconstruits et partenaires définis à l’entrée.",
+              "conditions": "Mêmes H,M et chemins ; seules les égalités de conservation ont été recomposées.",
+              "criterion": "Retrouver Qrév = +A, Wrév = −A et Qlibre = Wlibre = 0, avec A ≈ 1728,944 J.",
+              "finding": "Le dossier initial est restitué ; les partenaires n’ont pas été caractérisés par des observations indépendantes."
+            }
           }
-        ],
-        "id": 4
+        ]
       },
       {
+        "id": 5,
         "title": "Confronter état et chemin",
-        "system": "Le diagnostic des conditions autorisant le logarithme et des conclusions sur les états.",
-        "input": "Les bilans relus au niveau 4 et les hypothèses réversibles du niveau 2.",
-        "output": "Une attribution correcte de chaque formule à son chemin.",
+        "system": "Le test d’une formule de travail importée sur le chemin libre, puis les limites d’identification d’un trajet par une intégrale.",
+        "input": "4.3 transmet des échanges extérieurs différents malgré les mêmes extrémités ; les contraintes réversibles et libres restent séparées.",
+        "output": "Le logarithme reste attaché au chemin réversible ; un travail intégral ne détermine pas seul le profil mécanique ni la cinétique.",
         "section": "libre",
-        "comparison": "Confronter le retour au modèle du niveau 2 : les mêmes états extrêmes n’autorisent pas la substitution d’un chemin à l’autre.",
+        "comparison": "5 ↔ 2 : retrouver les domaines des expressions de travail, en distinguant états communs et contraintes de chaque chemin.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour met les formules à l’épreuve de leurs conditions puis inverse leur information ; il ne remplace pas un chemin par un autre."
+        },
+        "evaluation": {
+          "object": "5 ↔ 2 : travail de pression et portée des bilans directs.",
+          "conditions": "Même gaz, mêmes états extrêmes et convention reçue ; seules les contraintes extérieures distinguent les deux détentes.",
+          "criterion": "Conserver Wrév = −A et Wlibre = 0 ; associer la substitution Pext = nRT0/V uniquement au chemin réversible.",
+          "finding": "Les expressions retrouvent leurs domaines respectifs ; l’égalité des états ne fournit pas une intégrale de chemin universelle."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Poser l’erreur possible",
-            "action": "Prendre comme question l’usage du logarithme pour la détente libre au seul motif que les volumes extrêmes sont identiques.",
-            "output": "Confusion de chemin formulée comme objet du diagnostic."
+            "title": "Recevoir la différence extérieure",
+            "input": "Résultats de 4.3 ou reprise de 5.6 ; réversible : H perd A et M gagne A, libre : aucun de ces échanges.",
+            "action": "Formuler le test : importer Wrév dans le bilan libre au seul motif que V1,V2,T0 coïncident.",
+            "output": "Hypothèse de substitution à examiner, distincte des deux chemins conservés dans le dossier.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le test vise une confusion d’attribution ; il ne crée pas un troisième processus supposé réalisé."
+            }
           },
           {
             "id": 2,
-            "title": "Séparer les dépendances",
-            "action": "Classer ΔU et ΔS comme variations d’état, puis Q et W comme échanges dépendant du chemin choisi.",
-            "output": "Grille séparant dépendance d’état et dépendance de chemin."
+            "title": "Calculer l’effet de la substitution",
+            "input": "Test de 5.1 ; détente libre avec Q = 0 et W = 0 imposés, tandis que Wrév = −A avec A = nRT0 ln 2 > 0.",
+            "action": "Substituer hypothétiquement Wrév dans ΔU = Q + W : obtenir ΔUimporté = −A, au lieu de ΔUlibre = 0.",
+            "output": "L’importation produit un solde incompatible avec le bilan libre et les mêmes températures extrêmes sous U(T).",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le calcul localise la contradiction dans le travail substitué ; les volumes communs n’autorisent pas l’échange des contraintes extérieures."
+            }
           },
           {
             "id": 3,
-            "title": "Tester la substitution",
-            "action": "Appliquer hypothétiquement le travail réversible à la détente libre et montrer l’incompatibilité avec la pression extérieure résistante nulle.",
-            "output": "Contradiction localisée dans l’expression du travail substituée."
+            "title": "Établir le diagnostic de chemin",
+            "input": "Contradiction de 5.2 et bilans d’origine ; le gaz libre reste fermé et adiabatique, sans travail extérieur.",
+            "action": "Consigner que maintenir ΔU = 0 avec W = −A exigerait Q = +A, contraire au dossier libre ; conserver séparément les deux bilans.",
+            "output": "À 6.1 : logarithme réversible et bilan libre nul retrouvés ; un retour logarithmique exige un nouveau dispositif réversible.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le diagnostic confronte deux contraintes du même dossier ; il ne modifie pas l’état final pour sauver une formule mal attribuée."
+            }
           },
           {
             "id": 4,
-            "title": "Relire la contradiction",
-            "action": "Vérifier que le désaccord provient de la formule de chemin importée, et non d’une modification des états extrêmes du gaz.",
-            "output": "Cause du désaccord séparée des données d’état.",
-            "comparison": "Comparer le test de 3 à la question de 1 en gardant les mêmes volumes et températures finales."
+            "title": "Reprendre les contraintes incompatibles",
+            "input": "Résultat de 5.3 : le travail importé imposerait une chaleur reçue A malgré l’adiabaticité du cas libre.",
+            "action": "Reprendre les trois conditions Q = 0, ΔU = 0 et W = −A ; relever qu’elles ne peuvent satisfaire ensemble le premier principe.",
+            "output": "La formule importée est exclue ; l’égalité des états et la loi calorique adoptée restent inchangées.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour conserve le diagnostic obtenu et précise son objet : une attribution de chemin, pas une contradiction du premier principe."
+            },
+            "comparison": "5.4 ↔ 5.3 : retrouver l’incompatibilité entre chaleur nécessaire et adiabaticité annoncée.",
+            "evaluation": {
+              "object": "5.4 ↔ 5.3 : résultat du test et contraintes du dossier libre.",
+              "conditions": "Même A > 0, mêmes états et U(T) ; test hypothétique sans donnée expérimentale.",
+              "criterion": "Q = 0 et W = −A donnent ΔU = −A ≠ 0 ; imposer ΔU = 0 demanderait Q = +A.",
+              "finding": "La contradiction est conservée ; elle disparaît en rétablissant le travail nul de la détente libre."
+            }
           },
           {
             "id": 5,
-            "title": "Arbitrer les expressions",
-            "action": "Conserver le logarithme pour le chemin réversible et l’absence de travail pour le chemin libre, conformément à leurs interactions.",
-            "output": "Deux expressions maintenues dans leurs domaines respectifs.",
-            "comparison": "Confronter cette décision à la classification de 2 et aux conditions mécaniques nécessaires à chaque échange."
+            "title": "Inverser l’information intégrale",
+            "input": "Travail de pression réattribué en 5.4 ; pour une branche à volume monotone, W = −∫V1^V2 Pext(V)dV.",
+            "action": "Définir P̄ext = −W/(V2−V1) ; une modification g(V) telle que ∫V1^V2 g(V)dV = 0 laisse l’intégrale inchangée.",
+            "output": "Le travail fixe une moyenne volumique de pression extérieure ; il ne fournit pas, seul, un profil admissible ou une durée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’invariance sous g est formelle : elle ne garantit pas que les profils modifiés soient physiquement réalisables avec les contraintes du scénario."
+            },
+            "comparison": "5.5 ↔ 5.2 : l’inversion de l’intégrale précise pourquoi connaître un travail ne remplace pas les conditions mécaniques du bilan.",
+            "evaluation": {
+              "object": "5.5 ↔ 5.2 : travail attribué à un chemin et information récupérable depuis sa valeur.",
+              "conditions": "V2 > V1, branche monotone ; famille algébrique distincte des deux chemins effectivement supposés.",
+              "criterion": "Vérifier −∫(Pext+g)dV = W lorsque ∫g dV = 0 ; retrouver P̄ext = A/(V2−V1) pour le réversible et 0 pour le libre.",
+              "finding": "L’intégrale seule ne reconstruit pas tout le chemin ; pression positive, équilibre et contraintes thermiques demandent des informations supplémentaires."
+            }
           },
           {
             "id": 6,
-            "title": "Fixer la portée comparative",
-            "action": "Énoncer ce que les états communs imposent et ce qu’ils laissent dépendre du dispositif, sans prétendre déterminer une cinétique.",
-            "output": "Comparaison circonscrite aux états et aux bilans énergétiques.",
-            "comparison": "Comparer cette portée au diagnostic de 3 et à la confusion de 1, en distinguant les conclusions disponibles."
+            "title": "Restituer les chemins attribués",
+            "input": "Limite d’inversion de 5.5 et différence de partenaires reçue en 5.1.",
+            "action": "Restituer Wrév = −A avec Qrév = +A, et Wlibre = Qlibre = 0 ; conserver les mêmes états et les dispositifs distincts.",
+            "output": "À reprendre en 5.1 : même différence de bilans ; le travail logarithmique ne remplace pas les conditions de réversibilité.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour restitue les attributions initiales sans adopter la famille formelle de profils comme description d’un procédé réel."
+            },
+            "comparison": "5.6 ↔ 5.1 : retrouver états, chemins et effets extérieurs qui avaient motivé le test.",
+            "evaluation": {
+              "object": "5.6 ↔ 5.1 : bilans des deux chemins et contraintes extérieures initialement reprises.",
+              "conditions": "Mêmes n,T0,V1,V2 ; le test et la famille formelle n’ajoutent aucun processus réalisé.",
+              "criterion": "Retrouver H : −A et M : +A pour le réversible, échanges nuls pour le libre ; conserver ΔU = 0 dans les deux cas.",
+              "finding": "Le dossier initial est restitué ; mêmes états ne signifie ni mêmes transferts ni même environnement final."
+            }
           }
-        ],
-        "id": 5
+        ]
       },
       {
+        "id": 6,
         "title": "Revenir par compression réversible",
-        "system": "Le problème du retour de vingt à dix litres sous contrainte isotherme réversible.",
-        "input": "Le cadre confronté au niveau 5 et les états extrêmes échangés.",
-        "output": "Un travail reçu positif et une distinction entre retour imposé et retour spontané.",
+        "system": "La compression isotherme réversible ramenant le gaz à son état initial, après chacun des deux chemins d’expansion.",
+        "input": "5.3 transmet les bilans distincts ; le retour 20 L → 10 L impose thermostat à 300 K et compression réversible.",
+        "output": "Wretour = +A et Qretour = −A ; après détente libre, le gaz retrouve son état mais le cycle consomme A de travail.",
         "section": "controle",
-        "comparison": "Comparer la compression au calcul du niveau 3 et retrouver l’état initial du niveau 1, sans prétendre inverser spontanément la détente libre.",
+        "comparison": "6 ↔ 1 : retrouver les attributs initiaux du gaz, puis distinguer la restitution de l’environnement selon le chemin d’aller.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour constitue une étape physique supposée après l’un ou l’autre aller ; il ne représente pas une inversion spontanée de la détente libre."
+        },
+        "evaluation": {
+          "object": "6 ↔ 1 : état du gaz retrouvé et bilans des partenaires extérieurs.",
+          "conditions": "Deux cycles comparés séparément ; même gaz, mêmes partenaires idéaux du retour, aucun autre échange ni stockage résiduel.",
+          "criterion": "Retrouver n = 1 mol, T = 300 K et V = 10 L ; après libre puis compression, Wcycle = +A et Qcycle = −A.",
+          "finding": "Le gaz retrouve son état initial ; le thermostat gagne A et le partenaire mécanique perd A dans le cycle comprenant la détente libre."
+        },
         "steps": [
           {
             "id": 1,
             "title": "Poser le retour imposé",
-            "action": "Échanger les volumes de départ et d’arrivée et choisir explicitement une compression isotherme réversible à trois cents kelvins.",
-            "output": "Chemin de retour imposé et états extrêmes nommés."
+            "input": "Domaines de formules transmis par 5.3 ou reprise de 6.6 ; état de départ du retour (T0,V2).",
+            "action": "Choisir une compression réversible à T0 = 300 K vers V1 = 10 L, avec thermostat et partenaire mécanique idéaux.",
+            "output": "Chemin de retour explicitement imposé ; quantité fixée, travail de pression seul et mêmes états extrêmes échangés.",
+            "relation": {
+              "nature": "logique",
+              "description": "Ce dispositif est compatible avec un calcul réversible ; il remplace les contraintes libres pour effectuer un retour après relaxation."
+            }
           },
           {
             "id": 2,
-            "title": "Conserver les interactions nécessaires",
-            "action": "Maintenir un thermostat et l’équilibre mécanique successif pour autoriser la même expression logarithmique dans le sens inverse.",
-            "output": "Conditions du retour cohérentes avec le modèle confronté."
+            "title": "Intégrer dans le sens inverse",
+            "input": "Conditions de 6.1 ; Pext = P = nRT0/V le long du retour et U = U(T).",
+            "action": "Intégrer Wretour = −nRT0 ln(V1/V2) = +A ; utiliser ΔUretour = 0 pour déduire Qretour = −A.",
+            "output": "Compression : travail reçu positif et chaleur cédée au thermostat, tous deux de magnitude A.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion des bornes inverse le signe du travail sur le même chemin réversible ; elle ne transforme pas la détente libre en chemin réversible."
+            }
           },
           {
             "id": 3,
-            "title": "Calculer le travail inverse",
-            "action": "Évaluer le logarithme du rapport inverse et déduire le travail reçu positif ainsi que la chaleur rejetée.",
-            "output": "Wretour ≈ +1 728,944 J ; chaleur opposée négative."
+            "title": "Établir les valeurs du retour",
+            "input": "Bilans de 6.2 ; A = nRT0 ln 2 ≈ 1728,944 J.",
+            "action": "Consigner Wretour ≈ +1728,944 J, Qretour ≈ −1728,944 J et l’état final (n = 1 mol, T0 = 300 K, V1 = 10 L).",
+            "output": "À 1.1 : état initial du gaz retrouvé ; retour imposé et bilans extérieurs à conserver séparément des états.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le résultat fournit une reprise du dossier d’état ; il n’affirme pas que l’environnement est déjà restauré."
+            }
           },
           {
             "id": 4,
-            "title": "Comparer les deux sens",
-            "action": "Mettre les échanges du retour en regard de ceux de l’expansion réversible et vérifier leur opposition dans le modèle idéal.",
-            "output": "Échanges compensés sur le cycle réversible calculé.",
-            "comparison": "Comparer les résultats de 3 aux volumes inversés de 1, en maintenant le même choix de chemin."
+            "title": "Reprendre le retour et l’aller réversible",
+            "input": "Résultats de 6.3 et aller réversible (W,Q) = (−A,+A) ; mêmes partenaires idéaux pour les deux branches.",
+            "action": "Comparer les échanges opposés et former Wcycle,rév = −A+A = 0, Qcycle,rév = A−A = 0.",
+            "output": "Aller et retour réversibles compensent leurs échanges et restituent idéalement les partenaires, sans autre effet supposé.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La compensation dépend du choix des deux branches et des mêmes partenaires ; elle ne s’applique pas à un aller libre."
+            },
+            "comparison": "6.4 ↔ 6.3 : reprendre les signes et les valeurs du retour ; l’aller réversible fournit la comparaison complémentaire.",
+            "evaluation": {
+              "object": "6.4 ↔ 6.3 : échanges de compression et compensation avec leur aller réversible.",
+              "conditions": "Même T0 et mêmes partenaires idéaux ; aucun autre flux ou stockage d’énergie résiduel.",
+              "criterion": "Retrouver Wretour = +A, Qretour = −A ; leurs sommes avec l’aller réversible valent séparément zéro.",
+              "finding": "Les résultats du retour sont conservés ; le cycle réversible compensé reste distinct du cycle comportant une détente libre."
+            }
           },
           {
             "id": 5,
-            "title": "Examiner le cas libre",
-            "action": "Préciser qu’un retour au même état après détente libre exige un dispositif différent et n’efface pas automatiquement les effets sur l’environnement.",
-            "output": "Retour imposé distingué d’une inversion spontanée impossible.",
-            "comparison": "Confronter cette restriction aux interactions de 2 : le thermostat et la compression apportent des conditions nouvelles."
+            "title": "Calculer le cycle après détente libre",
+            "input": "Retours relus en 6.4 ; remplacer seulement l’aller réversible par la détente libre avec Waller = Qaller = 0.",
+            "action": "Additionner Wcycle = 0+A = A et Qcycle = 0−A = −A ; déduire ΔEH,cycle = +A et ΔEM,cycle = −A.",
+            "output": "Le cycle consomme ≈ 1728,944 J de travail et rejette autant de chaleur ; ΔUcycle = 0 ne restaure pas les partenaires.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La somme porte sur deux étapes supposées d’un même cycle : détente libre puis compression imposée. Leur bilan énergétique ne renverse pas l’irréversibilité passée."
+            },
+            "comparison": "6.5 ↔ 6.2 : conserver le bilan de compression, mais calculer son effet global après un aller sans échanges.",
+            "evaluation": {
+              "object": "6.5 ↔ 6.2 : compression réversible et cycle où elle suit une détente libre.",
+              "conditions": "Mêmes états d’équilibre, même retour, libre sans échange et partenaires idéaux sans autres effets.",
+              "criterion": "Retrouver Wcycle = +A, Qcycle = −A et Wcycle+Qcycle = 0 ; H gagne A tandis que M perd A.",
+              "finding": "Le gaz est restauré mais l’environnement conserve un changement ; une variation d’énergie extérieure totale nulle ne signifie pas un état extérieur identique."
+            }
           },
           {
             "id": 6,
-            "title": "Fermer la comparaison des chemins",
-            "action": "Présenter les états retrouvés et les échanges avec l’environnement, puis orienter le bilan d’irréversibilité vers l’analyse d’entropie.",
-            "output": "Boucle énergétique fermée ; bilan d’entropie identifié séparément.",
-            "comparison": "Comparer le bilan final à 3 et aux états de 1, sans assimiler retour d’état et annulation de toute irréversibilité."
+            "title": "Restituer le dossier de compression",
+            "input": "Cycles de 6.5 et 6.4 ; retirer de chaque bilan cyclique son propre bilan d’aller.",
+            "action": "Retrouver Wretour = Wcycle−Waller = +A et Qretour = Qcycle−Qaller = −A dans les deux cas ; conserver les bornes V2 → V1.",
+            "output": "À reprendre en 6.1 : même compression à 300 K, de 20 à 10 L, après des allers aux effets extérieurs différents.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La reconstruction isole la branche commune aux deux cycles ; elle conserve l’identité du retour et la différence de leurs histoires extérieures."
+            },
+            "comparison": "6.6 ↔ 6.1 : retrouver la branche de compression, ses bornes, ses contraintes et ses partenaires.",
+            "evaluation": {
+              "object": "6.6 ↔ 6.1 : états et dispositif du retour reconstitués depuis les deux cycles.",
+              "conditions": "Même gaz, T0 = 300 K, réversibilité imposée et partenaires sans autres échanges.",
+              "criterion": "Retrouver n = 1 mol, Vdépart = 20 L, Varrivée = 10 L, Wretour = +A et Qretour = −A.",
+              "finding": "Le dossier de compression est restitué ; retrouver l’état initial du gaz n’efface pas les effets extérieurs de l’aller libre."
+            }
           }
-        ],
-        "id": 6
+        ]
       }
-    ],
-    "version": "0.1",
-    "updated": "2026-09-09"
+    ]
   },
   "entropie": {
     "question": "Comment deux chemins de même variation d’entropie se distinguent-ils, et que révèle un retour à l’état initial ?",
     "basis": "Bilans théoriques d’une mole de gaz parfait doublant son volume, avec températures extrêmes à 300 K ; aucun échange mesuré.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Variation d’état, production globale incluant le contact, incompatibilités de signe et retour du gaz sont distingués dans chaque comparaison.",
+    "subject": {
+      "type": "physique",
+      "description": "Deux détentes d’une mole de gaz parfait entre les mêmes états, puis le retour après détente libre par compression réversible.",
+      "scope": "États d’équilibre à 300 K, volume doublé, thermostat unique éventuel ; bilans calculés, contact sans stockage et aucune localisation de production supposée mesurée."
+    },
     "levels": [
       {
+        "id": 1,
         "title": "Recenser états et contacts",
-        "system": "Le dossier des états d’équilibre et des échanges thermiques avec les réservoirs.",
-        "input": "Les deux détentes déjà calculées et le thermostat éventuel à température constante.",
-        "output": "Des états et contacts suffisamment définis pour un bilan d’entropie.",
+        "system": "Le dossier des deux états du gaz et des partenaires thermiques propres à chaque chemin.",
+        "input": "Une mole de gaz parfait, V1 = 10 L et V2 = 20 L, T1 = T2 = 300 K ; détentes réversible et libre distinctes.",
+        "output": "États, chaleurs reçues et contacts identifiés ; la température du thermostat ne désigne pas celle du gaz hors équilibre.",
         "section": "conditions",
         "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Les dossiers distinguent les mêmes états extrêmes et deux chemins supposés ; le cycle reçu au retour est identifié comme leur prolongement choisi."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Nommer les frontières",
-            "action": "Définir le gaz fermé, l’environnement et le thermostat éventuel, en repérant le contact thermique inclus dans le bilan adopté.",
-            "output": "Périmètre du bilan et partenaires extérieurs identifiés."
+            "title": "Délimiter gaz, contact et thermostat",
+            "input": "Deux chemins de l’exemple ; 1.6 restitue le dossier local et 6.3 transmet le cycle de retour après détente libre.",
+            "action": "Nommer le gaz fermé, le thermostat éventuel et le contact ; adopter un bilan global sans autre échange d’entropie ni stockage au contact.",
+            "output": "Périmètre global identifié ; le contact ne crée pas une réserve d’entropie laissée hors bilan.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le gaz conserve sa composition et sa quantité ; les partenaires extérieurs sont distingués du système dont on calcule la variation d’état."
+            }
           },
           {
             "id": 2,
-            "title": "Distinguer les températures",
-            "action": "Séparer la température du réservoir des températures d’équilibre du gaz, sans attribuer une température globale à une relaxation libre.",
-            "output": "Températures pertinentes distinguées selon leur rôle physique."
+            "title": "Transformer la chaleur en échange entropique",
+            "input": "Périmètre de 1.1 ; Q reçu par le gaz est positif et le thermostat idéal reste à T0 = 300 K.",
+            "action": "Associer au thermostat Qth = −Q et ΔSth = −Q/T0 ; définir l’échange global attribué au gaz Se = Q/T0.",
+            "output": "Se et ΔSth sont opposés ; T0 est la température du réservoir, pas une température globale supposée du gaz en relaxation.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La relation du thermostat utilise sa température constante et l’absence de stockage énergétique au contact ; elle ne suppose pas le chemin du gaz réversible."
+            }
           },
           {
             "id": 3,
-            "title": "Constituer les dossiers",
-            "action": "Reporter pour chaque chemin les états extrêmes et la chaleur calculée précédemment, avec sa provenance théorique et son signe.",
-            "output": "Deux dossiers d’états et d’échanges documentés séparément."
+            "title": "Établir les deux dossiers de chaleur",
+            "input": "Conversion de 1.2 ; chaleurs théoriques des détentes déjà calculées, R = 8,31446261815324 J·mol⁻¹·K⁻¹.",
+            "action": "Consigner Qrév = nRT0 ln 2 ≈ +1728,944 J et Qlibre = 0 ; conserver n = 1 mol, T1 = T2 = 300 K, V2/V1 = 2.",
+            "output": "À 2.1 : mêmes états et deux échanges différents ; aucun thermostat n’est requis pour le chemin libre adiabatique.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les valeurs proviennent des modèles de détente ; la chaleur réversible ne remplace pas celle du chemin libre."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les contacts",
-            "action": "Vérifier que chaque chaleur est associée au bon partenaire et que le chemin libre ne reçoit aucun contact thermique fictif.",
-            "output": "Correspondance des transferts et réservoirs explicitement contrôlée.",
-            "comparison": "Comparer les dossiers de 3 aux frontières de 1 avec la même convention d’échange et le même périmètre."
+            "title": "Reprendre les partenaires de chaque chaleur",
+            "input": "Dossiers de 1.3 et convention reçue ; aucun échange thermique réel n’a été mesuré.",
+            "action": "Reprendre Qrév avec son thermostat à 300 K et Qlibre nul avec l’enceinte adiabatique ; conserver les étiquettes des chemins.",
+            "output": "Chaleurs et contacts concordent ; les températures extrêmes ne décrivent pas toute la relaxation libre.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture porte sur les attributs de chaque dossier ; elle évite de transférer un partenaire ou une chaleur d’un chemin à l’autre."
+            },
+            "comparison": "1.4 ↔ 1.3 : chaleurs, contacts et états relus face aux deux dossiers constitués.",
+            "evaluation": {
+              "object": "1.4 ↔ 1.3 : chaleurs, contacts et états relus face aux deux dossiers constitués.",
+              "conditions": "Mêmes états d’équilibre, même quantité de gaz et données théoriques ; thermostat seulement pour le chemin en contact.",
+              "criterion": "Conserver Qrév ≈ +1728,944 J à T0 = 300 K et Qlibre = 0, avec V2/V1 = 2.",
+              "finding": "Les partenaires et signes sont conservés ; la détente libre ne reçoit pas un contact thermique fictif."
+            }
           },
           {
             "id": 5,
-            "title": "Contrôler le cas adiabatique",
-            "action": "Reconnaître que Q nul rend l’échange entropique nul sans exiger un thermostat physiquement présent autour de l’enceinte libre.",
-            "output": "Absence d’échange justifiée sans réservoir supplémentaire inventé.",
-            "comparison": "Confronter cette lecture aux températures distinguées en 2, sans introduire une température de contact inutile."
+            "title": "Réduire puis inverser l’échange",
+            "input": "Chaleurs reprises en 1.4 ; Qrév = nRT0 ln 2 et T0 > 0 pour le chemin en contact.",
+            "action": "Diviser Qrév par T0 pour obtenir Se,rév = nR ln 2 ; inverser Q = T0Se. Dans le cas adiabatique, l’échange est directement nul.",
+            "output": "Échange réversible indépendant de T0 à rapport de volumes fixé ; échange libre nul sans température de contact inventée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La simplification concerne la famille réversible isotherme considérée ; Q conserve sa dépendance à T0 même lorsque Q/T0 se simplifie."
+            },
+            "comparison": "1.5 ↔ 1.2 : échange simplifié et chaleur reconstruite comparés à la conversion par température du thermostat.",
+            "evaluation": {
+              "object": "1.5 ↔ 1.2 : échange simplifié et chaleur reconstruite comparés à la conversion par température du thermostat.",
+              "conditions": "Même chemin réversible isotherme, T0 positif constant ; adiabaticité séparément imposée pour le chemin libre.",
+              "criterion": "Retrouver Se,rév = nR ln 2 puis T0Se,rév = Qrév ; l’échange libre reste nul sans réservoir nécessaire.",
+              "finding": "Les conversions se correspondent ; aucune température instantanée globale du gaz libre n’est requise."
+            }
           },
           {
             "id": 6,
-            "title": "Fixer les entrées entropiques",
-            "action": "Conserver les états, contacts et chaleurs avec la convention du bilan, puis signaler les informations absentes d’une réalisation réelle.",
-            "output": "Dossier exploitable avec ses conditions et données manquantes.",
-            "comparison": "Comparer ce dossier à 3 et aux systèmes de 1, en conservant explicitement le statut calculé des échanges."
+            "title": "Restituer états et orientations",
+            "input": "Traitement de 1.5 et attributs de 1.1 ; gaz de quantité et composition fixes, chemins toujours distincts.",
+            "action": "Restituer les états 10 L et 20 L à 300 K ; retrouver Qrév positif et Qlibre nul avec leurs partenaires respectifs.",
+            "output": "Dossier initial retrouvé ; aucune production interne ou globale n’a encore été identifiée par une mesure.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour réassocie les échanges aux états et contacts ; les résultats restent des calculs issus des hypothèses de chaque chemin."
+            },
+            "comparison": "1.6 ↔ 1.1 : états, frontières et partenaires restitués face au dossier initial.",
+            "evaluation": {
+              "object": "1.6 ↔ 1.1 : états, frontières et partenaires restitués face au dossier initial.",
+              "conditions": "Même mole de gaz, composition fixe et absence de stockage au contact ; aucun échange mesuré.",
+              "criterion": "Retrouver V1 = 10 L, V2 = 20 L, T1 = T2 = 300 K et les deux contacts distincts.",
+              "finding": "Le dossier est restitué avec ses hypothèses ; le bilan global ne sera pas assimilé à une production locale du gaz seul."
+            }
           }
-        ],
-        "id": 1
+        ]
       },
       {
+        "id": 2,
         "title": "Séparer variation et production",
-        "system": "Le cadre théorique du bilan d’entropie et du calcul entre états du gaz parfait.",
-        "input": "Les dossiers du niveau 1 et les hypothèses de capacité constante.",
-        "output": "Une variation d’état calculable et un résidu de production interprétable.",
+        "system": "La variation d’entropie du gaz parfait et le résidu global associé aux échanges avec le thermostat.",
+        "input": "1.3 transmet états, chaleurs et contacts ; quantité et composition fixes, capacité totale Cv constante pour la formule retenue.",
+        "output": "ΔSgaz entre états et Σ = ΔSgaz − Q/T0, avec Σ globale non négative et contact inclus.",
         "section": "bilan",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’intégration d’une différentielle d’état et le bilan d’échange ont des rôles distincts ; la réversibilité auxiliaire n’est pas attribuée au chemin réel."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Identifier les quantités recherchées",
-            "action": "Distinguer la variation S2 − S1, l’entropie échangée et l’entropie produite pour chacun des chemins retenus.",
-            "output": "Trois quantités distinctes à établir dans chaque bilan."
+            "title": "Recevoir états et capacité totale",
+            "input": "Dossiers de 1.3 ou reprise locale de 2.6 ; gaz parfait à quantité fixe et Cv total constant, en J·K⁻¹.",
+            "action": "Distinguer ΔSgaz, Se et Σ globale ; conserver T1,T2,V1,V2 positifs et les chaleurs propres aux deux chemins.",
+            "output": "Attributs d’état et transferts séparés ; aucune valeur numérique de Cv n’est nécessaire lorsque T2 = T1.",
+            "relation": {
+              "nature": "logique",
+              "description": "Cv concerne toute la quantité de gaz ; le coefficient de ln(T2/T1) n’est pas multiplié une seconde fois par n."
+            }
           },
           {
             "id": 2,
-            "title": "Poser les deux relations",
-            "action": "Adopter la formule d’état du gaz parfait et le bilan global avec Q/T0, incluant la dissipation thermique du contact.",
-            "output": "Cadre d’état et cadre d’échange explicitement compatibles."
+            "title": "Intégrer l’état et isoler la production",
+            "input": "Données de 2.1 ; différentielle d’état du gaz parfait dS = Cv dT/T + nR dV/V et thermostat constant pour l’échange.",
+            "action": "Intégrer pour obtenir ΔSgaz = Cv ln(T2/T1) + nR ln(V2/V1) ; isoler Σ = ΔSgaz − Q/T0 dans le bilan global.",
+            "output": "Variation déterminée par les états ; production globale déterminée aussi par la chaleur du chemin.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégration relie des états d’équilibre ; elle ne remplace pas Q réel par une chaleur réversible fictive."
+            }
           },
           {
             "id": 3,
-            "title": "Former le résidu",
-            "action": "Écrire la production comme différence entre variation d’état et échange, en préservant la température du réservoir dans le second terme.",
-            "output": "Expression de production adaptée au thermostat retenu."
+            "title": "Établir le résidu applicable",
+            "input": "Relations de 2.2, contact sans stockage ni autre échange entropique ; pour l’adiabatique, Se = 0.",
+            "action": "Consigner Σrév = ΔSgaz − Qrév/T0 et Σlibre = ΔSgaz ; retenir Σ ≥ 0 comme contrainte du bilan macroscopique.",
+            "output": "À 3.1 : variation d’état commune et deux résidus à calculer séparément.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Σ inclut les irréversibilités du gaz et du contact compris dans le périmètre ; ce n’est pas automatiquement une production locale interne."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les dépendances",
-            "action": "Vérifier que la variation d’état dépend des états extrêmes alors que le terme échangé dépend du chemin thermique réel.",
-            "output": "Origine des deux termes du résidu clairement séparée.",
-            "comparison": "Comparer l’expression de 3 aux quantités de 1 sans remplacer un échange réel par celui d’un autre chemin."
+            "title": "Reprendre les dépendances des termes",
+            "input": "Expressions de 2.3 ; états identiques mais chaleurs différentes pour les deux détentes.",
+            "action": "Reprendre la dépendance de ΔSgaz envers les états et celle de Se envers le chemin ; conserver la portée globale de Σ.",
+            "output": "Même différence d’entropie possible avec des répartitions échange-production différentes.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le résidu ne dépend pas des seuls états ; associer une chaleur d’un autre chemin modifierait artificiellement la production calculée."
+            },
+            "comparison": "2.4 ↔ 2.3 : variation d’état et résidus relus face aux expressions des deux chemins.",
+            "evaluation": {
+              "object": "2.4 ↔ 2.3 : variation d’état et résidus relus face aux expressions des deux chemins.",
+              "conditions": "Mêmes états et mêmes conventions ; aucune chaleur d’un chemin substituée à celle de l’autre.",
+              "criterion": "Conserver Σrév = ΔSgaz − Qrév/T0 et Σlibre = ΔSgaz avec Se,libre = 0.",
+              "finding": "Les dépendances sont conservées ; Σ demeure une production globale incluant le contact éventuel."
+            }
           },
           {
             "id": 5,
-            "title": "Examiner les généralisations",
-            "action": "Identifier les changements nécessaires si la capacité dépend de T ou si plusieurs réservoirs interviennent dans la transformation.",
-            "output": "Intégration ou somme d’échanges requise selon le cas.",
-            "comparison": "Confronter ces changements aux deux relations de 2, sans utiliser Q/T0 pour plusieurs températures différentes."
+            "title": "Transformer capacité et réservoirs variables",
+            "input": "Dépendances reprises en 2.4 ; envisager Cv(T) total et plusieurs thermostats constants Tj > 0, sans changer l’exemple.",
+            "action": "Écrire ΔSgaz = ∫T1^T2 Cv(T)dT/T + nR ln(V2/V1) et Σ = ΔSgaz − ∑j Qj/Tj ; spécialiser Cv constant et un seul thermostat.",
+            "output": "L’intégrale et la somme restituent les deux relations initiales sous leurs hypothèses particulières.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La généralisation concerne des paramètres définis ; elle ne permet ni de remplacer plusieurs températures par une moyenne arbitraire ni d’inventer des réservoirs."
+            },
+            "comparison": "2.5 ↔ 2.2 : intégrale calorique et somme des échanges comparées aux deux relations initiales.",
+            "evaluation": {
+              "object": "2.5 ↔ 2.2 : intégrale calorique et somme des échanges comparées aux deux relations initiales.",
+              "conditions": "Cv total constant pour la réduction logarithmique ; un seul thermostat à T0 pour réduire la somme.",
+              "criterion": "Retrouver ∫ Cv dT/T = Cv ln(T2/T1) et ∑j Qj/Tj = Q/T0 dans les cas restreints.",
+              "finding": "Les formes initiales sont retrouvées sous conditions ; aucune réversibilité du chemin réel n’est nécessaire au calcul de la différence d’état."
+            }
           },
           {
             "id": 6,
-            "title": "Retenir le cadre local",
-            "action": "Conserver un thermostat unique pour le chemin en contact et une enceinte adiabatique pour la détente libre ; rappeler la production non négative.",
-            "output": "Cadre calculatoire et critère de cohérence explicités.",
-            "comparison": "Comparer le cadre final au résidu de 3 et aux quantités de 1, en gardant leurs distinctions."
+            "title": "Restituer le cadre des deux chemins",
+            "input": "Spécialisation de 2.5 et quantités reçues en 2.1 ; gaz parfait à quantité fixe, Cv total constant.",
+            "action": "Retrouver la formule logarithmique ; garder T0 = 300 K pour le contact réversible et Se = 0 pour la détente libre.",
+            "output": "Cadre initial restitué, avec Σ globale ≥ 0 et aucune température de relaxation supposée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour conserve le calcul entre états et les partenaires effectivement posés ; les extensions symboliques ne deviennent pas des conditions du scénario."
+            },
+            "comparison": "2.6 ↔ 2.1 : attributs, capacité et partenaires restitués face aux entrées du modèle.",
+            "evaluation": {
+              "object": "2.6 ↔ 2.1 : attributs, capacité et partenaires restitués face aux entrées du modèle.",
+              "conditions": "Même quantité de gaz, mêmes états d’équilibre et données calculées ; contact sans stockage dans le périmètre adopté.",
+              "criterion": "Conserver Cv en J·K⁻¹, n fixe, T0 = 300 K pour le thermostat et échange nul dans le cas libre.",
+              "finding": "Le cadre est restitué ; la valeur de Cv reste non chiffrée et disparaît du calcul lorsque les températures extrêmes sont égales."
+            }
           }
-        ],
-        "id": 2
+        ]
       },
       {
+        "id": 3,
         "title": "Calculer les deux répartitions",
-        "system": "L’application numérique du bilan d’entropie aux détentes réversible et libre.",
-        "input": "Les états et chaleurs théoriques du niveau 1 et les relations du niveau 2.",
-        "output": "Même ΔS, mais répartition différente entre échange et production.",
+        "system": "Les valeurs de variation, échange et production pour les détentes réversible et libre entre les mêmes états.",
+        "input": "2.3 transmet les bilans ; T2/T1 = 1, V2/V1 = 2, n = 1 mol, Qrév = nRT0 ln 2 et Qlibre = 0.",
+        "output": "ΔSgaz ≈ 5,763 J·K⁻¹ dans les deux cas ; Σrév = 0 et Σlibre ≈ 5,763 J·K⁻¹.",
         "section": "exemple",
         "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les chaleurs déjà calculées et les rapports d’état donnent les répartitions ; leur comparaison ne constitue pas une acquisition indépendante."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Préparer les rapports d’état",
-            "action": "Former T2/T1 égal à un et V2/V1 égal à deux pour la mole de gaz considérée.",
-            "output": "Rapports d’état sans dimension prêts à utiliser."
+            "title": "Recevoir les rapports et chaleurs",
+            "input": "Relations de 2.3 ; au retour, 3.6 restitue les mêmes états, quantité et chaleur de chaque chemin.",
+            "action": "Conserver T1 = T2 = T0 = 300 K, V1 = 10 L, V2 = 20 L et n = 1 mol ; associer Qrév et Qlibre.",
+            "output": "Rapports sans dimension et transferts calculés prêts pour les deux bilans.",
+            "relation": {
+              "nature": "logique",
+              "description": "La température T0 concerne le thermostat réversible ; son absence dans le cas libre ne modifie pas les températures extrêmes données."
+            }
           },
           {
             "id": 2,
-            "title": "Séparer les voies de calcul",
-            "action": "Calculer d’abord ΔS à partir des états, puis déterminer indépendamment de cette formule les échanges selon chaque chemin annoncé.",
-            "output": "Méthode distinguant variation d’état et échange thermique."
+            "title": "Calculer séparément les trois termes",
+            "input": "Dossier de 3.1 ; Cv ln 1 = 0, R exact et bilans globaux de 2.3.",
+            "action": "Calculer D = nR ln 2 ; obtenir Se,rév = Qrév/T0 = D, Σrév = D − D = 0 et Σlibre = D − 0 = D.",
+            "output": "Les deux chemins ont ΔSgaz = D, avec des productions globales différentes.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les chaleurs proviennent des modèles de détente ; leur emploi ne rend pas le calcul entropique indépendant de ces modèles."
+            }
           },
           {
             "id": 3,
-            "title": "Évaluer les répartitions",
-            "action": "Calculer R ln 2 puis répartir cette variation entre échange réversible et production libre selon les chaleurs déjà obtenues.",
-            "output": "ΔS ≈ 5,763 J·K⁻¹ ; productions différentes selon les chemins."
+            "title": "Établir les répartitions numériques",
+            "input": "Résultats de 3.2 ; D = 5,763146321643979 J·K⁻¹ avant arrondi.",
+            "action": "Consigner ΔSgaz ≈ 5,763 J·K⁻¹ ; réversible : Se = D, Σ = 0 ; libre : Se = 0, Σ = D.",
+            "output": "À 4.1 : mêmes variations du gaz, échanges opposés à ceux du thermostat éventuel et productions calculées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’arrondi sert à l’affichage ; aucune précision instrumentale ni production mesurée n’est attribuée aux valeurs."
+            }
           },
           {
             "id": 4,
-            "title": "Vérifier les sommes",
-            "action": "Additionner échange et production pour chaque chemin et retrouver la même variation d’état calculée au début.",
-            "output": "Deux bilans fermés avec une variation commune.",
-            "comparison": "Comparer les sommes de 3 aux rapports de 1 en conservant la même quantité de gaz et les mêmes états."
+            "title": "Recomposer chaque variation d’état",
+            "input": "Répartitions de 3.3, conservées avec D avant arrondi.",
+            "action": "Additionner Se + Σ pour chaque chemin : D + 0 pour le réversible, 0 + D pour le libre.",
+            "output": "Deux sommes égales à D, malgré la différence de production.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La relecture contrôle le bilan et l’attribution des termes ; elle n’efface pas la dépendance de la production envers le chemin."
+            },
+            "comparison": "3.4 ↔ 3.3 : sommes des échanges et productions relues face aux répartitions numériques.",
+            "evaluation": {
+              "object": "3.4 ↔ 3.3 : sommes des échanges et productions relues face aux répartitions numériques.",
+              "conditions": "Mêmes états, chaleurs calculées et D conservé avant arrondi ; aucune mesure nouvelle.",
+              "criterion": "Vérifier D + 0 = 0 + D = 5,763146321643979 J·K⁻¹, puis arrondir à 5,763 J·K⁻¹.",
+              "finding": "Les deux bilans se ferment ; la même variation d’état ne signifie pas la même production."
+            }
           },
           {
             "id": 5,
-            "title": "Interpréter le cas libre",
-            "action": "Contrôler que Q nul n’a pas été traduit en ΔS nul, puisque la relaxation libre produit de l’entropie.",
-            "output": "Distinction explicite entre adiabatique et entropie constante.",
-            "comparison": "Confronter cette interprétation à la séparation de 2, qui distinguait variation d’état et échange seulement."
+            "title": "Inverser le bilan et borner la chaleur",
+            "input": "Sommes de 3.4 ; états fixés, T0 > 0 pour un chemin en contact et Σ globale ≥ 0.",
+            "action": "Pour un chemin en contact, isoler Q = T0(ΔSgaz − Σ), donc Q ≤ T0D ; dans le cas libre, Se = 0 donne directement Σ = D.",
+            "output": "Même ΔSgaz, chaleur différente selon Σ ; adiabaticité n’impose pas Σ = 0.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La borne est une condition du bilan avec un thermostat ; elle n’affirme pas que tout couple Q,Σ algébriquement admissible décrit un chemin réalisable."
+            },
+            "comparison": "3.5 ↔ 3.2 : chaleur reconstruite et borne comparées au calcul direct des répartitions.",
+            "evaluation": {
+              "object": "3.5 ↔ 3.2 : chaleur reconstruite et borne comparées au calcul direct des répartitions.",
+              "conditions": "Même n, même rapport de volumes et thermostat constant lorsqu’il intervient ; Σ non négative dans le cadre global.",
+              "criterion": "Retrouver Qrév = T0D ≈ 1728,944 J avec Σrév = 0 ; pour le libre, Se = 0 et Σlibre = D sans thermostat requis.",
+              "finding": "L’inversion retrouve les chaleurs sous les productions connues ; une entropie échangée nulle n’implique pas une variation du gaz nulle."
+            }
           },
           {
             "id": 6,
-            "title": "Consigner les bilans",
-            "action": "Présenter côte à côte variation, échange et production, en gardant les unités et la provenance théorique de chaque terme.",
-            "output": "Tableau entropique comparatif complet et correctement attribué.",
-            "comparison": "Comparer le tableau final à 3 et aux états de 1, sans réduire l’irréversibilité à la seule chaleur."
+            "title": "Restituer les rapports d’état",
+            "input": "Inversion de 3.5 et ΔSgaz = D ; n = 1 mol, T2/T1 = 1 et V1 = 10 L conservés depuis 3.1.",
+            "action": "Inverser V2/V1 = exp(ΔSgaz/(nR)) = 2 ; retrouver V2 = 20 L et réassocier les chaleurs aux deux productions.",
+            "output": "États et transferts initiaux restitués ; les reconstructions restent des contrôles internes.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inverse utilise les températures égales et la quantité connue ; ΔS seul ne séparerait pas des rapports de température et de volume inconnus."
+            },
+            "comparison": "3.6 ↔ 3.1 : volume reconstruit, quantité, températures et chaleurs face au dossier numérique initial.",
+            "evaluation": {
+              "object": "3.6 ↔ 3.1 : volume reconstruit, quantité, températures et chaleurs face au dossier numérique initial.",
+              "conditions": "T2/T1 = 1 et n connus ; V1 fixé et entropie calculée réutilisée, sans détermination indépendante.",
+              "criterion": "Retrouver V2/V1 = 2, V1 = 10 L, V2 = 20 L, n = 1 mol et températures extrêmes 300 K.",
+              "finding": "Les attributs initiaux sont restitués ; aucune température ni expansion n’a été mesurée par l’inversion."
+            }
           }
-        ],
-        "id": 3
+        ]
       },
       {
+        "id": 4,
         "title": "Relire avec l’environnement",
-        "system": "Le contrôle des bilans avec le thermostat pour le chemin en contact, et sans échange extérieur pour le chemin adiabatique.",
-        "input": "Les échanges et productions calculés au niveau 3.",
-        "output": "Une comparaison entre bilan du gaz et variation totale de l’ensemble isolable.",
+        "system": "La somme des variations du gaz et du thermostat, puis la répartition conditionnelle de la production entre gaz et contact.",
+        "input": "3.3 transmet ΔSgaz = D, Qrév = T0D et Qlibre = 0, avec les productions globales 0 et D.",
+        "output": "Σ égale la variation de l’ensemble sans échange entropique extérieur ; sa localisation dans le gaz ou le contact reste distincte.",
         "section": "irreversibilite",
-        "comparison": "Comparer le retour par l’environnement aux bilans du niveau 3, puis retrouver les contacts et conventions du niveau 1.",
+        "comparison": "4 ↔ 3 : retrouver les productions calculées par la variation du gaz et de son environnement thermique.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’élargissement du bilan réécrit les échanges entre partenaires ; sa concordance contrôle les signes sans fournir une expérience indépendante."
+        },
+        "evaluation": {
+          "object": "4 ↔ 3 : variations du gaz et de l’environnement comparées aux productions globales calculées.",
+          "conditions": "Thermostat idéal à T0 constant, contact sans stockage d’énergie ni d’entropie ; aucun autre échange d’entropie de l’ensemble.",
+          "criterion": "Pour le réversible, D − Qrév/T0 = 0 ; pour le libre adiabatique, la variation globale vaut D sans thermostat ajouté.",
+          "finding": "Les deux écritures coïncident sous les conditions de périmètre ; Σ ne désigne pas nécessairement la seule production interne du gaz."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Recevoir les échanges calculés",
-            "action": "Reprendre les chaleurs du gaz : identifier leur opposé pour le thermostat du chemin en contact et l’échange nul dans la détente libre adiabatique.",
-            "output": "Échanges de retour issus des bilans précédents."
+            "title": "Recevoir les bilans et partenaires",
+            "input": "Répartitions de 3.3 ; 4.6 restitue localement les mêmes échanges et les conditions d’attribution.",
+            "action": "Reprendre D pour le gaz ; associer au thermostat la chaleur −Qrév et conserver l’absence d’échange thermique du chemin libre.",
+            "output": "Gaz, thermostat et contact distingués ; transferts et variations restent calculés.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les signes des chaleurs sont opposés lorsque le contact ne stocke pas d’énergie ; aucun partenaire supplémentaire n’est attribué au cas adiabatique."
+            }
           },
           {
             "id": 2,
-            "title": "Choisir le système élargi",
-            "action": "Associer gaz et thermostat pour le chemin en contact ; pour le chemin libre, retenir le gaz en enceinte adiabatique sans thermostat fictif.",
-            "output": "Périmètre élargi et partenaires entropiques explicitement retenus."
+            "title": "Additionner les variations des partenaires",
+            "input": "Données de 4.1 ; thermostat à T0 constant, contact sans stockage et ensemble sans autre échange d’entropie.",
+            "action": "Écrire ΔSth = −Q/T0 puis ΔSensemble = ΔSgaz + ΔSth = ΔSgaz − Q/T0 = Σ ; pour le libre, garder ΔSensemble = ΔSgaz.",
+            "output": "La variation globale correspond au résidu déjà défini, sous les conditions de fermeture entropique.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le travail échangé avec un dispositif idéal ne transporte pas d’entropie ; une autre source entropique ou un stockage au contact demanderait des termes supplémentaires."
+            }
           },
           {
             "id": 3,
-            "title": "Calculer l’entropie extérieure",
-            "action": "Additionner −Q/T0 et ΔS du gaz pour le chemin réversible en contact ; retenir ΔS du gaz seul pour la détente libre adiabatique.",
-            "output": "Variation totale nulle réversible, positive pour la détente libre."
+            "title": "Établir les variations de l’environnement",
+            "input": "Relations de 4.2 avec ΔSgaz = D ; Qrév = T0D et Qlibre = 0.",
+            "action": "Consigner ΔSth,rév = −D et ΔSensemble,rév = 0 ; pour la détente libre, ΔSextérieur = 0 et ΔSensemble = D.",
+            "output": "À 5.1 : sommes globales 0 et D, avec leurs hypothèses et sans production négative calculée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La perte d’entropie du thermostat compense la variation réversible du gaz ; la production libre n’est pas compensée par un échange."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les compensations",
-            "action": "Vérifier que l’échange positif du gaz correspond à la perte du thermostat et que la production libre n’a pas d’échange compensateur.",
-            "output": "Compensation des échanges distincte de la production totale.",
-            "comparison": "Comparer les sommes de 3 aux chaleurs de 1 en gardant les signes opposés des deux partenaires."
+            "title": "Reprendre compensation et production",
+            "input": "Sommes de 4.3 ; mêmes contacts et conventions de signe.",
+            "action": "Reprendre D − D = 0 pour le chemin réversible et D + 0 = D pour le libre ; conserver l’entropie extérieure dans chaque somme.",
+            "output": "Compensation d’un échange et production globale restent deux notions distinctes.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture identifie ce qui s’annule entre partenaires ; elle ne soustrait pas la production interne comme s’il s’agissait d’un transfert."
+            },
+            "comparison": "4.4 ↔ 4.3 : sommes du gaz et de l’extérieur relues face aux variations établies.",
+            "evaluation": {
+              "object": "4.4 ↔ 4.3 : sommes du gaz et de l’extérieur relues face aux variations établies.",
+              "conditions": "Même thermostat pour le chemin réversible, aucune chaleur pour le libre ; résultats calculés avec D avant arrondi.",
+              "criterion": "Vérifier ΔSensemble,rév = D − D = 0 et ΔSensemble,libre = D ; conserver les signes des partenaires.",
+              "finding": "Les sommes sont cohérentes ; une baisse de S du thermostat ne signifie pas une production négative."
+            }
           },
           {
             "id": 5,
-            "title": "Vérifier le périmètre entropique",
-            "action": "Si un contact dissipatif est envisagé, attribuer sa production au bilan élargi adopté ; le contact réversible de l’exemple n’en produit pas.",
-            "output": "Attribution de production cohérente avec la frontière choisie.",
-            "comparison": "Confronter cette précision au système élargi de 2 et à la convention globale utilisée dans la fiche."
+            "title": "Décomposer un contact dissipatif",
+            "input": "Sommes de 4.4 ; contact conductif passif sans stockage, Tb(t) > 0 supposée uniforme sur l’interface côté gaz, thermostat à T0 > 0.",
+            "action": "Écrire ΔSgaz = ∫δQ/Tb + Σgaz et Σcontact = ∫δQ(1/Tb − 1/T0) ; additionner pour retrouver Σ = Σgaz + Σcontact.",
+            "output": "La production globale inclut celle du contact ; si Tb = T0 durant l’échange, sa contribution s’annule.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le flux passif va du chaud vers le froid : δQ(T0 − Tb) ≥ 0, donc Σcontact ≥ 0 ; sans uniformité sur l’interface, une intégration spatiale serait nécessaire."
+            },
+            "comparison": "4.5 ↔ 4.2 : décomposition locale et contact comparée au bilan global des partenaires.",
+            "evaluation": {
+              "object": "4.5 ↔ 4.2 : décomposition locale et contact comparée au bilan global des partenaires.",
+              "conditions": "Contact passif sans stockage d’énergie ni d’entropie ; Tb(t) uniforme sur l’interface, températures positives et flux du chaud vers le froid.",
+              "criterion": "Retrouver Σgaz + Σcontact = ΔSgaz − Q/T0 et Σcontact ≥ 0 ; dans la limite Tb = T0, obtenir Σcontact = 0.",
+              "finding": "La somme conserve le bilan global ; sans températures locales et conditions du contact, sa répartition ne serait pas identifiable."
+            }
           },
           {
             "id": 6,
-            "title": "Consigner le contrôle croisé",
-            "action": "Conserver les deux écritures et expliciter que leur concordance contrôle les conventions sans fournir une validation expérimentale supplémentaire.",
-            "output": "Contrôle des frontières et signes correctement qualifié.",
-            "comparison": "Comparer ce bilan à 3 et aux échanges reçus en 1, sans transformer une identité en observation indépendante."
+            "title": "Restituer l’attribution des deux chemins",
+            "input": "Décomposition de 4.5 et dossiers reçus en 4.1 ; contact réversible dans le premier cas, aucune chaleur dans le second.",
+            "action": "Retrouver Σcontact = 0 pour les deux exemples ; conserver Σrév = 0 et Σlibre = D, sans généraliser cette attribution à tout contact.",
+            "output": "Bilans initiaux restitués ; un contact réel dissipatif demanderait des informations locales supplémentaires.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour distingue les cas particuliers du bilan global ; les données présentes ne décrivent aucun contact dissipatif effectivement observé."
+            },
+            "comparison": "4.6 ↔ 4.1 : échanges, partenaires et productions restitués face aux bilans reçus.",
+            "evaluation": {
+              "object": "4.6 ↔ 4.1 : échanges, partenaires et productions restitués face aux bilans reçus.",
+              "conditions": "Contact réversible pour la détente réversible ; adiabaticité pour le libre, sans thermostat fictif ni nouvelle mesure.",
+              "criterion": "Retrouver Qrév = T0D, Qlibre = 0, Σrév = 0 et Σlibre = D, avec les mêmes états du gaz.",
+              "finding": "Les bilans sont restitués ; l’identité entre les écritures ne constitue pas une validation expérimentale supplémentaire."
+            }
           }
-        ],
-        "id": 4
+        ]
       },
       {
+        "id": 5,
         "title": "Confronter les signes et limites",
-        "system": "Le diagnostic conditionnel d’une production négative ou d’une entropie constante.",
-        "input": "Le contrôle du niveau 4 et le cadre du niveau 2.",
-        "output": "Des critères de correction sans conclusion automatique sur la réversibilité.",
+        "system": "Le diagnostic conditionnel d’une variation d’entropie nulle ou d’un résidu global négatif, avec transformation des conventions.",
+        "input": "4.3 transmet les productions calculées 0 et D ; les cas Σcalculée < 0 et ΔSgaz = 0 sont envisagés symboliquement.",
+        "output": "Une production peut être compensée par export ; un résidu global négatif signale une incompatibilité du dossier, pas un processus admissible.",
         "section": "controle",
-        "comparison": "Confronter le retour au cadre du niveau 2, en séparant erreurs de convention, mauvais réservoir et confusion entre variation et production.",
+        "comparison": "5 ↔ 2 : confronter les diagnostics de signe et les conventions au bilan global et à sa contrainte Σ ≥ 0.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour transforme le bilan en contraintes et en contrecas algébriques ; il ne présente aucune anomalie hypothétique comme un phénomène mesuré."
+        },
+        "evaluation": {
+          "object": "5 ↔ 2 : contraintes déduites et conventions corrigées comparées au bilan global d’entrée.",
+          "conditions": "Même gaz fermé, thermostat constant positif lorsqu’il intervient et périmètre global complet ; cas symboliques sans données indépendantes.",
+          "criterion": "Retrouver Q = T0(ΔSgaz − Σ), Σ ≥ 0 ; si ΔSgaz = 0, alors Q = −T0Σ, éventuellement négatif.",
+          "finding": "La variation nulle ne fixe pas la production ; une production globale négative resterait incompatible avec ce cadre et ses hypothèses."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Poser les anomalies possibles",
-            "action": "Examiner hypothétiquement une production négative ou une variation d’entropie nulle, sans annoncer qu’elles ont été mesurées ici.",
-            "output": "Deux résultats possibles posés comme objets d’analyse."
+            "title": "Recevoir les questions de cohérence",
+            "input": "Résultats de 4.3 ou retour local de 5.6 ; aucune valeur expérimentale de production négative fournie.",
+            "action": "Distinguer l’hypothèse ΔSgaz = 0 d’un résultat Σcalculée < 0 ; conserver les bilans de référence 0 et D.",
+            "output": "Deux questions théoriques distinctes, sans anomalie annoncée dans les exemples.",
+            "relation": {
+              "nature": "logique",
+              "description": "La variation d’état et la production ne sont pas la même grandeur ; leurs signes ne se lisent pas avec le même critère."
+            }
           },
           {
             "id": 2,
-            "title": "Organiser les explications",
-            "action": "Séparer signe de Q, température de réservoir, frontière du système et hypothèses d’état dans une grille de diagnostic.",
-            "output": "Causes possibles classées selon les termes du bilan."
+            "title": "Transformer le bilan en contraintes",
+            "input": "Questions de 5.1 ; ΔSgaz = Q/T0 + Σ avec T0 > 0 et Σ globale non négative.",
+            "action": "Isoler Q = T0(ΔSgaz − Σ), donc Q ≤ T0ΔSgaz ; sous ΔSgaz = 0, déduire Q = −T0Σ ≤ 0.",
+            "output": "Une entropie du gaz constante peut accompagner une production positive compensée par chaleur rejetée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le traitement donne une condition de bilan ; il ne construit pas à lui seul un processus matériel ni n’impose l’adiabaticité."
+            }
           },
           {
             "id": 3,
-            "title": "Tester les lectures",
-            "action": "Montrer comment une sortie d’entropie peut compenser une production positive, puis rechercher les incohérences d’une production globale négative.",
-            "output": "Deux diagnostics distincts pour constance et signe négatif."
+            "title": "Établir les deux diagnostics",
+            "input": "Contraintes de 5.2 ; mêmes définitions de chaleur reçue et de production globale.",
+            "action": "Consigner ΔSgaz = 0 compatible avec Σ > 0 si Q < 0 ; Σcalculée < 0 correspond à Qcalculé > T0ΔScalculée, incompatible avec le cadre complet.",
+            "output": "À 6.1 : distinction entre variation et production, et bilan global à additionner pour le cycle de retour.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le premier résultat exprime une compensation possible ; le second indique un dossier à réexaminer, sans décrire une production physique négative."
+            }
           },
           {
             "id": 4,
-            "title": "Relire les conclusions",
-            "action": "Vérifier que ΔS nul n’est pas utilisé seul pour conclure à la réversibilité et qu’aucune hypothèse n’est corrigée sans justification.",
-            "output": "Conclusions limitées aux informations effectivement contenues dans le bilan.",
-            "comparison": "Comparer les diagnostics de 3 aux situations de 1 en conservant leur nature de tests hypothétiques."
+            "title": "Reprendre la portée des diagnostics",
+            "input": "Résultats de 5.3 ; exemples réversible et libre toujours décrits par Σ = 0 et Σ = D.",
+            "action": "Reprendre séparément compensation par export et incompatibilité du résidu ; ne choisir aucune cause matérielle sans informations indépendantes.",
+            "output": "Isentropique seul ne prouve pas réversible ; une valeur négative calculée n’est pas un processus réalisé.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture garde les diagnostics conditionnels ; signes, températures, frontière et hypothèses peuvent tous affecter un calcul incohérent."
+            },
+            "comparison": "5.4 ↔ 5.3 : compensation et incompatibilité relues face aux diagnostics établis.",
+            "evaluation": {
+              "object": "5.4 ↔ 5.3 : compensation et incompatibilité relues face aux diagnostics établis.",
+              "conditions": "Même cadre macroscopique, cas hypothétiques et bilans de référence ; aucune expérience négative annoncée.",
+              "criterion": "Sous ΔSgaz = 0, conserver Q = −T0Σ ; distinguer ce cas d’une valeur calculée Σ < 0.",
+              "finding": "La variation nulle n’établit pas la réversibilité ; le résidu négatif demande une relecture du dossier, pas son acceptation physique."
+            }
           },
           {
             "id": 5,
-            "title": "Arbitrer le cadre",
-            "action": "Maintenir la production non négative dans le bilan macroscopique adopté et examiner les données avant de modifier les hypothèses physiques.",
-            "output": "Cadre conservé et priorités de vérification motivées.",
-            "comparison": "Confronter l’arbitrage à la grille de 2, au lieu d’attribuer immédiatement un défaut au second principe."
+            "title": "Quantifier une erreur de convention",
+            "input": "Diagnostics repris en 5.4 ; envisager une chaleur fournie de magnitude q > 0, à un thermostat de température T0.",
+            "action": "Utiliser Q = −q pour obtenir Σcorrecte = ΔSgaz + q/T0 ; compter à tort Q = +q donnerait Σerronée = ΔSgaz − q/T0, soit un écart −2q/T0.",
+            "output": "Une inversion de signe peut produire un résidu artificiellement négatif ; aucune valeur de q n’est attribuée à un essai.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’exemple algébrique démontre l’effet d’une convention erronée ; il n’identifie pas la cause de tout résidu négatif possible."
+            },
+            "comparison": "5.5 ↔ 5.2 : transformation du signe d’une chaleur fournie comparée aux contraintes du bilan signé.",
+            "evaluation": {
+              "object": "5.5 ↔ 5.2 : transformation du signe d’une chaleur fournie comparée aux contraintes du bilan signé.",
+              "conditions": "Même q > 0 et T0 > 0 ; seul le codage du transfert change entre les deux écritures.",
+              "criterion": "Vérifier Σerronée − Σcorrecte = −2q/T0 ; si ΔSgaz = 0, retrouver +q/T0 avec Q = −q.",
+              "finding": "Une erreur de signe peut expliquer un résultat impossible ; ce contrecas ne remplace pas la vérification des températures et du périmètre."
+            }
           },
           {
             "id": 6,
-            "title": "Fixer la procédure de retour",
-            "action": "Formuler l’ordre de contrôle des unités, signes, températures et frontières pour une future analyse dotée de données indépendantes.",
-            "output": "Procédure ciblée applicable à un bilan entropique futur.",
-            "comparison": "Comparer cette procédure aux tests de 3 et aux anomalies de 1, sans prétendre disposer des données absentes."
+            "title": "Restituer les questions avec leur statut",
+            "input": "Traitement de 5.5 et questions reçues en 5.1 ; aucun transfert ou résidu observé disponible.",
+            "action": "Rétablir Q = −q pour une chaleur fournie ; conserver ΔSgaz = 0 comme compensation possible et Σcalculée < 0 comme incompatibilité à instruire.",
+            "output": "Questions initiales restituées ; les exemples conservent leurs productions globales non négatives.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour précise ce qu’une correction de signe peut résoudre ; sans données indépendantes, il ne corrige pas arbitrairement un dossier réel."
+            },
+            "comparison": "5.6 ↔ 5.1 : questions, statut hypothétique et exemples restitués face au dossier de cohérence.",
+            "evaluation": {
+              "object": "5.6 ↔ 5.1 : questions, statut hypothétique et exemples restitués face au dossier de cohérence.",
+              "conditions": "Aucune production négative mesurée, aucune correction de température ou frontière imposée sans justification.",
+              "criterion": "Conserver les questions ΔSgaz = 0 et Σcalculée < 0 distinctes ; retrouver Σrév = 0 et Σlibre = D pour les exemples.",
+              "finding": "Le dossier initial est restitué avec un effet de convention quantifié ; les données nécessaires à un diagnostic réel restent absentes."
+            }
           }
-        ],
-        "id": 5
+        ]
       },
       {
+        "id": 6,
         "title": "Revenir sans effacer la production",
-        "system": "Le cycle de pensée formé d’une détente libre suivie d’une compression isotherme réversible.",
-        "input": "Le cadre confronté, la détente libre calculée et le retour réversible vers dix litres.",
-        "output": "Le gaz retrouve son état, tandis que la production totale demeure positive.",
+        "system": "Le cycle calculé : détente libre de 10 à 20 L, puis compression isotherme réversible ramenant le gaz à 10 L.",
+        "input": "5.3 transmet le bilan global ; détente libre avec ΔSgaz = D, suivie d’un retour réversible à T0 = 300 K.",
+        "output": "Le gaz retrouve son état initial ; Σcycle = D subsiste et le thermostat gagne D, tandis que le cycle reçoit du travail.",
         "section": "irreversibilite",
-        "comparison": "Comparer le calcul du cycle à celui du niveau 3 et distinguer état initial retrouvé du gaz et modification de son environnement.",
+        "comparison": "6 ↔ 1 : retrouver l’état initial du gaz en confrontant séparément les contacts et les modifications de son environnement.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le cycle est une succession théorique explicitement choisie ; son calcul distingue le retour des variables d’état et l’accumulation de production."
+        },
+        "evaluation": {
+          "object": "6 ↔ 1 : état du gaz et partenaires extérieurs au terme du cycle comparés au dossier initial.",
+          "conditions": "Même mole, composition fixe et température 300 K ; détente libre suivie de compression réversible avec un seul thermostat, dispositifs idéaux.",
+          "criterion": "Retrouver V = 10 L et ΔSgaz,cycle = 0 ; conserver Σcycle = D et ΔSth,cycle = D ≈ 5,763 J·K⁻¹.",
+          "finding": "Le gaz retrouve ses attributs initiaux, mais le thermostat et le dispositif de travail ne sont pas restaurés ; la production passée n’est pas effacée."
+        },
         "steps": [
           {
             "id": 1,
-            "title": "Poser le cycle théorique",
-            "action": "Faire suivre la détente libre d’une compression réversible à trois cents kelvins, ramenant le gaz à son volume initial.",
-            "output": "Deux étapes théoriques ramenant le gaz au départ."
+            "title": "Définir les étapes du retour",
+            "input": "Cadre de 5.3 ; 6.6 restitue localement le cycle, avec la détente libre déjà calculée entre 10 et 20 L.",
+            "action": "Faire suivre la détente libre d’une compression réversible à 300 K vers 10 L ; conserver n = 1 mol et les énergies macroscopiques négligeables entre états.",
+            "output": "Gaz ramené à son état initial par deux étapes distinctes ; thermostat uniquement au retour, aucun autre échange entropique.",
+            "relation": {
+              "nature": "logique",
+              "description": "La chronologie appartient ici au cycle supposé ; elle ne transforme pas la détente libre elle-même en chemin réversible."
+            }
           },
           {
             "id": 2,
-            "title": "Séparer les bilans d’étape",
-            "action": "Conserver les fonctions d’état pour le gaz et comptabiliser séparément chaleur et production pour chaque étape du retour.",
-            "output": "Méthode par étapes avec états et partenaires explicites."
+            "title": "Additionner les bilans d’étape",
+            "input": "Étapes de 6.1 ; D = nR ln 2, ΔSlibre = D et Σlibre = D ; compression réversible avec Σretour = 0.",
+            "action": "Calculer ΔSretour = nR ln(1/2) = −D et Qretour = T0ΔSretour = −T0D ; sommer les variations et productions.",
+            "output": "ΔSgaz,cycle = 0, Qcycle = −T0D et Σcycle = D.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les différences d’état se télescopent ; les productions des étapes s’additionnent et ne changent pas de signe lors du retour du gaz."
+            }
           },
           {
             "id": 3,
-            "title": "Calculer le bilan du cycle",
-            "action": "Additionner les variations opposées du gaz et conserver la production R ln 2 issue de la détente libre.",
-            "output": "ΔSgaz cyclique nul ; production totale R ln 2."
+            "title": "Établir le résultat du cycle",
+            "input": "Sommes de 6.2 ; D = 5,763146321643979 J·K⁻¹ et premier principe sur le gaz revenu au même état.",
+            "action": "Consigner ΔSgaz,cycle = 0, Σcycle ≈ 5,763 J·K⁻¹, Qcycle ≈ −1728,944 J et Wcycle = −Qcycle ≈ +1728,944 J.",
+            "output": "À 1.1 : gaz revenu à 10 L et 300 K, avec production positive et environnement énergétique modifié.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le travail reçu compense la chaleur rejetée puisque ΔUcycle = 0 ; toutes les valeurs restent des résultats du cycle supposé."
+            }
           },
           {
             "id": 4,
-            "title": "Reconstituer l’environnement",
-            "action": "Calculer le gain d’entropie du thermostat pendant la compression et vérifier qu’il explique le bilan positif de l’ensemble.",
-            "output": "Gain extérieur compatible avec la production du cycle.",
-            "comparison": "Comparer ce bilan à 3 et au cycle de 1, sans oublier l’échange thermique du retour imposé."
+            "title": "Reprendre l’entropie du thermostat",
+            "input": "Résultats de 6.3 ; le thermostat reçoit −Qretour pendant la compression et n’échange rien lors de la détente libre.",
+            "action": "Calculer ΔSth,cycle = −Qcycle/T0 = D ; additionner à ΔSgaz,cycle = 0 pour retrouver la production globale.",
+            "output": "Le thermostat gagne environ 5,763 J·K⁻¹, bien que sa température reste 300 K.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Température constante ne signifie pas état extérieur restauré ; l’énergie et l’entropie reçues gardent la trace du cycle."
+            },
+            "comparison": "6.4 ↔ 6.3 : entropie extérieure et somme globale relues face au résultat du cycle.",
+            "evaluation": {
+              "object": "6.4 ↔ 6.3 : entropie extérieure et somme globale relues face au résultat du cycle.",
+              "conditions": "Même thermostat à 300 K, retour réversible et contact sans stockage ; valeurs calculées avant arrondi.",
+              "criterion": "Retrouver ΔSth,cycle = −Qcycle/T0 = D et ΔSgaz,cycle + ΔSth,cycle = D.",
+              "finding": "La somme reproduit la production du cycle ; le thermostat n’est pas restauré par le seul maintien de sa température."
+            }
           },
           {
             "id": 5,
-            "title": "Confronter le mot retour",
-            "action": "Vérifier que retrouver l’état du gaz ne signifie pas retrouver simultanément l’état de tous ses partenaires extérieurs.",
-            "output": "Retour d’état distingué d’une réversibilité globale du cycle.",
-            "comparison": "Confronter cette distinction à la méthode par étapes de 2, qui conserve les contributions des partenaires."
+            "title": "Relier travail cyclique et production",
+            "input": "Sommes reprises en 6.4 ; gaz cyclique, un thermostat à T0, contact sans stockage et tous travaux inclus.",
+            "action": "Transformer 0 = Qcycle/T0 + Σcycle et 0 = Qcycle + Wcycle en Wcycle = T0Σcycle ; avec Σretour ≥ 0, déduire Wcycle ≥ T0D.",
+            "output": "Le retour réversible atteint Wcycle = T0D ; une production supplémentaire au retour augmenterait ce travail sous les mêmes conditions.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La borne dépend du thermostat unique et du cycle fermé ; elle compare les retours possibles sans attribuer de dissipation nouvelle à celui calculé."
+            },
+            "comparison": "6.5 ↔ 6.2 : bilan cyclique et borne du travail comparés à l’addition directe des deux étapes.",
+            "evaluation": {
+              "object": "6.5 ↔ 6.2 : bilan cyclique et borne du travail comparés à l’addition directe des deux étapes.",
+              "conditions": "Même détente libre, un seul thermostat à T0 et retour au même état du gaz ; aucun autre échange d’entropie.",
+              "criterion": "Retrouver Σcycle = D + Σretour et Wcycle = T0Σcycle ≥ T0D ; égalité pour la compression réversible choisie.",
+              "finding": "La transformation conserve la production initiale ; un retour dissipatif ne pourrait pas l’annuler dans ce cadre."
+            }
           },
           {
             "id": 6,
-            "title": "Fermer la boucle entropique",
-            "action": "Présenter séparément le retour du gaz et la trace entropique extérieure, puis rappeler la nature calculée de cette comparaison.",
-            "output": "Boucle d’état fermée ; irréversibilité globale encore explicitement présente.",
-            "comparison": "Comparer la conclusion au calcul de 3 et aux états de 1, sans effacer la production par un simple retour."
+            "title": "Restituer le gaz et la trace extérieure",
+            "input": "Relation de 6.5 et cycle reçu en 6.1 ; retour réversible choisi, donc Σretour = 0.",
+            "action": "Retrouver n = 1 mol, T = 300 K et V = 10 L ; conserver Σcycle = D, gain entropique du thermostat D et travail reçu T0D.",
+            "output": "État initial du gaz restitué ; l’environnement demeure modifié par le cycle calculé.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour final sépare les attributs retrouvés et les échanges accumulés ; aucune compression ne soustrait la production de la détente libre."
+            },
+            "comparison": "6.6 ↔ 6.1 : états du gaz et partenaires restitués face au cycle initialement défini.",
+            "evaluation": {
+              "object": "6.6 ↔ 6.1 : états du gaz et partenaires restitués face au cycle initialement défini.",
+              "conditions": "Même mole et composition, étapes calculées et compression réversible à 300 K ; aucune expérience réalisée.",
+              "criterion": "Retrouver le gaz à 10 L et 300 K, avec Σcycle = D, ΔSth,cycle = D et Wcycle ≈ +1728,944 J.",
+              "finding": "Le cycle du gaz est fermé ; les bilans de l’environnement empêchent d’assimiler ce retour d’état à une réversibilité globale."
+            }
           }
-        ],
-        "id": 6
+        ]
       }
-    ],
-    "version": "0.1",
-    "updated": "2026-09-09"
+    ]
   },
   "microcanonique": {
     "question": "Comment les contraintes déterminent-elles les états comptés, et que conserve un retour portant sur une autre énergie ?",

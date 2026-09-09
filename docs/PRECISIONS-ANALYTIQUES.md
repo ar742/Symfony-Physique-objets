@@ -1,6 +1,6 @@
 # Préciser les analyses existantes
 
-Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) aux fiches déjà rédigées. Elle conserve leurs coordonnées afin de permettre la reprise de chaque élément. Les lots **AP1 à AP6** concernent dix-sept fiches :
+Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) aux fiches déjà rédigées. Elle conserve leurs coordonnées afin de permettre la reprise de chaque élément. Les lots **AP1 à AP7** concernent vingt fiches :
 
 | Lot | Fiche | Nature du sujet | Périmètre |
 | --- | --- | --- | --- |
@@ -21,14 +21,17 @@ Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) a
 | AP6 | `systeme-et-grandeurs` | Phénomène physique | Deux compartiments identiques ; frontières, extensivité et grandeurs rapportées |
 | AP6 | `gaz-parfait` | Phénomène physique | Gaz dilué à l’équilibre ; équation d’état, unités SI et inversion conditionnelle |
 | AP6 | `premier-principe` | Phénomène physique | Système fermé ; échanges signés, variation interne et variante de détente libre |
+| AP7 | `capacites-thermiques` | Phénomène physique | Gaz parfait monoatomique chauffé sous deux contraintes ; capacités, travail et énergie |
+| AP7 | `detente-isotherme` | Phénomène physique | Détentes réversible et libre entre mêmes états ; échanges et retour par compression |
+| AP7 | `entropie` | Phénomène physique | Gaz et thermostat ; variation d’état, échange et production globale avec le contact |
 
 ## Ce qui est précisé
 
-Les 612 sous-niveaux de ces six lots reprennent les attributs reçus, le traitement effectué et la sortie à conserver. Chacun des lots AP1 à AP4 et AP6 en approfondit 108 ; AP5 en approfondit 72. Les fonctions 2 et 5 réalisent un traitement théorique propre au système local : le retour ne se limite pas à inviter à vérifier ou décider.
+Les 720 sous-niveaux de ces sept lots reprennent les attributs reçus, le traitement effectué et la sortie à conserver. Chacun des lots AP1 à AP4, AP6 et AP7 en approfondit 108 ; AP5 en approfondit 72. Les fonctions 2 et 5 réalisent un traitement théorique propre au système local : le retour ne se limite pas à inviter à vérifier ou décider.
 
-Chaque niveau global et sous-niveau possède une relation entrante qualifiée. Les **714 relations** décrivent comment les entrées conduisent à l'élément étudié : dépendance logique, calcul, lecture, interprétation ou autre relation explicitée. Un contrôle de cohérence ne devient pas une mesure ; un changement de cas calculé ne devient pas une chronologie expérimentale.
+Chaque niveau global et sous-niveau possède une relation entrante qualifiée. Les **840 relations** décrivent comment les entrées conduisent à l'élément étudié : dépendance logique, calcul, lecture, interprétation ou autre relation explicitée. Un contrôle de cohérence ne devient pas une mesure ; un changement de cas calculé ne devient pas une chronologie expérimentale.
 
-Les trois comparaisons globales et les dix-huit comparaisons locales de chaque fiche possèdent quatre champs, soit **357 évaluations détaillées** au total :
+Les trois comparaisons globales et les dix-huit comparaisons locales de chaque fiche possèdent quatre champs, soit **420 évaluations détaillées** au total :
 
 1. **Éléments comparés** : références exactes, correspondant à 4/3, 5/2 ou 6/1.
 2. **Conditions de comparaison** : hypothèses communes, conventions et statut des données.
@@ -87,6 +90,16 @@ Le sixième lot reprend trois fiches de thermodynamique. Les 108 sous-niveaux ex
 - **Premier principe** : traduire les transferts dans la convention reçue positive, calculer le solde et examiner ce que permet sa reconstruction. Tous les travaux et les variations d'énergie macroscopique doivent être considérés. La détente libre adiabatique dans le vide est une variante distincte, sans autre travail ; ΔU = 0 ne fixe pas à elle seule la température finale. [MIT, cours 6, p. 6–8, 11, 16–18 et 23–24](https://ocw.mit.edu/courses/8-044-statistical-physics-i-spring-2013/ce5405cf466deea227c0bbdf350d19d2_MIT8_044S13_L6.pdf).
 
 Ces références existantes ont été revérifiées le 9 septembre 2026. Les exemples et les inversions sont recalculés dans leurs hypothèses. Les repères des deux recueils sont conservés ; leurs documents restent privés. Les comparaisons 4/3, 5/2 et 6/1 définissent leurs objets et critères aux deux étages, sans transformer une cohérence interne en validation expérimentale.
+
+## AP7 : capacités, détentes et entropie
+
+Le septième lot reprend trois analyses liées aux échanges thermiques. Leurs 108 sous-niveaux conservent les exemples et leurs coordonnées, puis précisent les contraintes, les traitements de retour et les comparaisons entre systèmes et chemins. Les valeurs restent supposées et calculées.
+
+- **Capacités thermiques** : distinguer les capacités totales, molaires et massiques, puis relier chaleur, variation interne et enthalpie sous les conditions adaptées. Les deux chauffages de 300 à 310 K ne conduisent généralement pas aux mêmes états mécaniques ; leur même ΔU repose ici sur la propriété U(T) du gaz parfait. Une capacité moyenne obtenue sur l'intervalle n'établit pas sa constance. [IUPAC, capacités thermiques](https://goldbook.iupac.org/terms/view/H02753), [MIT, cours 6, p. 10–13 et 16–19](https://ocw.mit.edu/courses/8-044-statistical-physics-i-spring-2013/ce5405cf466deea227c0bbdf350d19d2_MIT8_044S13_L6.pdf).
+- **Détentes** : comparer deux chemins entre les mêmes états d'équilibre, en conservant leurs échanges distincts. Le travail réversible est calculé avec la pression d'équilibre le long du chemin ; la détente libre utilise la pression extérieure nulle, sans température globale imposée pendant la relaxation. Le retour par compression réversible restitue l'état du gaz ; après la détente libre, il consomme du travail et rejette de la chaleur vers le thermostat. [MIT, cours 6, p. 16–18 et 23](https://ocw.mit.edu/courses/8-044-statistical-physics-i-spring-2013/ce5405cf466deea227c0bbdf350d19d2_MIT8_044S13_L6.pdf).
+- **Entropie** : séparer variation d'état, échange avec le thermostat et production globale, incluant le contact. Le bilan du gaz et du thermostat précise le périmètre auquel la non-négativité s'applique. Un retour du gaz à son état initial n'annule pas une production passée ; une entropie constante du gaz ne prouve pas à elle seule la réversibilité. [MIT, notes microcanoniques, p. 6–7](https://ocw.mit.edu/courses/8-044-statistical-physics-i-spring-2013/328b69f845f540b137c5fbde68203697_MIT8_044S13_mcrocanoncl.pdf).
+
+Ces références existantes ont été revérifiées le 9 septembre 2026. Les bilans des exemples et des retours sont recalculés dans leurs hypothèses. Les comparaisons 4/3, 5/2 et 6/1 sont explicites aux deux étages ; les calculs inverses ne remplacent pas une confrontation indépendante. Les fiches scientifiques et les repères des recueils sont conservés ; leurs ouvrages complets restent privés.
 
 ## Lecture dans le site
 
