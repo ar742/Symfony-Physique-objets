@@ -4,9 +4,9 @@ Chantier ouvert le 9 septembre 2026 à la demande de l'auteur. La thermodynamiqu
 
 ## Ordre des lots
 
-**Priorité depuis le 9 septembre 2026 : la structure analytique de chaque fiche.** Les 22 fiches existantes disposent de six systèmes globaux, chacun décliné selon la même boucle de six sous-niveaux (792 points). Le premier approfondissement analytique des 22 fiches est achevé avec AP8 ; la relecture scientifique avec l'auteur se poursuit. E1 constitue le prochain lot de nouveaux contenus planifié. Voir [la méthode et les règles d'extension](ANALYSES-DEUX-NIVEAUX.md).
+**Priorité depuis le 9 septembre 2026 : la structure analytique de chaque fiche.** Les 25 fiches disponibles disposent de six systèmes globaux, chacun décliné selon la même boucle de six sous-niveaux (900 points). Le premier approfondissement analytique des 22 premières fiches est achevé avec AP8. E1a ajoute trois fiches d’électrostatique avec leurs analyses détaillées dès la création ; la relecture scientifique avec l'auteur se poursuit. Voir [la méthode et les règles d'extension](ANALYSES-DEUX-NIVEAUX.md).
 
-Les [lots AP1 à AP8 de perfectionnement](PRECISIONS-ANALYTIQUES.md) précisent les vingt-deux analyses existantes : oscillateur, Bernoulli, Lagrange–Hamilton, travail-énergie, Poiseuille, corde, rotation axiale, roulement, référentiel tournant, Newton, orbite centrale, hydrostatique, élasticité, acoustique, système thermodynamique, gaz parfait, premier principe, capacités thermiques, détentes, entropie, microcanonique et Boltzmann. Entrées, fonctions théoriques, relations et évaluations sont définies aux deux étages. Les nouvelles fiches et les révisions ultérieures suivront ces mêmes exigences de sens.
+Les [lots AP1 à AP8 de perfectionnement](PRECISIONS-ANALYTIQUES.md) précisent les vingt-deux premières analyses : oscillateur, Bernoulli, Lagrange–Hamilton, travail-énergie, Poiseuille, corde, rotation axiale, roulement, référentiel tournant, Newton, orbite centrale, hydrostatique, élasticité, acoustique, système thermodynamique, gaz parfait, premier principe, capacités thermiques, détentes, entropie, microcanonique et Boltzmann. Entrées, fonctions théoriques, relations et évaluations sont définies aux deux étages. Les trois nouvelles analyses E1a respectent ces mêmes exigences. La suite du chantier et les révisions ultérieures les conserveront.
 
 Les pages ci-dessous sont les repères des éditions locales déjà indexées. Une fiche du recueil n'est pas considérée comme transposée intégralement dès qu'une première fiche web l'utilise.
 
@@ -26,6 +26,12 @@ Les pages ci-dessous sont les repères des éditions locales déjà indexées. U
 | T1 | Mesure, incertitudes, diffusion et transferts comme liens transversaux | P19, P23 p. 460–465, P24 p. 466–470 | Passages selon le domaine | Confronter calcul et mesure sans refaire le parcours thermique |
 
 Les sujets de recherche du lot A1 seront distingués des résultats expérimentalement établis. Les contraintes observationnelles et valeurs numériques contemporaines seront datées et vérifiées au moment de la rédaction.
+
+## E1 : livraison progressive
+
+Le [premier volet E1a](ELECTROSTATIQUE-E1A.md) livre trois fiches d’électrostatique : `champ-coulomb`, `potentiel-energie-electrique` et `gauss-sphere-chargee`. Les repères utilisés sont CPGE P11 p. 355, P13 p. 372 et théorie PC2 p. 268. Ce volet ne couvre pas tout E1.
+
+Les volets suivants prévus portent sur le champ magnétique et la force de Lorentz, la magnétostatique, puis l’induction et les liens entre les équations de Maxwell. Les milieux et les conditions aux limites seront abordés avec leurs hypothèses propres. Chaque fiche suivra la même structure 6 × 6 et ses évaluations.
 
 ## Méthode de chaque livraison
 
@@ -53,4 +59,4 @@ Le site fonctionne localement ; `physicstopics.fr` n'a plus d'hébergement. L'en
 
 ## Suivi
 
-Voir [le journal des avancées](AVANCEES.md). M1 et M2 ont livré huit fiches de mécanique et deux boucles. F1 ajoute six fiches et deux boucles pour les fluides, l'élasticité, la corde et l'acoustique. Ces livraisons constituent des premiers parcours délimités ; elles ne transposent pas l'intégralité des chapitres sources. M2 se limite notamment à une introduction analytique sur un système à un degré de liberté. AP1 à AP8 achèvent un premier approfondissement des analyses à deux niveaux des 22 fiches, y compris la thermodynamique et la physique statistique. E1 (champs et électromagnétisme) est le prochain lot planifié ; la relecture scientifique avec l'auteur reste ouverte. Les autres lots restent planifiés tant que le journal ne mentionne pas une livraison effective.
+Voir [le journal des avancées](AVANCEES.md). M1 et M2 ont livré huit fiches de mécanique et deux boucles. F1 ajoute six fiches et deux boucles pour les fluides, l'élasticité, la corde et l'acoustique. Ces livraisons constituent des premiers parcours délimités ; elles ne transposent pas l'intégralité des chapitres sources. M2 se limite notamment à une introduction analytique sur un système à un degré de liberté. AP1 à AP8 achèvent un premier approfondissement des analyses à deux niveaux des 22 fiches, y compris la thermodynamique et la physique statistique. E1a ouvre le domaine Électromagnétisme avec le champ de Coulomb, le potentiel et l’énergie, puis Gauss sur une sphère chargée. La magnétostatique, l’induction, les autres équations de Maxwell et les milieux restent à développer ; la relecture scientifique avec l’auteur reste ouverte. Les autres lots restent planifiés tant que le journal ne mentionne pas une livraison effective.

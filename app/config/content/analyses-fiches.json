@@ -14166,5 +14166,1937 @@
         ]
       }
     ]
+  },
+  "champ-coulomb": {
+    "question": "Comment distinguer le champ créé par une charge de la force sur une charge test, et confronter le modèle à deux distances ?",
+    "basis": "Q = +2,0 nC immobile dans le vide, q = −1,0 nC, r₁ = 0,30 m ; variante r₂ = 0,60 m. k ≈ 8,99 × 10⁹ N·m²·C⁻². Données supposées, résultats calculés.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Charges, orientation radiale, inversions conditionnelles et changement de distance sont confrontés sans confondre calcul et vérification expérimentale.",
+    "subject": {
+      "type": "physique",
+      "description": "Le champ électrostatique d’une source ponctuelle maintenue immobile et la force sur une charge test de perturbation négligée.",
+      "scope": "Source unique dans le vide, points d’observation distincts de la source ; pas de champ propre de la charge test ni de trajectoire calculée."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Définir charges et géométrie",
+        "system": "Le dossier de la source, de la charge test et du point d’évaluation du champ.",
+        "input": "Q = +2,0 nC en O, q = −1,0 nC au point M₁ situé à r₁ = 0,30 m, dans le vide.",
+        "output": "Charges scalaires signées en coulombs, distance positive et vecteur radial orienté de O vers M₁ ; source maintenue inchangée.",
+        "section": "conditions",
+        "comparison": "",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les données supposées sont associées à leurs rôles physiques ; la géométrie fixe une orientation avant de calculer un champ ou une force."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Nommer source et point de test",
+            "input": "Q = +2,0 nC, q = −1,0 nC et r₁ = 0,30 m ; 6.3 transmet séparément la variante à 0,60 m pour comparaison.",
+            "action": "Identifier O comme position de la source immobile et M₁ comme point de test ; conserver la variante sans remplacer r₁.",
+            "output": "Dossier de référence dans le vide : Q et q distincts, source maintenue fixe et perturbation de cette source négligée.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Source et test sont des rôles du calcul ; les deux distances correspondent à des comparaisons, sans déplacement réellement effectué."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Construire les attributs géométriques",
+            "input": "Les charges exprimées en nanocoulombs et le vecteur R₁ = OM₁, de norme r₁ > 0.",
+            "action": "Convertir Q et q en coulombs ; poser r₁ = ||R₁|| et eᵣ = R₁/r₁, puis vérifier ||eᵣ|| = 1.",
+            "output": "Q = +2,0 × 10⁻⁹ C, q = −1,0 × 10⁻⁹ C ; R₁ = 0,30 m × eᵣ, orienté vers le point de test.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les conversions conservent les signes ; la normalisation du vecteur de position fixe la direction radiale indépendamment des charges."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir les entrées du modèle",
+            "input": "Les charges converties, la distance et l’orientation obtenues par 1.2.",
+            "action": "Conserver k ≈ 8,99 × 10⁹ N·m²·C⁻² avec son statut approché, puis associer chaque donnée à Q, q ou à la géométrie.",
+            "output": "Transmis à 2.1 : Q positif, q négatif, r₁ = 0,30 m, eᵣ sortant et k approché ; aucun champ encore mesuré.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le dossier devient exploitable pour la loi de Coulomb, sans attribuer à une constante numérique arrondie un statut exact."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les rôles et les signes",
+            "input": "Le dossier constitué en 1.3, avec unités et orientation.",
+            "action": "Relever séparément charge source, charge test et vecteur radial ; maintenir les charges comme scalaires signés.",
+            "output": "Q > 0 et q < 0 sont des données ; eᵣ pointe de O vers M₁, sans être orienté par le signe de q.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour conserve la convention géométrique ; un changement de signe de charge ne redéfinit pas le vecteur radial."
+            },
+            "comparison": "Comparer les attributs repris à 1.3, en conservant rôle, signe et unité de chaque donnée.",
+            "evaluation": {
+              "object": "Les charges et repères relus en 1.4 et le dossier transmis en 1.3.",
+              "conditions": "Même source, même point M₁ et même vide supposé ; aucune observation ajoutée.",
+              "criterion": "Q = +2,0 nC, q = −1,0 nC, r₁ = 0,30 m et ||eᵣ|| = 1 ; k reste une valeur approchée.",
+              "finding": "Les attributs sont conservés ; le signe négatif de q n’a pas inversé la convention radiale."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire la position relative",
+            "input": "La distance r₁ et le vecteur unitaire eᵣ repris, avec positions O et M₁ définies dans un repère.",
+            "action": "Reconstruire R₁ = r₁eᵣ ; sous translation commune a des coordonnées de O et M₁, calculer R₁′ = (M₁+a)−(O+a) = R₁.",
+            "output": "La séparation, sa norme et son orientation sont conservées par un simple changement d’origine du repère.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La reconstruction inverse la normalisation géométrique et distingue coordonnées absolues et position relative utile au modèle."
+            },
+            "comparison": "Confronter cette reconstruction au traitement de 1.2 : r₁ et eᵣ restituent le même vecteur relatif.",
+            "evaluation": {
+              "object": "La normalisation géométrique de 1.2 et sa reconstruction en 1.5.",
+              "conditions": "Translation de coordonnées seulement, sans déplacement relatif des charges ; mêmes unités de longueur.",
+              "criterion": "r₁eᵣ = R₁, ||R₁|| = r₁ et (M₁+a)−(O+a) = M₁−O.",
+              "finding": "La géométrie relative est retrouvée ; une origine de coordonnées différente ne modifie pas les attributs physiques."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le dossier de référence",
+            "input": "La géométrie reconstruite et les charges signées conservées.",
+            "action": "Restituer le couple source-test à 0,30 m avec ses hypothèses de vide et de source immobile, sans chiffrer des coordonnées inutiles.",
+            "output": "Retour à 1.1 : mêmes Q, q et r₁ ; variante à 0,60 m toujours séparée, aucune trajectoire imposée.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour conserve les attributs initiaux utiles au calcul tout en identifiant les choix de repère comme conventions."
+            },
+            "comparison": "Comparer à 1.1 les charges, la distance de référence et les hypothèses sur la source.",
+            "evaluation": {
+              "object": "Le dossier restitué en 1.6 et les attributs physiques reçus en 1.1.",
+              "conditions": "Même configuration relative dans le modèle ponctuel ; aucun effet perturbateur de la charge test n’est ajouté.",
+              "criterion": "Retrouver Q = +2,0 nC, q = −1,0 nC, r₁ = 0,30 m et une source fixe dans le vide.",
+              "finding": "Les données initiales sont restituées ; ni une force ni un mouvement n’ont été déduits de la seule géométrie."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Relier champ radial et force signée",
+        "system": "La loi de Coulomb et la distinction entre champ de la source et force sur la charge test.",
+        "input": "Dossier de 1.3 : Q > 0, q < 0, r₁ > 0 et eᵣ orienté de la source vers le test, dans le vide.",
+        "output": "E_Q = (kQ/r₁²)eᵣ est sortant ; F = qE_Q = (kQq/r₁²)eᵣ est entrant.",
+        "section": "champ",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La loi physique de Coulomb transforme les attributs en champ et force ; la radialité géométrique ne démontre pas à elle seule la loi inverse carrée."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la configuration ponctuelle",
+            "input": "Charges, distance et orientation transmises par 1.3 ; q ≠ 0 et configuration de la source supposée inchangée.",
+            "action": "Retenir uniquement le champ créé par Q au point M₁, en excluant le champ propre de q de la force qu’elle subit.",
+            "output": "Un champ source E_Q(M₁) et une force F_{Q→q}(M₁) à déterminer ; objets distincts, malgré une même position d’évaluation.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le périmètre de la force est fixé avant son calcul ; l’existence d’une charge test ne fait pas entrer son champ propre dans E_Q."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Factoriser la loi de Coulomb",
+            "input": "La loi électrostatique pour deux charges ponctuelles, k approché, r₁ > 0 et q non nul.",
+            "action": "Écrire F_{Q→q} = kQq eᵣ/r₁², puis factoriser q pour identifier E_Q = F_{Q→q}/q = kQ eᵣ/r₁².",
+            "output": "E_Q ne dépend pas de la charge test ; [E_Q] = N·C⁻¹ et [qE_Q] = N.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La factorisation sépare la propriété du champ source de la réponse de la charge test, sous la configuration supposée conservée."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir direction et composantes",
+            "input": "Les relations de 2.2 et la convention radiale eᵣ sortante.",
+            "action": "Former Eᵣ = E_Q·eᵣ = kQ/r₁² et Fᵣ = F·eᵣ = qEᵣ ; utiliser les signes Q > 0 et q < 0.",
+            "output": "Transmis à 3.1 : Eᵣ > 0, Fᵣ < 0, composantes tangentielles nulles ; normes |E_Q| = k|Q|/r₁² et |F| = |q||E_Q|.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les signes des scalaires déterminent les sens des vecteurs ; la norme de la force reste positive même lorsque Fᵣ est négative."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les deux grandeurs vectorielles",
+            "input": "Les composantes, directions et normes établies en 2.3.",
+            "action": "Relever Eᵣ positif et Fᵣ négatif avec leurs unités, en conservant le même vecteur eᵣ dans les deux expressions.",
+            "output": "Champ sortant en N·C⁻¹ et force entrante en N ; le signe de la force n’est pas celui du champ.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour reçoit les conséquences de la loi avec la convention qui permet de comparer correctement les directions."
+            },
+            "comparison": "Comparer à 2.3 composantes signées et normes, sans transformer une composante négative en norme négative.",
+            "evaluation": {
+              "object": "Les grandeurs relues en 2.4 et les expressions obtenues en 2.3.",
+              "conditions": "Source positive et charge test négative, même point M₁ et même convention radiale.",
+              "criterion": "Eᵣ = kQ/r₁² > 0, Fᵣ = qEᵣ < 0 ; |F| = −Fᵣ et |E_Q| = Eᵣ.",
+              "finding": "Les directions sont conservées ; le champ et la force sont opposés pour la charge test choisie."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Transformer le signe du test",
+            "input": "E_Q et F repris ; contrecas formel q′ = −q, avec Q, r₁ et configuration source inchangés.",
+            "action": "Calculer F′ = q′E_Q = −F, puis reconstruire F′/q′ = F/q = E_Q.",
+            "output": "Inverser la charge test inverse la force, tandis que le champ reconstruit reste identique.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le contrecas confronte les deux descriptions du champ ; il change la réponse au champ sans déplacer ni modifier la source."
+            },
+            "comparison": "Confronter cette transformation à la factorisation de 2.2 : le quotient force sur charge test reste invariant.",
+            "evaluation": {
+              "object": "La factorisation de Coulomb de 2.2 et le changement de charge test traité en 2.5.",
+              "conditions": "Changement de signe hypothétique ; source et point d’évaluation fixés, perturbation toujours négligée.",
+              "criterion": "q′ = −q donne F′ = −F et F′/q′ = E_Q ; l’inversion du signe de q ne modifie pas kQ/r₁².",
+              "finding": "L’indépendance du champ source vis-à-vis du test est retrouvée dans ce cadre ; le contrecas n’est pas une manipulation effectuée."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le test de référence",
+            "input": "L’invariance du champ sous changement de test et les valeurs initiales Q = +2,0 nC, q = −1,0 nC.",
+            "action": "Revenir au test négatif et à r₁ = 0,30 m, puis restituer la source inchangée et les grandeurs recherchées.",
+            "output": "Retour à 2.1 : même champ de Q, force électrique sur q négative dirigée vers O ; aucun champ propre ajouté.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour restitue les attributs de la configuration initiale et le rôle exact des deux charges dans les expressions."
+            },
+            "comparison": "Comparer à 2.1 les rôles, charges et périmètre du champ utilisé pour la force.",
+            "evaluation": {
+              "object": "La configuration restituée en 2.6 et les attributs source-test reçus en 2.1.",
+              "conditions": "Retour au cas de référence, à distance positive et avec source maintenue immobile.",
+              "criterion": "Retrouver Q = +2,0 nC, q = −1,0 nC et r₁ = 0,30 m ; E_Q dépend de Q et F dépend aussi de q.",
+              "finding": "Les attributs d’entrée sont conservés ; le champ de la source reste défini même en l’absence de charge test."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Calculer le champ et la force à 0,30 m",
+        "system": "L’application numérique de la loi au point de référence M₁.",
+        "input": "Relations de 2.3 ; Q = +2,0 × 10⁻⁹ C, q = −1,0 × 10⁻⁹ C, r₁ = 0,30 m et k approché.",
+        "output": "Eᵣ₁ ≈ +199,778 N·C⁻¹ ; Fᵣ₁ ≈ −1,998 × 10⁻⁷ N, avec champ sortant et force entrante.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les valeurs supposées produisent des résultats numériques ; les chiffres du calcul ne sont pas une précision expérimentale."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les valeurs de référence",
+            "input": "Les expressions signées de 2.3, les charges en coulombs et r₁ = 0,30 m.",
+            "action": "Conserver k ≈ 8,99 × 10⁹ N·m²·C⁻² et r₁² = 0,0900 m², sans arrondir les résultats intermédiaires.",
+            "output": "Un jeu de paramètres supposés commun au calcul du champ puis de la force ; eᵣ reste le repère radial.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les données converties sont préparées dans les unités de la formule ; k conserve son statut de valeur approchée."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Évaluer les composantes signées",
+            "input": "Les valeurs reçues et les relations Eᵣ₁ = kQ/r₁², Fᵣ₁ = qEᵣ₁.",
+            "action": "Calculer Eᵣ₁ = (8,99 × 10⁹)(2,0 × 10⁻⁹)/(0,30)², puis multiplier par q = −1,0 × 10⁻⁹ C.",
+            "output": "Eᵣ₁ = 199,777777… N·C⁻¹ et Fᵣ₁ = −1,997777777… × 10⁻⁷ N avec le coefficient k retenu.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La première opération utilise seulement Q ; la seconde introduit le signe et la valeur de la charge test."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir les résultats du point M₁",
+            "input": "Les composantes numériques obtenues en 3.2 et la convention radiale.",
+            "action": "Consigner E_Q(M₁) ≈ +199,778 eᵣ N·C⁻¹ et F(M₁) ≈ −1,998 × 10⁻⁷ eᵣ N.",
+            "output": "Transmis à 4.1 : champ et force calculés à 0,30 m, orientation connue ; aucun relevé indépendant effectué.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les résultats gardent leur sens vectoriel et leur provenance ; les valeurs non arrondies servent aux contrôles inverses."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre signes et unités",
+            "input": "Les résultats du point M₁ établis en 3.3.",
+            "action": "Relever composantes signées et normes associées ; conserver explicitement N·C⁻¹ pour le champ et N pour la force.",
+            "output": "|E_Q| ≈ 199,778 N·C⁻¹ et |F| ≈ 1,998 × 10⁻⁷ N ; le signe moins indique uniquement la direction entrante de F.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour reçoit les résultats numériques en distinguant taille et orientation, avant la reconstruction de la charge test."
+            },
+            "comparison": "Comparer à 3.3 valeurs, directions et unités, avec les mêmes arrondis d’affichage.",
+            "evaluation": {
+              "object": "Les valeurs relues en 3.4 et les résultats numériques établis en 3.3.",
+              "conditions": "Même point et même coefficient k approché ; eᵣ orienté de O vers M₁.",
+              "criterion": "Eᵣ₁ > 0, Fᵣ₁ < 0 ; |E_Q| = Eᵣ₁ et |F| = −Fᵣ₁ ; Fᵣ₁ = qEᵣ₁ avant arrondi.",
+              "finding": "Les résultats sont conservés ; une force entrante ne signifie pas que le champ de Q soit entrant."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire la charge test",
+            "input": "Les vecteurs calculés F et E_Q, avec E_Q non nul et F attribuée uniquement à l’action électrique de Q.",
+            "action": "Projeter F = qE_Q sur E_Q et résoudre q = (F·E_Q)/||E_Q||² = Fᵣ₁/Eᵣ₁.",
+            "output": "Le quotient restitue q = −1,0 × 10⁻⁹ C ; son signe négatif explique l’opposition entre force et champ.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La projection inverse la relation force-champ sous son hypothèse d’application ; elle ne mesure pas indépendamment la charge test."
+            },
+            "comparison": "Confronter cette inversion à la multiplication de 3.2 : diviser la composante de force par celle du champ retrouve q.",
+            "evaluation": {
+              "object": "Le calcul direct de la force en 3.2 et la reconstruction de q en 3.5.",
+              "conditions": "Même force électrique et même champ source non nul ; valeurs du calcul conservées avant arrondi.",
+              "criterion": "Fᵣ₁/Eᵣ₁ = −1,0 × 10⁻⁹ C ; (F·E_Q)/||E_Q||² a l’unité coulomb et le même signe.",
+              "finding": "La charge test d’entrée est retrouvée par une identité du modèle ; aucune charge nouvelle n’est estimée expérimentalement."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les données du calcul",
+            "input": "La charge test reconstruite et les paramètres Q, r₁ et k conservés indépendamment.",
+            "action": "Restituer q = −1,0 nC avec Q = +2,0 nC et r₁ = 0,30 m ; garder les orientations et le caractère approché de k.",
+            "output": "Retour à 3.1 : mêmes charges, distance et convention radiale ; aucune masse ou trajectoire déterminée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour retrouve la charge utilisée et conserve les autres attributs fournis, sans transformer une force calculée en description complète du mouvement."
+            },
+            "comparison": "Comparer à 3.1 la charge reconstruite et les paramètres conservés, dans les mêmes unités.",
+            "evaluation": {
+              "object": "Les attributs restitués en 3.6 et les données numériques reçues en 3.1.",
+              "conditions": "Reconstruction interne ; Q, r₁ et k restent ceux de l’énoncé, la charge test étant le paramètre inversé.",
+              "criterion": "Retrouver q = −1,0 nC ; conserver Q = +2,0 nC, r₁ = 0,30 m et k ≈ 8,99 × 10⁹ N·m²·C⁻².",
+              "finding": "Le dossier initial est restitué avec ses hypothèses et ses unités ; les résultats ne fournissent pas de données mécaniques supplémentaires."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Reconstruire la source sous conditions",
+        "system": "Le problème inverse de la charge source à partir du champ calculé, de sa direction et d’une distance connue.",
+        "input": "Résultats de 3.3 : E_Q(M₁), F(M₁), r₁ = 0,30 m et q connue ; Q est traitée comme inconnue de contrôle.",
+        "output": "La composante radiale signée et r₁ connu restituent Q = +2,0 nC ; sans distance connue, seul Q/r₁² serait identifié.",
+        "section": "limites",
+        "comparison": "Comparer aux résultats du niveau 3 le champ et la force recalculés depuis Q reconstruite, avec mêmes distance et orientation.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les résultats directs deviennent des entrées d’inversion ; leurs dépendances au modèle ponctuel et aux paramètres géométriques sont conservées."
+        },
+        "evaluation": {
+          "object": "Les résultats de champ et de force du niveau 3, confrontés à leur reconstruction au niveau 4.",
+          "conditions": "Modèle ponctuel admis, source localisée et r₁ connu ; données issues du calcul, pas d’une acquisition indépendante.",
+          "criterion": "Qrec = Eᵣ₁r₁²/k = +2,0 nC ; kQrec/r₁² = Eᵣ₁ et qkQrec/r₁² = Fᵣ₁.",
+          "finding": "Les résultats initiaux sont restitués ; le contrôle ne prouve ni le caractère ponctuel de la source ni sa charge par mesure indépendante."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le champ pour inversion",
+            "input": "Le champ et la force transmis par 3.3, avec r₁ et la convention eᵣ ; k reste approché.",
+            "action": "Conserver les valeurs non arrondies et traiter Q comme inconnue de contrôle, en maintenant la localisation de la source et la distance.",
+            "output": "Une composante radiale signée disponible, une distance connue et un modèle ponctuel explicitement retenu.",
+            "relation": {
+              "nature": "logique",
+              "description": "L’inversion modifie le rôle d’une grandeur du dossier, sans prétendre que sa valeur initialement fournie constitue une nouvelle observation."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Isoler la charge source",
+            "input": "Eᵣ₁ = E_Q·eᵣ, r₁ > 0 connu et relation Eᵣ₁ = kQ/r₁².",
+            "action": "Résoudre Q = Eᵣ₁r₁²/k ; utiliser aussi Q = Fᵣ₁r₁²/(kq) lorsque la charge test non nulle est connue.",
+            "output": "Les deux expressions donnent Q = +2,0 × 10⁻⁹ C ; le signe est conservé grâce à la projection radiale.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La distance et l’orientation lèvent les ambiguïtés de l’inversion dans le modèle ; la norme du champ seule donnerait seulement |Q|."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir le résultat conditionnel",
+            "input": "Les expressions inverses de 4.2 et les paramètres connus du dossier.",
+            "action": "Consigner Qrec = +2,0 nC et rappeler que r₁, k, q et le caractère ponctuel n’ont pas été identifiés par ce résultat.",
+            "output": "Transmis à 5.1 : source reconstruite conditionnellement, champ de référence à 0,30 m et hypothèses nécessaires à l’inversion.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le résultat établit ce que l’inversion retrouve, en conservant séparément les informations qui lui ont été fournies."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les dépendances de Q",
+            "input": "La charge reconstruite de 4.3 et la liste de paramètres maintenus connus.",
+            "action": "Relever le signe positif de Qrec, sa valeur et la nécessité de r₁ ; distinguer champ signé et simple norme.",
+            "output": "Qrec = +2,0 nC avec direction et distance connues ; une donnée de norme seule n’aurait pas fixé le signe.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour reçoit le résultat avec ses conditions d’identification avant d’examiner l’ambiguïté d’une distance inconnue."
+            },
+            "comparison": "Comparer à 4.3 charge, signe et paramètres nécessaires, sans effacer les conditions du résultat.",
+            "evaluation": {
+              "object": "Le résultat inverse relu en 4.4 et la charge conditionnelle établie en 4.3.",
+              "conditions": "Même Eᵣ₁ positif, même r₁ et même k ; la géométrie source-point est conservée.",
+              "criterion": "Eᵣ₁r₁²/k = +2,0 nC ; avec ||E_Q|| seulement, la même formule en norme ne donnerait que |Q|.",
+              "finding": "La valeur et le signe sont conservés, avec leur dépendance à la direction du champ."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Résoudre l’ambiguïté charge-distance",
+            "input": "Le résultat repris ; contrecas où r serait aussi inconnu, tandis qu’Eᵣ et l’orientation seraient seuls disponibles.",
+            "action": "Poser Qλ = λ²Q et rλ = λr pour λ > 0 ; calculer kQλ/rλ² = kQ/r².",
+            "output": "Une famille de charges et distances donne le même champ ; une seule valeur de champ ne détermine pas simultanément Q et r.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La transformation explicite l’indétermination du problème inverse lorsque l’information géométrique est retirée ; elle ne décrit pas la variante à Q fixé."
+            },
+            "comparison": "Confronter cette famille à 4.2 : la donnée indépendante de r permet de sélectionner la charge reconstruite.",
+            "evaluation": {
+              "object": "L’inversion à distance connue de 4.2 et la famille équivalente calculée en 4.5.",
+              "conditions": "Même modèle ponctuel, même direction et k ; variation conjointe de Q et r seulement dans le contrecas.",
+              "criterion": "k(λ²Q)/(λr)² = kQ/r² ; imposer rλ = r₁ pour la solution de référence fixe λ = 1.",
+              "finding": "La distance connue est indispensable à cette reconstruction de Q ; le champ seul identifie le rapport signé Q/r²."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les entrées du contrôle",
+            "input": "La famille de 4.5 et la distance r₁ = 0,30 m maintenue dans le dossier initial.",
+            "action": "Fixer de nouveau r₁, retenir Qrec = +2,0 nC et recalculer Eᵣ₁ puis Fᵣ₁ avec q = −1,0 nC.",
+            "output": "Retour à 4.1 : mêmes champ et force à 0,30 m ; charge source retrouvée sous le modèle, géométrie et k conservés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La sélection de la distance initiale restitue les résultats reçus sans transformer leur cohérence algébrique en preuve expérimentale."
+            },
+            "comparison": "Comparer à 4.1 les grandeurs reçues, la distance et les informations maintenues connues.",
+            "evaluation": {
+              "object": "Le dossier de champ et de force restitué en 4.6 et les données du contrôle reçues en 4.1.",
+              "conditions": "Retour à la distance connue ; mêmes charges de référence et k approché.",
+              "criterion": "Eᵣ₁ ≈ 199,778 N·C⁻¹ et Fᵣ₁ ≈ −1,998 × 10⁻⁷ N sont retrouvés à r₁ = 0,30 m.",
+              "finding": "Les attributs du contrôle sont restitués. Leur concordance demeure conditionnelle au modèle et à la distance fournie."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Exploiter puis interroger la loi spatiale",
+        "system": "La dépendance radiale du champ et de la force à charges fixées, et l’identification conditionnelle d’un exposant.",
+        "input": "Résultat de 4.3 : Q reconstruite, Eᵣ₁ à r₁ = 0,30 m et modèle ponctuel ; q et k restent fixés.",
+        "output": "Le modèle prévoit Eᵣ(λr₁)/Eᵣ₁ = λ⁻² ; le rapport calculé à λ = 2 restitue p = 2 dans une famille de puissances.",
+        "section": "limites",
+        "comparison": "Comparer au traitement du niveau 2 la loi d’échelle déduite et l’exposant reconstruit sous les mêmes hypothèses.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le résultat inverse alimente une étude de dépendance spatiale, sans changer les charges pour compenser la variation de distance."
+        },
+        "evaluation": {
+          "object": "La loi de Coulomb adoptée au niveau 2 et son traitement par rapports et inversion d’exposant au niveau 5.",
+          "conditions": "Q et q fixes, r > 0, même k et même modèle ponctuel ; les deux valeurs sont calculées.",
+          "criterion": "Eᵣ(λr)/Eᵣ(r) = λ⁻² ; pour λ = 2 et un rapport 1/4, −ln(1/4)/ln 2 = 2.",
+          "finding": "Le retour retrouve l’exposant adopté. Ce contrôle interne ne constitue pas une vérification expérimentale de toute la loi spatiale."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir une référence radiale",
+            "input": "Qrec = +2,0 nC, Eᵣ₁ > 0 à r₁ = 0,30 m transmis par 4.3 ; q et k connus.",
+            "action": "Maintenir Q, q et k ; définir des points sur le même rayon sortant, à r = λr₁ avec λ > 0.",
+            "output": "Une référence Eᵣ₁, une distance r₁ et un rapport λ ; la géométrie conserve la même orientation radiale.",
+            "relation": {
+              "nature": "logique",
+              "description": "La comparaison porte sur la distance seule ; elle se distingue de la famille charge-distance équivalente du niveau 4."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Dériver le rapport spatial",
+            "input": "Le champ de référence et la loi Eᵣ = kQ/r² ; famille comparative Eₚ(r) = Eᵣ₁(r/r₁)⁻ᵖ.",
+            "action": "Diviser Eᵣ(λr₁) par Eᵣ₁ : les facteurs kQ s’éliminent et donnent λ⁻² ; tous les exposants p coïncident en r₁.",
+            "output": "Coulomb correspond à p = 2 ; une seule valeur de référence ne sélectionne pas un exposant dans cette famille.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le rapport sans dimension sépare la forme spatiale de l’amplitude ; la famille ancrée préserve les unités du champ."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Prédire le doublement de distance",
+            "input": "La loi de rapport λ⁻² obtenue en 5.2 et la variante λ = 2 à charges inchangées.",
+            "action": "Calculer 2⁻² = 1/4 ; écrire Fᵣ₂/Fᵣ₁ = qEᵣ₂/(qEᵣ₁) pour retrouver ce rapport à q non nul fixé.",
+            "output": "Transmis à 6.1 : r₂ = 0,60 m, Eᵣ₂/Eᵣ₁ = Fᵣ₂/Fᵣ₁ = 1/4, mêmes Q et q.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La prédiction prépare une variante séparée, dont les valeurs seront calculées au niveau 6."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre la prédiction de rapport",
+            "input": "Les rapports 1/4 transmis en 5.3 et les conditions de leur calcul.",
+            "action": "Distinguer rapport positif et signes des composantes : le champ reste positif, la force négative, leurs normes décroissent ensemble.",
+            "output": "Une prédiction à deux distances, à charges constantes ; aucune valeur mesurée n’a été ajoutée.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise conserve le sens physique et le statut calculé du rapport avant de l’utiliser dans un problème inverse."
+            },
+            "comparison": "Comparer à 5.3 les rapports, les signes et le maintien des mêmes charges.",
+            "evaluation": {
+              "object": "La prédiction spatiale relue en 5.4 et les rapports établis en 5.3.",
+              "conditions": "Même rayon sortant ; Q > 0, q < 0 et λ = 2.",
+              "criterion": "Eᵣ₂/Eᵣ₁ = 1/4 > 0 et Fᵣ₂/Fᵣ₁ = 1/4 > 0 ; Fᵣ₁ et Fᵣ₂ restent négatives.",
+              "finding": "Le rapport positif conserve les orientations ; il ne transforme pas une force entrante en force sortante."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire un exposant conditionnel",
+            "input": "Rapport R_E = 1/4, λ = 2 et famille Eₚ(r) = Eᵣ₁(r/r₁)⁻ᵖ, avec champs de même signe.",
+            "action": "Résoudre R_E = λ⁻ᵖ par p = −ln R_E/ln λ ; substituer λ = 2 et R_E = 1/4.",
+            "output": "p = 2 est retrouvé dans cette famille ; deux points calculés ne prouvent pas la loi pour toutes les distances.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion nécessite λ ≠ 1 et R_E > 0 ; elle identifie un exposant seulement après choix de la famille de modèles."
+            },
+            "comparison": "Comparer à 5.2 l’exposant sélectionné par le rapport et l’exposant de la loi ponctuelle adoptée.",
+            "evaluation": {
+              "object": "La dérivation directe de 5.2 et l’inversion de l’exposant en 5.5.",
+              "conditions": "Même source, même milieu et famille de puissances ancrée ; rapport issu de la loi elle-même.",
+              "criterion": "−ln(1/4)/ln 2 = 2 ; une seule donnée en r₁ laisserait tous les p possibles dans la famille.",
+              "finding": "Le traitement retrouve p = 2 par cohérence interne ; la restriction à cette famille et le caractère ponctuel restent des hypothèses."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Retrouver la référence et son domaine",
+            "input": "L’exposant p = 2 et le rapport 1/4 de la variante, avec r₁, Q, q et k maintenus.",
+            "action": "Inverser l’échelle par Eᵣ₁ = 4Eᵣ₂ ; conserver la référence r₁ et exclure r = 0, où l’expression ponctuelle est singulière.",
+            "output": "Retour à 5.1 : même champ de référence à 0,30 m et mêmes charges ; aucune extension au point source n’est obtenue.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour par l’échelle restitue l’amplitude ancrée sans lever les conditions géométriques et physiques posées à l’entrée."
+            },
+            "comparison": "Comparer à 5.1 la référence, les charges fixées et le domaine strictement extérieur au point source.",
+            "evaluation": {
+              "object": "Les attributs de référence restitués en 5.6 et ceux reçus en 5.1.",
+              "conditions": "Eᵣ₂ = Eᵣ₁/4 est la prédiction, Q et k connus ; r₁ > 0 reste fixé.",
+              "criterion": "4(kQ/(2r₁)²) = kQ/r₁² ≈ 199,778 N·C⁻¹, avec Q = +2,0 nC et r₁ = 0,30 m.",
+              "finding": "La référence initiale est restituée ; le calcul n’identifie ni une distribution étendue ni le comportement au point source."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Comparer les deux distances et revenir aux données",
+        "system": "La variante à 0,60 m, confrontée aux charges et à la géométrie de la référence à 0,30 m.",
+        "input": "Prédiction de 5.3 : r₂ = 2r₁ = 0,60 m, rapport 1/4 ; mêmes Q = +2,0 nC, q = −1,0 nC et k.",
+        "output": "Le champ et la force ont des normes divisées par quatre. Les inversions conditionnelles retrouvent les mêmes charges, avec deux distances distinctes.",
+        "section": "controle",
+        "comparison": "Comparer au niveau 1 les charges et la géométrie, en distinguant la distance initiale de la variante et les grandeurs maintenues fixes.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La variante produit des conséquences comparables à la référence et alimente un retour sur ses attributs, sans supposer un déplacement observé."
+        },
+        "evaluation": {
+          "object": "Les charges, distances et conventions géométriques du niveau 1, confrontées au retour obtenu avec les deux cas.",
+          "conditions": "Q et q identiques dans les deux calculs ; r₁ et r₂ connus, même orientation et même k approché.",
+          "criterion": "Eᵣⱼrⱼ²/k = +2,0 nC et Fᵣⱼ/Eᵣⱼ = −1,0 nC pour j = 1, 2 ; r₂√(Eᵣ₂/Eᵣ₁) = 0,30 m.",
+          "finding": "Les charges et la distance de référence sont retrouvées sous conditions ; 0,60 m reste une variante explicite, sans mesure nouvelle."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la variante séparée",
+            "input": "De 5.3 : r₂ = 0,60 m, mêmes Q = +2,0 nC et q = −1,0 nC ; rapports prédits 1/4.",
+            "action": "Placer le second point sur le même rayon sortant et conserver le dossier de référence à 0,30 m comme cas distinct.",
+            "output": "Deux positions comparables avec la même source, la même charge test supposée et la même convention radiale.",
+            "relation": {
+              "nature": "logique",
+              "description": "La variante modifie la distance seule ; elle n’introduit ni mouvement suivi, ni changement de charge, ni acquisition expérimentale."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer les grandeurs à 0,60 m",
+            "input": "r₂ = 0,60 m, Q = 2,0 × 10⁻⁹ C, q = −1,0 × 10⁻⁹ C et k ≈ 8,99 × 10⁹ N·m²·C⁻².",
+            "action": "Calculer Eᵣ₂ = kQ/r₂² puis Fᵣ₂ = qEᵣ₂ ; diviser ensuite chaque résultat par son homologue à r₁.",
+            "output": "Eᵣ₂ = 49,944444… N·C⁻¹ et Fᵣ₂ = −4,994444… × 10⁻⁸ N ; les deux rapports valent 1/4.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le calcul direct à la seconde distance confronte les valeurs à la prédiction d’échelle, avec le même coefficient approché."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Consigner la seconde configuration",
+            "input": "Les composantes et rapports calculés en 6.2, avec eᵣ orienté de la source vers le second point.",
+            "action": "Associer champ sortant et force entrante aux valeurs ; étiqueter ce résultat comme variante de distance à charges fixées.",
+            "output": "Transmis séparément à 1.1 : variante à 0,60 m, Eᵣ₂ ≈ 49,944 N·C⁻¹ et Fᵣ₂ ≈ −4,994 × 10⁻⁸ N.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La nouvelle conséquence rejoint le dossier initial comme comparaison ; elle ne remplace pas sa référence à 0,30 m."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les résultats comparables",
+            "input": "La variante consignée en 6.3 et, pour comparaison complémentaire, les valeurs de référence de 3.3.",
+            "action": "Relever les deux signes et les rapports de normes ; garder r₁ et r₂ distincts dans la lecture des valeurs.",
+            "output": "Le champ reste sortant et la force entrante ; à distance doublée, chacune des normes vaut un quart de sa référence.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour examine la variante produite avant de reconstruire les paramètres qui étaient fournis au calcul."
+            },
+            "comparison": "Comparer d’abord à 6.3 les valeurs et orientations reprises, puis aux résultats de référence à 0,30 m.",
+            "evaluation": {
+              "object": "La seconde configuration relue en 6.4 et le résultat transmis en 6.3.",
+              "conditions": "Mêmes paramètres du calcul, même rayon et distinction entre composantes signées et normes positives.",
+              "criterion": "Eᵣ₂ > 0, Fᵣ₂ < 0 ; ||E₂||/||E₁|| = ||F₂||/||F₁|| = 1/4.",
+              "finding": "La reprise conserve les valeurs, les sens et le caractère calculé de la variante."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire les charges avec données fixées",
+            "input": "Les couples calculés (Eᵣⱼ, Fᵣⱼ), les distances connues rⱼ et k ; j = 1 ou 2.",
+            "action": "Inverser séparément Qⱼ = Eᵣⱼrⱼ²/k, puis qⱼ = Fᵣⱼ/Eᵣⱼ ; comparer les deux reconstructions sans identifier simultanément les distances.",
+            "output": "Q₁ = Q₂ = +2,0 nC et q₁ = q₂ = −1,0 nC ; les deux configurations restituent les charges maintenues fixes.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Chaque inversion conserve ses données nécessaires : distance connue pour Q, champ non nul et force due à Q seule pour q."
+            },
+            "comparison": "Comparer aux traitements directs de 6.2 les charges retrouvées et les conditions qui rendent ces inversions possibles.",
+            "evaluation": {
+              "object": "Le calcul de champ et force de 6.2 et les inversions conditionnelles de 6.5.",
+              "conditions": "Valeurs non arrondies issues du modèle ; k et distances connus, champ non nul, source inchangée.",
+              "criterion": "Pour chaque j, (kQ/rⱼ²)rⱼ²/k = Q et (qEᵣⱼ)/Eᵣⱼ = q ; les deux charges gardent leurs signes.",
+              "finding": "Les inversions retrouvent les paramètres fournis. Elles ne mesurent pas ces charges et ne déterminent pas conjointement Q et une distance inconnue."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Revenir aux attributs de la variante",
+            "input": "Charges reconstruites, Eᵣ₂ calculé et dossier initial de la variante reçu en 6.1.",
+            "action": "Avec Q connue, isoler r₂ = √(kQ/Eᵣ₂) ; vérifier r₂/r₁ = 2 et maintenir la source fixe et la perturbation négligée.",
+            "output": "Retour à 6.1 : distance 0,60 m et charges inchangées ; la référence à 0,30 m demeure séparée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion de distance constitue un contrôle distinct, où Q est connue ; elle ne cumule pas plusieurs inconnues non identifiables."
+            },
+            "comparison": "Comparer à 6.1 la distance reconstruite, les charges et les hypothèses physiques conservées.",
+            "evaluation": {
+              "object": "Les attributs de la variante restitués en 6.6 et ceux reçus en 6.1.",
+              "conditions": "Q positive connue, Eᵣ₂ positif et calculé ; racine positive, mêmes k et localisation de la source.",
+              "criterion": "√(kQ/Eᵣ₂) = 0,60 m et r₂/r₁ = 2 ; Q = +2,0 nC et q = −1,0 nC restent inchangées.",
+              "finding": "Les attributs initiaux de la variante sont restitués ; fixation de la source et approximation de test demeurent supposées."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "potentiel-energie-electrique": {
+    "question": "Comment relier champ, potentiel et travail, puis retrouver conditionnellement la source sans confondre origine arbitraire et information physique ?",
+    "basis": "Source ponctuelle fixe Q = +2,0 nC, charge test q = +1,0 nC, rA = 0,20 m et rB = 0,40 m ; valeurs supposées, résultats calculés.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les intégrales, inversions et contrôles de signe sont explicités ; les deux parcours conservent source, référence et statut des données.",
+    "subject": {
+      "type": "physique",
+      "description": "L’interaction électrostatique d’une charge test avec une source ponctuelle fixe dans le vide.",
+      "scope": "Domaine r > 0, perturbation négligée, q constante ; comparaison de positions et du sens inverse, sans mouvement observé ni vitesse introduite."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Définir source, charge test et positions",
+        "system": "Les attributs physiques et conventions de l’interaction électrostatique examinée.",
+        "input": "Q = +2,0 nC fixe, q = +1,0 nC constante ; rA = 0,20 m, rB = 0,40 m et référence V(∞) = 0.",
+        "output": "Dossier SI avec source extérieure, positions distinctes et sens A→B ; le retour B→A reste un cas séparé.",
+        "section": "conditions",
+        "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Les données définissent un système idéal et deux configurations comparables ; elles ne décrivent ni une mesure ni une évolution temporelle."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les charges et les configurations",
+            "input": "Exemple initial ou retour de 1.6 ; 6.3 transmet aussi les deux sens de comparaison, explicitement séparés.",
+            "action": "Distinguer la source Q maintenue fixe de la charge test q ; situer A,B hors de la source et retenir V(∞) = 0.",
+            "output": "Attributs posés : Q,q positifs, vide, r > 0, perturbation négligée ; aucune trajectoire effectivement parcourue.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fixité de Q et l’absence de perturbation sont des hypothèses ; le seul rapport q/Q ne suffit pas à les établir."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Convertir charges et géométrie",
+            "input": "Données de 1.1 ; k ≈ 8,99 × 10⁹ N·m²·C⁻² et distances exprimées en mètres.",
+            "action": "Convertir les nC en C ; calculer kQ = 17,98 V·m et D_AB = 1/rB − 1/rA = −2,50 m⁻¹.",
+            "output": "Q = 2,0 × 10⁻⁹ C, q = 1,0 × 10⁻⁹ C ; coefficient kQ et facteur géométrique prêts.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le produit kQ a l’unité V·m ; sa multiplication ultérieure par D_AB donnera une différence de potentiel en volts."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Conserver le dossier d’entrée",
+            "input": "Conversions de 1.2 et conventions physiques reçues en 1.1.",
+            "action": "Associer à chaque rayon sa position, au coefficient kQ sa source et à D_AB le sens B moins A.",
+            "output": "À 2.1 : kQ = 17,98 V·m, D_AB = −2,50 m⁻¹, q constant, source fixe et zéro à l’infini.",
+            "relation": {
+              "nature": "logique",
+              "description": "La sortie transmet des attributs utilisables par l’intégration ; elle ne contient pas encore une observation du champ."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le sens et les unités",
+            "input": "Dossier de 1.3 avec deux charges différentes et deux positions de la même charge test.",
+            "action": "Relire D_AB comme une différence de rayons inverses ; garder Q dans le champ et q dans l’énergie.",
+            "output": "Charges, géométrie et sens sont conservés ; D_AB n’est ni un déplacement ni un potentiel.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La comparaison sépare les grandeurs de la source de celles de la sonde avant le calcul du potentiel."
+            },
+            "comparison": "1.4 ↔ 1.3 : conserver charges, unités et orientation de la différence.",
+            "evaluation": {
+              "object": "1.4 ↔ 1.3 : dossier des attributs convertis.",
+              "conditions": "Même source fixe et mêmes positions ; aucune permutation implicite de Q et q.",
+              "criterion": "Retrouver kQ = 17,98 V·m, D_AB = −2,50 m⁻¹ et q = 10⁻⁹ C.",
+              "finding": "Le dossier reste cohérent ; D_AB porte le sens A→B."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstituer le rayon d’arrivée",
+            "input": "Reprise de 1.4 ; rA = 0,20 m et D_AB = −2,50 m⁻¹ sont conservés.",
+            "action": "Résoudre rB = 1/(D_AB + 1/rA) = 0,40 m ; convertir séparément Q et q de C vers nC.",
+            "output": "Rayon rB positif retrouvé ; source +2,0 nC et charge test +1,0 nC restituées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion géométrique n’est admissible que si D_AB + 1/rA > 0 ; elle restitue ici les données utilisées."
+            },
+            "comparison": "1.5 ↔ 1.2 : inverser les conversions et le facteur géométrique.",
+            "evaluation": {
+              "object": "1.5 ↔ 1.2 : définition de D_AB et conversions SI.",
+              "conditions": "rA connu ; somme D_AB + 1/rA = 2,50 m⁻¹ positive.",
+              "criterion": "Recomposer 1/rB − 1/rA = −2,50 m⁻¹ et les deux valeurs en coulombs.",
+              "finding": "La transformation inverse restitue le dossier ; aucun rayon n’a été mesuré."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les hypothèses physiques",
+            "input": "Attributs reconstruits en 1.5 et conditions de source extérieure reçues en 1.1.",
+            "action": "Replacer rA,rB et les charges dans le vide ; maintenir fixité de Q, q constante et référence à l’infini.",
+            "output": "À reprendre en 1.1 : même système initial, ses unités contrôlées et la variante B→A distinguée.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les conversions restituent les nombres ; elles ne démontrent pas la fixité de la source ou la qualité de l’approximation de sonde."
+            },
+            "comparison": "1.6 ↔ 1.1 : retrouver les attributs et les hypothèses de départ.",
+            "evaluation": {
+              "object": "1.6 ↔ 1.1 : Q,q,rA,rB, référence et statut des données.",
+              "conditions": "Dossier initial séparé de la comparaison inverse ; r > 0.",
+              "criterion": "Retrouver +2,0 nC,+1,0 nC,0,20 m,0,40 m et V(∞) = 0 ; conserver les hypothèses non testées.",
+              "finding": "Les attributs sont restitués ; l’idéalisation de source fixe reste posée."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Intégrer le champ en potentiel",
+        "system": "Le modèle de champ radial et sa traduction en différences de potentiel et d’énergie.",
+        "input": "1.3 transmet source, géométrie et référence ; E = (kQ/r²)e_r est la loi électrostatique adoptée pour r > 0.",
+        "output": "V(r) = kQ/r ; ΔV_AB = kQ D_AB, ΔEp = qΔV_AB et Wchamp = −qΔV_AB.",
+        "section": "potentiel",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La loi de champ est intégrée avec une condition de référence ; l’indépendance du travail vis-à-vis du chemin résulte ici du potentiel global hors de la source."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le champ et son domaine",
+            "input": "Dossier de 1.3 ou reprise de 2.6 ; champ radial de la seule source ponctuelle Q, dans le vide.",
+            "action": "Poser E(r) = (kQ/r²)e_r pour r > 0 ; distinguer ce champ extérieur du champ propre de q.",
+            "output": "Champ statique donné sur le domaine excluant la source ; référence V(∞) = 0 et chemin admissible fixés.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les attributs de source conduisent au modèle de Coulomb adopté ; l’intégration ne détermine pas elle-même la nature de la source."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Effectuer l’intégration radiale",
+            "input": "Champ de 2.1, coefficient kQ et référence à l’infini.",
+            "action": "Calculer V(r) − V(∞) = −∫∞ʳ kQ/s² ds = kQ/r ; soustraire les valeurs aux deux rayons.",
+            "output": "V(r) = kQ/r et ΔV_AB = kQ(1/rB − 1/rA).",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La primitive de kQ/s² est −kQ/s ; le signe extérieur et les bornes fixent ensemble le signe du potentiel."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les expressions exploitables",
+            "input": "Potentiel et différence établis en 2.2 ; q constante dans le potentiel extérieur.",
+            "action": "Associer Ep = qV à l’interaction et Wchamp,A→B = −qΔV_AB au travail de la force électrique.",
+            "output": "À 3.1 : expressions de VA,VB,ΔV_AB,ΔEp et Wchamp avec kQ = 17,98 V·m et q = 10⁻⁹ C.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les expressions distinguent volts et joules ; l’énergie potentielle concerne l’interaction avec Q, sans auto-énergie."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire le potentiel comme fonction",
+            "input": "Expressions de 2.3 définies pour tous les r > 0, avec leur zéro à l’infini.",
+            "action": "Conserver V(r), sa référence et ses valeurs d’extrémité ; ne pas remplacer la fonction par une pente moyenne.",
+            "output": "Fonction radiale disponible pour dérivation ; ΔV_AB seule resterait une information entre deux points.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reconstruction locale du champ utilise la fonction V(r), et non uniquement deux valeurs calculées."
+            },
+            "comparison": "2.4 ↔ 2.3 : conserver la fonction et la signification des énergies.",
+            "evaluation": {
+              "object": "2.4 ↔ 2.3 : V(r), domaine et relations énergie-travail.",
+              "conditions": "Source ponctuelle inchangée ; potentiel extérieur de référence identique.",
+              "criterion": "Retrouver V = kQ/r, Ep = qV et Wchamp = −qΔV_AB, sans facteur 1/2.",
+              "finding": "Les expressions sont reprises avec leur domaine et leur portée."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Dériver pour retrouver le champ",
+            "input": "Fonction radiale conservée en 2.4, avec k,Q constants et aucune dépendance angulaire.",
+            "action": "Calculer −grad V = −(d/dr)(kQ/r)e_r = (kQ/r²)e_r ; puis −grad(qV) = qE.",
+            "output": "Champ de Coulomb et force sur la sonde retrouvés ; toute constante additive de V disparaîtrait à la dérivation.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivation inverse l’intégration à une constante près ; la référence fixe cette constante dans la chaîne d’entrée."
+            },
+            "comparison": "2.5 ↔ 2.2 : comparer dérivation et intégration du champ.",
+            "evaluation": {
+              "object": "2.5 ↔ 2.2 : relation entre champ radial et potentiel.",
+              "conditions": "Q et q constants, r > 0, potentiel différentiable et radial.",
+              "criterion": "Retrouver E_r = kQ/r² puis V = kQ/r en réintégrant avec V(∞) = 0.",
+              "finding": "Le calcul se ferme dans le modèle ; il ne vérifie pas expérimentalement la loi de Coulomb."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Rendre le modèle et sa condition",
+            "input": "Champ et force restitués en 2.5 ; domaine et référence reçus en 2.1.",
+            "action": "Restituer E(r), Q fixe et l’exclusion r = 0 ; maintenir séparés champ extérieur et charge test.",
+            "output": "À reprendre en 2.1 : même loi radiale et même référence, avec intégration et gradient raccordés.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour restitue les attributs du modèle tout en conservant le rôle distinct de la condition à l’infini."
+            },
+            "comparison": "2.6 ↔ 2.1 : retrouver champ, source et domaine.",
+            "evaluation": {
+              "object": "2.6 ↔ 2.1 : E = (kQ/r²)e_r et hypothèses du modèle.",
+              "conditions": "Source unique ponctuelle supposée, vide et statique ; q n’altère pas Q.",
+              "criterion": "Conserver Q fixe, r > 0 et V(∞) = 0 ; le champ retrouvé doit être radial sortant puisque Q > 0.",
+              "finding": "Le modèle initial est restitué ; aucune extension à r = 0 n’est proposée."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Établir les potentiels et le bilan chiffré",
+        "system": "Les résultats numériques associés aux deux configurations et au sens A→B.",
+        "input": "2.3 fournit les expressions ; kQ = 17,98 V·m, q = 10⁻⁹ C, rA = 0,20 m et rB = 0,40 m.",
+        "output": "VA = 89,9 V, VB = 44,95 V, ΔEp = −4,495 × 10⁻⁸ J et Wchamp,A→B = +4,495 × 10⁻⁸ J.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les paramètres supposés produisent des valeurs calculées avec k approché ; les chiffres conservés permettent la comparaison des deux chaînes."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les expressions numériques",
+            "input": "Expressions de 2.3 ou reprise de 3.6 ; potentiel à l’infini nul et charges constantes.",
+            "action": "Rassembler kQ,rA,rB et q avec leurs unités ; garder ΔV_AB = VB − VA avant toute substitution.",
+            "output": "Deux divisions en volts puis un produit en joules à évaluer ; sens A→B conservé.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les formules et les paramètres alimentent une évaluation numérique ; les valeurs obtenues ne sont pas des relevés instrumentaux."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer les potentiels et leur énergie",
+            "input": "Données de 3.1 ; kQ = 17,98 V·m et q = 1,0 × 10⁻⁹ C.",
+            "action": "Diviser par 0,20 puis 0,40 ; soustraire VB − VA et multiplier par q ; prendre l’opposé pour le travail.",
+            "output": "VA = 89,9 V ; VB = 44,95 V ; ΔV_AB = −44,95 V ; ΔEp = −4,495 × 10⁻⁸ J.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le travail vaut +4,495 × 10⁻⁸ J ; [qΔV] = C·V = J et le sens de la soustraction commande le signe."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Consigner les résultats comparables",
+            "input": "Résultats de 3.2 et travail associé au champ pour A→B.",
+            "action": "Retenir VA,VB,ΔV_AB,ΔEp,Wchamp ; mentionner qu’aucune donnée cinétique ni intervention extérieure n’a été fournie.",
+            "output": "À 4.1 : 89,9 V,44,95 V,−44,95 V,−4,495 × 10⁻⁸ J et +4,495 × 10⁻⁸ J, calculés.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le dossier distingue potentiel absolu conventionnel, différence physique et énergie d’interaction ; il ne spécifie pas le mouvement."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les signes calculés",
+            "input": "Dossier numérique de 3.3 ; Q et q positifs, rB supérieur à rA.",
+            "action": "Vérifier que VB < VA, ΔEp < 0 et Wchamp > 0 ; rattacher chaque signe au même sens A→B.",
+            "output": "Résultats relus sans changement de source, de référence ou de sens ; aucun travail extérieur encore attribué.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le signe est compatible avec l’éloignement d’une charge positive de la source positive dans une comparaison de positions."
+            },
+            "comparison": "3.4 ↔ 3.3 : conserver valeurs, unités et sens du bilan.",
+            "evaluation": {
+              "object": "3.4 ↔ 3.3 : potentiels et variations énergétiques calculés.",
+              "conditions": "Même q > 0, même référence et même sens A→B.",
+              "criterion": "Retrouver ΔV_AB = −44,95 V et Wchamp + ΔEp = 0, en joules.",
+              "finding": "Les valeurs et les signes concordent ; le dossier ne fournit pas une vitesse finale."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Remonter du travail aux potentiels",
+            "input": "Travail de 3.4, q connu non nul et VA = 89,9 V conservé avec sa référence.",
+            "action": "Résoudre ΔV_AB = −Wchamp/q = −44,95 V puis VB = VA + ΔV_AB = 44,95 V.",
+            "output": "Différence et potentiel d’arrivée retrouvés ; conserver VA était nécessaire pour retrouver VB dans la même référence.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le travail divisé par q restitue une différence ; il ne détermine pas à lui seul un potentiel absolu."
+            },
+            "comparison": "3.5 ↔ 3.2 : inverser le produit énergétique puis la soustraction.",
+            "evaluation": {
+              "object": "3.5 ↔ 3.2 : conversion entre travail et différence de potentiel.",
+              "conditions": "q = 10⁻⁹ C et VA fournis ; travail attribué à la force électrique seule.",
+              "criterion": "Vérifier −Wchamp/q = VB − VA et q(VB − VA) = −4,495 × 10⁻⁸ J.",
+              "finding": "Le calcul inverse restitue les résultats d’entrée sans donnée indépendante supplémentaire."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les paramètres de calcul",
+            "input": "Potentiels retrouvés en 3.5 et rayons de 3.1.",
+            "action": "Former VA rA = VB rB = 17,98 V·m ; joindre q et les deux rayons inchangés au dossier.",
+            "output": "À reprendre en 3.1 : coefficient kQ restitué, unités contrôlées et mêmes expressions à évaluer.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les deux produits comparent les résultats numériques au coefficient d’entrée ; ils partagent le même modèle et les mêmes données."
+            },
+            "comparison": "3.6 ↔ 3.1 : retrouver les entrées utilisées pour l’évaluation.",
+            "evaluation": {
+              "object": "3.6 ↔ 3.1 : kQ,q,rA,rB et référence.",
+              "conditions": "Les rayons sont conservés, pas reconstruits depuis une mesure ; V(∞) = 0.",
+              "criterion": "Obtenir VA rA = VB rB = 17,98 V·m avec q = 10⁻⁹ C et les rayons initiaux.",
+              "finding": "Le dossier de calcul est restitué ; cette égalité est un contrôle interne."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Reprendre le travail comme donnée de retour",
+        "system": "Le bilan électrique calculé, relu par la force et par l’énergie d’interaction.",
+        "input": "3.3 transmet ΔV_AB = −44,95 V, ΔEp = −4,495 × 10⁻⁸ J et Wchamp = +4,495 × 10⁻⁸ J.",
+        "output": "Même bilan obtenu par ∫qE·dl ; qV est distingué de l’énergie totale d’assemblage et du travail d’un agent extérieur.",
+        "section": "travail",
+        "comparison": "4 ↔ 3 : comparer le bilan repris aux potentiels et énergies calculés.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "La chaîne de retour reprend les résultats d’entrée ; l’intégrale de force en contrôle la cohérence sans devenir une mesure indépendante."
+        },
+        "evaluation": {
+          "object": "4 ↔ 3 : ΔV_AB, ΔEp et travail électrique.",
+          "conditions": "Même source fixe, mêmes positions et q constant ; intégrales dans le champ électrostatique adopté.",
+          "criterion": "Retrouver Wchamp = +4,495 × 10⁻⁸ J et ΔEp = −Wchamp = q(VB − VA).",
+          "finding": "Le bilan est conservé ; une intervention mécanique extérieure demanderait un cadre supplémentaire."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le bilan à réexaminer",
+            "input": "Résultats de 3.3 ou reprise de 4.6, avec leurs unités et le sens A→B.",
+            "action": "Retenir Wchamp comme travail électrique calculé ; conserver q,Q,rA,rB et le potentiel extérieur associé.",
+            "output": "Travail de +4,495 × 10⁻⁸ J à recomposer ; ΔEp et ΔV_AB restent disponibles pour comparaison.",
+            "relation": {
+              "nature": "logique",
+              "description": "La reprise nomme l’agent qui travaille : le champ de Q ; elle n’attribue pas automatiquement ce travail à un opérateur."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Recomposer le travail par la force",
+            "input": "Charge q et champ radial de 4.1 ; chemin radial de rA à rB choisi pour le calcul.",
+            "action": "Intégrer Wchamp = ∫rAʳᴮ qkQ/r² dr = qkQ(1/rA − 1/rB).",
+            "output": "Wchamp = +4,495 × 10⁻⁸ J ; les bornes donnent le signe positif pour l’éloignement envisagé.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Tout chemin admissible entre A et B donne le même résultat dans ce champ conservatif ; le chemin radial simplifie seulement l’intégrale."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir le dossier de retour",
+            "input": "Travail intégré en 4.2 et relations énergétiques reçues en 4.1.",
+            "action": "Comparer Wchamp à −qΔV_AB ; conserver la géométrie et q pour la future reconstruction de Q.",
+            "output": "À 5.1 : Wchamp = +4,495 × 10⁻⁸ J, ΔV_AB = −44,95 V, q connu et rayons distincts.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le dossier transmet les informations nécessaires à l’inversion ; leurs valeurs proviennent toujours de la chaîne de calcul initiale."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Distinguer champ et agent extérieur",
+            "input": "Dossier de 4.3, où seul le travail électrique est défini.",
+            "action": "Conserver ce bilan ; pour un déplacement quasi statique idéal supplémentaire, poser Fext = −qE, sans dissipation ni autre travail.",
+            "output": "Sous cette condition seulement, Wext = −Wchamp = ΔEp ; aucun tel déplacement n’est déclaré réalisé.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Un travail extérieur opposé exige un mode opératoire et une variation cinétique négligeable ; il ne découle pas du seul nom du trajet."
+            },
+            "comparison": "4.4 ↔ 4.3 : préserver le bilan électrique avant toute attribution extérieure.",
+            "evaluation": {
+              "object": "4.4 ↔ 4.3 : travail électrique et variation d’énergie.",
+              "conditions": "Le travail extérieur est conditionnel à Fext = −qE et à l’absence d’autres travaux ou pertes.",
+              "criterion": "Conserver Wchamp = +4,495 × 10⁻⁸ J ; dans le cas supplémentaire, Wext = −4,495 × 10⁻⁸ J.",
+              "finding": "Le bilan d’entrée demeure ; le signe de Wext est opposé, uniquement sous les conditions explicitées."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver la charge et contrôler le facteur",
+            "input": "Travail et ΔV_AB conservés en 4.4 ; potentiel créé par Q, hors champ propre de q.",
+            "action": "Calculer q = −Wchamp/ΔV_AB = 10⁻⁹ C ; pour la paire, réduire ½[q(kQ/r)+Q(kq/r)] à qkQ/r.",
+            "output": "q initial retrouvé ; l’énergie de la paire vaut qV_ext, pas ½qV_ext pour une charge test isolément comptée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La somme d’assemblage compte deux fois la même paire ; son facteur 1/2 ne réduit pas l’énergie d’interaction qV_ext."
+            },
+            "comparison": "4.5 ↔ 4.2 : retrouver la charge intervenant dans le travail de la force.",
+            "evaluation": {
+              "object": "4.5 ↔ 4.2 : coefficient q et énergie d’interaction.",
+              "conditions": "ΔV_AB non nul ; potentiel extérieur de la source et auto-énergies exclues.",
+              "criterion": "Obtenir q = +1,0 nC et −Δ(qV_ext) = ∫qE·dl ; un facteur 1/2 seul échouerait.",
+              "finding": "L’inversion restitue q ; la clarification C18 est cohérente avec le travail intégré."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le bilan attribué au champ",
+            "input": "Charge reconstruite en 4.5 et cadre de travail reçu en 4.1.",
+            "action": "Recomposer −qΔV_AB avec q retrouvé ; garder l’intervention extérieure comme hypothèse séparée du dossier initial.",
+            "output": "À reprendre en 4.1 : Wchamp = +4,495 × 10⁻⁸ J et ΔEp = −4,495 × 10⁻⁸ J.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La restitution vérifie l’attribution et le coefficient énergétique ; elle ne transforme pas le calcul de travail en déplacement observé."
+            },
+            "comparison": "4.6 ↔ 4.1 : retrouver le bilan électrique et son statut.",
+            "evaluation": {
+              "object": "4.6 ↔ 4.1 : travail, variation d’énergie et source du potentiel.",
+              "conditions": "Même sens A→B, q constant et perturbation négligée.",
+              "criterion": "Restituer les deux valeurs opposées et q = +1,0 nC ; ne pas remplacer Wchamp par Wext.",
+              "finding": "Le bilan reçu est retrouvé ; aucun apport cinétique ou travail mécanique n’est inventé."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Reconstruire la source et isoler la référence",
+        "system": "L’inversion du bilan électrique dans la famille des potentiels de source ponctuelle.",
+        "input": "4.3 fournit travail, différence de potentiel, q et rayons ; la loi V = kQ/r + C0 reste une hypothèse.",
+        "output": "Q retrouvé à +2,0 nC ; ΔV_AB fixe Q dans cette famille, mais pas C0 ni la forme d’un champ arbitraire.",
+        "section": "reference",
+        "comparison": "5 ↔ 2 : comparer l’inversion conditionnelle à l’intégration avec référence fixée.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’inversion traite le bilan repris ; elle restitue un paramètre du modèle adopté sans déduire ce modèle d’une unique différence."
+        },
+        "evaluation": {
+          "object": "5 ↔ 2 : intégration champ-potentiel et identification de Q.",
+          "conditions": "k et géométrie connus, rA ≠ rB ; même famille ponctuelle V = kQ/r + C0.",
+          "criterion": "Vérifier Q = ΔV_AB/[k(1/rB − 1/rA)] ; retrouver V = kQ/r seulement après choix C0 = 0.",
+          "finding": "La source initiale est retrouvée conditionnellement ; l’origine et la loi entière ne sont pas identifiées par ΔV_AB seule."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les informations à inverser",
+            "input": "Dossier de 4.3 ou reprise de 5.6 : ΔV_AB, Wchamp, q, rA,rB et coefficient k.",
+            "action": "Séparer la différence calculée des paramètres supposés connus ; autoriser C0 dans V(r) = kQ/r + C0.",
+            "output": "Données de retour définies ; famille ponctuelle conservée et constante de référence laissée symbolique.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le potentiel absolu nécessite une référence ; une différence possède moins d’information qu’une fonction spatiale complète."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Résoudre la charge source",
+            "input": "ΔV_AB = −44,95 V de 5.1 ; D_AB = −2,50 m⁻¹ non nul et k connu.",
+            "action": "Éliminer C0 par soustraction puis résoudre Q = ΔV_AB/(kD_AB) = +2,0 × 10⁻⁹ C.",
+            "output": "Q retrouvée à +2,0 nC ; V_C0(r) = 17,98/r + C0, avec r en mètres et V en volts.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’équation est inversible en Q pour D_AB ≠ 0 ; la même inversion échouerait à distinguer Q avec deux rayons égaux."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Consigner les attributs reconstruits",
+            "input": "Source Q retrouvée en 5.2 ; q et rayons conservés, référence initiale V(∞) = 0.",
+            "action": "Fixer C0 = 0 pour reprendre l’exemple ; restituer VA,VB et distinguer ce choix de l’identification de Q.",
+            "output": "À 6.1 : Q = +2,0 nC, q = +1,0 nC, rayons initiaux, VA = 89,9 V et VB = 44,95 V.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les attributs reconstruits permettent le calcul inverse B→A ; la fixité et l’approximation de sonde restent des hypothèses."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre ce qui est identifié",
+            "input": "Dossier de 5.3 et famille V_C0 de 5.2 ; résultats issus du modèle, sans tension indépendamment mesurée.",
+            "action": "Conserver Q comme résultat conditionnel ; reconnaître que C0 = 0 provient de la référence et non de ΔV_AB.",
+            "output": "Charge reconstruite, référence choisie et hypothèses physiques demeurent trois éléments distincts.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La valeur de Q n’est identifiée que dans la famille adoptée ; d’autres distributions pourraient donner la même différence entre A et B."
+            },
+            "comparison": "5.4 ↔ 5.3 : conserver le résultat d’inversion et sa portée.",
+            "evaluation": {
+              "object": "5.4 ↔ 5.3 : Q retrouvé, potentiels restitués et référence.",
+              "conditions": "Même famille de source ponctuelle ; toutes les valeurs proviennent du calcul initial.",
+              "criterion": "Retrouver +2,0 nC et les deux potentiels quand C0 = 0 ; ne pas attribuer ce zéro à la différence seule.",
+              "finding": "Le résultat est conservé avec ses conditions ; aucune validation indépendante de la source n’est acquise."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Tester puis inverser le décalage commun",
+            "input": "Potentiels de 5.4 ; constante arbitraire C0 en volts, uniforme dans l’espace, q constant.",
+            "action": "Former VA* = VA + C0 et VB* = VB + C0 ; calculer ΔV* = ΔV puis C0 = VA* − kQ/rA si VA* est spécifié.",
+            "output": "Q et ΔEp restent inchangés ; une valeur absolue référencée restitue C0, alors que la différence seule le laisse libre.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivée d’une constante est nulle et Δ(qC0) = 0 ; l’inversion distingue information sur la source et choix du zéro."
+            },
+            "comparison": "5.5 ↔ 5.2 : conserver Q dans l’inversion malgré le changement de référence.",
+            "evaluation": {
+              "object": "5.5 ↔ 5.2 : élimination de C0 et identification conditionnelle de Q.",
+              "conditions": "Même décalage en A,B et q constante ; k,rA,rB connus et distincts.",
+              "criterion": "Vérifier (VB* − VA*)/(kD_AB) = Q et q(VB* − VA*) = qΔV_AB ; C0 ne résulte que d’une valeur référencée.",
+              "finding": "Les différences et la source reconstruite sont invariantes ; VA et VB séparément dépendent du zéro."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les données et les limites",
+            "input": "Invariance établie en 5.5 et données de retour reçues en 5.1.",
+            "action": "Rendre ΔV_AB,Wchamp,q,rA,rB et k ; joindre la famille ponctuelle supposée et le zéro choisi pour l’exemple.",
+            "output": "À reprendre en 5.1 : même problème inverse, avec Q conditionnel et C0 libre tant que la référence manque.",
+            "relation": {
+              "nature": "logique",
+              "description": "Une différence contraint une intégrale du champ ; elle ne fournit pas ses valeurs locales ni la preuve d’une unique source."
+            },
+            "comparison": "5.6 ↔ 5.1 : retrouver les informations effectivement disponibles pour l’inversion.",
+            "evaluation": {
+              "object": "5.6 ↔ 5.1 : différence, géométrie, q et hypothèse de source.",
+              "conditions": "Aucune donnée indépendante ajoutée ; famille ponctuelle maintenue pour reconstruire Q.",
+              "criterion": "Retrouver −44,95 V,+4,495 × 10⁻⁸ J et les paramètres connus ; conserver les limites sur C0 et la loi spatiale.",
+              "finding": "Le dossier inverse est restitué sans promouvoir une différence en connaissance complète du champ."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Comparer le retour aux attributs initiaux",
+        "system": "Les deux sens de comparaison entre A et B et la restitution du dossier physique de départ.",
+        "input": "5.3 transmet Q retrouvé, q, les deux rayons et les potentiels dans la référence initiale.",
+        "output": "Pour B→A : ΔV = +44,95 V, ΔEp = +4,495 × 10⁻⁸ J et Wchamp = −4,495 × 10⁻⁸ J ; attributs initiaux conservés.",
+        "section": "controle",
+        "comparison": "6 ↔ 1 : confronter source, charge test, géométrie et hypothèses aux entrées.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le changement d’ordre des positions et l’inversion géométrique contrôlent le dossier initial ; ils ne constituent pas un retour temporel observé."
+        },
+        "evaluation": {
+          "object": "6 ↔ 1 : Q,q,rA,rB, fixité de la source et référence.",
+          "conditions": "Même modèle statique ; Q reconstruite sous l’hypothèse ponctuelle et autres attributs conservés.",
+          "criterion": "Retrouver Q = +2,0 nC, q = +1,0 nC, rA = 0,20 m, rB = 0,40 m et V(∞) = 0 ; isoler B→A comme comparaison.",
+          "finding": "Les valeurs concordent avec l’entrée ; fixité, vide et perturbation négligée restent supposés, sans validation expérimentale."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les attributs pour le retour",
+            "input": "Q retrouvé et dossier de 5.3 ou reprise de 6.6 ; source et référence inchangées.",
+            "action": "Conserver rA,rB comme noms de positions ; définir le cas B→A sans renommer les rayons ni modifier q.",
+            "output": "Deux positions identiques à celles d’entrée ; seul le sens de la comparaison énergétique change.",
+            "relation": {
+              "nature": "logique",
+              "description": "L’ordre inversé des extrémités définit un autre calcul ; aucune vitesse, durée ou réalisation d’un trajet n’est fournie."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer les variations inverses",
+            "input": "Potentiels et charge de 6.1, avec VA = 89,9 V et VB = 44,95 V.",
+            "action": "Former ΔV_BA = VA − VB = +44,95 V ; multiplier par q puis opposer le signe pour Wchamp,B→A.",
+            "output": "ΔEp,BA = +4,495 × 10⁻⁸ J et Wchamp,B→A = −4,495 × 10⁻⁸ J.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le changement de bornes inverse la différence et le travail ; le potentiel en une position donnée reste identique."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les deux cas distingués",
+            "input": "Valeurs inverses de 6.2 et dossier original A→B conservé.",
+            "action": "Consigner côte à côte les deux sens ; vérifier Wchamp,A→B + Wchamp,B→A = 0 sans en déduire une chronologie réelle.",
+            "output": "À 1.1 : mêmes Q,q,rA,rB et référence ; cas initial A→B et variante B→A séparés, signes opposés.",
+            "relation": {
+              "nature": "logique",
+              "description": "La circulation fermée nulle est une conséquence du champ conservatif ; elle ne décrit pas le bilan d’un dispositif extérieur non spécifié."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire ce qui revient et ce qui change",
+            "input": "Deux cas transmis en 6.3 avec les mêmes attributs physiques.",
+            "action": "Rattacher VA à A et VB à B dans les deux cas ; distinguer valeurs en un point et différences orientées.",
+            "output": "Potentiels et positions conservés ; seules les différences et le travail changent de signe.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour ne modifie pas Q ou q : la même interaction est comparée dans les deux sens."
+            },
+            "comparison": "6.4 ↔ 6.3 : préserver les deux cas et leur orientation.",
+            "evaluation": {
+              "object": "6.4 ↔ 6.3 : potentiels aux points, ΔEp et travaux opposés.",
+              "conditions": "Même source, même q et zéro à l’infini ; aucun changement de référence entre les deux sens.",
+              "criterion": "Retrouver VA = 89,9 V, VB = 44,95 V et la somme nulle des deux travaux.",
+              "finding": "Les deux cas sont conservés ; la nullité concerne le travail électrique sur le contour fermé."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstituer la position A depuis le retour",
+            "input": "Bilan B→A de 6.4 ; q,kQ et rB connus, Wchamp,B→A = −4,495 × 10⁻⁸ J.",
+            "action": "Résoudre 1/rA = 1/rB − Wchamp,B→A/(qkQ) = 5,00 m⁻¹ ; en déduire rA = 0,20 m.",
+            "output": "Position A restituée ; recomposer VA = kQ/rA = 89,9 V dans la référence initiale.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion suppose qkQ non nul et un rayon positif ; ces conditions sont satisfaites par le dossier retenu."
+            },
+            "comparison": "6.5 ↔ 6.2 : inverser le travail du retour pour retrouver son extrémité.",
+            "evaluation": {
+              "object": "6.5 ↔ 6.2 : relation entre géométrie et variation inverse.",
+              "conditions": "Loi ponctuelle conservée, q et Q connus ; rB = 0,40 m et même référence.",
+              "criterion": "Obtenir rA = 0,20 m puis q(kQ/rA − kQ/rB) = +4,495 × 10⁻⁸ J.",
+              "finding": "La reconstruction restitue la géométrie du calcul inverse ; elle n’est pas une mesure de distance."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le dossier à réexaminer",
+            "input": "Rayon rA reconstruit en 6.5 et attributs reçus en 6.1.",
+            "action": "Restituer Q,q,rA,rB et les hypothèses statiques ; garder les deux sens et l’origine des valeurs pour une reprise.",
+            "output": "À reprendre en 6.1 : source retrouvée conditionnellement, géométrie initiale et aucune information cinétique ajoutée.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour ferme le contrôle des attributs calculables ; les hypothèses matérielles restent identifiées comme telles pour une confrontation future."
+            },
+            "comparison": "6.6 ↔ 6.1 : retrouver source, sonde et positions du dossier reçu.",
+            "evaluation": {
+              "object": "6.6 ↔ 6.1 : Q,q,rA,rB, référence et statut de la comparaison.",
+              "conditions": "Fixité et perturbation négligée maintenues comme hypothèses ; aucune observation indépendante disponible.",
+              "criterion": "Restituer les deux charges et les deux rayons initiaux ; conserver V(∞) = 0 et le caractère calculé du retour.",
+              "finding": "Le dossier est cohérent avec l’entrée ; le scénario demeure une comparaison physique idéale."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "gauss-sphere-chargee": {
+    "question": "Comment passer de la charge enfermée au champ local, puis reconstruire la source en distinguant les hypothèses nécessaires ?",
+    "basis": "Sphère non conductrice uniformément chargée : R = 0,10 m, Q = +2,0 nC ; r = 0,050 m puis variante extérieure 0,20 m. Nombres théoriques, aucune mesure.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les deux branches, le raccord et les inversions sont explicités ; le retour distingue flux, champ, densité et modèle conducteur.",
+    "subject": {
+      "type": "physique",
+      "description": "Le champ électrostatique créé par une sphère dont la charge volumique uniforme est maintenue immobile.",
+      "scope": "Seule source, pas de charge surfacique supplémentaire, vide extérieur et ε0 partout. k = 8,99 × 10⁹ approximé avec 1/ε0 = 4πk ; variantes de calcul séparées."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Définir la sphère et la surface de calcul",
+        "system": "La charge volumique immobile, la géométrie de la source et la sphère de Gauss choisie.",
+        "input": "R = 0,10 m, Q = +2,0 nC ; point initial r = 0,050 m, permittivité ε0 et k approximé.",
+        "output": "Dossier géométrique et densité uniforme, distincts du champ à calculer ; surface fictive centrée et orientée vers l’extérieur.",
+        "section": "conditions",
+        "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Les données supposées définissent une source statique ; changer la surface de Gauss relève du calcul, sans transport de charge."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les deux rayons",
+            "input": "Scénario initial ; 1.6 restitue son dossier et 6.3 transmet séparément le calcul extérieur à r = 0,20 m.",
+            "action": "Nommer R, rayon matériel de la source, et r, distance du point étudié ; garder Q positive et la distribution non conductrice.",
+            "output": "Référence r = 0,050 m < R ; variante extérieure distincte, avec la même source.",
+            "relation": {
+              "nature": "logique",
+              "description": "La réception conserve les attributs physiques et le statut théorique des nombres, sans supposer une mesure ni une évolution temporelle."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Convertir la charge en densité",
+            "input": "Q = 2,0 × 10⁻⁹ C, R = 0,10 m et charge uniforme dans le volume sphérique.",
+            "action": "Calculer V = 4πR³/3 puis ρ = Q/V = 3Q/(4πR³) ; vérifier les unités C·m⁻³.",
+            "output": "ρ ≈ 4,774648 × 10⁻⁷ C·m⁻³ ; la densité est positive et constante dans la sphère.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’uniformité permet cette conversion charge-volume ; la valeur de ρ n’est pas une propriété matérielle mesurée."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir le dossier de symétrie",
+            "input": "Géométrie de 1.1 et densité de 1.2 ; environnement isotrope de permittivité ε0, sans autre source.",
+            "action": "Consigner une source invariante par rotation et une surface centrée ; choisir la normale radiale sortante pour r > 0.",
+            "output": "À 2.1 : R, Q, ρ uniforme, r, normale sortante et symétrie sphérique ; le champ reste à déterminer.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le dossier fournit les hypothèses permettant de simplifier le flux ; la forme sphérique de la surface ne suffit pas seule."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les attributs géométriques",
+            "input": "Dossier de 1.3, incluant source non conductrice et sphère de Gauss intérieure.",
+            "action": "Relire séparément le volume chargé de rayon R, la surface de rayon r et le signe positif de Q.",
+            "output": "Rayons, charge, densité et orientation sont conservés ; aucun champ extérieur supplémentaire n’est introduit.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise fixe ce que les calculs ultérieurs doivent conserver."
+            },
+            "comparison": "1.4 ↔ 1.3 : comparer rayons, distribution et orientation.",
+            "evaluation": {
+              "object": "1.4 ↔ 1.3 : dossier de source et surface.",
+              "conditions": "Même sphère statique ; distinction entre surface fictive et limite matérielle.",
+              "criterion": "Retrouver R = 0,10 m, r = 0,050 m, Q = +2,0 nC, ρ uniforme et normale sortante.",
+              "finding": "Les attributs coïncident ; le champ n’a pas encore été chiffré."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Inverser la relation de volume",
+            "input": "Q positive et densité uniforme reprises en 1.4 ; géométrie sphérique et valeur non arrondie de ρ.",
+            "action": "Résoudre R = [3Q/(4πρ)]^(1/3), puis vérifier que r/R = 1/2 pour le point de référence.",
+            "output": "Le rayon reconstruit vaut 0,10 m ; l’inversion utilise simultanément charge, densité et forme supposées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La racine positive inverse la conversion initiale ; sans densité connue, Q seul ne fixe pas le rayon."
+            },
+            "comparison": "1.5 ↔ 1.2 : confronter calcul de ρ et reconstruction de R.",
+            "evaluation": {
+              "object": "1.5 ↔ 1.2 : conversion charge-volume et inversion.",
+              "conditions": "Q > 0, ρ > 0, sphère uniforme ; calcul avant arrondi.",
+              "criterion": "Substituer ρ = 3Q/(4πR³) dans R = [3Q/(4πρ)]^(1/3).",
+              "finding": "Le rayon est retrouvé par identité interne, sans confirmation indépendante de l’uniformité."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer la source initiale",
+            "input": "Rayon reconstruit en 1.5 et hypothèses de source conservées depuis 1.1.",
+            "action": "Rétablir R, Q, ρ et r = R/2 ; conserver charges immobiles, ε0 partout et absence d’autre source.",
+            "output": "Retour à 1.1 : même sphère non conductrice ; le dossier extérieur reste séparé.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour restitue les données nécessaires au calcul sans transformer une hypothèse en observation."
+            },
+            "comparison": "1.6 ↔ 1.1 : retrouver la source et le point intérieur.",
+            "evaluation": {
+              "object": "1.6 ↔ 1.1 : géométrie, charge et cadre physique.",
+              "conditions": "Même modèle de référence ; la variante extérieure ne remplace pas le point initial.",
+              "criterion": "Retrouver R = 0,10 m, Q = +2,0 nC, r = 0,050 m et ε0 partout.",
+              "finding": "Le dossier initial est conservé ; sa réalisation matérielle reste à confronter à des données indépendantes."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Déduire les deux branches du champ",
+        "system": "L’intégration de la charge et l’utilisation du flux sous symétrie sphérique.",
+        "input": "Dossier de 1.3 : source uniforme, rayon R, charge Q et surface centrée de rayon r > 0.",
+        "output": "Charge enfermée et champ radial par branches ; centre défini par symétrie et limite régulière.",
+        "section": "symetrie",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La loi de Gauss relie charge et flux ; la symétrie fournit les informations supplémentaires pour extraire le champ local."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir source et surface",
+            "input": "R, Q, ρ et orientation de 1.3 ; 2.6 restitue les mêmes contraintes après le contrôle différentiel.",
+            "action": "Adopter E vecteur = E(r) e radial pour r > 0, avec E positif ici ; rappeler Φ = ∮ E vecteur · n vecteur dS.",
+            "output": "Sur chaque sphère centrée, Φ(r) = 4πr²E(r) ; E désigne la composante radiale signée.",
+            "relation": {
+              "nature": "logique",
+              "description": "L’invariance de toute la source et de son environnement autorise cette forme, pas le seul choix d’une surface sphérique."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Intégrer puis appliquer Gauss",
+            "input": "Densité uniforme et réduction du flux de 2.1, avec 1/ε0 = 4πk.",
+            "action": "Intégrer Qencl = ∫₀^min(r,R) 4πρs² ds ; résoudre 4πr²E = Qencl/ε0.",
+            "output": "Qencl = Q(r/R)³ et E = kQr/R³ si 0 < r < R ; Qencl = Q et E = kQ/r² si r ≥ R.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La borne d’intégration change quand la surface englobe toute la source ; l’identité de flux reste la même."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir le profil exploitable",
+            "input": "Les deux branches de 2.2, Q positive et densité finie sans charge ponctuelle centrale.",
+            "action": "Conserver le domaine de chaque expression ; prolonger le champ vectoriel par zéro au centre, conformément à la symétrie.",
+            "output": "À 3.1 : loi intérieure pour r = R/2, loi extérieure pour r ≥ R et E vecteur(0) = 0.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le prolongement traite le centre sans diviser par une surface nulle ; le vecteur radial n’y est pas défini."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre expressions et domaines",
+            "input": "Profil de 2.3 et distinction entre charge enfermée et charge totale.",
+            "action": "Relever la croissance linéaire intérieure et la décroissance extérieure ; vérifier que Qencl n’est remplacé par Q que pour r ≥ R.",
+            "output": "Les deux lois et leurs conditions sont conservées, avec une charge enfermée variable dans la source.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise empêche d’étendre artificiellement la loi extérieure jusqu’au centre."
+            },
+            "comparison": "2.4 ↔ 2.3 : conserver branches et domaine central.",
+            "evaluation": {
+              "object": "2.4 ↔ 2.3 : profil radial et domaines.",
+              "conditions": "Même densité uniforme et absence de singularité centrale.",
+              "criterion": "E = kQr/R³ pour 0 < r < R ; E = kQ/r² pour r ≥ R ; E vecteur(0) = 0.",
+              "finding": "Les domaines concordent ; aucune loi de conducteur n’est substituée au modèle."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Différencier le flux radial",
+            "input": "Profils repris en 2.4 et relation radiale div E = (1/r²) d(r²E)/dr pour r > 0, hors interface.",
+            "action": "Calculer cette dérivée : 3kQ/R³ à l’intérieur et zéro à l’extérieur ; multiplier par ε0.",
+            "output": "La densité reconstruite vaut 3Q/(4πR³) dans la source et zéro au-dehors.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivation inverse localement l’intégration ; un extérieur sans charge peut néanmoins porter un champ non nul."
+            },
+            "comparison": "2.5 ↔ 2.2 : confronter intégration de la charge et reconstruction différentielle.",
+            "evaluation": {
+              "object": "2.5 ↔ 2.2 : loi intégrale et densité reconstruite.",
+              "conditions": "Profils différentiables sur chaque région ; ε0 constant et 1/ε0 = 4πk.",
+              "criterion": "ε0 div E = ρ à l’intérieur, zéro à l’extérieur ; intégrer ρ sur le volume redonne Q.",
+              "finding": "Les formes intégrale et locale sont cohérentes dans leurs domaines, sans mesure indépendante."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer la distribution de départ",
+            "input": "Densité reconstruite en 2.5, branches du champ et hypothèses géométriques conservées en 2.1.",
+            "action": "Réintégrer la densité sur le rayon R et conserver la normale sortante ; attribuer la symétrie aux hypothèses initiales.",
+            "output": "Retour à 2.1 : charge totale Q, densité uniforme et surface centrée ; aucun champ extérieur ajouté.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La restitution retrouve la charge mais ne démontre pas les hypothèses de symétrie dont elle dépend."
+            },
+            "comparison": "2.6 ↔ 2.1 : retrouver source, charge et convention de flux.",
+            "evaluation": {
+              "object": "2.6 ↔ 2.1 : distribution initiale et distribution reconstruite.",
+              "conditions": "Même R, ε0 et choix de surface ; aucune couche surfacique supplémentaire.",
+              "criterion": "∫₀ᴿ 4πρs² ds = Q ; la normale reste sortante et Φ = 4πr²E.",
+              "finding": "Les attributs sont restitués sous les hypothèses conservées."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Calculer au demi-rayon",
+        "system": "Le résultat théorique au point intérieur r = 0,050 m et les grandeurs distinctes qui l’accompagnent.",
+        "input": "Branche intérieure transmise par 2.3 ; R = 0,10 m, Q = +2,0 nC et k = 8,99 × 10⁹.",
+        "output": "Qencl = 0,250 nC ; champ E = 899 N/C radial sortant ; flux Φ ≈ 28,243 N·m²/C.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le calcul applique le modèle à des nombres supposés ; le résultat n’est pas un relevé expérimental."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le point intérieur",
+            "input": "Profil de 2.3 ; r = 0,050 m, R = 0,10 m, Q = +2,0 nC ; retour local fourni par 3.6.",
+            "action": "Vérifier r < R et choisir la branche intérieure avec les unités SI, sans remplacer Qencl par Q.",
+            "output": "Rapport r/R = 1/2 ; le volume enfermé est une fraction de la source.",
+            "relation": {
+              "nature": "logique",
+              "description": "La position relative des rayons sélectionne la formule applicable."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer charge, champ et flux",
+            "input": "Rapport 1/2 de 3.1 et constante k arrondie, utilisée avec 1/ε0 = 4πk.",
+            "action": "Calculer Qencl = Q/8, puis E = kQencl/r² ; multiplier enfin par 4πr² pour obtenir le flux.",
+            "output": "Qencl = 0,250 nC ; E = 899 N/C ; Φ ≈ 28,242918 N·m²/C.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les mêmes constantes sont utilisées dans les deux écritures de Gauss pour éviter des écarts artificiels d’arrondi."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir le résultat intérieur",
+            "input": "Valeurs de 3.2, signe de Q et normale sortante.",
+            "action": "Associer au point r = 0,050 m un champ radial sortant de 899 N/C ; conserver séparément charge enfermée et flux.",
+            "output": "À 4.1 : dossier intérieur Qencl = 0,250 nC, E = 899 N/C et Φ ≈ 28,243 N·m²/C.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les unités distinguent les trois grandeurs ; leur présentation ne change pas leur statut de résultats calculés."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les nombres avec leurs unités",
+            "input": "Dossier transmis en 3.3 et valeurs non arrondies du flux conservées pour les vérifications.",
+            "action": "Relire le point, le sens du champ et les unités ; identifier Φ comme intégrale surfacique, différente de E.",
+            "output": "899 N/C est une valeur locale ; 28,243 N·m²/C décrit le flux de toute la sphère de Gauss.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La comparaison porte sur la signification du résultat autant que sur sa valeur."
+            },
+            "comparison": "3.4 ↔ 3.3 : préserver point, signe, valeurs et unités.",
+            "evaluation": {
+              "object": "3.4 ↔ 3.3 : charge, champ et flux du dossier intérieur.",
+              "conditions": "Même r et même orientation ; arrondis du flux explicités.",
+              "criterion": "Qencl = 0,250 nC ; E = 899 N/C radial sortant ; Φ = 4πr²E.",
+              "finding": "Les grandeurs sont conservées sans assimiler un flux à un champ."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire la charge depuis le champ",
+            "input": "Champ radial calculé E = 899 N/C, r = 0,050 m et R = 0,10 m repris en 3.4.",
+            "action": "Résoudre Qencl = Er²/k, puis Q = Qencl(R/r)³ sous l’hypothèse de densité uniforme.",
+            "output": "La reconstruction donne Qencl = 0,250 nC et Q = 2,0 nC.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion retrouve des paramètres du même calcul ; un champ local sans symétrie connue ne permettrait pas cette déduction."
+            },
+            "comparison": "3.5 ↔ 3.2 : confronter calcul direct et inversion conditionnelle.",
+            "evaluation": {
+              "object": "3.5 ↔ 3.2 : application numérique de Gauss et calcul inverse.",
+              "conditions": "r > 0 intérieur, R connu, sphère uniforme et absence d’autre source.",
+              "criterion": "Q = ER³/(kr) = 2,0 × 10⁻⁹ C ; réinjecter cette charge redonne E = 899 N/C.",
+              "finding": "Le contrôle ferme l’identité numérique ; il ne constitue pas une mesure de charge."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le dossier intérieur",
+            "input": "Charge reconstruite en 3.5 et géométrie conservée depuis 3.1.",
+            "action": "Rétablir Q positive, R = 0,10 m et r/R = 1/2 ; conserver la même constante approximée.",
+            "output": "Retour à 3.1 : même charge, même point intérieur et même branche applicable.",
+            "relation": {
+              "nature": "logique",
+              "description": "La restitution conserve les attributs d’entrée plutôt que de présenter le nombre obtenu comme une nouvelle observation."
+            },
+            "comparison": "3.6 ↔ 3.1 : retrouver paramètres et domaine du calcul.",
+            "evaluation": {
+              "object": "3.6 ↔ 3.1 : charge, rayons et choix de branche.",
+              "conditions": "Même géométrie et même k ; hypothèse d’uniformité maintenue.",
+              "criterion": "Q = +2,0 nC, R = 0,10 m, r = 0,050 m < R.",
+              "finding": "Le calcul inverse restitue le dossier intérieur sous ses conditions initiales."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Relire le profil et le flux",
+        "system": "Le dossier de champ intérieur replacé dans le profil complet et ses conditions de lecture.",
+        "input": "Résultat de 3.3 : r = R/2, E = 899 N/C et flux positif ; expressions intérieures et extérieures conservées.",
+        "output": "Profil continu, centre nul et distinction flux-champ explicitée ; calculs de cohérence, sans données expérimentales nouvelles.",
+        "section": "profil",
+        "comparison": "4 ↔ 3 : préserver le résultat intérieur, son orientation et son statut avant d’étendre la lecture au profil.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Les résultats deviennent les entrées du retour ; leurs conditions sont reprises avant toute reconstruction de la source."
+        },
+        "evaluation": {
+          "object": "4 ↔ 3 : valeurs et statut du résultat à r = R/2.",
+          "conditions": "Même Q, R et k ; le profil complet apporte un contexte, sans changer le point initial.",
+          "criterion": "À r = 0,050 m : E = 899 N/C, Qencl = 0,250 nC et Φ ≈ 28,243 N·m²/C.",
+          "finding": "Le résultat est conservé ; ni la continuité calculée ni la reprise du flux ne constituent une mesure."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le champ dans son domaine",
+            "input": "Résultat intérieur transmis par 3.3, avec les deux branches de Gauss ; 4.6 restitue cette lecture après contrôle.",
+            "action": "Situer 899 N/C à r = R/2 et reprendre les hypothèses permettant d’associer ce champ radial au flux fermé.",
+            "output": "Valeur intérieure conservée ; les limites au centre et à la surface restent à calculer.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La lecture reçoit un dossier complet plutôt qu’un nombre détaché du domaine où il a été calculé."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer les limites du profil",
+            "input": "Branches Eint = kQr/R³ et Eext = kQ/r², Q positive et aucune couche surfacique.",
+            "action": "Évaluer la limite centrale et les limites de part et d’autre de R ; déterminer le maximum par croissance puis décroissance.",
+            "output": "E(0) = 0 ; E(R−) = E(R+) = kQ/R² = 1 798 N/C, maximum du profil.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le raccord résulte des expressions et de l’absence de charge en nappe ; le saut de densité volumique ne crée pas un saut de E."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir le dossier de raccord",
+            "input": "Limites de 4.2 et valeur intérieure conservée en 4.1.",
+            "action": "Consigner la continuité à R, le centre nul et E(R/2) = E(R)/2 ; distinguer les régions chargée et vide.",
+            "output": "À 5.1 : profil radial continu, point intérieur à 899 N/C et hypothèses de reconstruction de la source.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le dossier enrichit la description du résultat tout en conservant les attributs nécessaires au retour inverse."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les points caractéristiques",
+            "input": "Centre, limites à R et point R/2 établis en 4.3.",
+            "action": "Relire les mêmes valeurs et leurs positions ; maintenir E non nul à l’extérieur malgré une densité locale nulle.",
+            "output": "Centre nul, surface à 1 798 N/C et intérieur à 899 N/C restent des résultats du même modèle.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture distingue absence de charge locale et absence de champ."
+            },
+            "comparison": "4.4 ↔ 4.3 : conserver les points caractéristiques et leur interprétation.",
+            "evaluation": {
+              "object": "4.4 ↔ 4.3 : centre, surface et point intérieur.",
+              "conditions": "Même source et absence de couche surfacique ; E désigne la composante radiale.",
+              "criterion": "E(0) = 0 ; E(R−) = E(R+) = 1 798 N/C ; E(R/2) = 899 N/C.",
+              "finding": "Les valeurs et leurs positions sont conservées ; le champ extérieur n’est pas annulé par l’absence de charge locale."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Construire un même flux avec un autre champ",
+            "input": "Profil relu en 4.4 ; extension distincte ajoutant un champ uniforme constant Ec vecteur, non nul, dans la région examinée.",
+            "action": "Calculer ∮ Ec vecteur · n vecteur dS = Ec vecteur · ∮ n vecteur dS = 0 ; former Etotal vecteur = Esphère vecteur + Ec vecteur.",
+            "output": "Le flux fermé est inchangé, mais le champ local et la symétrie sphérique du champ total changent.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Ce contre-exemple sort explicitement de l’hypothèse de source unique ; il prouve qu’un flux seul ne fixe pas un champ local."
+            },
+            "comparison": "4.5 ↔ 4.2 : confronter le profil déterminé par symétrie à un champ de même flux.",
+            "evaluation": {
+              "object": "4.5 ↔ 4.2 : unicité du profil dans son cadre et insuffisance du seul flux.",
+              "conditions": "Ec uniforme sur la région et produit par des sources extérieures ; la distribution de référence reste inchangée.",
+              "criterion": "Le champ ajouté porte un flux nul sur une surface fermée, alors que sa valeur ponctuelle est non nulle.",
+              "finding": "Le profil initial reste déterminé sous ses hypothèses ; supprimer celles-ci rend l’interprétation du seul flux insuffisante."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le profil de référence",
+            "input": "Contre-exemple de 4.5 et dossier intérieur reçu en 4.1.",
+            "action": "Revenir à Ec vecteur = 0 pour restaurer l’absence d’autre source ; reprendre le champ radial et le résultat à R/2.",
+            "output": "Retour à 4.1 : E = 899 N/C, radial sortant, avec le même flux et les hypothèses initiales.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour rétablit explicitement le cadre quitté par le contre-exemple."
+            },
+            "comparison": "4.6 ↔ 4.1 : retrouver valeur, domaine et conditions du champ reçu.",
+            "evaluation": {
+              "object": "4.6 ↔ 4.1 : résultat intérieur et symétrie du dossier.",
+              "conditions": "Ec nul ; même Q, R, r et permittivité.",
+              "criterion": "Retrouver E(R/2) = 899 N/C et Φ ≈ 28,243 N·m²/C avec la normale sortante.",
+              "finding": "Le dossier reçu est restitué ; le flux seul ne justifierait pas cette restauration."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Reconstruire la charge et confronter les modèles",
+        "system": "L’inversion conditionnelle du profil radial et la distinction entre charge volumique et charge de surface.",
+        "input": "Profil et conditions de 4.3 ; géométrie connue, champs calculés et absence de mesure indépendante.",
+        "output": "Q et ρ reconstruits pour la sphère uniforme ; un résultat extérieur seul ne distingue pas cette source d’une sphère conductrice.",
+        "section": "profil",
+        "comparison": "5 ↔ 2 : confronter la reconstruction depuis le champ à l’intégration initiale, puis expliciter les limites d’identification.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour inverse les relations charge-champ avec leurs hypothèses ; changer la répartition de charge constitue un autre modèle."
+        },
+        "evaluation": {
+          "object": "5 ↔ 2 : calcul direct de Gauss et reconstruction de source.",
+          "conditions": "Symétrie sphérique, géométrie et ε0 connus ; profil de référence calculé, aucun champ indépendant mesuré.",
+          "criterion": "Qencl = r²E/k ; la pente intérieure a = kQ/R³ donne ρ = 3a/(4πk).",
+          "finding": "Les paramètres initiaux sont retrouvés ; le champ extérieur commun à plusieurs répartitions limite l’identification."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le profil pour inversion",
+            "input": "Profil continu et résultat intérieur transmis par 4.3 ; 5.6 restitue les attributs reconstruits et leur statut.",
+            "action": "Garder R connu et E(r) radial ; distinguer le profil complet disponible d’une seule valeur extérieure éventuelle.",
+            "output": "Dossier calculé avec E(R/2) = 899 N/C et raccord E(R) = 1 798 N/C.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La quantité d’information disponible détermine la portée d’une reconstruction ; aucune nouvelle observation n’est ajoutée."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Inverser amplitude et pente",
+            "input": "Profil de 5.1 : E = ar à l’intérieur, a = kQ/R³ ; E = kQ/r² à l’extérieur.",
+            "action": "Calculer Q = r²E/k pour r ≥ R et ρ = 3a/(4πk) pour la branche intérieure ; reconstituer Q = 4πρR³/3.",
+            "output": "Q = 2,0 nC ; a = 17 980 N·C⁻¹·m⁻¹ et ρ ≈ 4,774648 × 10⁻⁷ C·m⁻³.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le rayon connu et l’hypothèse uniforme relient pente, densité et charge ; l’inversion ne vérifie pas expérimentalement ces hypothèses."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir la source reconstruite",
+            "input": "Paramètres de 5.2, signe radial positif et hypothèses de source conservées.",
+            "action": "Consigner Q et ρ reconstruits ; réserver le changement de rayon d’observation au cas extérieur, avec la même source.",
+            "output": "À 6.1 : Q = +2,0 nC, R = 0,10 m et loi extérieure ; application distincte à r = 0,20 m.",
+            "relation": {
+              "nature": "logique",
+              "description": "La sortie transmet un modèle reconstruit pour une nouvelle application, sans confondre cette réutilisation avec une validation."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les paramètres inversés",
+            "input": "Q, ρ et géométrie reconstruits en 5.3.",
+            "action": "Relire les signes et unités ; conserver l’uniformité comme condition du passage de la charge totale à la densité.",
+            "output": "Charge totale et densité ne sont interchangeables qu’avec le volume connu et la répartition supposée.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise précise ce qui a été inversé et ce qui a été conservé comme hypothèse."
+            },
+            "comparison": "5.4 ↔ 5.3 : retrouver paramètres et conditions d’inversion.",
+            "evaluation": {
+              "object": "5.4 ↔ 5.3 : source reconstruite et cadre de sa restitution.",
+              "conditions": "Même sphère uniforme, R connu et ε0 constant ; nombres issus du calcul.",
+              "criterion": "Q = +2,0 nC et ρ = 3Q/(4πR³) ; la branche extérieure est conservée.",
+              "finding": "Les paramètres sont repris sans les présenter comme des mesures indépendantes."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Comparer avec une sphère conductrice",
+            "input": "Paramètres repris en 5.4 ; autre modèle : sphère conductrice pleine, même Q et R, en équilibre électrostatique et sans autre source.",
+            "action": "Placer Q à la surface : Qencl = 0 pour r < R et Q à l’extérieur ; déduire Eint = 0 et Eext = kQ/r².",
+            "output": "Même champ extérieur ; intérieur différent. Dans le conducteur, σ = Q/(4πR²) et E(R+) − E(R−) = σ/ε0.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Gauss s’applique aux deux modèles ; la distribution et l’équilibre conducteur changent la branche intérieure et le raccord."
+            },
+            "comparison": "5.5 ↔ 5.2 : confronter reconstruction volumique et répartition surfacique compatible au-dehors.",
+            "evaluation": {
+              "object": "5.5 ↔ 5.2 : identification de ρ depuis le profil et ambiguïté du seul extérieur.",
+              "conditions": "Deux sources sphériques séparées, de mêmes Q et R ; conducteur idéal à l’équilibre, sans cavité ni source extérieure.",
+              "criterion": "Les champs coïncident pour r > R ; à R/2, modèle uniforme : 899 N/C, conducteur : 0.",
+              "finding": "Le profil intérieur distingue les modèles en théorie. Une valeur extérieure seule ne prouve pas l’uniformité de la charge."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les conditions de reconstruction",
+            "input": "Comparaison de 5.5 et profil intérieur non nul reçu en 5.1.",
+            "action": "Retenir le modèle de référence uniformément chargé ; restituer Q, ρ et absence de couche surfacique avec leur statut calculé.",
+            "output": "Retour à 5.1 : profil continu de la sphère non conductrice ; l’alternative conductrice reste un dossier distinct.",
+            "relation": {
+              "nature": "logique",
+              "description": "La restitution revient au modèle fourni ; elle ne choisit pas entre deux objets réels sans observation indépendante."
+            },
+            "comparison": "5.6 ↔ 5.1 : retrouver profil, géométrie et statut des données.",
+            "evaluation": {
+              "object": "5.6 ↔ 5.1 : profil reçu et paramètres restitués.",
+              "conditions": "Même source uniforme ; comparaison conductrice tenue séparée.",
+              "criterion": "Retrouver E(R/2) = 899 N/C, R = 0,10 m et continuité à R avec Q = +2,0 nC.",
+              "finding": "Les attributs du dossier sont conservés ; une confrontation expérimentale reste ouverte."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Appliquer au point extérieur et revenir aux données",
+        "system": "Le champ à deux rayons de la source et sa comparaison conditionnelle avec le point intérieur initial.",
+        "input": "Source et branche extérieure de 5.3 ; variante r = 0,20 m, avec Q = +2,0 nC et R = 0,10 m.",
+        "output": "Qencl = Q et E = 449,5 N/C ; reconstruction de Q puis restitution du champ initial sous l’hypothèse uniforme.",
+        "section": "controle",
+        "comparison": "6 ↔ 1 : confronter source et géométrie conservées, rayon d’observation modifié et portée de la reconstruction.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La même source est étudiée à un autre point ; le parcours compare des calculs, sans déplacement physique imposé."
+        },
+        "evaluation": {
+          "object": "6 ↔ 1 : source initiale et variante extérieure.",
+          "conditions": "Q, R, ε0 et distribution uniforme conservés ; r passe de 0,050 m à 0,20 m dans un dossier distinct.",
+          "criterion": "La reconstruction extérieure donne Q = +2,0 nC ; avec R connu et uniformité, ρ est identique et E(R/2) = 899 N/C.",
+          "finding": "La source supposée est retrouvée ; le point change et son champ vaut 449,5 N/C. L’inversion seule ne prouve pas la distribution intérieure."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le point extérieur",
+            "input": "Source reconstruite transmise par 5.3 et checkpoint r = 0,20 m ; 6.6 restitue ce dossier extérieur.",
+            "action": "Conserver Q = +2,0 nC et R = 0,10 m ; identifier r = 2R et la normale radiale sortante.",
+            "output": "La surface englobe toute la charge ; la région d’observation est extérieure et sans charge locale.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le changement concerne le point étudié, pas le rayon de la source ni sa charge."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer la variante extérieure",
+            "input": "r = 0,20 m > R et Qencl = Q ; même k approximé qu’au point intérieur.",
+            "action": "Évaluer E = kQ/r² puis Φ = 4πr²E = 4πkQ ; garder les valeurs non arrondies pour le contrôle.",
+            "output": "E = 449,5 N/C radial sortant ; Φ ≈ 225,943344 N·m²/C et Qencl = 2,0 nC.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La surface englobe une charge fixe ; le flux extérieur reste constant tandis que le champ décroît avec r."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir le dossier de variante",
+            "input": "Valeurs de 6.2 et référence intérieure conservée depuis 3.3.",
+            "action": "Consigner le point 2R et son champ ; comparer Qencl multipliée par huit et r multiplié par quatre depuis R/2.",
+            "output": "À 1.1, séparément : r = 0,20 m, Qencl = 2,0 nC et E = 449,5 N/C ; source Q,R inchangée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le rapport des champs vaut 8/4² = 1/2 ; la loi extérieure seule ne s’étend pas au point intérieur initial."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les résultats extérieurs",
+            "input": "Dossier de 6.3 : même source, r = 2R, champ et flux positifs.",
+            "action": "Relire E = 449,5 N/C et Qencl = Q ; conserver le rayon 0,20 m attaché à cette valeur.",
+            "output": "Variante extérieure conservée ; la charge locale nulle n’entraîne pas E = 0.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise évite de remplacer les attributs initiaux par ceux du point extérieur."
+            },
+            "comparison": "6.4 ↔ 6.3 : conserver point, source et valeurs de la variante.",
+            "evaluation": {
+              "object": "6.4 ↔ 6.3 : résultats de la variante extérieure.",
+              "conditions": "Même r = 0,20 m et même convention de flux ; arrondis explicités.",
+              "criterion": "E = 449,5 N/C, Qencl = 2,0 nC et Φ ≈ 225,943344 N·m²/C.",
+              "finding": "Les résultats sont conservés sans assimiler le vide extérieur à une absence de champ."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Inverser le résultat puis retrouver l’intérieur",
+            "input": "Champ extérieur repris en 6.4 ; r connu, R = 0,10 m et modèle uniforme conservé.",
+            "action": "Résoudre Q = Er²/k ; réutiliser cette charge dans E(R/2) = kQ/(2R²).",
+            "output": "Q = 2,0 nC et E(R/2) = 899 N/C ; la densité intérieure requiert encore R et l’uniformité.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion extérieure détermine Q dans le cadre sphérique ; la prédiction intérieure nécessite les hypothèses supplémentaires de la source."
+            },
+            "comparison": "6.5 ↔ 6.2 : confronter application extérieure et inversion suivie d’une restitution conditionnelle.",
+            "evaluation": {
+              "object": "6.5 ↔ 6.2 : calcul direct extérieur et reconstruction de charge.",
+              "conditions": "r connu, absence d’autre source et même k ; R et uniformité requis pour revenir à l’intérieur.",
+              "criterion": "Q = 449,5 × 0,20²/(8,99 × 10⁹) = 2,0 × 10⁻⁹ C ; réapplication extérieure redonne 449,5 N/C.",
+              "finding": "La charge est reconstruite par cohérence interne ; le champ intérieur de 899 N/C reste conditionné au modèle uniforme."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer la variante avec sa source",
+            "input": "Charge reconstruite en 6.5 et attributs du point extérieur reçus en 6.1.",
+            "action": "Rétablir Q, R, r = 0,20 m et normale sortante ; garder séparément le dossier initial à R/2.",
+            "output": "Retour à 6.1 : même source et même point extérieur, avec Qencl = Q et E = 449,5 N/C.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture locale restitue la variante ; la comparaison globale conserve explicitement le point intérieur distinct."
+            },
+            "comparison": "6.6 ↔ 6.1 : retrouver source et point de la variante.",
+            "evaluation": {
+              "object": "6.6 ↔ 6.1 : charge, rayons et orientation de l’application extérieure.",
+              "conditions": "Même distribution supposée et même ε0 ; aucune mesure ni déplacement matériel ajouté.",
+              "criterion": "Retrouver Q = +2,0 nC, R = 0,10 m et r = 0,20 m > R, avec champ radial sortant.",
+              "finding": "Le dossier extérieur est restitué ; les hypothèses physiques restent à confronter à des données indépendantes."
+            }
+          }
+        ]
+      }
+    ]
   }
 }

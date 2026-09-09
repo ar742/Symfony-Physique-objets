@@ -1,6 +1,6 @@
 # Préciser les analyses existantes
 
-Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) aux fiches déjà rédigées. Elle conserve leurs coordonnées afin de permettre la reprise de chaque élément. Les lots **AP1 à AP8** concernent les vingt-deux fiches existantes :
+Cette progression applique les [fondements du projet](FONDEMENTS-DU-PROJET.md) aux fiches déjà rédigées. Elle conserve leurs coordonnées afin de permettre la reprise de chaque élément. Les lots **AP1 à AP8** concernent les vingt-deux premières fiches :
 
 | Lot | Fiche | Nature du sujet | Périmètre |
 | --- | --- | --- | --- |
@@ -119,6 +119,10 @@ Les fiches concernées portent la mention « Entrées et évaluations précisée
 Dans une page de niveau, chaque point présente ses éléments reçus et la nature du lien entrant. Les retours affichent les quatre champs d'évaluation à côté des liens vers les éléments comparés. Les coordonnées et tous les anciens liens restent utilisables.
 
 Les 22 fiches disposent désormais de ces entrées, relations et évaluations détaillées. Cette couverture marque un premier approfondissement analytique complet du catalogue existant ; elle ne clôt pas la relecture scientifique avec l'auteur.
+
+## Nouvelles fiches dès leur création
+
+Le [volet E1a](ELECTROSTATIQUE-E1A.md) ajoute trois fiches d’électrostatique rédigées directement avec les entrées, relations et évaluations détaillées. Le catalogue comporte donc 25 analyses, 900 sous-niveaux, 1 050 relations et 525 évaluations. Les comptes AP1 à AP8 ci-dessus décrivent les 22 fiches approfondies lors de ces lots.
 
 ## Rédaction et données
 

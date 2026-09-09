@@ -40,8 +40,8 @@ final class LearningLibraryTest extends TestCase
     public function testCardsHavePreciseSourcesAndWellFormedMath(): void
     {
         $cards = $this->library()->all();
-        self::assertCount(22, $cards);
-        self::assertCount(22, array_unique(array_column($cards, 'slug')));
+        self::assertCount(25, $cards);
+        self::assertCount(25, array_unique(array_column($cards, 'slug')));
         $corrections = [];
         foreach ($cards as $card) {
             $anchors = ['conditions', 'exemple', 'controle', 'corrections', 'sources', 'dans-la-boucle', ...array_column($card['sections'], 'id')];
@@ -85,7 +85,7 @@ final class LearningLibraryTest extends TestCase
                 $corrections[] = $correction['id'];
             }
         }
-        self::assertCount(17, $corrections);
+        self::assertCount(18, $corrections);
     }
 
     public function testDisplayedExamplesMatchIndependentCalculations(): void
@@ -145,5 +145,23 @@ final class LearningLibraryTest extends TestCase
         $containsNumber('onde-acoustique', $soundIntensity * 1e6, 6);
         $containsNumber('onde-acoustique', 10 * log10($soundIntensity / 1e-12), 6);
         $containsNumber('onde-acoustique', .2 / (1.2 * 340) * 1e3, 6);
+        $k = 8.99e9;
+        $sourceCharge = 2e-9;
+        $containsNumber('champ-coulomb', $k * $sourceCharge / .3**2, 3);
+        $containsNumber('champ-coulomb', $k * $sourceCharge / .6**2, 3);
+        $force = -1e-9 * $k * $sourceCharge / .3**2;
+        self::assertStringContainsString('−'.number_format(abs($force) / 1e-7, 3, ',', '').' × 10⁻⁷ N', implode(' ', $library->find('champ-coulomb')['example']['steps']));
+        $containsNumber('potentiel-energie-electrique', $k * $sourceCharge / .2, 1);
+        $containsNumber('potentiel-energie-electrique', $k * $sourceCharge / .4, 2);
+        $energyChange = 1e-9 * $k * $sourceCharge * (1/.4 - 1/.2);
+        $energyMantissa = number_format(abs($energyChange) / 1e-8, 3, ',', '');
+        $potentialExample = implode(' ', $library->find('potentiel-energie-electrique')['example']['steps']);
+        self::assertStringContainsString('ΔEp = −'.$energyMantissa.' × 10⁻⁸ J', $potentialExample);
+        self::assertStringContainsString('+'.$energyMantissa.' × 10⁻⁸ J', $potentialExample);
+        $enclosedCharge = $sourceCharge * (.05/.1)**3;
+        $sphereField = $k * $enclosedCharge / .05**2;
+        $containsNumber('gauss-sphere-chargee', $enclosedCharge * 1e9, 3);
+        $containsNumber('gauss-sphere-chargee', $sphereField, 0);
+        $containsNumber('gauss-sphere-chargee', 4 * pi() * .05**2 * $sphereField, 3);
     }
 }

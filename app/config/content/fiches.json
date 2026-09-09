@@ -2635,5 +2635,327 @@
     "version": "1.0",
     "updated": "2026-09-09",
     "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "champ-coulomb",
+    "title": "Champ de Coulomb et force sur une charge test",
+    "level": "CPGE · Électrostatique",
+    "summary": "Distinguer charge source, champ radial et force électrique, puis comparer deux distances.",
+    "objective": "Calculer un champ ponctuel, déterminer le sens de la force et préciser ce qu’une inversion permet d’identifier.",
+    "prerequisites": [
+      "Charge électrique et unités SI",
+      "Vecteurs, norme et projection radiale"
+    ],
+    "system": "Une charge ponctuelle immobile Q dans le vide crée un champ au point M ; une charge test q y subit une force électrique.",
+    "conditions": [
+      "Charge source Q maintenue fixe ; autres sources absentes dans le modèle et perturbation de Q par la charge test négligée.",
+      "Distance r = OM strictement positive ; le vecteur unitaire eᵣ est orienté de la source O vers M.",
+      "Les valeurs sont supposées. On utilise k ≈ 8,99 × 10⁹ N·m²·C⁻² pour le calcul ; cette valeur approchée n’est pas une constante SI exacte."
+    ],
+    "sections": [
+      {
+        "id": "champ",
+        "title": "Le champ est une propriété de la source",
+        "paragraphs": [
+          "La charge Q est un scalaire signé, exprimé en coulombs. Le champ E_Q(M) est un vecteur défini au point M : il dépend de Q et de la position relative à la source. Il reste défini si aucune charge test n’est placée en M.",
+          "Pour une source ponctuelle dans le vide, la loi de Coulomb donne un champ radial. Avec eᵣ orienté de O vers M, sa composante Eᵣ = E_Q·eᵣ est positive pour Q > 0 et négative pour Q < 0. Sa norme vaut k|Q|/r², en N·C⁻¹."
+        ],
+        "equations": [
+          {
+            "id": "coulombchamp",
+            "reading": "Le champ vectoriel créé par Q au point M égale k Q divisé par r au carré, multiplié par le vecteur unitaire radial orienté de O vers M ; k vaut un divisé par quatre pi epsilon zéro. La distance r est strictement positive."
+          }
+        ]
+      },
+      {
+        "id": "force",
+        "title": "La charge test détermine la force",
+        "paragraphs": [
+          "La force exercée par Q sur la charge test est q E_Q. Une charge test positive subit une force de même sens que le champ ; une charge négative subit une force de sens opposé. Le signe de q ne change pas le champ créé par Q.",
+          "On calcule ici le champ de la source seule, sans inclure le champ propre de la charge test au point qu’elle occupe. Le résultat est une force électrique à une position donnée ; aucune trajectoire ni accélération n’est déterminée sans données mécaniques supplémentaires."
+        ],
+        "equations": [
+          {
+            "id": "coulombforce",
+            "reading": "La force vectorielle exercée par la source Q sur la charge test q égale q fois le champ créé par Q."
+          }
+        ]
+      },
+      {
+        "id": "limites",
+        "title": "Reconstruire une charge et préciser le domaine",
+        "paragraphs": [
+          "Si le modèle ponctuel est admis, que la source est localisée et que r est connu, la composante radiale signée du champ permet de reconstruire Q. La seule norme du champ déterminerait seulement |Q| ; son orientation est nécessaire pour retrouver le signe.",
+          "La loi ponctuelle est singulière à r = 0 : ce point est exclu du calcul. Décrire une source étendue ou un milieu matériel demanderait des informations supplémentaires sur la distribution et le milieu.",
+          "Un résultat à une seule distance ne vérifie pas toute une loi spatiale. Ici, le doublement de distance prédit une division du champ et de la force par quatre, à charges fixées. Retrouver ce rapport depuis deux valeurs calculées constitue un contrôle interne du modèle."
+        ],
+        "equations": [
+          {
+            "id": "coulombinverse",
+            "reading": "Pour une distance connue et le modèle ponctuel admis, Q égale r au carré multiplié par la composante radiale signée du champ, le tout divisé par k."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "Une source Q = +2,0 nC est placée dans le vide. À r₁ = 0,30 m, calculer son champ puis la force sur q = −1,0 nC ; comparer à r₂ = 0,60 m avec les mêmes charges.",
+      "steps": [
+        "Avec k ≈ 8,99 × 10⁹ N·m²·C⁻², Eᵣ₁ = kQ/r₁² ≈ +199,778 N·C⁻¹ : le champ est radial sortant.",
+        "Fᵣ₁ = qEᵣ₁ ≈ −1,998 × 10⁻⁷ N : la force sur la charge test négative est radiale entrante.",
+        "À r₂ = 2r₁, Eᵣ₂ = Eᵣ₁/4 ≈ +49,944 N·C⁻¹ et Fᵣ₂ = Fᵣ₁/4 ≈ −4,994 × 10⁻⁸ N."
+      ],
+      "result": "Le champ reste sortant et la force entrante aux deux distances. Leurs normes sont divisées par quatre ; les chiffres affichés proviennent du coefficient k approché."
+    },
+    "checkpoint": {
+      "question": "La force sur la charge test négative est dirigée vers Q. Le champ de la source est-il lui aussi dirigé vers Q ?",
+      "answer": "Non. Q est positive : son champ est sortant. Comme q est négative, F = qE est de sens opposé. Changer la charge test ne change pas le champ de Q si la source reste inchangée."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P13",
+        "page": 372,
+        "section": "Potentiels de charges ponctuelles et relation entre champ et potentiel"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 268,
+        "section": "Électrostatique : potentiel ponctuel et champ électrique"
+      }
+    ],
+    "references": [
+      "openstax-coulomb",
+      "openstax-champ-electrique"
+    ],
+    "corrections": [],
+    "number": 23,
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire",
+    "domain": "electromagnetisme"
+  },
+  {
+    "slug": "potentiel-energie-electrique",
+    "title": "Relier potentiel électrique, énergie et travail",
+    "level": "CPGE · Électrostatique",
+    "summary": "Passer du champ d’une charge fixe à une différence de potentiel, puis au travail sur une charge test.",
+    "objective": "Calculer une différence de potentiel et une variation d’énergie, puis contrôler leurs signes et leur indépendance du zéro choisi.",
+    "prerequisites": [
+      "Loi de Coulomb et champ électrique",
+      "Intégrale d’une fonction et gradient",
+      "Travail d’une force conservative"
+    ],
+    "system": "Une source ponctuelle Q fixe dans le vide et une charge test q constante ; deux positions A et B sont comparées hors de la source.",
+    "conditions": [
+      "Source immobile, champ électrostatique et perturbation de la source par la charge test négligée ; les trajets envisagés évitent r = 0.",
+      "Le potentiel V est celui créé par Q, sans contribution propre de q. Sa référence est V(∞) = 0 dans l’exemple.",
+      "Les charges et distances sont des données d’un exemple idéal. Aucun déplacement, travail mesuré, masse ou vitesse ne sont fournis.",
+      "Le travail du champ ne suffit à fixer une variation d’énergie cinétique que si le bilan des autres travaux est connu."
+    ],
+    "sections": [
+      {
+        "id": "potentiel",
+        "title": "Intégrer le champ, retrouver sa direction",
+        "paragraphs": [
+          "Pour la source ponctuelle, E = (kQ/r²)e_r, avec k = 1/(4πε0). L’intégration depuis l’infini donne V(r) = kQ/r. Le potentiel est une grandeur scalaire en volts ; sa différence entre A et B est définie ici par ΔV_AB = VB − VA.",
+          "Le gradient restitue le champ : E = −grad V. Dans ce cas radial, −dV/dr = kQ/r². L’intégrale entre deux positions ne dépend pas du trajet, dès lors que le champ reste électrostatique et que le trajet évite la source."
+        ],
+        "equations": [
+          {
+            "id": "potentielcharge",
+            "reading": "V de r vaut k Q sur r, avec le potentiel à l’infini égal à zéro."
+          },
+          {
+            "id": "potentielgradient",
+            "reading": "Le champ E vaut moins le gradient de V, soit moins la dérivée de V par rapport à r, multipliée par le vecteur unitaire radial."
+          }
+        ]
+      },
+      {
+        "id": "travail",
+        "title": "Séparer volts, joules et sens du travail",
+        "paragraphs": [
+          "Dans le potentiel extérieur V, l’énergie potentielle d’interaction associée à la charge test est Ep = qV. Il s’agit de l’interaction avec la source ; l’auto-énergie des charges ponctuelles n’intervient pas. Le potentiel V ne dépend pas de la charge test, tandis que Ep lui est proportionnelle.",
+          "Pour q constante, ΔEp = qΔV_AB et Wchamp,A→B = −ΔEp. Une charge positive qui s’éloigne d’une source positive descend en potentiel : son énergie potentielle diminue et le champ fournit un travail positif.",
+          "Si un agent extérieur déplace idéalement q quasi statiquement en équilibrant la force électrique, sans dissipation ni autre travail et avec variation d’énergie cinétique négligeable, son travail vaut ΔEp. Cette condition supplémentaire n’est pas un déplacement effectivement réalisé dans l’exemple."
+        ],
+        "equations": [
+          {
+            "id": "potentieltravail",
+            "reading": "Delta E p vaut q multiplié par la différence entre V B et V A, soit l’opposé du travail électrique de A vers B."
+          }
+        ]
+      },
+      {
+        "id": "reference",
+        "title": "Changer le zéro, borner la reconstruction",
+        "paragraphs": [
+          "Ajouter une constante C0 au potentiel ne change ni E, ni ΔV_AB, ni qΔV_AB. L’énergie Ep se décale alors de qC0 pour q constante. Les valeurs VA et VB de l’exemple utilisent le zéro à l’infini ; cette convention est à conserver lors d’une comparaison de valeurs absolues.",
+          "Si la géométrie, k et la loi de la source ponctuelle sont connus, Q se retrouve par ΔV_AB/[k(1/rB − 1/rA)], pour rA ≠ rB. Une seule différence de potentiel ne démontre ni toute la loi spatiale du champ, ni la présence exclusive d’une source ponctuelle.",
+          "Le calcul pour B→A inverse les variations et le travail du champ. La somme des travaux sur un aller et un retour est nulle dans ce modèle conservatif ; cela ne précise ni la durée ni la manière de déplacer la charge."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Dans le vide, Q = +2,0 nC et q = +1,0 nC. Comparer rA = 0,20 m à rB = 0,40 m avec V(∞) = 0 et k ≈ 8,99 × 10⁹ N·m²·C⁻².",
+      "steps": [
+        "Convertir Q = 2,0 × 10⁻⁹ C et q = 1,0 × 10⁻⁹ C ; kQ = 17,98 V·m.",
+        "Calculer VA = 17,98/0,20 = 89,9 V et VB = 17,98/0,40 = 44,95 V ; ΔV_AB = −44,95 V.",
+        "Multiplier par q : ΔEp = −4,495 × 10⁻⁸ J. Le travail du champ pour A→B vaut donc +4,495 × 10⁻⁸ J."
+      ],
+      "result": "Les valeurs calculées utilisent le k approché fourni. La variation d’énergie est négative et le travail du champ positif ; aucune vitesse n’en est déduite."
+    },
+    "checkpoint": {
+      "question": "Pour les mêmes charges et la même référence, que donnent le retour B→A et l’ajout d’une constante C0 au potentiel ?",
+      "answer": "Pour B→A, ΔV_BA = +44,95 V, ΔEp = +4,495 × 10⁻⁸ J et Wchamp = −4,495 × 10⁻⁸ J. Ajouter C0 à VA et VB laisse toutes ces différences et tous ces travaux inchangés. Ce sont des comparaisons calculées, pas le récit d’un déplacement."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P13",
+        "page": 372,
+        "section": "Champ, potentiel et énergie électrostatique"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 268,
+        "section": "Électrostatique : potentiel, circulation et énergie"
+      }
+    ],
+    "references": [
+      "openstax-energie-electrique",
+      "openstax-potentiel-electrique",
+      "openstax-gradient-electrique"
+    ],
+    "corrections": [
+      {
+        "id": "C18",
+        "title": "Distinguer énergie de la charge test et énergie d’assemblage",
+        "detail": "CPGE P13 p. 372 et théorie PC2 p. 268 placent un facteur 1/2 devant qV pour l’interaction d’une charge en un point, sans somme. Pour une charge test dans le potentiel des autres charges, l’énergie d’interaction est qV_ext. Le facteur 1/2 s’emploie dans l’énergie totale d’assemblage 1/2 Σ_i q_i V_autres(r_i), qui compte chaque paire deux fois avant division et exclut les auto-énergies. La fiche adopte le premier cadre.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P13",
+            "page": 372,
+            "section": "Champ, potentiel et énergie électrostatique"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC2",
+            "page": 268,
+            "section": "Électrostatique : potentiel, circulation et énergie"
+          }
+        ]
+      }
+    ],
+    "number": 24,
+    "domain": "electromagnetisme",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "gauss-sphere-chargee",
+    "title": "Calculer le champ d’une sphère uniformément chargée",
+    "level": "CPGE · Électrostatique",
+    "summary": "Relier charge enfermée, flux électrique et champ radial à l’intérieur puis à l’extérieur d’une sphère.",
+    "objective": "Exploiter la symétrie sphérique pour calculer le champ et préciser ce qu’un flux ou un calcul inverse permet de reconstruire.",
+    "prerequisites": [
+      "Champ électrique et charge",
+      "Surface, volume et intégrale",
+      "Symétrie sphérique"
+    ],
+    "system": "Une sphère non conductrice de rayon R porte une charge volumique uniforme et immobile, de charge totale Q positive.",
+    "conditions": [
+      "Distribution statique, seule source du champ ; aucun champ extérieur ajouté. La charge reste répartie dans le volume, sans couche surfacique supplémentaire.",
+      "Vide à l’extérieur et modèle de permittivité ε0 partout : aucune polarisation matérielle supplémentaire n’est prise en compte.",
+      "Surface de Gauss sphérique, centrée sur la distribution, de rayon r > 0 et orientée vers l’extérieur ; R désigne le rayon de la source.",
+      "Exemple théorique : R = 0,10 m, Q = +2,0 nC et k = 8,99 × 10⁹ N·m²·C⁻² approximé ; utiliser 1/ε0 = 4πk pour tous les chiffres."
+    ],
+    "sections": [
+      {
+        "id": "flux",
+        "title": "Distinguer flux et champ local",
+        "paragraphs": [
+          "Le flux électrique traverse une surface fermée orientée. La loi de Gauss le relie à la charge totale enfermée, même lorsque le champ varie sur cette surface.",
+          "Un flux nul n’impose pas, en général, un champ nul en chaque point : les contributions entrantes et sortantes peuvent se compenser. La loi de Gauss seule ne suffit donc pas à calculer un champ local sans informations supplémentaires."
+        ],
+        "equations": [
+          {
+            "id": "gaussflux",
+            "reading": "Le flux Phi à travers la surface fermée S vaut l’intégrale de E vecteur scalaire n vecteur d S, égale Q enfermée sur epsilon zéro."
+          }
+        ]
+      },
+      {
+        "id": "symetrie",
+        "title": "Choisir la surface et compter la charge",
+        "paragraphs": [
+          "La distribution uniforme, l’environnement et l’absence d’autre source donnent la symétrie sphérique. Pour r > 0, E vecteur = E(r) e radial ; E(r) est identique sur la sphère de Gauss et positif ici. Le flux vaut alors 4πr²E(r).",
+          "La densité vaut ρ = 3Q/(4πR³). À l’intérieur, seule la charge du volume de rayon r est enfermée ; à l’extérieur, toute la charge Q l’est. Déplacer la surface de calcul ne déplace aucune charge."
+        ],
+        "equations": [
+          {
+            "id": "gausscharge",
+            "reading": "Rho vaut trois Q sur quatre pi R au cube. Q intérieure de r vaut Q multiplié par le cube du rapport r sur R pour zéro inférieur ou égal à r inférieur ou égal à R ; elle vaut Q pour r supérieur à R."
+          }
+        ]
+      },
+      {
+        "id": "profil",
+        "title": "Raccorder les profils intérieur et extérieur",
+        "paragraphs": [
+          "En divisant le flux par 4πr², on obtient un champ proportionnel à r à l’intérieur et décroissant comme 1/r² à l’extérieur. Le champ vectoriel est nul au centre, où aucune direction radiale privilégiée n’existe.",
+          "Les deux expressions donnent E(R) = kQ/R² : le champ est continu à la surface, sans couche de charge surfacique dans ce modèle. Avec les données proposées, E(R) = 1 798 N/C.",
+          "Une sphère conductrice en équilibre électrostatique constitue un autre modèle : la charge excédentaire est à sa surface et son champ intérieur est nul. Son champ extérieur serait identique pour les mêmes Q et R ; une valeur extérieure seule ne distingue pas ces répartitions."
+        ],
+        "equations": [
+          {
+            "id": "gaussprofil",
+            "reading": "La composante radiale E r de r vaut k Q r sur R au cube à l’intérieur ; k Q sur r au carré à l’extérieur."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "À r = 0,050 m du centre, quel champ la sphère de rayon R = 0,10 m et de charge Q = +2,0 nC produit-elle ?",
+      "steps": [
+        "Le point est intérieur : r/R = 1/2. La charge enfermée vaut Q/8 = 0,250 nC.",
+        "E = kQenfermée/r² = 8,99 × 10⁹ × 0,250 × 10⁻⁹ / 0,050² = 899 N/C.",
+        "Le flux correspondant vaut 4πr²E ≈ 28,243 N·m²/C ; il est positif avec la normale sortante."
+      ],
+      "result": "Le champ calculé vaut 899 N/C, radial vers l’extérieur. Il provient du modèle supposé ; aucune mesure n’est fournie."
+    },
+    "checkpoint": {
+      "question": "À r = 0,20 m, que deviennent la charge enfermée et le champ ? Le champ doit-il être nul parce que ce point est dans le vide ?",
+      "answer": "La surface enferme Q = 2,0 nC et E = kQ/r² = 449,5 N/C, radial sortant. Le vide extérieur est sans charge locale mais le champ y est non nul. Le flux vaut Q/ε0 ≈ 225,943 N·m²/C."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P11",
+        "page": 355,
+        "section": "Équations de Maxwell–Gauss, avec et sans densité de charge"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 268,
+        "section": "Électrostatique : flux fermé et théorème de Gauss"
+      }
+    ],
+    "references": [
+      "openstax-gauss-sphere",
+      "openstax-gauss-conducteur"
+    ],
+    "corrections": [],
+    "number": 25,
+    "domain": "electromagnetisme",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
   }
 ]

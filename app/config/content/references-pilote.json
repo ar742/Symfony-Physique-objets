@@ -142,5 +142,47 @@
     "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter27.pdf",
     "note": "Chapitre 27, §27.3–27.4 et 27.6 : pression, profondeur et principe d’Archimède.",
     "checked": "2026-09-09"
+  },
+  "openstax-coulomb": {
+    "title": "OpenStax — Loi de Coulomb (§5.3)",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/5-3-coulombs-law",
+    "note": "Loi entre charges ponctuelles, sens de la force et valeur approchée du coefficient k.",
+    "checked": "2026-09-09"
+  },
+  "openstax-champ-electrique": {
+    "title": "OpenStax — Champ électrique (§5.4)",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/5-4-electric-field",
+    "note": "Champ des charges sources, relation F = qE et distinction entre champ et charge test.",
+    "checked": "2026-09-09"
+  },
+  "openstax-energie-electrique": {
+    "title": "OpenStax, University Physics Volume 2 — Énergie potentielle électrique",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/7-1-electric-potential-energy",
+    "note": "§7.1, équations 7.1–7.2 et exemple 7.3 : travail conservatif, énergie de deux charges et assemblage par paires.",
+    "checked": "2026-09-09"
+  },
+  "openstax-potentiel-electrique": {
+    "title": "OpenStax, University Physics Volume 2 — Potentiel et différence de potentiel",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/7-2-electric-potential-and-potential-difference",
+    "note": "§7.2, équations 7.4–7.7 : potentiel par unité de charge, variation d’énergie et intégration du champ.",
+    "checked": "2026-09-09"
+  },
+  "openstax-gradient-electrique": {
+    "title": "OpenStax, University Physics Volume 2 — Retrouver le champ par le gradient",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/7-4-determining-field-from-potential",
+    "note": "§7.4, équations 7.13–7.15 et exemple 7.17 : gradient négatif et champ de la charge ponctuelle.",
+    "checked": "2026-09-09"
+  },
+  "openstax-gauss-conducteur": {
+    "title": "OpenStax, University Physics Volume 2 — Conducteur en équilibre électrostatique",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/6-4-conductors-in-electrostatic-equilibrium",
+    "note": "§6.4 : champ nul dans le conducteur, charge excédentaire en surface et champ normal juste à l’extérieur.",
+    "checked": "2026-09-09"
+  },
+  "openstax-gauss-sphere": {
+    "title": "OpenStax, University Physics Volume 2 — Gauss et sphère uniformément chargée",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/6-3-applying-gausss-law",
+    "note": "§6.3, exemple 6.6 et figures 6.24–6.25 : symétrie sphérique, charge enfermée et profils intérieur/extérieur d’une sphère non conductrice.",
+    "checked": "2026-09-09"
   }
 }

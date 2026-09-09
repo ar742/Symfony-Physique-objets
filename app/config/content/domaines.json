@@ -317,8 +317,8 @@
   {
     "slug": "electromagnetisme",
     "title": "Électromagnétisme",
-    "summary": "Champs, flux, induction, Maxwell et propriétés des milieux.",
-    "scope": "Lot E1 planifié : fiches web à rédiger.",
+    "summary": "Charges, champ électrique, potentiel et flux : premier parcours d’électrostatique.",
+    "scope": "E1a : trois fiches avec leurs analyses à deux étages. Magnétostatique, induction, Maxwell et milieux restent à développer.",
     "sources": [
       {
         "doc": "cpge",
@@ -341,7 +341,63 @@
         "code": "PC2"
       }
     ],
-    "steps": []
+    "steps": [
+      {
+        "id": 1,
+        "title": "Décrire les charges",
+        "subtitle": "Source et charge test",
+        "tip": "Distinguer la charge qui crée le champ de celle sur laquelle on calcule la force.",
+        "card": "champ-coulomb",
+        "section": "conditions",
+        "color": "blue"
+      },
+      {
+        "id": 2,
+        "title": "Déduire le champ",
+        "subtitle": "Modèle de Coulomb",
+        "tip": "Relier charge source, distance et direction du champ dans le modèle ponctuel.",
+        "card": "champ-coulomb",
+        "section": "champ",
+        "color": "orange"
+      },
+      {
+        "id": 3,
+        "title": "Calculer la force",
+        "subtitle": "Signe et direction",
+        "tip": "Une charge test négative reçoit une force opposée au champ électrique.",
+        "card": "champ-coulomb",
+        "section": "exemple",
+        "color": "green"
+      },
+      {
+        "id": 4,
+        "title": "Relire par l’énergie",
+        "subtitle": "Potentiel et travail",
+        "tip": "Comparer travail du champ et variation de l’énergie d’interaction, avec leurs signes.",
+        "card": "potentiel-energie-electrique",
+        "section": "travail",
+        "color": "blue"
+      },
+      {
+        "id": 5,
+        "title": "Confronter par le flux",
+        "subtitle": "Gauss et symétrie",
+        "tip": "La loi de Gauss fixe un flux ; la symétrie permet d’en déduire un champ local.",
+        "card": "gauss-sphere-chargee",
+        "section": "symetrie",
+        "color": "orange"
+      },
+      {
+        "id": 6,
+        "title": "Comparer les positions",
+        "subtitle": "Intérieur et extérieur",
+        "tip": "Conserver la distribution volumique de charge en comparant les deux régimes du profil.",
+        "card": "gauss-sphere-chargee",
+        "section": "controle",
+        "color": "green"
+      }
+    ],
+    "loop_title": "Charges, champ, énergie et flux"
   },
   {
     "slug": "circuits-signaux",
