@@ -1,0 +1,22 @@
+{% extends 'site/layout.html.twig' %}
+{% block title %}Archives 2018 — Physique objets{% endblock %}
+{% block body %}
+    <div class="page-heading"><p class="eyebrow">Archives · Export du 22 août 2018</p><h1>Domaines et thèmes historiques</h1><p class="lead">{{ counts.domains }} domaines · {{ counts.topics }} thèmes · {{ counts.entries }} fiches de physique</p><p>Ce contenu est conservé comme archive. Le nouveau corpus s’appuie sur les <a href="{{ path('source_index') }}">recueils CPGE et physique théorique</a>.</p></div>
+    <nav class="domain-index" aria-label="Accéder à un domaine">
+        {% for domain in domains %}<a href="#domaine-{{ domain.id }}">{{ domain.title }}</a>{% endfor %}
+    </nav>
+    <div class="domain-grid">
+        {% for domain in domains %}
+            <section class="domain-section" id="domaine-{{ domain.id }}">
+                <h2>{{ domain.title }}</h2>
+                {% if domain.content|trim != domain.title|trim %}<p>{{ domain.content|nl2br }}</p>{% endif %}
+                <ul class="catalog-list">
+                    {% for item in topics[domain.id]|default([]) %}
+                        <li><a href="{{ path('sitephys_physmvc_phys_hometopic', {idTopic: item.topic.id}) }}">{{ item.topic.title }}</a><span class="item-count">{{ item.count }} fiche{% if item.count != 1 %}s{% endif %}</span></li>
+                    {% else %}<li>Aucun thème enregistré pour ce domaine.</li>{% endfor %}
+                </ul>
+                {% include 'site/_references.html.twig' with {references: domainReferences[domain.id]|default([]), reference_heading_id: 'references-domaine-' ~ domain.id, compact: true} %}
+            </section>
+        {% endfor %}
+    </div>
+{% endblock %}

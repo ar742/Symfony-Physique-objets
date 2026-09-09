@@ -1,0 +1,45 @@
+name: physique-objets-moderne
+
+services:
+  web:
+    build:
+      context: ./docker
+    ports:
+      - "127.0.0.1:${WEB_PORT:-8080}:80"
+    volumes:
+      - ./app:/var/www/html
+      - ./sources:/var/www/sources:ro
+      - composer_cache:/tmp/composer-cache
+    environment:
+      APP_ENV: dev
+      APP_DEBUG: "1"
+      SOURCE_PDF_DIR: /var/www/sources
+      APP_SECRET: ${APP_SECRET:?Le fichier .env doit definir APP_SECRET}
+      DATABASE_URL: "mysql://physique:${MYSQL_PASSWORD:?Le fichier .env doit definir MYSQL_PASSWORD}@database:3306/physique?serverVersion=8.4.0&charset=utf8mb4"
+      MAILER_DSN: "null://null"
+      MESSENGER_TRANSPORT_DSN: "sync://"
+      COMPOSER_ALLOW_SUPERUSER: "1"
+      COMPOSER_CACHE_DIR: /tmp/composer-cache
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: physique
+      MYSQL_USER: physique
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Le fichier .env doit definir MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Le fichier .env doit definir MYSQL_ROOT_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysql --protocol=TCP -h 127.0.0.1 -u\"$$MYSQL_USER\" -p\"$$MYSQL_PASSWORD\" \"$$MYSQL_DATABASE\" -e 'SELECT 1' >/dev/null 2>&1"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+volumes:
+  mysql_data:
+  composer_cache:

@@ -1,0 +1,22 @@
+{% extends 'site/layout.html.twig' %}
+{% block title %}Recueils CPGE et physique théorique — Physique objets{% endblock %}
+{% block body %}
+    <div class="page-heading"><p class="eyebrow">Les documents sources</p><h1>CPGE et physique théorique</h1><p class="lead">Deux recueils d’Aurélien Roudier, 1 433 pages et 91 points d’entrée pour retrouver une fiche.</p><p>Les liens ouvrent le PDF à la page indiquée. Le numéro imprimé a été vérifié pour chaque entrée du sommaire.</p></div>
+    <nav class="source-shortcuts" aria-label="Choisir un recueil">{% for document in documents %}<a class="topic-card" href="#recueil-{{ document.key }}"><span class="eyebrow">{{ document.pages }} pages · {{ document.entries|length }} entrées</span><h2>{{ document.title }}</h2><p>{{ document.subtitle }}</p></a>{% endfor %}</nav>
+    <p><a class="primary-link" href="{{ path('learning_index') }}">Lire les huit premières fiches web</a> · <a href="{{ path('learning_corrections') }}">Corrections documentées</a></p>
+    <section class="source-bridges"><h2>Passer de la CPGE aux approfondissements</h2><div class="topic-grid">
+        <div class="topic-card"><h3>Mécanique</h3><p><a href="#cpge-P2">Oscillateurs · P2</a></p><p><a href="#theorique-PC1">Mécanique · PC1</a></p></div>
+        <div class="topic-card"><h3>Thermodynamique</h3><p><a href="#cpge-P22">Thermodynamique · P22</a></p><p><a href="#theorique-PC3">Physique statistique · PC3</a></p></div>
+        <div class="topic-card"><h3>Physique quantique</h3><p><a href="#cpge-P25">Introduction · P25</a></p><p><a href="#theorique-PC4">Physique quantique · PC4</a></p></div>
+    </div></section>
+    {% for document in documents %}
+        <section class="source-volume" id="recueil-{{ document.key }}"><div class="source-volume-heading"><div><p class="eyebrow">{{ document.pages }} pages</p><h2>{{ document.title }}</h2></div><a href="{{ path('source_document', {key: document.key}) }}#page=1">Ouvrir le recueil complet</a></div>
+            {% for group, entries in document.groups %}
+                <details class="source-group"{% if group in ['Physique', 'Physique classique'] %} open{% endif %}><summary>{{ group }} <span>{{ entries|length }} entrées</span></summary>
+                    <ul class="source-index-list">{% for entry in entries %}<li id="{{ document.key }}-{{ entry.code }}"><span class="source-code">{{ entry.code }}</span><a href="{{ path('source_document', {key: document.key}) }}#page={{ entry.page }}">{{ entry.title }} <span class="page-number">p. {{ entry.page }}</span></a></li>{% endfor %}</ul>
+                </details>
+            {% endfor %}
+        </section>
+    {% endfor %}
+    <p class="archive-note">Ces documents constituent les sources du nouveau contenu. L’<a href="{{ path('sitephys_physmvc_topic') }}">archive du site de 2018</a> est conservée séparément.</p>
+{% endblock %}

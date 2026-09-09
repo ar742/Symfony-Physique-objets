@@ -1,0 +1,13 @@
+{% if references %}
+    {% set headingId = reference_heading_id|default('references') %}
+    <section class="reference-section{% if compact|default(false) %} reference-section-compact{% endif %}" aria-labelledby="{{ headingId }}">
+        {% if compact|default(false) %}<h3 id="{{ headingId }}">Références du domaine</h3>{% else %}<h2 id="{{ headingId }}">Références du domaine</h2>{% endif %}
+        {% for reference in references %}
+            <details class="reference-details"><summary>{{ reference.title }}</summary>
+                {% if reference.content %}<p class="scientific-text">{{ reference.content|nl2br }}</p>{% endif %}
+                {% set referenceUrl = reference.webLinks|web_url %}
+                {% if referenceUrl %}<p><a href="{{ referenceUrl }}" rel="noopener noreferrer">Consulter la référence</a></p>{% elseif reference.webLinks|default('')|trim %}<p class="scientific-text">Ressource indiquée : {{ reference.webLinks }}</p>{% endif %}
+            </details>
+        {% endfor %}
+    </section>
+{% endif %}

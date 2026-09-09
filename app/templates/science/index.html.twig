@@ -1,0 +1,10 @@
+{% extends 'site/layout.html.twig' %}
+{% block title %}Fiches — Thermodynamique et physique statistique{% endblock %}
+{% block body %}
+<nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="{{ path('sitephys_physmvc_home') }}">La boucle</a> / Fiches</nav>
+<header class="page-heading"><p class="eyebrow">Premier parcours · {{ cards|length }} fiches web</p><h1>De la thermodynamique à la physique statistique</h1><p class="lead">Un système, des lois, des exemples et des vérifications. Suivez l’ordre de lecture ou entrez par une étape de la boucle.</p><p class="pilot-status">Version pilote · Relecture scientifique par l’auteur à faire</p></header>
+<div class="topic-grid learning-grid">
+{% for card in cards %}<a class="topic-card" href="{{ path('learning_card', {slug: card.slug}) }}"><span class="eyebrow">{{ '%02d'|format(card.number) }} · {{ card.level }}</span><h2>{{ card.title }}</h2><p>{{ card.summary }}</p></a>{% endfor %}
+</div>
+<section class="content-note"><h2>Lire avec les sources</h2><p>Ces fiches reformulent une sélection de vos recueils. Chaque fiche indique les pages utilisées, ses hypothèses et les corrections apportées. Les exemples chiffrés sont des calculs pédagogiques.</p><div class="step-actions"><a href="{{ path('learning_corrections') }}">Consulter le journal des corrections</a><a href="{{ path('source_index') }}">Parcourir les PDF</a><a href="{{ path('learning_subloop', {base: 1}) }}">Entrer dans les 36 sous-étapes</a></div></section>
+{% endblock %}

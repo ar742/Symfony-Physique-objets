@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Installation — Physique objets</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; background: #f1f5fa; color: #172a43; font: 1rem/1.6 system-ui, sans-serif; }
+        main { max-width: 48rem; margin: 8vh auto; padding: 2rem; }
+        .label { color: #335880; font-weight: 650; }
+        h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.2; }
+        table { width: 100%; border-collapse: collapse; background: white; margin: 2rem 0; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #d8e1ec; overflow-wrap: anywhere; }
+        th { width: 50%; }
+        .result { border-left: 4px solid #28679b; padding: .8rem 1rem; background: #e1edfa; }
+        @media (max-width: 480px) { main { margin: 1rem auto; padding: 1rem; } th, td { padding: .75rem; } }
+    </style>
+</head>
+<body>
+<main>
+    <p class="label">Physique objets · Développement local</p>
+    <h1>{{ connected ? 'Votre environnement est prêt.' : 'La connexion MySQL reste à vérifier.' }}</h1>
+    <p>Cette page est produite par Symfony et Twig. Les versions ci-dessous proviennent des composants en cours d’exécution.</p>
+    <table aria-label="Versions des composants installés">
+        <tbody>
+        <tr><th scope="row">PHP</th><td>{{ php_version }}</td></tr>
+        <tr><th scope="row">Symfony</th><td>{{ symfony_version }}</td></tr>
+        <tr><th scope="row">Twig</th><td>{{ twig_version }}</td></tr>
+        <tr><th scope="row">MySQL</th><td>{{ mysql_version }}</td></tr>
+        </tbody>
+    </table>
+    <p class="result">{{ connected ? 'La connexion à la nouvelle base fonctionne.' : 'Consultez les instructions de dépannage du guide.' }}</p>
+    <p>La prochaine étape du chantier sera la reprise des domaines, thèmes, niveaux et références depuis l’export SQL de l’ancien site.</p>
+</main>
+</body>
+</html>

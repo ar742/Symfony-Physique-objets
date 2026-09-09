@@ -1,0 +1,568 @@
+[
+  {
+    "key": "cpge",
+    "title": "Fiches CPGE scientifiques",
+    "subtitle": "Édition 2027 · mathématiques, informatique, physique et chimie",
+    "filename": "cpge.pdf",
+    "pages": 635,
+    "sha256": "88dffc1b90f21a41c6e4766fdd6ccc598a05aa8cd06d0f2785ec2a799f89e0ce",
+    "entries": [
+      {
+        "code": "M1",
+        "title": "Topologie et ensembles",
+        "page": 12,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M2",
+        "title": "Nombres complexes",
+        "page": 26,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M3",
+        "title": "Arithmétique",
+        "page": 34,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M4",
+        "title": "Fonctions réelles et leur étude",
+        "page": 42,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M5",
+        "title": "Dérivées, intégration et primitives",
+        "page": 56,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M6",
+        "title": "Équations différentielles",
+        "page": 68,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M7",
+        "title": "Calculs différentiels",
+        "page": 73,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M8",
+        "title": "Suites réelles et étude de suites",
+        "page": 80,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M9",
+        "title": "Sommations et séries",
+        "page": 90,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M10",
+        "title": "Suites, séries de fonctions et séries entières",
+        "page": 98,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M11",
+        "title": "Transformées de Laplace et de Fourier",
+        "page": 106,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M12",
+        "title": "Dénombrement, lois discrètes, lois continues",
+        "page": 112,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M13",
+        "title": "Algèbre générale (Introduction)",
+        "page": 124,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M14",
+        "title": "Algèbre linéaire – Morphismes",
+        "page": 136,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M15",
+        "title": "Algèbre linéaire – Matrices",
+        "page": 144,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M16",
+        "title": "Espaces préhilbertiens, espaces euclidiens",
+        "page": 156,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M17",
+        "title": "Polynômes, fractions rationnelles",
+        "page": 165,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M18",
+        "title": "Géométrie du plan",
+        "page": 174,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "M19",
+        "title": "Géométrie de l’espace",
+        "page": 184,
+        "group": "Mathématiques"
+      },
+      {
+        "code": "I1",
+        "title": "Python : bases",
+        "page": 194,
+        "group": "Informatique"
+      },
+      {
+        "code": "I2",
+        "title": "Python : approfondissements",
+        "page": 222,
+        "group": "Informatique"
+      },
+      {
+        "code": "I3",
+        "title": "SQL",
+        "page": 247,
+        "group": "Informatique"
+      },
+      {
+        "code": "P1",
+        "title": "Mécanique du point",
+        "page": 265,
+        "group": "Physique"
+      },
+      {
+        "code": "P2",
+        "title": "Oscillateurs",
+        "page": 275,
+        "group": "Physique"
+      },
+      {
+        "code": "P3",
+        "title": "Mécanique du solide",
+        "page": 283,
+        "group": "Physique"
+      },
+      {
+        "code": "P4",
+        "title": "Ondes mécaniques",
+        "page": 291,
+        "group": "Physique"
+      },
+      {
+        "code": "P5",
+        "title": "Relativités restreinte et générale",
+        "page": 300,
+        "group": "Physique"
+      },
+      {
+        "code": "P6",
+        "title": "Statique des fluides",
+        "page": 306,
+        "group": "Physique"
+      },
+      {
+        "code": "P7",
+        "title": "Dynamique des fluides",
+        "page": 312,
+        "group": "Physique"
+      },
+      {
+        "code": "P8",
+        "title": "Acoustique – ondes sonores dans les fluides",
+        "page": 322,
+        "group": "Physique"
+      },
+      {
+        "code": "P9",
+        "title": "Optique géométrique",
+        "page": 325,
+        "group": "Physique"
+      },
+      {
+        "code": "P10",
+        "title": "Ondes lumineuses",
+        "page": 338,
+        "group": "Physique"
+      },
+      {
+        "code": "P11",
+        "title": "Dans le vide et milieux conducteurs",
+        "page": 351,
+        "group": "Physique"
+      },
+      {
+        "code": "P12",
+        "title": "Milieux diélectriques, milieux magnétiques",
+        "page": 362,
+        "group": "Physique"
+      },
+      {
+        "code": "P13",
+        "title": "Électrostatique",
+        "page": 370,
+        "group": "Physique"
+      },
+      {
+        "code": "P14",
+        "title": "Magnétostatique, induction",
+        "page": 376,
+        "group": "Physique"
+      },
+      {
+        "code": "P15",
+        "title": "Circuits avec R, L, C",
+        "page": 386,
+        "group": "Physique"
+      },
+      {
+        "code": "P16",
+        "title": "Circuits avec diode et transistor",
+        "page": 398,
+        "group": "Physique"
+      },
+      {
+        "code": "P17",
+        "title": "Systèmes et filtres",
+        "page": 404,
+        "group": "Physique"
+      },
+      {
+        "code": "P18",
+        "title": "Systèmes avec amplificateur opérationnel",
+        "page": 415,
+        "group": "Physique"
+      },
+      {
+        "code": "P19",
+        "title": "Technologies",
+        "page": 423,
+        "group": "Physique"
+      },
+      {
+        "code": "P20",
+        "title": "Physique statistique",
+        "page": 434,
+        "group": "Physique"
+      },
+      {
+        "code": "P21",
+        "title": "Physique du solide",
+        "page": 443,
+        "group": "Physique"
+      },
+      {
+        "code": "P22",
+        "title": "Thermodynamique",
+        "page": 450,
+        "group": "Physique"
+      },
+      {
+        "code": "P23",
+        "title": "Transferts et diffusion",
+        "page": 460,
+        "group": "Physique"
+      },
+      {
+        "code": "P24",
+        "title": "Thermométrie",
+        "page": 466,
+        "group": "Physique"
+      },
+      {
+        "code": "P25",
+        "title": "Introduction à la mécanique quantique",
+        "page": 471,
+        "group": "Physique"
+      },
+      {
+        "code": "P26",
+        "title": "Physique subatomique, nucléaire et atomique",
+        "page": 480,
+        "group": "Physique"
+      },
+      {
+        "code": "C1",
+        "title": "Structures atomiques et moléculaires",
+        "page": 491,
+        "group": "Chimie"
+      },
+      {
+        "code": "C2",
+        "title": "Propriétés des molécules",
+        "page": 500,
+        "group": "Chimie"
+      },
+      {
+        "code": "C3",
+        "title": "Absorption, émission et spectroscopies",
+        "page": 508,
+        "group": "Chimie"
+      },
+      {
+        "code": "C4",
+        "title": "Réactions de chimie organique",
+        "page": 522,
+        "group": "Chimie"
+      },
+      {
+        "code": "C5",
+        "title": "Réactions en solution aqueuse",
+        "page": 535,
+        "group": "Chimie"
+      },
+      {
+        "code": "C6",
+        "title": "Cinétique",
+        "page": 545,
+        "group": "Chimie"
+      },
+      {
+        "code": "C7",
+        "title": "Oxydo-réduction, électrochimie",
+        "page": 551,
+        "group": "Chimie"
+      },
+      {
+        "code": "C8",
+        "title": "Thermochimie",
+        "page": 562,
+        "group": "Chimie"
+      }
+    ]
+  },
+  {
+    "key": "theorique",
+    "title": "Physique théorique — fiches",
+    "subtitle": "Outils mathématiques, physique classique et contemporaine",
+    "filename": "theorique.pdf",
+    "pages": 798,
+    "sha256": "b530516037b61eca7298bbbd917e36c367a38c4e42bd46cab6fca27498dc2dda",
+    "entries": [
+      {
+        "code": "MATH-A",
+        "title": "Outils mathématiques — acquis et prérequis",
+        "page": 6,
+        "group": "Outils mathématiques"
+      },
+      {
+        "code": "MATH-B",
+        "title": "Outils mathématiques — bases",
+        "page": 70,
+        "group": "Outils mathématiques"
+      },
+      {
+        "code": "MATH-C",
+        "title": "Outils mathématiques — compléments",
+        "page": 181,
+        "group": "Outils mathématiques"
+      },
+      {
+        "code": "PC1",
+        "title": "Mécanique",
+        "page": 237,
+        "group": "Physique classique"
+      },
+      {
+        "code": "PC2",
+        "title": "Électromagnétisme",
+        "page": 262,
+        "group": "Physique classique"
+      },
+      {
+        "code": "PC3",
+        "title": "Physique statistique",
+        "page": 287,
+        "group": "Physique classique"
+      },
+      {
+        "code": "PC4",
+        "title": "Physique quantique",
+        "page": 304,
+        "group": "Physique classique"
+      },
+      {
+        "code": "TQC1",
+        "title": "TCC, MQ, RR et TQC – Bases",
+        "page": 341,
+        "group": "Théorie quantique des champs"
+      },
+      {
+        "code": "TQC2",
+        "title": "TQC – Généralités",
+        "page": 357,
+        "group": "Théorie quantique des champs"
+      },
+      {
+        "code": "TQC3",
+        "title": "Quantifications",
+        "page": 373,
+        "group": "Théorie quantique des champs"
+      },
+      {
+        "code": "TQC4",
+        "title": "Fonctionnelles et théories de Yang-Mills",
+        "page": 389,
+        "group": "Théorie quantique des champs"
+      },
+      {
+        "code": "TQC5",
+        "title": "Diagrammes de Feynman, renormalisation",
+        "page": 408,
+        "group": "Théorie quantique des champs"
+      },
+      {
+        "code": "TQC6",
+        "title": "QED, interaction électrofaible",
+        "page": 429,
+        "group": "Théorie quantique des champs"
+      },
+      {
+        "code": "TQC7",
+        "title": "Interaction forte – QCD",
+        "page": 442,
+        "group": "Théorie quantique des champs"
+      },
+      {
+        "code": "TQC8",
+        "title": "Modèle standard, mécanisme de Higgs",
+        "page": 461,
+        "group": "Théorie quantique des champs"
+      },
+      {
+        "code": "CU1",
+        "title": "Univers, astrophysique – Généralités",
+        "page": 486,
+        "group": "Cosmologie et univers"
+      },
+      {
+        "code": "CU2",
+        "title": "Évolution de l’univers – Nucléosynthèses",
+        "page": 494,
+        "group": "Cosmologie et univers"
+      },
+      {
+        "code": "CU3",
+        "title": "Relativité restreinte et électromagnétisme",
+        "page": 505,
+        "group": "Cosmologie et univers"
+      },
+      {
+        "code": "CU4",
+        "title": "Relativité générale (RG)",
+        "page": 511,
+        "group": "Cosmologie et univers"
+      },
+      {
+        "code": "CU5",
+        "title": "Formulation lagrangienne de la RG",
+        "page": 526,
+        "group": "Cosmologie et univers"
+      },
+      {
+        "code": "CU6",
+        "title": "Cosmologie, MSC – Généralités",
+        "page": 536,
+        "group": "Cosmologie et univers"
+      },
+      {
+        "code": "CU7",
+        "title": "Inflations",
+        "page": 542,
+        "group": "Cosmologie et univers"
+      },
+      {
+        "code": "CU8",
+        "title": "Études du CMB",
+        "page": 548,
+        "group": "Cosmologie et univers"
+      },
+      {
+        "code": "CU9",
+        "title": "Théories et observations actuelles de l’univers",
+        "page": 560,
+        "group": "Cosmologie et univers"
+      },
+      {
+        "code": "GQ1",
+        "title": "Bases – Généralités",
+        "page": 590,
+        "group": "Gravités quantiques"
+      },
+      {
+        "code": "GQ2",
+        "title": "Formalismes ADM, vielbeins, variables d’Ashtekar",
+        "page": 597,
+        "group": "Gravités quantiques"
+      },
+      {
+        "code": "GQ3",
+        "title": "Description de gravités quantiques",
+        "page": 611,
+        "group": "Gravités quantiques"
+      },
+      {
+        "code": "GQ4",
+        "title": "Gravité quantique à boucles",
+        "page": 630,
+        "group": "Gravités quantiques"
+      },
+      {
+        "code": "SCSG1",
+        "title": "Bases – SUSY",
+        "page": 653,
+        "group": "SUSY, SUGRA et cordes"
+      },
+      {
+        "code": "SCSG2",
+        "title": "SUSY– Formalisme, algèbre – SUGRA",
+        "page": 673,
+        "group": "SUSY, SUGRA et cordes"
+      },
+      {
+        "code": "SCSG3",
+        "title": "Théorie des cordes – supercordes",
+        "page": 683,
+        "group": "SUSY, SUGRA et cordes"
+      },
+      {
+        "code": "RMM1",
+        "title": "Théories de sécurité asymptotique",
+        "page": 719,
+        "group": "Alternatives"
+      },
+      {
+        "code": "RMM2",
+        "title": "Physique classique- quantique",
+        "page": 752,
+        "group": "Alternatives"
+      },
+      {
+        "code": "GNC1",
+        "title": "Géométrie non commutative - Éléments de base",
+        "page": 768,
+        "group": "Géométrie non commutative"
+      },
+      {
+        "code": "GNC2",
+        "title": "Géométrie non commutative et physique",
+        "page": 781,
+        "group": "Géométrie non commutative"
+      }
+    ]
+  }
+]

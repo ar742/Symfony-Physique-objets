@@ -1,0 +1,17 @@
+{% extends 'site/layout.html.twig' %}
+{% block title %}{{ entry.title }} — Physique objets{% endblock %}
+{% block body %}
+    <p class="archive-banner">Archive de 2018 · <a href="{{ path('source_index') }}">Consulter les nouveaux recueils</a></p>
+    <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="{{ path('sitephys_physmvc_topic') }}">Domaines et thèmes</a>{% if entry.topic %} / <a href="{{ path('sitephys_physmvc_phys_hometopic', {idTopic: entry.topic.id}) }}">{{ entry.topic.title }}</a>{% endif %}</nav>
+    <article class="physics-article">
+        <div class="page-heading"><p class="eyebrow">Niveau {{ entry.analysisLevel.base }} – {{ entry.analysisLevel.sub }}</p><h1>{{ entry.title }}</h1>
+            <p class="small-note">{{ entry.author }} · {{ entry.date|date('d/m/Y') }}{% if entry.updatedAt %} · Mise à jour le {{ entry.updatedAt|date('d/m/Y') }}{% endif %}</p>
+        </div>
+        <div class="scientific-text">{{ entry.content|nl2br }}</div>
+        {% if entry.evaluation %}<section class="reading-section"><h2>Évaluation</h2><div class="scientific-text">{{ entry.evaluation|nl2br }}</div></section>{% endif %}
+        {% set sourceUrl = entry.webLinks|web_url %}
+        {% if sourceUrl %}<p class="source-link"><a href="{{ sourceUrl }}" rel="noopener noreferrer">Consulter la ressource associée</a></p>{% elseif entry.webLinks|default('')|trim %}<p class="source-link scientific-text">Ressource indiquée : {{ entry.webLinks }}</p>{% endif %}
+        <details class="level-details"><summary>À propos du niveau {{ entry.analysisLevel.base }} – {{ entry.analysisLevel.sub }}</summary><p>{{ entry.analysisLevel.content|nl2br }}</p><a href="{{ path('sitephys_physmvc_symbolization', {_fragment: 'niveau-' ~ entry.analysisLevel.id}) }}">Voir les symbolisations de ce niveau</a></details>
+    </article>
+    {% include 'site/_references.html.twig' %}
+{% endblock %}

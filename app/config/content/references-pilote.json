@@ -1,0 +1,32 @@
+{
+  "definitions": {
+    "title": "MIT — Variables et systèmes thermodynamiques, p. 1–3",
+    "url": "https://ocw.mit.edu/courses/8-044-statistical-physics-i-spring-2013/89308d5289b1c515392685be677fa330_MIT8_044S13_notes.def.pdf",
+    "note": "Complément sur les grandeurs intensives et extensives et la description macroscopique."
+  },
+  "si": {
+    "title": "BIPM — Constantes définissant le SI",
+    "url": "https://www.bipm.org/fr/measurement-units/si-defining-constants",
+    "note": "Valeurs exactes de la constante de Boltzmann et de la constante d’Avogadro."
+  },
+  "capacite": {
+    "title": "IUPAC Gold Book — Heat capacity",
+    "url": "https://goldbook.iupac.org/terms/view/H02753",
+    "note": "Définitions des capacités thermiques à volume et à pression constants."
+  },
+  "travail": {
+    "title": "MIT — Cours 6 : travail, chaleur et premier principe",
+    "url": "https://ocw.mit.edu/courses/8-044-statistical-physics-i-spring-2013/ce5405cf466deea227c0bbdf350d19d2_MIT8_044S13_L6.pdf",
+    "note": "Le travail reçu est négatif dans une détente : intégrer −P dV pour le chemin réversible."
+  },
+  "micro": {
+    "title": "MIT — Ensemble microcanonique, p. 1–7",
+    "url": "https://ocw.mit.edu/courses/8-044-statistical-physics-i-spring-2013/328b69f845f540b137c5fbde68203697_MIT8_044S13_mcrocanoncl.pdf",
+    "note": "Équiprobabilité sous contraintes et bilan d’entropie avec un thermostat."
+  },
+  "canon": {
+    "title": "MIT — Dérivation de l’ensemble canonique",
+    "url": "https://ocw.mit.edu/courses/8-044-statistical-physics-i-spring-2013/7fa3fb4237d0d00d5603ae4ea8f02236_MIT8_044S13_Canonical.pdf",
+    "note": "Probabilités des micro-états d’un système en équilibre avec un réservoir thermique."
+  }
+}

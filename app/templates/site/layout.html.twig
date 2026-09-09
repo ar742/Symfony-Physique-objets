@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Étudier et organiser les thèmes de physique à travers les modèles objets, les niveaux d'analyse et les références.">
+    <title>{% block title %}Physique objets{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('styles/site.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/loop.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/science.css') }}">
+    <script src="{{ asset('scripts/loop.js') }}" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+    <div class="header-inner">
+        <a class="brand" href="{{ path('sitephys_physmvc_home') }}">Physique objets</a>
+        <nav aria-label="Navigation principale">
+            {% set current = app.request.attributes.get('_route') %}
+            {% for route, label in {
+                sitephys_physmvc_home: 'La boucle',
+                learning_index: 'Fiches',
+                source_index: 'Recueils',
+                sitephys_physmvc_presentation: 'Présentation',
+                sitephys_physmvc_topic: 'Archives 2018',
+                sitephys_physmvc_symbolization: 'Niveaux',
+                sitephys_physmvc_links: 'Liens'
+            } %}
+                <a href="{{ path(route) }}"{% if current == route %} aria-current="page"{% elseif route == 'learning_index' and current in ['learning_card', 'learning_corrections'] %} aria-current="true"{% elseif route == 'sitephys_physmvc_home' and current == 'learning_subloop' %} aria-current="true"{% elseif route == 'sitephys_physmvc_topic' and current in ['sitephys_physmvc_phys_hometopic', 'sitephys_physmvc_phys_view'] %} aria-current="true"{% endif %}>{{ label }}</a>
+            {% endfor %}
+        </nav>
+    </div>
+</header>
+<main id="contenu" class="site-main">
+    {% block body %}{% endblock %}
+</main>
+<footer class="site-footer">
+    <div class="footer-inner">
+        <p>Physique objets <span>·</span> Méthodes et langages orientés objet pour la physique</p>
+        <p class="version-note">Version locale en cours de reprise</p>
+    </div>
+</footer>
+</body>
+</html>

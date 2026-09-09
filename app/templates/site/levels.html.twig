@@ -1,0 +1,11 @@
+{% extends 'site/layout.html.twig' %}
+{% block title %}Niveaux et symbolisations — Physique objets{% endblock %}
+{% block body %}
+    <div class="page-heading"><p class="eyebrow">Les notations</p><h1>Niveaux et symbolisations</h1><p class="lead">Les définitions et notations utilisées pour décrire les éléments de physique.</p><a href="{{ path('sitephys_physmvc_presentation', {_fragment: 'niveaux'}) }}">Lire la présentation des niveaux</a></div>
+    <nav class="domain-index" aria-label="Accéder à un niveau">{% for level in levels %}<a href="#niveau-{{ level.id }}">{{ level.base }} – {{ level.sub }}</a>{% endfor %}</nav>
+    {% for level in levels %}
+        <section class="reading-section" id="niveau-{{ level.id }}"><h2>Niveau {{ level.base }} – {{ level.sub }}</h2><p class="scientific-text">{{ level.content|nl2br }}</p>
+            {% if symbols[level.id]|default([]) %}<details class="level-details"><summary>Symbolisations ({{ symbols[level.id]|length }})</summary><ul>{% for symbol in symbols[level.id] %}<li>{{ symbol.content|nl2br }}</li>{% endfor %}</ul></details>{% endif %}
+        </section>
+    {% endfor %}
+{% endblock %}

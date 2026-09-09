@@ -1,0 +1,24 @@
+{% extends 'site/layout.html.twig' %}
+{% block title %}{{ topic.title }} — Physique objets{% endblock %}
+{% block body %}
+    <p class="archive-banner">Archive de 2018 · <a href="{{ path('source_index') }}">Consulter les nouveaux recueils</a></p>
+    <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="{{ path('sitephys_physmvc_topic') }}">Domaines et thèmes</a>{% if topic.domain %} / <a href="{{ path('sitephys_physmvc_topic', {_fragment: 'domaine-' ~ topic.domain.id}) }}">{{ topic.domain.title }}</a>{% endif %}</nav>
+    <div class="page-heading">
+        <p class="eyebrow">{{ entries|length }} fiche{% if entries|length != 1 %}s{% endif %}</p><h1>{{ topic.title }}</h1>
+        {% if topic.content %}<div class="lead">{{ topic.content|nl2br }}</div>{% endif %}
+        <p><a href="{{ path('sitephys_physmvc_presentation', {_fragment: 'niveaux'}) }}">Comprendre les niveaux d'analyse</a></p>
+    </div>
+    <div class="entry-list">
+        {% for entry in entries %}
+            {% if loop.first or entry.analysisLevel.base != entries[loop.index0 - 1].analysisLevel.base %}
+                <h2 class="level-heading">Niveau de base {{ entry.analysisLevel.base }}</h2>
+            {% endif %}
+            <article class="entry-summary">
+                <p class="eyebrow">Niveau {{ entry.analysisLevel.base }} – {{ entry.analysisLevel.sub }}{% if entry.analysisLevel.sub == 0 %} · Vue générale{% endif %}</p>
+                <h3><a href="{{ path('sitephys_physmvc_phys_view', {id: entry.id}) }}">{{ entry.title }}</a></h3>
+                {% if entry.content %}<p>{{ entry.content|slice(0, 220) }}{% if entry.content|length > 220 %}…{% endif %}</p>{% endif %}
+            </article>
+        {% else %}<p class="empty-state">Ce thème ne contient pas encore de fiche.</p>{% endfor %}
+    </div>
+    {% include 'site/_references.html.twig' %}
+{% endblock %}

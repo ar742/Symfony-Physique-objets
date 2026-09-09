@@ -1,0 +1,17 @@
+{# Contenu repris de la presentation historique, section niveaux. #}
+<strong>Schéma général</strong> à <strong>simples niveaux</strong> : seuls éléments de <strong>1</strong> à <strong>6</strong> (Cf. schéma ci-dessus.).
+          <br /><br /> <strong>Schéma général</strong> à <strong>doubles niveaux</strong> de <strong>1</strong> à <strong>6</strong> (Cf. schéma ci-dessous.) :<br /><br />
+          <img src="{{ asset('legacy/images/schemaphysmvcglobal.png') }}" class="schema-global" alt="Image de niveaux globaux" title="Schéma global" /><br />
+          <ul><strong>Niveaux</strong> des éléments pour chaque thème : <br />
+            <br />
+            <li><strong>Niveau de base</strong> (<strong>global, nb de 1 à 6</strong>, cf. schéma ci-dessus pour les éléments globaux). </li>
+            <br />
+            <li><strong>Niveau de précision</strong> (<strong>np de 1 à 6</strong> : niveau d'élément dans un élément global, cf. schéma ci-dessus pour les éléments simples de chacun des éléments globaux). </li>
+            <br />
+            <li><strong>Niveau de précision np = 0</strong> : niveau global de l'élément d'un niveau de base nb. </li>
+            <br />
+            <li> <strong>Description formelle des niveaux de précision np</strong> (1 : "exp. in" et Action = "Observation", 2 : "th." et Action = "Formalisation" ou bien 3 : "exp. out" et Action = "Analyse, application") de la chaîne d'entrée : <br />
+            Action (niveau de précision « np ») dans le cadre utilisé de la chaîne d'entrée du niveau de base  « nb » des sorties établies au niveau nb – (np - 1) ou bien si np = 1, (nb - 1) – 3 (si nb > 1, sinon "Entrées générales") et nb – 6. Cette action produit des sorties, entrées du niveau nb – (np + 1) (et (nb + 1) – 1 si np = 3). </li><br />
+            <li> <strong>Description formelle des niveaux de précision np</strong> (4 : "exp. in" et Action = "Observation", 5 : "th." et Action = "Formalisation" ou bien 6 : "exp. out" et Action = "Analyse, application") de la chaîne de retour : <br />
+            Action explicite ou implicite (niveau de précision « np ») dans le cadre utilisé de la chaîne de retour du niveau de base  « nb » des sorties établies au niveau nb – (np - 1). Ses fonctions (méthodes) d'études par rapport au niveau nb – (np - 3)  et ses valeurs (attributs) d'études par rapport au niveau nb – (7 - np) (comparaisons par les évaluations entre les niveaux d'avancée équivalente) peuvent être inchangés, redéfinis, précisés, modifiés, simplifiés, complexifiés, extrapolés... Cette action produit des sorties, entrées du niveau nb – (np + 1) ou nb – 1 si np = 6. </li>
+          </ul>

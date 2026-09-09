@@ -1,0 +1,884 @@
+[
+  {
+    "slug": "systeme-et-grandeurs",
+    "title": "Définir le système et ses grandeurs",
+    "level": "CPGE · Fondations",
+    "summary": "Tracer la frontière du système et distinguer ce qui dépend de sa taille.",
+    "objective": "Écrire sans ambiguïté ce que l’on étudie et ce que l’on mesure.",
+    "prerequisites": [
+      "Unités SI",
+      "Quantité de matière"
+    ],
+    "system": "Un échantillon de gaz dans une enceinte, décrit à l’équilibre.",
+    "conditions": [
+      "Thermodynamique usuelle d’un système macroscopique homogène.",
+      "Effets de surface et interactions à longue portée négligés pour les règles d’extensivité."
+    ],
+    "sections": [
+      {
+        "id": "frontiere",
+        "title": "Une frontière, des échanges",
+        "paragraphs": [
+          "Le système est la portion du monde choisie pour l’étude. Le reste constitue son environnement. Un système fermé n’échange pas de matière ; il peut recevoir de la chaleur et du travail. Un système isolé n’échange ni matière ni énergie.",
+          "Une paroi adiabatique empêche le transfert thermique ; un piston mobile peut néanmoins transmettre du travail. Adiabatique ne signifie donc pas isolé."
+        ],
+        "equations": []
+      },
+      {
+        "id": "variables",
+        "title": "Nommer les grandeurs",
+        "paragraphs": [
+          "P est la pression absolue en pascals, V le volume en mètres cubes, T la température en kelvins, n la quantité de matière en moles et N le nombre de particules. Préciser également la composition du gaz.",
+          "Deux échantillons identiques à la même température et à la même pression ont ensemble deux fois le volume, la quantité de matière et l’énergie interne. Leur température et leur pression restent les mêmes : P et T sont intensives ; V, n, N et U sont extensives."
+        ],
+        "equations": []
+      },
+      {
+        "id": "capacites",
+        "title": "Capacité totale ou capacité rapportée à la matière ?",
+        "paragraphs": [
+          "Les capacités thermiques totales Cᵥ et Cₚ sont extensives, en J·K⁻¹. Les capacités molaires Cᵥ/n et Cₚ/n, ou massiques Cᵥ/m et Cₚ/m, sont intensives dans ce cadre. Toujours préciser laquelle est utilisée."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "On juxtapose deux compartiments identiques contenant chacun 1 mol de gaz à 300 K et 100 kPa, sans mélanger des espèces différentes. Que devient la description globale ?",
+      "steps": [
+        "La quantité de matière totale vaut 2 mol et le volume total est doublé.",
+        "La pression reste 100 kPa et la température 300 K."
+      ],
+      "result": "Additionner la matière et le volume ne conduit pas à additionner les pressions ni les températures."
+    },
+    "checkpoint": {
+      "question": "Une enceinte fermée avec un piston mobile est-elle nécessairement isolée ?",
+      "answer": "Non. Elle peut échanger du travail par le piston et de la chaleur à travers ses parois."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P22",
+        "page": 450,
+        "section": "Définitions et variables"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC3",
+        "page": 287,
+        "section": "Types de système"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC3",
+        "page": 297,
+        "section": "Variables et capacités thermiques"
+      }
+    ],
+    "references": [
+      "definitions",
+      "capacite"
+    ],
+    "corrections": [
+      {
+        "id": "C01",
+        "title": "Pression et capacités totales",
+        "detail": "P figure parmi les grandeurs extensives et Cᵥ, Cₚ parmi les intensives. Ici, P est intensive ; les capacités totales sont extensives. Les capacités molaires ou massiques sont distinguées explicitement.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P22",
+            "page": 450,
+            "section": "Grandeurs extensives / intensives"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC3",
+            "page": 297,
+            "section": "Grandeurs extensives / intensives"
+          }
+        ]
+      }
+    ],
+    "number": 1,
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "gaz-parfait",
+    "title": "Relier pression, volume et température",
+    "level": "CPGE · Modèle",
+    "summary": "Utiliser PV = nRT et passer des moles aux particules.",
+    "objective": "Calculer une pression et annoncer les hypothèses du gaz parfait classique.",
+    "prerequisites": [
+      "Définir le système",
+      "Conversions d’unités"
+    ],
+    "system": "Une quantité fixée d’un gaz dilué à l’équilibre.",
+    "conditions": [
+      "Interactions intermoléculaires et volume propre des molécules négligeables dans l’équation d’état.",
+      "Régime classique non relativiste, loin de la condensation ; T > 0 K et V > 0."
+    ],
+    "sections": [
+      {
+        "id": "modele",
+        "title": "Une équation d’état",
+        "paragraphs": [
+          "Le modèle impose une relation entre P, V, T et la quantité de matière. À n fixé, deux des grandeurs P, V, T suffisent à déterminer la troisième. L’équation d’état ne décrit pas à elle seule le déroulement d’une transformation."
+        ],
+        "equations": [
+          {
+            "id": "gaz",
+            "reading": "Pression fois volume égale n R T, ou N k B T."
+          }
+        ]
+      },
+      {
+        "id": "unites",
+        "title": "Moles, particules et constantes",
+        "paragraphs": [
+          "On utilise N = nNA et R = NAkB. Le SI fixe exactement NA = 6,022 140 76 × 10²³ mol⁻¹ et kB = 1,380 649 × 10⁻²³ J·K⁻¹ ; leur produit donne R = 8,314 462 618 153 24 J·mol⁻¹·K⁻¹.",
+          "Avec P en Pa et V en m³, PV est en joules. Convertir les litres en mètres cubes : 10 L = 0,010 m³. Une température Celsius doit être convertie en kelvins avant le calcul."
+        ],
+        "equations": []
+      },
+      {
+        "id": "limites",
+        "title": "Confronter le modèle",
+        "paragraphs": [
+          "À n et T fixés, le modèle prévoit que doubler V divise P par deux. Pour un gaz réel, mesurer P, V et T permet d’examiner PV/(nRT). Une valeur différente de 1 doit être interprétée avec les incertitudes de mesure, la composition et les conditions d’équilibre."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Quelle pression prévoit le modèle pour n = 1 mol, T = 300 K et V = 10 L ?",
+      "steps": [
+        "V = 0,010 m³.",
+        "P = nRT/V = 249 433,88 Pa."
+      ],
+      "result": "P ≈ 249,434 kPa, soit 2,49434 bar. Ces valeurs sont calculées, pas mesurées."
+    },
+    "checkpoint": {
+      "question": "À température fixée, le volume passe de 10 à 20 L. Quelle pression attend-on ?",
+      "answer": "124,717 kPa pour le même gaz et la même quantité de matière, dans le modèle parfait."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P22",
+        "page": 454,
+        "section": "Gaz parfait : équation d’état"
+      },
+      {
+        "doc": "cpge",
+        "code": "P20",
+        "page": 436,
+        "section": "Pression cinétique"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC3",
+        "page": 299,
+        "section": "Gaz parfait"
+      }
+    ],
+    "references": [
+      "si",
+      "definitions"
+    ],
+    "corrections": [
+      {
+        "id": "C02",
+        "title": "Distinguer n et N",
+        "detail": "Le symbole N désigne parfois la quantité de matière puis le nombre de molécules dans les recueils. Les fiches web adoptent n en mol et N pour le nombre de particules, reliés par N = nNA. Les constantes suivent les valeurs exactes du SI.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P20",
+            "page": 434,
+            "section": "Variables thermodynamiques"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC3",
+            "page": 287,
+            "section": "Variables thermodynamiques"
+          },
+          {
+            "doc": "cpge",
+            "code": "P22",
+            "page": 454,
+            "section": "Constantes du gaz parfait"
+          }
+        ]
+      }
+    ],
+    "number": 2,
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "premier-principe",
+    "title": "Faire le bilan d’énergie",
+    "level": "CPGE · Conservation",
+    "summary": "Fixer les signes de Q et W avant tout calcul.",
+    "objective": "Distinguer une énergie stockée d’un transfert d’énergie.",
+    "prerequisites": [
+      "Système fermé",
+      "Énergie et travail mécanique"
+    ],
+    "system": "Un système fermé dont les variations d’énergie cinétique et potentielle macroscopiques sont négligeables.",
+    "conditions": [
+      "Q et W sont positifs quand ils sont reçus par le système.",
+      "Inclure tous les travaux : le travail de pression n’est pas toujours le seul."
+    ],
+    "sections": [
+      {
+        "id": "bilan",
+        "title": "Le premier principe",
+        "paragraphs": [
+          "U est une fonction d’état : sa variation dépend seulement des états initial et final. Q et W décrivent des échanges au cours d’un chemin et dépendent de ce chemin. Si les énergies macroscopiques varient, le bilan porte sur U + Ecin + Epot."
+        ],
+        "equations": [
+          {
+            "id": "energie",
+            "reading": "Variation de l’énergie interne égale chaleur reçue plus travail reçu."
+          }
+        ]
+      },
+      {
+        "id": "pression",
+        "title": "Le travail de pression",
+        "paragraphs": [
+          "Dans le cas d’une frontière mobile soumise à une pression extérieure uniforme, le travail reçu est l’opposé de l’intégrale de Pext par rapport à V. Une expansion contre une pression positive fournit du travail au milieu extérieur : W est négatif.",
+          "Remplacer Pext par la pression d’équilibre P = nRT/V exige un chemin mécaniquement réversible. Une expansion brutale ou une détente dans le vide ne satisfait pas cette hypothèse."
+        ],
+        "equations": [
+          {
+            "id": "travail",
+            "reading": "Travail reçu égale moins l’intégrale, du volume initial au volume final, de la pression extérieure d V."
+          }
+        ]
+      },
+      {
+        "id": "signes",
+        "title": "Vérifier les signes",
+        "paragraphs": [
+          "Un gaz isolé ne reçoit ni travail ni chaleur ; son énergie totale est conservée. Un gaz adiabatique comprimé peut recevoir du travail et voir son énergie interne augmenter. La chaleur n’est pas une quantité stockée dans le système."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Un système reçoit 500 J de chaleur et fournit 200 J de travail. Quelle est la variation de son énergie interne ?",
+      "steps": [
+        "Q = +500 J et W = −200 J.",
+        "ΔU = 500 − 200 J."
+      ],
+      "result": "ΔU = +300 J."
+    },
+    "checkpoint": {
+      "question": "Pour une détente adiabatique dans le vide, que valent Q, W et ΔU ?",
+      "answer": "Q = 0 ; Pext = 0 donc W = 0 ; ΔU = 0 entre états sans énergie cinétique macroscopique résiduelle."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P22",
+        "page": 450,
+        "section": "Conventions de signe et travail de pression"
+      },
+      {
+        "doc": "cpge",
+        "code": "P22",
+        "page": 452,
+        "section": "Premier principe"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC3",
+        "page": 297,
+        "section": "Premier principe"
+      }
+    ],
+    "references": [
+      "travail"
+    ],
+    "corrections": [],
+    "number": 3,
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "capacites-thermiques",
+    "title": "Chauffer à volume ou à pression constants",
+    "level": "CPGE · Réponse thermique",
+    "summary": "Choisir Cᵥ ou Cₚ et distinguer la capacité totale de la capacité molaire.",
+    "objective": "Calculer un transfert thermique dans un cas simple et contrôler ses unités.",
+    "prerequisites": [
+      "Premier principe",
+      "Enthalpie H = U + PV"
+    ],
+    "system": "Un système fermé, de composition fixée, ne recevant que du travail de pression.",
+    "conditions": [
+      "Les dérivées sont prises à quantité de matière et composition fixées.",
+      "Q = ΔH à pression extérieure constante suppose des états initial et final à l’équilibre mécanique avec cette pression."
+    ],
+    "sections": [
+      {
+        "id": "definitions",
+        "title": "Deux réponses thermiques",
+        "paragraphs": [
+          "Cᵥ décrit la variation de U avec T à V fixé ; Cₚ celle de H avec T à P fixé. Les capacités totales s’expriment en J·K⁻¹. Si la capacité change avec T, il faut intégrer et non multiplier simplement par ΔT."
+        ],
+        "equations": [
+          {
+            "id": "cv",
+            "reading": "C indice V égale la dérivée partielle de U par rapport à T, à V et n fixés."
+          },
+          {
+            "id": "cp",
+            "reading": "C indice P égale la dérivée partielle de H par rapport à T, à P et n fixés."
+          }
+        ]
+      },
+      {
+        "id": "chauffage",
+        "title": "Choisir la contrainte",
+        "paragraphs": [
+          "À volume constant, le travail de pression est nul et Q = ΔU. À pression extérieure constante dans les conditions annoncées, Q = ΔH. Si la capacité appropriée est constante sur l’intervalle, on obtient respectivement Q = CᵥΔT et Q = CₚΔT."
+        ],
+        "equations": []
+      },
+      {
+        "id": "monoatomique",
+        "title": "Le cas du gaz parfait monoatomique",
+        "paragraphs": [
+          "Pour un gaz parfait monoatomique classique dont les excitations électroniques sont négligeables, Cᵥ = 3nR/2 et Cₚ = 5nR/2. Il faut plus de chaleur à pression constante, car l’expansion fournit aussi du travail à l’extérieur."
+        ],
+        "equations": [
+          {
+            "id": "mayer",
+            "reading": "Pour un gaz parfait, C indice P moins C indice V égale n R."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "On chauffe 1 mol d’un gaz parfait monoatomique de 300 à 310 K. Comparer les deux contraintes.",
+      "steps": [
+        "À V constant : Q = (3/2)R × 10 = 124,717 J.",
+        "À P constant : Q = (5/2)R × 10 = 207,862 J ; W = −nRΔT = −83,145 J."
+      ],
+      "result": "Dans les deux cas, ΔU = 124,717 J. À P constant, Q + W retrouve ce résultat."
+    },
+    "checkpoint": {
+      "question": "Cᵥ vaut déjà 12,472 J·K⁻¹ pour tout l’échantillon. Faut-il encore multiplier par sa masse ?",
+      "answer": "Non. ΔU = CᵥΔT si Cᵥ est constant. On multiplie par la masse seulement si l’on utilise une capacité massique en J·kg⁻¹·K⁻¹."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P22",
+        "page": 450,
+        "section": "Capacités thermiques"
+      },
+      {
+        "doc": "cpge",
+        "code": "P22",
+        "page": 454,
+        "section": "Gaz parfait et relation de Mayer"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC3",
+        "page": 299,
+        "section": "Capacités du gaz parfait"
+      }
+    ],
+    "references": [
+      "capacite"
+    ],
+    "corrections": [
+      {
+        "id": "C03",
+        "title": "Ne pas multiplier deux fois par la quantité de matière",
+        "detail": "La ligne adiabatique contient mCᵥΔT alors que Cᵥ est défini comme capacité totale. Avec cette convention, retenir CᵥΔT ; avec une capacité massique cᵥ, retenir mcᵥΔT.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P22",
+            "page": 454,
+            "section": "Transformation adiabatique réversible"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC3",
+            "page": 299,
+            "section": "Transformation adiabatique réversible"
+          }
+        ]
+      }
+    ],
+    "number": 4,
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "detente-isotherme",
+    "title": "Comparer deux détentes du gaz parfait",
+    "level": "CPGE · Application",
+    "summary": "Des mêmes états initial et final peuvent correspondre à des travaux différents.",
+    "objective": "Relier le signe du travail au chemin de transformation.",
+    "prerequisites": [
+      "Gaz parfait",
+      "Premier principe",
+      "Logarithme népérien"
+    ],
+    "system": "n moles de gaz parfait passent de V₁ à V₂, avec T₁ = T₂ = T₀.",
+    "conditions": [
+      "Pour le chemin réversible : température du gaz maintenue à T₀, équilibre mécanique à chaque étape et absence de dissipation.",
+      "Pour la détente libre : enceinte totale rigide et adiabatique, expansion dans une partie initialement vide ; états initial et final à l’équilibre."
+    ],
+    "sections": [
+      {
+        "id": "reversible",
+        "title": "Chemin isotherme réversible",
+        "paragraphs": [
+          "Avec Pext = P = nRT₀/V le long du chemin, l’intégration du travail de pression donne la relation ci-dessous. Pour un gaz parfait, U dépend seulement de T : ΔU = 0 et Q = −W."
+        ],
+        "equations": [
+          {
+            "id": "isotherme",
+            "reading": "Travail réversible reçu égale moins n R T zéro fois le logarithme du rapport V deux sur V un."
+          }
+        ]
+      },
+      {
+        "id": "libre",
+        "title": "Chemin de détente libre",
+        "paragraphs": [
+          "Si le gaz se détend dans le vide d’une enceinte rigide et adiabatique, W = Q = 0. Il n’a pas de pression ni de température globales d’équilibre pendant la relaxation. Pour le gaz parfait, ΔU = 0 implique T₂ = T₁.",
+          "Le logarithme du chemin réversible ne donne donc pas le travail de cette détente libre, même si les états de départ et d’arrivée sont identiques."
+        ],
+        "equations": []
+      },
+      {
+        "id": "comparaison",
+        "title": "Comparer sans confondre",
+        "paragraphs": [
+          "U et S sont des fonctions d’état, contrairement à Q et W. Les deux chemins ont le même ΔU et le même ΔS ; la répartition entre entropie échangée et produite diffère. La fiche sur l’entropie complète ce bilan."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "1 mol à 300 K passe de 10 L à 20 L. Quel est le travail reçu ?",
+      "steps": [
+        "Chemin réversible : W = −R × 300 × ln 2.",
+        "Chemin libre dans le vide : W = 0."
+      ],
+      "result": "Wrév ≈ −1 728,944 J ; Qrév ≈ +1 728,944 J. Pour la détente libre : W = Q = 0."
+    },
+    "checkpoint": {
+      "question": "Dans la compression isotherme réversible inverse, quel est le signe de W ?",
+      "answer": "Positif : ln(V₂/V₁) est négatif lorsque V₂ < V₁, donc W = −nRT₀ ln(V₂/V₁) > 0."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P22",
+        "page": 450,
+        "section": "Travail de pression et convention reçue"
+      },
+      {
+        "doc": "cpge",
+        "code": "P22",
+        "page": 454,
+        "section": "Transformation isotherme"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC3",
+        "page": 299,
+        "section": "Transformation isotherme"
+      }
+    ],
+    "references": [
+      "travail"
+    ],
+    "corrections": [
+      {
+        "id": "C04",
+        "title": "Signe du travail isotherme",
+        "detail": "La ligne W = −Q = nRT₀ ln(V₂/V₁) manque un signe moins devant nRT₀ dans la convention reçue du recueil. Elle doit aussi préciser le caractère réversible du chemin. Une détente libre donne W = 0.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P22",
+            "page": 454,
+            "section": "Transformation isotherme"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC3",
+            "page": 299,
+            "section": "Transformation isotherme"
+          }
+        ]
+      }
+    ],
+    "number": 5,
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "entropie",
+    "title": "Distinguer entropie échangée et produite",
+    "level": "CPGE · Second principe",
+    "summary": "Établir un bilan d’entropie et reconnaître une irréversibilité.",
+    "objective": "Calculer ΔS entre deux états puis interpréter la production d’entropie.",
+    "prerequisites": [
+      "Premier principe",
+      "Détente du gaz parfait"
+    ],
+    "system": "Un système fermé en contact éventuel avec un unique thermostat à température T₀ constante et positive.",
+    "conditions": [
+      "S’exprime en J·K⁻¹ ; Q reste positif quand il est reçu.",
+      "Le bilan avec Q/T₀ concerne ce thermostat. Avec plusieurs réservoirs, sommer leurs contributions Qⱼ/Tⱼ."
+    ],
+    "sections": [
+      {
+        "id": "bilan",
+        "title": "Le second principe",
+        "paragraphs": [
+          "La variation d’entropie se décompose en échange avec l’extérieur et production due aux irréversibilités. Avec un thermostat unique, on adopte le bilan global ci-dessous, incluant la dissipation thermique du contact. La production est positive ou nulle."
+        ],
+        "equations": [
+          {
+            "id": "entropie",
+            "reading": "Variation d’entropie égale Q divisé par T zéro plus l’entropie produite, qui est positive ou nulle."
+          }
+        ]
+      },
+      {
+        "id": "etats",
+        "title": "Calculer une variation d’état",
+        "paragraphs": [
+          "Pour un gaz parfait de quantité fixée et de capacité totale Cᵥ constante, la variation entre deux états d’équilibre s’écrit avec les rapports de températures et de volumes. Elle est valable même lorsque le chemin réel est irréversible."
+        ],
+        "equations": [
+          {
+            "id": "sgp",
+            "reading": "Variation d’entropie égale C indice V fois le logarithme de T deux sur T un, plus n R fois le logarithme de V deux sur V un."
+          }
+        ]
+      },
+      {
+        "id": "irreversibilite",
+        "title": "Lire le résultat",
+        "paragraphs": [
+          "Dans une détente libre adiabatique, Q = 0 mais ΔS > 0 : toute l’augmentation est produite. Dans une détente isotherme réversible, la même variation est entièrement échangée avec le thermostat.",
+          "Une transformation adiabatique réversible est isentropique. Une entropie constante ne suffit pas à prouver la réversibilité : une production peut être compensée par une sortie d’entropie."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Reprendre le doublement du volume d’une mole de gaz parfait à mêmes températures initiale et finale.",
+      "steps": [
+        "ΔS = R ln 2 = 5,763 J·K⁻¹ pour les deux chemins.",
+        "Chemin réversible à 300 K : Q/T₀ = 5,763 J·K⁻¹, donc Sproduite = 0.",
+        "Chemin libre adiabatique : Q/T₀ = 0, donc Sproduite = 5,763 J·K⁻¹."
+      ],
+      "result": "Le bilan d’entropie distingue les chemins alors que ΔU = 0 dans les deux cas."
+    },
+    "checkpoint": {
+      "question": "Un calcul donne Sproduite < 0. Que faut-il vérifier ?",
+      "answer": "Les signes de Q, les températures des réservoirs, la frontière choisie et les hypothèses. Dans le cadre de ce bilan macroscopique, une production négative signale une incohérence."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P22",
+        "page": 452,
+        "section": "Deuxième principe"
+      },
+      {
+        "doc": "cpge",
+        "code": "P22",
+        "page": 454,
+        "section": "Entropie du gaz parfait"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC3",
+        "page": 299,
+        "section": "Transformations isothermes"
+      }
+    ],
+    "references": [
+      "micro"
+    ],
+    "corrections": [
+      {
+        "id": "C05",
+        "title": "Température d’échange et signe de Q/T₀",
+        "detail": "Le bilan avec un thermostat utilise sa température T₀, pas une température du gaz supposée uniforme hors équilibre. Pour une expansion à pression extérieure constante avec T₂ = T₁, W = −Pext(V₂−V₁) et Q = +Pext(V₂−V₁) ; le signe négatif indiqué pour Q/T₀ est corrigé.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P22",
+            "page": 452,
+            "section": "Entropie échangée"
+          },
+          {
+            "doc": "cpge",
+            "code": "P22",
+            "page": 454,
+            "section": "Isotherme irréversible"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC3",
+            "page": 299,
+            "section": "Isotherme irréversible"
+          }
+        ]
+      }
+    ],
+    "number": 6,
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "microcanonique",
+    "title": "Compter les micro-états accessibles",
+    "level": "CPGE / Licence · Physique statistique",
+    "summary": "Relier un dénombrement microscopique à l’entropie.",
+    "objective": "Comprendre ce qui est équiprobable et quelles contraintes définissent l’ensemble.",
+    "prerequisites": [
+      "Probabilités discrètes",
+      "Logarithme népérien"
+    ],
+    "system": "Un système isolé à l’équilibre, avec énergie, volume et nombre de particules fixés.",
+    "conditions": [
+      "On compte ici un ensemble discret de micro-états compatibles avec les contraintes.",
+      "Pour un spectre dense, l’énergie peut être définie dans une petite fenêtre ; en classique, le comptage demande une mesure d’espace des phases correctement normalisée."
+    ],
+    "sections": [
+      {
+        "id": "contraintes",
+        "title": "Définir les états accessibles",
+        "paragraphs": [
+          "Un micro-état décrit précisément la configuration microscopique ; un macro-état rassemble les informations macroscopiques retenues. Plusieurs micro-états peuvent réaliser le même macro-état. Le nombre Ω dépend des contraintes imposées.",
+          "L’équiprobabilité est le postulat microcanonique à l’équilibre. Elle ne dit pas que tous les macro-états sont équiprobables, ni qu’un système hors équilibre parcourt instantanément tous ses états."
+        ],
+        "equations": []
+      },
+      {
+        "id": "comptage",
+        "title": "De Ω à S",
+        "paragraphs": [
+          "Si les Ω micro-états accessibles sont équiprobables, chaque probabilité vaut 1/Ω. L’entropie de Gibbs se réduit alors à S = kB ln Ω. Le logarithme porte sur un nombre sans dimension."
+        ],
+        "equations": [
+          {
+            "id": "micro",
+            "reading": "Probabilité d’un micro-état accessible égale un sur oméga ; entropie égale k B fois logarithme d’oméga."
+          }
+        ]
+      },
+      {
+        "id": "passerelle",
+        "title": "Changer les contraintes",
+        "paragraphs": [
+          "Si l’on met le système en contact thermique avec un grand réservoir, son énergie peut fluctuer. Il faut alors décrire son équilibre par la température du réservoir. C’est l’entrée dans l’ensemble canonique, à volume et nombre de particules fixés."
+        ],
+        "equations": []
+      }
+    ],
+    "example": {
+      "question": "Trois sites distincts ont chacun deux niveaux 0 et ε. L’énergie totale est fixée à ε. Combien de configurations sont accessibles ?",
+      "steps": [
+        "Un seul site est excité. Les configurations sont (ε,0,0), (0,ε,0) et (0,0,ε).",
+        "Ω = 3 ; chaque configuration a la probabilité 1/3."
+      ],
+      "result": "S/kB = ln 3 ≈ 1,098612 ; la probabilité que le premier site soit excité est 1/3."
+    },
+    "checkpoint": {
+      "question": "Peut-on garder ces trois micro-états si l’énergie totale passe à 2ε ?",
+      "answer": "Non. Il faut redéfinir les configurations compatibles : deux sites excités. Le nombre reste 3 dans cet exemple, mais ce ne sont plus les mêmes micro-états."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P20",
+        "page": 438,
+        "section": "Ensemble microcanonique"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC3",
+        "page": 290,
+        "section": "Système isolé — microcanonique"
+      }
+    ],
+    "references": [
+      "micro"
+    ],
+    "corrections": [],
+    "number": 7,
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "boltzmann",
+    "title": "Passer aux probabilités de Boltzmann",
+    "level": "CPGE / Licence · Physique statistique",
+    "summary": "Distinguer la probabilité d’un micro-état de celle d’un niveau dégénéré.",
+    "objective": "Normaliser des probabilités canoniques et calculer une énergie moyenne.",
+    "prerequisites": [
+      "Ensemble microcanonique",
+      "Exponentielle et somme de probabilités"
+    ],
+    "system": "Un système en équilibre thermique avec un grand réservoir à T > 0, à V et N fixés.",
+    "conditions": [
+      "Couplage au réservoir suffisamment faible pour négliger son énergie d’interaction dans le bilan.",
+      "Spectre discret d’énergie utilisé ici ; niveaux indépendants de T pour la dérivée de ln Z."
+    ],
+    "sections": [
+      {
+        "id": "microetats",
+        "title": "Une probabilité par micro-état",
+        "paragraphs": [
+          "Chaque micro-état i d’énergie Eᵢ porte le poids exp(−βEᵢ), avec β = 1/(kBT). La fonction de partition Z est la somme de ces poids ; diviser par Z normalise les probabilités."
+        ],
+        "equations": [
+          {
+            "id": "canon",
+            "reading": "Bêta égale un sur k B T. Z égale la somme sur les micro-états des exponentielles moins bêta E i. p i égale ce poids divisé par Z."
+          }
+        ]
+      },
+      {
+        "id": "degenerescence",
+        "title": "Regrouper les états de même énergie",
+        "paragraphs": [
+          "La dégénérescence gₐ est le nombre de micro-états de même énergie Eₐ. La probabilité du niveau est la somme des probabilités de ses gₐ micro-états. Elle comporte donc un facteur gₐ, absent de la probabilité d’un micro-état individuel. Ce nombre ne désigne pas la population du niveau."
+        ],
+        "equations": [
+          {
+            "id": "niveau",
+            "reading": "Probabilité du niveau a égale g a fois exp moins bêta E a, divisée par la somme sur les niveaux b des g b exp moins bêta E b."
+          }
+        ]
+      },
+      {
+        "id": "energie",
+        "title": "Retrouver une grandeur macroscopique",
+        "paragraphs": [
+          "L’énergie interne U est l’énergie moyenne sur les micro-états. La dérivée de ln Z est prise à N et V fixés dans cet ensemble, et non à potentiel chimique fixé."
+        ],
+        "equations": [
+          {
+            "id": "moyenne",
+            "reading": "U égale la somme des p i E i, égale moins la dérivée partielle de ln Z par rapport à bêta à N et V fixés."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "Un système possède deux niveaux non dégénérés, 0 et ε. À une température telle que ε/(kBT) = 1, quelle est la probabilité du niveau excité ?",
+      "steps": [
+        "Les poids valent 1 et exp(−1). Z = 1 + exp(−1) ≈ 1,367879.",
+        "Pexc = exp(−1)/Z = 1/(1 + exp(1))."
+      ],
+      "result": "Pexc ≈ 0,268941 ; Pfond ≈ 0,731059 ; U/ε ≈ 0,268941."
+    },
+    "checkpoint": {
+      "question": "À très haute température, la probabilité du niveau excité tend-elle toujours vers 1/2 ?",
+      "answer": "Pour ces deux niveaux non dégénérés, oui. Si le niveau excité a une dégénérescence 2 et le fondamental 1, elle tend vers 2/3."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P20",
+        "page": 435,
+        "section": "Probabilité et fonction de partition"
+      },
+      {
+        "doc": "cpge",
+        "code": "P20",
+        "page": 438,
+        "section": "Ensemble canonique"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC3",
+        "page": 288,
+        "section": "Dégénérescence et probabilités"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC3",
+        "page": 290,
+        "section": "Ensemble canonique"
+      }
+    ],
+    "references": [
+      "canon"
+    ],
+    "corrections": [
+      {
+        "id": "C06",
+        "title": "Micro-état, niveau et dégénérescence",
+        "detail": "Les formules avec g(E) sont ici attribuées à la probabilité d’un niveau d’énergie. Pour un micro-état individuel, pᵢ = exp(−βEᵢ)/Z. g compte des états de même énergie, et non des particules présentes.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P20",
+            "page": 435,
+            "section": "Dégénérescence et probabilité"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC3",
+            "page": 288,
+            "section": "Dégénérescence et probabilité"
+          }
+        ]
+      },
+      {
+        "id": "C07",
+        "title": "Variables fixées dans le canonique",
+        "detail": "La dérivée de ln Z servant à calculer U est prise à N,V fixés. Les indices μ,V des lignes canoniques sont remplacés par N,V ; fixer le potentiel chimique relève d’un autre ensemble.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P20",
+            "page": 438,
+            "section": "Énergie moyenne canonique"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC3",
+            "page": 290,
+            "section": "Énergie moyenne canonique"
+          }
+        ]
+      }
+    ],
+    "number": 8,
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  }
+]

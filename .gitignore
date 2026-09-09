@@ -1,0 +1,15 @@
+/.env
+/app/.env.local
+/app/.env.*.local
+/app/vendor/
+/app/var/
+/app/.installation-pack-ok
+/app/public/assets/
+/app/assets/vendor/
+*.sql
+*.sql.gz
+/sources/*.pdf
+/app/.phpunit.cache/
+/app/config/reference.php
+/sauvegardes/
+*.log

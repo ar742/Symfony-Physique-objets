@@ -1,0 +1,18 @@
+#!/bin/sh
+set -eu
+
+cd /var/www/html
+
+if [ ! -f composer.json ] || [ ! -f composer.lock ]; then
+    echo 'Les fichiers composer.json et composer.lock du projet clone sont requis.' >&2
+    exit 1
+fi
+
+echo 'Installation des versions verrouillees dans composer.lock...'
+composer install --no-interaction --prefer-dist
+mkdir -p var/cache var/log
+chown -R www-data:www-data var
+composer check-platform-reqs
+php bin/console lint:twig templates
+php bin/console about
+printf '\nDependances installees. Suivre le README pour demarrer MySQL et appliquer les migrations.\n'

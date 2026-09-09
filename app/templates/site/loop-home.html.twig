@@ -1,0 +1,30 @@
+{% extends 'site/layout.html.twig' %}
+{% block title %}La boucle d’étude — Physique objets{% endblock %}
+{% block body %}
+    <div class="loop-heading"><p class="eyebrow">Observer · Modéliser · Confronter</p><h1>Explorer la physique par sa boucle d’étude</h1><p class="lead">Six étapes pour relier les observations, les modèles et leurs applications.</p></div>
+    <section class="interactive-loop" aria-labelledby="boucle-titre">
+        <div class="loop-toolbar"><h2 id="boucle-titre">La boucle générale</h2><a href="{{ path('sitephys_physmvc_presentation', {_fragment: 'niveaux'}) }}">Voir le schéma d’origine</a></div>
+        {% include 'site/_loop.html.twig' %}
+        <p class="loop-help">Cliquez sur une étape pour la parcourir. Survolez-la ou utilisez Tab pour son explication. Sur mobile, touchez « i ». Échap ferme l’info-bulle.</p>
+    </section>
+    <section class="source-entry-strip" aria-label="Documents de référence"><div><h2>Les recueils d’Aurélien Roudier</h2><p>Fiches CPGE et physique théorique : accédez directement aux pages des documents.</p></div><a class="primary-link" href="{{ path('source_index') }}">Parcourir les recueils</a></section>
+    <div class="guide-heading"><p class="eyebrow">Un premier parcours de lecture</p><h2>Thermodynamique et physique statistique</h2><p>Explorez les 36 sous-étapes de la méthode et les huit premières fiches web : hypothèses, formules, exemples calculés et sources précises.</p><a class="primary-link" href="{{ path('learning_index') }}">Lire les huit fiches</a> <a href="{{ path('learning_corrections') }}">Voir les corrections documentées</a></div>
+    {% for step in steps %}
+        <section class="guide-step tone-{{ step.color }}" id="etape-{{ step.id }}" tabindex="-1">
+            <div class="guide-step-heading"><span class="step-number">0{{ step.id }}</span><div><p class="eyebrow">{{ step.subtitle }}</p><h2>{{ step.heading }}</h2></div></div>
+            <p>{{ step.text }}</p><p class="deliverable"><strong>À obtenir :</strong> {{ step.deliverable }}</p>
+            <p><a class="primary-link" href="{{ path('learning_subloop', {base: step.id}) }}">Explorer la sous-boucle {{ step.id }} · six sous-étapes</a></p>
+            <ul class="source-pointers">{% for source in step.sources %}<li><a href="{{ path('source_document', {key: source.doc}) }}#page={{ source.page }}">{{ source.label }} <span>{{ source.doc == 'cpge' ? 'CPGE' : 'Physique théorique' }} · {{ source.code }} · p. {{ source.page }}</span></a></li>{% endfor %}</ul>
+            <div class="step-actions"><a href="{{ path('source_index', {_fragment: 'recueil-' ~ (step.id < 4 ? 'cpge' : 'theorique')}) }}">Situer ces fiches dans le recueil</a><a href="#boucle-titre">Revenir à la boucle</a></div>
+        </section>
+    {% endfor %}
+    <section class="external-selection" id="ressources"><h2>Compléments de référence</h2><p>Des ressources institutionnelles pour les unités, les définitions et les prolongements des cours.</p>
+        <div class="topic-grid">
+            <a class="topic-card" href="https://www.bipm.org/fr/publications/si-brochure" rel="noopener noreferrer"><span class="eyebrow">BIPM · Français</span><h3>Unités et conventions</h3><p>Le Système international d’unités et sa brochure de référence.</p></a>
+            <a class="topic-card" href="https://ocw.mit.edu/courses/8-044-statistical-physics-i-spring-2013/" rel="noopener noreferrer"><span class="eyebrow">MIT OpenCourseWare · Anglais</span><h3>Physique statistique</h3><p>Cours, notes et exercices pour approfondir la thermodynamique et la description statistique.</p></a>
+            <a class="topic-card" href="https://ocw.mit.edu/courses/8-04-quantum-physics-i-spring-2016/" rel="noopener noreferrer"><span class="eyebrow">MIT OpenCourseWare · Anglais</span><h3>Physique quantique</h3><p>Observations fondatrices, mécanique ondulatoire et équation de Schrödinger.</p></a>
+            <a class="topic-card" href="https://pdg.lbl.gov/" rel="noopener noreferrer"><span class="eyebrow">Particle Data Group · Anglais</span><h3>Particules et cosmologie</h3><p>Tables, revues et résultats de référence pour les prolongements contemporains.</p></a>
+        </div>
+    </section>
+    <p class="archive-note">L’<a href="{{ path('sitephys_physmvc_topic') }}">ancien catalogue de 2018</a> reste consultable comme archive.</p>
+{% endblock %}

@@ -1,0 +1,5 @@
+<ul class="precise-sources">
+    {% for source in sources %}
+        <li><a href="{{ path('source_document', {key: source.doc}) }}#page={{ source.page }}">{{ source.document_title }} · {{ source.code }} · p. {{ source.page }}</a><span>{{ source.section }}</span></li>
+    {% endfor %}
+</ul>

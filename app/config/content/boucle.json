@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "title": "Observer",
+    "subtitle": "Entrées expérimentales",
+    "color": "blue",
+    "tip": "Définir le système, les grandeurs observables et le protocole. Le clic ouvre cette étape.",
+    "heading": "Définir ce que l’on observe",
+    "text": "Délimiter le système et son environnement, choisir les grandeurs à mesurer, préciser les unités et les conditions de l’expérience.",
+    "deliverable": "Un système défini, des variables nommées et un protocole explicite.",
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P24",
+        "label": "Thermométrie"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC3",
+        "label": "Systèmes et variables thermodynamiques"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Modéliser",
+    "subtitle": "Théorie",
+    "color": "orange",
+    "tip": "Choisir les hypothèses, les lois et les outils mathématiques. Le modèle doit annoncer ce qu’il permet de prévoir.",
+    "heading": "Formuler les hypothèses et les lois",
+    "text": "Distinguer les définitions, les hypothèses et les résultats du modèle. Relier les grandeurs observées aux variables et aux équations, en précisant leur domaine de validité.",
+    "deliverable": "Un modèle explicite et des prédictions que l’on peut examiner.",
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P22",
+        "label": "Thermodynamique"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC3",
+        "label": "Physique statistique"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Confronter",
+    "subtitle": "Sorties expérimentales",
+    "color": "green",
+    "tip": "Comparer les résultats attendus et obtenus, avec leurs unités et leurs incertitudes.",
+    "heading": "Comparer les prédictions aux résultats",
+    "text": "Rassembler les résultats de calcul, de simulation ou d’expérience. Comparer les ordres de grandeur et vérifier les conditions dans lesquelles cette comparaison a un sens.",
+    "deliverable": "Une comparaison documentée entre prédictions et observations.",
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P20",
+        "label": "Physique statistique"
+      },
+      {
+        "doc": "cpge",
+        "code": "P23",
+        "label": "Transferts et diffusion"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Analyser les écarts",
+    "subtitle": "Retour · observations",
+    "color": "blue",
+    "tip": "Identifier les écarts et leur origine possible : mesure, calcul, protocole ou hypothèse.",
+    "heading": "Interpréter les différences",
+    "text": "Distinguer une erreur de mesure, une approximation de calcul et une limite du modèle. Conserver les conditions de l’essai et les éléments qui permettent de reproduire l’analyse.",
+    "deliverable": "Des écarts caractérisés et des hypothèses à examiner.",
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P24",
+        "label": "Mesures et thermométrie"
+      },
+      {
+        "doc": "cpge",
+        "code": "P22",
+        "label": "Retour aux définitions thermodynamiques"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Réviser le modèle",
+    "subtitle": "Retour · théorie",
+    "color": "orange",
+    "tip": "Réexaminer les hypothèses et changer de description lorsque le cadre utilisé ne suffit plus.",
+    "heading": "Préciser ou changer le cadre théorique",
+    "text": "Réviser une hypothèse, préciser une approximation ou adopter une description plus adaptée. Le passage de la thermodynamique à la physique statistique fournit un exemple de changement de point de vue.",
+    "deliverable": "Un cadre révisé, avec les raisons de ce changement.",
+    "sources": [
+      {
+        "doc": "theorique",
+        "code": "PC3",
+        "label": "Approche statistique"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC4",
+        "label": "Prolongement quantique"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Reprendre l’expérience",
+    "subtitle": "Retour · applications",
+    "color": "green",
+    "tip": "Déduire un nouvel essai du cadre révisé, puis revenir aux observations. La boucle peut recommencer.",
+    "heading": "Préparer une nouvelle confrontation",
+    "text": "Choisir une nouvelle situation, adapter le protocole et définir les résultats attendus. Noter ce qui a changé pour pouvoir comparer les deux passages dans la boucle.",
+    "deliverable": "Un nouvel essai et une trace des modifications apportées.",
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P23",
+        "label": "Transferts et diffusion"
+      },
+      {
+        "doc": "cpge",
+        "code": "P2",
+        "label": "Autre terrain d’étude : les oscillateurs"
+      }
+    ]
+  }
+]

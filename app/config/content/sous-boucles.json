@@ -1,0 +1,464 @@
+[
+  {
+    "base": 1,
+    "steps": [
+      {
+        "id": 1,
+        "coordinate": "1.1",
+        "title": "Délimiter",
+        "subtitle": "Observation",
+        "color": "blue",
+        "tip": "Choisir le gaz comme système et identifier le piston, les parois et le thermostat comme éléments de son environnement.",
+        "text": "Choisir le gaz comme système et identifier le piston, les parois et le thermostat comme éléments de son environnement.",
+        "deliverable": "Un dessin de la frontière avec les échanges permis.",
+        "card": "systeme-et-grandeurs",
+        "section": "frontiere"
+      },
+      {
+        "id": 2,
+        "coordinate": "1.2",
+        "title": "Nommer les variables",
+        "subtitle": "Formalisation",
+        "color": "orange",
+        "tip": "Écrire P, V, T, n et N avec leurs unités, puis distinguer grandeurs totales et grandeurs intensives.",
+        "text": "Écrire P, V, T, n et N avec leurs unités, puis distinguer grandeurs totales et grandeurs intensives.",
+        "deliverable": "Un tableau de variables avec unités et rôle de chaque capteur.",
+        "card": "systeme-et-grandeurs",
+        "section": "variables"
+      },
+      {
+        "id": 3,
+        "coordinate": "1.3",
+        "title": "Préparer les relevés",
+        "subtitle": "Application / analyse",
+        "color": "green",
+        "tip": "Choisir plusieurs volumes, attendre la stabilisation de la température et noter les pressions absolues correspondantes.",
+        "text": "Choisir plusieurs volumes, attendre la stabilisation de la température et noter les pressions absolues correspondantes.",
+        "deliverable": "Un protocole et des emplacements pour les mesures ; aucune valeur simulée présentée comme mesurée.",
+        "card": "gaz-parfait",
+        "section": "limites"
+      },
+      {
+        "id": 4,
+        "coordinate": "1.4",
+        "title": "Vérifier les unités",
+        "subtitle": "Retour · observation",
+        "color": "blue",
+        "tip": "Contrôler le zéro du capteur et les conversions : pression absolue, litres en mètres cubes, degrés Celsius en kelvins.",
+        "text": "Contrôler le zéro du capteur et les conversions : pression absolue, litres en mètres cubes, degrés Celsius en kelvins.",
+        "deliverable": "La liste des corrections instrumentales et conversions appliquées.",
+        "card": "gaz-parfait",
+        "section": "unites"
+      },
+      {
+        "id": 5,
+        "coordinate": "1.5",
+        "title": "Préciser la frontière",
+        "subtitle": "Retour · formalisation",
+        "color": "orange",
+        "tip": "Réexaminer si les parois sont réellement adiabatiques et si le déplacement du piston permet un transfert de travail.",
+        "text": "Réexaminer si les parois sont réellement adiabatiques et si le déplacement du piston permet un transfert de travail.",
+        "deliverable": "Une frontière révisée et les échanges retenus dans le bilan.",
+        "card": "premier-principe",
+        "section": "pression"
+      },
+      {
+        "id": 6,
+        "coordinate": "1.6",
+        "title": "Relever à nouveau",
+        "subtitle": "Retour · application / analyse",
+        "color": "green",
+        "tip": "Répéter les relevés dans les mêmes conditions pour repérer une dérive ou un manque de stabilisation.",
+        "text": "Répéter les relevés dans les mêmes conditions pour repérer une dérive ou un manque de stabilisation.",
+        "deliverable": "Deux séries comparables, leurs conditions et les incertitudes des mesures.",
+        "card": "gaz-parfait",
+        "section": "limites"
+      }
+    ]
+  },
+  {
+    "base": 2,
+    "steps": [
+      {
+        "id": 1,
+        "coordinate": "2.1",
+        "title": "Choisir le cadre",
+        "subtitle": "Observation",
+        "color": "blue",
+        "tip": "Repérer les contraintes connues : quantité de matière fixée, équilibre et gaz suffisamment dilué pour un premier modèle classique.",
+        "text": "Repérer les contraintes connues : quantité de matière fixée, équilibre et gaz suffisamment dilué pour un premier modèle classique.",
+        "deliverable": "Les données disponibles et ce que l’on suppose.",
+        "card": "gaz-parfait",
+        "section": "conditions"
+      },
+      {
+        "id": 2,
+        "coordinate": "2.2",
+        "title": "Écrire les lois",
+        "subtitle": "Formalisation",
+        "color": "orange",
+        "tip": "Associer PV = nRT au bilan ΔU = Q + W ; préciser que ces deux relations ne jouent pas le même rôle.",
+        "text": "Associer PV = nRT au bilan ΔU = Q + W ; préciser que ces deux relations ne jouent pas le même rôle.",
+        "deliverable": "Une équation d’état et une loi de conservation, avec leurs conventions.",
+        "card": "premier-principe",
+        "section": "bilan"
+      },
+      {
+        "id": 3,
+        "coordinate": "2.3",
+        "title": "Prévoir la détente",
+        "subtitle": "Application / analyse",
+        "color": "green",
+        "tip": "Déduire la pression finale et le travail reçu lors d’un doublement réversible du volume à température constante.",
+        "text": "Déduire la pression finale et le travail reçu lors d’un doublement réversible du volume à température constante.",
+        "deliverable": "Une prédiction chiffrée avant toute comparaison expérimentale.",
+        "card": "detente-isotherme",
+        "section": "exemple"
+      },
+      {
+        "id": 4,
+        "coordinate": "2.4",
+        "title": "Tester les limites",
+        "subtitle": "Retour · observation",
+        "color": "blue",
+        "tip": "Vérifier que W s’annule pour V₂ = V₁ et devient positif pour la compression inverse.",
+        "text": "Vérifier que W s’annule pour V₂ = V₁ et devient positif pour la compression inverse.",
+        "deliverable": "Les signes et les cas limites du calcul.",
+        "card": "detente-isotherme",
+        "section": "controle"
+      },
+      {
+        "id": 5,
+        "coordinate": "2.5",
+        "title": "Revoir le chemin",
+        "subtitle": "Retour · formalisation",
+        "color": "orange",
+        "tip": "Distinguer isotherme réversible et détente libre : les mêmes températures initiale et finale ne suffisent pas à déterminer W.",
+        "text": "Distinguer isotherme réversible et détente libre : les mêmes températures initiale et finale ne suffisent pas à déterminer W.",
+        "deliverable": "Le chemin auquel s’applique chaque formule.",
+        "card": "detente-isotherme",
+        "section": "libre"
+      },
+      {
+        "id": 6,
+        "coordinate": "2.6",
+        "title": "Recalculer",
+        "subtitle": "Retour · application / analyse",
+        "color": "green",
+        "tip": "Reprendre le bilan du gaz puis celui du thermostat avec le chemin choisi.",
+        "text": "Reprendre le bilan du gaz puis celui du thermostat avec le chemin choisi.",
+        "deliverable": "Des prédictions cohérentes pour W, Q et ΔS.",
+        "card": "entropie",
+        "section": "exemple"
+      }
+    ]
+  },
+  {
+    "base": 3,
+    "steps": [
+      {
+        "id": 1,
+        "coordinate": "3.1",
+        "title": "Rassembler les résultats",
+        "subtitle": "Observation",
+        "color": "blue",
+        "tip": "Séparer les valeurs calculées, les valeurs mesurées et les constantes utilisées ; conserver les unités de chacune.",
+        "text": "Séparer les valeurs calculées, les valeurs mesurées et les constantes utilisées ; conserver les unités de chacune.",
+        "deliverable": "Un tableau distinguant les origines des nombres.",
+        "card": "gaz-parfait",
+        "section": "exemple"
+      },
+      {
+        "id": 2,
+        "coordinate": "3.2",
+        "title": "Choisir un indicateur",
+        "subtitle": "Formalisation",
+        "color": "orange",
+        "tip": "Examiner PV/(nRT), attendu égal à 1 dans le modèle, en tenant compte des incertitudes et de leurs éventuelles corrélations.",
+        "text": "Examiner PV/(nRT), attendu égal à 1 dans le modèle, en tenant compte des incertitudes et de leurs éventuelles corrélations.",
+        "deliverable": "Une définition explicite de l’écart au modèle.",
+        "card": "gaz-parfait",
+        "section": "limites"
+      },
+      {
+        "id": 3,
+        "coordinate": "3.3",
+        "title": "Comparer les bilans",
+        "subtitle": "Application / analyse",
+        "color": "green",
+        "tip": "Comparer chauffage isochore et isobare : le supplément de chaleur reçu dans le second cas accompagne le travail fourni.",
+        "text": "Comparer chauffage isochore et isobare : le supplément de chaleur reçu dans le second cas accompagne le travail fourni.",
+        "deliverable": "Les valeurs de Q, W et ΔU pour chaque transformation.",
+        "card": "capacites-thermiques",
+        "section": "exemple"
+      },
+      {
+        "id": 4,
+        "coordinate": "3.4",
+        "title": "Repérer une anomalie",
+        "subtitle": "Retour · observation",
+        "color": "blue",
+        "tip": "Vérifier si un signe inattendu vient d’une confusion entre travail reçu et travail fourni.",
+        "text": "Vérifier si un signe inattendu vient d’une confusion entre travail reçu et travail fourni.",
+        "deliverable": "Le bilan écrit du point de vue du système choisi.",
+        "card": "premier-principe",
+        "section": "signes"
+      },
+      {
+        "id": 5,
+        "coordinate": "3.5",
+        "title": "Interpréter l’écart",
+        "subtitle": "Retour · formalisation",
+        "color": "orange",
+        "tip": "Distinguer variation d’entropie, échange avec le thermostat et production liée aux irréversibilités.",
+        "text": "Distinguer variation d’entropie, échange avec le thermostat et production liée aux irréversibilités.",
+        "deliverable": "Le calcul séparé des trois termes du bilan entropique.",
+        "card": "entropie",
+        "section": "bilan"
+      },
+      {
+        "id": 6,
+        "coordinate": "3.6",
+        "title": "Conclure la comparaison",
+        "subtitle": "Retour · application / analyse",
+        "color": "green",
+        "tip": "Vérifier que les limites du modèle et du protocole permettent réellement la conclusion envisagée.",
+        "text": "Vérifier que les limites du modèle et du protocole permettent réellement la conclusion envisagée.",
+        "deliverable": "Une conclusion bornée aux conditions étudiées et aux incertitudes annoncées.",
+        "card": "gaz-parfait",
+        "section": "limites"
+      }
+    ]
+  },
+  {
+    "base": 4,
+    "steps": [
+      {
+        "id": 1,
+        "coordinate": "4.1",
+        "title": "Localiser l’écart",
+        "subtitle": "Observation",
+        "color": "blue",
+        "tip": "Identifier la grandeur en désaccord : pression finale, chaleur, travail ou entropie. Retrouver sa définition et son unité.",
+        "text": "Identifier la grandeur en désaccord : pression finale, chaleur, travail ou entropie. Retrouver sa définition et son unité.",
+        "deliverable": "La ligne précise du résultat à examiner.",
+        "card": "systeme-et-grandeurs",
+        "section": "variables"
+      },
+      {
+        "id": 2,
+        "coordinate": "4.2",
+        "title": "Vérifier les dimensions",
+        "subtitle": "Formalisation",
+        "color": "orange",
+        "tip": "Contrôler si une capacité totale a été multipliée à tort par la masse, ou si une capacité molaire a été utilisée sans n.",
+        "text": "Contrôler si une capacité totale a été multipliée à tort par la masse, ou si une capacité molaire a été utilisée sans n.",
+        "deliverable": "Un bilan dont chaque terme porte la bonne dimension.",
+        "card": "capacites-thermiques",
+        "section": "controle"
+      },
+      {
+        "id": 3,
+        "coordinate": "4.3",
+        "title": "Refaire un calcul",
+        "subtitle": "Application / analyse",
+        "color": "green",
+        "tip": "Recalculer le travail de détente à partir de −∫Pext dV et vérifier son signe avant l’application numérique.",
+        "text": "Recalculer le travail de détente à partir de −∫Pext dV et vérifier son signe avant l’application numérique.",
+        "deliverable": "Un calcul reproductible à partir des données initiales.",
+        "card": "detente-isotherme",
+        "section": "reversible"
+      },
+      {
+        "id": 4,
+        "coordinate": "4.4",
+        "title": "Relire la référence",
+        "subtitle": "Retour · observation",
+        "color": "blue",
+        "tip": "Comparer la formule utilisée au PDF et à la correction documentée ; distinguer erreur de transcription et désaccord physique.",
+        "text": "Comparer la formule utilisée au PDF et à la correction documentée ; distinguer erreur de transcription et désaccord physique.",
+        "deliverable": "La référence de page et la décision de correction.",
+        "card": "detente-isotherme",
+        "section": "corrections"
+      },
+      {
+        "id": 5,
+        "coordinate": "4.5",
+        "title": "Identifier l’hypothèse",
+        "subtitle": "Retour · formalisation",
+        "color": "orange",
+        "tip": "Examiner si l’équilibre mécanique et thermique était suffisamment proche des conditions du chemin réversible.",
+        "text": "Examiner si l’équilibre mécanique et thermique était suffisamment proche des conditions du chemin réversible.",
+        "deliverable": "Une hypothèse mise à l’épreuve avec ses éléments observables.",
+        "card": "detente-isotherme",
+        "section": "conditions"
+      },
+      {
+        "id": 6,
+        "coordinate": "4.6",
+        "title": "Tester l’explication",
+        "subtitle": "Retour · application / analyse",
+        "color": "green",
+        "tip": "Utiliser le bilan d’entropie pour vérifier si l’interprétation proposée reste compatible avec une production positive ou nulle.",
+        "text": "Utiliser le bilan d’entropie pour vérifier si l’interprétation proposée reste compatible avec une production positive ou nulle.",
+        "deliverable": "Une explication compatible avec les deux principes, ou une nouvelle question.",
+        "card": "entropie",
+        "section": "controle"
+      }
+    ]
+  },
+  {
+    "base": 5,
+    "steps": [
+      {
+        "id": 1,
+        "coordinate": "5.1",
+        "title": "Changer d’échelle",
+        "subtitle": "Observation",
+        "color": "blue",
+        "tip": "Demander quelles configurations microscopiques sont compatibles avec les contraintes macroscopiques.",
+        "text": "Demander quelles configurations microscopiques sont compatibles avec les contraintes macroscopiques.",
+        "deliverable": "Une description des micro-états et des contraintes retenues.",
+        "card": "microcanonique",
+        "section": "contraintes"
+      },
+      {
+        "id": 2,
+        "coordinate": "5.2",
+        "title": "Compter les états",
+        "subtitle": "Formalisation",
+        "color": "orange",
+        "tip": "Définir Ω avant d’appliquer l’équiprobabilité ; distinguer un micro-état d’un niveau d’énergie.",
+        "text": "Définir Ω avant d’appliquer l’équiprobabilité ; distinguer un micro-état d’un niveau d’énergie.",
+        "deliverable": "Un dénombrement explicite sur un exemple fini.",
+        "card": "microcanonique",
+        "section": "comptage"
+      },
+      {
+        "id": 3,
+        "coordinate": "5.3",
+        "title": "Calculer une moyenne",
+        "subtitle": "Application / analyse",
+        "color": "green",
+        "tip": "Mettre le système au contact d’un réservoir, normaliser les poids de Boltzmann puis calculer l’énergie moyenne.",
+        "text": "Mettre le système au contact d’un réservoir, normaliser les poids de Boltzmann puis calculer l’énergie moyenne.",
+        "deliverable": "Z, les probabilités et la moyenne obtenue.",
+        "card": "boltzmann",
+        "section": "energie"
+      },
+      {
+        "id": 4,
+        "coordinate": "5.4",
+        "title": "Contrôler les poids",
+        "subtitle": "Retour · observation",
+        "color": "blue",
+        "tip": "Vérifier que la somme des probabilités vaut 1 et traiter la dégénérescence comme un nombre d’états.",
+        "text": "Vérifier que la somme des probabilités vaut 1 et traiter la dégénérescence comme un nombre d’états.",
+        "deliverable": "Une normalisation vérifiée et un comptage sans double emploi.",
+        "card": "boltzmann",
+        "section": "degenerescence"
+      },
+      {
+        "id": 5,
+        "coordinate": "5.5",
+        "title": "Choisir l’ensemble",
+        "subtitle": "Retour · formalisation",
+        "color": "orange",
+        "tip": "Fixer E,V,N pour le microcanonique ou T,V,N pour le canonique ; ne pas mélanger les variables contraintes.",
+        "text": "Fixer E,V,N pour le microcanonique ou T,V,N pour le canonique ; ne pas mélanger les variables contraintes.",
+        "deliverable": "L’ensemble statistique justifié par les échanges possibles.",
+        "card": "microcanonique",
+        "section": "passerelle"
+      },
+      {
+        "id": 6,
+        "coordinate": "5.6",
+        "title": "Relier à l’observable",
+        "subtitle": "Retour · application / analyse",
+        "color": "green",
+        "tip": "Interpréter la probabilité du niveau excité et l’énergie moyenne, puis vérifier les limites de température.",
+        "text": "Interpréter la probabilité du niveau excité et l’énergie moyenne, puis vérifier les limites de température.",
+        "deliverable": "Une prédiction microscopique reliée à une grandeur macroscopique.",
+        "card": "boltzmann",
+        "section": "controle"
+      }
+    ]
+  },
+  {
+    "base": 6,
+    "steps": [
+      {
+        "id": 1,
+        "coordinate": "6.1",
+        "title": "Choisir un nouvel essai",
+        "subtitle": "Observation",
+        "color": "blue",
+        "tip": "Définir une variation contrôlée : volume, température ou contrainte de chauffage, en précisant ce qui reste fixé.",
+        "text": "Définir une variation contrôlée : volume, température ou contrainte de chauffage, en précisant ce qui reste fixé.",
+        "deliverable": "Une seule modification clairement identifiée pour la comparaison.",
+        "card": "capacites-thermiques",
+        "section": "chauffage"
+      },
+      {
+        "id": 2,
+        "coordinate": "6.2",
+        "title": "Annoncer la prédiction",
+        "subtitle": "Formalisation",
+        "color": "orange",
+        "tip": "Calculer le résultat attendu avec le cadre révisé avant le nouvel essai.",
+        "text": "Calculer le résultat attendu avec le cadre révisé avant le nouvel essai.",
+        "deliverable": "Une prédiction datée avec les hypothèses et les paramètres.",
+        "card": "gaz-parfait",
+        "section": "modele"
+      },
+      {
+        "id": 3,
+        "coordinate": "6.3",
+        "title": "Comparer les chemins",
+        "subtitle": "Application / analyse",
+        "color": "green",
+        "tip": "Étudier les chemins réversible et libre comme deux modèles distincts, puis comparer les fonctions d’état et les échanges.",
+        "text": "Étudier les chemins réversible et libre comme deux modèles distincts, puis comparer les fonctions d’état et les échanges.",
+        "deliverable": "Un tableau des deux bilans énergétiques et entropiques.",
+        "card": "entropie",
+        "section": "exemple"
+      },
+      {
+        "id": 4,
+        "coordinate": "6.4",
+        "title": "Conserver la trace",
+        "subtitle": "Retour · observation",
+        "color": "blue",
+        "tip": "Noter les paramètres, unités, résultats, corrections et conditions de répétition pour rendre la comparaison reproductible.",
+        "text": "Noter les paramètres, unités, résultats, corrections et conditions de répétition pour rendre la comparaison reproductible.",
+        "deliverable": "Une fiche d’essai permettant de distinguer données observées et calculées.",
+        "card": "gaz-parfait",
+        "section": "unites"
+      },
+      {
+        "id": 5,
+        "coordinate": "6.5",
+        "title": "Évaluer la révision",
+        "subtitle": "Retour · formalisation",
+        "color": "orange",
+        "tip": "Vérifier si la nouvelle description explique le résultat et respecte le domaine de validité annoncé.",
+        "text": "Vérifier si la nouvelle description explique le résultat et respecte le domaine de validité annoncé.",
+        "deliverable": "Ce que la révision explique et ce qui reste à examiner.",
+        "card": "boltzmann",
+        "section": "conditions"
+      },
+      {
+        "id": 6,
+        "coordinate": "6.6",
+        "title": "Relancer la boucle",
+        "subtitle": "Retour · application / analyse",
+        "color": "green",
+        "tip": "Revenir à la définition du système avec les nouvelles questions : autres échanges, autre contrainte ou autre échelle.",
+        "text": "Revenir à la définition du système avec les nouvelles questions : autres échanges, autre contrainte ou autre échelle.",
+        "deliverable": "Une nouvelle question d’observation et une frontière explicitée.",
+        "card": "systeme-et-grandeurs",
+        "section": "frontiere"
+      }
+    ]
+  }
+]

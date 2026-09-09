@@ -1,0 +1,25 @@
+{% set tip_prefix = tip_prefix|default('loop-tip-') %}
+{% set anchor_prefix = anchor_prefix|default('etape-') %}
+{% set marker_id = marker_id|default('flow-arrow') %}
+<div class="loop-board" aria-label="{{ board_label|default('Boucle générale à six niveaux') }}">
+    <svg class="loop-wires" viewBox="0 0 1000 430" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <defs><marker id="{{ marker_id }}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+        <g class="loop-flow" fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#{{ marker_id }})">
+            <path d="M300 103 H356"/><path d="M635 103 H691"/>
+            <path d="M970 103 H985 V327 H977"/>
+            <path d="M700 327 H644"/><path d="M365 327 H309"/>
+            <path d="M30 327 H15 V103 H23"/>
+        </g>
+        <path class="evaluation-wire" d="M500 176 V254" stroke-dasharray="5 6" fill="none" stroke-width="2"/>
+    </svg>
+    {% for step in steps %}
+        <div class="loop-node node-{{ step.id }} tone-{{ step.color }}" data-loop-node>
+            <a class="loop-node-link" href="#{{ anchor_prefix }}{{ step.id }}" aria-describedby="{{ tip_prefix }}{{ step.id }}">
+                <span class="step-number">{{ step.coordinate|default('0' ~ step.id) }}</span><strong>{{ step.title }}</strong><span class="step-subtitle">{{ step.subtitle }}</span>
+            </a>
+            <button type="button" class="tip-toggle" aria-label="À propos de l’étape {{ step.coordinate|default(step.id) }} : {{ step.title }}" aria-controls="{{ tip_prefix }}{{ step.id }}" aria-expanded="false">i</button>
+            <span class="loop-tooltip" id="{{ tip_prefix }}{{ step.id }}" role="tooltip">{{ step.tip }}</span>
+        </div>
+    {% endfor %}
+    <a class="loop-evaluation" href="#{{ anchor_prefix }}4">Évaluations et comparaisons</a>
+</div>

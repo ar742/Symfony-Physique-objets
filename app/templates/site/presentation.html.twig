@@ -1,0 +1,35 @@
+{% extends 'site/layout.html.twig' %}
+{% block title %}Présentation de la démarche — Physique objets{% endblock %}
+{% block body %}
+    <div class="page-heading">
+        <p class="eyebrow">La démarche</p>
+        <h1>Études des attributs et fonctionnalités des éléments de physique</h1>
+        <p class="lead">Les textes et schémas ci-dessous sont repris de la présentation de la version historique.</p>
+    </div>
+    <div class="reading-layout">
+        <nav class="contents" aria-label="Sommaire de la présentation">
+            <p>Dans cette page</p>
+            <a href="#modele">Modèles objets</a>
+            <a href="#appli">Applications</a>
+            <a href="#niveaux">Niveaux</a>
+            <a href="#modes">Modes</a>
+            <a href="#references">Références et notations</a>
+        </nav>
+        <div class="reading-content">
+            <figure class="intro-schema">
+                <img src="{{ asset('legacy/images/schemaphysmvcelement.jpg') }}" width="370" height="150" alt="Schéma historique : trois niveaux d'entrée et trois niveaux de retour.">
+                <figcaption>Élément simple : les six niveaux du modèle.</figcaption>
+            </figure>
+            {% for id, title in {modele: 'Modèles objets', appli: 'Applications', niveaux: 'Niveaux', modes: 'Modes', references: 'Références et notations'} %}
+                <section id="{{ id }}" class="reading-section">
+                    <h2>{{ title }}</h2>
+                    <div class="legacy-text">{% include 'site/legacy/' ~ id ~ '.html.twig' %}</div>
+                </section>
+            {% endfor %}
+            <aside class="content-note">
+                <h2>Les contenus associés aux thèmes</h2>
+                <p>La <a href="{{ path('sitephys_physmvc_home') }}">boucle interactive</a> reprend les six niveaux généraux. Le nouveau corpus s’appuie sur les <a href="{{ path('source_index') }}">recueils CPGE et physique théorique</a>.</p>
+            </aside>
+        </div>
+    </div>
+{% endblock %}

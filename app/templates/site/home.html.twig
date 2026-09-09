@@ -1,0 +1,30 @@
+{% extends 'site/layout.html.twig' %}
+{% block title %}Études des thèmes et domaines de physique — Physique objets{% endblock %}
+{% block body %}
+    <div class="home-banner"><img src="{{ asset('legacy/images/home-fond.jpg') }}" alt="" width="792" height="150"></div>
+    <div class="home-intro">
+        <div>
+            <p class="eyebrow">Études des thèmes et domaines de physique</p>
+            <h1>Méthodes et langages orientés objet pour la physique</h1>
+            <p class="lead">Étudier les attributs et les fonctionnalités des éléments de physique dans leur environnement.</p>
+            <a class="primary-link" href="{{ path('sitephys_physmvc_presentation') }}">Découvrir la démarche</a>
+        </div>
+        <figure class="schema-card">
+            <img src="{{ asset('legacy/images/schemaphysmvcelement.jpg') }}" width="370" height="150" alt="Cycle à six niveaux : expérimentation d'entrée, théorie, expérimentation de sortie, puis trois niveaux de retour.">
+            <figcaption>Le schéma à six niveaux de la version historique.</figcaption>
+        </figure>
+    </div>
+    <section class="exploration" aria-labelledby="explorer">
+        <h2 id="explorer">Comprendre l'organisation du site</h2>
+        <div class="topic-grid">
+            <a class="topic-card" href="{{ path('sitephys_physmvc_presentation', {_fragment: 'modele'}) }}"><span class="eyebrow">Modèles</span><h3>Les modèles objets</h3><p>Classes, attributs, fonctionnalités et relations dans un environnement d'étude.</p></a>
+            <a class="topic-card" href="{{ path('sitephys_physmvc_presentation', {_fragment: 'niveaux'}) }}"><span class="eyebrow">Organisation</span><h3>Les niveaux d'analyse</h3><p>Niveaux de base, niveaux de précision et chaînes d'entrée et de retour.</p></a>
+            <a class="topic-card" href="{{ path('sitephys_physmvc_presentation', {_fragment: 'references'}) }}"><span class="eyebrow">Notation</span><h3>Les références</h3><p>Notations employées pour les formules, les lois et les phénomènes physiques.</p></a>
+        </div>
+    </section>
+    <section class="content-note" aria-labelledby="themes">
+        <h2 id="themes">Domaines et thèmes</h2>
+        <p>{{ counts.domains }} domaines, {{ counts.topics }} thèmes et {{ counts.entries }} fiches : explorez les textes et références, de la thermodynamique à la physique quantique.</p>
+        <a class="primary-link" href="{{ path('sitephys_physmvc_topic') }}">Explorer les thèmes</a>
+    </section>
+{% endblock %}

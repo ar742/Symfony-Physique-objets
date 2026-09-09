@@ -1,0 +1,11 @@
+{% extends 'site/layout.html.twig' %}
+{% block title %}Liens et ressources — Physique objets{% endblock %}
+{% block body %}
+    <div class="page-heading"><p class="eyebrow">Pour poursuivre la lecture</p><h1>Liens et ressources</h1><p class="lead">Les ressources externes répertoriées dans la version historique du site.</p></div>
+    <div class="resource-list">
+        {% for id, title in {site1: 'Travaux pratiques et préparation aux études supérieures', site2: 'Physique-chimie au lycée', site3: 'Astronomie, physique et technologies'} %}
+            <section class="resource"><h2>{{ title }}</h2><div class="legacy-text">{% include 'site/legacy/' ~ id ~ '.html.twig' %}</div></section>
+        {% endfor %}
+    </div>
+    <p class="small-note">Descriptions reprises du site de 2017 ; la disponibilité actuelle des sites externes n'a pas été vérifiée.</p>
+{% endblock %}

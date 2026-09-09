@@ -1,0 +1,7 @@
+{% extends 'site/layout.html.twig' %}
+{% block title %}Journal des corrections — Premier parcours{% endblock %}
+{% block body %}
+<nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="{{ path('learning_index') }}">Fiches</a> / Corrections</nav>
+<header class="page-heading"><p class="eyebrow">Traçabilité · 9 septembre 2026</p><h1>Corrections du premier parcours</h1><p class="lead">Les modifications ci-dessous sont appliquées aux fiches web. Chaque entrée renvoie au passage du PDF concerné.</p><p class="pilot-status">Relecture scientifique par l’auteur à faire</p><p>Ce journal porte sur les passages utilisés dans les huit fiches. Il ne constitue pas un audit complet des deux recueils. Les documents PDF conservent leur version d’origine.</p></header>
+{% for card in cards %}{% for correction in card.corrections %}<section class="reading-section correction" id="{{ correction.id }}"><p class="eyebrow">{{ correction.id }} · v{{ card.version }}</p><h2>{{ correction.title }}</h2><p>{{ correction.detail }}</p>{% include 'science/_sources.html.twig' with {sources: correction.sources} only %}<a href="{{ path('learning_card', {slug: card.slug, _fragment: 'corrections'}) }}">Voir la version web : {{ card.title }}</a></section>{% endfor %}{% endfor %}
+{% endblock %}
