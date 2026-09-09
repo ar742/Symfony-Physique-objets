@@ -53,4 +53,37 @@ final class CardAnalysisLibraryTest extends TestCase
         self::assertSame(132, $totalLevels);
         self::assertSame(792, $totalPoints);
     }
+
+    public function testRefinementsDescribeEveryInputRelationAndReturnEvaluation(): void
+    {
+        $library = new CardAnalysisLibrary(dirname(__DIR__));
+        $refined = array_filter($library->all(), static fn (array $analysis): bool => isset($analysis['refinement']));
+        foreach (['oscillateur-harmonique', 'continuite-bernoulli', 'lagrange-hamilton'] as $slug) { self::assertArrayHasKey($slug, $refined); }
+        self::assertSame('theorique', $refined['lagrange-hamilton']['subject']['type']);
+        $natures = ['logique', 'calculatoire', 'observationnelle', 'interprétative', 'chronologique', 'causale'];
+        foreach ($refined as $slug => $analysis) {
+            self::assertContains($analysis['subject']['type'], ['physique', 'theorique']);
+            foreach (['description', 'scope'] as $key) { self::assertNotEmpty(trim($analysis['subject'][$key]), $slug); }
+            self::assertNotEmpty(trim($analysis['refinement']));
+            self::assertMatchesRegularExpression('/^\d+\.\d+(?:\.\d+)?$/', $analysis['version']);
+            $updated = \DateTimeImmutable::createFromFormat('!Y-m-d', $analysis['updated']);
+            self::assertInstanceOf(\DateTimeImmutable::class, $updated);
+            self::assertSame($analysis['updated'], $updated->format('Y-m-d'));
+            $relations = $evaluations = 0;
+            foreach ($analysis['levels'] as $level) {
+                foreach ([$level, ...$level['steps']] as $element) {
+                    $context = $slug.' '.$element['coordinate'];
+                    self::assertNotEmpty(trim($element['input']), $context);
+                    self::assertContains($element['relation']['nature'], $natures, $context);
+                    self::assertNotEmpty(trim($element['relation']['description']), $context);
+                    $relations++;
+                    if ($element['id'] <= 3) { self::assertArrayNotHasKey('evaluation', $element, $context); continue; }
+                    foreach (['object', 'conditions', 'criterion', 'finding'] as $key) { self::assertNotEmpty(trim($element['evaluation'][$key]), $context.' '.$key); }
+                    $evaluations++;
+                }
+            }
+            self::assertSame(42, $relations, $slug);
+            self::assertSame(21, $evaluations, $slug);
+        }
+    }
 }

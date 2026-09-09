@@ -1,0 +1,8 @@
+{% if analysis.subject is defined %}
+<section class="analysis-subject" aria-label="Objet et périmètre de l’analyse" data-analysis-subject>
+    <p class="eyebrow">{{ analysis.subject.type == 'theorique' ? 'Étude d’un objet théorique' : 'Étude d’un phénomène physique' }}</p>
+    <p><strong>Objet :</strong> {{ analysis.subject.description }}</p>
+    <p><strong>Périmètre :</strong> {{ analysis.subject.scope }}</p>
+    <p class="analysis-refinement">Analyse v{{ analysis.version }} · {{ analysis.updated|date('d/m/Y') }} — {{ analysis.refinement }}</p>
+</section>
+{% endif %}

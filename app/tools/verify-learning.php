@@ -4,6 +4,8 @@ require dirname(__DIR__).'/vendor/autoload.php';
 $kernel = new App\Kernel('dev', true);
 $kernel->boot();
 $library = new App\Content\LearningLibrary(dirname(__DIR__), new App\Content\SourceLibrary(dirname(__DIR__)));
+$analyses = new App\Content\CardAnalysisLibrary(dirname(__DIR__));
+$refined = array_filter($analyses->all(), static fn (array $analysis): bool => isset($analysis['refinement']));
 $domains = new App\Content\DomainLibrary(dirname(__DIR__), $library, new App\Content\SourceLibrary(dirname(__DIR__)));
 $checks = 0;
 $errors = [];
@@ -45,6 +47,8 @@ foreach ($paths as $path) {
     if (str_starts_with($path, '/domaines/') && $path !== '/domaines/') {
         $domain = $domains->find(substr($path, strlen('/domaines/')));
         $xpath = new DOMXPath($document);
+        $expectedBadges = count(array_filter($domain['cards'], static fn (array $card): bool => isset($refined[$card['slug']])));
+        $check($xpath->query('//*[@class="analysis-refinement-badge"]')->length === $expectedBadges, 'Analyses précisées du domaine '.$path);
         foreach ($domain['loops'] as $group) {
             $panels = $xpath->query('//section[@aria-labelledby="'.$group['anchor'].'"]');
             $check($panels->length === 1, 'Boucle unique '.$group['anchor']);
@@ -54,9 +58,15 @@ foreach ($paths as $path) {
             $check($xpath->query('.//*[@role="tooltip"]', $panel)->length === 6, 'Six infos '.$group['anchor']);
         }
     }
+    if ($path === '/fiches/') {
+        $check((new DOMXPath($document))->query('//*[@class="analysis-refinement-badge"]')->length === count($refined), 'Analyses précisées dans le catalogue');
+    }
     if (preg_match('~^/fiches/([a-z][a-z0-9-]*)$~', $path, $match) && $path !== '/fiches/corrections') {
         $card = $library->find($match[1]);
         $xpath = new DOMXPath($document);
+        $isRefined = isset($refined[$card['slug']]);
+        $check($xpath->query('//*[@data-analysis-subject]')->length === ($isRefined ? 1 : 0), 'Nature et périmètre du sujet '.$path);
+        $check($xpath->query('//*[@data-analysis-evaluation]')->length === ($isRefined ? 3 : 0), 'Trois évaluations globales détaillées '.$path);
         $nodes = $xpath->query('//section[@id="analyse"]//*[@data-loop-node]/a');
         $check($nodes->length === 6, 'Six systèmes globaux '.$path);
         foreach ($nodes as $index => $node) {
@@ -75,6 +85,14 @@ foreach ($paths as $path) {
     if (preg_match('~^/fiches/([a-z][a-z0-9-]*)/analyse/([1-6])$~', $path, $match)) {
         $base = (int) $match[2];
         $xpath = new DOMXPath($document);
+        $isRefined = isset($refined[$match[1]]);
+        $check($xpath->query('//*[@data-analysis-subject]')->length === ($isRefined ? 1 : 0), 'Nature du sujet au second étage '.$path);
+        $check($xpath->query('//*[@data-analysis-input]')->length === ($isRefined ? 6 : 0), 'Entrées spécifiques des six sous-niveaux '.$path);
+        $check($xpath->query('//*[@data-analysis-relation]')->length === ($isRefined ? 7 : 0), 'Liens entrants qualifiés '.$path);
+        $check($xpath->query('//*[@data-analysis-evaluation]')->length === ($isRefined ? (3 + (int) ($base > 3)) : 0), 'Évaluations locales et globale détaillées '.$path);
+        foreach ($xpath->query('//*[@data-analysis-evaluation]') as $evaluation) {
+            $check($xpath->query('./div/dt', $evaluation)->length === 4 && $xpath->query('./div/dd', $evaluation)->length === 4, 'Quatre champs par évaluation '.$path);
+        }
         $nodes = $xpath->query('//*[@data-loop-node]/a');
         $check($nodes->length === 6, 'Six sous-niveaux graphiques '.$path);
         $check($xpath->query('//*[@role="tooltip"]')->length === 6, 'Six explications '.$path);
@@ -114,7 +132,7 @@ foreach (['/boucle/0', '/boucle/7', '/fiches/inconnue', '/fiches/..%2F.env', '/d
     $response = $kernel->handle(Symfony\Component\HttpFoundation\Request::create($path), Symfony\Component\HttpKernel\HttpKernelInterface::SUB_REQUEST);
     $check($response->getStatusCode() === 404, 'Route invalide '.$path);
 }
-foreach (['/boucle/2', '/fiches/boltzmann', '/domaines/mecanique', '/fiches/lagrange-hamilton', '/domaines/fluides-ondes', '/fiches/onde-acoustique', '/fiches/oscillateur-harmonique/analyse/5', '/fiches/gaz-parfait/analyse/1', '/fiches/onde-acoustique/analyse/6', '/styles/science.css', '/scripts/theme.js'] as $path) {
+foreach (['/boucle/2', '/fiches/boltzmann', '/domaines/mecanique', '/fiches/lagrange-hamilton', '/domaines/fluides-ondes', '/fiches/onde-acoustique', '/fiches/oscillateur-harmonique/analyse/5', '/fiches/gaz-parfait/analyse/1', '/fiches/onde-acoustique/analyse/6', '/fiches/continuite-bernoulli/analyse/4', '/fiches/lagrange-hamilton/analyse/5', '/styles/science.css', '/scripts/theme.js'] as $path) {
     $curl = curl_init('http://127.0.0.1'.$path);
     curl_setopt_array($curl, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 30]);
     $html = curl_exec($curl);
@@ -122,7 +140,7 @@ foreach (['/boucle/2', '/fiches/boltzmann', '/domaines/mecanique', '/fiches/lagr
     $check(is_string($html) && strlen($html) > 100, 'Contenu HTTP '.$path);
     unset($curl);
 }
-$result = ['checks' => $checks, 'pages' => count($documents), 'substeps' => 36, 'analysis_levels' => count($library->all()) * 6, 'analysis_sublevels' => count($library->all()) * 36, 'domain_steps' => array_sum(array_map(static fn (array $domain): int => count($domain['steps']), $domains->all())), 'cards' => count($library->all()), 'corrections' => array_sum(array_map(static fn (array $card): int => count($card['corrections']), $library->all())), 'browser_visual_test' => false, 'errors' => $errors];
+$result = ['checks' => $checks, 'pages' => count($documents), 'substeps' => 36, 'analysis_levels' => count($library->all()) * 6, 'analysis_sublevels' => count($library->all()) * 36, 'refined_analyses' => count($refined), 'detailed_evaluations' => count($refined) * 21, 'domain_steps' => array_sum(array_map(static fn (array $domain): int => count($domain['steps']), $domains->all())), 'cards' => count($library->all()), 'corrections' => array_sum(array_map(static fn (array $card): int => count($card['corrections']), $library->all())), 'browser_visual_test' => false, 'errors' => $errors];
 file_put_contents(dirname(__DIR__).'/var/learning-verification.json', json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)."\n";
 exit($errors ? 1 : 0);

@@ -17,7 +17,7 @@ Cette présentation reprend la conception du schéma général de 2018, précis�
 
 Le terme « Exp. » ne suppose pas qu'une manipulation ait été effectuée. Il peut désigner l'expression d'un système observé, prédit ou supposé, un résultat de calcul, une expérience de pensée ou une donnée à recueillir. Les fiches distinguent ces statuts ; aucun protocole proposé ne devient une expérience effectivement réalisée par le seul fait de sa rédaction.
 
-Le sujet est le plus souvent un phénomène physique à ancrage expérimental. S'il est théorique dès le départ (théorème, théorie, etc.), les éléments Exp. initiaux et finaux sont ses attributs, propriétés, conditions et conséquences. **Les positions 2 et 5 restent toujours théoriques aux deux étages**, y compris dans les sous-boucles d'un système lui-même théorique. Elles utilisent respectivement Exp. 1 et Exp. 4 pour produire Exp. 3 et Exp. 6. Le libellé abrégé « Confrontation théorique » de 5 inclut donc un traitement théorique de retour, au-delà de la comparaison avec 2.
+Le sujet est le plus souvent un phénomène physique à ancrage expérimental. S'il est théorique dès le départ (théorème, théorie, etc.), les éléments Exp. initiaux et finaux sont ses attributs, propriétés, conditions et conséquences. **Les positions 2 et 5 restent toujours théoriques aux deux étages**, y compris dans les sous-boucles d'un système lui-même théorique. Elles utilisent respectivement Exp. 1 et Exp. 4 pour produire Exp. 3 et Exp. 6. Le libellé « Formalisation et confrontation » de 5 explicite le traitement théorique de retour, au-delà de la comparaison avec 2.
 
 Un niveau global est un système à part entière : le système physique initial, son dossier de données, le modèle théorique, la chaîne de calcul ou le dispositif de confrontation peuvent constituer des objets différents. Sa sous-boucle doit analyser CET objet, et non répéter six chapitres génériques du cours.
 
@@ -55,6 +55,8 @@ Les données sont explicitement rédigées dans `app/config/content/analyses-fic
 Le couple identifiant de fiche + coordonnée n.p situe l'élément à répertorier, relire et réviser. Préserver ces repères lors des enrichissements et documenter les déplacements en cas de restructuration. Le nombre de points renseignés et la validité technique des liens ne suffisent pas à établir la précision scientifique de leurs significations et évaluations.
 
 Pour ajouter une fiche, rédiger son analyse complète avec six niveaux et six sous-niveaux par niveau. Chaque niveau doit nommer son propre système, ses entrées, sa sortie, un passage associé et ses comparaisons. Les tests refusent une fiche sans analyse et vérifient la couverture, les coordonnées et les destinations des liens.
+
+Le [premier lot d'approfondissement analytique](PRECISIONS-ANALYTIQUES.md) précise trois fiches : oscillateur, Bernoulli et Lagrange–Hamilton. Il distingue la nature et le périmètre du sujet, les entrées de chaque sous-niveau, les relations avec ces entrées et les quatre champs de chaque évaluation. Les autres fiches conservent leur première rédaction pendant cette progression.
 
 ## Source de conception et confidentialité
 

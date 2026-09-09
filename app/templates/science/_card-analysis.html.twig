@@ -2,6 +2,7 @@
     <div class="loop-toolbar"><h2 id="analyse-titre">Ce système en 6 niveaux et 36 sous-niveaux</h2><a href="#lecture">Accéder au contenu scientifique</a></div>
     <p class="lead">{{ analysis.question }}</p>
     <p class="analysis-basis"><strong>Point de départ :</strong> {{ analysis.basis }}</p>
+    {% include 'science/_analysis-subject.html.twig' %}
     <p>Chaque niveau est lui-même un système à analyser. Cliquez sur un niveau pour ouvrir sa boucle à six sous-niveaux.</p>
     <section class="interactive-loop analysis-loop" aria-label="Six systèmes globaux de cette fiche">
         {% include 'site/_loop.html.twig' with {
@@ -19,7 +20,7 @@
     <section class="analysis-comparisons" id="comparaisons-globales" aria-labelledby="comparaisons-titre">
         <h3 id="comparaisons-titre">Ce que la chaîne de retour doit comparer</h3>
         <div class="analysis-comparison-grid">
-            {% for item in analysis.levels|slice(3) %}<article><h4>{{ 7 - item.id }} ↔ {{ item.id }} · {{ item.name }}</h4><p>{{ item.comparison }}</p><a href="{{ item.href }}">Ouvrir le niveau {{ item.id }}</a></article>{% endfor %}
+            {% for item in analysis.levels|slice(3) %}<article><h4>{{ 7 - item.id }} ↔ {{ item.id }} · {{ item.name }}</h4>{% if item.evaluation is defined %}{% include 'science/_analysis-evaluation.html.twig' with {evaluation: item.evaluation} only %}{% else %}<p>{{ item.comparison }}</p>{% endif %}<a href="{{ item.href }}">Ouvrir le niveau {{ item.id }}</a></article>{% endfor %}
         </div>
     </section>
     <details class="analysis-matrix"><summary>Vue d’ensemble des 36 sous-niveaux de cette fiche</summary><div class="subloop-overview">

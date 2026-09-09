@@ -6,6 +6,8 @@ Chantier ouvert le 9 septembre 2026 à la demande de l'auteur. La thermodynamiqu
 
 **Priorité depuis le 9 septembre 2026 : la structure analytique de chaque fiche.** Les 22 fiches existantes disposent de six systèmes globaux, chacun décliné selon la même boucle de six sous-niveaux (792 points). La première rédaction et les schémas constituent une base de relecture avec l'auteur, avant l'approfondissement scientifique. E1 reste planifié après cette étape. Voir [la méthode et les règles d'extension](ANALYSES-DEUX-NIVEAUX.md).
 
+Le [lot AP1 de perfectionnement](PRECISIONS-ANALYTIQUES.md) précise l'oscillateur, Bernoulli et Lagrange–Hamilton : entrées, fonctions théoriques, relations et évaluations aux deux étages. Ce travail prépare les prochains groupes de révision et les nouvelles fiches, avec les mêmes exigences de sens.
+
 Les pages ci-dessous sont les repères des éditions locales déjà indexées. Une fiche du recueil n'est pas considérée comme transposée intégralement dès qu'une première fiche web l'utilise.
 
 | Lot | Domaine et contenu à construire | Recueil CPGE | Recueil théorique | Première interaction envisagée |

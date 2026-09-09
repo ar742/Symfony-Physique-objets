@@ -11,7 +11,7 @@
 {% endfor %}
 {% else %}<p><a class="primary-link" href="{{ path('learning_subloop', {base: 1}) }}">Explorer les 36 sous-étapes du parcours</a></p>{% endif %}
 <section class="domain-reading" aria-labelledby="fiches-domaine"><h2 id="fiches-domaine">Lire les fiches du domaine</h2><div class="topic-grid learning-grid">
-{% for card in domain.cards %}<a class="topic-card" href="{{ path('learning_card', {slug: card.slug}) }}"><span class="eyebrow">{{ '%02d'|format(card.number) }} · {{ card.level }}</span><h3>{{ card.title }}</h3><p>{{ card.summary }}</p></a>{% endfor %}
+{% for card in domain.cards %}<a class="topic-card" href="{{ path('learning_card', {slug: card.slug}) }}"><span class="eyebrow">{{ '%02d'|format(card.number) }} · {{ card.level }}</span><h3>{{ card.title }}</h3><p>{{ card.summary }}</p>{% if analyses[card.slug].refinement is defined %}<span class="analysis-refinement-badge">Entrées et évaluations précisées</span>{% endif %}</a>{% endfor %}
 </div></section>
 <p><a href="{{ path('learning_corrections') }}">Consulter les corrections documentées</a> · <a href="{{ path('source_index') }}">Retrouver les sources dans les recueils</a></p>
 {% endblock %}

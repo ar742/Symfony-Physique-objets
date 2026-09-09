@@ -10,9 +10,9 @@ use Symfony\Component\Routing\Attribute\Route;
 final class LearningController extends AbstractController
 {
     #[Route('/fiches/', name: 'learning_index', methods: ['GET'])]
-    public function index(LearningLibrary $library, DomainLibrary $domains): Response
+    public function index(LearningLibrary $library, DomainLibrary $domains, CardAnalysisLibrary $analyses): Response
     {
-        return $this->render('science/index.html.twig', ['cards' => $library->all(), 'domains' => $domains->available()]);
+        return $this->render('science/index.html.twig', ['cards' => $library->all(), 'domains' => $domains->available(), 'analyses' => $analyses->all()]);
     }
 
     #[Route('/domaines/', name: 'learning_domains', methods: ['GET'])]
@@ -22,7 +22,7 @@ final class LearningController extends AbstractController
     }
 
     #[Route('/domaines/{slug}', name: 'learning_domain', requirements: ['slug' => '[a-z][a-z0-9-]*'], methods: ['GET'])]
-    public function domain(string $slug, DomainLibrary $domains): Response
+    public function domain(string $slug, DomainLibrary $domains, CardAnalysisLibrary $analyses): Response
     {
         $domain = $domains->find($slug);
         if ($domain === null || $domain['cards'] === []) { throw $this->createNotFoundException('Parcours indisponible.'); }
@@ -33,7 +33,7 @@ final class LearningController extends AbstractController
             unset($step);
         }
         unset($group);
-        return $this->render('science/domain.html.twig', ['domain' => $domain]);
+        return $this->render('science/domain.html.twig', ['domain' => $domain, 'analyses' => $analyses->all()]);
     }
 
     #[Route('/fiches/corrections', name: 'learning_corrections', priority: 10, methods: ['GET'])]

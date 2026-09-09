@@ -24,6 +24,16 @@
 .analysis-inputs { margin: 1rem 0; font-size: .95rem; }
 .analysis-footer { justify-content: space-between; padding-top: 2rem; }
 .analysis-point .step-actions { margin-top: 1.5rem; }
+.analysis-subject { padding: 1rem 1.2rem; margin: 1.5rem 0; border: 1px solid var(--line); border-radius: .35rem; background: var(--wash); }
+.analysis-subject p:first-child { margin-top: 0; }
+.analysis-subject p:last-child { margin-bottom: 0; }
+.analysis-refinement { color: var(--muted); font-size: .9rem; }
+.analysis-refinement-badge { display: inline-block; border: 1px solid var(--evaluation-border); border-radius: .3rem; padding: .3rem .55rem; color: var(--evaluation-ink); background: var(--evaluation-paper); font-size: .85rem; }
+.analysis-relation { border-left: 3px solid var(--line); padding-left: 1rem; }
+.analysis-evaluation { margin: 1rem 0; }
+.analysis-evaluation > div + div { margin-top: 1rem; }
+.analysis-evaluation dt { font-weight: 700; }
+.analysis-evaluation dd { margin: .3rem 0 0; overflow-wrap: anywhere; }
 .card-analysis:focus, #lecture:focus, .analysis-point:focus { outline: none; }
 @media(max-width: 820px) { .analysis-comparison-grid, .analysis-io { grid-template-columns: 1fr; } }
 .base-switcher { display: flex; gap: .5rem; flex-wrap: wrap; margin: 0 0 2rem; }

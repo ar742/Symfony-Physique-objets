@@ -17,7 +17,7 @@ final class CardAnalysisLibrary
             2 => ['label' => 'TH', 'name' => 'Formalisation d’entrée', 'color' => 'orange'],
             3 => ['label' => 'Exp. OUT', 'name' => 'Résultats d’entrée', 'color' => 'green'],
             4 => ['label' => 'Retour · Exp. IN', 'name' => 'Relecture des résultats', 'color' => 'blue'],
-            5 => ['label' => 'Retour · TH', 'name' => 'Confrontation théorique', 'color' => 'orange'],
+            5 => ['label' => 'Retour · TH', 'name' => 'Formalisation et confrontation', 'color' => 'orange'],
             6 => ['label' => 'Retour · Exp. OUT', 'name' => 'Résultats de retour', 'color' => 'green'],
         ];
     }

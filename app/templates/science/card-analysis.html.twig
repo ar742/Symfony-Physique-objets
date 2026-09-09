@@ -2,11 +2,13 @@
 {% block title %}{{ base }}.0 · {{ level.title }} — {{ card.title }}{% endblock %}
 {% block body %}
 <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="{{ path('learning_index') }}">Fiches</a> / <a href="{{ path('learning_card', {slug: card.slug, _fragment: 'analyse'}) }}">{{ card.title }}</a> / Niveau {{ base }}</nav>
-<header class="page-heading analysis-heading"><p class="eyebrow">{{ base }}.0 · {{ level.label }} · {{ level.name }}</p><h1>{{ level.title }}</h1><p class="lead"><strong>Système de ce niveau :</strong> {{ level.system }}</p><p class="pilot-status">Première structuration analytique · à préciser avec l’auteur</p></header>
+<header class="page-heading analysis-heading"><p class="eyebrow">{{ base }}.0 · {{ level.label }} · {{ level.name }}</p><h1>{{ level.title }}</h1><p class="lead"><strong>Système de ce niveau :</strong> {{ level.system }}</p><p class="pilot-status">Analyse évolutive · à préciser avec l’auteur</p></header>
 <nav class="base-switcher" aria-label="Changer de niveau dans cette fiche">{% for item in analysis.levels %}<a href="{{ path('learning_card_analysis', {slug: card.slug, base: item.id}) }}"{% if item.id == base %} aria-current="page"{% endif %}>{{ item.id }} · {{ stages[item.id].label }}</a>{% endfor %}</nav>
+{% include 'science/_analysis-subject.html.twig' %}
 <dl class="analysis-io"><div><dt>Entrées du système {{ base }}.0</dt><dd>{{ level.input }}</dd></div><div><dt>Sortie globale à établir</dt><dd>{{ level.output }}</dd></div></dl>
+{% if level.relation is defined %}<p class="analysis-relation" data-analysis-relation><strong>Lien avec les entrées · {{ level.relation.nature }} :</strong> {{ level.relation.description }}</p>{% endif %}
 <div class="step-actions"><a href="{{ path('learning_card', {slug: card.slug, _fragment: 'analyse'}) }}">Revenir aux six systèmes globaux</a><a href="{{ path('learning_card', {slug: card.slug, _fragment: level.section}) }}">Lire le passage scientifique associé</a></div>
-{% if base > 3 %}<section class="content-note analysis-global-review"><h2>Comparaison au niveau global</h2><p>{{ level.comparison }}</p><div class="comparison-targets"><a href="{{ path('learning_card_analysis', {slug: card.slug, base: 7 - base}) }}">Valeurs et résultats : {{ base }}.0 ↔ {{ 7 - base }}.0</a><a href="{{ path('learning_card_analysis', {slug: card.slug, base: base - 3}) }}">Méthodes de même fonction : {{ base }}.0 ↔ {{ base - 3 }}.0</a></div></section>{% endif %}
+{% if base > 3 %}<section class="content-note analysis-global-review"><h2>Comparaison au niveau global</h2>{% if level.evaluation is defined %}{% include 'science/_analysis-evaluation.html.twig' with {evaluation: level.evaluation} only %}{% else %}<p>{{ level.comparison }}</p>{% endif %}<div class="comparison-targets"><a href="{{ path('learning_card_analysis', {slug: card.slug, base: 7 - base}) }}">{{ base == 5 ? 'Théories' : 'Attributs et résultats Exp.' }} : {{ base }}.0 ↔ {{ 7 - base }}.0</a><a href="{{ path('learning_card_analysis', {slug: card.slug, base: base - 3}) }}">Méthodes de même fonction : {{ base }}.0 ↔ {{ base - 3 }}.0</a></div></section>{% endif %}
 <section class="interactive-loop analysis-loop" aria-labelledby="sous-boucle-titre"><h2 id="sous-boucle-titre">Le système {{ base }}.0 en six sous-niveaux</h2>
     {% include 'site/_loop.html.twig' with {
         steps: level.steps, tip_prefix: 'analysis-detail-tip-', marker_id: 'analysis-detail-arrow',
@@ -26,6 +28,8 @@
 {% for point in level.steps %}
 <section class="guide-step analysis-point tone-{{ point.color }}" id="point-{{ point.coordinate }}" tabindex="-1" data-analysis-point>
     <div class="guide-step-heading"><span class="step-number">{{ point.coordinate }}</span><div><p class="eyebrow">{{ point.label }} · {{ point.name }}</p><h2>{{ point.title }}</h2></div></div>
+    {% if point.input is defined %}<p class="analysis-point-input" data-analysis-input><strong>Éléments reçus :</strong> {{ point.input }}</p>{% endif %}
+    {% if point.relation is defined %}<p class="analysis-relation" data-analysis-relation><strong>Lien avec les entrées · {{ point.relation.nature }} :</strong> {{ point.relation.description }}</p>{% endif %}
     <p>{{ point.action }}</p>
     <p class="deliverable"><strong>À conserver :</strong> {{ point.output }}</p>
     <nav class="analysis-inputs" aria-label="Entrées du sous-niveau {{ point.coordinate }}">
@@ -35,7 +39,7 @@
             <a href="#point-{{ base }}.6">Recevoir le retour local {{ base }}.6</a>
         {% else %}<a href="#point-{{ base }}.{{ point.id - 1 }}">Reprendre la sortie {{ base }}.{{ point.id - 1 }}</a>{% endif %}
     </nav>
-    {% if point.id > 3 %}<div class="analysis-review"><h3>Confrontation avec la chaîne d’entrée</h3><p>{{ point.comparison }}</p><div class="comparison-targets"><a href="#point-{{ base }}.{{ 7 - point.id }}">Valeurs et résultats : {{ point.coordinate }} ↔ {{ base }}.{{ 7 - point.id }}</a><a href="#point-{{ base }}.{{ point.id - 3 }}">Méthodes : {{ point.coordinate }} ↔ {{ base }}.{{ point.id - 3 }}</a></div></div>{% endif %}
+    {% if point.id > 3 %}<div class="analysis-review"><h3>Confrontation avec la chaîne d’entrée</h3>{% if point.evaluation is defined %}{% include 'science/_analysis-evaluation.html.twig' with {evaluation: point.evaluation} only %}{% else %}<p>{{ point.comparison }}</p>{% endif %}<div class="comparison-targets"><a href="#point-{{ base }}.{{ 7 - point.id }}">{{ point.id == 5 ? 'Théories' : 'Attributs et résultats Exp.' }} : {{ point.coordinate }} ↔ {{ base }}.{{ 7 - point.id }}</a><a href="#point-{{ base }}.{{ point.id - 3 }}">Méthodes : {{ point.coordinate }} ↔ {{ base }}.{{ point.id - 3 }}</a></div></div>{% endif %}
     {% if point.id == 3 %}<p class="analysis-handoff"><a href="{{ path('learning_card_analysis', {slug: card.slug, base: base == 6 ? 1 : base + 1, _fragment: 'point-' ~ (base == 6 ? 1 : base + 1) ~ '.1'}) }}">Transmettre aussi cette sortie au système {{ base == 6 ? 1 : base + 1 }} · entrée {{ base == 6 ? 1 : base + 1 }}.1</a></p>{% endif %}
     <div class="step-actions"><a href="#sous-boucle-titre">Revenir au schéma du niveau {{ base }}</a><a href="#point-{{ base }}.{{ point.id == 6 ? 1 : point.id + 1 }}">{{ point.id == 6 ? 'Reprendre la boucle locale' : 'Sous-niveau suivant' }} →</a></div>
 </section>
