@@ -12,6 +12,7 @@ Un site pour étudier la physique en reliant observations, modèles et applicati
 - Un journal de **onze corrections ou clarifications** des passages utilisés des recueils.
 - Les sommaires de deux recueils d'Aurélien Roudier : **91 points d'entrée** pour 1 433 pages sources.
 - Le code de consultation et d'import des archives scientifiques de 2018.
+- Un bouton **Mode sombre** en haut de chaque page : choix clair/sombre mémorisé sur le navigateur, préférence système au premier accès et impression sur fond clair.
 
 Les fiches sont une version pilote : la relecture scientifique de l'auteur et la recette visuelle complète restent à effectuer. Voir [le détail du parcours](PREMIER-PARCOURS.md).
 

@@ -37,3 +37,13 @@ Prochain lot : **M2**, mécanique du solide, rotations et référentiels ; prép
 Portée : rotation autour d'un axe fixe, cylindre idéal sans glissement, rotation uniforme autour d'une origine fixe, formalismes analytiques pour un oscillateur à un degré de liberté. Les situations générales restent à approfondir. La relecture de l'auteur et la recette visuelle au navigateur restent à faire. Aucun PDF complet ou extrait de page n'est publié ; aucune nouvelle dépendance ni modification de la base de données.
 
 Prochain lot : **F1**, hydrostatique et écoulements, puis ondes mécaniques et acoustique.
+
+## 9 septembre 2026 — Affichage clair/sombre
+
+- Interrupteur « Mode sombre » en haut à droite de toutes les pages HTML du site, y compris les archives, les recueils et l'installation. L'état est annoncé aux lecteurs d'écran ; le bouton s'utilise aussi au clavier.
+- Au premier accès, l'affichage suit la préférence système. Un choix manuel est conservé dans le navigateur entre les pages et les visites, et partagé entre ses onglets. Si le stockage est indisponible, le bouton reste utilisable sur la page courante. Sans JavaScript, le contenu reste disponible en clair.
+- Palette adaptée pour les textes, navigation, fiches, MathML, boucles, info-bulles, résultats et corrections. Les schémas historiques gardent leur fond clair ; l'impression conserve la palette claire. Le lecteur PDF du navigateur conserve ses propres réglages.
+- La page d'installation utilise désormais le gabarit commun. Aucun changement de contenu scientifique, de dépendance, de base de données ou de documents privés.
+- Validation : syntaxe JavaScript et 58 fichiers Twig valides ; 1 302 contrôles fonctionnels sur 29 pages, sans erreur. Présence unique du bouton vérifiée par HTTP sur 11 pages représentatives et disponibilité de ses quatre ressources. Revue ciblée du code de mémorisation et d'accessibilité. La vérification visuelle au navigateur reste à faire.
+
+Le prochain lot scientifique reste **F1**.

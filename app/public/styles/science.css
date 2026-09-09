@@ -1,4 +1,4 @@
-.pilot-status { display: inline-block; border: 1px solid #bed2d8; border-radius: .25rem; padding: .35rem .7rem; color: #264d59; background: #f0f7f8; font-size: .9rem; }
+.pilot-status { display: inline-block; border: 1px solid var(--status-border); border-radius: .25rem; padding: .35rem .7rem; color: var(--status-ink); background: var(--status-paper); font-size: .9rem; }
 .learning-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .learning-grid h2 { font-size: 1.3rem; margin: .6rem 0; }
 .learning-grid h3 { font-size: 1.3rem; margin: .6rem 0; }
@@ -7,7 +7,7 @@
 .domain-loop h2 { scroll-margin-top: 1rem; }
 .base-switcher { display: flex; gap: .5rem; flex-wrap: wrap; margin: 0 0 2rem; }
 .base-switcher a { padding: .55rem .85rem; border: 1px solid var(--line); border-radius: .3rem; text-decoration: none; }
-.base-switcher a[aria-current] { background: var(--blue); color: white; border-color: var(--blue); }
+.base-switcher a[aria-current] { background: var(--blue); color: var(--on-blue); border-color: var(--blue); }
 .precision-loop .loop-node-link strong { font-size: 1.04rem; }
 .precision-loop .step-subtitle { font-size: .8rem; }
 .loop-overview { border-top: 2px solid var(--line); margin-top: 2rem; padding-top: 1.5rem; }
@@ -17,15 +17,15 @@
 .learning-article .reading-section:first-child { padding-top: 0; }
 .learning-article li { margin-bottom: .5rem; }
 .learning-article [tabindex="-1"]:focus { outline: none; }
-.equation { background: #f2f7fa; border-left: 3px solid #3d7a94; margin: 1.25rem 0; padding: 1.1rem; }
+.equation { background: var(--equation-paper); border-left: 3px solid var(--equation-line); margin: 1.25rem 0; padding: 1.1rem; }
 .math-scroll { overflow-x: auto; padding: .65rem 0; }
 .equation math { font-size: 1.25rem; margin: 0; }
 .equation figcaption { margin-top: .75rem; line-height: 1.6; }
-.example-result { border-left: 3px solid #18704a; background: #eff8f3; padding: 1rem; font-weight: 600; }
+.example-result { border-left: 3px solid var(--tone-green); background: var(--result-paper); padding: 1rem; font-weight: 600; }
 .answer { border: 1px solid var(--line); padding: .9rem 1.1rem; border-radius: .3rem; }
 .answer[open] summary { margin-bottom: .75rem; }
 .answer p:last-child { margin-bottom: 0; }
-.correction { max-width: 55rem; border-left: 3px solid #b44e12; padding-left: 1.25rem; margin: 1.5rem 0; }
+.correction { max-width: 55rem; border-left: 3px solid var(--tone-orange); padding-left: 1.25rem; margin: 1.5rem 0; }
 .precise-sources { list-style: none; padding: 0; }
 .precise-sources li { margin-bottom: 1rem; }
 .precise-sources span { display: block; color: var(--muted); font-size: .9rem; }

@@ -6,6 +6,7 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="description" content="Étudier et organiser les thèmes de physique à travers les modèles objets, les niveaux d'analyse et les références.">
     <title>{% block title %}Physique objets{% endblock %}</title>
+    <script src="{{ asset('scripts/theme.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('styles/site.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/loop.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/science.css') }}">
@@ -16,6 +17,10 @@
 <header class="site-header">
     <div class="header-inner">
         <a class="brand" href="{{ path('sitephys_physmvc_home') }}">Physique objets</a>
+        <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Mode sombre" title="Passer au mode sombre" hidden>
+            <span class="theme-track" aria-hidden="true"></span>
+            <span>Mode sombre</span>
+        </button>
         <nav aria-label="Navigation principale">
             {% set current = app.request.attributes.get('_route') %}
             {% for route, label in {
