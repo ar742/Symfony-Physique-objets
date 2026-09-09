@@ -317,9 +317,13 @@
   {
     "slug": "electromagnetisme",
     "title": "Électromagnétisme",
-    "summary": "Charges, champs et induction : des modèles statiques aux courants variables et au stockage magnétique.",
-    "scope": "Quatre parcours de trois fiches : électrostatique (E1a), champs magnétiques (E1b), solénoïde et induction (E1c), puis déplacement de Maxwell, énergie inductive et circuit RL (E1d). Ondes électromagnétiques, milieux et couplages restent à développer.",
+    "summary": "Charges, champs et ondes : des modèles statiques à l’induction, à la polarisation et au transport d’énergie.",
+    "scope": "Cinq parcours de trois fiches : électrostatique (E1a), champs magnétiques (E1b), solénoïde et induction (E1c), Maxwell et circuits inductifs (E1d), puis ondes électromagnétiques dans le vide (E1e). Les milieux, interfaces et couplages restent à développer.",
     "sources": [
+      {
+        "doc": "cpge",
+        "code": "P10"
+      },
       {
         "doc": "cpge",
         "code": "P11"
@@ -335,6 +339,10 @@
       {
         "doc": "cpge",
         "code": "P14"
+      },
+      {
+        "doc": "cpge",
+        "code": "P15"
       },
       {
         "doc": "theorique",
@@ -575,6 +583,66 @@
             "tip": "La source est retirée dans un scénario distinct ; le circuit RL reste fermé et dissipe son énergie initiale.",
             "card": "circuit-rl-transitoire",
             "section": "decharge",
+            "color": "green"
+          }
+        ]
+      },
+      {
+        "anchor": "boucle-ondes-electromagnetiques",
+        "title": "Propagation, polarisation et énergie des ondes",
+        "steps": [
+          {
+            "id": 1,
+            "title": "Définir une onde plane",
+            "subtitle": "Vide et données de champ",
+            "tip": "Une onde monochromatique particulière est choisie ; géométrie, amplitude et fréquence sont supposées.",
+            "card": "onde-electromagnetique-vide",
+            "section": "conditions",
+            "color": "blue"
+          },
+          {
+            "id": 2,
+            "title": "Relier les champs",
+            "subtitle": "Maxwell et propagation",
+            "tip": "Les équations relient transversalité, dispersion et orientation des champs électrique et magnétique.",
+            "card": "onde-electromagnetique-vide",
+            "section": "maxwell",
+            "color": "orange"
+          },
+          {
+            "id": 3,
+            "title": "Décrire la polarisation",
+            "subtitle": "Composantes et ellipse",
+            "tip": "Les deux composantes et leur déphasage donnent le parcours du champ à position fixée.",
+            "card": "polarisation-onde-electromagnetique",
+            "section": "ellipse",
+            "color": "green"
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les projections",
+            "subtitle": "Analyseur et information",
+            "tip": "Les intensités transmises ne suffisent pas à distinguer deux sens de parcours de la même ellipse.",
+            "card": "polarisation-onde-electromagnetique",
+            "section": "analyseur",
+            "color": "blue"
+          },
+          {
+            "id": 5,
+            "title": "Établir le bilan d’énergie",
+            "subtitle": "Densité et flux de Poynting",
+            "tip": "Le bilan local relie évolution de la densité et transport d’énergie ; la moyenne distingue amplitude et valeur efficace.",
+            "card": "energie-onde-poynting",
+            "section": "conservation",
+            "color": "orange"
+          },
+          {
+            "id": 6,
+            "title": "Comparer la surface traversée",
+            "subtitle": "Flux orienté et énergie",
+            "tip": "L’inclinaison de la surface modifie l’énergie traversante sans modifier l’intensité de l’onde.",
+            "card": "energie-onde-poynting",
+            "section": "surface",
             "color": "green"
           }
         ]

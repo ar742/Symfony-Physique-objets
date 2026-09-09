@@ -22020,5 +22020,1991 @@
         ]
       }
     ]
+  },
+  "onde-electromagnetique-vide": {
+    "question": "Comment une paire de champs satisfait-elle ensemble Maxwell, puis permet-elle de retrouver les attributs d’une onde plane et son sens de propagation ?",
+    "basis": "Onde supposée du vide : E0 = 3,00 V/m, f = 100 MHz, phase ωt−kz, direction +z. Calcul en z = 0,t = T/8 ; variante indépendante vers −z. c exact SI ; μ0 et ε0 approchés cohérents.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les deux étages distinguent champs instantanés, amplitudes et phase ; les inversions exigent leurs données, et les retours confrontent l’équation d’onde aux contraintes complètes de Maxwell.",
+    "subject": {
+      "type": "physique",
+      "description": "Une onde plane progressive monochromatique dans une région de vide sans sources, étudiée par ses champs calculés.",
+      "scope": "Onde unique à polarisation linéaire, sans champ statique ajouté, sans frontière ni antenne ; pas de superposition, de mesure ni de bilan énergétique global."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Définir le mode et ses attributs",
+        "system": "Le dossier de l’onde supposée : région sans sources, amplitude, fréquence, direction et origine de phase.",
+        "input": "E0 = 3,00 V/m, f = 100 MHz, direction +z ; phase nulle en z = 0,t = 0, vide sans champ statique superposé.",
+        "output": "T = 10 ns, ω = 2πf, λ = c/f et k = ω/c ; amplitude crête et sens sont identifiés.",
+        "section": "conditions",
+        "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Le choix d’un mode particulier fournit les données de 2 ; la variante de 6 conserve un dossier distinct."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir l’onde supposée",
+            "input": "Données de 1.0 ; 1.6 rend les paramètres reconstruits. 6.3 transmet séparément la variante vers −z.",
+            "action": "Fixer la région ρ = j = 0, la base directe et la référence vers +z ; exclure tout champ statique ajouté.",
+            "output": "E0 = 3,00 V/m, f = 100 MHz et ψ(0,0) = 0 restent des données supposées.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "L’onde plane monochromatique est choisie comme système physique idéalisé, sans émission décrite."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Convertir les paramètres du mode",
+            "input": "E0,f,c et sens de propagation reçus en 1.1.",
+            "action": "Calculer T = 1/f, ω = 2πf, λ = c/f et k = 2π/λ ; construire ψ = ωt−kz.",
+            "output": "T = 10 ns, λ = 2,99792458 m, ω ≈ 6,28318530718 × 10⁸ rad/s et k ≈ 2,095845022 rad/m.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dispersion du vide relie les paramètres spatiaux et temporels du mode choisi."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre le dossier de phase",
+            "input": "Paramètres dérivés de 1.2 et amplitude crête positive.",
+            "action": "Séparer k, norme positive, du vecteur k = k e_z ; transmettre amplitude, phase et région sans sources à 2.1.",
+            "output": "2.1 reçoit E0,ω,k,ψ et la direction +z, avec l’hypothèse de mode unique.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Les paramètres deviennent les attributs de la paire de champs à établir."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre fréquence et vecteur d’onde",
+            "input": "Dossier transmis en 1.3, valeurs SI et orientation.",
+            "action": "Relire f en Hz, ω en rad/s et k en rad/m ; maintenir E0 comme amplitude, distincte de Ex(z,t).",
+            "output": "La fréquence et le nombre d’onde sont positifs ; le sens réside dans le vecteur k et la phase.",
+            "comparison": "1.4 ↔ 1.3 : paramètres, unités et statut du mode.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise conserve les grandeurs avant leur reconstruction inverse."
+            },
+            "evaluation": {
+              "object": "Fréquence, amplitude, phase et direction transmises.",
+              "conditions": "Même mode dans le vide et même origine de phase.",
+              "criterion": "ω = 2πf, kλ = 2π, cT = λ ; E0 reste une amplitude crête.",
+              "finding": "Les données dérivées gardent leur signification et leurs unités."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver les paramètres temporels",
+            "input": "T,λ et phase repris en 1.4 ; c connu.",
+            "action": "Inverser f = 1/T = c/λ et ω = ck ; suivre ψ constante pour obtenir dz/dt = ω/k.",
+            "output": "f = 100 MHz et dz/dt = +c ; la phase donnée restitue le sens initial.",
+            "comparison": "1.5 ↔ 1.2 : conversions directes et inversions.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La fréquence se reconstruit depuis une période ou une longueur connue, avec le modèle du vide."
+            },
+            "evaluation": {
+              "object": "Construction du mode et reconstruction de ses paramètres.",
+              "conditions": "T,λ positifs et phase complète connue.",
+              "criterion": "1/(10 ns) = 100 MHz ; c/2,99792458 m = 100 MHz ; dz/dt = +c.",
+              "finding": "Le dossier est algébriquement cohérent ; ces relations ne sont pas des mesures de c."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Rendre les attributs du mode",
+            "input": "Fréquence et direction retrouvées en 1.5 ; amplitude et région conservées.",
+            "action": "Restituer à 1.1 E0,f,+z et l’origine de phase ; garder la variante dans son propre dossier.",
+            "output": "Retour à 1.1 : E0 = 3,00 V/m, f = 100 MHz et mode vers +z, sans source locale.",
+            "comparison": "1.6 ↔ 1.1 : amplitude, fréquence, direction et cadre.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture compare les attributs supposés, sans confondre un modèle particulier avec tout champ du vide."
+            },
+            "evaluation": {
+              "object": "Dossier initial et paramètres restitués.",
+              "conditions": "Même origine, aucun champ statique ajouté.",
+              "criterion": "Retrouver f et +z ; conserver E0,ρ = 0,j = 0 et l’origine ψ(0,0) = 0.",
+              "finding": "Les attributs concordent sous les hypothèses données, qui restent à confronter à une situation réelle."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Déduire ensemble les deux champs",
+        "system": "Les contraintes de Maxwell appliquées au mode harmonique transverse de la référence.",
+        "input": "E0,phase ωt−kz et vecteur d’onde reçus de 1 ; divergences nulles et deux rotationnels dans le vide.",
+        "output": "E = E0 cosψ e_x, B = (E0/c)cosψ e_y, ω = ck ; la paire est transverse et sans décalage temporel.",
+        "section": "maxwell",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Maxwell fixe la relation de la paire ; ses résultats fournissent les expressions évaluées en 3."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir phase et contraintes du vide",
+            "input": "1.3 transmet E0,ω,k,ψ et +z ; 2.6 rend la paire reconstruite avec ses contraintes.",
+            "action": "Écrire E = E0 cosψ e_x et retenir les quatre équations de Maxwell sans sources, sans terme statique additionnel.",
+            "output": "Polarisation électrique suivant x ; B et la relation ω,k doivent satisfaire ensemble les équations.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La fonction de phase ne détermine pas seule une paire électromagnétique admissible."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Résoudre les contraintes de Maxwell",
+            "input": "Champ électrique et équations complètes reçus en 2.1.",
+            "action": "Appliquer Gauss puis Faraday : B0 = kE0/ω suivant y ; Maxwell–Ampère donne kB0 = ωE0/c².",
+            "output": "ω = ck pour ω,k > 0 ; B0 = E0/c et E,B perpendiculaires à k.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les divergences imposent la transversalité ; les rotationnels couplent amplitude magnétique et dispersion."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la paire admissible",
+            "input": "E,B et dispersion obtenus en 2.2.",
+            "action": "Consigner la même phase pour les deux champs et la relation B = (e_z×E)/c ; transmettre à 3.1.",
+            "output": "3.1 reçoit E0 cosψ e_x et (E0/c)cosψ e_y pour z = 0,t = T/8.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La paire est transmise comme solution du modèle, sans succession causale E puis B."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre direction et facteur de phase",
+            "input": "Paire transmise en 2.3, base directe et k positif.",
+            "action": "Relire e_z×e_x = e_y et le facteur cosψ commun ; maintenir la distinction composantes et vecteurs.",
+            "output": "Quand cosψ change de signe, E et B s’inversent ensemble ; leur orientation relative reste compatible avec +z.",
+            "comparison": "2.4 ↔ 2.3 : même paire transverse et même phase.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise contrôle les signes avant de reconstruire le champ électrique."
+            },
+            "evaluation": {
+              "object": "Expressions des champs et orientation de la paire.",
+              "conditions": "Base directe, propagation +z et mode unique.",
+              "criterion": "B = (e_z×E)/c et k·E = k·B = 0, y compris aux zéros communs.",
+              "finding": "La relation vectorielle est conservée sans quotient par un champ nul."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire E et vérifier les dérivées",
+            "input": "Paire de 2.4 et contrainte transverse e_z·E = 0.",
+            "action": "Inverser E = −c(e_z×B) ; calculer ∂zEx = kE0 sinψ et −∂tBy = ωB0 sinψ.",
+            "output": "E initial est retrouvé ; Faraday est satisfait car kE0 = ωB0, avec Maxwell–Ampère si ω = ck.",
+            "comparison": "2.5 ↔ 2.2 : construction de B et reconstruction de E.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le double produit vectoriel inverse la relation sous transversalité ; les dérivées vérifient sa compatibilité."
+            },
+            "evaluation": {
+              "object": "Déduction de la paire et vérification inverse.",
+              "conditions": "Même phase, c et dispersion ; pas de composante longitudinale cachée.",
+              "criterion": "−e_z×(e_z×E) = E ; ∂zEx = −∂tBy et −∂zBy = (1/c²)∂tEx.",
+              "finding": "Les deux rotationnels concordent ; une constante statique non prévue n’est pas ajoutée."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Rendre la paire compatible avec l’entrée",
+            "input": "Champ électrique reconstruit en 2.5 et contraintes reçues en 2.1.",
+            "action": "Restituer à 2.1 la polarisation x, l’amplitude E0 et la phase ; conserver les divergences nulles.",
+            "output": "Retour à 2.1 : même E0 cosψ e_x et même région sans sources, avec B associé.",
+            "comparison": "2.6 ↔ 2.1 : champ d’entrée et contraintes du mode.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour retrouve les attributs électriques et le cadre initial, pas seulement une amplitude magnétique."
+            },
+            "evaluation": {
+              "object": "Champ supposé et champ reconstitué.",
+              "conditions": "Même direction, même origine et même amplitude.",
+              "criterion": "E = E0 cos(ωt−kz)e_x ; div E = 0 et B associé sans terme statique.",
+              "finding": "La reconstruction satisfait les entrées du modèle ; elle reste une vérification interne."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Calculer les champs au point choisi",
+        "system": "Les valeurs instantanées prédites en z = 0,t = T/8, séparées des amplitudes crêtes.",
+        "input": "Paire de 2, E0 = 3,00 V/m, f = 100 MHz ; c exact et point fixé.",
+        "output": "ψ = π/4, Ex ≈ +2,121320 V/m et By ≈ +7,075963 nT ; B0 ≈ 10,006923 nT.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’application numérique fournit à 4 un dossier de champs et de phase, sans statut de mesure."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les expressions au point prescrit",
+            "input": "2.3 transmet la paire et ψ ; 3.6 restitue amplitudes et point après inversion.",
+            "action": "Fixer z = 0,t = T/8 = 1,25 ns ; conserver E0 = 3,00 V/m et T = 10 ns.",
+            "output": "La phase est déterminée par les coordonnées et l’origine connues, pas estimée depuis une mesure.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le choix du point distingue donnée géométrique, instant et résultat de champ."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Évaluer phase et composantes",
+            "input": "Expressions et point de 3.1 ; amplitudes crêtes données.",
+            "action": "Calculer ψ = π/4, cosψ = 1/√2, B0 = E0/c, puis Ex = E0/√2 et By = B0/√2.",
+            "output": "Ex ≈ +2,121320 V/m, By ≈ +7,075963 nT ; B0 ≈ 10,006923 nT.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le facteur de phase réduit les composantes instantanées sans modifier les amplitudes du mode."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les valeurs avec leur phase",
+            "input": "Valeurs calculées en 3.2, ψ = π/4 et coordonnées connues.",
+            "action": "Associer aux nombres leurs directions +e_x,+e_y ; transmettre à 4.1 les champs, le point et les paramètres du mode.",
+            "output": "4.1 reçoit Ex,By,ψ,z = 0,t = T/8 ainsi que E0,f,k et λ.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour reçoit un dossier complet ; un nombre de champ isolé perdrait ces conditions."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre amplitude et valeur instantanée",
+            "input": "Dossier transmis en 3.3, avec composantes et amplitudes distinctes.",
+            "action": "Relire Ex < E0 et By < B0 ; convertir les nanoteslas en teslas avant tout quotient.",
+            "output": "Les deux valeurs instantanées représentent 1/√2 de leur amplitude et portent les signes de cosψ.",
+            "comparison": "3.4 ↔ 3.3 : valeurs, unités et point de calcul.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise empêche d’identifier une valeur locale à l’amplitude crête."
+            },
+            "evaluation": {
+              "object": "Composantes instantanées et paramètres transmis.",
+              "conditions": "Même z,t et mêmes unités SI.",
+              "criterion": "Ex/E0 = By/B0 = 1/√2 ; By ≈ 7,075963 × 10⁻⁹ T.",
+              "finding": "Les résultats sont conservés avec leur phase explicitement connue."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstituer les amplitudes à phase connue",
+            "input": "Ex,By et ψ = π/4 repris en 3.4.",
+            "action": "Inverser E0 = Ex/cosψ et B0 = By/cosψ ; contrôler E0 = cB0.",
+            "output": "E0 = 3,00 V/m et B0 ≈ 10,006923 nT ; l’inversion exige ici cosψ ≠ 0.",
+            "comparison": "3.5 ↔ 3.2 : modulation directe et démultiplication du facteur de phase.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Une phase donnée lève l’ambiguïté entre amplitude et valeur instantanée."
+            },
+            "evaluation": {
+              "object": "Calcul des champs et reconstruction des amplitudes.",
+              "conditions": "Phase fournie, non déduite d’un cosinus isolé ; valeurs non arrondies pour l’inversion.",
+              "criterion": "√2 Ex = 3,00 V/m et √2 By = 3/c T.",
+              "finding": "Les amplitudes sont retrouvées ; à cosψ = 0, cette inversion serait impossible."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Rendre amplitudes et point de référence",
+            "input": "Amplitudes retrouvées en 3.5, f,z,t maintenus.",
+            "action": "Restituer à 3.1 E0,B0 et le point choisi ; conserver la fréquence comme donnée initiale.",
+            "output": "Retour à 3.1 : E0 = 3,00 V/m, z = 0,t = 1,25 ns et T = 10 ns.",
+            "comparison": "3.6 ↔ 3.1 : amplitude, coordonnées et fréquence donnée.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour retrouve les entrées nécessaires au calcul, sans extraire une fréquence d’un seul échantillon."
+            },
+            "evaluation": {
+              "object": "Attributs du calcul local reçu.",
+              "conditions": "Même origine de phase et même fréquence.",
+              "criterion": "E0 reconstitué vaut 3,00 V/m ; z = 0,t = T/8 et f = 100 MHz restent identifiés.",
+              "finding": "Le dossier se referme ; une valeur instantanée seule ne reconstituerait pas tous ses attributs."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Reprendre la phase dans l’espace",
+        "system": "Le dossier calculé relu comme une phase qui se transporte et reste uniforme dans chaque plan transverse.",
+        "input": "Champs, phase π/4 et point z = 0,t = T/8 de 3 ; mode vers +z conservé.",
+        "output": "La phase choisie suit z = c(t−T/8) ; une translation transverse laisse les champs inchangés, sans imposer E·r = 0.",
+        "section": "propagation",
+        "comparison": "4 ↔ 3 : conserver champs et phase en distinguant point fixe, phase transportée et plan transverse.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "La reprise décrit la géométrie du résultat ; elle fournit en 5 les conditions d’une reconstruction du mode."
+        },
+        "evaluation": {
+          "object": "Champs locaux de 3 et dossier spatial de retour.",
+          "conditions": "Même onde et même origine ; les points auxiliaires sont des positions de calcul.",
+          "criterion": "À ψ = π/4, Ex = E0/√2 et By = E0/(c√2), indépendamment du point choisi sur ce plan de phase.",
+          "finding": "Les valeurs sont conservées sur une phase transportée ; aucune particule n’est supposée suivre cette phase."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir champs et point de phase",
+            "input": "3.3 transmet Ex,By,ψ et les paramètres ; 4.6 rend leur description spatiale.",
+            "action": "Distinguer le point fixe z = 0 du plan de phase ψ = π/4 passant par ce point à t = T/8.",
+            "output": "Même dossier numérique, examiné désormais sous translations spatiales et évolution de phase.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La reprise conserve les résultats et change la question posée sur leur géométrie."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Suivre le plan de phase constante",
+            "input": "Phase ωt−kz = π/4 et ω/k = c reçues en 4.1.",
+            "action": "Résoudre z(t) = c(t−T/8) ; à t = T/4, obtenir z = λ/8 et les mêmes composantes.",
+            "output": "La phase avance vers +z ; en z = λ/8,t = T/4, Ex et By gardent les valeurs de référence.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La vitesse calculée est celle de la phase, pas celle d’un porteur matériel."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la géométrie de propagation",
+            "input": "Plan de phase et champs invariants sur ce plan issus de 4.2.",
+            "action": "Consigner λ/8 = 0,3747405725 m et le décalage temporel T/8 ; transmettre avec la paire orientée à 5.1.",
+            "output": "5.1 reçoit les champs, la phase connue, λ et la propagation +z pour reconstruire les attributs du mode.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Les données spatiales complètent la paire instantanée sans constituer une observation indépendante."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre ce qui se transporte",
+            "input": "Résultats spatiaux et temporels transmis en 4.3.",
+            "action": "Relire les coordonnées des deux points de calcul et la même phase ; distinguer cette translation de l’oscillation à z fixe.",
+            "output": "Un décalage de λ/8 vers +z accompagne T/8 ; Ex et By sont inchangés à phase fixée.",
+            "comparison": "4.4 ↔ 4.3 : positions, instants et phase comparables.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise ne traite pas l’oscillation du champ comme la trajectoire d’une particule."
+            },
+            "evaluation": {
+              "object": "Dossier de phase transportée et données transmises.",
+              "conditions": "Même onde et phase π/4, avec t1 = T/8 et t2 = T/4.",
+              "criterion": "k(z2−z1) = ω(t2−t1) = π/4.",
+              "finding": "Les deux points partagent la phase et les champs calculés."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Tester une translation dans le plan transverse",
+            "input": "Phase et champs de 4.4 ; position auxiliaire r = x0 e_x+z e_z avec x0 ≠ 0.",
+            "action": "Garder z,t et déplacer x : ψ reste identique ; calculer k·E = 0 mais r·E = x0Ex.",
+            "output": "Les champs sont transverses à k, alors que r·E est non nul au point de phase π/4 si x0 ≠ 0.",
+            "comparison": "4.5 ↔ 4.2 : invariance de phase longitudinale et transverse.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Une translation transverse conserve le plan d’onde et fournit un contre-exemple explicite à E ⟂ r."
+            },
+            "evaluation": {
+              "object": "Description de la propagation et critère de transversalité.",
+              "conditions": "Même phase non nulle en champ ; x0 est une coordonnée auxiliaire, non une mesure.",
+              "criterion": "ψ ne dépend pas de x ; k·E = 0 et r·E = x0E0/√2.",
+              "finding": "L’orthogonalité vise k, pas le vecteur position arbitraire ; le plan de phase reste cohérent."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Rendre le dossier géométrique corrigé",
+            "input": "Invariances et produits scalaires de 4.5, point reçu en 4.1.",
+            "action": "Restituer à 4.1 le point de référence et ses champs, avec +z comme direction et k comme normale aux plans.",
+            "output": "Retour à 4.1 : mêmes Ex,By,ψ et coordonnées ; aucune orthogonalité générale à r n’est ajoutée.",
+            "comparison": "4.6 ↔ 4.1 : champs, point et direction reçus.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture conserve les résultats initiaux et précise la géométrie qui les accompagne."
+            },
+            "evaluation": {
+              "object": "Dossier initial et description spatiale restituée.",
+              "conditions": "Même origine et même mode ; positions auxiliaires gardées distinctes.",
+              "criterion": "Retrouver ψ = π/4 en z = 0,t = T/8 et la paire positive Ex,By.",
+              "finding": "Les données sont intactes ; la transversalité est explicitement indépendante du choix d’origine spatiale."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Reconstruire le mode sous les contraintes de Maxwell",
+        "system": "L’inversion des attributs de l’onde et l’examen des conditions qui rendent la paire admissible.",
+        "input": "Paire orientée, phase connue, λ et propagation de 4 ; hypothèses de mode unique et de vide conservées.",
+        "output": "E0,f,k et sens se reconstruisent avec leurs données nécessaires ; d’Alembert seul admet aussi des champs refusés par Maxwell.",
+        "section": "retour",
+        "comparison": "5 ↔ 2 : comparer la déduction complète de Maxwell et la reconstruction conditionnelle de la paire.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’inversion et un champ d’essai non admissible délimitent la théorie appliquée ensuite à la variante de 6."
+        },
+        "evaluation": {
+          "object": "Déduction des champs en 2 et traitement inverse en 5.",
+          "conditions": "Même onde unique sans sources ; phase et λ fournies pour les inversions.",
+          "criterion": "Reconstruire E0 = Ex/cosψ, f = c/λ et k = 2π/λ ; exiger les divergences et rotationnels en plus de d’Alembert.",
+          "finding": "Les paramètres sont retrouvés sous Maxwell ; une solution de l’équation d’onde seule n’est pas un critère suffisant."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les données nécessaires à l’inversion",
+            "input": "4.3 transmet Ex,By,ψ = π/4,λ et direction ; 5.6 restitue le dossier avec ses contraintes.",
+            "action": "Traiter E0,f,k et le sens comme inconnus à retrouver, tout en conservant c,λ et la phase donnée.",
+            "output": "La paire est non nulle au point choisi ; une information de phase et une longueur d’onde sont disponibles.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "L’inversion dispose de données précisées, sans prétendre extraire tout le mode d’un unique nombre."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Reconstruire amplitude, fréquence et direction",
+            "input": "Données reçues en 5.1 : Ex,By,ψ,λ,c et base directe.",
+            "action": "Calculer E0 = Ex/cosψ, f = c/λ, k = 2π/λ ; orienter n suivant E×B pour cette onde unique.",
+            "output": "E0 = 3,00 V/m, f = 100 MHz, k ≈ 2,095845022 rad/m et n = +e_z.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La phase fixe l’amplitude, λ fixe f ; la paire vectorielle non nulle fixe ici le sens."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les conditions de reconstruction",
+            "input": "Attributs reconstruits en 5.2 et contraintes de la paire.",
+            "action": "Consigner le mode retrouvé et les conditions utilisées ; transmettre à 6.1 pour inverser le sens dans un autre dossier.",
+            "output": "6.1 reçoit E0,f,k,origine de phase et relation B = (n×E)/c, sous Maxwell complet.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour fournit un cadre pour une variante, pas la superposition d’une seconde onde."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les informations absentes d’un échantillon",
+            "input": "Résultats et conditions transmis en 5.3.",
+            "action": "Relire l’usage de ψ connue ; si seul cosψ est fourni, conserver les deux branches ±arccos et leurs répétitions modulo 2π.",
+            "output": "Une phase absolue et une fréquence ne sont pas déterminées par une seule composante instantanée ; aux zéros, Ex/By est indéfini.",
+            "comparison": "5.4 ↔ 5.3 : mêmes attributs et mêmes données nécessaires.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise maintient les conditions de l’inversion au lieu d’attribuer aux champs des informations non fournies."
+            },
+            "evaluation": {
+              "object": "Paramètres reconstruits et portée de leur identification.",
+              "conditions": "Un seul instant ne représente pas une série temporelle ; mode supposé connu.",
+              "criterion": "Ne retrouver E0 par division que si cosψ est donné non nul ; ne former Ex/By qu’hors zéro commun.",
+              "finding": "L’inversion reste conditionnelle ; le dossier de référence satisfait ces conditions."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Soumettre un champ longitudinal à Gauss",
+            "input": "Contraintes reprises en 5.4 ; cas d’essai séparé E_test = E0 cosψ e_z, B_test = 0.",
+            "action": "Calculer son d’Alembert, nul si ω = ck, puis div E_test = kE0 sinψ.",
+            "output": "L’équation d’onde est satisfaite mais Gauss échoue en général ; ce champ d’essai est rejeté comme onde du vide sans sources.",
+            "comparison": "5.5 ↔ 5.2 : reconstruction sous Maxwell et test de ses conditions.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le contre-exemple sépare une équation nécessaire des contraintes qui ont rendu l’inversion électromagnétique admissible."
+            },
+            "evaluation": {
+              "object": "Inversion du mode transverse et insuffisance de d’Alembert seul.",
+              "conditions": "Champ d’essai distinct, sinψ non identiquement nul et ρ = 0 imposé.",
+              "criterion": "D’Alembert(E_test) = 0 alors que div E_test = kE0 sinψ ≠ 0 en général.",
+              "finding": "Le modèle longitudinal ne peut remplacer la paire de 5.2 ; satisfaire l’équation d’onde ne suffit pas."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Rendre la paire transverse identifiée",
+            "input": "Mode reconstruit en 5.2 et champ d’essai rejeté en 5.5.",
+            "action": "Réinjecter E0,f,k,+z dans la paire transverse ; restituer à 5.1 Ex,By,λ et la phase connue.",
+            "output": "Retour à 5.1 : Ex = 3/√2 V/m, By = 3/(c√2) T et λ = 2,99792458 m.",
+            "comparison": "5.6 ↔ 5.1 : données de l’inverse et contraintes restituées.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture retrouve les attributs reçus en conservant l’exigence de Maxwell complet."
+            },
+            "evaluation": {
+              "object": "Paire et paramètres du dossier d’entrée.",
+              "conditions": "Même point, même phase et vide sans sources.",
+              "criterion": "Reproduire Ex,By,λ et la direction +z ; exclure E_test longitudinal.",
+              "finding": "La reconstruction est interne et compatible avec les entrées ; elle n’est pas une validation expérimentale."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Comparer une propagation vers le sens opposé",
+        "system": "La variante indépendante vers −z, aux mêmes amplitude, fréquence et origine de phase que la référence.",
+        "input": "Mode et contraintes de 5 ; ψ− = ωt+kz, E0 = 3,00 V/m et f = 100 MHz conservés.",
+        "output": "Au point z = 0,t = T/8, Ex reste positif et inchangé ; By devient négatif, avec n = −e_z.",
+        "section": "controle",
+        "comparison": "6 ↔ 1 : mêmes amplitude, fréquence, origine et vide ; direction modifiée dans un dossier indépendant.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La variante applique Maxwell au sens opposé, puis retourne vers 1 avec invariants et différence explicités."
+        },
+        "evaluation": {
+          "object": "Attributs du mode final comparés au dossier initial de 1.",
+          "conditions": "Deux scénarios distincts, mêmes E0,f,λ et phase à l’origine ; même point de comparaison.",
+          "criterion": "√2 Ex = 3,00 V/m et c/λ = 100 MHz dans les deux cas ; le sens de E×B passe de +z à −z.",
+          "finding": "Amplitude et fréquence sont restituées ; seule la propagation est inversée. Les deux ondes ne sont pas superposées."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir une variante indépendante",
+            "input": "5.3 transmet E0,f,k et Maxwell ; 6.6 rend ces attributs et le sens reconstruit.",
+            "action": "Poser n = −e_z et ψ− = ωt+kz ; garder E− suivant x, le point de calcul et la référence séparée.",
+            "output": "Même E0 et même f ; changer la direction impose de reconstruire aussi B−.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La phase et la paire appartiennent à un autre scénario, sans réflexion ni commutation modélisées."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Déduire la paire vers −z",
+            "input": "Direction et phase de 6.1, même dispersion ω = ck.",
+            "action": "Calculer B− = (−e_z×E−)/c ; à z = 0,t = T/8, évaluer E− et B−.",
+            "output": "Ex,− ≈ +2,121320 V/m et By,− ≈ −7,075963 nT ; la phase constante se déplace à −c.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le signe de B− suit le produit vectoriel ; le cosinus au plan z = 0 reste le même."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la variante au dossier initial",
+            "input": "Paire de 6.2 et référence vers +z conservée.",
+            "action": "Consigner les deux directions et leurs champs au même point ; transmettre la variante séparément à 1.1.",
+            "output": "1.1 reçoit mêmes E0,f,λ et origine, avec la phase ψ− ; au point choisi, By change de signe et Ex reste identique.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le raccord permet une nouvelle comparaison sans remplacer les données de l’onde initiale."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les invariants et les signes",
+            "input": "Dossiers comparés transmis en 6.3.",
+            "action": "Relire Ex,− = Ex,+ au plan z = 0 et By,− = −By,+ ; distinguer cette comparaison du rapport des amplitudes.",
+            "output": "E0/B0 = c reste positif dans les deux cas ; le quotient signé Ex/By vaut −c dans la variante hors zéro.",
+            "comparison": "6.4 ↔ 6.3 : même paire de scénarios au même point.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les amplitudes positives ne transportent pas la même information que les composantes orientées."
+            },
+            "evaluation": {
+              "object": "Valeurs comparées et sens des champs.",
+              "conditions": "Plan z = 0 et t = T/8 ; base fixe, champs non nuls.",
+              "criterion": "Ex,− = +3/√2 V/m ; By,− = −3/(c√2) T.",
+              "finding": "Les invariants et le changement de signe sont conservés sans annoncer une onde stationnaire."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire le sens et tester un signe erroné",
+            "input": "Paire de variante reprise en 6.4 et phase ψ− connue.",
+            "action": "Retrouver n = −e_z par E−×B− ; tester B_faux = +(E0/c)cosψ− e_y dans Faraday.",
+            "output": "Le bon signe satisfait Maxwell ; pour B_faux, rot E−+∂tB_faux = −2kE0 sinψ− e_y, non nul en général.",
+            "comparison": "6.5 ↔ 6.2 : déduction orientée et contrôle inverse par Faraday.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le test différentiel rejette la paire de mauvais signe, même si ses composantes satisfont séparément d’Alembert."
+            },
+            "evaluation": {
+              "object": "Relation magnétique directe et reconstruction du sens.",
+              "conditions": "Même E− et même phase ; B_faux est un essai distinct, pas un champ ajouté.",
+              "criterion": "Le résidu de Faraday s’annule pour B− mais pas pour B_faux, notamment à ψ− = π/4.",
+              "finding": "La direction −z exige le signe magnétique retenu ; l’équation d’onde seule ne le fixe pas."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Rendre les attributs de l’onde opposée",
+            "input": "Sens retrouvé en 6.5, amplitudes et λ conservées en 6.4.",
+            "action": "Restituer à 6.1 n = −e_z, E0 = √2 Ex,− et f = c/λ ; comparer à la référence de 1.",
+            "output": "Retour à 6.1 : E0 = 3,00 V/m, f = 100 MHz, sens −z ; la référence reste vers +z.",
+            "comparison": "6.6 ↔ 6.1 : amplitude, fréquence, origine et sens.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture retrouve les entrées propres de la variante et distingue la différence avec le dossier initial."
+            },
+            "evaluation": {
+              "object": "Attributs de variante et données reçues.",
+              "conditions": "Même phase connue au point, même vide et même base.",
+              "criterion": "Retrouver E0,f et n = −e_z ; conserver ψ−(0,0) = 0 et l’absence de superposition.",
+              "finding": "La variante se referme avec ses entrées ; aucun changement réel d’appareil ni mesure n’est supposé."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "polarisation-onde-electromagnetique": {
+    "question": "Comment relier les composantes d’une onde à son ellipse et aux intensités transmises, puis retrouver ce que ces projections déterminent ou laissent ambigu ?",
+    "basis": "Onde +z, ψ = ωt − kz, a = 3,00 V/m, b = 2,00 V/m, f = 100 MHz ; référence δ = −π/2, variante séparée δ = +π/2. Analyseur linéaire idéal et moyennes périodiques. Paramètres supposés, résultats calculés.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "La forme, le parcours temporel et les projections moyennes sont traités séparément. Chaque reconstruction précise la calibration, les axes connus et les informations de phase perdues.",
+    "subject": {
+      "type": "physique",
+      "description": "La polarisation d’une onde électromagnétique cohérente et sa transmission par projection sur un analyseur linéaire idéal.",
+      "scope": "Onde progressive monochromatique dans le vide ; géométrie transverse, intensités périodiques et inversion conditionnelle. Aucune mesure, antenne ni réponse matérielle du polariseur n’est modélisée."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Définir l’onde et la lecture temporelle",
+        "system": "Le dossier des composantes transverses et des conventions d’observation.",
+        "input": "a = 3,00 V/m, b = 2,00 V/m, f = 100 MHz, δ = −π/2, propagation +z ; variante reçue de 6.3 séparément.",
+        "output": "Phase ψ = ωt − kz ; à z = 0, E(0) = (3,0,0) puis déplacement vers +y ; axes et vue fixés.",
+        "section": "composantes",
+        "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Les paramètres et les conventions déterminent le sens du parcours temporel sans l’assimiler au sens de propagation."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les attributs de polarisation",
+            "input": "Scénario de référence ; 6.3 ajoute la variante δ = +π/2 ; 1.6 restitue les conventions contrôlées.",
+            "action": "Distinguer les dossiers par δ et fixer a,b,f, les axes directs, z = 0 et la vue depuis +z.",
+            "output": "Référence δ = −π/2 conservée ; variante nommée séparément, même sens de propagation et même base.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La reprise conserve les attributs reçus et évite de superposer deux ondes distinctes."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Passer des paramètres à la phase et au mouvement",
+            "input": "Fréquence et déphasage de 1.1 ; c exact et μ0 approché communs au lot.",
+            "action": "Calculer T = 1/f, ω = 2πf, k = ω/c ; utiliser cos(ψ − π/2) = sinψ et dériver à z = t = 0.",
+            "output": "T = 10 ns, k ≈ 2,095845 rad/m ; E(0) = (3,0,0), ∂tEy(0) = bω > 0.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivée temporelle établit le départ vers +y au point fixé ; le signe −kz concerne la propagation."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre un champ paramétré",
+            "input": "Phase, composantes et mouvement initial calculés en 1.2.",
+            "action": "Associer à E ses amplitudes positives, sa quadrature et la relation B = e_z × E/c pour l’élimination de phase.",
+            "output": "À 2.1 : Ex = a cosψ, Ey = b sinψ ; a = 3, b = 2, référence +x vers +y.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le champ défini fournit les entrées du calcul de l’ellipse et des projections."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire le lieu où le champ est suivi",
+            "input": "Champ paramétré et conventions transmis en 1.3.",
+            "action": "Maintenir z fixé lorsque t varie et distinguer la succession temporelle d’une coupe spatiale à instant fixé.",
+            "output": "Le parcours annoncé concerne un seul point ; les flèches ne suivent ni une particule ni un déplacement spatial.",
+            "comparison": "1.4 ↔ 1.3 : même champ et même lecture temporelle.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les conditions d’observation déterminent le sens de variation de la phase."
+            },
+            "evaluation": {
+              "object": "Conventions reprises et champ transmis.",
+              "conditions": "z = 0 fixé, temps croissant, vue depuis +z vers l’origine.",
+              "criterion": "Conserver ψ = ωt et le départ vers +y ; ne pas remplacer ∂t par ∂z.",
+              "finding": "Le mouvement initial reste compatible avec la paramétrisation ; aucune trajectoire matérielle n’est décrite."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Comparer variations temporelle et spatiale",
+            "input": "Phase reprise en 1.4 et relation de propagation +z.",
+            "action": "Calculer ∂tψ = ω et ∂zψ = −k ; imposer dψ = 0 pour obtenir dz/dt = ω/k = c.",
+            "output": "Le parcours temporel et la coupe suivant +z lisent des phases opposées ; les fronts de phase avancent pourtant suivant +z.",
+            "comparison": "1.5 ↔ 1.2 : dérivées temporelle et spatiale de la phase.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les dérivées de la même phase distinguent rotation locale et propagation des fronts."
+            },
+            "evaluation": {
+              "object": "Dérivées de phase et mouvement déduit au départ.",
+              "conditions": "ω,k positifs ; une unique onde progressive et base inchangée.",
+              "criterion": "Retrouver ∂tEy(0) > 0 et vitesse de phase +c sans attribuer cette vitesse à l’ellipse locale.",
+              "finding": "La vue et l’ordre temporel suffisent à lever l’ambiguïté descriptive du parcours."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les conventions utilisables",
+            "input": "Phase et deux lectures distinguées en 1.5 ; dossiers initiaux conservés.",
+            "action": "Retourner à 1.1 les amplitudes, le déphasage, le plan d’observation, les axes et la propagation, sans changer la variante.",
+            "output": "Retour à 1.1 : a = 3, b = 2, f = 100 MHz, δ = −π/2 ; dossier δ = +π/2 toujours distinct.",
+            "comparison": "1.6 ↔ 1.1 : mêmes paramètres et mêmes conventions.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture restitue les attributs permettant de reproduire le champ initial."
+            },
+            "evaluation": {
+              "object": "Attributs restitués et dossier d’entrée.",
+              "conditions": "Référence et variante distinctes, z = 0, même origine de phase.",
+              "criterion": "Retrouver E(0) = (3,0,0) et le départ vers +y pour la référence uniquement.",
+              "finding": "La définition est reproductible ; elle ne prouve pas l’existence expérimentale de l’onde supposée."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Éliminer la phase et projeter le champ",
+        "system": "Le modèle analytique reliant composantes, ellipse et intensités moyennes.",
+        "input": "Champ de 1 : Ex = a cosψ, Ey = b sinψ ; extension symbolique Ey = b cos(ψ + δ).",
+        "output": "En quadrature, Ex²/a² + Ey²/b² = 1 ; Iθ = K[a²cos²θ + b²sin²θ + 2ab cosδ cosθsinθ], K = ε0c/2.",
+        "section": "ellipse",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’élimination de la phase donne le lieu ; la projection suivie d’une moyenne donne une autre information sur ce champ."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les composantes à relier",
+            "input": "1.3 fournit la quadrature et les amplitudes ; 2.6 retourne les identités et leurs conditions.",
+            "action": "Garder le champ de référence et introduire δ symbolique seulement pour repérer les termes conservés par la projection.",
+            "output": "x = Ex/a = cosψ ; y = Ey/b = cosψ cosδ − sinψ sinδ, avec a,b > 0.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La généralisation symbolique conserve la référence comme cas δ = −π/2."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Éliminer la phase et moyenner une projection",
+            "input": "Composantes normalisées de 2.1 et axe uθ = cosθ e_x + sinθ e_y.",
+            "action": "Éliminer sinψ pour obtenir x² + y² − 2xy cosδ = sin²δ ; développer Eθ² puis moyenner sur T.",
+            "output": "Quadrature : x² + y² = 1 ; Iθ = K[a²cos²θ + b²sin²θ + 2ab cosδ cosθsinθ].",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "〈cos²ψ〉 = 1/2 et 〈cosψ cos(ψ + δ)〉 = cosδ/2 expliquent chaque terme transmis."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les lois applicables aux nombres",
+            "input": "Ellipse et loi de projection obtenues en 2.2 ; Iin = K(a² + b²).",
+            "action": "Spécialiser δ = −π/2 sans changer a,b ; réserver les autres déphasages à des comparaisons nommées.",
+            "output": "À 3.1 : Ex²/a² + Ey²/b² = 1 et Iθ/Iin = (a²cos²θ + b²sin²θ)/(a² + b²).",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Ces lois permettent les calculs de points et de fractions sans recourir à Malus pour l’ellipse."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les conditions d’élimination",
+            "input": "Lois quadratiques transmises en 2.3.",
+            "action": "Vérifier que a,b sont non nuls et que la quadrature supprime le terme croisé ; conserver l’origine temporelle séparément.",
+            "output": "L’équation de l’ellipse fixe son lieu, mais ne fixe ni le sens du parcours ni l’instant de passage.",
+            "comparison": "2.4 ↔ 2.3 : mêmes lois et domaine de validité.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "L’élimination de ψ retire une information temporelle présente dans les composantes."
+            },
+            "evaluation": {
+              "object": "Ellipse et projections reprises.",
+              "conditions": "a,b positifs ; δ = −π/2 dans la référence.",
+              "criterion": "Retrouver les demi-axes a,b sans déduire le parcours de la seule équation quadratique.",
+              "finding": "Le lieu géométrique est correctement identifié ; une chronologie ne peut pas être reconstruite par cette seule élimination."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Réintroduire une phase et comparer la ligne",
+            "input": "Lieu et information perdue identifiés en 2.4.",
+            "action": "Paramétrer le même lieu par (a cosψ, ±b sinψ) ; pour δ = 0, factoriser Eθ = √(a² + b²) cos(θ − θ0) cosψ.",
+            "output": "Les deux signes décrivent l’ellipse ; dans le seul cas linéaire auxiliaire, θ0 = atan2(b,a) et Iθ/Iin = cos²(θ − θ0).",
+            "comparison": "2.5 ↔ 2.2 : reconstruire des composantes et comparer la projection.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La reparamétrisation expose l’ambiguïté du lieu ; la factorisation dérive les conditions de Malus."
+            },
+            "evaluation": {
+              "object": "Élimination directe et reconstructions proposées.",
+              "conditions": "Quadrature pour l’ellipse ; δ = 0 traité comme cas auxiliaire séparé.",
+              "criterion": "Retrouver l’ellipse avec les deux signes et la loi de Malus dans le cas linéaire auxiliaire δ = 0 retenu ici.",
+              "finding": "La forme elliptique ne suffit pas au sens ; le cas linéaire requiert une autre condition de phase."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le modèle et ses pertes d’information",
+            "input": "Paramétrisations et spécialisation linéaire de 2.5.",
+            "action": "Retourner à 2.1 les composantes de référence, le calcul de moyenne et les conditions des deux comparaisons.",
+            "output": "Retour à 2.1 : quadrature conservée, terme cosδ nul ; δ = 0 reste auxiliaire et non une évolution observée.",
+            "comparison": "2.6 ↔ 2.1 : même champ initial et extension symbolique contrôlée.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture garde la distinction entre composantes temporelles et informations quadratiques."
+            },
+            "evaluation": {
+              "object": "Modèle restitué et composantes reçues.",
+              "conditions": "a = 3, b = 2 et δ = −π/2 pour l’application numérique.",
+              "criterion": "Réinjecter la référence dans les lois et retrouver Ey = b sinψ, l’ellipse et l’absence de terme croisé.",
+              "finding": "Les identités se referment ; l’accord reste un contrôle analytique interne."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Calculer la référence elliptique",
+        "system": "L’application chiffrée du champ local et des transmissions aux trois angles retenus.",
+        "input": "Lois de 2 avec a = 3,00 V/m, b = 2,00 V/m, δ = −π/2 ; z = 0 et constantes communes.",
+        "output": "E(T/8) = (3/√2,2/√2,0) V/m ; I0/Iin = 9/13, I45/Iin = 1/2, I90/Iin = 4/13.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’application fixe des résultats de référence dont les décimales servent au contrôle numérique, sans représenter des mesures."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les lois et les points demandés",
+            "input": "2.3 transmet les lois de quadrature ; 3.6 restitue les résultats vérifiés.",
+            "action": "Fixer z = 0, t = T/8 puis T/4, et les angles θ = 0°,45°,90° ; garder les valeurs en unités SI.",
+            "output": "Dossier à calculer : a = 3, b = 2 V/m, T = 10 ns et Iin = K × 13.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le choix des points et angles rend la comparaison numérique reproductible."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Évaluer les champs et intensités",
+            "input": "Dossier numérique de 3.1 ; ε0 = 1/(μ0c²) et K = ε0c/2.",
+            "action": "Substituer ψ = π/4 puis π/2 ; calculer Iin et les trois carrés de projection moyens.",
+            "output": "E(T/8) ≈ (2,121320 ; 1,414214 ; 0) V/m ; E(T/4) = (0,2,0) ; Iin ≈ 0,017253722 W/m².",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les intensités I0,I45,I90 valent respectivement K × 9, K × 6,5 et K × 4."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les résultats et leur provenance",
+            "input": "Composantes et intensités calculées en 3.2.",
+            "action": "Associer aux trois angles les fractions 9/13,1/2,4/13 et les valeurs absolues correspondantes ; marquer ces données comme calculées.",
+            "output": "À 4.1 : I0 ≈ 0,011944884, I45 ≈ 0,008626861, I90 ≈ 0,005308837 W/m² ; séquence du champ conservée.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La reprise dispose d’intensités calculées et de leur normalisation, pas d’un relevé expérimental."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire les unités et la distinction crête-moyenne",
+            "input": "Résultats chiffrés transmis en 3.3.",
+            "action": "Séparer amplitudes de composantes, norme instantanée et intensités moyennes ; relever la provenance de chaque nombre.",
+            "output": "À T/8, |E| = √6,5 ≈ 2,549510 V/m ; Iin est une moyenne et non la norme instantanée du champ.",
+            "comparison": "3.4 ↔ 3.3 : même résultat et statut numérique.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les unités et la moyenne définissent des grandeurs différentes malgré l’emploi commun des composantes."
+            },
+            "evaluation": {
+              "object": "Nombres repris et calculs transmis.",
+              "conditions": "Les valeurs décimales sont arrondies ; amplitudes crêtes et moyenne sur une période.",
+              "criterion": "Préserver V/m pour E et W/m² pour I ; fractions sans dimension et composantes signées.",
+              "finding": "Les nombres correspondent aux grandeurs annoncées ; aucune précision instrumentale n’est implicite."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Réinjecter les composantes et les fractions",
+            "input": "Composantes à T/8 et fractions identifiées en 3.4.",
+            "action": "Calculer Ex²/9 + Ey²/4 = 1 ; retrouver I0 + I90 = Iin, I45 = Iin/2 et √(I0/I90) = 3/2.",
+            "output": "Le point appartient à l’ellipse ; le rapport √(I0/I90) retrouve a/b = 3/2, mais ce rapport seul ne fixe pas l’échelle absolue.",
+            "comparison": "3.5 ↔ 3.2 : calcul direct et contrôles par réinjection.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La substitution et les rapports contrôlent le calcul direct tout en précisant les données qu’ils éliminent."
+            },
+            "evaluation": {
+              "object": "Points et transmissions calculés par deux écritures.",
+              "conditions": "Fractions exactes utilisées avant arrondi ; modèle de quadrature inchangé.",
+              "criterion": "Retrouver l’ellipse, la somme des deux projections orthogonales et le rapport d’amplitudes.",
+              "finding": "Les égalités sont cohérentes entre elles ; elles ne constituent pas trois validations expérimentales indépendantes."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer l’application reproductible",
+            "input": "Contrôles de 3.5 et points demandés en 3.1.",
+            "action": "Retourner à 3.1 les temps, angles, valeurs et facteurs de normalisation ; conserver a,b en paramètres supposés.",
+            "output": "Retour à 3.1 : T/8,T/4, trois angles, mêmes composantes et fractions ; calibration numérique du modèle explicitée.",
+            "comparison": "3.6 ↔ 3.1 : mêmes données et mêmes demandes.",
+            "relation": {
+              "nature": "logique",
+              "description": "La boucle retrouve les choix nécessaires pour répéter les calculs de référence."
+            },
+            "evaluation": {
+              "object": "Application restituée et dossier de calcul reçu.",
+              "conditions": "a = 3, b = 2, δ = −π/2 ; z = 0 et constantes identiques.",
+              "criterion": "Retrouver 9/13,1/2,4/13 et le signe positif de Ey à T/8.",
+              "finding": "La référence est calculée avec ses conventions ; la variante de phase n’est pas absorbée dans ces résultats."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Reprendre ce que les intensités décrivent",
+        "system": "La lecture des transmissions calculées comme contraintes sur une réponse angulaire.",
+        "input": "Résultats de 3 : I0,I45,I90 et fractions normalisées ; origine calculée et séquence signée gardées distinctes.",
+        "output": "Réponse Iθ/Iin = (9 cos²θ + 4 sin²θ)/13, extrema 9/13 et 4/13 ; aucune extinction, sens de parcours non déterminé.",
+        "section": "analyseur",
+        "comparison": "4 ↔ 3 : reprendre les transmissions sans les convertir en mesures ni en composantes signées.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "La reprise distingue la réponse moyenne de l’analyseur et l’histoire temporelle connue seulement par le modèle de référence."
+        },
+        "evaluation": {
+          "object": "Transmissions relues et dossier calculé au niveau 3.",
+          "conditions": "Même onde cohérente, axes d’analyse connus et données issues de calculs.",
+          "criterion": "Conserver les trois fractions, leur normalisation et l’absence de signe temporel dans les intensités.",
+          "finding": "La réponse angulaire renseigne les projections ; elle ne transforme pas leur provenance ni ne donne le sens du parcours."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les projections comme contraintes",
+            "input": "3.3 apporte les trois intensités et leur provenance ; 4.6 retourne la lecture angulaire vérifiée.",
+            "action": "Isoler les informations accessibles aux intensités seules et conserver la séquence du champ comme information distincte.",
+            "output": "I0,I45,I90 sont positifs ; I45 = (I0 + I90)/2 dans les valeurs exactes du calcul.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La reprise retire l’accès direct à la phase pour préciser ce qu’un analyseur seul permettrait d’inférer."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Reconstruire la dépendance angulaire",
+            "input": "Trois intensités calculées de 4.1 et modèle de projection à deux composantes cohérentes.",
+            "action": "Écrire Iθ = C0 + C2 cos2θ + S2 sin2θ ; calculer C0 = (I0 + I90)/2, C2 = (I0 − I90)/2, S2 = I45 − C0.",
+            "output": "C0 = Iin/2, C2 = 5Iin/26, S2 = 0 ; maxima 9Iin/13 à 0° et minima 4Iin/13 à 90°, modulo 180°.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les trois angles déterminent les coefficients de la réponse quadratique dans le modèle supposé."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les contraintes utiles à l’inversion",
+            "input": "Coefficients et extrema obtenus en 4.2.",
+            "action": "Joindre I0,I90,I45, les axes et K à la distinction entre valeurs absolues et fractions ; signaler l’absence d’extinction.",
+            "output": "À 5.1 : données calibrées du modèle et S2 = 0 ; seules les fractions laisseraient libre une amplitude commune.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La reconstruction d’amplitudes nécessite une échelle absolue que la normalisation seule élimine."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire la portée du minimum non nul",
+            "input": "Réponse angulaire et statut des données transmis en 4.3.",
+            "action": "Comparer le minimum 4Iin/13 à zéro et distinguer rotation de l’analyseur et parcours temporel du vecteur champ.",
+            "output": "Aucun angle ne supprime la transmission de cette référence ; cela ne fixe pas le sens de son ellipse.",
+            "comparison": "4.4 ↔ 4.3 : mêmes contraintes et même origine.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Une intensité positive à tous les angles est une propriété de la réponse calculée, pas une observation du parcours."
+            },
+            "evaluation": {
+              "object": "Lecture du minimum et réponse transmise.",
+              "conditions": "Onde cohérente de référence, analyseur idéal et paramètres imposés.",
+              "criterion": "Conserver Imin = 4Iin/13 > 0 sans en tirer un signe de δ.",
+              "finding": "La lecture respecte ce que la projection conserve ; la chronologie du champ reste une donnée séparée."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Intégrer sur les angles et tester l’extinction",
+            "input": "Réponse harmonique reprise en 4.4.",
+            "action": "Intégrer sur θ de 0 à π pour obtenir la moyenne angulaire C0 ; vérifier Imax + Imin = 2C0 et C0² − C2² − S2² = 36Iin²/169.",
+            "output": "La moyenne angulaire vaut Iin/2 ; le déterminant positif interdit une extinction, contrairement au cas linéaire où il est nul.",
+            "comparison": "4.5 ↔ 4.2 : coefficients, extrema et moyenne angulaire.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégration sur les angles contrôle les extrema ; elle est distincte de la moyenne temporelle déjà effectuée."
+            },
+            "evaluation": {
+              "object": "Reconstruction harmonique et contraintes de positivité.",
+              "conditions": "Même référence ; les coefficients sont normalisés par l’intensité incidente calculée.",
+              "criterion": "Retrouver moyenne Iin/2, somme Imax + Imin = Iin et minimum strictement positif.",
+              "finding": "La réponse satisfait les contraintes quadratiques ; une réponse constante ne prouverait pas à elle seule une polarisation circulaire hors modèle cohérent."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer la lecture limitée aux projections",
+            "input": "Contraintes intégrées de 4.5 et séparation des données en 4.1.",
+            "action": "Retourner à 4.1 les intensités, leurs axes, leurs extrema et ce qui manque : phase signée et éventuelle calibration expérimentale.",
+            "output": "Retour à 4.1 : trois valeurs calculées préservées ; aucune mesure indépendante ni sens de parcours attribué à l’analyseur.",
+            "comparison": "4.6 ↔ 4.1 : même provenance et mêmes données accessibles.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture conserve la différence entre contraintes d’intensité et informations temporelles."
+            },
+            "evaluation": {
+              "object": "Contraintes restituées et intensités reçues.",
+              "conditions": "Aucune information temporelle supplémentaire n’est introduite dans les projections.",
+              "criterion": "Retrouver I0,I45,I90 et leur relation de somme sans prétendre sélectionner δ = −π/2.",
+              "finding": "La reprise reste fidèle au dossier ; la sélection d’un parcours demandera une information d’un autre type."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Reconstruire amplitudes et ambiguïté de phase",
+        "system": "L’inversion conditionnelle des intensités transmises dans le modèle de deux composantes cohérentes.",
+        "input": "Contraintes de 4 avec K connu, axes identifiés et I0,I90,I45 absolues calculées ; aucune chronologie mesurée.",
+        "output": "a = 3 V/m, b = 2 V/m et cosδ = 0 ; δ = ±π/2 modulo 2π restent possibles, ainsi qu’une phase commune indéterminée.",
+        "section": "analyseur",
+        "comparison": "5 ↔ 2 : inverser les lois de projection sous conditions, sans rétablir les informations éliminées.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’inversion retrouve amplitudes et cosinus du déphasage ; un signe temporel supplémentaire serait nécessaire pour sélectionner le parcours."
+        },
+        "evaluation": {
+          "object": "Lois directes du niveau 2 et paramètres reconstruits.",
+          "conditions": "Axes connus, K connu, intensités absolues et a,b positifs ; modèle cohérent maintenu.",
+          "criterion": "Réinjecter a,b et cosδ dans Iθ ; exposer explicitement les deux signes de sinδ et la phase commune libre.",
+          "finding": "L’inverse reproduit la réponse mais ne sélectionne pas la référence parmi les deux parcours ; cohérence interne et mesure restent distinctes."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les données de l’inverse",
+            "input": "4.3 transmet intensités, axes et K ; 5.6 restitue les paramètres accessibles et leur ambiguïté.",
+            "action": "Fixer l’échelle absolue du dossier calculé et conserver a,b positifs ; séparer le cas où seules les fractions seraient disponibles.",
+            "output": "Données connues : I0,I90,I45 et K ; inconnues : amplitudes et phase relative, sans chronologie signée.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La calibration choisie appartient aux hypothèses de reconstruction, pas à une mesure nouvellement acquise."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Inverser les trois projections",
+            "input": "Intensités absolues et K connus en 5.1.",
+            "action": "Calculer a = √(I0/K), b = √(I90/K) et cosδ = (2I45 − I0 − I90)/(2√(I0I90)).",
+            "output": "a = 3 V/m, b = 2 V/m, cosδ = 0 ; δ = ±π/2 modulo 2π. Les fractions seules fixeraient a/b = 3/2.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les racines positives utilisent la convention d’amplitude ; le dénominateur est non nul pour cette référence."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les deux solutions de phase",
+            "input": "Amplitudes et solutions de phase obtenues en 5.2.",
+            "action": "Garder δ = −π/2 comme référence connue par construction et proposer δ = +π/2 comme variante indépendante.",
+            "output": "À 6.1 : même a,b,f et propagation ; variante δ = +π/2, compatible avec toutes les intensités de la référence.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La non-unicité de l’inverse fournit un cas à comparer, sans transformer une ambiguïté en évolution temporelle."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire les conditions de reconstruction",
+            "input": "Deux solutions et amplitudes transmises en 5.3.",
+            "action": "Vérifier |cosδ| ≤ 1 et préciser qu’une valeur hors intervalle serait incompatible avec les hypothèses et données de cet inverse.",
+            "output": "cosδ = 0 est admissible ; les deux branches sont conservées, tandis que la phase commune demeure inaccessible aux moyennes.",
+            "comparison": "5.4 ↔ 5.3 : mêmes solutions et mêmes données nécessaires.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le test d’admissibilité concerne la compatibilité du modèle et des données, pas une phase physique hors domaine."
+            },
+            "evaluation": {
+              "object": "Solutions relues et sortie de l’inverse.",
+              "conditions": "I0,I90 strictement positifs ; données absolues calculées et axes identifiés.",
+              "criterion": "Maintenir deux phases admissibles modulo 2π et ne pas attribuer une phase absolue aux intensités.",
+              "finding": "La reconstruction respecte ses limites ; aucun signe n’est sélectionné sans information supplémentaire."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Tester la perte de signe par substitution",
+            "input": "Branches admissibles reprises en 5.4 et lois de composantes initiales.",
+            "action": "Substituer δ et −δ dans l’ellipse générale et Iθ ; dériver D = Ex∂tEy − Ey∂tEx = −abω sinδ.",
+            "output": "Même ellipse et mêmes Iθ ; D = +(6 V²/m²)ω pour δ = −π/2, D = −(6 V²/m²)ω pour δ = +π/2.",
+            "comparison": "5.5 ↔ 5.2 : paramètres reconstruits et information de signe absente de l’inverse.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le cosinus rend les projections identiques ; le déterminant temporel signé distingue les parcours si une telle information est disponible."
+            },
+            "evaluation": {
+              "object": "Inversion d’intensités et discrimination temporelle conditionnelle.",
+              "conditions": "Axes directs, temps croissant, position fixée et ω positif ; D est ici calculé.",
+              "criterion": "Prouver l’égalité de Iθ pour tous les angles et l’opposition des signes de D.",
+              "finding": "Les intensités seules ne suffisent pas ; une information temporelle signée lèverait l’ambiguïté, sans être fournie comme mesure dans ce dossier."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer ce que l’inverse détermine",
+            "input": "Amplitudes, ambiguïté et test de signe établis en 5.5.",
+            "action": "Réinjecter les deux branches dans les trois intensités puis retourner à 5.1 les paramètres accessibles et les conditions de calibration.",
+            "output": "Retour à 5.1 : a = 3, b = 2, cosδ = 0 ; les deux branches reproduisent I0,I45,I90, phase commune non retrouvée.",
+            "comparison": "5.6 ↔ 5.1 : mêmes données absolues, axes et calibration.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture rétablit les données d’intensité, sans inventer les informations que la moyenne a supprimées."
+            },
+            "evaluation": {
+              "object": "Données reçues et projections restituées.",
+              "conditions": "Même K et amplitudes positives ; aucun champ signé mesuré ajouté.",
+              "criterion": "Reproduire les trois intensités et conserver deux sens possibles ; avec fractions seules, laisser l’échelle absolue libre.",
+              "finding": "L’inverse ferme les calculs sous conditions ; il ne valide ni calibration réelle ni état de polarisation mesuré."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Comparer la variante de parcours inversé",
+        "system": "Un second dossier de phase qui conserve l’ellipse et les transmissions de la référence.",
+        "input": "Branche δ = +π/2 fournie par 5 ; a = 3 V/m, b = 2 V/m, f = 100 MHz, même onde +z et mêmes conventions.",
+        "output": "Evar = (3 cosψ,−2 sinψ,0) ; même ellipse, mêmes Iθ, mais départ vers −y et parcours opposé à la référence.",
+        "section": "controle",
+        "comparison": "6 ↔ 1 : mêmes amplitudes, fréquence, axes et propagation ; seule la phase relative change dans un dossier distinct.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "La variante confronte le dossier initial à une solution indiscernable par intensités linéaires, mais différente dans sa chronologie signée."
+        },
+        "evaluation": {
+          "object": "Dossier initial du niveau 1 et variante calculée.",
+          "conditions": "a,b,f,c,base et propagation +z conservés ; δ passe de −π/2 à +π/2 dans un scénario séparé.",
+          "criterion": "Retrouver E(0) = (3,0,0), inverser ∂tEy(0), conserver l’ellipse et toutes les Iθ.",
+          "finding": "La phase relative modifie le parcours sans inverser la propagation ; les intensités ne suffisent pas à identifier le dossier."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la branche opposée comme variante",
+            "input": "5.3 apporte δ = +π/2 ; 6.6 restitue la comparaison des dossiers et leurs attributs.",
+            "action": "Créer un second dossier avec les mêmes a,b,f,z = 0 et vue ; conserver δ = −π/2 comme référence séparée.",
+            "output": "Variante : Ex = 3 cosψ, Ey = −2 sinψ ; phase ψ = ωt − kz inchangée.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le changement de phase relative ne superpose pas les branches et ne change pas la propagation."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer la suite signée de la variante",
+            "input": "Composantes de variante fixées en 6.1.",
+            "action": "Évaluer E à 0,T/8,T/4 et ∂tEy(0) ; calculer B = (−Ey/c,Ex/c,0) aux mêmes instants.",
+            "output": "E(0) = (3,0,0), E(T/8) = (3/√2,−2/√2,0), E(T/4) = (0,−2,0) V/m ; départ vers −y.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le signe de Ey inverse la composante Bx correspondante ; la relation B = e_z × E/c conserve une onde +z."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Renvoyer les dossiers au départ de l’analyse",
+            "input": "Suite de variante calculée en 6.2 et référence conservée.",
+            "action": "Joindre au dossier initial les deux signes de Ey et leurs intensités égales ; maintenir axes, vue, fréquences et origine de phase.",
+            "output": "À 1.1 : δ = −π/2 et δ = +π/2 comparés séparément ; mêmes amplitudes et propagation, suites temporelles opposées en y.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour global conserve la distinction entre changement d’attribut et évolution effective d’une onde."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre la comparaison des suites",
+            "input": "Deux dossiers et composantes transmis en 6.3.",
+            "action": "Comparer les champs au même z et aux mêmes temps ; relever l’égalité à t = 0 et l’opposition de Ey à T/8.",
+            "output": "Le seul instant t = 0 ne distingue pas les branches ; l’ordre temporel signé les distingue dès le mouvement initial.",
+            "comparison": "6.4 ↔ 6.3 : mêmes temps, axes et dossiers.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Une égalité ponctuelle ne rend pas identiques deux évolutions du champ."
+            },
+            "evaluation": {
+              "object": "Suites relues et comparaison transmise.",
+              "conditions": "Origine de phase commune, position fixée et temps croissant ; calculs et non observations.",
+              "criterion": "Conserver Ex égal, Ey opposé et E(0) commun sans conclure à un même parcours.",
+              "finding": "La comparaison situe précisément l’information discriminante ; la vue reste celle du dossier initial."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire la phase locale et contrôler les projections",
+            "input": "Suites signées reprises en 6.4, amplitudes connues et temps T/8 fixé.",
+            "action": "Calculer ψ = atan2(−Ey/b,Ex/a) pour la variante, modulo 2π ; réinjecter δ = +π/2 dans Iθ et le lieu quadratique.",
+            "output": "À T/8, ψ = π/4 modulo 2π ; Ex²/9 + Ey²/4 = 1 et mêmes fractions 9/13,1/2,4/13 que la référence.",
+            "comparison": "6.5 ↔ 6.2 : suite directe et reconstruction conditionnelle de phase.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inverse de phase utilise des composantes signées et une branche choisie ; les intensités seules ne permettent pas ce calcul."
+            },
+            "evaluation": {
+              "object": "Calcul direct de la variante et réinjection inverse.",
+              "conditions": "a,b connus, branche δ = +π/2 choisie, composantes signées calculées et position fixée.",
+              "criterion": "Retrouver la phase modulo 2π ainsi que le lieu et les transmissions de référence.",
+              "finding": "La variante est cohérente avec ses composantes ; l’inverse signé ne devient pas une identification par seules intensités."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les invariants et la différence de phase",
+            "input": "Phase reconstruite et égalités vérifiées en 6.5 ; attributs de 6.1.",
+            "action": "Retourner à 6.1 les mêmes a,b,f,base et propagation, les deux déphasages et le signe temporel propre à chaque dossier.",
+            "output": "Retour à 6.1 : variante vers −y, référence vers +y ; ellipse et réponse d’analyseur communes, sans mesure ni transformation réalisée.",
+            "comparison": "6.6 ↔ 6.1 : même variante et référence séparée.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture distingue les paramètres conservés, l’attribut modifié et les informations nécessaires pour les reconnaître."
+            },
+            "evaluation": {
+              "object": "Attributs reçus et résultats restitués.",
+              "conditions": "Même onde +z, mêmes amplitudes et fréquence ; seule δ diffère entre les dossiers.",
+              "criterion": "Retrouver Evar(0) = (3,0,0), ∂tEy,var(0) < 0 et les mêmes intensités que la référence.",
+              "finding": "L’aller-retour conserve le sens physique des deux dossiers et l’ambiguïté propre à l’analyseur linéaire."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "energie-onde-poynting": {
+    "question": "Comment passer des champs instantanés d’une onde à son énergie traversante, puis retrouver ses attributs en séparant moyenne temporelle et projection géométrique ?",
+    "basis": "Onde unique dans le vide : E0 = 3,00 V·m⁻¹ crête, f = 100 MHz, propagation +z. Aire A = 0,0100 m², fenêtre Δt = 1,00 µs = 100T ; normale de référence +z et variante séparée à 60°. Données supposées, résultats calculés.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les traitements instantanés, les moyennes et les intégrales de flux sont séparés ; les inversions précisent les informations conservées et celles perdues.",
+    "subject": {
+      "type": "physique",
+      "description": "Le transport d’énergie d’une onde électromagnétique plane à travers deux orientations d’une surface géométrique finie.",
+      "scope": "Onde sinusoïdale unique dans le vide, sans charges ni courants ; surface de comptage sans absorbeur, durée entière de périodes et constantes numériques cohérentes."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Définir l’onde et le domaine de comptage",
+        "system": "Les champs supposés, leurs conventions et la surface finie sur laquelle le flux sera intégré.",
+        "input": "E0=3,00 V·m⁻¹ crête, f=100 MHz, propagation +z ; aire A=0,0100 m² de normale +z et durée Δt=1,00 µs.",
+        "output": "T=10 ns, B0=E0/c≈10,006923 nT et Δt=100T ; amplitude, direction, aire et fenêtre sont distinguées.",
+        "section": "conditions",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les attributs du champ fixent les échelles et les conventions nécessaires aux calculs de moyenne et de flux."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir l’onde et la surface",
+            "input": "Données supposées ou reprise de 1.6 ; 6.3 peut transmettre la surface inclinée comme variante séparée.",
+            "action": "Identifier E suivant x, B suivant y et la propagation +z ; distinguer l’amplitude de crête de l’aire et de la durée.",
+            "output": "Référence : E=E0 cosψ e_x, B=(E0/c)cosψ e_y ; surface au plan z=0, normale +z.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le domaine de comptage est géométrique ; aucun absorbeur ni antenne n’est ajouté au modèle."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Former les échelles temporelles et magnétiques",
+            "input": "E0, f, c et Δt reçus ; μ0 approché et ε0=1/(μ0c²).",
+            "action": "Calculer T=1/f, B0=E0/c et N_T=Δt/T ; conserver ω=2πf et k=ω/c.",
+            "output": "T=10 ns, B0≈10,006923 nT et N_T=100 ; les constantes numériques vérifient μ0ε0c²=1.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La durée contient un nombre entier de périodes, ce qui permettra une moyenne indépendante de la phase locale."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les champs avec leurs attributs",
+            "input": "Échelles calculées en 1.2, repère direct et phase ψ=ωt−kz.",
+            "action": "Joindre E0 comme amplitude positive, les champs réels et la région sans j ni ρ ; conserver A et la fenêtre.",
+            "output": "À 2.1 : champs, c, μ0, ε0, ω et k cohérents ; aucune énergie totale finie attribuée à l’onde infinie.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le calcul local utilise les champs supposés ; l’aire et la durée délimitent ensuite une énergie traversante."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les rôles des données",
+            "input": "Dossier transmis en 1.3 avec onde sinusoïdale et fenêtre entière de périodes.",
+            "action": "Relire E0 comme crête, f comme fréquence et A comme aire géométrique ; garder la normale distincte du sens de propagation.",
+            "output": "Les attributs de l’onde et ceux du comptage restent séparés.",
+            "comparison": "1.4 ↔ 1.3 : conserver les attributs et leur rôle physique.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Une orientation de surface modifie son flux traversant sans modifier les champs incidents."
+            },
+            "evaluation": {
+              "object": "Dossier repris et champs transmis en 1.3.",
+              "conditions": "Même onde unique et même surface normale de référence.",
+              "criterion": "E0=3,00 V·m⁻¹ est une crête ; A=0,0100 m², Δt=100T et normale +z.",
+              "finding": "Les paramètres gardent leur signification avant la construction des grandeurs énergétiques."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Recomposer amplitude, fréquence et durée",
+            "input": "B0, T et N_T repris en 1.4 ; c connu, directions conservées.",
+            "action": "Inverser E0=cB0, f=1/T et Δt=N_T T ; retrouver k=2π/(cT).",
+            "output": "E0=3,00 V·m⁻¹, f=100 MHz, Δt=1,00 µs et k≈2,095845 m⁻¹.",
+            "comparison": "1.5 ↔ 1.2 : confronter les conversions directes et inverses.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Ces conversions restituent les attributs à partir des échelles calculées ; elles ne les déduisent pas d’une intensité mesurée."
+            },
+            "evaluation": {
+              "object": "Échelles de 1.2 et paramètres recomposés en 1.5.",
+              "conditions": "Onde dans le vide, c connu et T>0 ; nombre de périodes renseigné.",
+              "criterion": "cB0=E0, 1/T=f et 100T=1,00 µs.",
+              "finding": "Les paramètres sont retrouvés par cohérence des unités et du modèle."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer l’onde et la fenêtre initiales",
+            "input": "Paramètres reconstruits et aire, normale, polarisation conservées depuis 1.1.",
+            "action": "Rendre les champs de référence, la normale +z et les 100 périodes ; conserver séparément toute variante à 60°.",
+            "output": "Retour à 1.1 : mêmes E0,f,A,Δt et conventions ; aucune phase ou polarisation nouvelle n’est inférée.",
+            "comparison": "1.6 ↔ 1.1 : retrouver l’onde et le domaine de comptage.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour conserve les données qui n’ont pas été identifiées par les seules conversions."
+            },
+            "evaluation": {
+              "object": "Attributs restitués et entrée physique de 1.1.",
+              "conditions": "Même modèle infini, même région vide et même surface géométrique.",
+              "criterion": "E0=3,00 V·m⁻¹, f=100 MHz, A=0,0100 m², Δt=1,00 µs ; normale +z.",
+              "finding": "Le dossier initial est restitué avec son statut supposé."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Construire densité et flux instantanés",
+        "system": "Les grandeurs énergétiques locales déduites des deux champs réels de l’onde unique.",
+        "input": "1.3 transmet E, B, ψ et les constantes ; j=0 dans la région considérée.",
+        "output": "u=ε0E0²cos²ψ et S=cu e_z ; les contributions électrique et magnétique sont égales à chaque instant.",
+        "section": "conservation",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les produits quadratiques des champs donnent densité et flux ; le bilan local est conservé sans terme matériel j·E."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les champs réels",
+            "input": "Champs et constantes de 1.3 ou reprise de 2.6 ; ψ=ωt−kz.",
+            "action": "Séparer u_E=ε0E²/2 et u_B=B²/(2μ0) ; garder les signes des champs pour le produit vectoriel.",
+            "output": "Deux contributions à additionner et un flux vectoriel à calculer dans le vide.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Les normes au carré portent sur des champs réels ; aucune moyenne complexe n’est confondue avec une valeur instantanée."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Former les produits énergétiques",
+            "input": "E=E0 cosψ e_x, B=(E0/c)cosψ e_y et μ0ε0c²=1.",
+            "action": "Calculer u_E=u_B=ε0E0²cos²ψ/2 ; additionner puis former E×B/μ0 avec e_x×e_y=e_z.",
+            "output": "u=ε0E0²cos²ψ ; S=ε0cE0²cos²ψ e_z=cu e_z.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’égalité des deux densités et la relation S=cu e_z utilisent l’onde progressive unique ; elles ne sont pas générales."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les expressions instantanées",
+            "input": "Densité et flux issus de 2.2 ; période T connue.",
+            "action": "Conserver la dépendance cos²ψ, les unités J·m⁻³ et W·m⁻² et la direction +z.",
+            "output": "À 3.1 : u et S instantanés, leurs crêtes et T, pour calculer les moyennes temporelles.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le flux oscille à deux fois la fréquence des champs ; la moyenne n’est pas encore sa valeur instantanée."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les nœuds et le sens du flux",
+            "input": "Expressions de 2.3, avec les deux champs en phase.",
+            "action": "Comparer les signes des champs et du flux ; examiner cosψ=0 sans diviser E par B.",
+            "output": "u≥0 et S_z≥0 ; au nœud, u=S_z=0, tandis que S=cu e_z reste valable.",
+            "comparison": "2.4 ↔ 2.3 : conserver les expressions et leur domaine, y compris aux nœuds.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les deux champs s’inversent simultanément ; leur produit vectoriel ne retourne pas la propagation."
+            },
+            "evaluation": {
+              "object": "Densité et flux repris, comparés à 2.3.",
+              "conditions": "Une seule onde, mêmes champs en phase et même propagation.",
+              "criterion": "u_E=u_B ; S_z=cu≥0 ; aucune utilisation du quotient 0/0 au nœud.",
+              "finding": "Les grandeurs instantanées conservent leur sens et leurs valeurs nulles admissibles."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Vérifier la conservation par dérivation",
+            "input": "u=u0 cos²ψ et S_z=cu0 cos²ψ repris ; u0=ε0E0² constant.",
+            "action": "Calculer ∂tu=−ωu0 sin(2ψ) et ∂zS_z=cku0 sin(2ψ) ; utiliser ω=ck.",
+            "output": "∂tu+div S=0, conformément au bilan local avec j=0.",
+            "comparison": "2.5 ↔ 2.2 : confronter les produits des champs au bilan différentiel.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les dérivées opposées rendent compte du transport du profil énergétique, sans disparition ni création locale d’énergie."
+            },
+            "evaluation": {
+              "object": "Construction de 2.2 et dérivées du bilan en 2.5.",
+              "conditions": "ω=ck, champs transverses de l’onde choisie, absence de charges et de courant.",
+              "criterion": "(−ω+ck)u0 sin(2ψ)=0 pour tout z,t.",
+              "finding": "La solution énergétique respecte la conservation ; le contrôle reste interne au modèle."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les attributs des champs connus",
+            "input": "Bilan vérifié et champs supposés reçus en 2.1.",
+            "action": "Rattacher u_E et u_B aux champs conservés ; maintenir E0, ψ et les directions comme informations d’entrée.",
+            "output": "Retour à 2.1 : mêmes champs et contributions, sans prétendre reconstruire leurs signes instantanés depuis u seul.",
+            "comparison": "2.6 ↔ 2.1 : retrouver les champs supposés et leur cadre énergétique.",
+            "relation": {
+              "nature": "logique",
+              "description": "Une densité quadratique ne contient pas toute l’information des champs ; leurs conventions restent fournies."
+            },
+            "evaluation": {
+              "object": "Dossier de champs restitué et entrée de 2.1.",
+              "conditions": "Phase et polarisation conservées ; onde unique dans le vide.",
+              "criterion": "u_E=u_B=ε0E0²cos²ψ/2 avec E0=3,00 V·m⁻¹ et mêmes axes.",
+              "finding": "Le cadre est restitué ; le bilan ne suffit pas à identifier seul la totalité des champs."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Calculer les moyennes et distinguer les amplitudes",
+        "system": "La moyenne temporelle du flux et de la densité d’énergie, reliée à la valeur efficace du champ.",
+        "input": "2.3 transmet u=ε0E0²cos²ψ et S_z=cu ; période T=10 ns et amplitude crête E0=3,00 V·m⁻¹.",
+        "output": "I≈0,0119448843 W·m⁻², ⟨u⟩≈3,984385×10⁻¹¹ J·m⁻³ et E_eff≈2,121320 V·m⁻¹.",
+        "section": "intensite",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La moyenne de cos² sur une période donne le facteur un demi ; les moyennes signées des champs ne remplacent pas ces grandeurs."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les fonctions à moyenner",
+            "input": "Expressions instantanées de 2.3 ou reprise de 3.6 ; point spatial fixé pendant la moyenne.",
+            "action": "Définir ⟨g⟩=(1/T)∫ₜ₀ᵗ₀⁺ᵀg(t)dt ; conserver la distinction entre E, E², u et S_z.",
+            "output": "Une moyenne sur une période complète, indépendante de la phase initiale au point considéré.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La moyenne est prise à position fixe ; la période complète conserve le même résultat quel que soit le début de fenêtre."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Intégrer la sinusoïde au carré",
+            "input": "Fonctions de 3.1 et identité cos²ψ=[1+cos(2ψ)]/2.",
+            "action": "Intégrer sur T : ⟨cos²ψ⟩=1/2 ; calculer I, ⟨u⟩ et E_eff=√⟨E²⟩.",
+            "output": "I≈0,0119448843 W·m⁻² ; ⟨u⟩≈3,984385×10⁻¹¹ J·m⁻³ ; E_eff=E0/√2≈2,121320 V·m⁻¹.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le terme oscillant s’intègre à zéro ; l’intensité positive dépend de ⟨E²⟩, et non de ⟨E⟩²."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les moyennes et leurs unités",
+            "input": "Résultats de 3.2, avec E0 et la direction de propagation conservés.",
+            "action": "Joindre ⟨S⟩=I e_z, S_z,max=2I et u_max=2⟨u⟩ ; conserver A et Δt=100T.",
+            "output": "À 4.1 : flux moyen vectoriel, densité moyenne, aire normale A=0,0100 m² et durée 1,00 µs.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La moyenne prépare l’intégration sur un domaine fini ; elle n’est pas une énergie totale."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre moyenne, crête et valeur efficace",
+            "input": "Dossier de 3.3, avec champs réels sinusoïdaux.",
+            "action": "Calculer séparément ⟨E_x⟩=0 et relire E0, E_eff et I ; comparer les crêtes aux moyennes quadratiques.",
+            "output": "La moyenne signée est nulle, E_eff non nul ; S_z,max≈0,0238897686 W·m⁻² vaut 2I.",
+            "comparison": "3.4 ↔ 3.3 : conserver les valeurs et le type de moyenne.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Un champ de moyenne signée nulle peut transporter une énergie moyenne positive."
+            },
+            "evaluation": {
+              "object": "Grandeurs reprises et dossier moyen de 3.3.",
+              "conditions": "Même onde sinusoïdale, moyenne sur une période entière.",
+              "criterion": "E_eff²=E0²/2, ⟨E_x⟩=0 et I=ε0cE_eff²>0.",
+              "finding": "Crête, valeur efficace et moyenne signée restent distinguées."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire les grandeurs quadratiques",
+            "input": "I repris en 3.4, c et ε0 connus ; hypothèse harmonique conservée.",
+            "action": "Inverser ⟨u⟩=I/c et E_eff=√[I/(ε0c)] ; retrouver u_max=2⟨u⟩ et S_z,max=2I.",
+            "output": "Densité moyenne et valeur efficace sont restituées ; u_max≈7,968769×10⁻¹¹ J·m⁻³.",
+            "comparison": "3.5 ↔ 3.2 : confronter moyennes directes et reconstructions quadratiques.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les inversions relient des moyennes compatibles ; les facteurs de crête utilisent la sinusoïde supposée."
+            },
+            "evaluation": {
+              "object": "Calcul de 3.2 et inversion des moyennes en 3.5.",
+              "conditions": "c, ε0 et caractère sinusoïdal connus ; I est un résultat calculé.",
+              "criterion": "c⟨u⟩=I et ε0cE_eff²=I ; u_max=2⟨u⟩.",
+              "finding": "Les moyennes sont retrouvées conditionnellement, sans mesure de champ."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les fonctions avec leur phase conservée",
+            "input": "Moyennes et crêtes reconstruites, phase ψ reçue en 3.1 toujours fournie.",
+            "action": "Reformer u=u_max cos²ψ et S_z=S_z,max cos²ψ ; garder la période et la polarisation initiales.",
+            "output": "Retour à 3.1 : mêmes fonctions à moyenner ; la phase est conservée comme donnée, pas identifiée par I.",
+            "comparison": "3.6 ↔ 3.1 : retrouver fonctions, période et définition de la moyenne.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour complète les moyennes par les attributs restés connus pour retrouver les fonctions instantanées."
+            },
+            "evaluation": {
+              "object": "Fonctions restituées et entrée de 3.1.",
+              "conditions": "Phase et directions initiales maintenues ; T=10 ns.",
+              "criterion": "La moyenne des fonctions reconstruites redonne I et ⟨u⟩ ; leur phase demeure ψ=ωt−kz.",
+              "finding": "Le dossier instantané est restitué grâce aux données conservées."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Intégrer l’énergie à travers la surface normale",
+        "system": "L’aire géométrique de référence et la fenêtre finie qui définissent une énergie traversante.",
+        "input": "3.3 fournit ⟨S⟩=I e_z, ⟨u⟩, A=0,0100 m² et Δt=100T ; normale +z, plan z=0.",
+        "output": "Puissance moyenne IA≈1,19448843×10⁻⁴ W et énergie W_0≈1,19448843×10⁻¹⁰ J pendant 1,00 µs.",
+        "section": "surface",
+        "comparison": "4 ↔ 3 : confronter le flux intégré aux moyennes et unités transmises.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’intégration spatiale et temporelle transforme une intensité en puissance puis en énergie pour un domaine de comptage défini."
+        },
+        "evaluation": {
+          "object": "Moyennes du niveau 3 confrontées au résultat intégré du niveau 4.",
+          "conditions": "Même onde, surface normale d’aire A et fenêtre de 100 périodes.",
+          "criterion": "W_0/(AΔt)=I et W_0/(AcΔt)=⟨u⟩ ; unités respectives W·m⁻² et J·m⁻³.",
+          "finding": "L’énergie traversante restitue les moyennes ; elle ne représente pas l’énergie totale de l’onde infinie."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la surface normale et la fenêtre",
+            "input": "Dossier de 3.3 ou reprise de 4.6 ; surface au plan z=0, normale +z.",
+            "action": "Définir P(t)=∫_A S·e_z dA et W_0=∫₀^ΔtP(t)dt ; maintenir Δt=100T.",
+            "output": "Une énergie orientée traversant une surface géométrique finie, sans hypothèse d’absorption.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le domaine de comptage est renseigné par son aire, sa normale et ses bornes temporelles."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Effectuer les intégrales de flux",
+            "input": "Flux moyen et domaine de 4.1 ; onde plane uniforme transversalement.",
+            "action": "Intégrer sur les 100 périodes et l’aire : ⟨P⟩=IA puis W_0=IAΔt.",
+            "output": "⟨P⟩≈0,119448843 mW ; W_0≈0,119448843 nJ, soit 1,19448843×10⁻¹⁰ J.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La fenêtre contient un nombre entier de périodes ; remplacer le flux par sa moyenne dans cette intégrale est exact pour le modèle."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre l’énergie et ses conditions",
+            "input": "Valeurs intégrées de 4.2, aire, durée et normale connues.",
+            "action": "Joindre W_0, A, Δt et I ; garder la sinusoïde unique et les constantes pour une inversion d’amplitude.",
+            "output": "À 5.1 : énergie traversante normale, I, A=0,0100 m², Δt=1,00 µs et modèle harmonique.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "L’énergie seule ne suffirait pas à séparer amplitude, aire, durée et orientation."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le sens de l’énergie traversante",
+            "input": "Dossier transmis en 4.3 et absence de récepteur modélisé.",
+            "action": "Relire W_0 comme une intégrale de flux ; distinguer ce comptage d’une absorption ou du contenu de tout l’espace.",
+            "output": "Énergie positive traversant la surface normale ; aucune énergie totale finie n’est attribuée à l’onde.",
+            "comparison": "4.4 ↔ 4.3 : conserver valeur, domaine et statut de l’énergie.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Une surface mathématique ne dissipe pas nécessairement l’énergie qui la traverse."
+            },
+            "evaluation": {
+              "object": "Énergie reprise et résultat de 4.3.",
+              "conditions": "Surface de comptage sans absorbeur ; champ plan supposé infini.",
+              "criterion": "W_0=IAΔt pour l’aire et la durée fournies ; aucune intégrale sur tout l’espace n’est évaluée.",
+              "finding": "Le résultat garde sa portée finie et traversante."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver l’intensité et le volume balayé",
+            "input": "W_0 repris, aire A et durée Δt connues ; relation de transport S=cu e_z.",
+            "action": "Calculer I_rec=W_0/(AΔt) ; comparer W_0 à ⟨u⟩AcΔt, énergie initiale du volume de section A et longueur cΔt.",
+            "output": "I_rec≈0,0119448843 W·m⁻² ; W_0=⟨u⟩AcΔt, sur une longueur de 100 longueurs d’onde.",
+            "comparison": "4.5 ↔ 4.2 : confronter intégrale de flux et contenu énergétique du volume balayé.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le volume initial situé entre z=−cΔt et z=0 traverse la surface en Δt ; sa moyenne spatiale vaut ici ⟨u⟩."
+            },
+            "evaluation": {
+              "object": "Intégration de 4.2 et reconstruction de 4.5.",
+              "conditions": "Propagation +z, surface au plan z=0 et Δt=100T ; aucune absorption.",
+              "criterion": "I_rec=I ; cΔt=100λ, donc l’intégrale de u sur le volume vaut ⟨u⟩AcΔt=W_0.",
+              "finding": "Les deux descriptions du transport concordent pour cette onde et cette fenêtre."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le domaine de flux initial",
+            "input": "I et contenu du volume reconstitués, aire et normale conservées depuis 4.1.",
+            "action": "Rendre ⟨S⟩=I e_z, A, Δt et le plan z=0 ; maintenir W_0 comme énergie traversante.",
+            "output": "Retour à 4.1 : même intensité, même normale et même fenêtre de comptage.",
+            "comparison": "4.6 ↔ 4.1 : retrouver le flux et les attributs du comptage.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour restitue le domaine de l’intégration sans le transformer en dispositif absorbant."
+            },
+            "evaluation": {
+              "object": "Domaine restitué et entrée de 4.1.",
+              "conditions": "Même onde et mêmes paramètres géométriques supposés.",
+              "criterion": "A=0,0100 m², Δt=1,00 µs, normale +z et I≈0,0119448843 W·m⁻².",
+              "finding": "Le domaine initial est retrouvé par contrôle interne."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Reconstruire l’amplitude et préciser les indéterminations",
+        "system": "L’inversion de l’intensité dans le modèle d’une onde linéaire sinusoïdale unique.",
+        "input": "4.3 transmet W_0 et le domaine normal, donc I=W_0/(AΔt) ; forme harmonique et constantes connues.",
+        "output": "E0=√[2I/(ε0c)]=3,00 V·m⁻¹ ; phase, polarisation et sens ne sont pas identifiés par la seule intensité scalaire.",
+        "section": "intensite",
+        "comparison": "5 ↔ 2 : confronter la reconstruction d’amplitude aux produits quadratiques établis à l’aller.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour inverse une moyenne quadratique sous la forme d’onde supposée ; il distingue amplitude retrouvée et informations restées données."
+        },
+        "evaluation": {
+          "object": "Densité et flux du niveau 2 confrontés à l’inversion du niveau 5.",
+          "conditions": "Onde unique linéaire sinusoïdale, E0 positif ; constantes et domaine de comptage connus.",
+          "criterion": "E0²=2I/(ε0c), puis S_z,max=ε0cE0²=2I ; une phase différente conserve I.",
+          "finding": "L’amplitude est restituée conditionnellement ; la moyenne ne suffit pas à reconstruire tous les champs instantanés."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le flux avec son modèle",
+            "input": "Dossier de 4.3 ou reprise de 5.6 ; W_0, A, Δt et normale +z connus.",
+            "action": "Reconstituer I=W_0/(AΔt) ; traiter E0 comme inconnue de contrôle tout en conservant la forme sinusoïdale linéaire.",
+            "output": "Intensité positive calculée, accompagnée des hypothèses nécessaires à son inversion.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "L’amplitude n’est définie par cette formule que sous le modèle harmonique retenu."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Inverser la moyenne quadratique",
+            "input": "I≈0,0119448843 W·m⁻² et constantes c, ε0 ; E0 défini positif.",
+            "action": "Résoudre E0=√[2I/(ε0c)] ; calculer E_eff=E0/√2 et B0=E0/c.",
+            "output": "E0=3,00 V·m⁻¹, E_eff≈2,121320 V·m⁻¹ et B0≈10,006923 nT.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La racine positive restitue une amplitude de crête ; elle n’est pas le signe instantané du champ."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre l’onde pour un autre comptage",
+            "input": "Amplitude reconstruite en 5.2 et fréquence, phase, polarisation et direction conservées.",
+            "action": "Garder la même onde ; transmettre A et Δt en introduisant séparément la normale n=sin60° e_x+cos60° e_z.",
+            "output": "À 6.1 : onde de référence conservée et surface de même aire géométrique inclinée à 60°.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La variante modifie le domaine de flux ; elle ne modifie pas l’état de polarisation ni l’amplitude."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre ce qui a été retrouvé",
+            "input": "Onde et variante de surface transmises en 5.3.",
+            "action": "Distinguer E0 reconstruit de f, ψ et des directions restés donnés ; maintenir la nature calculée de I.",
+            "output": "L’amplitude est retrouvée sous conditions ; aucune phase ou fréquence n’est obtenue depuis cette intensité seule.",
+            "comparison": "5.4 ↔ 5.3 : conserver résultat inverse et informations supplémentaires.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La conservation du dossier initial peut utiliser des informations maintenues, sans les présenter comme identifiées."
+            },
+            "evaluation": {
+              "object": "Portée de la reconstruction reprise et dossier de 5.3.",
+              "conditions": "Même hypothèse linéaire sinusoïdale ; aucune observation indépendante.",
+              "criterion": "E0=3,00 V·m⁻¹ ; f=100 MHz et propagation +z restent des données.",
+              "finding": "Les attributs reconstruits et conservés restent distincts."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Construire des champs de même intensité",
+            "input": "Intensité scalaire de 5.4 ; phase et sens retirés seulement dans les cas de non-unicité.",
+            "action": "Remplacer ψ par ψ+φ : la moyenne de cos² reste 1/2 ; considérer aussi une onde vers −z avec le signe de B adapté.",
+            "output": "Toute phase φ conserve I ; l’onde opposée conserve la même intensité scalaire mais son vecteur moyen vaut −I e_z.",
+            "comparison": "5.5 ↔ 5.2 : confronter amplitude identifiable et champs non uniques.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les cas explicites distinguent perte de phase par moyenne et perte de direction lorsqu’on ne conserve que la valeur scalaire."
+            },
+            "evaluation": {
+              "object": "Inversion de 5.2 et familles de 5.5.",
+              "conditions": "Même E0 et f ; cas opposé séparé, sans superposition avec la référence.",
+              "criterion": "⟨cos²(ψ+φ)⟩=1/2 ; inverser la propagation change ⟨S⟩ mais pas son module.",
+              "finding": "I seul ne fixe ni phase ni sens ; une polarisation générale n’est pas non plus spécifiée par cette seule valeur."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le dossier nominal sous ses conventions",
+            "input": "Amplitude de 5.2 et limites établies en 5.5 ; conventions nominales reçues en 5.1.",
+            "action": "Rétablir ψ=ωt−kz, E suivant x et B suivant y comme données conservées ; recalculer I et W_0.",
+            "output": "Retour à 5.1 : I et énergie traversante normale retrouvés, avec mêmes A et Δt.",
+            "comparison": "5.6 ↔ 5.1 : retrouver intensité, domaine et cadre de l’inversion.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour choisit le dossier de référence grâce aux conventions fournies ; il ne prétend pas les extraire de I."
+            },
+            "evaluation": {
+              "object": "Dossier restitué et entrée de 5.1.",
+              "conditions": "Amplitude positive et conventions initiales maintenues.",
+              "criterion": "ε0cE0²/2=I ; IAΔt≈1,19448843×10⁻¹⁰ J.",
+              "finding": "Le dossier est restitué par cohérence interne ; les autres champs compatibles restent distingués."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Projeter le flux et retrouver les attributs de la surface",
+        "system": "La même onde traversant une aire de normale inclinée, comparée au domaine normal de référence.",
+        "input": "5.3 fournit la même onde, A=0,0100 m² et Δt=100T ; variante n=sinθ e_x+cosθ e_z, θ=60°.",
+        "output": "La puissance et l’énergie traversantes sont divisées par deux : W_60≈5,97244214×10⁻¹¹ J ; I reste inchangée.",
+        "section": "surface",
+        "comparison": "6 ↔ 1 : confronter onde, aire, durée et orientation, en isolant la normale modifiée.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La projection agit sur le flux moyen à travers la surface ; le retour conserve l’onde et restitue les attributs nécessaires au comptage."
+        },
+        "evaluation": {
+          "object": "Attributs du niveau 1 confrontés aux résultats de surface du niveau 6.",
+          "conditions": "Même onde, A et Δt ; normale à 0° ou 60° donnée séparément.",
+          "criterion": "W/(AΔt cosθ)=I et E0=√[2I/(ε0c)] dans chaque cas ; A et Δt demeurent des données.",
+          "finding": "L’onde initiale est retrouvée conditionnellement ; la différence d’énergie vient de la projection, sans variation d’intensité."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la surface oblique distincte",
+            "input": "Onde et domaine de 5.3 ou reprise de 6.6 ; angle θ=60° connu.",
+            "action": "Conserver E0, f, A et Δt ; définir la normale inclinée et garder la surface normale comme référence séparée.",
+            "output": "Même aire géométrique A ; aire projetée A cos60°=0,00500 m².",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "L’inclinaison concerne une surface géométrique de comptage ; aucun polariseur ni absorbeur n’est introduit."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Intégrer la projection moyenne",
+            "input": "⟨S⟩=I e_z, normale n de 6.1 et fenêtre de 100 périodes.",
+            "action": "Moyenner en chaque point, puis projeter ⟨S⟩·n=I cosθ ; intégrer sur A et Δt.",
+            "output": "À 60° : ⟨P⟩≈5,97244214×10⁻⁵ W et W_60≈5,97244214×10⁻¹¹ J.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La phase peut varier sur l’aire oblique ; la fenêtre entière de périodes fournit néanmoins la même moyenne locale avant projection."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les deux domaines de comptage",
+            "input": "Résultats de 6.2 et domaine normal conservé.",
+            "action": "Joindre W_60=W_0/2 et les mêmes I,E0,A,Δt ; conserver les deux normales séparément.",
+            "output": "À 1.1 : référence normale et variante à 60°, même onde et même aire géométrique, énergies traversantes différentes.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le raccord retourne deux domaines comparables sans présenter l’inclinaison comme une transformation mesurée."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le facteur géométrique",
+            "input": "Dossier comparatif de 6.3, avec aire A identique dans les deux cas.",
+            "action": "Vérifier que I ne change pas ; relire le facteur cosθ comme projection et non comme diminution de l’amplitude.",
+            "output": "W_60/W_0=1/2 ; I≈0,0119448843 W·m⁻² et E0=3,00 V·m⁻¹ dans les deux cas.",
+            "comparison": "6.4 ↔ 6.3 : conserver le rapport des flux et les invariants de l’onde.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "L’aire projetée diffère alors que l’aire géométrique reste fixée."
+            },
+            "evaluation": {
+              "object": "Résultats repris et comparaison transmise en 6.3.",
+              "conditions": "Même fenêtre de 100 périodes et mêmes constantes.",
+              "criterion": "A cos60°=A/2, donc W_60=W_0/2 sans changement de I.",
+              "finding": "La différence est attribuée à la normale, pas à une atténuation de l’onde."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Inverser le comptage et examiner le cas dégénéré",
+            "input": "W_60 repris, A et Δt connus ; θ connu pour l’amplitude, I connu séparément pour l’angle.",
+            "action": "Calculer I_rec=W_60/(AΔt cos60°), puis E0 ; avec I donné, retrouver θ=arccos[W_60/(IAΔt)].",
+            "output": "I et E0 sont restitués ; θ_rec=60° pour 0≤θ≤90°. À cosθ=0, W=0 ne permet plus l’inversion d’amplitude.",
+            "comparison": "6.5 ↔ 6.2 : confronter projection directe et inversions conditionnelles.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Chaque inversion fixe les autres attributs ; un seul W ne sépare pas simultanément intensité et orientation."
+            },
+            "evaluation": {
+              "object": "Projection de 6.2 et reconstructions de 6.5.",
+              "conditions": "A>0, Δt>0 ; cos60°=1/2 non nul. Angle ou intensité fourni selon l’inversion.",
+              "criterion": "W_60/(AΔt/2)=I ; arccos(1/2)=60° ; à 90°, toute amplitude donne un flux normal nul.",
+              "finding": "Le retour retrouve les attributs sous conditions et identifie la perte d’information à incidence tangente."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer l’onde et l’orientation de la variante",
+            "input": "Valeurs reconstruites en 6.5 et attributs conservés depuis 6.1.",
+            "action": "Rendre E0=3,00 V·m⁻¹, θ=60°, A et Δt ; garder la fréquence et les directions de champs initiales.",
+            "output": "Retour à 6.1 : même onde, aire géométrique 0,0100 m², normale inclinée et fenêtre de 1,00 µs.",
+            "comparison": "6.6 ↔ 6.1 : retrouver les attributs de la variante et leur provenance.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour restitue les paramètres connus et reconstruits sans déduire phase, fréquence ou polarisation d’un seul flux."
+            },
+            "evaluation": {
+              "object": "Dossier restitué et entrée de 6.1.",
+              "conditions": "Aire, durée, fréquence et modèle de l’onde conservés ; contrôles calculés.",
+              "criterion": "E0=3,00 V·m⁻¹, f=100 MHz, A=0,0100 m², Δt=100T et θ=60°.",
+              "finding": "La variante est restituée avec ses informations nécessaires ; la normale de référence reste distincte."
+            }
+          }
+        ]
+      }
+    ]
   }
 }

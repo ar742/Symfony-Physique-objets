@@ -3994,5 +3994,365 @@
       "openstax-rl"
     ],
     "corrections": []
+  },
+  {
+    "slug": "onde-electromagnetique-vide",
+    "number": 35,
+    "title": "Onde électromagnétique dans le vide : champs et propagation",
+    "level": "CPGE · Ondes électromagnétiques",
+    "domain": "electromagnetisme",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire",
+    "summary": "Construire une paire de champs compatible avec Maxwell, puis distinguer amplitude, phase et sens de propagation.",
+    "objective": "Relier E et B dans une onde plane du vide, calculer leurs valeurs et préciser ce que les résultats permettent de reconstruire.",
+    "prerequisites": [
+      "Dérivées partielles, divergence et rotationnel",
+      "Phase d’une onde progressive sinusoïdale",
+      "Base orthonormée directe et produit vectoriel"
+    ],
+    "system": "Une onde plane progressive monochromatique supposée traverse une région de vide sans charges ni courants locaux. Le champ électrique est polarisé suivant l’axe x.",
+    "conditions": [
+      "Modèle particulier sans champ statique superposé, sans frontières ni antenne étudiées ; ρ = 0 et j = 0 dans la région. L’onde plane idéale n’est pas une description de tout champ électromagnétique.",
+      "Base (e_x,e_y,e_z) directe. Référence vers +z : ψ = ωt−kz, E = E0 cosψ e_x ; E0 = 3,00 V·m⁻¹ est une amplitude crête positive, f = 100 MHz, ω = 2πf et k > 0.",
+      "c = 299 792 458 m·s⁻¹ est exact dans le SI. Pour un calcul utilisant les constantes du vide, μ0 ≈ 4π × 10⁻⁷ H·m⁻¹ et ε0 = 1/(μ0c²) ≈ 8,85418781762 × 10⁻¹² F·m⁻¹ sont des valeurs numériques approchées cohérentes entre elles.",
+      "Point de calcul : z = 0 et t = T/8, avec T = 1/f. La variante indépendante se propage vers −z, aux mêmes f,E0 et origine de phase ; les deux ondes ne sont pas superposées.",
+      "Les champs et inversions sont calculés dans un modèle idéal ; aucune mesure ni émission réelle n’est décrite. L’énergie totale d’une onde plane infinie n’est pas calculée."
+    ],
+    "sections": [
+      {
+        "id": "maxwell",
+        "title": "Conserver toutes les contraintes de Maxwell",
+        "paragraphs": [
+          "Dans la région sans sources, div E = div B = 0, rot E = −∂B/∂t et rot B = (1/c²)∂E/∂t. Le rotationnel de Faraday, combiné à Maxwell–Ampère et à la divergence nulle, fournit l’équation d’onde.",
+          "Pour une composante sinusoïdale de phase ωt−k·r, Gauss impose k·E0 = k·B0 = 0. La transversalité concerne le vecteur d’onde k, perpendiculaire aux plans de phase constante. Elle ne signifie pas que E est orthogonal au vecteur position r en tout point.",
+          "L’équation d’onde seule ne suffit pas : E_test = E0 cos(ωt−kz) e_z satisfait cette équation si ω = ck, mais sa divergence kE0 sin(ωt−kz) n’est pas identiquement nulle. Ce champ longitudinal ne constitue donc pas l’onde électromagnétique vide étudiée."
+        ],
+        "equations": [
+          {
+            "id": "ondevideequation",
+            "reading": "Le laplacien du champ électrique moins un sur c au carré fois sa dérivée seconde par rapport au temps est nul. c au carré vaut un sur le produit mu zéro epsilon zéro."
+          }
+        ]
+      },
+      {
+        "id": "propagation",
+        "title": "Associer phase et paire de champs",
+        "paragraphs": [
+          "Pour la référence, Faraday donne B = (E0/c)cos(ωt−kz)e_y. Les deux champs possèdent le même facteur de phase ; ils satisfont ensemble Maxwell. Ce modèle ne décrit pas E puis B se créant successivement avec un retard.",
+          "À phase constante, ωt−kz = constante implique dz/dt = ω/k = c : la figure de phase progresse vers +z. À position fixe, les composantes oscillent. Leurs valeurs instantanées se distinguent des amplitudes positives E0 et B0 = E0/c.",
+          "Pour une onde progressive unique du vide de direction unitaire n, B = (n×E)/c. Dans la référence, Ex/By = c lorsque ces composantes sont non nulles. Aux zéros communs, ce quotient est indéfini, tandis que la relation vectorielle reste satisfaite."
+        ],
+        "equations": [
+          {
+            "id": "ondevidechamps",
+            "reading": "Le champ électrique vaut E zéro fois le cosinus de oméga t moins k z, suivant e x. Le champ magnétique vaut E zéro sur c fois le même cosinus, suivant e y."
+          }
+        ]
+      },
+      {
+        "id": "retour",
+        "title": "Retrouver les attributs et comparer les deux sens",
+        "paragraphs": [
+          "Dans le vide, la dispersion ω = ck donne λ = c/f et une vitesse de phase c indépendante de f. À λ connue, on retrouve f ; à phase connue et cosψ non nul, Ex détermine E0. Une valeur instantanée isolée ne fixe pas à elle seule fréquence, amplitude et phase.",
+          "La valeur d’un cosinus laisse généralement deux branches de phase, puis une ambiguïté modulo 2π. La paire orientée E,B non nulle renseigne le sens de propagation dans ce modèle ; le seul rapport des normes E0/B0 = c ne distingue pas +z et −z.",
+          "Dans la variante vers −z, ψ− = ωt+kz et B− = −(E0/c)cosψ− e_y, tandis que E− = E0 cosψ− e_x. Au plan z = 0, Ex est le même dans les deux dossiers et By est opposé. Fréquence, amplitude et longueur d’onde sont conservées ; la direction change."
+        ],
+        "equations": [
+          {
+            "id": "ondevidedispersion",
+            "reading": "Oméga vaut c fois k ; lambda vaut c sur f. Pour une onde progressive unique dans le vide, le champ magnétique vaut le produit vectoriel de la direction unitaire n par le champ électrique, divisé par c."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "Pour E0 = 3,00 V/m et f = 100 MHz, calculer la longueur d’onde et les champs en z = 0, t = T/8 ; comparer les deux sens de propagation.",
+      "steps": [
+        "T = 10,0 ns et λ = c/f = 2,99792458 m. ω ≈ 6,28318530718 × 10⁸ rad·s⁻¹ et k ≈ 2,095845022 rad·m⁻¹.",
+        "À phase zéro, B0 = E0/c ≈ 10,006923 nT. Au point choisi t = 1,25 ns, ψ = π/4 : Ex = 3/√2 ≈ +2,121320 V·m⁻¹ et By ≈ +7,075963 nT.",
+        "Le produit E×B est orienté vers +z à ce point. Dans la variante vers −z, la même phase au plan z = 0 donne le même Ex, mais By ≈ −7,075963 nT.",
+        "Le rapport des amplitudes reste E0/B0 = c dans les deux scénarios. Le signe de By relativement à Ex distingue ici les directions ; les amplitudes seules ne le font pas."
+      ],
+      "result": "La paire des champs change d’orientation quand la propagation s’inverse, sans changement de f,E0 ou λ. Les décimales servent au contrôle numérique, pas à une précision de mesure."
+    },
+    "checkpoint": {
+      "question": "Un champ sinusoïdal qui vérifie l’équation d’onde est-il nécessairement une onde électromagnétique dans le vide ? Peut-on toujours calculer Ex/By ?",
+      "answer": "Non : il faut aussi satisfaire les divergences et les deux rotationnels de Maxwell. Un champ longitudinal variable peut vérifier d’Alembert tout en violant Gauss. Pour notre onde transverse, Ex/By est défini seulement hors zéro commun ; la relation B = (n×E)/c reste valable même lorsque les deux champs s’annulent."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P11",
+        "page": 352,
+        "section": "Définition OPPM, convention de phase et transversalité précisées par C23"
+      },
+      {
+        "doc": "cpge",
+        "code": "P11",
+        "page": 355,
+        "section": "Bloc supérieur : Maxwell dans le vide et équation de d’Alembert"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 263,
+        "section": "Onde monochromatique, vecteur d’onde, transversalité et dispersion"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 265,
+        "section": "Équations complètes de Maxwell, spécialisées ici à ρ = 0 et j = 0"
+      }
+    ],
+    "references": [
+      "openstax-onde-plane",
+      "mit-onde-vide",
+      "bipm-celerite-vide",
+      "nist-permeabilite"
+    ],
+    "corrections": [
+      {
+        "id": "C23",
+        "title": "Préciser le modèle d’onde plane et la transversalité",
+        "detail": "CPGE P11 p. 352 et théorie PC2 p. 263 présentent le champ électromagnétique du vide ou d’un conducteur comme une OPPM. Une onde plane progressive monochromatique est un cas particulier choisi, et une composante utile de décomposition, pas tout champ possible. CPGE p. 352 écrit aussi E0 ⟂ r : pour l’onde plane du vide, la condition est E0 ⟂ k, comme l’indique déjà la théorie p. 263. Cette clarification ne valide pas l’ensemble des affirmations sur les conducteurs.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P11",
+            "page": 352,
+            "section": "Paragraphe OPPM et parenthèse de transversalité"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC2",
+            "page": 263,
+            "section": "Paragraphe OPPM ; transversalité correctement écrite avec k"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "polarisation-onde-electromagnetique",
+    "title": "Polarisation : parcourir une ellipse et analyser ses projections",
+    "level": "CPGE · Ondes électromagnétiques",
+    "summary": "Distinguer la forme décrite par le champ, son sens de parcours et les informations conservées par un analyseur linéaire.",
+    "objective": "Calculer une polarisation elliptique, ses projections moyennes et une variante de phase qui conserve l’ellipse en inversant son parcours.",
+    "prerequisites": [
+      "Onde plane progressive monochromatique dans le vide",
+      "Composantes, phase relative et fonctions trigonométriques",
+      "Projection d’un vecteur et moyenne sur une période"
+    ],
+    "system": "Une onde électromagnétique plane monochromatique se propage suivant +z dans le vide. On étudie le champ à position fixée et sa projection par un analyseur linéaire idéal.",
+    "conditions": [
+      "La base (e_x,e_y,e_z) est directe. La phase est ψ = ωt − kz, avec f = 100 MHz, ω = 2πf, k = ω/c, T = 10 ns et λ = c/f = 2,99792458 m.",
+      "c = 299792458 m/s est exacte dans le SI. Pour les calculs, μ0 ≈ 4π × 10⁻⁷ H/m et ε0 = 1/(μ0c²) ≈ 8,85418781762 × 10⁻¹² F/m forment un choix approché cohérent ; ε0 n’est pas une seconde constante exacte.",
+      "Les amplitudes positives sont a = 3,00 V/m et b = 2,00 V/m. La référence impose δ = −π/2 : E = (3 cosψ, 2 sinψ, 0). Ces valeurs sont supposées, sans mesure fournie.",
+      "Il s’agit d’une seule onde progressive cohérente, sans autre champ superposé. B = (e_z × E)/c ; le champ électrique est transverse. Ni l’antenne ni les interfaces de génération ne sont modélisées.",
+      "La figure de polarisation est observée à position fixée. Pour décrire le parcours, on se place depuis +z en regardant l’origine, avec +x vers la droite et +y vers le haut du dessin ; on évite les étiquettes droite/gauche dépendantes des conventions.",
+      "L’analyseur idéal projette le champ sur u_θ = cosθ e_x + sinθ e_y. Les intensités transmises sont des moyennes sur une période ; le dispositif matériel et son bilan microscopique ne sont pas étudiés.",
+      "La variante δ = +π/2 constitue un autre dossier, avec les mêmes a,b,f et propagation +z. Les cas δ = 0 ou a = b en quadrature sont des comparaisons auxiliaires, pas des transformations réalisées."
+    ],
+    "sections": [
+      {
+        "id": "composantes",
+        "title": "Fixer les composantes et la phase relative",
+        "paragraphs": [
+          "La phase commune situe l’oscillation dans le temps et l’espace ; la phase relative δ règle le décalage entre Ex et Ey. À position fixée, ψ croît avec le temps. Une photographie spatiale de l’onde ne se lit donc pas comme une succession temporelle au même point.",
+          "Pour δ = −π/2, Ey = b sinψ. Au plan z = 0, le champ part de (a,0) à t = 0 et se déplace vers +y. La variante δ = +π/2 remplace Ey par −b sinψ et inverse ce mouvement initial.",
+          "Le champ magnétique associé vaut B = (−Ey/c, Ex/c, 0). Le changement de phase relative conserve la propagation +z : il ne faut pas confondre inversion du parcours de polarisation et inversion du sens de propagation."
+        ],
+        "equations": [
+          {
+            "id": "polarisationcomposantes",
+            "reading": "E indice x vaut a cosinus psi ; E indice y vaut b cosinus de psi plus delta ; psi vaut oméga t moins k z."
+          }
+        ]
+      },
+      {
+        "id": "ellipse",
+        "title": "Lire la forme sans perdre le sens du parcours",
+        "paragraphs": [
+          "En quadrature, δ = ±π/2, l’élimination de ψ donne Ex²/a² + Ey²/b² = 1. Ici, les demi-axes valent 3 et 2 V/m : la norme du champ varie entre 2 et 3 V/m. L’ellipse décrit les extrémités du vecteur champ à une position fixée ; ce n’est pas la trajectoire d’une particule.",
+          "Les deux signes de δ donnent exactement ce même lieu géométrique. Le parcours est pourtant opposé : à z = 0, la référence va de +x vers +y, tandis que la variante va de +x vers −y. Vue depuis +z vers l’origine, la référence tourne dans le sens antihoraire du dessin défini.",
+          "À titre auxiliaire, δ = 0 donne Ey = (b/a)Ex : la polarisation est linéaire suivant un axe d’angle arctan(b/a) ≈ 33,690068°. Une quadrature avec a = b donne un cercle ; ces conditions ne sont pas celles de l’ellipse de référence."
+        ],
+        "equations": [
+          {
+            "id": "polarisationellipse",
+            "reading": "Pour delta égal à plus ou moins pi sur deux, E indice x au carré divisé par a au carré, plus E indice y au carré divisé par b au carré, vaut un."
+          }
+        ]
+      },
+      {
+        "id": "analyseur",
+        "title": "Projeter le champ puis moyenner son carré",
+        "paragraphs": [
+          "Le champ transmis scalaire est E_θ = Ex cosθ + Ey sinθ. Dans le modèle retenu, I_θ = ε0c〈E_θ²〉. Les moyennes 〈cos²ψ〉 = 1/2 et 〈cosψ cos(ψ + δ)〉 = cosδ/2 donnent l’expression générale ci-dessous.",
+          "L’intensité incidente est I_in = ε0c(a² + b²)/2. Pour la quadrature de référence, I_θ/I_in = (9 cos²θ + 4 sin²θ)/13 : aucun angle d’analyseur n’éteint totalement cette onde. La loi simple de Malus s’applique à une polarisation incidente linéaire, pas directement à une ellipse arbitraire.",
+          "Les intensités linéaires ne dépendent que de cosδ. Elles sont identiques pour les deux variantes δ = ±π/2 et ne donnent ni le signe de sinδ ni la phase absolue. Des amplitudes absolues exigent une calibration ; les seuls rapports d’intensité donnent ici a/b = 3/2.",
+          "Une suite temporelle signée des composantes, avec axes et sens du temps connus, permettrait de distinguer les parcours. La suite présentée ici est calculée : elle ne constitue pas une observation expérimentale indépendante."
+        ],
+        "equations": [
+          {
+            "id": "polarisationanalyseur",
+            "reading": "L’intensité transmise I indice thêta vaut epsilon zéro c sur deux, multiplié par la somme : a au carré cosinus au carré thêta, b au carré sinus au carré thêta, et deux a b cosinus delta cosinus thêta sinus thêta."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "À z = 0, quelles sont les composantes à T/8, puis les fractions transmises aux angles 0°, 45° et 90° ? Que change δ = +π/2 ?",
+      "steps": [
+        "T/8 = 1,25 ns donne ψ = π/4 : E = (3/√2, 2/√2, 0) ≈ (2,121320 ; 1,414214 ; 0) V/m. À T/4 = 2,50 ns, E = (0,2,0) V/m.",
+        "L’ellipse est Ex²/9 + Ey²/4 = 1, avec les composantes exprimées en V/m. La norme vaut √6,5 ≈ 2,549510 V/m à T/8, entre ses extrema 2 et 3 V/m.",
+        "I_in ≈ 0,017253722 W/m². Aux angles 0°, 45° et 90°, les fractions transmises valent respectivement 9/13 ≈ 0,692308, 1/2 et 4/13 ≈ 0,307692.",
+        "La variante δ = +π/2 donne E(T/8) ≈ (2,121320 ; −1,414214 ; 0) V/m et E(T/4) = (0,−2,0) V/m. Elle conserve l’ellipse et toutes les intensités I_θ ; seul le parcours est inversé."
+      ],
+      "result": "Deux parcours opposés produisent les mêmes projections moyennes. Les décimales vérifient les calculs du modèle et ne décrivent pas une précision de mesure."
+    },
+    "checkpoint": {
+      "question": "Les fractions 9/13, 1/2 et 4/13 suffisent-elles à retrouver les deux amplitudes absolues et le sens de parcours de l’ellipse ?",
+      "answer": "Non. Dans le modèle cohérent à deux composantes et avec les axes connus, elles donnent a/b = √(I₀/I₉₀) = 3/2 et cosδ = 0. Une intensité absolue calibrée est nécessaire pour fixer a et b ; δ = ±π/2 restent indiscernables par ces seules projections, même en variant continûment l’angle. Une information temporelle signée permettrait de lever cette dernière ambiguïté."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P10",
+        "page": 339,
+        "section": "Polarisations d’ondes planes : composantes linéaires, circulaires et elliptiques ; analyseur"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 280,
+        "section": "Polarisation des ondes planes et loi de Malus pour une onde incidente linéaire"
+      }
+    ],
+    "references": [
+      "mit-polarisation-ondes",
+      "nist-permeabilite"
+    ],
+    "corrections": [],
+    "number": 36,
+    "domain": "electromagnetisme",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "energie-onde-poynting",
+    "number": 37,
+    "title": "Onde électromagnétique : énergie et flux de Poynting",
+    "level": "CPGE · Ondes électromagnétiques",
+    "domain": "electromagnetisme",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire",
+    "summary": "Distinguer densité d’énergie, flux instantané, intensité moyenne et énergie traversant une surface orientée.",
+    "objective": "Calculer le transport d’énergie d’une onde plane, puis reconstruire son amplitude et comparer deux orientations de surface.",
+    "prerequisites": [
+      "Produit vectoriel et flux orienté",
+      "Champs d’une onde plane dans le vide",
+      "Moyenne temporelle d’une fonction périodique"
+    ],
+    "system": "Une onde plane progressive monochromatique dans le vide traverse une surface géométrique de comptage, sans absorbeur ni antenne modélisés.",
+    "conditions": [
+      "Une seule onde sans champ statique superposé, charges ni courants dans la région étudiée : E = E0 cosψ e_x, B = (E0/c) cosψ e_y, ψ = ωt−kz, propagation suivant +z.",
+      "E0 = 3,00 V·m⁻¹ est l’amplitude de crête positive ; f = 100 MHz, ω = 2πf, k = ω/c et T = 10 ns.",
+      "c = 299792458 m·s⁻¹ est exact dans le SI ; μ0 ≈ 4π × 10⁻⁷ H·m⁻¹ est approché. Pour des calculs cohérents, ε0 = 1/(μ0c²) ≈ 8,854187817620389 × 10⁻¹² F·m⁻¹ est également approché.",
+      "Référence : aire géométrique A = 0,0100 m² dans le plan z = 0, normale +z ; fenêtre Δt = 1,00 µs, soit exactement 100 périodes.",
+      "Variante séparée : même onde, même aire géométrique et même durée ; normale n = sinθ e_x + cosθ e_z avec θ = 60°.",
+      "Le champ plan infini est un modèle supposé. Seules des densités, des flux et une énergie traversant une aire pendant une durée finies sont calculés ; aucune mesure ni énergie totale finie de l’onde n’est donnée."
+    ],
+    "sections": [
+      {
+        "id": "conservation",
+        "title": "Une densité locale et un bilan de conservation",
+        "paragraphs": [
+          "Dans le vide, les contributions électrique et magnétique à la densité d’énergie sont ε0E²/2 et B²/(2μ0), où les carrés désignent les normes au carré des champs réels. La densité totale u s’exprime en J·m⁻³.",
+          "Pour cette onde progressive unique, B² = E²/c² : les deux contributions sont égales à chaque instant et u = ε0E0²cos²ψ. Cette égalité n’est pas une propriété de tout champ électromagnétique ou de toute superposition.",
+          "Le bilan local de Poynting relie variation du stockage, divergence du flux et travail sur les charges. Ici j = 0 : ∂u/∂t + div S = 0. Le flux peut varier localement dans le temps tout en respectant cette conservation."
+        ],
+        "equations": [
+          {
+            "id": "poyntingbilan",
+            "reading": "La dérivée temporelle de u plus la divergence de S égale moins le produit scalaire de j et E. La densité u vaut epsilon zéro E au carré sur deux plus B au carré divisé par deux mu zéro."
+          }
+        ]
+      },
+      {
+        "id": "intensite",
+        "title": "Passer du flux instantané à l’intensité moyenne",
+        "paragraphs": [
+          "Le vecteur de Poynting S = E × B/μ0 s’exprime en W·m⁻². Avec e_x × e_y = e_z, il vaut ici c u e_z. Les deux champs changent de signe ensemble ; S_z reste positif ou nul, y compris aux nœuds où u et S s’annulent.",
+          "La moyenne de cos²ψ sur une période vaut 1/2. L’intensité I = ⟨S_z⟩ est donc ε0cE0²/2 ; le flux instantané maximal vaut 2I. La moyenne de la densité est ⟨u⟩ = I/c.",
+          "La valeur efficace E_eff = √⟨E²⟩ vaut E0/√2 pour cette sinusoïde. La moyenne signée du champ est nulle ; elle ne remplace ni son amplitude de crête ni sa valeur efficace.",
+          "À intensité connue, E0 = √[2I/(ε0c)] sous l’hypothèse de cette onde linéaire sinusoïdale. Une intensité scalaire seule ne restitue ni la phase, ni le sens de propagation, ni une polarisation générale."
+        ],
+        "equations": [
+          {
+            "id": "poyntingintensite",
+            "reading": "Le vecteur S vaut le produit vectoriel de E par B divisé par mu zéro. L’intensité I vaut epsilon zéro c E zéro au carré sur deux, soit epsilon zéro c E efficace au carré."
+          }
+        ]
+      },
+      {
+        "id": "surface",
+        "title": "Intégrer sur une surface et une fenêtre définies",
+        "paragraphs": [
+          "La puissance orientée traversant une surface est l’intégrale de S·n sur son aire ; son intégrale temporelle donne l’énergie traversante W. Cela ne suppose ni absorption par un capteur ni dépôt d’énergie dans la surface géométrique.",
+          "Pour notre fenêtre de 100 périodes, la moyenne temporelle vaut en chaque point I e_z. Ainsi, la puissance moyenne à travers l’aire A de normale n vaut IA cosθ et W = IAΔt cosθ. L’aire projetée est A cosθ ; l’aire géométrique reste A.",
+          "Sur la surface oblique, la phase peut varier d’un point à l’autre. La moyenne sur un nombre entier de périodes permet néanmoins cette intégration. Pour une fenêtre arbitraire, il faudrait conserver l’intégrale temporelle complète, avec ses phases.",
+          "À θ = 60°, le flux traversant est divisé par deux sans changer I. À θ = 90°, il est nul malgré une onde non nulle : l’inversion depuis W échoue lorsque cosθ = 0. Avec aire, durée et angle connus, elle restitue I = W/(AΔt cosθ) quand ce quotient est défini."
+        ],
+        "equations": [
+          {
+            "id": "poyntingsurface",
+            "reading": "L’énergie orientée W traversant la surface vaut I multiplié par l’aire géométrique A, la durée delta t et le cosinus de theta, pour la fenêtre entière de périodes retenue."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "Pour E0 = 3,00 V·m⁻¹, calculer intensité et énergie traversant A = 0,0100 m² pendant 100 périodes. Comparer les normales à 0° et 60°.",
+      "steps": [
+        "E_eff ≈ 2,121320 V·m⁻¹ et ⟨u⟩ ≈ 3,984385 × 10⁻¹¹ J·m⁻³. L’intensité vaut I ≈ 0,0119448843 W·m⁻² ; le flux de crête vaut 2I.",
+        "Avec la normale +z : puissance moyenne IA ≈ 1,19448843 × 10⁻⁴ W et W ≈ 1,19448843 × 10⁻¹⁰ J, soit 0,119448843 nJ.",
+        "À θ = 60°, cosθ = 1/2 : la même onde donne une puissance moyenne ≈ 5,97244214 × 10⁻⁵ W et W_60 ≈ 5,97244214 × 10⁻¹¹ J."
+      ],
+      "result": "Seule la projection géométrique change entre les deux cas. L’intensité de l’onde et son amplitude restent les mêmes ; les chiffres sont des résultats de calcul."
+    },
+    "checkpoint": {
+      "question": "Un flux moyen nul à travers une surface impose-t-il E0 = 0 ? Et si l’amplitude de l’onde est doublée à géométrie inchangée ?",
+      "answer": "Non : une normale à 90° de la propagation donne S·n = 0 pour une onde non nulle. L’énergie traversante ne permet alors pas de reconstruire l’amplitude. Dans le cas auxiliaire où E0 est doublée, l’intensité et toute énergie traversante à géométrie et durée inchangées sont multipliées par quatre."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P11",
+        "page": 354,
+        "section": "Bilan énergétique local, densité, vecteur de Poynting et moyenne harmonique"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 264,
+        "section": "Bilan énergétique électromagnétique local et densité d’énergie"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 265,
+        "section": "Vecteur de Poynting et moyenne temporelle harmonique, en haut de page"
+      }
+    ],
+    "references": [
+      "openstax-poynting",
+      "nist-permeabilite"
+    ],
+    "corrections": []
   }
 ]

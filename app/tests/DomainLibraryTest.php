@@ -64,12 +64,13 @@ final class DomainLibraryTest extends TestCase
         self::assertCount(6, $domains->find('fluides-ondes')['cards']);
         self::assertCount(2, $domains->find('fluides-ondes')['loops']);
         self::assertCount(12, $domains->find('fluides-ondes')['steps']);
-        self::assertCount(12, $domains->find('electromagnetisme')['cards']);
-        self::assertCount(4, $domains->find('electromagnetisme')['loops']);
+        self::assertCount(15, $domains->find('electromagnetisme')['cards']);
+        self::assertCount(5, $domains->find('electromagnetisme')['loops']);
         self::assertSame('boucle-domaine', $domains->find('electromagnetisme')['loops'][0]['anchor'], 'Ancre E1a conservée');
         self::assertSame('boucle-magnetostatique', $domains->find('electromagnetisme')['loops'][1]['anchor']);
         self::assertSame('boucle-induction', $domains->find('electromagnetisme')['loops'][2]['anchor']);
         self::assertSame('boucle-maxwell-rl', $domains->find('electromagnetisme')['loops'][3]['anchor']);
-        self::assertCount(24, $domains->find('electromagnetisme')['steps']);
+        self::assertSame('boucle-ondes-electromagnetiques', $domains->find('electromagnetisme')['loops'][4]['anchor']);
+        self::assertCount(30, $domains->find('electromagnetisme')['steps']);
     }
 }

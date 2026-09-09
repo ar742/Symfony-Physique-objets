@@ -40,8 +40,8 @@ final class LearningLibraryTest extends TestCase
     public function testCardsHavePreciseSourcesAndWellFormedMath(): void
     {
         $cards = $this->library()->all();
-        self::assertCount(34, $cards);
-        self::assertCount(34, array_unique(array_column($cards, 'slug')));
+        self::assertCount(37, $cards);
+        self::assertCount(37, array_unique(array_column($cards, 'slug')));
         $corrections = [];
         foreach ($cards as $card) {
             $anchors = ['conditions', 'exemple', 'controle', 'corrections', 'sources', 'dans-la-boucle', ...array_column($card['sections'], 'id')];
@@ -85,7 +85,7 @@ final class LearningLibraryTest extends TestCase
                 $corrections[] = $correction['id'];
             }
         }
-        self::assertCount(22, $corrections);
+        self::assertCount(23, $corrections);
     }
 
     public function testDisplayedExamplesMatchIndependentCalculations(): void
@@ -283,6 +283,41 @@ final class LearningLibraryTest extends TestCase
         $containsNumber('circuit-rl-transitoire', $rlInitialEnergy*(1-exp(-2)), 9);
         $rlExample = implode(' ', $library->find('circuit-rl-transitoire')['example']['steps']);
         self::assertStringContainsString('u_L,d ≈ −'.number_format($rlSource*exp(-1), 6, ',', '').' V', $rlExample);
+        $waveSpeed = 299792458.;
+        $wavePermittivity = 1/($mu0Approx*$waveSpeed**2);
+        $waveFrequency = 1e8;
+        $waveAmplitude = 3.;
+        $waveSample = $waveAmplitude*cos(pi()/4);
+        $containsNumber('onde-electromagnetique-vide', $waveSpeed/$waveFrequency, 8);
+        $containsNumber('onde-electromagnetique-vide', 2*pi()*$waveFrequency/$waveSpeed, 9);
+        $containsNumber('onde-electromagnetique-vide', $waveAmplitude/$waveSpeed*1e9, 6);
+        $containsNumber('onde-electromagnetique-vide', $waveSample, 6);
+        $waveExample = implode(' ', $library->find('onde-electromagnetique-vide')['example']['steps']);
+        self::assertStringContainsString('By ≈ +'.number_format($waveSample/$waveSpeed*1e9, 6, ',', '').' nT', $waveExample);
+        self::assertStringContainsString('By ≈ −'.number_format($waveSample/$waveSpeed*1e9, 6, ',', '').' nT', $waveExample);
+        $polarAmplitudeY = 2.;
+        $polarSampleY = $polarAmplitudeY*sin(pi()/4);
+        $polarIntensity = $wavePermittivity*$waveSpeed*($waveAmplitude**2+$polarAmplitudeY**2)/2;
+        $containsNumber('polarisation-onde-electromagnetique', $waveSample, 6);
+        $containsNumber('polarisation-onde-electromagnetique', $polarSampleY, 6);
+        $containsNumber('polarisation-onde-electromagnetique', hypot($waveSample, $polarSampleY), 6);
+        $containsNumber('polarisation-onde-electromagnetique', $polarIntensity, 9);
+        $containsNumber('polarisation-onde-electromagnetique', $waveAmplitude**2/($waveAmplitude**2+$polarAmplitudeY**2), 6);
+        $containsNumber('polarisation-onde-electromagnetique', $polarAmplitudeY**2/($waveAmplitude**2+$polarAmplitudeY**2), 6);
+        $polarExample = implode(' ', $library->find('polarisation-onde-electromagnetique')['example']['steps']);
+        self::assertStringContainsString('−'.number_format($polarSampleY, 6, ',', '').' ; 0)', $polarExample);
+        $poyntingIntensity = $waveAmplitude**2/(2*$mu0Approx*$waveSpeed);
+        $countingArea = .0100;
+        $countingDuration = 1e-6;
+        $transferredEnergy = $poyntingIntensity*$countingArea*$countingDuration;
+        $containsNumber('energie-onde-poynting', $waveAmplitude/sqrt(2), 6);
+        $containsNumber('energie-onde-poynting', $poyntingIntensity, 10);
+        $containsNumber('energie-onde-poynting', $poyntingIntensity/$waveSpeed*1e11, 6);
+        $containsNumber('energie-onde-poynting', $poyntingIntensity*$countingArea*1e4, 8);
+        $containsNumber('energie-onde-poynting', $transferredEnergy*1e10, 8);
+        $containsNumber('energie-onde-poynting', $transferredEnergy*1e9, 9);
+        $containsNumber('energie-onde-poynting', $transferredEnergy*cos(pi()/3)*1e11, 8);
+
 
 
     }

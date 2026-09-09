@@ -292,5 +292,35 @@
     "url": "https://openstax.org/books/university-physics-volume-2/pages/14-3-energy-in-a-magnetic-field",
     "note": "Intégration de la puissance d’une inductance constante, énergie Li²/2 et densité B²/(2μ0) dans le vide.",
     "checked": "2026-09-09"
+  },
+  "openstax-onde-plane": {
+    "title": "OpenStax — Ondes électromagnétiques planes (§16.2)",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/16-2-plane-electromagnetic-waves",
+    "note": "Équations 16.16–16.26 : contraintes de Maxwell, propagation dans le vide et relation entre champs. La fiche distingue la relation vectorielle du quotient indéfini aux zéros communs.",
+    "checked": "2026-09-09"
+  },
+  "mit-onde-vide": {
+    "title": "MIT 6.013 — Ondes planes et contraintes de Maxwell",
+    "url": "https://ocw.mit.edu/courses/6-013-electromagnetics-and-applications-spring-2009/d3be4ea78b036a6362230fb41780cf54_MIT6_013S09_notes.pdf",
+    "note": "Pages 27–28, équations 2.2.9–2.2.14 : l’équation d’onde seule ne garantit pas Gauss ; p. 31 et 34, équations 2.3.4–2.3.6 et 2.3.21–2.3.25 : phase, dispersion et champs transverses.",
+    "checked": "2026-09-09"
+  },
+  "bipm-celerite-vide": {
+    "title": "BIPM — Définition du mètre et vitesse de la lumière",
+    "url": "https://www.bipm.org/en/si-base-units/metre",
+    "note": "La définition du mètre fixe exactement c = 299 792 458 m·s⁻¹. Cela ne rend pas μ0 ou ε0 exacts individuellement.",
+    "checked": "2026-09-09"
+  },
+  "mit-polarisation-ondes": {
+    "title": "MIT · Electromagnetic Field Theory, chapitre 7, §7-4-6 et §7-4-7(a) — Polarization and Polarizers",
+    "url": "https://ocw.mit.edu/courses/res-6-002-electromagnetic-field-theory-a-problem-solving-approach-spring-2008/85a1dfee83863a0bad0dee5c7305ec30_MITRES_6_002S08_chapter7.pdf",
+    "note": "Pages imprimées 515–518 : composantes déphasées, ellipse, cas linéaire et circulaire ; projection du champ par un polariseur. Les sens sont décrits avec la phase, la vue et les axes explicites.",
+    "checked": "2026-09-09"
+  },
+  "openstax-poynting": {
+    "title": "OpenStax — Énergie transportée par les ondes électromagnétiques (§16.3)",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/16-3-energy-carried-by-electromagnetic-waves",
+    "note": "Équations 16.27–16.33 : densité d’énergie, vecteur de Poynting, flux instantané et moyenne sinusoïdale ; figure 16.11 : énergie traversant une aire pendant une durée.",
+    "checked": "2026-09-09"
   }
 }
