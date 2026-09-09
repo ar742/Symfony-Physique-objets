@@ -18048,5 +18048,1991 @@
         ]
       }
     ]
+  },
+  "solenoide-fini": {
+    "question": "Comment conserver les extrémités dans le champ d’un solénoïde, puis reconstruire ses attributs en distinguant formule finie et approximation longue ?",
+    "basis": "Nappe azimutale supposée : a = 0,020 m, ℓ = 0,200 m, N = 1000, I = +0,500 A. Référence au centre et variante à z = +ℓ/2 ; champs calculés avec μ0 approché.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "L’intégration, les limites et les inversions sont explicitées ; les erreurs gardent un dénominateur défini, les positions et familles comparées restent distinctes.",
+    "subject": {
+      "type": "physique",
+      "description": "Le champ axial produit par une nappe cylindrique finie de courant, modèle continu d’un bobinage serré.",
+      "scope": "Magnétostatique, source seule et μ0 partout ; calcul sur l’axe, sans inductance ni énergie de bobine, sans observation indépendante."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Définir la nappe et les positions",
+        "system": "La distribution de courant idéalisée, sa longueur finie et les positions axiales à comparer.",
+        "input": "a = 0,020 m, ℓ = 0,200 m, N = 1000, I = +0,500 A ; référence z = 0, extrémités ±ℓ/2.",
+        "output": "n = 5000 m⁻¹ et Kφ = nI = 2500 A·m⁻¹ ; nappe uniforme et repère axial définis.",
+        "section": "conditions",
+        "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "La source et les conventions sont fixées avant le calcul ; centre et extrémité sont deux positions du même modèle."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la source finie",
+            "input": "Données générales ou retour de 1.6 ; 6.3 transmet séparément le résultat à z = +ℓ/2.",
+            "action": "Distinguer rayon a, longueur ℓ et nombre N ; orienter le courant positivement autour de +z et garder le centre comme référence.",
+            "output": "Nappe azimutale continue, source seule, μ0 partout et courant permanent supposés.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le modèle remplace le bobinage serré par une nappe ; il n’ajoute ni connexions ni hélicité réelle du fil."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Construire les densités utiles",
+            "input": "N = 1000 tours répartis uniformément sur ℓ = 0,200 m, chacun associé au courant I.",
+            "action": "Calculer n = N/ℓ puis Kφ = nI ; attribuer à une tranche dz′ le poids dN = n dz′.",
+            "output": "n = 5000 m⁻¹ et Kφ = 2500 A·m⁻¹ ; dN est le poids continu de la tranche.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le nombre de spires par longueur relie la source totale aux contributions élémentaires ; Kφ n’est pas un courant en ampères."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la géométrie des sources",
+            "input": "Densités de 1.2 et origine au milieu du cylindre.",
+            "action": "Fixer −ℓ/2 ≤ z′ ≤ ℓ/2 et séparer z′, position source, de z, position de calcul.",
+            "output": "À 2.1 : a,ℓ,n,I et bornes z′ = ±0,100 m ; référence z = 0 et μ0 approché.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Les séparations z−z′ deviennent les arguments du champ de chaque spire, sans déplacement matériel décrit."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre nombre, densité et courant",
+            "input": "Dossier transmis en 1.3 avec unités et bornes.",
+            "action": "Relire N comme nombre total, n comme densité linéique de spires et I comme courant par spire.",
+            "output": "N,n,I et Kφ restent distincts ; les bornes sources et le point axial sont conservés.",
+            "comparison": "1.4 ↔ 1.3 : conserver distribution, unités et géométrie.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise empêche de remplacer le courant par N fois sa valeur à chaque tranche."
+            },
+            "evaluation": {
+              "object": "Attributs reçus et dossier de source établi en 1.3.",
+              "conditions": "Même nappe uniforme et même sens positif.",
+              "criterion": "nℓ = 1000, nI = 2500 A·m⁻¹ et z′ compris entre −0,100 et +0,100 m.",
+              "finding": "La source est conservée avec ses paramètres distincts."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Recomposer les paramètres de la nappe",
+            "input": "n,Kφ et ℓ repris en 1.4 ; n > 0 et rayon conservé.",
+            "action": "Inverser N = nℓ et I = Kφ/n ; vérifier que ∫ n dz′ sur la longueur restitue N.",
+            "output": "N = 1000 et I = +0,500 A sont retrouvés dans la convention initiale.",
+            "comparison": "1.5 ↔ 1.2 : confronter densités et paramètres recomposés.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La recomposition inverse les densités avec la longueur connue ; elle ne détermine pas la géométrie à partir du seul produit nI."
+            },
+            "evaluation": {
+              "object": "Conversion de 1.2 et reconstruction de 1.5.",
+              "conditions": "Répartition uniforme, longueur donnée et même orientation.",
+              "criterion": "5000 × 0,200 = 1000 et 2500/5000 = 0,500 A.",
+              "finding": "Les paramètres de la source sont restitués par identité interne."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le dossier de référence",
+            "input": "N et I reconstruits, a,ℓ et positions conservés.",
+            "action": "Rendre la nappe au centre z = 0 ; conserver la variante à +0,100 m et les hypothèses de source unique.",
+            "output": "Retour à 1.1 : mêmes a,ℓ,N,I et même origine ; aucun champ encore mesuré.",
+            "comparison": "1.6 ↔ 1.1 : retrouver source, positions et statut.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour retrouve les attributs supposés sans démontrer la qualité d’un bobinage réel."
+            },
+            "evaluation": {
+              "object": "Source restituée et attributs de 1.1.",
+              "conditions": "Même modèle continu et même μ0 partout.",
+              "criterion": "a = 0,020 m, ℓ = 0,200 m, N = 1000, I = +0,500 A et référence z = 0.",
+              "finding": "Les données initiales sont retrouvées ; la variante reste séparée."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Intégrer les contributions axiales",
+        "system": "La superposition des champs de spires sur une longueur finie et son expression sans angles.",
+        "input": "Distribution transmise par 1.3 ; le champ axial d’une spire de rayon a sert de noyau d’intégration.",
+        "output": "Bz(z) = (μ0nI/2)[g(z+ℓ/2)−g(z−ℓ/2)], avec g(s) = s/√(a²+s²).",
+        "section": "spires",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’intégration conserve chaque extrémité de la source ; elle ne suppose pas un champ uniforme sur tout l’axe."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le noyau d’une spire",
+            "input": "a,n,I et intervalle source de 1.3, ou reprise de 2.6 ; point d’observation sur l’axe.",
+            "action": "Associer à n dz′ spires la contribution dBz = μ0nIa² dz′/[2(a²+(z−z′)²)³ᐟ²].",
+            "output": "Une contribution axiale de même signe que I, à additionner sur toute la longueur.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La symétrie de chaque spire annule ses composantes transversales sur l’axe ; le noyau ne décrit pas les points hors axe."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Effectuer l’intégrale finie",
+            "input": "Noyau reçu en 2.1 et bornes z′ = −ℓ/2,+ℓ/2.",
+            "action": "Poser s = z−z′ ; utiliser la primitive g(s) = s/√(a²+s²) du noyau a²/(a²+s²)³ᐟ².",
+            "output": "Bz(z) = (μ0nI/2)[g(z+ℓ/2)−g(z−ℓ/2)], valable pour a > 0.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le changement de variable inverse les bornes ; leur ordre final préserve le signe positif pour I > 0."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Conserver la loi avec son domaine",
+            "input": "Expression obtenue en 2.2 et source positive.",
+            "action": "Joindre B = Bz e_z à la formule ; conserver les deux termes, les dimensions et le caractère axial.",
+            "output": "À 3.1 : loi finie complète, a > 0, z réel, mêmes n,I et référence z = 0.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les deux extrémités demeurent présentes dans le résultat, même pour un point situé à l’intérieur."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre séparations et signe",
+            "input": "Formule transmise en 2.3, avec g évaluée aux deux séparations signées.",
+            "action": "Distinguer z−ℓ/2 de sa valeur absolue ; conserver les signes dans les numérateurs et les carrés dans les racines.",
+            "output": "Les termes aux extrémités gardent leur orientation ; le champ n’est pas remplacé par μ0nI.",
+            "comparison": "2.4 ↔ 2.3 : préserver formule, signe et domaine.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour conserve l’information perdue par des valeurs absolues injustifiées dans les numérateurs."
+            },
+            "evaluation": {
+              "object": "Expression relue et loi finie établie en 2.3.",
+              "conditions": "a positif, mêmes bornes et même I > 0.",
+              "criterion": "Bz = (μ0nI/2)[g(z+ℓ/2)−g(z−ℓ/2)] sans changer les signes des arguments.",
+              "finding": "La loi est reprise avec ses deux extrémités."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver le noyau par dérivation",
+            "input": "Primitive g conservée en 2.4, avec a constant.",
+            "action": "Dériver g′(s) = a²/(a²+s²)³ᐟ² > 0 ; utiliser aussi g(−s) = −g(s) pour calculer Bz(−z).",
+            "output": "Le noyau est retrouvé ; Bz est positif pour I > 0 et Bz(−z) = Bz(z).",
+            "comparison": "2.5 ↔ 2.2 : confronter primitive, noyau et symétrie de l’expression.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivation contrôle l’intégration ; l’imparité de g explique la parité du champ axial."
+            },
+            "evaluation": {
+              "object": "Intégration de 2.2 et dérivation de 2.5.",
+              "conditions": "a > 0, distribution uniforme symétrique par rapport au centre.",
+              "criterion": "g′ restitue exactement le noyau ; l’ordre z+ℓ/2 > z−ℓ/2 donne Bz > 0.",
+              "finding": "Le calcul est cohérent ; aucune mesure du profil n’est produite."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les contributions initiales",
+            "input": "Noyau restitué en 2.5 et intervalle source conservé.",
+            "action": "Rattacher g′ à chaque tranche n dz′ et rétablir a,n,I, les bornes et le point z.",
+            "output": "Retour à 2.1 : même contribution de spire et même nappe finie à intégrer.",
+            "comparison": "2.6 ↔ 2.1 : retrouver noyau, source et domaine axial.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour retrouve les éléments de l’intégration sans leur attribuer une uniformité de champ."
+            },
+            "evaluation": {
+              "object": "Contributions restituées et données reçues en 2.1.",
+              "conditions": "Même rayon, densité et courant ; source seule dans μ0.",
+              "criterion": "dBz = (μ0nI/2)g′(z−z′)dz′ et −ℓ/2 ≤ z′ ≤ ℓ/2.",
+              "finding": "Le dossier d’entrée est restitué, avec les limites du modèle continu."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Calculer le champ central",
+        "system": "L’application de la formule finie au centre de la nappe.",
+        "input": "Loi de 2.3 ; z = 0, a = 0,020 m, ℓ = 0,200 m, N = 1000, I = +0,500 A.",
+        "output": "Bc ≈ 3,080585 mT suivant +z, calculé avec la longueur finie et μ0 approché.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La symétrie centrale simplifie l’expression sans supprimer la dépendance au rayon et à la longueur."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la référence centrale",
+            "input": "Formule finie transmise en 2.3 ou reprise de 3.6 ; origine z = 0.",
+            "action": "Fixer z = 0 et garder n = N/ℓ, avec les valeurs supposées de la source.",
+            "output": "Les deux termes g(ℓ/2) et g(−ℓ/2) sont opposés.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La position centrale est une donnée de l’application ; elle n’est pas déduite de la valeur du champ."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Évaluer le champ fini au centre",
+            "input": "Séparations symétriques de 3.1 et μ0 ≈ 4π × 10⁻⁷ T·m·A⁻¹.",
+            "action": "Calculer Bc = μ0NI/[2√(a²+(ℓ/2)²)] et convertir le résultat en milliteslas.",
+            "output": "Bc ≈ 0,003080585047 T = 3,080585047 mT ; direction +z.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La racine conserve le rayon fini ; les décimales sont celles du calcul, pas d’une précision expérimentale."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la valeur avec ses paramètres",
+            "input": "Champ central de 3.2 et mêmes a,ℓ,N,I.",
+            "action": "Consigner Bc signé et la position z = 0 ; garder les paramètres nécessaires à une comparaison ou une inversion.",
+            "output": "À 4.1 : Bc ≈ 3,080585 mT, géométrie connue, n = 5000 m⁻¹ et statut calculé.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La sortie conserve l’association entre valeur locale et position centrale."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le résultat central",
+            "input": "Dossier de 3.3 et coefficient μ0 approché.",
+            "action": "Relire Bc comme composante positive en teslas ; conserver les dimensions de a et ℓ dans sa formule.",
+            "output": "Même champ au centre ; aucune valeur uniforme n’est attribuée au reste du cylindre.",
+            "comparison": "3.4 ↔ 3.3 : conserver champ, position et paramètres.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour conserve le domaine d’une application ponctuelle avant d’en exploiter le résultat."
+            },
+            "evaluation": {
+              "object": "Valeur relue et résultat central de 3.3.",
+              "conditions": "Même source et même convention +z.",
+              "criterion": "Bc ≈ 3,080585 mT à z = 0, avec a = 0,020 m et ℓ = 0,200 m.",
+              "finding": "Le résultat est conservé avec sa provenance calculée."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire le rayon sous conditions",
+            "input": "Bc repris, N,I et ℓ connus ; modèle central fini maintenu.",
+            "action": "Isoler a = √[(μ0NI/(2Bc))²−(ℓ/2)²] en prenant la racine positive.",
+            "output": "a = 0,020 m est retrouvé avant arrondi, sous les valeurs connues de N,I et ℓ.",
+            "comparison": "3.5 ↔ 3.2 : confronter évaluation centrale et inversion du rayon.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion géométrique suppose un radicand positif ; elle ne détermine pas simultanément rayon, courant et nombre de spires."
+            },
+            "evaluation": {
+              "object": "Formule directe de 3.2 et reconstruction géométrique de 3.5.",
+              "conditions": "N,I,ℓ et μ0 connus ; données non arrondies et rayon strictement positif.",
+              "criterion": "(μ0NI/(2Bc))²−(ℓ/2)² = (0,020 m)².",
+              "finding": "Le rayon supposé est restitué par contrôle interne, sans mesure de géométrie."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les entrées de l’application",
+            "input": "Rayon reconstruit, paramètres N,I,ℓ et position conservés.",
+            "action": "Rendre a = 0,020 m avec N = 1000, I = +0,500 A, ℓ = 0,200 m et z = 0.",
+            "output": "Retour à 3.1 : mêmes source finie et point central, prêts pour une reprise.",
+            "comparison": "3.6 ↔ 3.1 : retrouver les attributs du calcul central.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion ne remplace pas les paramètres restés connus par des résultats indépendants."
+            },
+            "evaluation": {
+              "object": "Paramètres restitués et entrée de 3.1.",
+              "conditions": "Même modèle et même valeur approchée de μ0.",
+              "criterion": "Retrouver a,ℓ,N,I et z = 0 ; n = N/ℓ = 5000 m⁻¹ reste inchangé.",
+              "finding": "Le dossier initial est restitué avec ses hypothèses."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Évaluer l’approximation longue au centre",
+        "system": "Le champ central fini repris avec une approximation dont l’erreur et la famille limite sont définies.",
+        "input": "De 3.3 : Bc et source connue ; approximation B∞ = μ0nI à confronter au centre de cette nappe.",
+        "output": "δc = (B∞−Bc)/Bc ≈ 1,98039 % ; l’approximation est une comparaison au centre, pas une uniformité démontrée.",
+        "section": "limite",
+        "comparison": "4 ↔ 3 : restituer le champ central fini avant de quantifier l’écart de l’approximation.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le résultat fini sert de référence à une comparaison définie ; changer de formule ne change pas la source initiale."
+        },
+        "evaluation": {
+          "object": "Champ central du niveau 3 et sa reprise avec approximation au niveau 4.",
+          "conditions": "Mêmes a,ℓ,N,I ; Bc fini au dénominateur de l’erreur.",
+          "criterion": "B∞/(1+δc) = Bc ≈ 3,080585 mT, avec B∞ ≈ 3,141593 mT.",
+          "finding": "La référence est restituée ; l’approximation la surestime de 1,98039 % selon le dénominateur choisi."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le champ à comparer",
+            "input": "Bc et paramètres transmis par 3.3 ou retour de 4.6.",
+            "action": "Conserver le point z = 0 ; distinguer son champ fini de la valeur B∞ calculée avec le même nI.",
+            "output": "Un résultat central identifié et une approximation à évaluer sans modifier les données.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le sous-indice infini nomme une expression limite ; le solénoïde de l’exemple reste fini."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Former le facteur central et l’erreur",
+            "input": "Bc de 4.1, nI connu et rapport géométrique χ = 2a/ℓ.",
+            "action": "Écrire Bc/B∞ = 1/√(1+χ²), puis δc = (B∞−Bc)/Bc = √(1+χ²)−1.",
+            "output": "χ = 0,200, B∞ ≈ 3,141593 mT et δc ≈ 0,0198039, soit 1,98039 %.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’écart est rapporté au champ fini ; changer ce dénominateur donnerait un autre pourcentage."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la comparaison définie",
+            "input": "Facteur et erreur calculés en 4.2.",
+            "action": "Consigner Bc,B∞,δc et la position centrale ; préciser la limite ℓ→∞ à a,n,I et z fixes.",
+            "output": "À 5.1 : référence finie, approximation centrale et géométrie connues ; N est connu pour l’exemple.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Dans la famille limite, N = nℓ augmente ; un allongement à N fixé ne conserve pas la même densité."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre l’écart sans élargir sa portée",
+            "input": "Comparaison centrale transmise en 4.3.",
+            "action": "Relire δc avec son dénominateur Bc ; conserver la distinction entre point intérieur fixe et position suivant une extrémité.",
+            "output": "Erreur centrale positive ; aucune conclusion d’uniformité n’est étendue jusqu’aux bords.",
+            "comparison": "4.4 ↔ 4.3 : conserver valeurs, dénominateur et conditions de limite.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La qualification de l’approximation dépend du point où elle est confrontée au modèle fini."
+            },
+            "evaluation": {
+              "object": "Comparaison relue et dossier de 4.3.",
+              "conditions": "Même centre et mêmes paramètres ; limite à n fixé distinguée du bobinage donné.",
+              "criterion": "(3,141592654−3,080585047)/3,080585047 ≈ 0,0198039.",
+              "finding": "L’erreur reste celle du champ central, sans changement implicite de référence."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Inverser un critère d’approximation",
+            "input": "Expression δc reprise en 4.4 ; tolérance relative symbolique ε > 0, définie avec Bc au dénominateur.",
+            "action": "Résoudre √[1+(2a/ℓ)²]−1 ≤ ε : ℓ/a ≥ 2/√[ε(2+ε)].",
+            "output": "Le rapport longueur/rayon requis dépend de la tolérance ; à ε = δc de l’exemple, ℓ/a = 10.",
+            "comparison": "4.5 ↔ 4.2 : confronter erreur directe et condition géométrique inversée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le critère inversé précise ce que signifie long pour cette comparaison centrale, sans inventer une tolérance expérimentale."
+            },
+            "evaluation": {
+              "object": "Erreur de 4.2 et seuil géométrique de 4.5.",
+              "conditions": "a,ℓ positifs ; critère au centre et ε strictement positif.",
+              "criterion": "Pour ε = √1,04−1, 2/√[ε(2+ε)] = 10.",
+              "finding": "Le rapport géométrique initial est retrouvé ; le seuil ne s’applique pas automatiquement à l’extrémité."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer la référence finie",
+            "input": "Rapport géométrique et erreur de 4.5, avec B∞ et paramètres conservés.",
+            "action": "Recomposer Bc = B∞/(1+δc) et rendre le point z = 0 avec a,ℓ,N,I.",
+            "output": "Retour à 4.1 : Bc ≈ 3,080585 mT et source inchangée ; approximation conservée comme comparaison.",
+            "comparison": "4.6 ↔ 4.1 : retrouver le résultat central et ses attributs.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour restitue la valeur finie reçue plutôt que de la remplacer par sa limite."
+            },
+            "evaluation": {
+              "object": "Résultat restitué et référence reçue en 4.1.",
+              "conditions": "Même nI et même géométrie ; erreur définie relativement à Bc.",
+              "criterion": "B∞/(1+δc) = 3,080585047 mT, avec z = 0 et ℓ/a = 10.",
+              "finding": "Les entrées sont restituées sous le modèle fini."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Reconstruire le courant sous le modèle retenu",
+        "system": "L’inversion du champ central, son biais sous approximation et la séparation des paramètres de source.",
+        "input": "De 4.3 : Bc calculé, géométrie a,ℓ et N connus ; formule finie et approximation comparables.",
+        "output": "La formule finie restitue I = +0,500 A ; l’approximation donne 0,490290 A. Sans N connu, seul NI est identifié.",
+        "section": "axe",
+        "comparison": "5 ↔ 2 : confronter l’inversion conditionnelle à la superposition finie et distinguer la formule longue.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour exploite le champ repris pour reconstruire un paramètre, en maintenant explicitement les autres informations connues."
+        },
+        "evaluation": {
+          "object": "Superposition finie du niveau 2 et inversion du courant au niveau 5.",
+          "conditions": "a,ℓ,N et μ0 connus ; champ central signé issu du calcul.",
+          "criterion": "Irec = 2Bc√(a²+(ℓ/2)²)/(μ0N) = +0,500 A ; sa réinjection restitue Bc.",
+          "finding": "Le modèle fini se referme ; l’inversion approchée diffère sans révéler une variation physique du courant."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les informations à inverser",
+            "input": "Bc, comparaison et géométrie transmis par 4.3 ou reprise de 5.6.",
+            "action": "Traiter I comme inconnue de contrôle ; conserver N,a,ℓ et μ0 avec leur statut de données.",
+            "output": "Un problème inverse central renseigné, distinct d’une mesure du courant.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le paramètre est reconstruit depuis un résultat du même modèle ; les autres attributs ne deviennent pas des inconnues simultanées."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Comparer les deux inversions du courant",
+            "input": "Dossier de 5.1 et expression Bc = μ0NI/[2√(a²+(ℓ/2)²)].",
+            "action": "Isoler Irec avec la formule finie ; calculer séparément I∞ = Bc/(μ0n) et son biais (I∞−Irec)/Irec.",
+            "output": "Irec = 0,500 A ; I∞ ≈ 0,490290 A ; biais relatif ≈ −1,94193 %.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le biais est rapporté au courant fini reconstruit ; il diffère du pourcentage d’erreur du champ défini au niveau 4."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la source reconstruite",
+            "input": "Irec de 5.2, nombre de spires et géométrie connus.",
+            "action": "Retenir le courant de la formule finie et conserver I∞ comme résultat d’une approximation séparée.",
+            "output": "À 6.1 : I = +0,500 A, mêmes a,ℓ,N et loi axiale finie ; variante z = +ℓ/2.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La source reconstruite alimente une autre position de calcul ; le courant approché ne la remplace pas."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les conditions d’identification",
+            "input": "Résultat et données connues de 5.3.",
+            "action": "Relire séparément Irec et I∞ ; conserver N connu et le champ signé suivant +z.",
+            "output": "Courant positif restitué sous la formule finie, avec géométrie et nombre de spires fournis.",
+            "comparison": "5.4 ↔ 5.3 : conserver résultat, signe et paramètres nécessaires.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le signe du courant est lié à la composante axiale signée dans la convention choisie."
+            },
+            "evaluation": {
+              "object": "Résultat inverse relu et source transmise en 5.3.",
+              "conditions": "Même orientation et mêmes a,ℓ,N ; aucune observation indépendante.",
+              "criterion": "Irec = +0,500 A et I∞ ≈ 0,490290 A restent deux résultats de modèles distincts.",
+              "finding": "L’écart d’inversion n’est pas présenté comme un changement de courant."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Exhiber l’indétermination entre N et I",
+            "input": "Profil fini repris et contrecas où N serait inconnu, avec a,ℓ connus.",
+            "action": "Poser Nλ = λN et Iλ = I/λ : calculer NλIλ = NI et nλIλ = nI.",
+            "output": "Toute cette famille conserve le champ axial ; le profil ne sépare pas N de I sans donnée supplémentaire.",
+            "comparison": "5.5 ↔ 5.2 : confronter inversion à N connu et famille moins renseignée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Pour un nombre entier de tours, on retient les λ tels que λN soit entier ; ce contrecas ne modifie pas l’exemple donné."
+            },
+            "evaluation": {
+              "object": "Inversion de 5.2 et famille équivalente de 5.5.",
+              "conditions": "λ > 0, géométrie fixe et nappe uniforme ; N retiré des informations connues dans le seul contrecas.",
+              "criterion": "Bz est proportionnel à NI ; imposer Nλ = N connu sélectionne λ = 1.",
+              "finding": "N connu permet de retrouver I ; les deux paramètres ne sont pas identifiés ensemble par le champ."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les données du problème inverse",
+            "input": "Famille de 5.5 et N = 1000 connu dans 5.1.",
+            "action": "Revenir à N = 1000, retenir I = +0,500 A et réévaluer Bc avec a,ℓ conservés.",
+            "output": "Retour à 5.1 : même Bc, même géométrie et même problème inverse conditionnel.",
+            "comparison": "5.6 ↔ 5.1 : retrouver le champ reçu et les attributs connus.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La restitution rétablit l’information connue au départ et garde l’approximation comme comparaison distincte."
+            },
+            "evaluation": {
+              "object": "Données du contrôle restituées et entrée de 5.1.",
+              "conditions": "N = 1000, a = 0,020 m et ℓ = 0,200 m maintenus.",
+              "criterion": "La réapplication avec I = 0,500 A donne Bc ≈ 3,080585 mT.",
+              "finding": "Le dossier est restitué ; la concordance demeure un contrôle interne."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Comparer l’extrémité au centre",
+        "system": "Le champ calculé à une extrémité de la même nappe, confronté à la source et au point de référence.",
+        "input": "5.3 transmet I reconstruit et la géométrie connue ; variante z = +ℓ/2 = +0,100 m, centre conservé séparément.",
+        "output": "Be ≈ 1,563001 mT suivant +z ; Be/Bc ≈ 0,507371. Les deux inversions finies retrouvent le même courant.",
+        "section": "controle",
+        "comparison": "6 ↔ 1 : retrouver les paramètres de source en conservant la différence entre centre et extrémité.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La comparaison change le point axial évalué, sans changer la nappe ni décrire un déplacement effectué."
+        },
+        "evaluation": {
+          "object": "Source et positions du niveau 1, confrontées aux résultats de centre et d’extrémité.",
+          "conditions": "a,ℓ,N connus, même μ0 et même orientation ; positions fournies séparément.",
+          "criterion": "2Bc√(a²+(ℓ/2)²)/(μ0N) = 2Be√(a²+ℓ²)/(μ0N) = +0,500 A ; N = nℓ = 1000.",
+          "finding": "La source initiale est retrouvée ; les deux champs différents correspondent aux deux positions conservées."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la variante d’extrémité",
+            "input": "Source et loi finie transmises par 5.3 ou reprise de 6.6.",
+            "action": "Choisir z = +ℓ/2 sur l’axe, avec I = +0,500 A ; maintenir le centre z = 0 comme référence distincte.",
+            "output": "Même nappe de rayon 0,020 m et longueur 0,200 m, évaluée au bord axial positif.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le choix d’une extrémité est une donnée géométrique ; il ne résulte pas d’une mesure du champ."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Évaluer le champ au bord axial",
+            "input": "Formule finie de 6.1 : les arguments de g deviennent ℓ et zéro.",
+            "action": "Calculer Be = (μ0nI/2)ℓ/√(a²+ℓ²) ; comparer à B∞/2 par δe = (B∞/2−Be)/Be.",
+            "output": "Be ≈ 1,563001 mT et δe ≈ 0,498756 % ; Be/Bc ≈ 0,507371.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La demi-valeur longue est comparée au champ fini d’extrémité, placé au dénominateur de l’erreur."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la variante avec son statut",
+            "input": "Champ d’extrémité et rapports calculés en 6.2.",
+            "action": "Consigner z = +0,100 m, Be positif et la même source ; conserver les valeurs centrales à part.",
+            "output": "À 1.1, séparément : variante Be ≈ 1,563001 mT à +ℓ/2 ; I,a,ℓ,N inchangés.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le dossier initial reçoit une nouvelle conséquence calculée, sans remplacer sa référence centrale."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre la différence spatiale",
+            "input": "Variante transmise en 6.3 et Bc du centre pour comparaison complémentaire.",
+            "action": "Relire les deux champs dirigés suivant +z, mais de normes différentes ; distinguer B∞ et B∞/2.",
+            "output": "Le champ à l’extrémité vaut environ 0,507371 fois le champ central ; l’intérieur fini n’est pas uniforme.",
+            "comparison": "6.4 ↔ 6.3 : conserver valeur, position et source de la variante.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La petite erreur centrale de B∞ ne justifie pas son application à une position située au bord."
+            },
+            "evaluation": {
+              "object": "Résultat d’extrémité relu et variante établie en 6.3.",
+              "conditions": "Même source et même axe ; Be au dénominateur des comparaisons d’extrémité.",
+              "criterion": "Be ≈ 1,563001 mT ; B∞/2 ≈ 1,570796 mT ; leur écart relatif vaut 0,498756 %.",
+              "finding": "La variante est conservée ; elle relève d’une autre approximation que le centre."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver le courant depuis l’extrémité",
+            "input": "Be repris en 6.4 et géométrie a,ℓ,N connue ; Bc disponible séparément.",
+            "action": "Isoler Ie = 2Be√(a²+ℓ²)/(μ0N) ; comparer à Ic = 2Bc√(a²+(ℓ/2)²)/(μ0N).",
+            "output": "Ie = Ic = +0,500 A avant arrondi, malgré les champs locaux différents.",
+            "comparison": "6.5 ↔ 6.2 : confronter calcul local du champ et inversion correspondante.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Chaque inversion utilise le facteur géométrique de sa position ; employer le facteur central à l’extrémité fausserait le courant."
+            },
+            "evaluation": {
+              "object": "Champ évalué en 6.2 et reconstruction de 6.5.",
+              "conditions": "Source unique, N,a,ℓ et positions connus ; champs signés issus du calcul.",
+              "criterion": "2Be√(a²+ℓ²)/(μ0N) = 0,500 A ; la formule finie réappliquée retrouve Be.",
+              "finding": "Les deux positions restituent le courant commun sous le même modèle."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer la source et la position fournies",
+            "input": "Courant reconstruit et attributs reçus en 6.1.",
+            "action": "Rendre I = +0,500 A avec a,ℓ,N et z = +ℓ/2 conservés ; signaler que Bz(−z) = Bz(z) n’identifie pas le signe de z.",
+            "output": "Retour à 6.1 : même extrémité fournie et même source ; centre et autre extrémité ne sont pas confondus.",
+            "comparison": "6.6 ↔ 6.1 : retrouver source et attributs géométriques de la variante.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La reconstruction du courant conserve la position comme donnée ; la parité du champ interdit d’en déduire seule son signe."
+            },
+            "evaluation": {
+              "object": "Dossier restitué et entrée du cas d’extrémité.",
+              "conditions": "Même géométrie et même μ0 ; z positif fourni, non inféré du champ.",
+              "criterion": "I = +0,500 A, a = 0,020 m, ℓ = 0,200 m, N = 1000 et z = +0,100 m.",
+              "finding": "Les attributs d’entrée sont restitués, avec la limite d’identification de la position."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "faraday-circuit-fixe": {
+    "question": "Comment passer du flux extérieur d’une bobine fixe à son courant, puis reconstruire le champ accessible et comparer une pente opposée ?",
+    "basis": "N = 100 spires en série, A = 0,010 m², normale +e_z, R = 20 Ω ; Bext = 0,200 + 0,500t en teslas sur 0 ≤ t ≤ 0,200 s. Modèle résistif adopté. Variante séparée de pente −0,500 T·s⁻¹ ; données supposées, résultats calculés.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les flux par spire et lié, les signes, la fermeture résistive et ses limites sont explicités. Le retour intègre la force électromotrice et distingue variation identifiable, offset libre et énergie dissipée.",
+    "subject": {
+      "type": "physique",
+      "description": "L’induction dans une bobine fixe soumise à deux rampes extérieures prescrites, avec courant et dissipation calculés.",
+      "scope": "Spire et liaisons idéalisées, modèle résistif quasi stationnaire ; ni établissement de la rampe ni dispositif extérieur complet ni mesure indépendante ne sont décrits."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Exprimer la bobine et son flux extérieur",
+        "system": "Le dossier géométrique et temporel de la bobine, avant calcul du courant.",
+        "input": "N = 100, A = 0,010 m², normale +e_z, R = 20 Ω ; B₀ = 0,200 T et α = +0,500 T·s⁻¹ sur 0,200 s.",
+        "output": "Flux de référence Φ(t) = 0,00200 + 0,00500t Wb et flux lié λ(t) = 0,200 + 0,500t Wb ; origine temporelle fixée.",
+        "section": "flux",
+        "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "L’aire orientée et le nombre de spires établissent le flux reçu par la formalisation ; la variante demeure un autre dossier."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la géométrie et la rampe",
+            "input": "Données générales ; 6.3 transmet la rampe décroissante séparée, et 1.6 restitue la géométrie reconstruite.",
+            "action": "Identifier les spires identiques en série, le contour fixe et la normale ; distinguer les deux pentes sans remplacer la référence.",
+            "output": "Référence α positive, N,A,R constants ; champ prescrit, liaisons de flux négligeable, données supposées.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour peut enrichir le dossier initial ; il ne constitue pas une histoire de commutation du circuit."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer puis additionner les flux",
+            "input": "A = 0,010 m², N = 100 et Bext(t) = 0,200 + 0,500t T, parallèle à la normale.",
+            "action": "Intégrer le champ uniforme sur une spire : Φ = A Bext ; sommer N flux de même orientation : λ = NΦ.",
+            "output": "Φ = 0,00200 + 0,00500t Wb ; λ = 0,200 + 0,500t Wb, pour t en secondes.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégration surfacique utilise l’uniformité ; la somme des spires ne modifie pas le signe choisi."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre le flux lié et son orientation",
+            "input": "Fonctions Φ et λ obtenues en 1.2, borne finale t = 0,200 s et résistance totale.",
+            "action": "Distinguer Φ par spire de λ pour le circuit complet ; transmettre leurs expressions avec le sens positif du courant.",
+            "output": "À 2.1 : Φ : 0,00200 → 0,00300 Wb ; λ : 0,200 → 0,300 Wb, fonctions affines connues et R = 20 Ω.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La loi de circuit reçoit le flux lié ; multiplier encore λ par N compterait deux fois les spires."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire les deux grandeurs de flux",
+            "input": "Flux et bornes transmis en 1.3, avec la même normale +e_z.",
+            "action": "Reprendre séparément le flux de chaque spire et leur somme ; conserver l’origine t = 0 du segment régulier.",
+            "output": "Rapport λ/Φ = 100 et accroissements ΔΦ = 0,00100 Wb, Δλ = 0,100 Wb.",
+            "comparison": "1.4 ↔ 1.3 : mêmes flux signés, bornes et nombre de spires.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour examine l’identification des grandeurs avant toute dérivation."
+            },
+            "evaluation": {
+              "object": "Distinction Φ/λ dans le dossier transmis.",
+              "conditions": "Spires identiques, même orientation et même intervalle.",
+              "criterion": "λ = 100Φ à chaque instant et Δλ = 100ΔΦ.",
+              "finding": "Les valeurs sont cohérentes avec la géométrie supposée ; aucun flux n’a été mesuré."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire le champ à partir du flux",
+            "input": "λ(t) relu en 1.4, N et A connus et non nuls.",
+            "action": "Diviser λ par NA pour retrouver Bext ; vérifier aussi Φ = λ/N avant de restituer le champ initial.",
+            "output": "Bext(t) = 0,200 + 0,500t T ; B₀ = 0,200 T est retrouvé parce que λ(0) est fourni.",
+            "comparison": "1.5 ↔ 1.2 : inversion de la transformation Bext → Φ → λ.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inverse de la somme et de l’intégration uniforme reste conditionné par la géométrie connue."
+            },
+            "evaluation": {
+              "object": "Calcul direct du flux et reconstruction du champ.",
+              "conditions": "Champ uniforme normal, N,A connus ; flux absolu fourni.",
+              "criterion": "λ/(NA) restitue la fonction Bext et son unité tesla.",
+              "finding": "L’inversion ferme le calcul ; elle ne préjuge pas de l’information perdue en dérivant λ."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le dossier géométrique",
+            "input": "Champ reconstruit en 1.5 et valeurs N,A,R conservées.",
+            "action": "Rapporter le champ et ses bornes au dossier initial ; retourner ces attributs à 1.1 en maintenant la variante séparée.",
+            "output": "Retour à 1.1 : B₀ = 0,200 T, α = +0,500 T·s⁻¹, N = 100, A = 0,010 m², R = 20 Ω.",
+            "comparison": "1.6 ↔ 1.1 : géométrie, rampe et statut des données préservés.",
+            "relation": {
+              "nature": "logique",
+              "description": "La restitution ferme une comparaison de données, sans établir expérimentalement le modèle de bobine."
+            },
+            "evaluation": {
+              "object": "Dossier reconstruit et données générales reçues.",
+              "conditions": "Même normale, mêmes spires, intervalle et résistance.",
+              "criterion": "Conserver tous les attributs de la référence, notamment l’offset B₀.",
+              "finding": "La reconstruction est compatible avec le dossier ; aucune mesure ni hypothèse sur L n’a été ajoutée."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Dériver le flux et fermer le modèle résistif",
+        "system": "La loi de Faraday appliquée au contour fixe et son association à la résistance totale.",
+        "input": "Flux lié λ(t) de 1, sens positif associé à +e_z, résistance R ; approximation résistive explicitement adoptée.",
+        "output": "e = −NAα et i = −NAα/R sur le segment, sous négligence des transitoires et de l’auto-induction.",
+        "section": "fem",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La dérivée du flux donne la force électromotrice ; le courant demande en plus une fermeture électrique, ici résistive."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le flux du circuit complet",
+            "input": "1.3 fournit λ(t), Φ(t), leurs bornes et R ; 2.6 retourne la portée de l’approximation résistive.",
+            "action": "Prendre λ comme flux extérieur lié au circuit entier ; conserver le contour fixe et le sens positif indiqué.",
+            "output": "Donnée de dérivation λ, résistance R constante ; L absent et transitoires exclus du segment étudié.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La fixation du contour écarte ici une force électromotrice due au déplacement du conducteur."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Appliquer Faraday puis la loi de circuit",
+            "input": "λ(t) = NA(B₀ + αt), N,A,R constants et contour fixe.",
+            "action": "Dériver λ : dλ/dt = NAα ; poser e = −dλ/dt puis résoudre Ri = e dans le modèle adopté.",
+            "output": "e = −NAα ; i = −NAα/R ; B₀ disparaît de ces deux expressions.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Faraday fixe une circulation ; la relation résistive traduit la réponse du circuit à cette excitation."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la réponse symbolique",
+            "input": "Expressions e et i de 2.2, constantes de la rampe et intervalle de 0,200 s.",
+            "action": "Associer les signes à la normale commune ; joindre N,A,α,R et la limite de validité au calcul numérique.",
+            "output": "À 3.1 : e = −NAα, i = e/R ; N = 100, A = 0,010 m², α = +0,500 T·s⁻¹, R = 20 Ω.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le résultat symbolique précède sa substitution numérique ; aucune fermeture instantanée du circuit n’est supposée."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire la fermeture adoptée",
+            "input": "Réponse de 2.3 et hypothèses sur le secondaire.",
+            "action": "Distinguer la loi de Faraday de l’égalité particulière e = Ri ; conserver explicitement l’absence d’une valeur de L.",
+            "output": "La force électromotrice découle du flux prescrit ; le courant annoncé dépend du régime résistif adopté.",
+            "comparison": "2.4 ↔ 2.3 : expressions conservées avec leurs hypothèses.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture sépare une loi d’induction du modèle utilisé pour calculer la réponse matérielle."
+            },
+            "evaluation": {
+              "object": "Réponse e,i transmise et justification de e = Ri.",
+              "conditions": "Même rampe, circuit fixe, réaction du secondaire négligée.",
+              "criterion": "Ne pas présenter e = Ri comme une loi valable pour tout transitoire de bobine.",
+              "finding": "Le courant reste une prévision conditionnelle ; la petitesse de L/R n’est pas chiffrée."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Réintroduire symboliquement l’auto-induction",
+            "input": "e constant relu en 2.4, R connu ; L positif laissé symbolique pour un modèle élargi.",
+            "action": "Écrire L di/dt + Ri = e ; la solution sur le segment est i = e/R + C exp[−(t−t*)/τ], τ = L/R.",
+            "output": "L’écart au courant résistif décroît avec τ ; C dépend de l’état à t*, non fourni.",
+            "comparison": "2.5 ↔ 2.2 : réponse RL générale et limite résistive.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le traitement distingue la réponse permanente de la composante transitoire sans inventer un démarrage à t = 0."
+            },
+            "evaluation": {
+              "object": "Fermeture e = Ri et équation avec inductance propre.",
+              "conditions": "L constant, circuit linéaire ; segment de e constante, origine t* dans ce segment.",
+              "criterion": "L’écart C exp[−(t−t*)/τ] doit être négligeable ; pour une commande variable, τ doit être petit à l’échelle pertinente.",
+              "finding": "La limite justifie conditionnellement 2.2 ; ni L ni C ne permettent ici un contrôle numérique."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer la portée du calcul de courant",
+            "input": "Limite et inconnues du modèle élargi issues de 2.5.",
+            "action": "Retourner à 2.1 la fermeture choisie avec ses réserves précises ; maintenir l’étude sur le segment régulier établi.",
+            "output": "Retour à 2.1 : e = −NAα, i ≈ e/R dans l’approximation adoptée ; établissement de la rampe hors périmètre.",
+            "comparison": "2.6 ↔ 2.1 : retrouver le même circuit et préciser sa fermeture.",
+            "relation": {
+              "nature": "logique",
+              "description": "L’étude symbolique explicite les conditions de la réponse sans changer les données du scénario."
+            },
+            "evaluation": {
+              "object": "Circuit reçu et modèle restitué après examen de L.",
+              "conditions": "N,A,R inchangés et même flux extérieur prescrit.",
+              "criterion": "Séparer l’absence de L dans le calcul de l’affirmation physique L = 0.",
+              "finding": "La valeur résistive sera calculée sous hypothèse ; la réponse transitoire réelle reste indéterminée."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Établir les résultats signés de la rampe",
+        "system": "Le calcul de la force électromotrice, du courant et de la dissipation dans la référence.",
+        "input": "Réponse symbolique e = −NAα, i = e/R ; N = 100, A = 0,010 m², α = +0,500 T·s⁻¹, R = 20 Ω.",
+        "output": "e = −0,500 V, i = −0,0250 A ; P_J = 0,0125 W et E_J = 0,00250 J sur 0,200 s.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La substitution des données supposées produit des résultats signés, puis des grandeurs énergétiques positives."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les expressions à évaluer",
+            "input": "2.3 apporte e = −NAα et i = e/R ; 3.6 retourne les paramètres retrouvés par inversion.",
+            "action": "Rassembler les valeurs SI, Δt = 0,200 s et la convention de courant avant toute substitution.",
+            "output": "NA = 1,00 m², α positive, R = 20 Ω et modèle résistif retenu.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Les mêmes données alimentent le calcul direct et son contrôle inverse ; aucun second jeu expérimental n’est disponible."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer courant et effet Joule",
+            "input": "NA = 1,00 m², α = +0,500 T·s⁻¹, R = 20 Ω et Δt = 0,200 s.",
+            "action": "Évaluer e = −NAα, puis i = e/R, P_J = Ri² et E_J = P_J Δt puisque la pente est constante.",
+            "output": "e = −0,500 V ; i = −0,0250 A ; P_J = 0,0125 W ; E_J = 0,00250 J.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le carré supprime le signe du courant dans la puissance dissipée, sans modifier le signe de la réponse électrique."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre le résultat et son statut",
+            "input": "Valeurs calculées en 3.2 et orientation positive antihoraire vue depuis +z.",
+            "action": "Décrire le courant réel du modèle comme horaire ; transmettre aussi les signes algébriques et l’intervalle énergétique.",
+            "output": "À 4.1 : e = −0,500 V, i = −0,0250 A, P_J = 0,0125 W, E_J = 0,00250 J ; résultats calculés.",
+            "comparison": "",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La traduction d’un signe en sens de parcours utilise l’orientation choisie ; elle n’ajoute pas une observation."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire les signes et les unités",
+            "input": "Résultats numériques transmis en 3.3.",
+            "action": "Conserver e et i signés et P_J,E_J positifs ; identifier volt, ampère, watt et joule sans les confondre.",
+            "output": "Valeurs conservées dans le dossier : réponse négative et dissipation positive.",
+            "comparison": "3.4 ↔ 3.3 : mêmes valeurs, sens du courant et statut calculé.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour porte sur les valeurs rédigées et leurs unités, sans prétendre à une interface de mesure."
+            },
+            "evaluation": {
+              "object": "Valeurs numériques et interprétation transmise.",
+              "conditions": "Même orientation, R > 0 et même durée.",
+              "criterion": "e/i = 20 Ω ; e i positif, P_J Δt exprimé en joules.",
+              "finding": "La lecture du signe est cohérente ; les résultats ne sont pas des mesures."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver les paramètres de calcul",
+            "input": "e = −0,500 V et i = −0,0250 A relus, α = +0,500 T·s⁻¹ et A = 0,010 m² connus.",
+            "action": "Calculer R = e/i et N = −e/(Aα), puis comparer ces paramètres à ceux utilisés en 3.2.",
+            "output": "R = 20 Ω et N = 100 ; l’inversion exige i et Aα non nuls.",
+            "comparison": "3.5 ↔ 3.2 : inversion de la réponse électrique calculée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La reconstruction algébrique teste la substitution ; elle ne sépare pas des paramètres simultanément inconnus."
+            },
+            "evaluation": {
+              "object": "Substitution directe et reconstruction de R,N.",
+              "conditions": "A et α connus, modèle résistif, e,i signés issus du calcul.",
+              "criterion": "Retrouver R = 20 Ω et N = 100 sans changer de convention.",
+              "finding": "Le calcul se referme ; sans A connu, e ne déterminerait que le produit NA pour α connu."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les attributs numériques",
+            "input": "R et N reconstruits en 3.5, A,α et durée conservés.",
+            "action": "Reporter les paramètres au dossier de 3.1 et joindre les quatre résultats avec leurs unités.",
+            "output": "Retour à 3.1 : N = 100, A = 0,010 m², α = +0,500 T·s⁻¹, R = 20 Ω, Δt = 0,200 s.",
+            "comparison": "3.6 ↔ 3.1 : mêmes paramètres et même segment de rampe.",
+            "relation": {
+              "nature": "logique",
+              "description": "La boucle numérique restaure ses entrées sous les hypothèses choisies."
+            },
+            "evaluation": {
+              "object": "Attributs reçus et paramètres reconstruits.",
+              "conditions": "Même orientation et grandeurs calculées, sans données indépendantes.",
+              "criterion": "Conserver N,A,α,R,Δt et le statut supposé des entrées.",
+              "finding": "Le contrôle est interne ; il ne prouve pas que les effets inductifs ou capacitifs sont négligeables."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Reprendre l’énergie et sa provenance",
+        "system": "Le dossier de résultats électriques relu comme bilan de la seule énergie reçue et dissipée par le secondaire.",
+        "input": "Résultats de 3 : e,i signés, P_J,E_J positifs ; bobine fixe et approximation résistive.",
+        "output": "Énergie Joule de 0,00250 J conservée ; transfert électrique au secondaire identifié, bilan complet de la source extérieure non déterminé.",
+        "section": "energie",
+        "comparison": "4 ↔ 3 : préserver les résultats calculés en précisant leur portée énergétique.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Le retour reprend les sorties numériques comme données du bilan ; aucune mesure supplémentaire n’est introduite."
+        },
+        "evaluation": {
+          "object": "Résultats électriques et énergie relue.",
+          "conditions": "Même circuit, même segment de 0,200 s et mêmes hypothèses.",
+          "criterion": "Conserver e = −0,500 V, i = −0,0250 A et E_J = 0,00250 J ; distinguer cette part de l’énergie totale de la source.",
+          "finding": "Le bilan du secondaire est cohérent ; l’appareil imposant Bext n’est pas décrit."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la dissipation calculée",
+            "input": "3.3 transmet e,i,P_J,E_J ; 4.6 retourne le périmètre du bilan énergétique.",
+            "action": "Reprendre les résultats dans le circuit fixe ; identifier la résistance comme siège de dissipation et le champ extérieur comme excitation prescrite.",
+            "output": "Énergie Joule de référence 0,00250 J, sans déplacement de la bobine ni bilan complet du générateur de champ.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le système énergétique examiné est le secondaire ; sa source extérieure reste distincte."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer le transfert électrique reçu",
+            "input": "e = −0,500 V, i = −0,0250 A constants et Δt = 0,200 s.",
+            "action": "Intégrer le courant : q_tr = iΔt = −0,00500 C ; calculer W_reçu = ∫e i dt = e q_tr.",
+            "output": "W_reçu = +0,00250 J = E_J ; q_tr est la charge algébrique traversant une section, sans accumulation dans la bobine.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le produit de deux grandeurs signées donne le transfert positif ; il ne représente pas un travail de la force magnétique sur les charges."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre un bilan de portée définie",
+            "input": "W_reçu et E_J de 4.2, e signé et paramètres géométriques connus.",
+            "action": "Conserver l’égalité énergétique du secondaire ; joindre e et sa durée pour la reconstruction du champ en retour.",
+            "output": "À 5.1 : e = −0,500 V sur 0,200 s, N = 100, A = 0,010 m² ; B₀ = 0,200 T reste une donnée initiale distincte.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La dissipation seule perdrait le signe ; la reconstruction reçoit donc la force électromotrice signée avec la durée."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire ce que l’énergie ne donne pas",
+            "input": "Bilan et données de 4.3 ; énergie extérieure totale non renseignée.",
+            "action": "Distinguer W_reçu par le secondaire de l’énergie consommée par la source ; conserver la force électromotrice signée transmise.",
+            "output": "E_J = W_reçu = 0,00250 J ; ni rendement de la source ni champ initial déduits de cette énergie.",
+            "comparison": "4.4 ↔ 4.3 : même bilan partiel et même e signée.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "L’égalité locale ne complète pas un système extérieur dont les attributs ne sont pas fournis."
+            },
+            "evaluation": {
+              "object": "Bilan transmis et interprétation de l’énergie.",
+              "conditions": "Secondaire résistif ; source imposant le champ non modélisée.",
+              "criterion": "Ne pas remplacer l’énergie de la résistance par celle de tout le dispositif.",
+              "finding": "La part dissipée est conservée ; l’origine électromagnétique du transfert ne chiffre pas le générateur extérieur."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Élargir le bilan à un stockage inductif",
+            "input": "Bilan résistif relu et L constant symbolique dans un modèle élargi.",
+            "action": "Multiplier e = Ri + L di/dt par i, puis intégrer : ∫e i dt = E_J + Δ(Li²/2).",
+            "output": "Un changement de courant peut ajouter un stockage propre ; sur une réponse constante établie, Δ(Li²/2) = 0.",
+            "comparison": "4.5 ↔ 4.2 : transfert reçu avec ou sans variation de stockage propre.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le bilan élargi distingue dissipation et stockage, même si la géométrie du circuit reste fixe."
+            },
+            "evaluation": {
+              "object": "Égalité W_reçu = E_J et bilan inductif élargi.",
+              "conditions": "L constant, mêmes orientations ; champs de réaction représentés par l’auto-induction seulement.",
+              "criterion": "L’égalité résistive exige une variation de stockage négligeable sur le segment retenu.",
+              "finding": "Le modèle de référence est compatible avec une réponse établie ; aucun stockage transitoire numérique n’est calculable ici."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le périmètre énergétique",
+            "input": "Bilan élargi de 4.5 et réponse constante adoptée pour la référence.",
+            "action": "Retourner à 4.1 le résultat Joule avec la distinction entre source, transfert reçu et éventuel stockage propre.",
+            "output": "Retour à 4.1 : 0,00250 J dissipé ; dans le segment résistif retenu, même énergie reçue, sans bilan extérieur complet.",
+            "comparison": "4.6 ↔ 4.1 : conserver l’énergie et préciser ses frontières.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture porte sur le secondaire étudié et maintient les inconnues du dispositif extérieur."
+            },
+            "evaluation": {
+              "object": "Énergie reçue initialement en données et bilan restitué.",
+              "conditions": "Même bobine fixe, même intervalle et approximation résistive.",
+              "criterion": "Préserver E_J = 0,00250 J ; ne pas attribuer un travail à une bobine mobile inexistante.",
+              "finding": "Le bilan est cohérent avec le scénario ; L et la dépense énergétique totale de la source restent ouverts."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Reconstruire la variation et l’offset manquant",
+        "system": "L’inversion de Faraday à partir de la force électromotrice signée et de la géométrie connue.",
+        "input": "Dossier de 4 : e(t), N,A et durée connus ; B₀ est disponible comme donnée initiale, sans provenir de e.",
+        "output": "ΔBext = +0,100 T ; Bext(t) = 0,200 + 0,500t T seulement avec l’ancrage initial ; variante opposée définie séparément.",
+        "section": "fem",
+        "comparison": "5 ↔ 2 : intégration du signal et dérivation du flux, avec perte puis restitution conditionnelle de la constante.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour résout l’inverse de Faraday ; il confronte l’information accessible à celle éliminée par la dérivation."
+        },
+        "evaluation": {
+          "object": "Formalisation directe de 2 et reconstruction du champ.",
+          "conditions": "Contour fixe, N,A connus et signal signé sur le même intervalle.",
+          "criterion": "L’intégrale de e impose ΔB ; retrouver Bext exige un ancrage initial supplémentaire.",
+          "finding": "La rampe initiale est reconstruite conditionnellement ; le courant résistif ne supprime pas l’indétermination de l’offset."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la force électromotrice pour l’inverse",
+            "input": "4.3 transmet e = −0,500 V, N,A et durée ; 5.6 retourne la séparation entre variation et valeur initiale.",
+            "action": "Traiter e comme résultat calculé réutilisé ; garder B₀ à part pour distinguer reconstruction relative et reconstruction absolue.",
+            "output": "Signal signé, NA = 1,00 m², Δt = 0,200 s ; ancrage initial facultatif B₀ = 0,200 T.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La réutilisation du résultat direct n’en fait pas un signal mesuré indépendamment."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Intégrer Faraday avec sa constante",
+            "input": "e constant de 5.1, N,A connus ; valeur initiale notée B_* avant ancrage.",
+            "action": "Intégrer dBext/dt = −e/(NA) : Bext(t) = B_* − e t/(NA) et ΔBext = −eΔt/(NA).",
+            "output": "Famille B_* + 0,500t T ; ΔBext = +0,100 T. Poser B_* = 0,200 T retrouve la référence.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégrale détermine une différence ; l’état initial reste un attribut distinct du signal."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre une reconstruction et sa variante",
+            "input": "Relation Bext = B_* − e t/(NA) issue de 5.2 et ancrage B_* = 0,200 T.",
+            "action": "Conserver la référence reconstruite ; préparer séparément le cas e′ = +0,500 V, qui correspond à la pente opposée prescrite.",
+            "output": "À 6.1 : variante Bext′ = 0,200 − 0,500t T, mêmes N,A,R et durée ; référence Bext = 0,200 + 0,500t T conservée.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La deuxième application change la pente du dossier ; elle n’est pas une inversion temporelle effectivement réalisée."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire l’information retrouvée",
+            "input": "Famille reconstruite et variante de 5.3, avec la même géométrie.",
+            "action": "Séparer ΔB imposé par e, ancrage initial fourni et choix d’une deuxième pente ; maintenir le statut calculé des deux signaux.",
+            "output": "Référence : ΔB = +0,100 T ; variante : ΔB′ = −0,100 T, toutes deux ancrées ici à 0,200 T.",
+            "comparison": "5.4 ↔ 5.3 : conserver reconstruction conditionnelle et distinction des deux cas.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture contrôle ce qui vient du signal et ce qui vient du dossier initial."
+            },
+            "evaluation": {
+              "object": "Rampe reconstruite et attributs transmis.",
+              "conditions": "N,A et origine temporelle identiques ; ancrage initial explicitement fourni.",
+              "criterion": "Ne pas attribuer B₀ au seul signal e ; conserver le signe propre à chaque ΔB.",
+              "finding": "La valeur finale reste conditionnelle à l’ancrage, tandis que la variation est fixée par le signal."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Démontrer la non-unicité de l’offset",
+            "input": "Variation et ancrage relus en 5.4 ; un décalage constant δB quelconque.",
+            "action": "Remplacer Bext par Bext + δB : d(Bext + δB)/dt = dBext/dt ; vérifier que e et le courant résistif restent inchangés.",
+            "output": "Une infinité d’offsets produit la même réponse ; imposer Bext(0) = B₀ sélectionne un seul membre.",
+            "comparison": "5.5 ↔ 5.2 : famille intégrée et invariance par décalage constant.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le noyau constant de la dérivation explique l’indétermination, sans remettre en cause la variation intégrée."
+            },
+            "evaluation": {
+              "object": "Intégration du signal et identification d’une valeur absolue.",
+              "conditions": "Champ décalé spatialement uniforme ; même pente, géométrie et régime de circuit.",
+              "criterion": "Une constante ajoutée doit laisser e inchangée ; l’ancrage initial doit fixer cette constante.",
+              "finding": "La non-unicité est démontrée ; aucune inversion de e seule ne retrouve B₀."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer ce qui peut être identifié",
+            "input": "Famille de champs de 5.5 et ancrage de référence connu séparément.",
+            "action": "Retourner à 5.1 ΔB = +0,100 T et l’information initiale requise ; présenter Bfinal = 0,300 T comme résultat conditionnel.",
+            "output": "Retour à 5.1 : signal et géométrie identifient ΔB ; B₀ fourni identifie ensuite Bext(t).",
+            "comparison": "5.6 ↔ 5.1 : signal conservé et rôle de l’ancrage initial explicité.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour ferme le problème inverse en distinguant ses données nécessaires et ses informations insuffisantes."
+            },
+            "evaluation": {
+              "object": "Attributs de l’inverse reçus et informations restituées.",
+              "conditions": "Même signal calculé, N,A, intervalle et référence temporelle.",
+              "criterion": "Retrouver ΔB = +0,100 T sans B₀, puis 0,300 T à la fin seulement avec B₀ = 0,200 T.",
+              "finding": "Le problème inverse est conditionnellement résolu ; aucune mesure de champ initial n’a été créée."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Comparer la rampe décroissante à la référence",
+        "system": "La seconde application de Faraday à une pente opposée, avec le champ encore positif.",
+        "input": "Reconstruction de 5 et variante α′ = −0,500 T·s⁻¹, même B₀ = 0,200 T, N = 100, A = 0,010 m², R = 20 Ω.",
+        "output": "Variante : Bext′ : 0,200 → 0,100 T, e′ = +0,500 V, i′ = +0,0250 A ; même E_J = 0,00250 J.",
+        "section": "controle",
+        "comparison": "6 ↔ 1 : mêmes attributs géométriques et initiaux, seule la pente change dans un scénario distinct.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Le retour confronte deux applications du même modèle ; le changement de dossier n’implique ni commutation instantanée ni expérience réalisée."
+        },
+        "evaluation": {
+          "object": "Référence initiale et résultats de la variante.",
+          "conditions": "N,A,R,B₀, orientation et durée inchangés ; α remplacé par −α.",
+          "criterion": "La pente change de signe, e et i aussi ; B reste positif et la dissipation conserve sa valeur.",
+          "finding": "Lenz porte sur la variation du flux. Les deux cas gardent l’hypothèse résistive et ne renseignent pas L."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le second dossier sans effacer le premier",
+            "input": "5.3 fournit les rampes distinctes ; 6.6 retourne la comparaison des signes et attributs.",
+            "action": "Isoler α′ = −0,500 T·s⁻¹ avec B₀,N,A,R identiques ; conserver la référence croissante pour la comparaison.",
+            "output": "Variante sur 0 ≤ t ≤ 0,200 s, même normale +e_z et régime résistif adopté.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La nouvelle application porte sur une pente prescrite séparément, sans description d’un passage physique entre régimes."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer la réponse de la rampe décroissante",
+            "input": "Bext′ = 0,200 − 0,500t T, N = 100, A = 0,010 m², R = 20 Ω.",
+            "action": "Calculer les bornes du champ, puis e′ = −NAα′, i′ = e′/R et E_J′ = R i′² Δt.",
+            "output": "Bext′ : 0,200 → 0,100 T ; e′ = +0,500 V, i′ = +0,0250 A, E_J′ = 0,00250 J.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivée change de signe tandis que le champ lui-même demeure positif sur l’intervalle."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la variante au nouveau tour",
+            "input": "Valeurs de 6.2, champ positif et pente négative.",
+            "action": "Associer i′ positif au sens antihoraire vu depuis +z ; transmettre la variante complète au dossier général pour une comparaison séparée.",
+            "output": "À 1.1 : α′ négatif, mêmes N,A,R,B₀ et durée ; e′ = +0,500 V, i′ = +0,0250 A, référence croissante conservée.",
+            "comparison": "",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le sens du courant correspond à un effet induit qui s’oppose à la diminution du flux, et non au champ positif présent."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire variation, champ présent et énergie",
+            "input": "Variante et interprétation transmises en 6.3.",
+            "action": "Maintenir séparément le signe de Bext′, celui de sa dérivée et celui de i′ ; reprendre la dissipation positive.",
+            "output": "Bext′ > 0, dBext′/dt < 0 et i′ > 0 ; P_J′ = 0,0125 W.",
+            "comparison": "6.4 ↔ 6.3 : même rampe, même sens de courant et même statut.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Trois signes différents peuvent coexister ; la variation du flux gouverne le signe électromoteur."
+            },
+            "evaluation": {
+              "object": "Variante calculée et lecture du signe de Lenz.",
+              "conditions": "Même normale et Bext′ positif sur tout l’intervalle.",
+              "criterion": "Conserver i′ > 0 malgré Bext′ > 0 ; vérifier ΔBext′ = −0,100 T.",
+              "finding": "L’opposition à la diminution explique le courant ; elle n’exige pas un champ extérieur négatif."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver la pente et tester la perte de signe",
+            "input": "e′ = +0,500 V et E_J′ = 0,00250 J relus ; N,A,R,Δt connus.",
+            "action": "Inverser α′ = −e′/(NA) ; avec l’énergie seule, résoudre |α′| = √(E_J′ R/Δt)/(NA).",
+            "output": "Le signal signé donne α′ = −0,500 T·s⁻¹ ; l’énergie ne donne que |α′| = 0,500 T·s⁻¹.",
+            "comparison": "6.5 ↔ 6.2 : réponse directe et reconstruction signée ou énergétique.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le carré du courant conserve la dissipation mais supprime l’information de signe ; Faraday signé la restitue."
+            },
+            "evaluation": {
+              "object": "Calcul de la variante et deux inversions possibles.",
+              "conditions": "N,A,R,Δt connus, modèle résistif ; signal et énergie issus du même calcul.",
+              "criterion": "e′ identifie la pente signée ; E_J′ seule admet les deux signes de pente.",
+              "finding": "Les deux rampes dissipent autant ; leur distinction exige une information signée, sans identifier l’offset."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer la comparaison des deux scénarios",
+            "input": "Pente retrouvée et ambiguïté énergétique de 6.5.",
+            "action": "Retourner à 6.1 les attributs communs et la pente propre à chaque dossier ; conserver les limites du modèle résistif.",
+            "output": "Retour à 6.1 : mêmes N,A,R,B₀,Δt ; pentes opposées, courants opposés et énergie Joule identique.",
+            "comparison": "6.6 ↔ 6.1 : variante restituée avec ses seuls changements autorisés.",
+            "relation": {
+              "nature": "logique",
+              "description": "La comparaison restaure les dossiers de départ et garde distincts calcul de variante et réalisation expérimentale."
+            },
+            "evaluation": {
+              "object": "Second dossier reçu et résultats reconstruits.",
+              "conditions": "Géométrie, champ initial, durée et approximation identiques.",
+              "criterion": "Retrouver α′ = −0,500 T·s⁻¹, Bfinal′ = 0,100 T ; maintenir séparément α = +0,500 et Bfinal = 0,300 T.",
+              "finding": "La boucle distingue les deux rampes ; ni la dépense totale de la source ni l’inductance n’est déduite."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "induction-tige-mobile": {
+    "question": "Comment passer du déplacement orienté de la tige au courant et au freinage, puis retrouver les attributs du dispositif sans attribuer l’énergie au champ permanent ?",
+    "basis": "ℓ = 0,200 m, R = 0,600 Ω, B = +0,500 e_z T ; x > 0 et contour positif associé à +z. Référence v = +3,00 e_x m·s⁻¹ ; variante séparée v = −3,00 e_x m·s⁻¹. Données supposées, résultats calculés.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les intégrales orientées, transformations mécaniques et inversions conditionnelles sont explicitées ; deux segments à vitesses opposées restent distincts.",
+    "subject": {
+      "type": "physique",
+      "description": "Le circuit fermé formé par deux rails fixes, une tige mobile et une résistance fixe, dans un champ permanent prescrit.",
+      "scope": "Modèle résistif quasi stationnaire, auto-induction et réaction négligées ; vitesse constante imposée, sans frottement ni phase d’accélération étudiée."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Délimiter le circuit et orienter son mouvement",
+        "system": "Le contour déformable, sa résistance fixe et les segments de mouvement à comparer.",
+        "input": "Tige suivant y à x > 0, rails suivant x ; ℓ, R, champ suivant +z et vitesse nominale supposés.",
+        "output": "Contour orienté, vitesse du conducteur distinguée de la dérive des porteurs ; Φ = Bℓx et dΦ/dt = Bℓv.",
+        "section": "conditions",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La géométrie transforme le déplacement en variation de flux ; la convention du contour détermine les signes à conserver."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les attributs géométriques",
+            "input": "Scénario nominal ou reprise locale de 1.6 ; 6.3 transmet éventuellement les deux vitesses opposées, conservées comme cas séparés.",
+            "action": "Identifier les rails fixes, la tige à x > 0 et la résistance fixe ; choisir le cas nominal avant calcul.",
+            "output": "ℓ = 0,200 m, R = 0,600 Ω, B = +0,500 T et v = +3,00 m·s⁻¹ ; axes directs.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le dispositif inclut la fermeture du circuit ; la longueur de la tige ne désigne pas la position x."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Transformer l’aire en flux orienté",
+            "input": "Rectangle d’aire ℓx, normale +z et champ B e_z uniforme permanent.",
+            "action": "Intégrer B·dS sur le rectangle puis dériver x(t) : Φ = Bℓx et dΦ/dt = Bℓv.",
+            "output": "Le flux croît à +0,300 Wb·s⁻¹ pour la référence ; sa valeur absolue reste inconnue sans x.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le champ peut rester permanent tandis que le flux varie par déformation du contour ; Bℓv possède l’unité volt."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre le contour déformable",
+            "input": "Flux et dérivée de 1.2, sens positif antihoraire vu depuis +z.",
+            "action": "Associer dℓ suivant +y sur la tige ; affecter u = v e_x à celle-ci et u = 0 aux éléments fixes.",
+            "output": "À 2.1 : contour orienté, dΦ/dt, ℓ, B, v et R ; modèle résistif sans auto-induction.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La vitesse u est celle des éléments matériels du circuit, distincte de la vitesse relative des porteurs."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les orientations utiles",
+            "input": "Dossier géométrique transmis en 1.3 et même face +z.",
+            "action": "Vérifier que le parcours remonte la tige suivant +y et que l’augmentation de x augmente le flux positif.",
+            "output": "Sens de contour et signe de dΦ/dt conservés ; aucune valeur initiale de x ajoutée.",
+            "comparison": "1.4 ↔ 1.3 : conserver géométrie, sens du parcours et vitesse matérielle.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le retour empêche de remplacer une grandeur orientée par son seul module."
+            },
+            "evaluation": {
+              "object": "Orientations reprises et dossier de 1.3.",
+              "conditions": "Même rectangle, normale +z et x > 0.",
+              "criterion": "Sur la tige, dℓ est suivant +y ; pour v > 0, dΦ/dt > 0.",
+              "finding": "Les conventions sont cohérentes et prêtes pour le produit vectoriel."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver le mouvement depuis le flux",
+            "input": "Variation dΦ/dt = +0,300 Wb·s⁻¹ reprise en 1.4 ; B et ℓ connus, non nuls.",
+            "action": "Résoudre v = (dΦ/dt)/(Bℓ) ; intégrer seulement sous la forme Φ(t) = Φ(t₀) + Bℓv(t−t₀).",
+            "output": "v = +3,00 m·s⁻¹ ; Φ(t₀), donc x(t₀), demeure une donnée non renseignée.",
+            "comparison": "1.5 ↔ 1.2 : inverser la dérivation du flux et identifier sa constante libre.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivée détermine la vitesse à Bℓ connu ; elle ne restitue pas la constante d’intégration."
+            },
+            "evaluation": {
+              "object": "Construction du flux en 1.2 et reconstruction de la vitesse.",
+              "conditions": "Champ et longueur connus, segment à vitesse constante.",
+              "criterion": "v Bℓ = +0,300 Wb·s⁻¹ ; ajouter une constante à Φ ne change pas sa dérivée.",
+              "finding": "La vitesse est retrouvée, mais aucune position absolue n’est identifiée."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le circuit initial",
+            "input": "Vitesse reconstruite en 1.5, ℓ, R et orientation conservés depuis 1.1.",
+            "action": "Rattacher v à la tige, garder les autres éléments fixes et conserver x > 0 sans choisir de position initiale.",
+            "output": "Retour à 1.1 : mêmes ℓ, R, B et v nominale ; position et durée restent non renseignées.",
+            "comparison": "1.6 ↔ 1.1 : retrouver le dispositif et son mouvement supposé.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour restitue les attributs connus et maintient les limites de la reconstruction."
+            },
+            "evaluation": {
+              "object": "Attributs restitués et données reçues en 1.1.",
+              "conditions": "Même convention spatiale ; aucune donnée de position supplémentaire.",
+              "criterion": "ℓ = 0,200 m, R = 0,600 Ω, B = +0,500 T, v = +3,00 m·s⁻¹ ; x > 0.",
+              "finding": "Le dossier initial est conservé sans inventer un trajet mesuré."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Dériver la f.é.m. et le courant",
+        "system": "Le contour mobile soumis à la force électromotrice de mouvement et à une résistance concentrée.",
+        "input": "1.3 transmet u, B, le contour orienté et R ; circulation électrique fermée nulle dans l’approximation adoptée.",
+        "output": "e = −Bℓv et i = −Bℓv/R ; le courant signé reste associé au parcours positif du contour.",
+        "section": "fem",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’intégration du terme de mouvement donne la f.é.m. ; la loi résistive transforme celle-ci en courant orienté."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les champs et la fermeture",
+            "input": "Contour et vitesses matérielles de 1.3, ou dossier électrique restitué en 2.6.",
+            "action": "Séparer le terme u×B de E ; conserver ∮E·dℓ = 0 sans poser E = 0 dans la résistance.",
+            "output": "Seule la tige contribue à ∮(u×B)·dℓ ; la résistance fixe dissipe l’énergie électrique.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La circulation nulle d’un champ électrique conservatif ne signifie pas son annulation point par point."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Intégrer le champ électromoteur",
+            "input": "u = v e_x sur la tige, B = B e_z, dℓ = dy e_y dans le sens positif.",
+            "action": "Calculer u×B = −vB e_y ; intégrer de y = 0 à ℓ, puis résoudre Ri = e.",
+            "output": "e = −vB∫₀^ℓdy = −Bℓv ; i = −Bℓv/R.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les contributions de mouvement des rails et de la résistance sont nulles car ils restent fixes."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la réponse électrique",
+            "input": "Expressions orientées de 2.2 et valeurs supposées de ℓ, B, v et R.",
+            "action": "Conserver e et i comme grandeurs signées ; préparer le produit iℓ e_y×B pour la force sur la tige.",
+            "output": "À 3.1 : e = −Bℓv, i = e/R et F_x = iℓB, avec le même sens positif.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le courant conventionnel signé détermine directement le sens de la force de Laplace."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le sens réel du courant",
+            "input": "Réponse électrique de 2.3 avec B > 0, v > 0 et R > 0.",
+            "action": "Déduire du signe négatif de i un parcours suivant −y dans la tige ; conserver le contour positif de référence.",
+            "output": "Courant horaire vu depuis +z, alors que le contour de calcul reste antihoraire.",
+            "comparison": "2.4 ↔ 2.3 : conserver les signes de e et i et les traduire en sens physique.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Un courant négatif ne change pas la convention ; il indique un parcours opposé à celle-ci."
+            },
+            "evaluation": {
+              "object": "Interprétation du courant et réponse orientée de 2.3.",
+              "conditions": "B, v et R positifs dans la référence.",
+              "criterion": "e < 0 et i < 0 ; le courant descend la tige suivant −y.",
+              "finding": "Le sens réel est identifié sans réorienter silencieusement le contour."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire la f.é.m. par le flux",
+            "input": "Réponse et orientations reprises en 2.4 ; flux géométrique Φ = Bℓx connu symboliquement.",
+            "action": "Dériver Φ avec B constant puis calculer −dΦ/dt ; comparer à l’intégrale de u×B et reformer Ri.",
+            "output": "−dΦ/dt = −Bℓv = ∮(u×B)·dℓ = Ri dans ce modèle.",
+            "comparison": "2.5 ↔ 2.2 : confronter dérivation du flux et intégration du produit vectoriel.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Deux expressions de la même loi se raccordent : dérivée du flux à travers une surface mobile et circulation motrice."
+            },
+            "evaluation": {
+              "object": "Intégration de 2.2 et traitement du flux de 2.5.",
+              "conditions": "Même contour déformable ; champ permanent et auto-induction négligée.",
+              "criterion": "Les deux calculs donnent −Bℓv avec le même signe, et Ri leur est égal.",
+              "finding": "La cohérence des représentations est vérifiée, sans observation indépendante."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les contributions électriques",
+            "input": "Égalité entre les deux f.é.m. et modèle électrique reçu en 2.1.",
+            "action": "Réassembler e = ∮E·dℓ + ∮(u×B)·dℓ ; maintenir le premier terme nul et appliquer Ri = e.",
+            "output": "Retour à 2.1 : conducteur mobile, éléments fixes et champ électrique local restent distingués.",
+            "comparison": "2.6 ↔ 2.1 : retrouver la décomposition des contributions au circuit.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’écriture complète conserve le rôle du champ électrique dans le circuit sans lui attribuer une circulation motrice supplémentaire."
+            },
+            "evaluation": {
+              "object": "Décomposition reconstruite et hypothèses reçues en 2.1.",
+              "conditions": "R fixe ; circulation de E nulle sous les approximations adoptées.",
+              "criterion": "e = 0 − Bℓv ; la loi Ri = e concerne le circuit fermé.",
+              "finding": "Les contributions initiales sont retrouvées ; E n’est pas déclaré nul partout."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Calculer le cas à vitesse positive",
+        "system": "Les conséquences électriques et mécaniques chiffrées du segment nominal.",
+        "input": "2.3 transmet e, i et F_x ; ℓ = 0,200 m, B = +0,500 T, R = 0,600 Ω, v = +3,00 m·s⁻¹.",
+        "output": "e = −0,300 V, i = −0,500 A, F_x = −0,0500 N ; P_J = +0,150 W et F_ext,x = +0,0500 N.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La substitution numérique conserve les signes ; le maintien à vitesse constante relie la force extérieure au freinage."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les expressions à évaluer",
+            "input": "Formules de 2.3, ou valeurs recalculées de 3.6 ; cas nominal à v > 0.",
+            "action": "Rassembler ℓ, B, R et v en unités SI ; conserver i orienté suivant le contour positif.",
+            "output": "Données numériques supposées distinctes des résultats à calculer ; résistance strictement positive.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La longueur et la vitesse sont utilisées en mètres et mètres par seconde ; aucun module ne remplace le signe de v."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Évaluer les grandeurs couplées",
+            "input": "Relations e = −Bℓv, i = e/R et F_x = iℓB ; paramètres de 3.1.",
+            "action": "Calculer successivement e, i, F_x, puis F_ext,x = −F_x et P_J = Ri².",
+            "output": "e = −0,300 V ; i = −0,500 A ; F_x = −0,0500 N ; F_ext,x = +0,0500 N ; P_J = 0,150 W.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La condition d’accélération nulle impose la compensation des forces suivant x ; les supports idéaux ne dissipent pas."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre le bilan chiffré",
+            "input": "Valeurs de 3.2 et vitesse nominale maintenue constante.",
+            "action": "Associer chaque signe à son sens ; joindre F_xv = −0,150 W et F_ext,xv = +0,150 W.",
+            "output": "À 4.1 : dossier électrique, freinage, force d’entraînement et puissances, pour contrôler le transfert d’énergie.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La même vitesse sert aux deux puissances mécaniques, qui se compensent sur la tige."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les valeurs et leurs unités",
+            "input": "Dossier transmis en 3.3 : volts, ampères, newtons et watts.",
+            "action": "Contrôler que le courant descend la tige et que F_x s’oppose à v ; distinguer force et puissance.",
+            "output": "Courant suivant −y, freinage suivant −x ; puissance Joule positive, puissance de Laplace négative.",
+            "comparison": "3.4 ↔ 3.3 : conserver chiffres, unités et sens de transfert.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le signe de la puissance dépend du produit force-vitesse ; la dissipation dépend du carré du courant."
+            },
+            "evaluation": {
+              "object": "Résultats repris et dossier chiffré de 3.3.",
+              "conditions": "Même cas nominal ; vitesse positive et R > 0.",
+              "criterion": "e/R = −0,500 A, iℓB = −0,0500 N et Ri² = +0,150 W.",
+              "finding": "Les valeurs restent associées à leur grandeur et à leur orientation."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire résistance et vitesse",
+            "input": "e = −0,300 V et i = −0,500 A repris ; ℓ et B connus.",
+            "action": "Résoudre R_rec = e/i et v_rec = −e/(Bℓ) ; réinjecter dans F_x = −B²ℓ²v/R.",
+            "output": "R_rec = 0,600 Ω, v_rec = +3,00 m·s⁻¹ et F_x retrouvé égal à −0,0500 N.",
+            "comparison": "3.5 ↔ 3.2 : inverser les calculs électriques puis reconstruire le freinage.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion exige e et i non nuls ; la valeur positive de R est compatible avec un élément dissipatif."
+            },
+            "evaluation": {
+              "object": "Évaluation directe de 3.2 et paramètres reconstruits.",
+              "conditions": "ℓ et B connus ; e et i sont les résultats du même calcul.",
+              "criterion": "e/i = 0,600 Ω ; −e/(Bℓ) = +3,00 m·s⁻¹ ; F_x reconstruit = −0,0500 N.",
+              "finding": "Les paramètres sont retrouvés conditionnellement ; le contrôle n’est pas une mesure de résistance."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le cas numérique",
+            "input": "Paramètres R_rec et v_rec obtenus, avec ℓ et B conservés depuis 3.1.",
+            "action": "Réévaluer e = −Bℓv_rec, i = e/R_rec et P_J = R_rec i² pour fermer le calcul.",
+            "output": "Retour à 3.1 : mêmes données nominales et même chaîne de résultats ; aucun résultat indépendant ajouté.",
+            "comparison": "3.6 ↔ 3.1 : retrouver les entrées et la réponse du segment nominal.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La réinjection teste la réversibilité algébrique de la chaîne numérique."
+            },
+            "evaluation": {
+              "object": "Dossier reconstruit et données de 3.1.",
+              "conditions": "Valeurs non arrondies utilisées dans les inversions ; mêmes unités SI.",
+              "criterion": "ℓ = 0,200 m, B = +0,500 T, R = 0,600 Ω, v = +3,00 m·s⁻¹.",
+              "finding": "Le cas de départ est restitué avec ses hypothèses de vitesse imposée."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Traiter le transfert mécanique et la dissipation",
+        "system": "La tige maintenue en mouvement, son agent extérieur et la résistance fixe où l’énergie est dissipée.",
+        "input": "3.3 fournit les valeurs de e, i, F_x et v ; accélération et frottement nuls sur le segment considéré.",
+        "output": "F_ext,xv = ei = Ri² = +0,150 W, tandis que F_xv = −0,150 W ; l’énergie provient du travail extérieur.",
+        "section": "energie",
+        "comparison": "4 ↔ 3 : confronter le bilan énergétique aux forces et puissances chiffrées du cas nominal.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le traitement transforme le freinage en puissance mécanique perdue et la f.é.m. en puissance électrique dissipée."
+        },
+        "evaluation": {
+          "object": "Forces et puissances du niveau 3 confrontées au bilan du niveau 4.",
+          "conditions": "Résistance fixe, vitesse constante ; stockage inductif et frottement négligés.",
+          "criterion": "F_ext,xv = −F_xv = ei = Ri² = 0,150 W ; la variation d’énergie cinétique de la tige est nulle.",
+          "finding": "Les transferts se compensent selon le modèle ; la source magnétique permanente n’est pas une alimentation énergétique."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les échanges du cas nominal",
+            "input": "Dossier chiffré de 3.3, ou bilan restitué en 4.6 ; toutes les parties sauf la tige sont fixes.",
+            "action": "Délimiter la tige, l’agent extérieur et la résistance ; attribuer à chaque élément sa vitesse et son échange.",
+            "output": "La tige reçoit deux puissances mécaniques opposées ; la résistance fixe dissipe P_J = 0,150 W.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Les forces de maintien sur les éléments immobiles ont une puissance mécanique nulle."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Transformer le freinage en puissance",
+            "input": "F_x = iℓB, e = −Bℓv et Ri = e repris avec la même orientation.",
+            "action": "Multiplier F_x par v : F_xv = −ei = −Ri² ; utiliser F_ext,x = −F_x.",
+            "output": "P_ext = Ri² = 0,150 W et P_Laplace = −Ri² = −0,150 W.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La substitution relie directement perte mécanique par freinage et puissance électrique fournie au circuit."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre un bilan avec son origine",
+            "input": "Identités énergétiques de 4.2, valeurs électriques et forces nominales conservées.",
+            "action": "Distinguer transfert mécanique, dissipation et stockage négligé ; joindre ℓ, R et v pour les inversions suivantes.",
+            "output": "À 5.1 : e, F_x, P_J, ℓ, R et v ; énergie fournie par l’agent extérieur, pas par le champ permanent.",
+            "comparison": "",
+            "relation": {
+              "nature": "interprétative",
+              "description": "À l’échelle d’un porteur, la force magnétique reste perpendiculaire à sa vitesse totale ; le bilan macroscopique suit le travail de l’agent."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le périmètre de l’énergie",
+            "input": "Bilan transmis en 4.3 et hypothèse de champ permanent extérieur.",
+            "action": "Séparer la puissance mécanique négative de Laplace de la puissance Joule positive ; conserver l’absence de stockage inductif dans ce modèle.",
+            "output": "Aucune énergie du champ permanent n’est débitée dans le calcul ; P_ext compense exactement P_J.",
+            "comparison": "4.4 ↔ 4.3 : conserver origine, destinataire et signe des échanges.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La force magnétique participe au couplage mécanique sans devenir une source d’énergie."
+            },
+            "evaluation": {
+              "object": "Attribution des puissances reprise et bilan de 4.3.",
+              "conditions": "Même périmètre : agent extérieur, tige et résistance fixe.",
+              "criterion": "P_ext > 0, P_Laplace < 0 et P_J > 0 ; aucune accélération étudiée.",
+              "finding": "L’interprétation respecte les signes calculés et le fournisseur mécanique."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Intégrer sur un segment admissible",
+            "input": "Puissances constantes reprises en 4.4 ; durée symbolique Δt > 0 telle que x(t) > 0 sur le segment.",
+            "action": "Poser Δx = vΔt ; intégrer W_ext = F_ext,xΔx et l’énergie Joule E_J = Ri²Δt.",
+            "output": "W_ext = E_J = 0,150 W × Δt ; le travail de Laplace vaut −E_J, sans durée numérique choisie.",
+            "comparison": "4.5 ↔ 4.2 : confronter bilan intégré et identité instantanée des puissances.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégration passe des puissances aux énergies ; dans ce segment nominal, Δx > 0 et W_ext > 0."
+            },
+            "evaluation": {
+              "object": "Transformation instantanée de 4.2 et intégration de 4.5.",
+              "conditions": "Δt entièrement dans le régime à vitesse constante ; x reste positif.",
+              "criterion": "W_ext/Δt = Ri² et W_Laplace + W_ext = 0 ; chaque énergie a l’unité joule.",
+              "finding": "Le bilan s’intègre sans inventer position initiale, durée de trajet ni phase d’accélération."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les échanges instantanés",
+            "input": "Travaux symboliques et Δt > 0 de 4.5 ; valeurs mécaniques reçues en 4.1.",
+            "action": "Diviser les travaux par Δt ; retrouver F_ext,x = P_ext/v et F_x = −F_ext,x.",
+            "output": "Retour à 4.1 : P_ext = 0,150 W, F_ext,x = +0,0500 N et F_x = −0,0500 N.",
+            "comparison": "4.6 ↔ 4.1 : retrouver les échanges et forces du dossier reçu.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "À vitesse connue non nulle, les puissances intégrées restituent les forces de maintien et de freinage."
+            },
+            "evaluation": {
+              "object": "Échanges restitués et dossier mécanique de 4.1.",
+              "conditions": "Même segment nominal, v = +3,00 m·s⁻¹.",
+              "criterion": "P_ext/v = +0,0500 N ; −P_ext/v = −0,0500 N ; P_ext = P_J.",
+              "finding": "Les échanges initiaux sont retrouvés sous le périmètre et les approximations conservés."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Reconstruire le champ sous conditions",
+        "system": "Les inversions du modèle électrique et mécanique à partir de résultats orientés du cas nominal.",
+        "input": "4.3 transmet e = −0,300 V, F_x = −0,0500 N, P_J et les valeurs connues de ℓ, R et v.",
+        "output": "La f.é.m. signée restitue B = +0,500 T ; le freinage seul restitue |B| = 0,500 T, sans choisir son orientation.",
+        "section": "freinage",
+        "comparison": "5 ↔ 2 : confronter les inversions conditionnelles aux lois orientées établies à l’aller.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’inversion distingue la dépendance linéaire de la f.é.m. en B de la dépendance quadratique du freinage."
+        },
+        "evaluation": {
+          "object": "Modèle orienté du niveau 2 confronté aux reconstructions du niveau 5.",
+          "conditions": "ℓ, R et v connus, avec ℓ > 0, R > 0 et v ≠ 0 ; résultats issus du calcul.",
+          "criterion": "B = −e/(ℓv) et B² = −RF_x/(ℓ²v) ; le second quotient est positif pour le freinage calculé.",
+          "finding": "Le champ signé est retrouvé grâce à e ; le seul freinage ne suffit pas et aucune mesure indépendante n’est produite."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les résultats à inverser",
+            "input": "Dossier de 4.3 ou reprise de 5.6 : e, F_x, P_J, ℓ, R et vitesse signée nominale.",
+            "action": "Traiter B comme paramètre à reconstruire ; garder ℓ, R et v connus et distinguer les canaux électrique et mécanique.",
+            "output": "Une inversion utilise e ; l’autre utilise F_x, sans confondre les informations disponibles.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le calcul inverse restitue un paramètre du modèle choisi ; il ne reconstitue pas simultanément tous ses attributs."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Résoudre les deux inversions",
+            "input": "e = −0,300 V et F_x = −0,0500 N ; ℓ = 0,200 m, R = 0,600 Ω, v = +3,00 m·s⁻¹.",
+            "action": "Calculer B_e = −e/(ℓv) et B_F² = −RF_x/(ℓ²v) ; prendre la racine positive pour |B_F|.",
+            "output": "B_e = +0,500 T ; B_F² = 0,250 T² et |B_F| = 0,500 T.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le signe de la f.é.m. combiné à celui de v fixe B ; la racine d’un carré ne fixe que son module."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les paramètres et l’ambiguïté",
+            "input": "Reconstructions de 5.2 et modèle résistif conservé.",
+            "action": "Retenir B = +0,500 T grâce à e ; joindre l’ambiguïté du freinage et annoncer séparément la vitesse variante −3,00 m·s⁻¹.",
+            "output": "À 6.1 : même ℓ, R et champ orienté retrouvé ; cas nominal conservé et variante de vitesse explicitement distincte.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La comparaison à vitesse opposée réutilise le champ identifié conditionnellement ; elle ne retourne pas la tige dans le temps."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre la portée de chaque résultat",
+            "input": "Dossier de 5.3 avec reconstruction électrique signée et reconstruction mécanique en module.",
+            "action": "Vérifier que l’orientation +z provient de e et v, et non de la seule valeur de la force résistante.",
+            "output": "B_e² = B_F² ; leur accord est une cohérence interne des relations utilisées.",
+            "comparison": "5.4 ↔ 5.3 : conserver paramètres restitués, ambiguïté et statut du contrôle.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Un résultat au seul point de fonctionnement considéré n’établit pas expérimentalement la loi pour toutes les vitesses ou tous les champs."
+            },
+            "evaluation": {
+              "object": "Portée des inversions reprise et dossier transmis en 5.3.",
+              "conditions": "Données calculées ; ℓ, R et v supposés connus.",
+              "criterion": "Le canal électrique donne +0,500 T ; le canal mécanique admet B = ±0,500 T.",
+              "finding": "La provenance du signe est préservée et le contrôle n’est pas présenté comme une validation expérimentale."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Construire le contre-exemple d’orientation",
+            "input": "Résultats repris en 5.4 ; considérer uniquement pour l’identifiabilité les deux champs B et −B au même v.",
+            "action": "Remplacer B par −B dans e, i, F_x et P_J ; comparer les parités des quatre expressions.",
+            "output": "e et i changent de signe ; F_x et P_J restent inchangés. Les deux champs ont donc le même freinage.",
+            "comparison": "5.5 ↔ 5.2 : confronter les solutions de l’inversion à une paire explicite de paramètres.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La paire de paramètres opposés prouve la non-unicité de l’inversion mécanique, sans changer le champ retenu pour la fiche."
+            },
+            "evaluation": {
+              "object": "Résolutions de 5.2 et contre-exemple de 5.5.",
+              "conditions": "Même ℓ, R et v non nul ; seul le signe de B est changé pour ce test logique.",
+              "criterion": "Pour B = −0,500 T, e = +0,300 V, i = +0,500 A, F_x = −0,0500 N et P_J = 0,150 W.",
+              "finding": "Le freinage n’identifie pas l’orientation ; la f.é.m. signée distingue les deux hypothèses."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les données nominales inversées",
+            "input": "B_e = +0,500 T sélectionné par e, et paramètres connus reçus en 5.1.",
+            "action": "Réinjecter B_e dans e = −Bℓv, F_x = −B²ℓ²v/R et P_J = B²ℓ²v²/R.",
+            "output": "Retour à 5.1 : e = −0,300 V, F_x = −0,0500 N et P_J = 0,150 W, au même v positif.",
+            "comparison": "5.6 ↔ 5.1 : retrouver les résultats reçus et les paramètres maintenus connus.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La réinjection referme l’inversion conditionnelle ; le contre-exemple B négatif demeure extérieur au cas nominal."
+            },
+            "evaluation": {
+              "object": "Données régénérées et entrée du calcul inverse en 5.1.",
+              "conditions": "Champ signé choisi grâce à e ; ℓ, R et v maintenus.",
+              "criterion": "Les trois résultats initiaux sont reproduits avec B_e > 0.",
+              "finding": "Le dossier de référence est restitué sans effacer l’ambiguïté propre au canal mécanique."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Comparer une vitesse opposée et retrouver les attributs",
+        "system": "Deux segments distincts à vitesses constantes opposées, dans le même dispositif et le même champ.",
+        "input": "5.3 fournit ℓ, R, B = +0,500 T et la référence ; variante supposée séparément à v = −3,00 m·s⁻¹, x > 0.",
+        "output": "La variante inverse e, i et les forces, garde P_J = 0,150 W ; les inversions restituent chaque vitesse avec ses attributs communs.",
+        "section": "controle",
+        "comparison": "6 ↔ 1 : confronter les vitesses restituées et les attributs conservés du dispositif initial.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le changement de signe de v modifie les grandeurs impaires et conserve la dissipation ; les deux cas reviennent séparément au dossier initial."
+        },
+        "evaluation": {
+          "object": "Attributs du niveau 1 confrontés aux résultats et inversions du niveau 6.",
+          "conditions": "ℓ et R conservés, B orienté connu ou restitué conditionnellement ; x > 0, géométrie et contour inchangés.",
+          "criterion": "−e/(Bℓ) vaut +3,00 m·s⁻¹ pour la référence et −3,00 m·s⁻¹ pour la variante ; P_J ne fixe que |v|.",
+          "finding": "Les deux mouvements sont distingués ; ℓ et R restent des données, tandis que x initial n’est pas retrouvé."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la variante séparée",
+            "input": "Dossier transmis en 5.3 ou reprise de 6.6 ; même B, ℓ et R, mais v_var = −3,00 m·s⁻¹.",
+            "action": "Conserver la normale +z et le parcours positif +y sur la tige ; garder la référence positive comme autre cas.",
+            "output": "Deux segments distincts à x > 0, sans description de la manœuvre qui inverserait réellement la vitesse.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Les régimes supposés peuvent être comparés sans inclure une accélération ni une transition instantanée."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Évaluer la vitesse négative",
+            "input": "v_var = −3,00 m·s⁻¹ et mêmes lois orientées que dans le cas nominal.",
+            "action": "Calculer e_var = −Bℓv_var, i_var = e_var/R, F_x,var = i_varℓB et F_ext,x,var = −F_x,var.",
+            "output": "e_var = +0,300 V ; i_var = +0,500 A ; F_x,var = +0,0500 N ; F_ext,x,var = −0,0500 N ; P_J,var = +0,150 W.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le produit F_ext,x,var v_var reste positif ; le freinage est maintenant dirigé suivant +x."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les deux mouvements au départ",
+            "input": "Résultats de 6.2 et valeurs nominales conservées.",
+            "action": "Joindre les deux vitesses, leurs signes électriques et le même P_J ; garder ℓ, R, B, contour et x > 0.",
+            "output": "À 1.1 : référence v = +3,00 m·s⁻¹ et variante v = −3,00 m·s⁻¹ séparées, avec leurs réponses calculées.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour fournit deux jeux d’attributs comparables ; il n’assimile pas leur comparaison à une évolution observée."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les signes et la dissipation",
+            "input": "Dossier comparatif de 6.3, au même champ positif.",
+            "action": "Comparer e_var = −e_ref, i_var = −i_ref et F_x,var = −F_x,ref ; vérifier P_ext,var = F_ext,x,var v_var.",
+            "output": "Tous les signes orientés s’inversent sauf celui de la dissipation ; P_ext,var = P_J,var = 0,150 W.",
+            "comparison": "6.4 ↔ 6.3 : conserver les parités calculées et l’origine mécanique de la puissance.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Une force extérieure négative peut fournir une puissance positive lorsque la vitesse est elle aussi négative."
+            },
+            "evaluation": {
+              "object": "Résultats comparatifs repris et dossier de 6.3.",
+              "conditions": "Valeurs opposées de v, même module ; dispositif inchangé.",
+              "criterion": "F_xv = −0,150 W dans chaque cas ; P_ext = P_J = +0,150 W dans chaque cas.",
+              "finding": "Les forces freinent et l’agent fournit la dissipation dans les deux sens."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver vitesse signée et module",
+            "input": "e_var = +0,300 V et P_J,var = 0,150 W repris ; B et ℓ connus non nuls, R connu positif.",
+            "action": "Résoudre v_e = −e_var/(Bℓ) et |v_P| = √(R P_J,var)/|Bℓ| ; réévaluer le flux dérivé Bℓv_e.",
+            "output": "v_e = −3,00 m·s⁻¹, |v_P| = 3,00 m·s⁻¹ et dΦ/dt = −0,300 Wb·s⁻¹.",
+            "comparison": "6.5 ↔ 6.2 : inverser les calculs de la variante en distinguant vitesse et module.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La puissance seule admet deux signes de vitesse ; l’information orientée de la f.é.m. sélectionne ici le signe négatif."
+            },
+            "evaluation": {
+              "object": "Évaluation de 6.2 et inversions de 6.5.",
+              "conditions": "ℓ, B et R connus ; champ orienté inchangé.",
+              "criterion": "−e_var/(Bℓ) = −3,00 m·s⁻¹ ; les deux valeurs ±3,00 m·s⁻¹ donnent le même P_J.",
+              "finding": "La vitesse signée est reconstruite conditionnellement ; une puissance positive ne fixe pas le sens du mouvement."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les deux dossiers physiques",
+            "input": "Vitesse variante reconstruite et référence reçue en 6.1 ; paramètres géométriques conservés.",
+            "action": "Rétablir u = v e_x sur la tige pour chaque cas, u = 0 ailleurs ; conserver x > 0 sans fixer x initial.",
+            "output": "Retour à 6.1 : mêmes ℓ, R, B et orientations, vitesses +3,00 et −3,00 m·s⁻¹ distinctes ; aucune transition ajoutée.",
+            "comparison": "6.6 ↔ 6.1 : retrouver les données des deux segments et leur séparation.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture de la boucle retrouve les attributs et leurs limites ; les résultats constants ne déterminent ni position initiale ni durée."
+            },
+            "evaluation": {
+              "object": "Dossiers restitués et cas reçus en 6.1.",
+              "conditions": "Paramètres communs connus ; résultats de calcul, sans données indépendantes supplémentaires.",
+              "criterion": "ℓ = 0,200 m, R = 0,600 Ω, B = +0,500 T ; v_ref = +3,00 et v_var = −3,00 m·s⁻¹ ; x > 0.",
+              "finding": "Les deux entrées sont restituées avec le même modèle ; ni accélération réelle ni position absolue n’est inférée."
+            }
+          }
+        ]
+      }
+    ]
   }
 }

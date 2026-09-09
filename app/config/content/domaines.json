@@ -317,8 +317,8 @@
   {
     "slug": "electromagnetisme",
     "title": "Électromagnétisme",
-    "summary": "Charges et champ électrique, puis force magnétique et champs de courants permanents.",
-    "scope": "Deux parcours de trois fiches : électrostatique (E1a), puis force de Lorentz, fil et spire en magnétostatique (E1b). Induction, compléments de Maxwell et milieux restent à développer.",
+    "summary": "Charges et champ électrique, champs de courants permanents, puis induction et conversion électromécanique.",
+    "scope": "Trois parcours de trois fiches : électrostatique (E1a), force et champ magnétiques (E1b), solénoïde et premiers modèles d’induction (E1c). Les compléments de Maxwell, les milieux et les circuits inductifs restent à développer.",
     "sources": [
       {
         "doc": "cpge",
@@ -455,6 +455,66 @@
             "tip": "Comparer le champ axial exact dans le modèle filiforme et son approximation dipolaire.",
             "card": "champ-axe-spire",
             "section": "controle",
+            "color": "green"
+          }
+        ]
+      },
+      {
+        "anchor": "boucle-induction",
+        "title": "Solénoïde, flux variable et tige mobile",
+        "steps": [
+          {
+            "id": 1,
+            "title": "Définir le bobinage",
+            "subtitle": "Géométrie et courant",
+            "tip": "Le rayon, la longueur et la densité de spires fixent le modèle du solénoïde fini.",
+            "card": "solenoide-fini",
+            "section": "conditions",
+            "color": "blue"
+          },
+          {
+            "id": 2,
+            "title": "Calculer le champ axial",
+            "subtitle": "Superposition des spires",
+            "tip": "Intégrer Biot–Savart puis comparer le centre, une extrémité et la limite longue.",
+            "card": "solenoide-fini",
+            "section": "axe",
+            "color": "orange"
+          },
+          {
+            "id": 3,
+            "title": "Déduire le courant induit",
+            "subtitle": "Flux extérieur variable",
+            "tip": "Dans une bobine fixe, distinguer flux par spire, flux lié et force électromotrice signée.",
+            "card": "faraday-circuit-fixe",
+            "section": "exemple",
+            "color": "green"
+          },
+          {
+            "id": 4,
+            "title": "Comparer les puissances",
+            "subtitle": "Origine du transfert",
+            "tip": "La dissipation du circuit fixe reçoit son énergie de la source qui fait varier le champ prescrit.",
+            "card": "faraday-circuit-fixe",
+            "section": "energie",
+            "color": "blue"
+          },
+          {
+            "id": 5,
+            "title": "Traiter le mouvement",
+            "subtitle": "Force électromotrice motrice",
+            "tip": "Pour une tige sur rails, relier le mouvement, le courant et la force de freinage.",
+            "card": "induction-tige-mobile",
+            "section": "freinage",
+            "color": "orange"
+          },
+          {
+            "id": 6,
+            "title": "Refermer le bilan",
+            "subtitle": "Travail mécanique et chaleur",
+            "tip": "À vitesse constante imposée, le travail de traction compense la dissipation Joule.",
+            "card": "induction-tige-mobile",
+            "section": "energie",
             "color": "green"
           }
         ]

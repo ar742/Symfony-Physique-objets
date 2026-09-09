@@ -3291,5 +3291,342 @@
     "version": "1.0",
     "updated": "2026-09-09",
     "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "solenoide-fini",
+    "number": 29,
+    "title": "Solénoïde fini : champ axial et effet des extrémités",
+    "level": "CPGE · Magnétostatique",
+    "domain": "electromagnetisme",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire",
+    "summary": "Intégrer les contributions des spires et distinguer le champ central de celui d’une extrémité.",
+    "objective": "Calculer le champ sur l’axe d’un solénoïde fini, évaluer une approximation et préciser les conditions d’une inversion.",
+    "prerequisites": [
+      "Champ sur l’axe d’une spire circulaire",
+      "Intégrale définie et changement de variable",
+      "Densité de spires et courant surfacique"
+    ],
+    "system": "Une nappe cylindrique de courant azimutal, de rayon a et de longueur ℓ, idéalise un bobinage serré de N spires parcourues par I.",
+    "conditions": [
+      "Source seule en régime permanent, perméabilité μ0 partout ; nappe continue purement azimutale, sans fils de connexion ni composante hélicoïdale du courant.",
+      "Origine au milieu du solénoïde, extrémités z = ±ℓ/2 ; calcul sur l’axe uniquement. Le courant positif est antihoraire vu depuis +z et donne Bz > 0.",
+      "Données supposées : a = 0,020 m, ℓ = 0,200 m, N = 1000 et I = +0,500 A ; n = N/ℓ. La référence est z = 0, la variante z = +ℓ/2.",
+      "Pour les valeurs numériques, μ0 ≈ 4π × 10⁻⁷ T·m·A⁻¹ est approché, non exact dans le SI actuel."
+    ],
+    "sections": [
+      {
+        "id": "spires",
+        "title": "Passer des spires à une nappe continue",
+        "paragraphs": [
+          "Une tranche d’épaisseur dz′ représente n dz′ spires du modèle continu. Les champs s’additionnent : la contribution de cette tranche est celle d’une spire multipliée par n dz′. La densité surfacique de courant azimutal vaut Kφ = nI, en A·m⁻¹.",
+          "Sur l’axe, les contributions transversales de chaque spire s’annulent. Le champ de la tranche dépend de la séparation z−z′ ; intégrer sur toutes les positions sources conserve explicitement la longueur finie."
+        ],
+        "equations": [
+          {
+            "id": "solenoideintegrale",
+            "reading": "B indice z de z vaut mu zéro n I a au carré sur deux, multiplié par l’intégrale de moins ell sur deux à plus ell sur deux de d z prime, divisé par la quantité a au carré plus le carré de la différence z moins z prime, le tout à la puissance trois demis."
+          }
+        ]
+      },
+      {
+        "id": "axe",
+        "title": "Conserver les deux extrémités dans le résultat",
+        "paragraphs": [
+          "L’intégration donne une expression valable sur tout l’axe pour a > 0. Avec g(s) = s/√(a²+s²), elle s’écrit Bz(z) = (μ0nI/2)[g(z+ℓ/2)−g(z−ℓ/2)]. Les séparations signées évitent des bornes angulaires ambiguës.",
+          "Pour I > 0, le champ axial est positif et Bz(−z) = Bz(z). Au centre, Bc = μ0NI/[2√(a²+(ℓ/2)²)] ; à une extrémité, Be = μ0NI/[2√(a²+ℓ²)]. Le solénoïde fini ne possède donc pas le même champ sur toute sa région intérieure.",
+          "Si a, ℓ et N sont connus, Bc signé permet de reconstruire I. Si N et I sont tous deux inconnus, le champ de ce modèle ne les sépare pas : à géométrie fixée, il dépend de leur produit NI."
+        ],
+        "equations": [
+          {
+            "id": "solenoideaxe",
+            "reading": "B indice z de z vaut mu zéro n I sur deux, multiplié par une différence de deux quotients. Le premier a pour numérateur z plus ell sur deux, et pour dénominateur la racine de a au carré plus le carré de cette somme. Le second a pour numérateur z moins ell sur deux, et pour dénominateur la racine de a au carré plus le carré de cette différence."
+          }
+        ]
+      },
+      {
+        "id": "limite",
+        "title": "Définir la limite longue et son erreur",
+        "paragraphs": [
+          "Pour une famille où a, n et I restent fixes et où les extrémités s’éloignent, le champ en un point intérieur fixe tend vers B∞ = μ0nI. Allonger à N fixé change aussi n : il faut préciser les paramètres conservés.",
+          "Pour le solénoïde donné, on compare B∞ au champ central fini Bc. L’erreur relative choisie est δc = (B∞−Bc)/Bc, avec le champ fini au dénominateur. Elle vaut √[1+(2a/ℓ)²]−1.",
+          "À l’extrémité z = ℓ/2, la limite longue donne plutôt B∞/2. La position suit alors l’extrémité et reste différente d’un point intérieur fixe. Les expressions axiales ne fournissent pas le champ hors de l’axe."
+        ],
+        "equations": [
+          {
+            "id": "solenoidelong",
+            "reading": "B infini vaut mu zéro n I. Le champ axial au centre vaut B infini divisé par la racine de un plus le carré du rapport deux a sur ell."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "Avec a = 0,020 m, ℓ = 0,200 m, N = 1000 et I = +0,500 A, comparer les champs au centre et à l’extrémité z = +0,100 m.",
+      "steps": [
+        "n = N/ℓ = 5000 m⁻¹ et B∞ ≈ 3,141593 mT.",
+        "Au centre, Bc = B∞/√1,04 ≈ 3,080585 mT. L’erreur (B∞−Bc)/Bc vaut environ 1,98039 %.",
+        "À l’extrémité, Be = (B∞/2)/√1,01 ≈ 1,563001 mT. L’approximation B∞/2 la surestime d’environ 0,498756 %, avec Be au dénominateur."
+      ],
+      "result": "Les deux champs sont dirigés suivant +z. Be/Bc ≈ 0,507371 ; la proximité de Bc et B∞ n’autorise pas à déclarer tout l’intérieur uniforme."
+    },
+    "checkpoint": {
+      "question": "Un champ central calculé de 3,080585 mT permet-il de retrouver I = 0,500 A en utilisant directement Bc = μ0nI ?",
+      "answer": "Cette inversion approchée donne environ 0,490290 A. Avec a, ℓ et N connus, la formule finie redonne 0,500 A. Le biais relatif du courant approché est −1,94193 %, avec 0,500 A au dénominateur ; cette cohérence interne n’est pas une mesure du courant."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P14",
+        "page": 383,
+        "section": "Corrigé 4 : champ sur l’axe d’un solénoïde et limite infinie"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 269,
+        "section": "Biot–Savart pour distribution linéique : base de l’addition des champs de spires"
+      }
+    ],
+    "references": [
+      "mit-solenoide-fini",
+      "openstax-solenoides",
+      "nist-permeabilite"
+    ],
+    "corrections": [
+      {
+        "id": "C20",
+        "title": "Rendre cohérente la limite du solénoïde infini",
+        "detail": "CPGE P14 p. 383 indique θ₁ = −π et θ₂ = π dans une différence cos θ₂ − cos θ₁ : celle-ci vaut zéro, contrairement au champ μ0nI annoncé. La fiche utilise l’intégrale axiale : à a, n, I et z fixes, les deux termes aux extrémités tendent vers +1 et −1 lorsque ℓ augmente, donnant bien B∞ = μ0nI. Ce contrôle corrige la limite sans réinterpréter les angles du schéma.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P14",
+            "page": 383,
+            "section": "Corrigé 4 : bornes angulaires du solénoïde infini"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "faraday-circuit-fixe",
+    "title": "Faraday : du flux variable au courant induit",
+    "level": "CPGE · Induction électromagnétique",
+    "summary": "Calculer la force électromotrice d’une bobine fixe, puis retrouver la variation du champ sans perdre les conventions de signe.",
+    "objective": "Distinguer flux par spire, flux lié et force électromotrice ; calculer le courant résistif et l’énergie dissipée, puis comparer deux pentes opposées.",
+    "prerequisites": [
+      "Flux d’un champ et orientation d’un contour",
+      "Dérivation, intégration et constante d’intégration",
+      "Loi d’Ohm et effet Joule"
+    ],
+    "system": "Une bobine fermée, fixe, de 100 spires identiques en série, chacune d’aire 0,010 m², est soumise à un champ magnétique extérieur uniforme variable.",
+    "conditions": [
+      "La normale commune des spires est +e_z ; le sens positif de parcours et de courant est antihoraire vu depuis +z vers la bobine. Les liaisons sont supposées ne pas ajouter de flux lié appréciable.",
+      "Le champ prescrit est Bext(t)e_z, avec Bext(t) = B₀ + αt, B₀ = 0,200 T et α = +0,500 T·s⁻¹ pour 0 ≤ t ≤ 0,200 s.",
+      "Cet intervalle est un segment régulier de rampe. L’établissement de la rampe, une fermeture du circuit ou les transitoires aux extrémités ne sont pas décrits.",
+      "La résistance totale constante vaut R = 20 Ω. Le modèle résistif quasi stationnaire néglige auto-induction, réaction du secondaire sur le champ prescrit et capacités parasites.",
+      "Cette approximation suppose notamment L/R petit devant l’échelle de variation pertinente de la commande, avec les transitoires déjà écartés du segment étudié. L n’est pas fourni : cette condition est une hypothèse, sans vérification chiffrée.",
+      "La variante est une autre rampe, α = −0,500 T·s⁻¹, avec les mêmes B₀, N, A, R et intervalle ; elle ne décrit pas une inversion instantanée de la référence."
+    ],
+    "sections": [
+      {
+        "id": "flux",
+        "title": "Un flux par spire, un flux lié à la bobine",
+        "paragraphs": [
+          "Le flux extérieur d’une spire est l’intégrale de Bext sur sa surface orientée. Le champ est uniforme et parallèle à la normale : Φ = A Bext. Φ est signé ; changer la normale change son signe.",
+          "Les 100 spires sont parcourues en série avec la même orientation. Le flux lié λ est la somme des flux extérieurs des spires, soit NΦ. Ce facteur N ne doit pas être appliqué une seconde fois lors du calcul de la force électromotrice."
+        ],
+        "equations": [
+          {
+            "id": "faradayflux",
+            "reading": "Le flux extérieur Phi d’une spire vaut A fois B extérieur. Le flux lié lambda de la bobine vaut N fois Phi."
+          }
+        ]
+      },
+      {
+        "id": "fem",
+        "title": "La variation du flux fixe le signe du courant",
+        "paragraphs": [
+          "La loi de Faraday donne la force électromotrice e sur le circuit complet par la dérivée opposée du flux lié extérieur. Sur cette rampe et dans le modèle retenu, e = −NAα et le bilan résistif donne i = e/R.",
+          "Le signe moins exprime Lenz : les effets du courant induit s’opposent à la variation du flux qui le produit. Un champ positif croissant conduit ici à i négatif ; un champ positif décroissant conduit à i positif. Le champ induit n’est donc pas systématiquement opposé au champ extérieur présent.",
+          "Dans un contour fixe, la force électromotrice traduit une circulation du champ électrique induit. Une circulation non nulle sur un contour fermé ne peut être une différence de potentiel électrostatique indépendante du chemin. e = Ri est ici un bilan de circuit, sans rendre ce champ conservatif.",
+          "L’intégration donne ΔBext = −(1/NA)∫e dt. Avec N et A connus, elle restitue une variation ; retrouver Bext(t) exige aussi une valeur initiale. Ajouter un champ constant au champ prescrit laisse e inchangée."
+        ],
+        "equations": [
+          {
+            "id": "faradayfem",
+            "reading": "La force électromotrice e vaut l’opposé de la dérivée temporelle de lambda. Dans le modèle résistif adopté, e vaut R fois le courant signé i."
+          }
+        ]
+      },
+      {
+        "id": "energie",
+        "title": "Une dissipation positive pour les deux sens de courant",
+        "paragraphs": [
+          "La puissance Joule P_J est positive ou nulle. Dans le modèle résistif, elle est égale à e i : e et i changent ensemble de signe quand la pente change de signe.",
+          "L’énergie reçue par le circuit via le champ électrique induit provient du dispositif extérieur qui fait varier le champ magnétique. Le calcul évalue la part dissipée dans cette résistance ; il ne détermine ni toute l’énergie de la source extérieure ni son rendement.",
+          "La bobine reste fixe. Si l’auto-induction devait être conservée, le bilan comprendrait aussi la variation de l’énergie magnétique propre et e = Ri ne suffirait plus pendant un transitoire."
+        ],
+        "equations": [
+          {
+            "id": "faradayenergie",
+            "reading": "La puissance Joule vaut R fois i au carré, soit e fois i dans le modèle résistif. L’énergie Joule sur la durée Delta t est l’intégrale de cette puissance entre zéro et Delta t."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "Calculer e, i et l’énergie Joule sur le segment de 0,200 s. Que devient le résultat pour la rampe séparée de pente −0,500 T·s⁻¹ ?",
+      "steps": [
+        "Pour α = +0,500 T·s⁻¹, Bext passe de 0,200 à 0,300 T. Le flux d’une spire passe de 0,00200 à 0,00300 Wb ; λ passe de 0,200 à 0,300 Wb.",
+        "NAα = 0,500 Wb·s⁻¹ donne e = −0,500 V et i = −0,0250 A. Le courant est horaire vu depuis +z ; P_J = 20 × (0,0250)² = 0,0125 W.",
+        "L’énergie dissipée calculée est E_J = 0,0125 × 0,200 = 0,00250 J. Les données sont supposées et la fermeture résistive est adoptée, sans mesure de L.",
+        "Pour α = −0,500 T·s⁻¹, Bext reste positif : 0,200 → 0,100 T. e = +0,500 V et i = +0,0250 A ; P_J et E_J conservent leurs valeurs positives."
+      ],
+      "result": "Le changement de pente inverse le courant sans inverser le champ extérieur pendant cet intervalle. Les deux rampes dissipent ici la même énergie dans la résistance."
+    },
+    "checkpoint": {
+      "question": "Le seul relevé supposé e(t) = −0,500 V sur 0,200 s permet-il d’affirmer que le champ final vaut 0,300 T ?",
+      "answer": "Avec N = 100 et A = 0,010 m² connus, il donne ΔBext = +0,100 T. La valeur finale 0,300 T exige en plus B₀ = 0,200 T. Toute rampe Bext(t) = C + 0,500t, avec C constant en teslas, donne la même e ; ce calcul inverse ne constitue pas une mesure indépendante."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P14",
+        "page": 380,
+        "section": "Induction : champ électromoteur de Neumann, lois de Faraday et de Lenz"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 269,
+        "section": "Induction : circulation électromotrice, lois de Faraday et de Lenz"
+      }
+    ],
+    "references": [
+      "openstax-faraday",
+      "openstax-lenz",
+      "openstax-champ-induit",
+      "openstax-rl"
+    ],
+    "corrections": [],
+    "number": 30,
+    "domain": "electromagnetisme",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "induction-tige-mobile",
+    "title": "Tige mobile : de l’induction au freinage",
+    "level": "CPGE · Induction",
+    "summary": "Orienter la f.é.m. et le courant d’une tige mobile, puis relier le freinage au travail mécanique dissipé.",
+    "objective": "Calculer f.é.m., courant, force et puissance ; comparer deux vitesses opposées et préciser ce que leurs inversions identifient.",
+    "prerequisites": [
+      "Produit vectoriel et contour orienté",
+      "Loi d’Ohm et effet Joule",
+      "Force de Laplace et puissance mécanique"
+    ],
+    "system": "Une tige conductrice ferme deux rails fixes dans un champ magnétique uniforme permanent ; un agent extérieur maintient sa vitesse.",
+    "conditions": [
+      "Repère orthonormé direct : rails suivant x, tige de longueur ℓ = 0,200 m suivant y et située à x > 0 ; aire du rectangle ℓx.",
+      "B = +0,500 e_z T est prescrit. Normale du contour +z, parcours positif antihoraire vu depuis +z ; la tige est parcourue suivant +y.",
+      "Toute la résistance R = 0,600 Ω est concentrée dans une résistance fixe ; rails, tige et contacts idéaux.",
+      "Auto-induction, réaction du circuit sur le champ prescrit et capacités parasites négligées : modèle résistif quasi stationnaire adopté, sans transitoire d’établissement.",
+      "Vitesse de référence v = +3,00 e_x m·s⁻¹ constante, maintenue par un agent extérieur ; frottements négligés et accélération nulle sur le segment étudié.",
+      "La variante suppose séparément v = −3,00 e_x m·s⁻¹, toujours à x > 0. Aucun retournement instantané ni sa phase d’accélération n’est décrit."
+    ],
+    "sections": [
+      {
+        "id": "fem",
+        "title": "Orienter la f.é.m. motrice",
+        "paragraphs": [
+          "On note v la composante signée de la vitesse de la tige suivant x, et u la vitesse locale du conducteur : u = v e_x sur la tige, u = 0 sur les parties fixes. Ce n’est pas la vitesse de dérive des porteurs.",
+          "Sur la tige, u × B = −vB e_y. Son intégrale suivant le parcours positif +y vaut donc −Bℓv. Le flux extérieur orienté Φ = Bℓx donne aussi e = −dΦ/dt = −Bℓv.",
+          "Dans ce modèle à champ permanent et auto-induction négligée, la circulation fermée du champ électrique est nulle ; cela ne signifie pas que ce champ soit nul dans la résistance. La f.é.m. motrice fournit e = Ri, avec i signé selon le même contour."
+        ],
+        "equations": [
+          {
+            "id": "tigeemf",
+            "reading": "La f.é.m. e est l’intégrale fermée du produit scalaire de u croix B avec l’élément de contour orienté. Elle vaut moins B fois ℓ fois v, et égale R fois i."
+          }
+        ]
+      },
+      {
+        "id": "freinage",
+        "title": "Relier le courant à la force résistante",
+        "paragraphs": [
+          "La force de Laplace sur la tige vaut iℓ e_y × B e_z. Sa composante suivant x est iℓB. En remplaçant i par −Bℓv/R, on obtient une force opposée à la vitesse pour R > 0.",
+          "À vitesse constante et sans frottement, l’agent extérieur exerce F_ext,x = −F_x. Les forces sur les parties fixes peuvent être reprises par leurs supports ; leur vitesse est nulle, donc elles ne contribuent pas à la puissance mécanique de déplacement.",
+          "Si ℓ et v ≠ 0 sont connus, la f.é.m. signée donne B = −e/(ℓv), où B est la composante suivant +z. La force seule donne B² = −RF_x/(ℓ²v) : elle ne distingue pas les deux orientations du champ."
+        ],
+        "equations": [
+          {
+            "id": "tigefreinage",
+            "reading": "La composante F indice x vaut i fois ℓ fois B, soit moins le quotient B au carré ℓ au carré sur R, multiplié par la vitesse signée v."
+          }
+        ]
+      },
+      {
+        "id": "energie",
+        "title": "Identifier l’origine mécanique de l’énergie",
+        "paragraphs": [
+          "La puissance mécanique de la force de Laplace sur la tige est F_xv = −Ri². L’agent extérieur fournit la puissance opposée, entièrement dissipée par effet Joule dans la résistance selon le modèle retenu.",
+          "Le champ magnétique permanent ne fournit pas cette énergie. À l’échelle d’un porteur, la partie magnétique de Lorentz est perpendiculaire à sa vitesse totale ; le dispositif transfère le travail de l’agent extérieur vers la dissipation électrique.",
+          "Sur une durée Δt appartenant entièrement à un segment à vitesse constante et x > 0, le travail extérieur vaut Ri²Δt. La position initiale et la durée ne sont pas données : aucune énergie de trajet particulière n’est chiffrée.",
+          "Changer séparément v en −v inverse e, i et les forces suivant x, mais laisse Ri² positif et inchangé. Cette comparaison ne modélise pas la manœuvre nécessaire pour renverser le mouvement."
+        ],
+        "equations": [
+          {
+            "id": "tigepuissance",
+            "reading": "La puissance extérieure vaut F extérieur indice x multiplié par v ; elle égale R i au carré, soit le carré de B ℓ v divisé par R."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "Pour la vitesse +3,00 m·s⁻¹, déterminer les signes et valeurs de e, i, F_x et P_ext. Que devient ce bilan dans la variante à −3,00 m·s⁻¹ ?",
+      "steps": [
+        "e = −0,500 × 0,200 × 3,00 = −0,300 V ; i = e/R = −0,500 A. Le courant parcourt la tige suivant −y.",
+        "F_x = (−0,500) × 0,200 × 0,500 = −0,0500 N ; F_ext,x = +0,0500 N maintient la vitesse.",
+        "P_ext = 0,0500 × 3,00 = 0,150 W = 0,600 × (−0,500)². La puissance mécanique de Laplace vaut −0,150 W.",
+        "Dans la variante : e = +0,300 V, i = +0,500 A, F_x = +0,0500 N et F_ext,x = −0,0500 N ; P_ext = P_J = +0,150 W."
+      ],
+      "result": "Le freinage s’oppose au mouvement dans les deux cas. L’agent extérieur fournit la puissance Joule ; les données sont supposées et les résultats calculés."
+    },
+    "checkpoint": {
+      "question": "La valeur du freinage permet-elle de retrouver le signe du champ magnétique ? Une puissance Joule positive dans les deux sens signifie-t-elle que le champ fournit de l’énergie ?",
+      "answer": "Non dans les deux cas. À ℓ, R et v connus, F_x dépend de B² et ne fixe pas son signe. La f.é.m. orientée e, avec v connu et non nul, lève cette ambiguïté. La puissance Joule vient du travail mécanique de l’agent qui maintient la vitesse."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P14",
+        "page": 379,
+        "section": "Force de Laplace sur un conducteur filiforme"
+      },
+      {
+        "doc": "cpge",
+        "code": "P14",
+        "page": 380,
+        "section": "Champ électromoteur de Lorentz ; Faraday et Lenz"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 269,
+        "section": "Champ électromoteur, induction de Faraday et force volumique de Laplace"
+      }
+    ],
+    "references": [
+      "openstax-tige-mobile"
+    ],
+    "corrections": [],
+    "number": 31,
+    "domain": "electromagnetisme",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
   }
 ]

@@ -50,15 +50,15 @@ final class CardAnalysisLibraryTest extends TestCase
             }
             self::assertCount(36, $coordinates);
         }
-        self::assertSame(168, $totalLevels);
-        self::assertSame(1008, $totalPoints);
+        self::assertSame(186, $totalLevels);
+        self::assertSame(1116, $totalPoints);
     }
 
     public function testRefinementsDescribeEveryInputRelationAndReturnEvaluation(): void
     {
         $library = new CardAnalysisLibrary(dirname(__DIR__));
         $refined = array_filter($library->all(), static fn (array $analysis): bool => isset($analysis['refinement']));
-        foreach (['oscillateur-harmonique', 'continuite-bernoulli', 'lagrange-hamilton', 'travail-energie-mecanique', 'viscosite-poiseuille', 'onde-corde', 'rotation-axe-fixe', 'roulement-sans-glissement', 'referentiel-tournant', 'newton-referentiel', 'force-centrale-orbite', 'hydrostatique-archimede', 'elasticite-lineaire', 'onde-acoustique', 'systeme-et-grandeurs', 'gaz-parfait', 'premier-principe', 'capacites-thermiques', 'detente-isotherme', 'entropie', 'microcanonique', 'boltzmann', 'champ-coulomb', 'potentiel-energie-electrique', 'gauss-sphere-chargee', 'force-lorentz-trajectoire', 'champ-fil-ampere', 'champ-axe-spire'] as $slug) { self::assertArrayHasKey($slug, $refined); }
+        foreach (['oscillateur-harmonique', 'continuite-bernoulli', 'lagrange-hamilton', 'travail-energie-mecanique', 'viscosite-poiseuille', 'onde-corde', 'rotation-axe-fixe', 'roulement-sans-glissement', 'referentiel-tournant', 'newton-referentiel', 'force-centrale-orbite', 'hydrostatique-archimede', 'elasticite-lineaire', 'onde-acoustique', 'systeme-et-grandeurs', 'gaz-parfait', 'premier-principe', 'capacites-thermiques', 'detente-isotherme', 'entropie', 'microcanonique', 'boltzmann', 'champ-coulomb', 'potentiel-energie-electrique', 'gauss-sphere-chargee', 'force-lorentz-trajectoire', 'champ-fil-ampere', 'champ-axe-spire', 'solenoide-fini', 'faraday-circuit-fixe', 'induction-tige-mobile'] as $slug) { self::assertArrayHasKey($slug, $refined); }
         self::assertSame('theorique', $refined['lagrange-hamilton']['subject']['type']);
         $natures = ['logique', 'calculatoire', 'observationnelle', 'interprétative', 'chronologique', 'causale'];
         foreach ($refined as $slug => $analysis) {

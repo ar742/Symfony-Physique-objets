@@ -226,5 +226,47 @@
     "url": "https://openstax.org/books/university-physics-volume-2/pages/12-4-magnetic-field-of-a-current-loop",
     "note": "§12.4, équations 12.13–12.19 : annulation transverse, champ axial, centre et limite dipolaire. L’axe y de la source est nommé z dans la fiche ; |z|³ rend explicites les deux côtés de l’axe.",
     "checked": "2026-09-09"
+  },
+  "mit-solenoide-fini": {
+    "title": "MIT OpenCourseWare — Sources of Magnetic Fields, §9.4",
+    "url": "https://ocw.mit.edu/courses/8-02-physics-ii-electricity-and-magnetism-spring-2007/378f66ab154c54f34f58ab72fbcf9414_ch9sourc_b_field.pdf",
+    "note": "Page 21, équations 9.4.5–9.4.6 : superposition des spires et champ sur l’axe d’un solénoïde fini. μ0 est utilisé ici avec son statut actuel de constante non exacte.",
+    "checked": "2026-09-09"
+  },
+  "openstax-solenoides": {
+    "title": "OpenStax — Solénoïdes et tores (§12.6)",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/12-6-solenoids-and-toroids",
+    "note": "Intégration des spires, champ axial fini et limite longue. La fiche distingue explicitement le centre et les extrémités du modèle fini.",
+    "checked": "2026-09-09"
+  },
+  "openstax-faraday": {
+    "title": "OpenStax · University Physics 2, §13.1 — Faraday’s Law",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/13-1-faradays-law",
+    "note": "Flux orienté, dérivée opposée et somme pour N spires de flux identiques ; exemple original de rampe rédigé pour cette fiche.",
+    "checked": "2026-09-09"
+  },
+  "openstax-lenz": {
+    "title": "OpenStax · University Physics 2, §13.2 — Lenz’s Law",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/13-2-lenzs-law",
+    "note": "Orientation du courant en réponse à une augmentation ou diminution du flux extérieur.",
+    "checked": "2026-09-09"
+  },
+  "openstax-champ-induit": {
+    "title": "OpenStax · University Physics 2, §13.4 — Induced Electric Fields",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/13-4-induced-electric-fields",
+    "note": "Circulation du champ électrique induit et distinction avec un champ électrostatique conservatif.",
+    "checked": "2026-09-09"
+  },
+  "openstax-rl": {
+    "title": "OpenStax · University Physics 2, §14.4 — RL Circuits",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/14-4-rl-circuits",
+    "note": "Bilan avec auto-induction et constante de temps L/R, utilisés pour délimiter l’approximation résistive.",
+    "checked": "2026-09-09"
+  },
+  "openstax-tige-mobile": {
+    "title": "OpenStax — F.é.m. de mouvement (§13.3)",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/13-3-motional-emf",
+    "note": "Figure 13.12 et équations 13.4–13.7 : tige sur rails, flux variable par déplacement, f.é.m. et égalité entre puissance mécanique et effet Joule. Les signes sont ici explicités par notre contour.",
+    "checked": "2026-09-09"
   }
 }

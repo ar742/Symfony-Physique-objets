@@ -40,8 +40,8 @@ final class LearningLibraryTest extends TestCase
     public function testCardsHavePreciseSourcesAndWellFormedMath(): void
     {
         $cards = $this->library()->all();
-        self::assertCount(28, $cards);
-        self::assertCount(28, array_unique(array_column($cards, 'slug')));
+        self::assertCount(31, $cards);
+        self::assertCount(31, array_unique(array_column($cards, 'slug')));
         $corrections = [];
         foreach ($cards as $card) {
             $anchors = ['conditions', 'exemple', 'controle', 'corrections', 'sources', 'dans-la-boucle', ...array_column($card['sections'], 'id')];
@@ -85,7 +85,7 @@ final class LearningLibraryTest extends TestCase
                 $corrections[] = $correction['id'];
             }
         }
-        self::assertCount(19, $corrections);
+        self::assertCount(20, $corrections);
     }
 
     public function testDisplayedExamplesMatchIndependentCalculations(): void
@@ -191,5 +191,51 @@ final class LearningLibraryTest extends TestCase
         $containsNumber('champ-axe-spire', $axialField * 1e6, 6);
         $containsNumber('champ-axe-spire', $axialField / $centralField, 6);
         $containsNumber('champ-axe-spire', $loopCurrent * pi() * $loopRadius**2, 6);
+        $solenoidLength = .200;
+        $solenoidRadius = .020;
+        $solenoidTurns = 1000;
+        $solenoidCurrent = .500;
+        $longField = $mu0Approx * $solenoidTurns * $solenoidCurrent / $solenoidLength;
+        $centreField = $mu0Approx * $solenoidTurns * $solenoidCurrent / (2 * sqrt($solenoidRadius**2 + ($solenoidLength/2)**2));
+        $endField = $mu0Approx * $solenoidTurns * $solenoidCurrent / (2 * sqrt($solenoidRadius**2 + $solenoidLength**2));
+        $containsNumber('solenoide-fini', $longField * 1e3, 6);
+        $containsNumber('solenoide-fini', $centreField * 1e3, 6);
+        $containsNumber('solenoide-fini', $endField * 1e3, 6);
+        $containsNumber('solenoide-fini', $endField / $centreField, 6);
+        $containsNumber('solenoide-fini', 100 * ($longField / $centreField - 1), 5);
+        $approximateCurrent = $centreField * $solenoidLength / ($mu0Approx * $solenoidTurns);
+        self::assertStringContainsString(number_format($approximateCurrent, 6, ',', '').' A', $library->find('solenoide-fini')['checkpoint']['answer']);
+        $fixedTurns = 100;
+        $fixedArea = .010;
+        $fieldSlope = .500;
+        $fixedResistance = 20;
+        $rampDuration = .200;
+        $fixedEmf = -$fixedTurns * $fixedArea * $fieldSlope;
+        $fixedCurrent = $fixedEmf / $fixedResistance;
+        $joulePower = $fixedResistance * $fixedCurrent**2;
+        $containsNumber('faraday-circuit-fixe', $joulePower, 4);
+        $containsNumber('faraday-circuit-fixe', $joulePower * $rampDuration, 5);
+        $fixedExample = implode(' ', $library->find('faraday-circuit-fixe')['example']['steps']);
+        self::assertStringContainsString('e = −'.number_format(abs($fixedEmf), 3, ',', '').' V', $fixedExample);
+        self::assertStringContainsString('i = −'.number_format(abs($fixedCurrent), 4, ',', '').' A', $fixedExample);
+        self::assertStringContainsString('i = +'.number_format(abs($fixedCurrent), 4, ',', '').' A', $fixedExample);
+        $fieldChange = -$fixedEmf * $rampDuration / ($fixedTurns * $fixedArea);
+        self::assertStringContainsString('ΔBext = +'.number_format($fieldChange, 3, ',', '').' T', $library->find('faraday-circuit-fixe')['checkpoint']['answer']);
+        $rodLength = .200;
+        $rodField = .500;
+        $rodSpeed = 3.;
+        $rodResistance = .600;
+        $rodEmf = -$rodField * $rodLength * $rodSpeed;
+        $rodCurrent = $rodEmf / $rodResistance;
+        $rodForce = $rodCurrent * $rodLength * $rodField;
+        $rodPower = -$rodForce * $rodSpeed;
+        $containsNumber('induction-tige-mobile', $rodPower, 3);
+        $rodExample = implode(' ', $library->find('induction-tige-mobile')['example']['steps']);
+        self::assertStringContainsString('= −'.number_format(abs($rodEmf), 3, ',', '').' V', $rodExample);
+        self::assertStringContainsString('= −'.number_format(abs($rodCurrent), 3, ',', '').' A', $rodExample);
+        self::assertStringContainsString('= −'.number_format(abs($rodForce), 4, ',', '').' N', $rodExample);
+        self::assertStringContainsString('F_ext,x = −'.number_format(abs($rodForce), 4, ',', '').' N', $rodExample);
+        self::assertStringContainsString('P_ext = P_J = +'.number_format($rodPower, 3, ',', '').' W', $rodExample);
+
     }
 }

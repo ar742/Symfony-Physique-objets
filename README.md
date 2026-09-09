@@ -6,9 +6,9 @@ Un site pour étudier la physique en reliant observations, modèles et applicati
 
 ## Contenu disponible
 
-- **Chaque fiche possède six systèmes globaux et six sous-niveaux par système** : 168 systèmes et **1 008 sous-niveaux rédigés pour les 28 fiches**. Un clic ouvre la sous-boucle, puis la description du point choisi ; survol, clavier et boutons d'information tactiles donnent accès aux explications.
+- **Chaque fiche possède six systèmes globaux et six sous-niveaux par système** : 186 systèmes et **1 116 sous-niveaux rédigés pour les 31 fiches**. Un clic ouvre la sous-boucle, puis la description du point choisi ; survol, clavier et boutons d'information tactiles donnent accès aux explications.
 - La même chaîne analytique se répète aux deux échelles : expression du système, formalisation, résultats, relecture, confrontation théorique, résultats de retour. Les liens comparent les résultats, les théories et les données initiales. Voir [la méthode à deux niveaux](docs/ANALYSES-DEUX-NIVEAUX.md).
-- **Des entrées et évaluations explicites pour les 28 fiches** : 1 008 sous-niveaux précisent les entrées, 1 176 relations qualifient les liens et 588 évaluations détaillent objets, conditions, critères et constats. La nature physique ou théorique du sujet est explicite. Voir [les approfondissements AP1 à AP8](docs/PRECISIONS-ANALYTIQUES.md) et les volets [E1a](docs/ELECTROSTATIQUE-E1A.md) et [E1b](docs/MAGNETOSTATIQUE-E1B.md).
+- **Des entrées et évaluations explicites pour les 31 fiches** : 1 116 sous-niveaux précisent les entrées, 1 302 relations qualifient les liens et 651 évaluations détaillent objets, conditions, critères et constats. La nature physique ou théorique du sujet est explicite. Voir [les approfondissements AP1 à AP8](docs/PRECISIONS-ANALYTIQUES.md) et les volets [E1a](docs/ELECTROSTATIQUE-E1A.md), [E1b](docs/MAGNETOSTATIQUE-E1B.md) et [E1c](docs/INDUCTION-E1C.md).
 - La boucle générale et ses six sous-boucles transversales initiales restent accessibles comme parcours d'introduction.
 - **Huit fiches web** de thermodynamique et physique statistique : hypothèses, 13 équations MathML, exemples calculés, questions corrigées et références de pages.
 - **Quatre fiches de mécanique** : Newton et référentiel, travail-énergie, oscillateur amorti, force centrale et orbite. Une boucle de mécanique à six entrées ouvre directement les sections des fiches.
@@ -16,8 +16,9 @@ Un site pour étudier la physique en reliant observations, modèles et applicati
 - **Six fiches de fluides et ondes** : hydrostatique et Archimède, continuité et Bernoulli, viscosité et Poiseuille, élasticité linéaire, corde tendue et acoustique. Deux boucles relient les hypothèses, les calculs et leurs limites.
 - **Trois fiches d’électrostatique** : champ de Coulomb, potentiel et énergie, puis théorème de Gauss appliqué à une sphère chargée. Une boucle de domaine les relie ; chacune possède dès sa création son analyse détaillée 6 × 6.
 - **Trois fiches de champ magnétique** : force de Lorentz et trajectoires, champ d’un fil par Ampère, puis champ axial d’une spire. Une seconde boucle d’électromagnétisme les relie, avec une analyse 6 × 6 détaillée pour chaque fiche.
-- Une page **Domaines** : quatre domaines disponibles, huit autres planifiés avec repères dans les recueils ; 28 fiches et 61 équations MathML au total.
-- Un journal de **dix-neuf corrections ou clarifications** des passages utilisés des recueils.
+- **Trois fiches sur le solénoïde et l’induction** : champ axial d’un solénoïde fini, loi de Faraday dans une bobine fixe et tige mobile sur des rails. Une troisième boucle d’électromagnétisme les relie ; chaque fiche possède ses 36 sous-niveaux et leurs évaluations.
+- Une page **Domaines** : quatre domaines disponibles, huit autres planifiés avec repères dans les recueils ; 31 fiches et 70 équations MathML au total.
+- Un journal de **vingt corrections ou clarifications** des passages utilisés des recueils.
 - Les sommaires de deux recueils d'Aurélien Roudier : **91 points d'entrée** pour 1 433 pages sources.
 - Le code de consultation et d'import des archives scientifiques de 2018.
 - Un bouton **Mode sombre** en haut de chaque page : choix clair/sombre mémorisé sur le navigateur, préférence système au premier accès et impression sur fond clair.
@@ -59,7 +60,7 @@ docker compose up -d --wait
 
 Ouvrir [le site local](http://localhost:8080/), [les domaines](http://localhost:8080/domaines/), [la mécanique](http://localhost:8080/domaines/mecanique) ou [le diagnostic](http://localhost:8080/installation). Adapter le port dans les liens s'il a été changé.
 
-La boucle, les quatre domaines et les vingt-huit fiches sont présents dès le démarrage. Les tables d'archives sont initialement vides ; leur import est facultatif. Sur un PC où le projet modernisé fonctionne déjà, publier ce dépôt ne nécessite pas de réinstaller le site.
+La boucle, les quatre domaines et les trente et une fiches sont présents dès le démarrage. Les tables d'archives sont initialement vides ; leur import est facultatif. Sur un PC où le projet modernisé fonctionne déjà, publier ce dépôt ne nécessite pas de réinstaller le site.
 
 ## Ajouter les documents et les archives
 
