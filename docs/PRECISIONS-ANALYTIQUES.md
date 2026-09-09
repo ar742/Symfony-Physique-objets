@@ -122,7 +122,7 @@ Les 22 fiches disposent désormais de ces entrées, relations et évaluations d�
 
 ## Nouvelles fiches dès leur création
 
-Le [volet E1a](ELECTROSTATIQUE-E1A.md) ajoute trois fiches d’électrostatique rédigées directement avec les entrées, relations et évaluations détaillées. Le [volet E1b](MAGNETOSTATIQUE-E1B.md) poursuit avec trois fiches de champ magnétique : Lorentz, Ampère et la spire. Le [volet E1c](INDUCTION-E1C.md) ajoute le solénoïde fini, Faraday en circuit fixe et la tige mobile. Le catalogue comporte donc 31 analyses, 1 116 sous-niveaux, 1 302 relations et 651 évaluations. Les comptes AP1 à AP8 ci-dessus décrivent les 22 fiches approfondies lors de ces lots.
+Le [volet E1a](ELECTROSTATIQUE-E1A.md) ajoute trois fiches d’électrostatique rédigées directement avec les entrées, relations et évaluations détaillées. Le [volet E1b](MAGNETOSTATIQUE-E1B.md) poursuit avec trois fiches de champ magnétique : Lorentz, Ampère et la spire. Le [volet E1c](INDUCTION-E1C.md) ajoute le solénoïde fini, Faraday en circuit fixe et la tige mobile. Le [volet E1d](MAXWELL-INDUCTANCE-E1D.md) poursuit avec Maxwell dans un condensateur, le stockage magnétique et le circuit RL. Le catalogue comporte donc 34 analyses, 1 224 sous-niveaux, 1 428 relations et 714 évaluations. Les comptes AP1 à AP8 ci-dessus décrivent les 22 fiches approfondies lors de ces lots.
 
 ## Rédaction et données
 

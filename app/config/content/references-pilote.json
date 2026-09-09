@@ -268,5 +268,29 @@
     "url": "https://openstax.org/books/university-physics-volume-2/pages/13-3-motional-emf",
     "note": "Figure 13.12 et équations 13.4–13.7 : tige sur rails, flux variable par déplacement, f.é.m. et égalité entre puissance mécanique et effet Joule. Les signes sont ici explicités par notre contour.",
     "checked": "2026-09-09"
+  },
+  "mit-continuite-maxwell": {
+    "title": "MIT 6.013 — Conservation de charge déduite de Maxwell",
+    "url": "https://ocw.mit.edu/courses/6-013-electromagnetics-and-applications-spring-2009/d3be4ea78b036a6362230fb41780cf54_MIT6_013S09_notes.pdf",
+    "note": "Page 25, équations 2.1.18–2.1.21 : divergence de Maxwell–Ampère, loi de Gauss et bilans local/intégral de charge. Le statut anciennement exact de μ0 dans la note historique n’est pas repris.",
+    "checked": "2026-09-09"
+  },
+  "utexas-jauge-coulomb": {
+    "title": "University of Texas — Potentiel vecteur et jauge de Coulomb",
+    "url": "https://farside.ph.utexas.edu/teaching/em/lectures/node38.html",
+    "note": "Richard Fitzpatrick, équations 318–323 : liberté de jauge du potentiel vecteur et choix div A = 0 ; distinction utilisée pour corriger l’intitulé CPGE379.",
+    "checked": "2026-09-09"
+  },
+  "openstax-auto-induction": {
+    "title": "OpenStax · University Physics 2, §14.2 — Self-Inductance and Inductors",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/14-2-self-inductance-and-inductors",
+    "note": "Flux lié de N spires, force électromotrice propre et estimation de L pour un solénoïde long ; hypothèses linéaires explicites dans la fiche.",
+    "checked": "2026-09-09"
+  },
+  "openstax-energie-magnetique": {
+    "title": "OpenStax · University Physics 2, §14.3 — Energy in a Magnetic Field",
+    "url": "https://openstax.org/books/university-physics-volume-2/pages/14-3-energy-in-a-magnetic-field",
+    "note": "Intégration de la puissance d’une inductance constante, énergie Li²/2 et densité B²/(2μ0) dans le vide.",
+    "checked": "2026-09-09"
   }
 }

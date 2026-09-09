@@ -20034,5 +20034,1991 @@
         ]
       }
     ]
+  },
+  "condensateur-maxwell": {
+    "question": "Comment le même courant total relie-t-il deux surfaces d’un condensateur, puis permet-il de retrouver la pente de charge sans confondre déplacement, conduction et charge initiale ?",
+    "basis": "Condensateur idéal supposé : a = 0,050 m, d = 0,001 m, r = 0,080 m ; Q0 = 1,00 nC, pente +1,00 mA sur 2,00 µs. Variante séparée de pente opposée sur 0,500 µs ; constantes approchées.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les traitements de flux, de circulation et de continuité précisent les surfaces orientées, les inversions conditionnelles et les attributs conservés dans la variante.",
+    "subject": {
+      "type": "physique",
+      "description": "Le champ magnétique associé à la charge d’un condensateur dans le vide, décrit avec le courant de déplacement.",
+      "scope": "Modèle axial quasi stationnaire sans effets de bord ; segment établi, surfaces fixes et r > a. Aucun calcul de rayonnement ni observation indépendante."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Définir les charges et les orientations",
+        "system": "La géométrie du condensateur et le dossier de charge imposée, distinct de ses champs calculés.",
+        "input": "a = 0,050 m, d = 0,001 m, r = 0,080 m ; Q0 = 1,00 nC, I = +1,00 mA et durée 2,00 µs.",
+        "output": "Aire S, loi Q(t), signes et contour sont fixés ; l’alimentation matérielle s’arrête aux armatures.",
+        "section": "conditions",
+        "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Les attributs définissent le calcul de flux de 2 ; la variante reste un dossier distinct au retour de 6."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le condensateur supposé",
+            "input": "Données de 1.0 ; 1.6 restitue les paramètres recomposés. 6.3 transmet séparément la variante de pente négative.",
+            "action": "Situer l’armature positive en z = −d/2, l’autre en +d/2 ; conserver le contour médian r > a.",
+            "output": "Géométrie fixe, normale +z et parcours +eθ ; la référence reste Q0+It.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Les orientations font partie des entrées ; elles ne décrivent aucun déplacement des armatures."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Construire le dossier de charge",
+            "input": "Rayon a, charge initiale Q0, courant I et temps de 1.1.",
+            "action": "Calculer S = πa² et Q(t) = Q0+It ; associer au flux la normale dirigée de l’armature positive vers l’autre.",
+            "output": "S ≈ 7,853982 × 10⁻³ m² ; Q(0) = 1,00 nC et Q(2,00 µs) = 3,00 nC.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégration du courant constant fournit l’évolution supposée de la charge."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre aire, charges et contour",
+            "input": "Dossier géométrique et temporel calculé en 1.2.",
+            "action": "Consigner séparément l’aire des armatures S et le rayon de contour r ; transmettre Q(t) et les orientations à 2.1.",
+            "output": "2.1 reçoit S,Q(t),r et les conventions, avec l’hypothèse de flux extérieur négligé.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "L’aire électrique disponible est un attribut d’entrée du calcul de flux, pas πr²."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre la rampe et ses unités",
+            "input": "S et les deux charges datées transmis en 1.3.",
+            "action": "Relire les conversions nC, mA et µs, en maintenant d et r indépendants de l’aire S.",
+            "output": "La variation vaut +2,00 nC sur 2,00 µs ; les paramètres géométriques sont conservés.",
+            "comparison": "1.4 ↔ 1.3 : même dossier, mêmes instants et orientations.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise vérifie la signification des données calculées avant leur inversion."
+            },
+            "evaluation": {
+              "object": "Charges, durée et aire reprises.",
+              "conditions": "Scénario de référence, sans substitution de la variante.",
+              "criterion": "Qf−Q0 = 2,00 nC ; Δt = 2,00 µs ; S = π(0,050 m)².",
+              "finding": "Les unités et attributs transmis sont inchangés."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Recomposer les attributs initiaux",
+            "input": "Aire S, Qf = 3,00 nC, Q0 = 1,00 nC et Δt = 2,00 µs relus en 1.4.",
+            "action": "Inverser a = √(S/π), I = (Qf−Q0)/Δt, puis Q0 = Qf−IΔt.",
+            "output": "a = 0,050 m, I = +1,00 mA et Q0 = 1,00 nC sont restitués.",
+            "comparison": "1.5 ↔ 1.2 : comparer conversion directe et recomposition.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La reconstruction emploie les valeurs du même modèle et les instants connus."
+            },
+            "evaluation": {
+              "object": "Calcul de la rampe et inversion de ses attributs.",
+              "conditions": "Aire circulaire et courant constant ; durée non nulle.",
+              "criterion": "Retrouver a, I et Q0 à partir des données de 1.4.",
+              "finding": "L’inversion est cohérente ; elle ne mesure ni a ni I."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Rendre le dossier recomposé",
+            "input": "Attributs a,I,Q0 de 1.5 et géométrie d,r conservée.",
+            "action": "Restituer à 1.1 les paramètres retrouvés, les deux armatures et le segment de référence.",
+            "output": "Retour à 1.1 : a,d,r,Q0,I et orientations concordent ; symétrie et effets de bord restent supposés.",
+            "comparison": "1.6 ↔ 1.1 : paramètres retrouvés et hypothèses maintenues.",
+            "relation": {
+              "nature": "logique",
+              "description": "La boucle locale confronte les valeurs recomposées aux entrées physiques idéalisées."
+            },
+            "evaluation": {
+              "object": "Dossier initial du condensateur.",
+              "conditions": "Même référence temporelle et mêmes approximations.",
+              "criterion": "a = 0,050 m, Q0 = 1,00 nC, I = +1,00 mA ; d = 0,001 m et r = 0,080 m inchangés.",
+              "finding": "Les données sont restituées ; les calculs n’établissent pas la qualité de l’idéalisation."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Transformer la charge en flux variable",
+        "system": "Maxwell–Ampère sur le disque fixe de l’entrefer, alimenté par le champ électrique supposé uniforme.",
+        "input": "Aire S, loi Q(t) et contour orienté de 1 ; j = 0 dans le vide entre les armatures.",
+        "output": "ΦE,gap = Q/ε0 et Id = dQ/dt ; Γ = μ0Id dans le modèle retenu.",
+        "section": "entrefer",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La loi de Gauss pour le condensateur puis la dérivée du flux donnent la contribution utilisée en 3."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le disque d’entrefer",
+            "input": "1.3 fournit S,Q(t),r > a et normale +z ; 2.6 rend le flux reconstitué.",
+            "action": "Définir Σgap comme disque médian fixe ; retenir E = Q/(ε0S) sur l’aire S et le flux extérieur négligé.",
+            "output": "Une seule aire S contribue au flux ; le courant de conduction traversant Σgap est nul.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le support du champ électrique est distingué de l’aire totale du disque."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Intégrer puis dériver le champ",
+            "input": "Champ et support de flux de 2.1, géométrie indépendante du temps.",
+            "action": "Intégrer ΦE,gap = ES = Q/ε0 ; dériver à surface fixe, Id = ε0 dΦE,gap/dt = I.",
+            "output": "Id = +1,00 mA et Γ = μ0(Icond+Id) = μ0I, avec Icond = 0.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivée agit sur la charge ; ni S ni la surface orientée ne changent."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre le courant de déplacement",
+            "input": "Expression de Id et circulation issues de 2.2.",
+            "action": "Consigner Id, Γ et la distinction entre densité ε0∂E/∂t et courant intégré ; les transmettre à 3.1.",
+            "output": "3.1 reçoit Id = +1,00 mA, Γ = μ0Id et r = 0,080 m pour calculer Bθ.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le champ azimutal demande encore la réduction par symétrie."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le flux et son taux",
+            "input": "Résultats de 2.3 avec ΦE,gap = Q/ε0.",
+            "action": "Relire le signe positif de dΦE,gap/dt et l’absence de conduction sur cette surface.",
+            "output": "Le déplacement est un taux de flux, non un passage de porteurs à travers le vide.",
+            "comparison": "2.4 ↔ 2.3 : même contribution au bilan magnétique.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise distingue la quantité physique dérivée et son rôle dans la circulation."
+            },
+            "evaluation": {
+              "object": "Id, courant de conduction et convention de flux.",
+              "conditions": "Disque fixe dans l’entrefer, normale +z.",
+              "criterion": "Icond = 0 ; ε0 dΦE,gap/dt = +1,00 mA.",
+              "finding": "La contribution et son statut sont conservés."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Intégrer le déplacement en retour",
+            "input": "Id constant repris en 2.4, ΦE,gap(0) = Q0/ε0 et S connus.",
+            "action": "Intégrer ΦE,gap(t) = ΦE,gap(0)+Id t/ε0, puis reconstituer E = ΦE,gap/S et Q = ε0ΦE,gap.",
+            "output": "Q(t) = Q0+It et E(t) = (Q0+It)/(ε0S) ; sans flux initial, une constante reste libre.",
+            "comparison": "2.5 ↔ 2.2 : dériver et intégrer avec la constante explicitée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégration inverse la dérivation en exigeant une donnée initiale."
+            },
+            "evaluation": {
+              "object": "Traitements direct et retour du flux.",
+              "conditions": "S fixe ; ΦE,gap(0) fourni indépendamment de Id.",
+              "criterion": "d[ΦE,gap(0)+Id t/ε0]/dt = Id/ε0 et Q(0) = Q0.",
+              "finding": "Le retour retrouve la loi donnée ; Id seul ne fixe pas le flux initial."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Rendre le champ compatible avec l’entrée",
+            "input": "Flux, champ et charge reconstitués en 2.5.",
+            "action": "Restituer à 2.1 la distribution idéalisée sur S et la charge initiale nécessaire à sa reconstruction.",
+            "output": "Retour à 2.1 : Q0 = 1,00 nC, même loi Q(t), même support S et conduction nulle.",
+            "comparison": "2.6 ↔ 2.1 : charge, champ supposé et surface.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour confronte les attributs électriques d’entrée, pas seulement Id."
+            },
+            "evaluation": {
+              "object": "Attributs électriques reçus en 2.1.",
+              "conditions": "Même aire connue et même flux initial.",
+              "criterion": "ε0SE(0) = 1,00 nC et ε0SE(t)−Q0 = It.",
+              "finding": "Les attributs sont restitués sous le modèle de condensateur plan."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Calculer le champ du scénario de référence",
+        "system": "Les valeurs prédites du champ électrique, du déplacement et du champ magnétique au contour médian.",
+        "input": "Id = +1,00 mA, Γ = μ0Id, r = 0,080 m ; Q de 1,00 à 3,00 nC et S connu.",
+        "output": "Bθ ≈ +2,50 nT constant ; Γ ≈ +1,256637061 × 10⁻⁹ T·m ; E augmente de 14 380,083 à 43 140,249 V·m⁻¹.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les valeurs calculées deviennent les entrées du contrôle par une autre surface en 4."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la circulation à évaluer",
+            "input": "2.3 transmet Id, Γ = μ0Id et r ; 3.6 restitue leur reconstruction avec le signe.",
+            "action": "Fixer ε0 et μ0 aux valeurs approchées données ; conserver la symétrie qui rend Bθ uniforme sur C.",
+            "output": "Calcul à r = 0,080 m, avec la normale +z et le sens +eθ inchangés.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La donnée intégrale seule n’impose pas un champ uniforme sans l’hypothèse de symétrie."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Évaluer les champs et leurs unités",
+            "input": "Id,r,μ0 de 3.1 ; Q0,Qf et S du dossier de référence.",
+            "action": "Calculer Γ = μ0Id, Bθ = Γ/(2πr) et E = Q/(ε0S) aux deux instants.",
+            "output": "Γ ≈ 1,256637061 × 10⁻⁹ T·m ; Bθ ≈ 2,50 nT ; E0 ≈ 14 380,083 et Ef ≈ 43 140,249 V·m⁻¹.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La division d’une circulation par une longueur donne B, tandis que Q fixe E."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les résultats signés",
+            "input": "Valeurs issues de 3.2, sur le segment établi de référence.",
+            "action": "Consigner que Bθ reste positif et constant malgré E croissant ; transmettre les valeurs et conventions à 4.1.",
+            "output": "4.1 reçoit Γ,Bθ,Id et les champs électriques calculés pour comparer deux surfaces de même bord.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour reçoit des prédictions, sans leur attribuer un statut de mesure."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire champ et circulation",
+            "input": "Dossier de 3.3 : Bθ ≈ +2,50 nT, Γ positif, E0 et Ef.",
+            "action": "Vérifier que Bθ désigne une composante signée et Γ une circulation, avec des unités différentes.",
+            "output": "Le sens +eθ est conservé ; E reste suivant +z aux deux instants.",
+            "comparison": "3.4 ↔ 3.3 : valeurs, unités et sens.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise empêche de confondre circulation intégrée et champ local."
+            },
+            "evaluation": {
+              "object": "Résultats magnétiques et électriques repris.",
+              "conditions": "Même contour, même segment et mêmes constantes approchées.",
+              "criterion": "Γ en T·m, Bθ en T ; Ef/E0 = 3 et signe Bθ positif.",
+              "finding": "Les valeurs calculées sont conservées avec leur statut."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Inverser la réduction circulaire",
+            "input": "Bθ et Γ repris en 3.4 ; r et μ0 connus.",
+            "action": "Calculer Id = 2πrBθ/μ0 ; avec Id donné, calculer aussi r = μ0Id/(2πBθ).",
+            "output": "Id ≈ +1,00 mA et r ≈ 0,080 m ; un seul Bθ ne sépare pas Id et r inconnus.",
+            "comparison": "3.5 ↔ 3.2 : réduction directe et inversions conditionnelles.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Chaque inversion fixe les autres paramètres ; elle n’identifie pas simultanément courant et distance."
+            },
+            "evaluation": {
+              "object": "Calcul circulaire et reconstruction de ses paramètres.",
+              "conditions": "Bθ non nul, modèle axial, r ou Id fourni selon l’inversion.",
+              "criterion": "2πrBθ/μ0 ≈ 1,00 mA ; μ0Id/(2πBθ) ≈ 0,080 m.",
+              "finding": "Les valeurs d’entrée sont retrouvées par les mêmes équations."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Rendre le courant et le contour",
+            "input": "Id et r reconstruits en 3.5, avec conventions conservées.",
+            "action": "Restituer à 3.1 la circulation μ0Id et le rayon reconstitués ; maintenir la distinction E et dE/dt.",
+            "output": "Retour à 3.1 : Id,r,Γ et signes concordent ; la symétrie demeure une condition du calcul.",
+            "comparison": "3.6 ↔ 3.1 : courant intégré et géométrie de contour.",
+            "relation": {
+              "nature": "logique",
+              "description": "La boucle compare les attributs reçus, sans transformer une identité en observation."
+            },
+            "evaluation": {
+              "object": "Courant, rayon et orientation d’entrée.",
+              "conditions": "Constantes et modèle identiques ; les données sont calculées.",
+              "criterion": "Id ≈ +1,00 mA, r ≈ 0,080 m et Γ positif.",
+              "finding": "La reconstruction est interne et conditionnelle ; elle ne démontre pas la symétrie réelle."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Reprendre la circulation avec une autre surface",
+        "system": "Deux surfaces fixes orientées de même bord, dont les contributions de conduction et de déplacement diffèrent.",
+        "input": "Γ et Bθ de 3 ; Σgap traverse le vide, Σfil contourne l’armature positive et coupe son alimentation.",
+        "output": "Le total vaut +1,00 mA sur les deux surfaces : déplacement sur Σgap, conduction sur Σfil dans l’approximation.",
+        "section": "circulation",
+        "comparison": "4 ↔ 3 : conserver Γ,Bθ,orientation et scénario en changeant seulement de surface.",
+        "relation": {
+          "nature": "logique",
+          "description": "La reprise de la circulation prépare le bilan de charge de 5 ; changer de surface n’est pas changer de phénomène."
+        },
+        "evaluation": {
+          "object": "Circulation calculée en 3 et relue sur deux surfaces.",
+          "conditions": "Même contour orienté et même instant ; flux extérieur négligé dans le modèle.",
+          "criterion": "Itot,gap = Itot,fil = 1,00 mA, donc Γ ≈ 1,256637061 × 10⁻⁹ T·m et Bθ ≈ +2,50 nT.",
+          "finding": "Le total est inchangé ; les contributions séparées ne coïncident pas."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir deux surfaces comparables",
+            "input": "3.3 fournit Γ,Bθ,Id et E(t) ; 4.6 rend le total commun avec les hypothèses de surface.",
+            "action": "Associer à C le disque Σgap et une surface bombée Σfil coupant le fil d’alimentation une fois, avec orientation induite identique.",
+            "output": "Dans Σgap, Icond = 0 ; dans Σfil, le courant de conduction positif entrant dans l’armature vaut I.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le bord et son orientation restent fixes ; seul le chemin de la surface change."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Établir les deux sommes de courant",
+            "input": "Les deux surfaces de 4.1 et le champ extérieur négligé.",
+            "action": "Calculer Itot,gap = 0+I ; sur Σfil, négliger le flux électrique et calculer Itot,fil = I+0.",
+            "output": "Les deux totaux valent +1,00 mA ; Γgap = Γfil ≈ μ0I.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le calcul porte sur des sommes différentes, sous une approximation commune explicitée."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la compensation des termes",
+            "input": "Résultats de 4.2 et même contour C.",
+            "action": "Conserver les quatre contributions et transmettre à 5.1 leur compensation avec la charge de l’armature entre les surfaces.",
+            "output": "5.1 reçoit ΔIcond = −I, ΔId = +I pour Σgap−Σfil, et ΔItot = 0.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La différence entre surfaces ouvre le bilan de charge à l’intérieur du volume qu’elles ferment."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les contributions sans les additionner deux fois",
+            "input": "Tableau des deux sommes et différences transmis en 4.3.",
+            "action": "Relire chaque somme sur sa propre surface ; ne pas réunir Icond,fil et Id,gap dans un même second membre.",
+            "output": "Itot = I sur chaque surface ; la valeur 2I ne correspond pas à ce calcul.",
+            "comparison": "4.4 ↔ 4.3 : même tableau orienté de contributions.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise conserve l’association de chaque contribution à sa surface."
+            },
+            "evaluation": {
+              "object": "Contributions de conduction et de déplacement.",
+              "conditions": "Σgap et Σfil ont le même bord, mais constituent deux choix alternatifs.",
+              "criterion": "(0+I) = (I+0) = I ; ΔIcond+ΔId = 0.",
+              "finding": "Aucun double comptage du courant n’est introduit."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Démontrer la compensation par le volume fermé",
+            "input": "Différences de 4.4 ; volume délimité par Σgap−Σfil contenant l’armature positive.",
+            "action": "Appliquer Gauss : ε0(Φgap−Φfil) = Q ; puis le bilan matériel : Icond,gap−Icond,fil = −dQ/dt.",
+            "output": "Après dérivation, ΔId = dQ/dt compense ΔIcond ; ΔItot = 0, même si les termes extérieurs sont conservés.",
+            "comparison": "4.5 ↔ 4.2 : sommes approchées et bilan intégral de leur différence.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les orientations fermées donnent la compensation générale ; le tableau de 4.2 en est le cas idéalisé."
+            },
+            "evaluation": {
+              "object": "Égalité des deux sommes et justification par Gauss/continuité.",
+              "conditions": "Surfaces fixes, même bord ; volume contenant une seule armature ; charges surfaciques traitées intégralement.",
+              "criterion": "ΔItot = −dQ/dt + ε0 d(Φgap−Φfil)/dt = 0.",
+              "finding": "Le bilan explique l’indépendance de surface ; il suppose la conservation matérielle de charge."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Rendre la circulation commune",
+            "input": "Total invariant établi en 4.5 et r = 0,080 m conservé.",
+            "action": "Restituer à 4.1 Γ = μ0Itot et Bθ = Γ/(2πr), avec les contributions propres à chaque surface.",
+            "output": "Retour à 4.1 : Γ et Bθ initiaux sont retrouvés ; le disque d’entrefer reste sans conduction.",
+            "comparison": "4.6 ↔ 4.1 : circulation, contour et statut des surfaces.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour retrouve le dossier reçu, tout en explicitant pourquoi les deux surfaces conviennent."
+            },
+            "evaluation": {
+              "object": "Attributs de la comparaison entre surfaces.",
+              "conditions": "Même référence, même orientation ; hypothèses géométriques conservées.",
+              "criterion": "Γ ≈ +1,256637061 × 10⁻⁹ T·m, Bθ ≈ +2,50 nT et Icond,gap = 0.",
+              "finding": "Les attributs initiaux sont restitués ; la fuite et les effets de bord réels restent hors modèle."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Dériver la continuité et reconstruire la charge",
+        "system": "Le lien entre Maxwell–Ampère, Gauss et la reconstruction d’une charge à partir d’un courant total.",
+        "input": "Total invariant et différences entre surfaces de 4 ; champs et sources du même condensateur.",
+        "output": "∂ρ/∂t+div j = 0 ; I se reconstruit par Γ/μ0 et Q par intégration avec Q0 fourni ; la jauge est distincte.",
+        "section": "continuite",
+        "comparison": "5 ↔ 2 : relier le traitement intégral du déplacement à la continuité locale et aux conditions de reconstruction.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La divergence de Maxwell–Ampère puis l’intégration du bilan de charge préparent la variante de 6."
+        },
+        "evaluation": {
+          "object": "Traitement du flux en 2 et théorie du retour en 5.",
+          "conditions": "Même Maxwell–Ampère complet, loi de Gauss et surfaces fixes ; aucune suppression du déplacement dans le vide.",
+          "criterion": "div rot B = 0 impose ∂ρ/∂t+div j = 0 ; Γ/μ0 = dQ/dt dans le modèle du condensateur.",
+          "finding": "Les formulations concordent ; le retour exige Q0 pour retrouver Q, sans choix de jauge imposé."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le bilan entre surfaces",
+            "input": "4.3 transmet ΔIcond = −I, ΔId = +I et ΔItot = 0 ; 5.6 rend la charge intégrée et sa constante.",
+            "action": "Réunir Maxwell–Ampère complet et Gauss pour les densités ρ,j ; conserver le bilan intégral aux armatures idéalisées.",
+            "output": "Le vide de l’entrefer possède j = 0 et ρ = 0 ; la charge surfacique des armatures peut varier.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Les équations sont appliquées avec leurs sources ; la densité de surface ne devient pas une densité volumique régulière."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Passer de Maxwell à la continuité",
+            "input": "Équations rot B = μ0(j+ε0∂E/∂t) et div E = ρ/ε0 reçues en 5.1.",
+            "action": "Prendre la divergence du rotationnel, commuter dérivée temporelle et divergence, puis substituer la loi de Gauss.",
+            "output": "0 = div j+∂ρ/∂t ; sur un volume fixe, dQvolume/dt = −∯ j·n dS.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’identité div rot B = 0 relie les sources matérielles, indépendamment d’un potentiel vecteur."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la loi de conservation",
+            "input": "Continuité locale et intégrale déduite en 5.2.",
+            "action": "Consigner que le courant matériel entrant vaut dQ/dt ; transmettre cette loi à 6.1 pour traiter une pente opposée.",
+            "output": "6.1 reçoit dQ/dt = Ientrant, avec Q0 nécessaire et le déplacement distinct de j.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Une autre pente devient une autre donnée du même bilan, sans prolonger artificiellement la référence."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre la continuité et sa portée",
+            "input": "Résultats de 5.3, avec le bilan de l’armature positive.",
+            "action": "Relire la stationnarité de ρ comme condition de div j = 0 ; distinguer cette propriété du seul courant constant dans le fil.",
+            "output": "L’armature reçoit une charge variable ; son bilan ne se réduit pas à dQ/dt = 0.",
+            "comparison": "5.4 ↔ 5.3 : même bilan matériel et mêmes conditions.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise empêche de confondre courant constant et absence d’accumulation de charge."
+            },
+            "evaluation": {
+              "object": "Continuité reçue et interprétée.",
+              "conditions": "Volume fixe contenant l’armature ; courant positif entrant.",
+              "criterion": "dQ/dt = Ientrant, soit +1,00 mA dans la référence, bien que le courant soit constant.",
+              "finding": "L’accumulation sur l’armature est conservée ; j = 0 reste compatible avec Id ≠ 0 dans le vide."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Intégrer le courant reconstruit",
+            "input": "Bilan de 5.4, circulation Γ(t), μ0 connu et Q0 donné.",
+            "action": "Reconstruire Ientrant = Γ/μ0, puis Q(t) = Q0+∫₀ᵗ Γ(s)/μ0 ds ; différencier le résultat pour retrouver le bilan.",
+            "output": "La référence redonne Q0+It ; si Q0 manque, toutes les charges C+It ont le même champ magnétique calculé.",
+            "comparison": "5.5 ↔ 5.2 : conservation différentielle et reconstruction intégrale.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La reconstruction utilise le total associé au condensateur ; une constante de charge échappe à la circulation."
+            },
+            "evaluation": {
+              "object": "Continuité dérivée et intégration du courant de retour.",
+              "conditions": "Même modèle, μ0 connu, Q à un instant fourni pour une reconstruction unique.",
+              "criterion": "dQ/dt = Γ/μ0 ; Q(0) = Q0 ; ajouter une constante à Q ne change pas Γ.",
+              "finding": "L’intégration satisfait la continuité ; elle ne détermine pas seule la charge initiale."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Rendre les sources compatibles",
+            "input": "Q(t) et courant reconstruits en 5.5 ; cadre reçu en 5.1.",
+            "action": "Restituer à 5.1 le bilan d’armature et la différence des contributions ; identifier div A = 0 comme jauge de Coulomb.",
+            "output": "Retour à 5.1 : ΔIcond = −I, ΔId = +I, ΔItot = 0 ; aucune conduction dans l’entrefer n’est ajoutée.",
+            "comparison": "5.6 ↔ 5.1 : sources, accumulation et compensation.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture conserve les sources initiales ; fixer un potentiel ne remplace pas leur conservation."
+            },
+            "evaluation": {
+              "object": "Dossier de sources et différences entre surfaces.",
+              "conditions": "Q0 connu ; même orientation et même distribution idéalisée.",
+              "criterion": "dQ/dt = +1,00 mA ; ΔIcond = −1,00 mA et ΔId = +1,00 mA.",
+              "finding": "Les attributs d’entrée sont retrouvés ; div A = 0 est un choix de jauge, distinct du bilan physique."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Distinguer charge positive et pente négative",
+        "system": "La variante indépendante qui retire de la charge sans inverser le champ électrique sur l’intervalle étudié.",
+        "input": "Conservation et reconstruction de 5 ; Q0 = 1,00 nC, pente −I = −1,00 mA, 0 ≤ t ≤ 0,500 µs.",
+        "output": "Q− reste positive, E− reste suivant +z ; Γ− et Bθ,− changent de signe. Q0 est retrouvé seulement avec un attribut électrique.",
+        "section": "controle",
+        "comparison": "6 ↔ 1 : comparer charges initiales, pentes, intervalles, géométrie et orientations des deux dossiers séparés.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’application à la pente opposée retourne vers 1 avec les attributs invariants et modifiés explicitement distingués."
+        },
+        "evaluation": {
+          "object": "Données finales confrontées au condensateur initial de 1.",
+          "conditions": "Même a,d,r,Q0 et orientation ; pente et durée de variante séparées de la référence.",
+          "criterion": "Irec = 2πrBθ/μ0 vaut ±1,00 mA ; Q0,rec = ε0SE(t)−Irec t = 1,00 nC dans chaque scénario.",
+          "finding": "Le courant change de signe ; Q0 et la géométrie sont conservés. B seul ne restitue ni Q0 ni tous les paramètres géométriques."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le bilan pour une variante séparée",
+            "input": "5.3 fournit dQ/dt = Ientrant ; Q0 et géométrie restent donnés. 6.6 restitue la pente et la charge initiale.",
+            "action": "Poser Ientrant = −1,00 mA sur 0 ≤ t ≤ 0,500 µs, avec un temps propre commençant à Q0 = 1,00 nC.",
+            "output": "Le scénario de référence n’est pas prolongé ; la variante possède ses propres instants et sa pente négative.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Changer de pente définit un autre dossier, sans prétendre une commutation effectivement réalisée."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Propager le bilan avec la pente opposée",
+            "input": "Pente négative et charge initiale de 6.1, mêmes S,r,ε0,μ0.",
+            "action": "Intégrer Q− = Q0−It ; calculer E− = Q−/(ε0S), Id,− = −I, Γ− = −μ0I et Bθ,− = Γ−/(2πr).",
+            "output": "À 0,500 µs : Q− = 0,500 nC, E− ≈ +7 190,041 V·m⁻¹ et Bθ,− ≈ −2,50 nT.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivée commande le signe de Bθ ; la charge elle-même commande le signe de E."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les attributs de la variante",
+            "input": "Résultats de 6.2 et leurs signes distincts.",
+            "action": "Consigner la pente, la durée et les champs de variante ; transmettre ce dossier séparément à 1.1.",
+            "output": "1.1 reçoit Q0 inchangé, Q− final positif et pente négative ; la référence Q0+It reste identifiée.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le raccord ouvre une comparaison entre scénarios sans écraser les données de départ."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les signes et l’intervalle",
+            "input": "Dossier de variante transmis en 6.3.",
+            "action": "Relire Q− > 0 et E− > 0 sur l’intervalle, malgré dQ−/dt < 0 et Bθ,− < 0.",
+            "output": "La charge décroît de 1,00 à 0,500 nC ; Γ− ≈ −1,256637061 × 10⁻⁹ T·m.",
+            "comparison": "6.4 ↔ 6.3 : préserver la distinction des signes.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La reprise compare une valeur à sa dérivée sans leur imposer le même signe."
+            },
+            "evaluation": {
+              "object": "Valeurs et signes du dossier de variante.",
+              "conditions": "Temps propre entre 0 et 0,500 µs ; orientation fixe.",
+              "criterion": "Q− ≥ 0,500 nC, E− > 0, Id,− = −1,00 mA et Bθ,− < 0.",
+              "finding": "Les résultats repris gardent une charge positive et une pente négative."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver pente et constante initiale",
+            "input": "Bθ,− et E− repris en 6.4, au temps connu t ; S et r conservés.",
+            "action": "Inverser Irec = 2πrBθ,−/μ0 et Q0,rec = ε0SE−−Irec t ; résoudre aussi Q− > 0 en t < Q0/I.",
+            "output": "Irec = −1,00 mA, Q0,rec = 1,00 nC ; le seuil Q− = 0 serait 1,00 µs, hors intervalle retenu.",
+            "comparison": "6.5 ↔ 6.2 : application de la pente et reconstruction conditionnelle.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le champ électrique apporte la constante absente de B ; le seuil délimite seulement le segment supposé."
+            },
+            "evaluation": {
+              "object": "Calcul direct de variante et inversion de ses attributs.",
+              "conditions": "S,r et temps connus ; E− et Bθ,− sont des résultats du même modèle.",
+              "criterion": "À 0,500 µs, ε0SE− = 0,500 nC et −Irec t = +0,500 nC ; leur somme restitue Q0.",
+              "finding": "La reconstruction retrouve la donnée initiale ; Bθ,− seul laisserait Q0 indéterminée."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Rendre le dossier de pente négative",
+            "input": "Pente, Q0 et borne de positivité retrouvés en 6.5.",
+            "action": "Restituer à 6.1 le scénario de variante, puis comparer à 1 les invariants et les attributs modifiés.",
+            "output": "Retour à 6.1 : Q0 et pente concordent ; a,d,r restent donnés. Vers 1, seule la pente et la durée changent.",
+            "comparison": "6.6 ↔ 6.1 : charge initiale, pente, intervalle et cadre.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture compare les attributs initiaux de chaque dossier, sans confondre leurs horloges."
+            },
+            "evaluation": {
+              "object": "Attributs initiaux de la variante.",
+              "conditions": "Temps propre et géométrie inchangés ; charge initiale fournie puis reconstruite.",
+              "criterion": "Q0 = 1,00 nC, Ientrant = −1,00 mA, durée 0,500 µs < 1,00 µs ; a,d,r maintenus.",
+              "finding": "La variante est cohérente avec ses entrées ; ni la géométrie ni la réalité des champs ne sont mesurées."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "auto-induction-energie": {
+    "question": "Comment estimer l’inductance d’une bobine, calculer son stockage magnétique et retrouver les données accessibles lors d’une restitution d’énergie ?",
+    "basis": "Bobine idéale linéaire : N = 1000, a = 0,020 m, ℓ = 0,200 m, μ0 approché. L est estimée par le modèle long. Référence i = βt, β = 50,0 A/s, T = 0,0100 s, I₀ = 0,500 A ; variante descendante séparée. Données supposées, résultats calculés.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "Les conventions u_L/e_auto, le flux lié, l’estimation géométrique et les bilans signés sont distingués. Les inversions précisent leurs données connues et les limites de l’approximation longue.",
+    "subject": {
+      "type": "physique",
+      "description": "Le stockage et la restitution d’énergie dans une bobine idéale dont le courant est imposé par un dispositif extérieur.",
+      "scope": "Inductance constante estimée dans le vide par un solénoïde long ; résistance, pertes et capacités négligées. Ni champ fini complet ni transitoires du dispositif extérieur ne sont calculés."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Définir la bobine et le courant imposé",
+        "system": "Le dossier géométrique, les conventions électriques et les deux rampes supposées.",
+        "input": "N = 1000, a = 0,020 m, ℓ = 0,200 m ; montée de 0 à I₀ = 0,500 A sur T = 0,0100 s.",
+        "output": "S = πa², n = N/ℓ, β = I₀/T ; géométrie fixe, convention récepteur et approximation longue adoptée.",
+        "section": "conditions",
+        "comparison": "",
+        "relation": {
+          "nature": "logique",
+          "description": "Les données fixent le problème de stockage ; la référence et la restitution sont deux applications distinctes."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la bobine et ses conventions",
+            "input": "Données générales ; 6.3 transmet la descente séparée et 1.6 restitue les attributs géométriques.",
+            "action": "Identifier la bobine sans pertes, le courant positif et la borne positive réceptrice ; garder les deux rampes dans des dossiers distincts.",
+            "output": "Référence i = βt, géométrie immobile, dispositif extérieur imposant le courant ; aucune mesure fournie.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "L’état de départ est supposé ; la boucle d’analyse ne réalise pas une commutation du dispositif."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Transformer les paramètres géométriques et temporels",
+            "input": "N,a,ℓ,I₀,T reçus en 1.1 ; section circulaire et rampe affine.",
+            "action": "Calculer S = πa², n = N/ℓ, V = Sℓ, β = I₀/T et ℓ/(2a).",
+            "output": "S ≈ 0,001256637 m², n = 5000 m⁻¹, V ≈ 0,000251327 m³ ; β = 50,0 A/s et ℓ/(2a) = 5.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Ces transformations donnent les attributs du modèle ; le rapport géométrique seul ne quantifie pas son erreur."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la géométrie au flux propre",
+            "input": "Attributs dérivés en 1.2, μ0 approché et sens du bobinage.",
+            "action": "Associer le courant positif au champ intérieur +z ; conserver la distinction entre flux d’une spire et somme des flux.",
+            "output": "À 2.1 : N,S,ℓ,n, β,I₀,T ; champ uniforme intérieur supposé et extérieur négligé dans l’estimation longue.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "L’estimation du flux reçoit des hypothèses de champ, pas la solution complète d’une bobine finie."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le statut du modèle long",
+            "input": "Dossier transmis en 1.3 et rapport longueur/diamètre égal à 5.",
+            "action": "Relire l’uniformité et la négligence du champ extérieur comme choix d’approximation ; préserver les données de géométrie et de rampe.",
+            "output": "Modèle long adopté pour estimer L ; aucune borne d’erreur sur l’inductance n’est annoncée.",
+            "comparison": "1.4 ↔ 1.3 : mêmes paramètres et mêmes hypothèses d’estimation.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "L’existence d’une géométrie finie ne transforme pas la formule longue en résultat exact."
+            },
+            "evaluation": {
+              "object": "Géométrie et modèle de champ transmis.",
+              "conditions": "Bobine fixe de dimensions connues, vide et bobinage serré idéalisé.",
+              "criterion": "Conserver S,n,ℓ et distinguer leur calcul de la validité de l’approximation longue.",
+              "finding": "Les attributs sont cohérents ; l’écart au champ complet reste non évalué."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire dimensions et amplitude",
+            "input": "S,n,β,T repris en 1.4 ; N = 1000 connu.",
+            "action": "Inverser a = √(S/π), ℓ = N/n et I₀ = βT, en utilisant les valeurs non arrondies du calcul.",
+            "output": "a = 0,020 m, ℓ = 0,200 m et I₀ = 0,500 A sont retrouvés.",
+            "comparison": "1.5 ↔ 1.2 : inverser les transformations des attributs.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les inverses retrouvent les données connues ; ils ne constituent pas une mesure de la géométrie."
+            },
+            "evaluation": {
+              "object": "Paramètres calculés et dimensions reconstruites.",
+              "conditions": "N,T connus, section circulaire et rampe affine.",
+              "criterion": "Retrouver a,ℓ,I₀ avec les mêmes unités et conventions.",
+              "finding": "Le dossier se referme algébriquement ; aucune précision expérimentale n’est ajoutée."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le dossier initial",
+            "input": "Dimensions et amplitude retrouvées en 1.5, conventions de 1.1 conservées.",
+            "action": "Retourner N,a,ℓ,I₀,T à 1.1 ; maintenir les hypothèses de bobine idéale et l’origine du courant imposé.",
+            "output": "Retour à 1.1 : mêmes dimensions, β = 50,0 A/s et montée nominale ; descente conservée séparément.",
+            "comparison": "1.6 ↔ 1.1 : géométrie, commande et conventions inchangées.",
+            "relation": {
+              "nature": "logique",
+              "description": "La restitution préserve le dispositif et son statut supposé."
+            },
+            "evaluation": {
+              "object": "Dossier reconstruit et données générales.",
+              "conditions": "Même bobine et même rampe de référence.",
+              "criterion": "Conserver N = 1000, a = 0,020 m, ℓ = 0,200 m, I₀ = 0,500 A et T = 0,0100 s.",
+              "finding": "La boucle retrouve ses entrées sans démontrer une précision sur L."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Formaliser le flux, la tension et le stockage",
+        "system": "Le modèle linéaire de la bobine et l’estimation de son inductance par le champ long.",
+        "input": "Géométrie de 1 et courant i(t) ; flux propre, L constant et convention récepteur.",
+        "output": "L ≈ μ0N²S/ℓ, λ = Li, u_L = L di/dt = −e_auto et W_m = Li²/2.",
+        "section": "flux",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le champ approché donne le flux lié ; Faraday et l’intégration de la puissance définissent la réponse et le stockage."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les hypothèses de champ",
+            "input": "1.3 transmet N,S,ℓ,n et la rampe ; 2.6 retourne la portée du calcul de L.",
+            "action": "Retenir B ≈ μ0ni à l’intérieur et le flux propre ; exclure un flux extérieur indépendant ajouté au modèle.",
+            "output": "Φ ≈ BS par spire, λ = NΦ ; approximation spatiale commune à tout le bobinage.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La définition du flux propre sépare cette bobine de l’excitation extérieure étudiée dans la fiche Faraday."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Déduire l’inductance et les relations de dipôle",
+            "input": "B ≈ μ0Ni/ℓ, S,N constants et flux lié λ reçu en 2.1.",
+            "action": "Former λ ≈ μ0N²Si/ℓ puis L ; dériver λ et intégrer u_L i = Li di/dt depuis i = 0.",
+            "output": "λ = Li, L ≈ μ0N²S/ℓ ; u_L = L di/dt, e_auto = −u_L ; W_m = Li²/2.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le coefficient géométrique est estimé ; les relations suivantes sont celles du dipôle linéaire à L constant."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les lois au calcul numérique",
+            "input": "Relations de 2.2 et rampe i = βt, avec β = 50,0 A/s.",
+            "action": "Exprimer u_L = Lβ, λ = Lβt, W_m = Lβ²t²/2 et p_L = Lβ²t ; joindre les dimensions de la bobine.",
+            "output": "À 3.1 : estimation de L et fonctions de t ; N = 1000, a = 0,020 m, ℓ = 0,200 m, T = 0,0100 s.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Les fonctions décrivent le segment prescrit ; les coins de la commande ne sont pas modélisés."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire définitions et approximations",
+            "input": "Lois et fonctions transmises en 2.3.",
+            "action": "Séparer la définition linéaire λ = Li de l’estimation géométrique de L ; conserver le signe opposé entre u_L et e_auto.",
+            "output": "La tension réceptrice est positive pendant la montée, tandis que la force électromotrice propre est négative.",
+            "comparison": "2.4 ↔ 2.3 : lois, signes et approximation géométrique conservés.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les conventions électriques ne changent pas lorsqu’on passe de Faraday au bilan de puissance."
+            },
+            "evaluation": {
+              "object": "Formalisation transmise et interprétation de L.",
+              "conditions": "L constant, convention récepteur et modèle long.",
+              "criterion": "Garder u_L = −e_auto et ne pas qualifier L ≈ μ0N²S/ℓ d’expression finie exacte.",
+              "finding": "Le modèle est identifié ; sa précision pour le bobinage réel demeure ouverte."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver l’inductance par l’énergie du champ",
+            "input": "Champ intérieur approché et volume Sℓ relus en 2.4.",
+            "action": "Intégrer B²/(2μ0) sur Sℓ : W_champ ≈ μ0N²Si²/(2ℓ) ; identifier le coefficient de i²/2.",
+            "output": "L_champ ≈ μ0N²S/ℓ, identique à l’estimation par le flux.",
+            "comparison": "2.5 ↔ 2.2 : estimation par énergie et estimation par flux.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La voie énergétique utilise le même champ approché ; leur accord ne constitue pas un calcul du champ fini."
+            },
+            "evaluation": {
+              "object": "Deux constructions de l’inductance.",
+              "conditions": "Même approximation d’un champ uniforme intérieur et extérieur négligé.",
+              "criterion": "Les coefficients de i²/2 et de λ/i doivent coïncider ; l’intégrale réelle porterait sur tout le champ.",
+              "finding": "La cohérence interne est obtenue ; l’erreur du champ central ne donne pas celle de L."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer un modèle de portée définie",
+            "input": "Inductance retrouvée en 2.5 et hypothèses reçues en 2.1.",
+            "action": "Retourner les mêmes relations à 2.1 en gardant l’intégration intérieure comme approximation, et non comme propriété générale d’une bobine.",
+            "output": "Retour à 2.1 : L constant estimé, flux propre et énergie cohérents dans le modèle long ; champ fini complet absent.",
+            "comparison": "2.6 ↔ 2.1 : mêmes attributs de champ et même approximation.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour précise les limites du calcul sans modifier la géométrie ni simuler une mesure."
+            },
+            "evaluation": {
+              "object": "Modèle restitué et entrée de la formalisation.",
+              "conditions": "Vide, bobine linéaire fixe et absence de pertes.",
+              "criterion": "Préserver N,S,ℓ et le caractère propre du flux ; maintenir les champs extérieurs réels hors du calcul approché.",
+              "finding": "La formalisation est refermée conditionnellement, sans garantie numérique sur le bobinage fini."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Calculer la montée du courant",
+        "system": "Les valeurs approchées de flux, tension, puissance et énergie produites par la rampe de référence.",
+        "input": "Lois de 2, β = 50,0 A/s, T = 0,0100 s et inductance estimée par la géométrie.",
+        "output": "L ≈ 7,895684 mH, u_L ≈ +0,394784 V ; à I₀, λ ≈ 0,003947842 Wb et W_m ≈ 0,986960 mJ.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La substitution numérique applique les lois au segment de montée ; les nombres gardent le statut d’estimations du modèle."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la rampe à évaluer",
+            "input": "2.3 transmet L et les fonctions de t ; 3.6 restitue les valeurs obtenues par contrôle inverse.",
+            "action": "Employer les données SI et la valeur non arrondie de μ0 ≈ 4π × 10⁻⁷ ; conserver i(0) = 0.",
+            "output": "Géométrie connue et estimation L ≈ μ0N²πa²/ℓ ; courant final I₀ = 0,500 A.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Les chiffres servent au calcul du scénario, sans annoncer une précision de mesure."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Évaluer l’inductance et la réponse finale",
+            "input": "N,a,ℓ,μ0,β,I₀,T reçus en 3.1.",
+            "action": "Calculer L, u_L = Lβ, λ(T) = LI₀, W_m(T) = LI₀²/2 et p_L(T⁻) = LβI₀.",
+            "output": "L ≈ 7,895684 mH ; u_L ≈ +0,394784 V ; λ(T) ≈ 0,003947842 Wb ; W_m(T) ≈ 0,986960 mJ ; p_L(T⁻) ≈ +0,197392 W.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La tension et la puissance à l’extrémité sont évaluées par la limite intérieure de la rampe."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les grandeurs et leurs rôles",
+            "input": "Résultats de 3.2 et relation e_auto = −u_L.",
+            "action": "Joindre e_auto ≈ −0,394784 V ; identifier W_m comme stockage et p_L comme rythme instantané de transfert.",
+            "output": "À 4.1 : λ(T), W_m(T), u_L, e_auto, p_L(t) = Lβ²t et intervalle de 0 à T ; pertes nulles.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le dossier énergétique reçoit des valeurs signées et des fonctions, pas seulement une puissance finale."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les signes et les unités",
+            "input": "Dossier numérique transmis en 3.3.",
+            "action": "Conserver λ en webers, L en henrys, u_L en volts, p_L en watts et W_m en joules ; garder e_auto opposé à u_L.",
+            "output": "Montée : tension réceptrice positive, force électromotrice propre négative et énergie croissante.",
+            "comparison": "3.4 ↔ 3.3 : mêmes résultats et mêmes conventions.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les unités distinguent état énergétique, flux et vitesse de transfert."
+            },
+            "evaluation": {
+              "object": "Valeurs relues et dossier de la montée.",
+              "conditions": "Même courant positif croissant, même estimation de L.",
+              "criterion": "u_L/β possède l’unité henry ; u_L i est une puissance, Li² une énergie.",
+              "finding": "Les grandeurs sont correctement séparées ; la perte Joule reste nulle dans le modèle."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire L par les résultats calculés",
+            "input": "u_L, λ(T) et W_m(T) repris ; β et I₀ connus non nuls.",
+            "action": "Former L_u = u_L/β, L_λ = λ(T)/I₀ et L_W = 2W_m(T)/I₀² avec les valeurs non arrondies.",
+            "output": "Les trois inversions donnent L ≈ 7,895684 mH.",
+            "comparison": "3.5 ↔ 3.2 : calcul direct et reconstruction du coefficient.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Ces canaux partagent les mêmes données de calcul ; leur accord n’est pas une identification expérimentale indépendante."
+            },
+            "evaluation": {
+              "object": "Inductance utilisée et inductances reconstruites.",
+              "conditions": "β et I₀ connus, convention récepteur et absence de pertes.",
+              "criterion": "Les trois quotients doivent retrouver le même L positif.",
+              "finding": "Le calcul numérique est cohérent ; aucune précision supplémentaire sur L réel n’en résulte."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les données de la montée",
+            "input": "L reconstruit en 3.5 et β,T conservés depuis 3.1.",
+            "action": "Réinjecter L dans u_L = Lβ et W_m(T) = L(βT)²/2 ; retourner le dossier complet à 3.1.",
+            "output": "Retour à 3.1 : même inductance estimée, β = 50,0 A/s, T = 0,0100 s et i(0) = 0.",
+            "comparison": "3.6 ↔ 3.1 : mêmes paramètres et même condition initiale.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La réinjection ferme l’application numérique en conservant son approximation géométrique."
+            },
+            "evaluation": {
+              "object": "Entrées du calcul et dossier restitué.",
+              "conditions": "Même géométrie et rampe, valeurs non arrondies pour les inversions.",
+              "criterion": "Retrouver I₀ = βT = 0,500 A, u_L ≈ +0,394784 V et W_m(T) ≈ 0,986960 mJ.",
+              "finding": "La référence est retrouvée ; aucun courant effectivement mesuré n’est introduit."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Reprendre le stockage et le transfert d’énergie",
+        "system": "Le dossier de montée relu comme bilan énergétique d’une bobine idéale.",
+        "input": "Résultats de 3 : tension constante, courant croissant, puissance variable et énergie finale estimée.",
+        "output": "Travail reçu ≈ +0,986960 mJ, égal au stockage final ; aucun effet Joule dans la bobine, puissance et énergie distinguées.",
+        "section": "energie",
+        "comparison": "4 ↔ 3 : conserver les résultats de la montée et préciser ce qu’ils représentent dans le modèle.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Le retour réexamine les valeurs comme attributs d’un bilan calculé, sans leur attribuer un statut de mesures."
+        },
+        "evaluation": {
+          "object": "Tension, puissance et énergie issues de 3.",
+          "conditions": "Même bobine idéale, rampe de 0 à I₀ et W_m(i = 0) = 0.",
+          "criterion": "Préserver W_m(T) ≈ 0,986960 mJ ; intégrer la puissance variable au lieu de la confondre avec l’énergie.",
+          "finding": "Le stockage et le transfert sont compatibles ; aucune énergie dissipée n’est ajoutée."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le bilan de la montée",
+            "input": "3.3 apporte λ(T), u_L, e_auto, p_L(t) et W_m(T) ; 4.6 retourne leur portée énergétique.",
+            "action": "Identifier l’extérieur comme fournisseur de travail à la bobine ; conserver un stockage initial nul et l’absence de résistance.",
+            "output": "p_L(t) = Lβ²t ; énergie finale estimée à 0,986960 mJ, sans dissipation.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le système examiné reçoit de l’énergie ; la consommation totale du dispositif extérieur n’est pas spécifiée."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Intégrer la puissance variable",
+            "input": "p_L(t) = Lβ²t sur 0 ≤ t ≤ T et courant initial nul.",
+            "action": "Calculer W_reçu = ∫₀ᵀp_L dt = Lβ²T²/2 ; identifier aussi W_reçu = p_L(T⁻)T/2.",
+            "output": "W_reçu = LI₀²/2 ≈ +0,986960 mJ ; employer p_L(T⁻)T donnerait deux fois trop.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La puissance croît linéairement ; son intégrale, et non sa valeur finale, donne le transfert reçu."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre un état énergétique identifié",
+            "input": "Bilan intégré de 4.2, λ(T) et L issus de la même estimation.",
+            "action": "Conserver W_m(T) = W_reçu ; joindre le flux lié signé, L et β,T pour reconstruire les attributs du courant.",
+            "output": "À 5.1 : W_m(T) ≈ 0,986960 mJ, λ(T) ≈ +0,003947842 Wb, L estimé et I₀ de référence conservé pour comparaison.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "L’énergie perd le signe du courant ; le flux lié signé apporte une information différente au retour."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire puissance et énergie comme grandeurs distinctes",
+            "input": "État transmis en 4.3 et expression du travail reçu.",
+            "action": "Contrôler [u_L i] = W et [Li²] = J ; séparer valeur stockée et variation énergétique.",
+            "output": "Le produit courant-tension est une puissance ; le stockage est Li²/2 = λ²/(2L), pas i²/(2L).",
+            "comparison": "4.4 ↔ 4.3 : conserver l’énergie et la provenance de son calcul.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La lecture dimensionnelle corrige la confusion de la chaîne source sans modifier les résultats calculés."
+            },
+            "evaluation": {
+              "object": "État énergétique relu et bilan transmis.",
+              "conditions": "Convention récepteur, L constant et valeurs en SI.",
+              "criterion": "W_reçu et W_m ont l’unité joule ; i²/L n’a pas cette unité.",
+              "finding": "Le dossier garde le stockage correct et distingue la puissance de son intégrale."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Construire un état à tension nulle et énergie non nulle",
+            "input": "Stockage de 4.4 et courant I₀ > 0 ; cas auxiliaire distinct à courant constant.",
+            "action": "Poser di/dt = 0 : u_L = 0 et p_L = 0, alors que W_m = LI₀²/2 reste constant.",
+            "output": "Une bobine au courant constant I₀ conserve ici environ 0,986960 mJ malgré une tension nulle.",
+            "comparison": "4.5 ↔ 4.2 : énergie intégrée lors de la montée et conservation à courant constant.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’absence de transfert instantané ne supprime pas l’état énergétique déjà fixé."
+            },
+            "evaluation": {
+              "object": "Calcul du stockage et interprétation de u_L = 0.",
+              "conditions": "Même L et même courant final, mais application auxiliaire sans variation de courant.",
+              "criterion": "dW_m/dt = 0 n’impose pas W_m = 0 ; l’intégrale d’une puissance nulle conserve l’énergie initiale.",
+              "finding": "Le contre-exemple distingue énergie et puissance ; aucune transition entre ces applications n’est simulée."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le bilan de référence",
+            "input": "Distinction établie en 4.5 et montée de courant reçue en 4.1.",
+            "action": "Retourner la valeur stockée et son origine à 4.1 ; maintenir le cas à courant constant comme comparaison séparée.",
+            "output": "Retour à 4.1 : la montée reçoit +0,986960 mJ environ ; le stockage final n’est ni une puissance ni une perte.",
+            "comparison": "4.6 ↔ 4.1 : même bilan de montée et même bobine idéale.",
+            "relation": {
+              "nature": "logique",
+              "description": "La restitution préserve le chemin de calcul de la référence tout en clarifiant la nature des grandeurs."
+            },
+            "evaluation": {
+              "object": "Bilan restitué et échanges reçus.",
+              "conditions": "Courant initial nul et montée de référence inchangée.",
+              "criterion": "Retrouver W_reçu = W_m(T), absence d’effet Joule et fournisseur extérieur.",
+              "finding": "L’énergie est correctement attribuée ; le dispositif imposant le courant n’est pas décrit intégralement."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Reconstruire le courant et ses informations manquantes",
+        "system": "L’inversion du modèle à partir du flux lié et de l’énergie, avec L connu dans l’approximation retenue.",
+        "input": "Dossier de 4 : λ(T) signé, W_m(T), L estimé et paramètres de la rampe conservés.",
+        "output": "i_λ = λ/L = +0,500 A ; l’énergie seule fournit |i| = √(2W_m/L) = 0,500 A. La restitution peut être définie séparément.",
+        "section": "flux",
+        "comparison": "5 ↔ 2 : inverser les relations linéaire de flux et quadratique d’énergie.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour compare l’information conservée par λ = Li à celle perdue dans W_m = Li²/2."
+        },
+        "evaluation": {
+          "object": "Formalisation du flux et du stockage, puis reconstruction du courant.",
+          "conditions": "Même bobine linéaire, L positif connu ou estimé ; grandeurs issues du même calcul.",
+          "criterion": "Le flux signé fixe i ; l’énergie ne fixe que son module sans information supplémentaire.",
+          "finding": "Le courant positif de référence est retrouvé conditionnellement ; aucun nouvel étalonnage de L n’est obtenu."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les données de l’inversion",
+            "input": "4.3 transmet λ(T), W_m(T), L,β,T ; 5.6 retourne le courant reconstruit et ses limites.",
+            "action": "Traiter le courant final comme inconnu à retrouver ; distinguer flux signé et énergie non négative.",
+            "output": "L est connu dans le modèle ; deux canaux d’inversion sont disponibles, issus du calcul précédent.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Chacune de ces inversions utilise L comme coefficient donné ; elles ne fournissent pas une mesure indépendante de ce coefficient."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Résoudre les deux reconstructions",
+            "input": "λ(T) ≈ +0,003947842 Wb et W_m(T) ≈ 0,986960 mJ, L ≈ 7,895684 mH.",
+            "action": "Résoudre i_λ = λ/L et i_W² = 2W_m/L ; conserver les deux signes possibles de la racine énergétique.",
+            "output": "i_λ = +0,500 A ; i_W = ±0,500 A avec les valeurs non arrondies.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La relation linéaire conserve le signe ; la relation quadratique admet deux courants pour une énergie positive."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre l’état de départ de la restitution",
+            "input": "Courant positif reconstruit en 5.2, β et T conservés.",
+            "action": "Retenir I₀ = +0,500 A grâce au flux ; préparer la variante i_d = I₀ − βt_d avec son propre temps.",
+            "output": "À 6.1 : I₀ = +0,500 A, W_m initial estimé à 0,986960 mJ, β = 50,0 A/s, même L et durée T.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La variante commence à l’état chargé ; elle demeure distincte de la montée initialement à courant nul."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Relire la provenance du signe du courant",
+            "input": "Résultats et état transmis en 5.3.",
+            "action": "Conserver le signe positif comme information apportée par λ ; ne pas l’attribuer à la seule énergie stockée.",
+            "output": "Le signe de I₀ est identifié par le flux propre orienté, tandis que W_m fixe seulement son module.",
+            "comparison": "5.4 ↔ 5.3 : même état reconstruit et même origine du signe.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La relecture conserve les informations nécessaires à la définition de la rampe descendante."
+            },
+            "evaluation": {
+              "object": "Courant retenu et dossier transmis.",
+              "conditions": "L positif, flux orienté selon le courant de référence.",
+              "criterion": "Ne sélectionner +0,500 A qu’avec une information signée ; préserver l’ambiguïté du canal énergétique.",
+              "finding": "L’état de restitution est défini sans effacer la non-unicité de l’énergie seule."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Construire deux courants de même énergie",
+            "input": "Module de courant et ambiguïté repris en 5.4.",
+            "action": "Comparer i et −i : λ(−i) = −λ(i), alors que W_m(−i) = W_m(i) ; appliquer aux deux valeurs ±I₀.",
+            "output": "±0,500 A stockent chacun environ 0,986960 mJ mais donnent des flux liés opposés.",
+            "comparison": "5.5 ↔ 5.2 : solutions inverses et paire explicite d’états.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La parité des relations fournit un contre-exemple explicite à l’identification du signe par l’énergie."
+            },
+            "evaluation": {
+              "object": "Reconstruction énergétique et test de non-unicité.",
+              "conditions": "Même L constant et positif ; changement du signe du courant pour ce seul contrôle.",
+              "criterion": "W_m identique pour ±I₀, mais λ de signes contraires.",
+              "finding": "La non-unicité est démontrée ; le courant négatif reste un cas auxiliaire, pas la variante descendante choisie."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le courant identifié sous conditions",
+            "input": "I₀ positif sélectionné par λ et paire d’états de 5.5.",
+            "action": "Réinjecter I₀ dans λ = LI₀ et W_m = LI₀²/2 ; retourner à 5.1 les résultats et les données nécessaires.",
+            "output": "Retour à 5.1 : même flux positif, même énergie et L supposé connu ; courant positif retrouvé.",
+            "comparison": "5.6 ↔ 5.1 : retrouver les données de l’inverse et leurs conditions.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La réinjection teste la cohérence des informations sans mesurer l’inductance réelle."
+            },
+            "evaluation": {
+              "object": "Résultats restitués et données reçues.",
+              "conditions": "Même L estimé et courant sélectionné par le flux orienté.",
+              "criterion": "Reproduire λ(T) ≈ +0,003947842 Wb et W_m(T) ≈ 0,986960 mJ.",
+              "finding": "La reconstruction se referme avec L donné ; les paramètres supposés ne deviennent pas des valeurs mesurées indépendamment."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Restituer l’énergie pendant une rampe descendante",
+        "system": "Une commande de courant décroissant, distincte de la montée et sans dissipation dans la bobine idéale.",
+        "input": "État chargé de 5 : I₀ = +0,500 A ; i_d = I₀ − βt_d, β = 50,0 A/s, 0 ≤ t_d ≤ T.",
+        "output": "u_L,d ≈ −0,394784 V ; travail reçu ≈ −0,986960 mJ, énergie libérée positive de même valeur et stockage final nul.",
+        "section": "controle",
+        "comparison": "6 ↔ 1 : mêmes géométrie, amplitude et durée ; état initial et pente modifiés dans un dossier séparé.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "La restitution compare deux commandes idéales sans décrire leur raccord temporel ni ajouter de pertes au dipôle."
+        },
+        "evaluation": {
+          "object": "Dossier initial de montée et résultats de restitution.",
+          "conditions": "Même N,a,ℓ,L estimé,I₀,T ; départ de la variante à I₀ plutôt qu’à zéro.",
+          "criterion": "La descente libère l’énergie stockée, u_L change de signe et W_m reste non négative ; la référence n’est pas effacée.",
+          "finding": "Le stockage est récupérable dans le modèle ; l’extérieur doit pouvoir recevoir cette énergie et aucune dissipation Joule n’apparaît."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le dossier de restitution",
+            "input": "5.3 apporte l’état chargé et la pente descendante ; 6.6 retourne les deux dossiers comparés.",
+            "action": "Conserver la convention récepteur, fixer le temps propre t_d et maintenir la montée de référence comme autre application.",
+            "output": "i_d(0) = I₀ > 0, di_d/dt_d = −β ; même bobine, extérieur supposé capable de recevoir l’énergie.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le courant ne devient pas négatif sur ce segment ; seule sa variation est négative."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer le stockage décroissant",
+            "input": "i_d = I₀ − βt_d et L constant, pour 0 ≤ t_d ≤ T.",
+            "action": "Calculer u_L,d = −Lβ, p_L,d = −Lβ(I₀ − βt_d) et W_m,d = L(I₀ − βt_d)²/2.",
+            "output": "u_L,d ≈ −0,394784 V ; p_L,d < 0 avant T, puis nul ; W_m,d décroît de 0,986960 mJ environ à zéro.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La puissance négative est la dérivée d’un stockage positif décroissant, pas une énergie stockée négative."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les deux commandes au départ",
+            "input": "Résultats de 6.2 et montée de référence conservée.",
+            "action": "Joindre la descente avec son état initial chargé, son temps propre et sa tension négative ; garder la géométrie et la référence.",
+            "output": "À 1.1 : montée de 0 à I₀ et descente séparée de I₀ à 0, mêmes N,a,ℓ,T et estimation de L.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour répertorie deux scénarios ; il ne simule ni commutation ni transitoires aux coins."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les signes du transfert",
+            "input": "Stockage et puissance de restitution transmis en 6.3.",
+            "action": "Relire i_d ≥ 0, u_L,d < 0 et W_m,d ≥ 0 ; distinguer puissance reçue négative et énergie libérée positive.",
+            "output": "La bobine restitue de l’énergie à l’extérieur ; son courant est positif avant T et nul à T.",
+            "comparison": "6.4 ↔ 6.3 : préserver la variante et ses signes.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le sens énergétique dépend de u_L i, pas du seul signe du courant."
+            },
+            "evaluation": {
+              "object": "Restitution relue et dossier transmis.",
+              "conditions": "Même convention récepteur, courant positif avant la fin et absence de pertes.",
+              "criterion": "p_L,d < 0 pour 0 ≤ t_d < T, W_m,d ≥ 0 et W_m,d(T) = 0.",
+              "finding": "Les signes décrivent une restitution ; aucune énergie négative ni dissipation n’est déduite."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Intégrer la restitution et reconstruire le courant",
+            "input": "u_L,d constant, puissance et état initial repris en 6.4.",
+            "action": "Intégrer de 0 à t_d : i_d(t_d) = I₀ + (1/L)∫₀^{t_d}u_L,d(s) ds ; calculer ensuite ∫₀ᵀp_L,d dt_d = W_m,d(T) − W_m,d(0).",
+            "output": "i_d = I₀ − βt_d ; travail reçu ≈ −0,986960 mJ, donc énergie libérée ≈ +0,986960 mJ.",
+            "comparison": "6.5 ↔ 6.2 : lois différentielles et bilans intégrés de la descente.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégration inverse retrouve la commande avec son courant initial ; le signe du travail distingue réception et restitution."
+            },
+            "evaluation": {
+              "object": "Calcul direct et reconstruction intégrée.",
+              "conditions": "L connu, même état initial I₀, même intervalle et mêmes signes de tension.",
+              "criterion": "Retrouver i_d(T) = 0 et W_reçu = −LI₀²/2 ; l’énergie libérée est −W_reçu.",
+              "finding": "La restitution ferme le bilan de la bobine idéale, sans renseigner le rendement global du dispositif extérieur."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les attributs des deux rampes",
+            "input": "Commande reconstruite et bilan intégré de 6.5 ; référence conservée depuis 6.1.",
+            "action": "Retourner à 6.1 la descente identifiée et la montée séparée ; conserver la géométrie, l’amplitude, la durée et l’estimation de L.",
+            "output": "Retour à 6.1 : départ chargé de la variante, stockage final nul et énergie libérée positive ; montée de référence inchangée.",
+            "comparison": "6.6 ↔ 6.1 : même état chargé, même pente et mêmes paramètres.",
+            "relation": {
+              "nature": "logique",
+              "description": "La fermeture retrouve les attributs du scénario sans transformer un bilan idéal en observation de récupération réelle."
+            },
+            "evaluation": {
+              "object": "Dossier de restitution reçu et attributs restitués.",
+              "conditions": "Même bobine idéale ; β = 50,0 A/s, I₀ = 0,500 A et T = 0,0100 s.",
+              "criterion": "Retrouver i_d(0) = I₀, i_d(T) = 0 et l’opposé du travail reçu pendant la montée.",
+              "finding": "Les deux commandes se comparent sans être confondues ; précision de L réel et comportement de la source restent hors calcul."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "circuit-rl-transitoire": {
+    "question": "Comment calculer l’établissement d’un courant RL et ses énergies, puis retrouver les paramètres avant de comparer une décharge initialisée séparément ?",
+    "basis": "R = 20,0 Ω, L = 0,200 H, U = +10,0 V ; établissement depuis i(0) = 0. Décharge indépendante dans RL fermé depuis I∞ = 0,500 A, avec temps t_d. Données supposées, résultats calculés.",
+    "version": "0.2",
+    "updated": "2026-09-09",
+    "refinement": "L’intégration temporelle, les bilans de puissance et d’énergie et les inversions conditionnelles sont développés ; établissement et décharge gardent leurs états initiaux distincts.",
+    "subject": {
+      "type": "physique",
+      "description": "Le courant et les échanges énergétiques d’un circuit RL idéal, alimenté puis étudié dans une décharge indépendante.",
+      "scope": "R et L constants, modèle à paramètres localisés, bobine sans pertes ; commutation avec chemin fermé, sans observation ni réalisation expérimentale."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Définir les composants et les états initiaux",
+        "system": "Le circuit série, ses conventions et les deux initialisations à conserver séparément.",
+        "input": "R = 20,0 Ω, L = 0,200 H et source U = +10,0 V ; établissement depuis i(0) = 0.",
+        "output": "τ = 0,0100 s, I∞ = 0,500 A ; polarités réceptrices et courant initial fixés pour chaque cas.",
+        "section": "conditions",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les composants déterminent les échelles du transitoire ; les conditions initiales distinguent les problèmes malgré leurs mêmes R et L."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le circuit et ses conventions",
+            "input": "Données nominales ou reprise de 1.6 ; 6.3 peut transmettre la décharge séparée avec son courant initial propre.",
+            "action": "Identifier R, la bobine idéale et la source ; orienter i, u_R et u_L en convention récepteur pour les deux composants.",
+            "output": "Établissement : i(0−) = 0, source positive appliquée à t = 0 ; toute résistance est extérieure à la bobine.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Les signes de tension sont définis relativement au courant choisi, avant de résoudre son évolution."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Former les échelles du problème",
+            "input": "Paramètres R, L et U reçus, avec R > 0 et L > 0.",
+            "action": "Calculer τ = L/R et I∞ = U/R ; contrôler que H/Ω a la dimension d’un temps.",
+            "output": "τ = 10,0 ms ; I∞ = 0,500 A est le courant stationnaire associé à la source maintenue.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le régime stationnaire impose di/dt = 0 et donc Ri = U ; il ne précise pas une durée finie d’établissement."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre l’initialisation électrique",
+            "input": "Échelles de 1.2, conventions et état sans courant reçu en 1.1.",
+            "action": "Conserver i(0+) = 0 sans impulsion de tension ; fixer le bilan U = u_R + u_L et le modèle localisé.",
+            "output": "À 2.1 : R, L, U, τ, I∞ et i(0) = 0 ; capacités parasites et pertes magnétiques négligées.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "L’état initial complète l’équation du premier ordre et sélectionne une solution parmi les réponses possibles."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre l’état et la valeur stationnaire",
+            "input": "Dossier transmis en 1.3, avec initialisation et échelles distinctes.",
+            "action": "Relire i(0) = 0 comme entrée, I∞ = 0,500 A comme valeur stationnaire et τ comme échelle temporelle.",
+            "output": "Le courant initial n’est pas remplacé par la valeur finale ; τ n’est pas une date d’achèvement.",
+            "comparison": "1.4 ↔ 1.3 : conserver conventions, état initial et rôle des échelles.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La distinction entre état initial, échelle et limite empêche de supprimer le transitoire."
+            },
+            "evaluation": {
+              "object": "Dossier repris et initialisation transmise en 1.3.",
+              "conditions": "Même source appliquée au circuit RL idéal.",
+              "criterion": "i(0) = 0, τ = 0,0100 s et I∞ = 0,500 A gardent des fonctions distinctes.",
+              "finding": "Les données sont préservées sans confondre référence et décharge."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Recomposer les paramètres depuis les échelles",
+            "input": "τ et I∞ repris en 1.4 ; R connu et conventions maintenues.",
+            "action": "Résoudre L = Rτ et U = RI∞ ; calculer W∞ = LI∞²/2 pour la limite de stockage.",
+            "output": "L = 0,200 H, U = +10,0 V et W∞ = 0,0250 J.",
+            "comparison": "1.5 ↔ 1.2 : confronter formation des échelles et reconstruction des paramètres.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les échelles seules ne séparent pas tous les composants ; la résistance connue permet cette reconstruction."
+            },
+            "evaluation": {
+              "object": "Conversions de 1.2 et paramètres recomposés en 1.5.",
+              "conditions": "R = 20,0 Ω connu ; bobine linéaire à L constant.",
+              "criterion": "Rτ = 0,200 H et RI∞ = 10,0 V ; LI∞²/2 = 0,0250 J.",
+              "finding": "Les paramètres sont restitués et leur énergie limite calculée, sans mesure."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les deux initialisations admises",
+            "input": "Paramètres reconstruits et état initial de référence conservé depuis 1.1.",
+            "action": "Rendre l’établissement depuis zéro ; réserver i_d(0) = I∞ à une décharge indépendante après régime permanent supposé.",
+            "output": "Retour à 1.1 : mêmes R, L, U et conventions ; deux courants initiaux séparés, sans transition temporelle inventée.",
+            "comparison": "1.6 ↔ 1.1 : retrouver composants, conventions et conditions initiales.",
+            "relation": {
+              "nature": "logique",
+              "description": "La décharge complètement initialisée ne découle pas d’une fermeture de durée finie depuis zéro."
+            },
+            "evaluation": {
+              "object": "Attributs restitués et dossier initial de 1.1.",
+              "conditions": "Source présente pour l’établissement ; chemin RL fermé pour la décharge distincte.",
+              "criterion": "i(0) = 0 ; i_d(0) = 0,500 A seulement dans l’autre scénario.",
+              "finding": "Les initialisations sont conservées avec leurs configurations de circuit."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Résoudre la réponse à la source continue",
+        "system": "L’équation différentielle du courant d’établissement et les tensions des deux composants.",
+        "input": "1.3 transmet le circuit, U constant et i(0) = 0 ; u_R = Ri, u_L = L di/dt.",
+        "output": "i(t) = I∞[1−exp(−t/τ)], u_R = U[1−exp(−t/τ)] et u_L = U exp(−t/τ), pour t ≥ 0.",
+        "section": "etablissement",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La résolution de la maille avec son état initial donne courant et tensions ; la limite stationnaire reste asymptotique."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la maille et l’état initial",
+            "input": "Dossier de 1.3 ou reprise de 2.6 ; R, L constants et source appliquée pour t ≥ 0.",
+            "action": "Substituer les lois des composants dans U = u_R + u_L ; conserver i(0+) = 0.",
+            "output": "L di/dt + Ri = U, avec une condition initiale renseignée.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La source constante impose un second membre non nul ; la bobine conserve une dérivée dans le transitoire."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Intégrer l’équation du courant",
+            "input": "Équation de 2.1, τ = L/R et solution stationnaire I∞ = U/R.",
+            "action": "Poser j = i−I∞ ; intégrer dj/dt = −j/τ, puis imposer j(0) = −I∞.",
+            "output": "i(t) = I∞[1−exp(−t/τ)] ; u_R = Ri et u_L = U exp(−t/τ).",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La solution homogène exponentielle et la constante particulière sont fixées par la valeur initiale."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la réponse et ses limites",
+            "input": "Courant et tensions établis en 2.2, sur le domaine t ≥ 0.",
+            "action": "Joindre i(0) = 0, u_L(0+) = U et la limite i→I∞ ; conserver le temps de référence t = τ.",
+            "output": "À 3.1 : expressions temporelles, paramètres et instant d’évaluation τ = 0,0100 s.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La même réponse permet de calculer courant, tensions et stockage sans changer les conditions initiales."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre les signes durant l’établissement",
+            "input": "Réponse transmise en 2.3, avec U > 0 et t ≥ 0.",
+            "action": "Comparer les valeurs initiales et limites ; vérifier i ≥ 0, di/dt > 0 et u_L > 0 aux temps finis.",
+            "output": "i reste inférieur à I∞ à toute date finie ; la bobine reçoit de l’énergie dès que i > 0.",
+            "comparison": "2.4 ↔ 2.3 : conserver la réponse, ses signes et son domaine temporel.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Une dérivée positive donne une tension réceptrice positive ; le courant n’effectue pas de saut initial."
+            },
+            "evaluation": {
+              "object": "Réponse relue et expressions de 2.3.",
+              "conditions": "Source constante positive et L, R strictement positifs.",
+              "criterion": "i(0)=0 ; pour t>0 fini, 0<i<I∞ et u_L>0 ; u_R+u_L=U.",
+              "finding": "La réponse reste celle d’un établissement asymptotique."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver l’équation par dérivation",
+            "input": "Solution et polarités reprises en 2.4.",
+            "action": "Dériver di/dt = (I∞/τ)exp(−t/τ), puis former L di/dt + Ri et les valeurs à t = 0+.",
+            "output": "La somme vaut U ; di/dt(0+) = U/L = 50,0 A·s⁻¹, avec i(0+) = 0.",
+            "comparison": "2.5 ↔ 2.2 : confronter intégration et substitution dans la maille.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivation rétablit le bilan différentiel et teste séparément la condition initiale."
+            },
+            "evaluation": {
+              "object": "Résolution de 2.2 et équation reconstruite en 2.5.",
+              "conditions": "L/R=τ, I∞=U/R et t≥0.",
+              "criterion": "L(I∞/τ)e^(−t/τ)+RI∞[1−e^(−t/τ)]=U ; i(0)=0.",
+              "finding": "La solution satisfait le modèle et son initialisation ; ce contrôle est interne."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer la maille et la continuité",
+            "input": "Équation retrouvée et pente initiale de 2.5 ; état sans courant reçu en 2.1.",
+            "action": "Intégrer u_L = L di/dt à travers la commutation : une tension sans impulsion donne i(0+)−i(0−)=0.",
+            "output": "Retour à 2.1 : maille, i(0)=0 et pente finie ; tension initiale U admise sans saut de courant.",
+            "comparison": "2.6 ↔ 2.1 : retrouver le bilan et la condition initiale.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Une discontinuité finie de tension ne produit pas une intégrale impulsionnelle ; la continuité du courant est compatible avec la réponse."
+            },
+            "evaluation": {
+              "object": "Maille et continuité restituées, comparées aux entrées de 2.1.",
+              "conditions": "Bobine idéale à L constant ; aucune impulsion de tension prescrite.",
+              "criterion": "i(0−)=i(0+)=0 et u_L(0+)=10,0 V ; L di/dt(0+)=U.",
+              "finding": "L’état initial est retrouvé sans traiter une ouverture inductive sans chemin."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Évaluer l’état après une constante de temps",
+        "system": "Le courant, les tensions et le stockage magnétique calculés à t = τ.",
+        "input": "2.3 transmet la réponse d’établissement et l’instant τ = 0,0100 s, avec I∞ = 0,500 A.",
+        "output": "i(τ) ≈ 0,316060 A, u_R ≈ 6,321206 V, u_L ≈ 3,678794 V et W_m(τ) ≈ 0,009989410 J.",
+        "section": "exemple",
+        "comparison": "",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’application temporelle produit un état encore transitoire, auquel sont associés tensions, pente et énergie stockée."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir l’instant de calcul",
+            "input": "Réponse temporelle de 2.3 ou état restitué en 3.6 ; t = τ = 10,0 ms.",
+            "action": "Conserver L, R, U et i(0)=0 ; distinguer le rapport t/τ=1 d’une fin d’établissement.",
+            "output": "Un instant de référence connu et un facteur exp(−1), sans observation supposée.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La date est choisie pour l’évaluation du modèle ; elle n’est pas une durée mesurée d’achèvement."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer courant, tensions et stockage",
+            "input": "Expressions de 3.1 et exp(−1) ≈ 0,367879441.",
+            "action": "Évaluer i = I∞(1−e⁻¹), u_R = Ri, u_L = Ue⁻¹ et W_m = Li²/2.",
+            "output": "i ≈ 0,316060279 A ; u_R ≈ 6,321205588 V ; u_L ≈ 3,678794412 V ; W_m ≈ 0,009989410 J.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le stockage dépend du carré du courant instantané ; il ne vaut pas encore LI∞²/2."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre l’état énergétique instantané",
+            "input": "Résultats de 3.2, instant τ et réponse complète conservée.",
+            "action": "Joindre P_g = Ui, P_J = Ri² et p_L = u_Li pour préparer leur intégration depuis zéro.",
+            "output": "À 4.1 : état à τ ; P_g≈3,160603 W, P_J≈1,997882 W, p_L≈1,162721 W et W_m calculé.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les puissances instantanées sont distinctes des énergies déjà transférées depuis la fermeture."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre l’état sans l’appeler permanent",
+            "input": "Dossier de 3.3 et valeur limite I∞ = 0,500 A.",
+            "action": "Comparer i(τ)/I∞ à un et vérifier la maille ; conserver W_m comme énergie de stockage, pas puissance.",
+            "output": "i(τ)/I∞ ≈ 0,632121 ; u_R+u_L=10,0 V ; le régime reste transitoire.",
+            "comparison": "3.4 ↔ 3.3 : conserver valeurs, unités et caractère transitoire.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La tension de bobine non nulle indique une variation du courant ; le stockage est inférieur à sa limite."
+            },
+            "evaluation": {
+              "object": "État repris et dossier de 3.3.",
+              "conditions": "Même instant τ, mêmes conventions réceptrices.",
+              "criterion": "i<I∞, u_L>0 et W_m<0,0250 J ; P_g=P_J+p_L.",
+              "finding": "Les résultats sont conservés et les puissances ne sont pas confondues avec les énergies."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Reconstruire l’inductance depuis le stockage",
+            "input": "i(τ) non nul et W_m(τ) repris en 3.4 ; u_L(τ) connu dans le dossier.",
+            "action": "Isoler L_rec = 2W_m/i², puis calculer la pente u_L/L_rec ; comparer à la dérivée de la solution.",
+            "output": "L_rec = 0,200 H ; di/dt(τ) ≈ 18,393972 A·s⁻¹.",
+            "comparison": "3.5 ↔ 3.2 : inverser le stockage calculé et retrouver sa dynamique.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion énergétique restitue L sous l’hypothèse de stockage purement inductif ; la tension permet ensuite de retrouver la pente."
+            },
+            "evaluation": {
+              "object": "Évaluation de 3.2 et reconstruction de L en 3.5.",
+              "conditions": "i et W_m proviennent du même calcul ; bobine idéale linéaire.",
+              "criterion": "2W_m/i²=0,200 H ; u_L/L_rec=(I∞/τ)e⁻¹.",
+              "finding": "L et la pente sont retrouvés par cohérence interne, sans mesure d’inductance."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer l’état de référence",
+            "input": "L_rec, pente et données conservées depuis 3.1.",
+            "action": "Reformer τ=L_rec/R et I∞=U/R ; réévaluer i au temps t=0,0100 s sans changer i(0).",
+            "output": "Retour à 3.1 : même date τ, mêmes paramètres et courant initial nul.",
+            "comparison": "3.6 ↔ 3.1 : retrouver les entrées de l’évaluation temporelle.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Les résultats inversés referment l’application numérique avec son instant et sa condition initiale."
+            },
+            "evaluation": {
+              "object": "Paramètres restitués et dossier reçu en 3.1.",
+              "conditions": "R et U connus ; stockage inductif admis.",
+              "criterion": "τ=0,0100 s, I∞=0,500 A et i(0)=0, avec i(τ)≈0,316060279 A.",
+              "finding": "Le dossier d’établissement est restitué ; la décharge n’est pas amorcée à cet instant."
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Intégrer les échanges pendant l’établissement",
+        "system": "Le partage de l’énergie fournie entre dissipation résistive et stockage magnétique.",
+        "input": "3.3 fournit l’état à τ et la réponse i(t) ; stockage initial nul et source maintenue sur 0≤t.",
+        "output": "À τ, E_g≈0,018393972 J, E_J≈0,008404562 J et W_m≈0,009989410 J ; E_g=E_J+W_m.",
+        "section": "energie",
+        "comparison": "4 ↔ 3 : confronter les échanges intégrés au stockage et aux puissances instantanées de référence.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’intégration des puissances relie les échanges cumulés à l’état magnétique repris, en conservant l’origine temporelle."
+        },
+        "evaluation": {
+          "object": "État et puissances du niveau 3 confrontés au bilan intégré du niveau 4.",
+          "conditions": "Même source maintenue, i(0)=0 et aucune perte autre que R.",
+          "criterion": "E_g(τ)−E_J(τ)=W_m(τ) ; leurs dérivées sont Ui, Ri² et u_Li.",
+          "finding": "Le partage énergétique restitue l’état calculé ; le stockage n’absorbe pas toute l’énergie fournie."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les puissances et l’origine des énergies",
+            "input": "Dossier de 3.3 ou reprise de 4.6 ; i(t)=I∞[1−exp(−t/τ)] et W_m(0)=0.",
+            "action": "Définir E_g=∫₀ᵗUi(s)ds et E_J=∫₀ᵗRi(s)²ds ; réserver W_m à la bobine.",
+            "output": "Trois énergies avec la même origine t=0 et les mêmes paramètres supposés.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La puissance du générateur est positive pendant l’établissement ; la résistance dissipe et la bobine stocke."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Effectuer les intégrales de puissance",
+            "input": "Puissances de 4.1 et facteur q_t=exp(−t/τ).",
+            "action": "Intégrer E_g=UI∞[t−τ(1−q_t)] et E_J=RI∞²[t−2τ(1−q_t)+(τ/2)(1−q_t²)].",
+            "output": "À τ : E_g≈0,018393972 J et E_J≈0,008404562 J ; leur différence vaut 0,009989410 J.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégrale de i² contient les deux exponentielles exp(−t/τ) et exp(−2t/τ), et non le carré de l’intégrale de i."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre le bilan et les données à inverser",
+            "input": "Énergies intégrées de 4.2, état i(τ), date τ et paramètres conservés.",
+            "action": "Joindre E_g−E_J=W_m ; conserver l’instant t_*=0,0100 s, le courant calculé et I∞ pour l’inversion.",
+            "output": "À 5.1 : bilan à τ, i(t_*)≈0,316060279 A, I∞=0,500 A, t_* connu et R=20,0 Ω.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Les valeurs relues servent au calcul inverse ; elles gardent leur provenance issue du même modèle."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le partage et ses limites",
+            "input": "Bilan transmis en 4.3, avec source maintenue et courant non nul à long terme.",
+            "action": "Vérifier E_g=E_J+W_m ; distinguer le stockage fini des énergies cumulées lorsque t augmente sans limite.",
+            "output": "W_m→0,0250 J, tandis que P_g et P_J→5,00 W ; E_g et E_J divergent.",
+            "comparison": "4.4 ↔ 4.3 : conserver le bilan et préciser ce qui reste fini.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Une résistance alimentée en régime permanent continue de dissiper ; la limite du stockage ne borne pas l’énergie fournie."
+            },
+            "evaluation": {
+              "object": "Énergies reprises et bilan de 4.3.",
+              "conditions": "U reste appliqué ; R>0 et I∞=U/R.",
+              "criterion": "À τ, 0,018393972≈0,008404562+0,009989410 J ; à long terme, E_g−E_J→0,0250 J.",
+              "finding": "Le partage est conservé ; aucune énergie totale finie n’est attribuée à une alimentation maintenue indéfiniment."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver les puissances par dérivation",
+            "input": "Expressions intégrées reprises en 4.4 et q_t=exp(−t/τ).",
+            "action": "Dériver E_g et E_J ; dériver leur différence pour obtenir dW_m/dt=UI∞q_t(1−q_t).",
+            "output": "dE_g/dt=Ui, dE_J/dt=Ri² ; à τ, leur différence vaut p_L≈1,162721 W.",
+            "comparison": "4.5 ↔ 4.2 : confronter intégration des puissances et dérivation des énergies.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivation restitue les puissances et utilise U=RI∞, L=Rτ pour retrouver L i di/dt."
+            },
+            "evaluation": {
+              "object": "Intégrales de 4.2 et puissances reconstruites en 4.5.",
+              "conditions": "Même origine temporelle et paramètres constants.",
+              "criterion": "d(E_g−E_J)/dt=Li di/dt=u_Li ; les trois énergies s’annulent à t=0.",
+              "finding": "Le bilan différentiel et ses constantes d’intégration sont retrouvés."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer les échanges de départ",
+            "input": "Puissances reconstituées et origine commune vérifiée en 4.5.",
+            "action": "Réévaluer Ui, Ri² et u_Li à τ ; rendre W_m(0)=0 et la source maintenue au dossier d’intégration.",
+            "output": "Retour à 4.1 : mêmes puissances, même courant et mêmes bornes temporelles depuis zéro.",
+            "comparison": "4.6 ↔ 4.1 : retrouver les échanges instantanés et leur origine.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La restitution conserve le périmètre énergétique et l’alimentation qui distingue l’établissement de la décharge."
+            },
+            "evaluation": {
+              "object": "Échanges restitués et entrée du bilan en 4.1.",
+              "conditions": "Même établissement depuis i(0)=0.",
+              "criterion": "P_g≈3,160603 W, P_J≈1,997882 W, p_L≈1,162721 W ; W_m(0)=0.",
+              "finding": "Le dossier énergétique initial est restitué sans attribuer les pertes à la bobine idéale."
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Reconstruire la constante de temps sous conditions",
+        "system": "L’inversion d’un résultat d’établissement, avec instant, courant final et résistance connus.",
+        "input": "4.3 fournit i(t_*)≈0,316060279 A à t_*=0,0100 s, I∞=0,500 A et R=20,0 Ω.",
+        "output": "τ_rec=0,0100 s et L_rec=0,200 H ; un seul point ne suffit plus si I∞ est également inconnu.",
+        "section": "etablissement",
+        "comparison": "5 ↔ 2 : confronter le modèle exponentiel d’entrée et son inversion conditionnelle.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le logarithme inverse le rapport exponentiel avec son instant connu ; la résistance complète l’identification de L."
+        },
+        "evaluation": {
+          "object": "Réponse du niveau 2 confrontée au traitement inverse du niveau 5.",
+          "conditions": "i(0)=0, instant t_*>0, I∞ et R connus ; 0<i(t_*)/I∞<1.",
+          "criterion": "τ_rec=−t_*/ln[1−i(t_*)/I∞] et L_rec=Rτ_rec restituent les coefficients de l’équation.",
+          "finding": "Les paramètres sont retrouvés dans le modèle choisi ; un résultat calculé à un seul instant ne valide pas toute la réponse."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir les informations disponibles",
+            "input": "Dossier de 4.3 ou reprise de 5.6 ; t_*, i(t_*), I∞ et R sont renseignés.",
+            "action": "Traiter τ comme inconnue de contrôle ; conserver la date en secondes, la valeur finale connue et i(0)=0.",
+            "output": "Problème inverse conditionnel, fondé sur le résultat calculé à t_*=10,0 ms.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le seul rapport de courant sans date ne donnerait que t_*/τ ; l’instant fourni est nécessaire."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Inverser le rapport d’établissement",
+            "input": "f=i(t_*)/I∞ avec 0<f<1 ; valeurs reçues en 5.1.",
+            "action": "Résoudre 1−f=exp(−t_*/τ), puis τ_rec=−t_*/ln(1−f) et L_rec=Rτ_rec.",
+            "output": "f≈0,632120559 ; τ_rec=0,0100 s et L_rec=0,200 H avant arrondi.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intervalle 0<f<1 assure un logarithme négatif et une constante de temps positive."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les composants retrouvés",
+            "input": "τ_rec et L_rec de 5.2 ; R et I∞ maintenus connus.",
+            "action": "Conserver U=RI∞=10,0 V pour la référence ; préparer la décharge indépendante dans RL fermé depuis i_d(0)=I∞.",
+            "output": "À 6.1 : R=20,0 Ω, L=0,200 H, τ=0,0100 s et i_d(0)=0,500 A ; source absente de la boucle de décharge.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La reconstruction alimente un autre problème initial ; elle ne commute pas l’établissement au temps t_*."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre ce qui a été identifié",
+            "input": "Paramètres transmis en 5.3 et informations utilisées pour l’inversion.",
+            "action": "Distinguer τ et L reconstruits de R et I∞ restés connus ; maintenir le statut calculé de i(t_*).",
+            "output": "Les paramètres retrouvés dépendent du modèle exponentiel, de l’initialisation et de la valeur finale fournies.",
+            "comparison": "5.4 ↔ 5.3 : conserver paramètres reconstruits et conditions d’identification.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le calcul inverse n’ajoute pas d’information indépendante sur l’existence d’effets parasites."
+            },
+            "evaluation": {
+              "object": "Portée de la reconstruction reprise et dossier de 5.3.",
+              "conditions": "R et I∞ connus ; établissement depuis zéro à date connue.",
+              "criterion": "τ=0,0100 s et L=0,200 H ; R et I∞ ne sont pas présentés comme identifiés simultanément.",
+              "finding": "La reconstruction demeure conditionnelle et distincte d’une mesure du circuit."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Construire la famille compatible avec un seul point",
+            "input": "Point i_*=i(t_*) repris ; contrecas où I∞, donc U, serait inconnu tandis que R reste connu.",
+            "action": "Choisir τ_λ=λτ_rec pour λ>0 ; poser I∞,λ=i_*/[1−exp(−t_*/τ_λ)], L_λ=Rτ_λ et U_λ=RI∞,λ.",
+            "output": "Cette famille reproduit le même i_* depuis zéro ; la valeur finale connue sélectionne le cas nominal.",
+            "comparison": "5.5 ↔ 5.2 : confronter inversion renseignée et famille sous-déterminée.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le contre-exemple établit la non-unicité à un seul instant lorsque la source n’est plus renseignée ; il ne change pas la référence."
+            },
+            "evaluation": {
+              "object": "Inversion unique de 5.2 et famille de 5.5.",
+              "conditions": "t_*>0, i_*>0, λ>0 ; I∞ retiré des seules données du contrecas.",
+              "criterion": "I∞,λ[1−exp(−t_*/τ_λ)]=i_* ; imposer I∞,λ=0,500 A restitue λ=1.",
+              "finding": "Le point seul n’identifie pas simultanément τ et I∞ ; les informations initiales lèvent cette ambiguïté."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le point et le cadre nominal",
+            "input": "Famille de 5.5 et I∞=0,500 A connu dès 5.1.",
+            "action": "Retenir τ_rec, réinjecter dans i(t_*) et rendre t_*, R, I∞ ainsi que l’état initial nul.",
+            "output": "Retour à 5.1 : même i(t_*)≈0,316060279 A, mêmes informations connues et même problème inverse.",
+            "comparison": "5.6 ↔ 5.1 : retrouver le point reçu et les hypothèses conservées.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La réinjection referme le contrôle avec les données initialement disponibles, sans prétendre tester tous les temps."
+            },
+            "evaluation": {
+              "object": "Dossier restitué et entrée de 5.1.",
+              "conditions": "Même U, R et initialisation ; résultat non arrondi utilisé pour l’inversion.",
+              "criterion": "I∞[1−exp(−0,0100/τ_rec)]≈0,316060279 A et L_rec/R=τ_rec.",
+              "finding": "Le point initial est restitué sous le modèle retenu."
+            }
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Calculer la décharge et comparer les initialisations",
+        "system": "La boucle RL fermée sans source, initialisée séparément au courant stationnaire de référence.",
+        "input": "5.3 transmet R, L et τ ; i_d(0)=I∞=0,500 A après régime permanent préalable supposé, temps propre t_d.",
+        "output": "À t_d=τ : i_d≈0,183940 A, W_m,d≈0,003383382 J et E_J,d≈0,021616618 J ; somme égale à W_0=0,0250 J.",
+        "section": "decharge",
+        "comparison": "6 ↔ 1 : confronter composants et états initiaux restitués, en distinguant établissement et décharge.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le même couple R,L gouverne un autre état initial et un second membre nul ; son énergie stockée alimente la seule dissipation."
+        },
+        "evaluation": {
+          "object": "Circuit et initialisations du niveau 1 confrontés à la décharge du niveau 6.",
+          "conditions": "R,L et sens du courant conservés ; source retirée avec chemin fermé, sans impulsion de tension.",
+          "criterion": "Le retour donne i_d(0)=0,500 A, L/R=0,0100 s et W_0=0,0250 J ; la référence conserve i(0)=0 et U=10,0 V.",
+          "finding": "Les composants communs sont retrouvés avec deux états initiaux distincts ; la décharge ne prolonge pas l’établissement arrêté à τ."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir la boucle sans source",
+            "input": "Paramètres de 5.3 ou reprise de 6.6 ; courant initial i_d(0)=0,500 A supposé en régime permanent préalable.",
+            "action": "Maintenir un chemin RL fermé lors de la commutation ; conserver les polarités réceptrices et introduire le temps t_d.",
+            "output": "Source absente de cette boucle ; W_0=LI∞²/2=0,0250 J initialement stockée.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "La commutation est idéalisée avec continuité du courant ; aucune ouverture sans chemin n’est modélisée."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Intégrer la décroissance et son énergie",
+            "input": "Équation L di_d/dt_d+Ri_d=0 et condition initiale de 6.1.",
+            "action": "Intégrer i_d=I∞exp(−t_d/τ), puis W_m,d=W_0exp(−2t_d/τ) et E_J,d=W_0[1−exp(−2t_d/τ)].",
+            "output": "À t_d=τ : i_d≈0,183939721 A, W_m,d≈0,003383382 J et E_J,d≈0,021616618 J.",
+            "comparison": "",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le stockage dépend du carré du courant : son exponentielle contient 2t_d/τ et non t_d/τ."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la décharge comme cas distinct",
+            "input": "Valeurs de 6.2, courant initial et configuration reçus en 6.1.",
+            "action": "Joindre u_R,d=Ri_d et u_L,d=−Ri_d ; conserver W_m,d+E_J,d=W_0 et la référence d’établissement à part.",
+            "output": "À 1.1 : décharge séparée depuis 0,500 A ; à τ, u_R,d≈+3,678794 V et u_L,d≈−3,678794 V.",
+            "comparison": "",
+            "relation": {
+              "nature": "logique",
+              "description": "Le retour ajoute une comparaison entre configurations et initialisations, sans prétendre qu’elles s’enchaînent au temps τ."
+            }
+          },
+          {
+            "id": 4,
+            "title": "Reprendre l’origine de l’énergie dissipée",
+            "input": "Dossier de décharge transmis en 6.3, avec source retirée.",
+            "action": "Vérifier u_R,d+u_L,d=0 et p_L,d=−Ri_d² ; comparer la somme des énergies à W_0.",
+            "output": "La bobine libère son stockage, le résistor dissipe ; E_J,d tend vers 0,0250 J lorsque t_d→∞.",
+            "comparison": "6.4 ↔ 6.3 : conserver signes, périmètre et bilan de la décharge.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Cette énergie dissipée totale est finie parce que l’alimentation est absente, contrairement à l’établissement avec source maintenue."
+            },
+            "evaluation": {
+              "object": "Décharge reprise et dossier transmis en 6.3.",
+              "conditions": "Boucle RL fermée, même courant positif et bobine idéale.",
+              "criterion": "u_L,d<0 pour t_d fini ; 0,003383382+0,021616618=0,0250 J à τ.",
+              "finding": "L’énergie provient du stockage initial ; le générateur retiré n’alimente pas cette phase."
+            }
+          },
+          {
+            "id": 5,
+            "title": "Retrouver l’initialisation et l’échelle énergétique",
+            "input": "i_d(τ) et W_m,d(τ) repris ; date t_d=0,0100 s, W_0 et τ de courant connus.",
+            "action": "Calculer I_0,rec=i_d exp(t_d/τ) ; isoler τ_E=−2t_d/ln(W_m,d/W_0) et comparer à L/R.",
+            "output": "I_0,rec=0,500 A et τ_E=0,0100 s ; l’échelle de décroissance de l’énergie elle-même est τ_E/2=5,00 ms.",
+            "comparison": "6.5 ↔ 6.2 : confronter solution de décharge et reconstruction de ses paramètres.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’inversion de l’énergie conserve le facteur deux ; son seul carré ne déterminerait pas le signe du courant initial."
+            },
+            "evaluation": {
+              "object": "Solution de 6.2 et inversions de 6.5.",
+              "conditions": "t_d>0, 0<W_m,d/W_0<1 ; courant signé repris, même bobine.",
+              "criterion": "i_d(τ)e=0,500 A ; −2τ/ln(e⁻²)=τ=L/R.",
+              "finding": "L’état initial positif et la constante de temps sont restitués sans confondre courant et énergie."
+            }
+          },
+          {
+            "id": 6,
+            "title": "Restituer le circuit et le courant préalables",
+            "input": "Courant initial et τ reconstruits, R et configuration de 6.1 conservés.",
+            "action": "Reformer L=Rτ et W_0=LI_0,rec²/2 ; restituer le chemin fermé, la source retirée et l’origine propre t_d=0.",
+            "output": "Retour à 6.1 : i_d(0)=0,500 A, R=20,0 Ω, L=0,200 H et W_0=0,0250 J ; établissement depuis zéro distinct.",
+            "comparison": "6.6 ↔ 6.1 : retrouver composants, état initial et configuration.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le retour retrouve les attributs de la décharge et ne revendique pas une préparation exactement atteinte en temps fini depuis zéro."
+            },
+            "evaluation": {
+              "object": "Dossier restitué et initialisation reçue en 6.1.",
+              "conditions": "Même convention récepteur et aucune impulsion de tension ; chemin de courant maintenu.",
+              "criterion": "i_d(0+)=i_d(0−)=0,500 A ; u_R,d(0+)=+10,0 V et u_L,d(0+)=−10,0 V.",
+              "finding": "La décharge initialisée est restituée avec continuité du courant et changement fini des tensions."
+            }
+          }
+        ]
+      }
+    ]
   }
 }

@@ -76,6 +76,6 @@ Le périmètre n'est pas nécessairement un sujet isolé et définitivement fix�
 - Concevoir les futurs outils de travail autour de ces éléments identifiables : enrichissement, révision et suivi des évaluations, avec leur contexte et leur provenance.
 - Présenter les textes comme des analyses perfectibles et situer ce qui est établi, proposé ou encore à examiner.
 
-Les 31 fiches actuelles et leurs schémas constituent une première mise en œuvre. Leur rédaction doit progressivement se préciser suivant ce fondement ; la présence du schéma ne vaut pas validation scientifique de chaque contenu.
+Les 34 fiches actuelles et leurs schémas constituent une première mise en œuvre. Leur rédaction doit progressivement se préciser suivant ce fondement ; la présence du schéma ne vaut pas validation scientifique de chaque contenu.
 
 Les coordonnées, raccords et fichiers de l'application sont décrits dans [la mise en œuvre à deux niveaux](ANALYSES-DEUX-NIVEAUX.md). Les livraisons sont suivies dans [le journal des avancées](AVANCEES.md), et les domaines à développer dans [le chantier](CHANTIER-DOMAINES.md).

@@ -40,8 +40,8 @@ final class LearningLibraryTest extends TestCase
     public function testCardsHavePreciseSourcesAndWellFormedMath(): void
     {
         $cards = $this->library()->all();
-        self::assertCount(31, $cards);
-        self::assertCount(31, array_unique(array_column($cards, 'slug')));
+        self::assertCount(34, $cards);
+        self::assertCount(34, array_unique(array_column($cards, 'slug')));
         $corrections = [];
         foreach ($cards as $card) {
             $anchors = ['conditions', 'exemple', 'controle', 'corrections', 'sources', 'dans-la-boucle', ...array_column($card['sections'], 'id')];
@@ -85,7 +85,7 @@ final class LearningLibraryTest extends TestCase
                 $corrections[] = $correction['id'];
             }
         }
-        self::assertCount(20, $corrections);
+        self::assertCount(22, $corrections);
     }
 
     public function testDisplayedExamplesMatchIndependentCalculations(): void
@@ -236,6 +236,54 @@ final class LearningLibraryTest extends TestCase
         self::assertStringContainsString('= −'.number_format(abs($rodForce), 4, ',', '').' N', $rodExample);
         self::assertStringContainsString('F_ext,x = −'.number_format(abs($rodForce), 4, ',', '').' N', $rodExample);
         self::assertStringContainsString('P_ext = P_J = +'.number_format($rodPower, 3, ',', '').' W', $rodExample);
+        $epsilon0Approx = 8.8541878e-12;
+        $capacitorArea = pi() * .050**2;
+        $chargingCurrent = .001;
+        $initialCharge = 1e-9;
+        $contourRadius = .080;
+        $capacitorField = $mu0Approx * $chargingCurrent / (2*pi()*$contourRadius);
+        $containsNumber('condensateur-maxwell', $initialCharge / ($epsilon0Approx*$capacitorArea), 3);
+        $containsNumber('condensateur-maxwell', ($initialCharge + $chargingCurrent*2e-6) / ($epsilon0Approx*$capacitorArea), 3);
+        $containsNumber('condensateur-maxwell', ($initialCharge - $chargingCurrent*.5e-6) / ($epsilon0Approx*$capacitorArea), 3);
+        $maxwellExample = implode(' ', $library->find('condensateur-maxwell')['example']['steps']);
+        self::assertStringContainsString('Bθ ≈ +'.number_format($capacitorField*1e9, 2, ',', '').' nT', $maxwellExample);
+        self::assertStringContainsString('Bθ,− ≈ −'.number_format($capacitorField*1e9, 2, ',', '').' nT', $maxwellExample);
+        $coilInductance = $mu0Approx * $solenoidTurns**2 * pi()*$solenoidRadius**2 / $solenoidLength;
+        $coilSlope = 50.;
+        $coilVoltage = $coilInductance * $coilSlope;
+        $coilEnergy = $coilInductance * $solenoidCurrent**2 / 2;
+        $containsNumber('auto-induction-energie', $coilInductance*1e3, 6);
+        $containsNumber('auto-induction-energie', $coilInductance*$solenoidCurrent, 9);
+        $containsNumber('auto-induction-energie', $coilEnergy*1e3, 6);
+        $containsNumber('auto-induction-energie', $coilVoltage*$solenoidCurrent, 6);
+        $coilExample = implode(' ', $library->find('auto-induction-energie')['example']['steps']);
+        self::assertStringContainsString('u_L ≈ +'.number_format($coilVoltage, 6, ',', '').' V', $coilExample);
+        self::assertStringContainsString('u_L,d ≈ −'.number_format($coilVoltage, 6, ',', '').' V', $coilExample);
+        self::assertStringContainsString('−'.number_format($coilEnergy*1e3, 6, ',', '').' mJ', $coilExample);
+        $rlResistance = 20.;
+        $rlInductance = .200;
+        $rlSource = 10.;
+        $rlTau = $rlInductance/$rlResistance;
+        $rlLimit = $rlSource/$rlResistance;
+        $rlCurrent = $rlLimit*(1-exp(-1));
+        $rlStored = $rlInductance*$rlCurrent**2/2;
+        $rlSupplied = $rlSource*$rlLimit*$rlTau*exp(-1);
+        // Direct integral of R i(t)^2 over [0, tau], independent of the subtraction in the fiche.
+        $rlDissipated = $rlResistance*$rlLimit**2*$rlTau*(1-2*(1-exp(-1))+(1-exp(-2))/2);
+        $containsNumber('circuit-rl-transitoire', $rlCurrent, 6);
+        $containsNumber('circuit-rl-transitoire', $rlResistance*$rlCurrent, 6);
+        $containsNumber('circuit-rl-transitoire', $rlSource*exp(-1), 6);
+        $containsNumber('circuit-rl-transitoire', $rlStored, 9);
+        $containsNumber('circuit-rl-transitoire', $rlSupplied, 9);
+        $containsNumber('circuit-rl-transitoire', $rlDissipated, 9);
+        self::assertEqualsWithDelta($rlSupplied, $rlStored+$rlDissipated, 1e-14);
+        $rlInitialEnergy = $rlInductance*$rlLimit**2/2;
+        $containsNumber('circuit-rl-transitoire', $rlLimit*exp(-1), 6);
+        $containsNumber('circuit-rl-transitoire', $rlInitialEnergy*exp(-2), 9);
+        $containsNumber('circuit-rl-transitoire', $rlInitialEnergy*(1-exp(-2)), 9);
+        $rlExample = implode(' ', $library->find('circuit-rl-transitoire')['example']['steps']);
+        self::assertStringContainsString('u_L,d ≈ −'.number_format($rlSource*exp(-1), 6, ',', '').' V', $rlExample);
+
 
     }
 }

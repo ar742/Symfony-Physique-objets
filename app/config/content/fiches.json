@@ -3628,5 +3628,371 @@
     "version": "1.0",
     "updated": "2026-09-09",
     "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "condensateur-maxwell",
+    "number": 32,
+    "title": "Condensateur en charge : Maxwell–Ampère et continuité",
+    "level": "CPGE · Électromagnétisme",
+    "domain": "electromagnetisme",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire",
+    "summary": "Relier le courant d’alimentation au champ magnétique de l’entrefer et distinguer déplacement électrique et transport de charge.",
+    "objective": "Calculer une circulation sur deux surfaces, dériver la conservation de charge et séparer le signe du champ électrique de celui de sa variation.",
+    "prerequisites": [
+      "Flux orienté et circulation",
+      "Loi de Gauss et condensateur plan",
+      "Dérivée temporelle et théorème de divergence"
+    ],
+    "system": "Deux armatures circulaires fixes dans le vide portent des charges opposées. Un courant extérieur imposé fait varier la charge Q de l’armature positive.",
+    "conditions": [
+      "Modèle supposé : rayon a = 0,050 m, écart d = 0,001 m et aire S = πa² ; alimentation axiale idéalisée, retour éloigné, symétrie axiale et effets de bord négligés.",
+      "L’axe +z va de l’armature positive vers l’armature négative. Dans l’entrefer, E = [Q/(ε0S)] e_z. Le contour médian de rayon r = 0,080 m > a est orienté selon +eθ, antihoraire vu depuis +z.",
+      "Référence : I = +1,00 mA et Q(t) = Q0 + It, Q0 = 1,00 nC, sur le segment établi 0 ≤ t ≤ 2,00 µs. L’approximation quasi stationnaire ne supprime pas le déplacement dans l’entrefer ; les commutations ne sont pas modélisées.",
+      "Pour les calculs : ε0 ≈ 8,8541878 × 10⁻¹² F·m⁻¹ et μ0 ≈ 4π × 10⁻⁷ T·m·A⁻¹ sont approchés. Les résultats sont des prédictions du modèle, sans mesure effectuée."
+    ],
+    "sections": [
+      {
+        "id": "circulation",
+        "title": "Conserver le même contour avec deux surfaces",
+        "paragraphs": [
+          "Pour une surface fixe Σ bordée par C, le courant de conduction est l’intégrale de j·dS ; le flux électrique ΦE,Σ est l’intégrale de E·dS. La normale et le sens de parcours sont liés par la règle de la main droite.",
+          "Un disque Σgap dans l’entrefer ne traverse aucun conducteur. Une autre surface Σfil, ayant exactement le même bord et la même orientation induite, peut contourner l’armature positive et couper son alimentation. Dans le modèle sans champ extérieur aux armatures, son déplacement est négligé et son courant de conduction vaut I.",
+          "C’est la somme conduction plus déplacement qui est indépendante de la surface. L’égalité séparée de chacun des termes n’est pas requise. Le théorème de Stokes donne la circulation ; la symétrie axiale est une hypothèse supplémentaire pour en déduire Bθ."
+        ],
+        "equations": [
+          {
+            "id": "maxwellcirculation",
+            "reading": "Gamma, circulation de B le long du contour C, vaut mu zéro multiplié par la somme du courant de conduction traversant la surface sigma et d’epsilon zéro fois la dérivée temporelle du flux électrique à travers cette surface fixe."
+          }
+        ]
+      },
+      {
+        "id": "entrefer",
+        "title": "Un flux variable sans conduction dans le vide",
+        "paragraphs": [
+          "Le disque de rayon r > a reçoit le flux de la seule aire S des armatures dans l’approximation retenue : ΦE,gap = ES = Q/ε0. La densité de déplacement y vaut ε0∂E/∂t ; son intégrale est un courant au sens de Maxwell–Ampère, sans transport matériel de charges à travers le vide.",
+          "La circulation vaut alors Γ ≈ μ0I. Pour le champ azimutal du modèle axial, Γ = 2πrBθ, donc Bθ ≈ μ0I/(2πr). Le rayon r du contour ne remplace pas le rayon a dans l’aire portant le flux électrique.",
+          "Dans une variante indépendante, Q−(t) = Q0−It sur 0 ≤ t ≤ 0,500 µs. La charge reste positive : E garde le sens +z, tandis que ∂E/∂t, Id et Bθ deviennent négatifs. Le champ magnétique renseigne ici la pente de Q, pas sa valeur initiale."
+        ],
+        "equations": [
+          {
+            "id": "maxwelldeplacement",
+            "reading": "Le courant de déplacement à travers le disque de l’entrefer vaut epsilon zéro fois la dérivée du flux électrique, soit la dérivée de Q par rapport au temps, égale au courant I dans le scénario de référence."
+          }
+        ]
+      },
+      {
+        "id": "continuite",
+        "title": "Conserver la charge sans choisir une jauge",
+        "paragraphs": [
+          "Prendre la divergence de rot B = μ0(j + ε0∂E/∂t), puis utiliser div E = ρ/ε0, donne ∂ρ/∂t + div j = 0. Pour les charges idéalisées en surface, le bilan intégral sur un volume fixe évite de traiter leur densité comme une fonction régulière.",
+          "La charge d’une armature augmente du courant matériel reçu par son fil. Dans le vide de l’entrefer, j = 0 et ρ = 0, malgré un déplacement non nul. Un courant constant dans le fil n’impose donc pas une charge constante sur l’armature.",
+          "La condition div A = 0 est la jauge de Coulomb pour le potentiel vecteur. Elle ne remplace pas la conservation de charge. À r connu, Bθ signé permet de reconstruire I dans ce modèle ; il faut encore Q à un instant pour fixer la constante d’intégration de Q(t)."
+        ],
+        "equations": [
+          {
+            "id": "maxwellcontinuite",
+            "reading": "La dérivée temporelle de la densité de charge rho plus la divergence de la densité de courant de conduction j est égale à zéro."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "Calculer le déplacement et le champ magnétique à r = 0,080 m durant la rampe de charge, puis comparer avec la pente opposée.",
+      "steps": [
+        "S = πa² ≈ 7,853982 × 10⁻³ m². Dans la référence, Q passe de 1,00 à 3,00 nC ; E passe d’environ 14 380,083 à 43 140,249 V·m⁻¹ suivant +z.",
+        "ε0S dE/dt = I = +1,00 mA. Sur Σgap, la conduction est nulle ; Γ ≈ +1,256637061 × 10⁻⁹ T·m et Bθ ≈ +2,50 nT.",
+        "Sur Σfil, la conduction vaut +1,00 mA et le déplacement est négligé dans le même modèle : la circulation est inchangée.",
+        "Variante séparée à t = 0,500 µs : Q− = 0,500 nC et E− ≈ +7 190,041 V·m⁻¹ ; Id,− = −1,00 mA, Γ− ≈ −1,256637061 × 10⁻⁹ T·m et Bθ,− ≈ −2,50 nT."
+      ],
+      "result": "Le changement de signe de la pente inverse le champ magnétique, tandis que les deux charges et les deux champs électriques restent positifs sur leurs intervalles respectifs."
+    },
+    "checkpoint": {
+      "question": "Bθ = −2,50 nT signifie-t-il que Q est négative, et permet-il de retrouver Q0 = 1,00 nC ?",
+      "answer": "À r connu et sous les hypothèses de symétrie, il donne dQ/dt ≈ −1,00 mA. Il ne fixe pas Q0 : toutes les fonctions Q(t) = C−It ont la même pente. La donnée Q0 = 1,00 nC garde ici Q positive jusqu’à 0,500 µs ; une inversion de valeurs calculées reste un contrôle interne."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P14",
+        "page": 379,
+        "section": "Circulation magnétique et intitulé « Conservation de la charge », distingué de la jauge"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 264,
+        "section": "Jauges de Coulomb et Lorenz ; conservation locale de charge"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 265,
+        "section": "Équations complètes de Gauss et de Maxwell–Ampère ; le déplacement est conservé dans l’entrefer"
+      }
+    ],
+    "references": [
+      "openstax-maxwell-ampere",
+      "mit-continuite-maxwell",
+      "utexas-jauge-coulomb",
+      "nist-permeabilite"
+    ],
+    "corrections": [
+      {
+        "id": "C21",
+        "title": "Distinguer conservation de charge et jauge de Coulomb",
+        "detail": "CPGE P14 p. 379 place div A = 0 sous l’intitulé « Conservation de la charge ». Cette relation définit la jauge de Coulomb. La conservation locale est ∂ρ/∂t + div j = 0 ; si la densité de charge est stationnaire, elle se réduit à div j = 0. Le recueil théorique PC2 p. 264 distingue déjà correctement ces deux notions.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P14",
+            "page": 379,
+            "section": "Intitulé Conservation de la charge"
+          },
+          {
+            "doc": "theorique",
+            "code": "PC2",
+            "page": 264,
+            "section": "Jauge de Coulomb et conservation locale"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "auto-induction-energie",
+    "title": "Auto-induction : stocker et restituer l’énergie magnétique",
+    "level": "CPGE · Induction",
+    "summary": "Relier flux propre, tension et énergie d’une bobine idéale, en distinguant stockage réversible et dissipation.",
+    "objective": "Estimer l’inductance d’un solénoïde long, calculer l’énergie d’une rampe de courant et comparer sa restitution à l’extérieur.",
+    "prerequisites": [
+      "Flux lié d’une bobine et loi de Faraday",
+      "Convention récepteur et puissance électrique",
+      "Intégration et énergie volumique"
+    ],
+    "system": "Une bobine idéale, linéaire et sans pertes reçoit un courant imposé. Son inductance constante est estimée par le modèle du solénoïde long dans le vide.",
+    "conditions": [
+      "N = 1000 spires, rayon a = 0,020 m, longueur ℓ = 0,200 m et section S = πa² ; géométrie fixe et bobinage serré idéalisé. Le courant positif crée un champ intérieur suivant +z.",
+      "Le flux lié propre λ est la somme des flux dus au courant de la bobine elle-même. Dans le modèle linéaire retenu, λ = Li, avec L constant et positif, sans flux extérieur ajouté.",
+      "L’estimation L ≈ μ0N²S/ℓ suppose un champ intérieur uniforme B ≈ μ0Ni/ℓ et néglige le champ extérieur et les effets des extrémités. Ce n’est pas l’inductance exacte du solénoïde fini.",
+      "μ0 ≈ 4π × 10⁻⁷ T·m/A est une valeur approchée. Le rapport ℓ/(2a) vaut 5 ; aucune erreur numérique sur L ou l’énergie n’est déduite de ce seul rapport ni de l’erreur du champ central.",
+      "La bobine est sans résistance, hystérésis ni pertes ; capacités parasites et rayonnement sont négligés dans ce modèle à paramètres localisés.",
+      "En convention récepteur, i entre par la borne positive de u_L. La référence impose i(t) = βt, β = 50,0 A/s, de 0 à I₀ = 0,500 A sur T = 0,0100 s.",
+      "Les rampes sont idéales ; les coins et transitoires du dispositif imposant le courant ne sont pas étudiés. La variante séparée impose i_d(t_d) = I₀ − βt_d sur la même durée ; le dispositif extérieur est supposé capable de recevoir l’énergie restituée."
+    ],
+    "sections": [
+      {
+        "id": "flux",
+        "title": "Du flux propre à l’inductance estimée",
+        "paragraphs": [
+          "Chaque spire du solénoïde long reçoit approximativement le flux Φ = BS. Le flux lié est λ = NΦ : le facteur N s’ajoute au facteur N déjà présent dans le champ intérieur. On obtient ainsi une inductance proportionnelle à N².",
+          "La relation λ = Li définit ici la réponse linéaire de la bobine. À courant non nul, L = λ/i ; à i = 0, on utilise la même relation linéaire ou sa pente, sans former le quotient 0/0.",
+          "Pour une bobine finie, les flux ne sont pas déterminés par le seul champ au centre : ils nécessitent le champ sur les surfaces des différentes spires. L’expression géométrique ci-dessous est une estimation du modèle long, pas une correction exacte de la géométrie finie."
+        ],
+        "equations": [
+          {
+            "id": "inductanceflux",
+            "reading": "Le flux lié propre lambda vaut L fois le courant i. Dans l’approximation du solénoïde long, L vaut approximativement mu zéro N au carré S divisé par la longueur ell."
+          }
+        ]
+      },
+      {
+        "id": "tension",
+        "title": "Opposer la variation sans dissiper",
+        "paragraphs": [
+          "La force électromotrice d’auto-induction e_auto est l’opposé de la dérivée du flux propre. Pour L constant, elle vaut −L di/dt. La tension u_L en convention récepteur vaut au contraire +L di/dt : il faut conserver ces conventions lors du bilan.",
+          "Une rampe de courant croissante demande ici u_L > 0. Une rampe décroissante avec i encore positif donne u_L < 0 : la bobine restitue alors de l’énergie. L’auto-induction s’oppose à la variation du courant, pas systématiquement au courant présent.",
+          "Une tension inductive nulle indique di/dt = 0 dans ce modèle. Elle n’impose ni courant nul ni énergie stockée nulle. Une relation de dipôle u_L = L di/dt ne transforme pas le champ électrique induit en champ électrostatique conservatif."
+        ],
+        "equations": [
+          {
+            "id": "inductancetension",
+            "reading": "En convention récepteur, u indice L vaut L multiplié par la dérivée du courant par rapport au temps ; c’est l’opposé de la force électromotrice d’auto-induction."
+          }
+        ]
+      },
+      {
+        "id": "energie",
+        "title": "Intégrer la puissance reçue",
+        "paragraphs": [
+          "La puissance reçue par la bobine idéale est p_L = u_L i. Son intégration depuis un état de courant nul donne W_m = Li²/2, avec W_m(i = 0) = 0 comme référence d’énergie. Cette énergie reste positive ou nulle, même lorsque sa variation est négative.",
+          "Dans le vide, la densité d’énergie magnétique est B²/(2μ0). Pour la distribution réelle, l’intégration doit couvrir tout le champ, y compris l’extérieur de la bobine. Le remplacement par cette densité uniforme multipliée par Sℓ appartient seulement au modèle long retenu.",
+          "Le dispositif extérieur fournit l’énergie pendant la montée du courant. Pendant la descente prescrite, le travail reçu par la bobine est négatif et l’énergie libérée vers l’extérieur est positive. Il n’y a aucune dissipation Joule dans cette bobine idéale.",
+          "Les deux calculs, à partir de la puissance et du champ approché, sont cohérents entre eux. Leur accord ne chiffre pas l’écart entre cette estimation et l’inductance d’un bobinage réel."
+        ],
+        "equations": [
+          {
+            "id": "inductanceenergie",
+            "reading": "L’énergie magnétique W indice m vaut L i au carré sur deux ; elle vaut approximativement B au carré sur deux mu zéro, multiplié par S ell dans le modèle long. La puissance reçue p indice L vaut u indice L fois i, soit la dérivée temporelle de W indice m."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "Estimer L, puis calculer la tension et l’énergie à la fin de la rampe de courant. Que transfère la bobine pendant la rampe descendante séparée ?",
+      "steps": [
+        "S = πa² ≈ 0,001256637 m² et N/ℓ = 5000 m⁻¹ donnent L ≈ 7,895684 mH dans l’approximation longue.",
+        "La pente β = I₀/T = 50,0 A/s donne u_L ≈ +0,394784 V et e_auto ≈ −0,394784 V sur la montée. Au courant I₀, λ ≈ 0,003947842 Wb et B ≈ 3,141593 mT.",
+        "À la fin, W_m ≈ 0,986960 mJ et p_L ≈ +0,197392 W, cette dernière valeur étant la limite intérieure au segment. Intégrer p_L(t) = Lβ²t de 0 à T retrouve W_m.",
+        "Pour i_d = I₀ − βt_d, u_L,d ≈ −0,394784 V. La puissance est négative tant que i_d > 0, puis nulle à courant nul ; W_m passe de 0,986960 mJ à zéro. Le travail reçu vaut environ −0,986960 mJ, soit +0,986960 mJ libéré vers l’extérieur."
+      ],
+      "result": "Les valeurs numériques sont des estimations du modèle long avec μ0 approché. La montée stocke l’énergie et la descente séparée la restitue sans perte dans la bobine idéale."
+    },
+    "checkpoint": {
+      "question": "Si la tension u_L devient nulle tandis que le courant reste I₀ = 0,500 A, l’énergie magnétique est-elle nulle ? Peut-on la retrouver par i²/(2L) ?",
+      "answer": "Non. u_L = 0 impose un courant constant ; W_m = LI₀²/2 reste ici estimée à 0,986960 mJ. La forme équivalente est λ²/(2L), puisque λ = Li. i²/(2L) n’a pas l’unité d’une énergie. Le produit u_L i est une puissance ; c’est son intégrale temporelle qui donne la variation d’énergie."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P14",
+        "page": 379,
+        "section": "Énergie d’une bobine : densité magnétique et chaîne d’égalités clarifiée par C22"
+      },
+      {
+        "doc": "cpge",
+        "code": "P14",
+        "page": 380,
+        "section": "Coefficient d’auto-induction et énergie magnétique emmagasinée"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 269,
+        "section": "Loi de Faraday et Lenz, appliquées ici au flux propre du même circuit"
+      }
+    ],
+    "references": [
+      "openstax-auto-induction",
+      "openstax-energie-magnetique",
+      "nist-permeabilite"
+    ],
+    "corrections": [
+      {
+        "id": "C22",
+        "title": "Distinguer énergie stockée et puissance électrique",
+        "detail": "CPGE P14 p. 379 associe Li²/2 à (i/2)(V_B−V_A), qui a la dimension d’une puissance, puis à i²/(2L), qui n’a pas celle d’une énergie. Pour L constant, W_m = Li²/2 = λ²/(2L), tandis que dW_m/dt = u_L i en convention récepteur. La densité B²/(2μ0) s’intègre sur tout le champ ; la restriction au volume intérieur de la bobine suppose ici le modèle long. La formule Li²/2 est correctement rappelée p. 380.",
+        "sources": [
+          {
+            "doc": "cpge",
+            "code": "P14",
+            "page": 379,
+            "section": "Chaîne « Énergie d’une bobine », égalités après l’intégrale volumique"
+          }
+        ]
+      }
+    ],
+    "number": 33,
+    "domain": "electromagnetisme",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire"
+  },
+  {
+    "slug": "circuit-rl-transitoire",
+    "number": 34,
+    "title": "Circuit RL : établissement, énergie et décharge",
+    "level": "CPGE · Circuits transitoires",
+    "domain": "electromagnetisme",
+    "version": "1.0",
+    "updated": "2026-09-09",
+    "status": "Version pilote · relecture auteur à faire",
+    "summary": "Suivre un courant qui s’établit, répartir l’énergie fournie et distinguer une décharge avec chemin fermé.",
+    "objective": "Résoudre le transitoire RL, calculer son bilan énergétique et reconstruire ses paramètres sous des conditions explicites.",
+    "prerequisites": [
+      "Loi des mailles et convention récepteur",
+      "Équation différentielle linéaire du premier ordre",
+      "Puissance électrique et énergie magnétique"
+    ],
+    "system": "Un résistor et une bobine idéale en série sont reliés à une source continue ; une commutation distincte permet une décharge dans une boucle RL fermée.",
+    "conditions": [
+      "R = 20,0 Ω et L = 0,200 H sont constants ; R est toute la résistance extérieure, la bobine est idéale.",
+      "Modèle à paramètres localisés : capacités parasites, pertes magnétiques et rayonnement négligés ; fils et commutation idéaux.",
+      "Établissement : source U = +10,0 V appliquée à t = 0, i(0−) = i(0+) = 0. Le courant positif sort de la borne positive de la source.",
+      "Convention récepteur conservée pour R et L : u_R = Ri et u_L = L di/dt ; pendant l’établissement, U = u_R + u_L.",
+      "Décharge indépendante : après un régime permanent préalable supposé, i_d(0) = I∞ = 0,500 A. La source est retirée par une commutation qui maintient un chemin RL fermé.",
+      "Le temps de décharge t_d a sa propre origine. Cette initialisation ne prétend pas que l’établissement depuis zéro atteint exactement I∞ à une date finie."
+    ],
+    "sections": [
+      {
+        "id": "etablissement",
+        "title": "Résoudre l’établissement du courant",
+        "paragraphs": [
+          "La loi des mailles donne L di/dt + Ri = U. Avec i(0) = 0, le courant augmente vers I∞ = U/R ; τ = L/R fixe son échelle de variation. À tout temps fini, il reste inférieur à I∞ dans ce modèle.",
+          "La tension réceptrice de la bobine vaut u_L = U exp(−t/τ), tandis que u_R = U[1−exp(−t/τ)]. À l’instant initial, u_R = 0 et u_L = U ; en régime permanent, u_R tend vers U et u_L vers zéro.",
+          "Comme L[i(0+)−i(0−)] est l’intégrale de u_L à travers la commutation, le courant reste continu en l’absence d’impulsion de tension. La tension peut changer par saut fini ; une bobine idéale ne s’ouvre pas ici sans chemin de courant."
+        ],
+        "equations": [
+          {
+            "id": "rlcourant",
+            "reading": "Tau vaut L divisé par R. Le courant i de t vaut U sur R multiplié par un moins l’exponentielle de moins t sur tau."
+          }
+        ]
+      },
+      {
+        "id": "energie",
+        "title": "Séparer énergie fournie, dissipation et stockage",
+        "paragraphs": [
+          "Multiplier la loi des mailles par i donne le bilan des puissances. Le générateur fournit Ui, le résistor dissipe Ri² et la bobine reçoit la dérivée de W_m = Li²/2. Cette énergie stockée n’est pas une dissipation dans la bobine idéale.",
+          "Depuis t = 0, l’énergie fournie vaut E_g(t) = U I∞{t−τ[1−exp(−t/τ)]}. L’énergie Joule vaut E_J(t) = E_g(t)−W_m(t), puisque le stockage initial est nul. Les puissances sont en watts, les énergies intégrées en joules.",
+          "Si la source demeure branchée, W_m tend vers LI∞²/2, mais Ui et Ri² tendent vers U²/R. Les énergies cumulées E_g et E_J divergent alors ; seule leur différence tend vers l’énergie stockée finie."
+        ],
+        "equations": [
+          {
+            "id": "rlbilan",
+            "reading": "U multiplié par i égale R i au carré plus la dérivée temporelle de L i au carré sur deux."
+          }
+        ]
+      },
+      {
+        "id": "decharge",
+        "title": "Décharger dans une boucle fermée",
+        "paragraphs": [
+          "La commutation retire la source tout en refermant R et L sur eux-mêmes. Avec les mêmes sens de référence pour i_d et les tensions réceptrices, L di_d/dt_d + Ri_d = 0. Le courant initial positif décroît ; u_R,d = Ri_d > 0 et u_L,d = −Ri_d < 0 aux temps finis.",
+          "L’énergie initiale W_0 = LI∞²/2 alimente seule la dissipation : −dW_m,d/dt_d = Ri_d². L’énergie Joule cumulée vaut W_0[1−exp(−2t_d/τ)] ; elle tend vers W_0 à temps infini. L’énergie décroît avec l’échelle τ/2, distincte de celle du courant.",
+          "À un temps t_* connu, le rapport d’établissement f = i(t_*)/I∞ permet τ = −t_*/ln(1−f), si I∞ est connu et 0 < f < 1 ; R connu donne alors L = Rτ. Une seule valeur de courant ne suffit pas si la valeur finale est aussi inconnue. Ici, les inversions portent sur des résultats calculés."
+        ],
+        "equations": [
+          {
+            "id": "rldecharge",
+            "reading": "Le courant de décharge vaut I infini multiplié par l’exponentielle de moins t indice d sur tau. Son énergie magnétique vaut L I infini au carré sur deux, multiplié par l’exponentielle de moins deux t indice d sur tau."
+          }
+        ]
+      }
+    ],
+    "example": {
+      "question": "Évaluer courant, tensions et énergies à t = τ = 10,0 ms. Comparer à la décharge indépendante au temps t_d = τ, initialisée à 0,500 A.",
+      "steps": [
+        "τ = L/R = 0,0100 s et I∞ = U/R = 0,500 A. À t = τ : i ≈ 0,316060 A, u_R ≈ 6,321206 V et u_L ≈ 3,678794 V.",
+        "W_m(τ) ≈ 0,009989410 J. L’énergie fournie E_g(τ) ≈ 0,018393972 J se répartit en E_J(τ) ≈ 0,008404562 J et W_m(τ).",
+        "Pour la décharge, W_0 = 0,0250 J. À t_d = τ : i_d ≈ 0,183940 A, u_R,d ≈ +3,678794 V et u_L,d ≈ −3,678794 V.",
+        "W_m,d(τ) ≈ 0,003383382 J et E_J,d(τ) ≈ 0,021616618 J ; leur somme reste W_0, sans apport de la source."
+      ],
+      "result": "Les valeurs sont calculées à partir des paramètres supposés. Les deux cas ont la même constante τ, mais des conditions initiales et des bilans d’alimentation distincts."
+    },
+    "checkpoint": {
+      "question": "Après une durée très grande, toute l’énergie fournie pendant l’établissement est-elle stockée dans la bobine ? La décharge présentée commence-t-elle à t = τ de cet établissement ?",
+      "answer": "Non. Avec la source maintenue, la puissance Joule tend vers 5,00 W et l’énergie dissipée continue de croître ; le stockage tend seulement vers 0,0250 J. La décharge étudiée suppose séparément un courant initial de 0,500 A. À t = τ de l’établissement depuis zéro, le courant n’est encore que 0,316060 A."
+    },
+    "sources": [
+      {
+        "doc": "cpge",
+        "code": "P15",
+        "page": 391,
+        "section": "Convention récepteur, dipôle RL et établissement sous tension constante"
+      },
+      {
+        "doc": "theorique",
+        "code": "PC2",
+        "page": 264,
+        "section": "Loi d’Ohm locale et bilan énergétique électromagnétique ; appui énergétique, sans solution RL spécifique"
+      }
+    ],
+    "references": [
+      "openstax-rl"
+    ],
+    "corrections": []
   }
 ]

@@ -317,8 +317,8 @@
   {
     "slug": "electromagnetisme",
     "title": "Électromagnétisme",
-    "summary": "Charges et champ électrique, champs de courants permanents, puis induction et conversion électromécanique.",
-    "scope": "Trois parcours de trois fiches : électrostatique (E1a), force et champ magnétiques (E1b), solénoïde et premiers modèles d’induction (E1c). Les compléments de Maxwell, les milieux et les circuits inductifs restent à développer.",
+    "summary": "Charges, champs et induction : des modèles statiques aux courants variables et au stockage magnétique.",
+    "scope": "Quatre parcours de trois fiches : électrostatique (E1a), champs magnétiques (E1b), solénoïde et induction (E1c), puis déplacement de Maxwell, énergie inductive et circuit RL (E1d). Ondes électromagnétiques, milieux et couplages restent à développer.",
     "sources": [
       {
         "doc": "cpge",
@@ -515,6 +515,66 @@
             "tip": "À vitesse constante imposée, le travail de traction compense la dissipation Joule.",
             "card": "induction-tige-mobile",
             "section": "energie",
+            "color": "green"
+          }
+        ]
+      },
+      {
+        "anchor": "boucle-maxwell-rl",
+        "title": "Courant de déplacement, énergie et circuit RL",
+        "steps": [
+          {
+            "id": 1,
+            "title": "Définir la charge variable",
+            "subtitle": "Condensateur et orientations",
+            "tip": "Un courant prescrit fait varier la charge et le champ entre les armatures.",
+            "card": "condensateur-maxwell",
+            "section": "conditions",
+            "color": "blue"
+          },
+          {
+            "id": 2,
+            "title": "Compléter la circulation",
+            "subtitle": "Conduction et déplacement",
+            "tip": "Le terme de déplacement rend le total traversant deux surfaces compatible avec la conservation de charge.",
+            "card": "condensateur-maxwell",
+            "section": "circulation",
+            "color": "orange"
+          },
+          {
+            "id": 3,
+            "title": "Calculer une inductance",
+            "subtitle": "Flux propre lié",
+            "tip": "Le modèle de solénoïde long estime le flux lié et l’inductance ; ses limites restent explicites.",
+            "card": "auto-induction-energie",
+            "section": "exemple",
+            "color": "green"
+          },
+          {
+            "id": 4,
+            "title": "Reprendre le bilan",
+            "subtitle": "Stockage et restitution",
+            "tip": "La bobine idéale stocke une énergie qu’elle peut restituer ; puissance reçue et énergie sont distinguées.",
+            "card": "auto-induction-energie",
+            "section": "energie",
+            "color": "blue"
+          },
+          {
+            "id": 5,
+            "title": "Résoudre le transitoire",
+            "subtitle": "Équation du circuit RL",
+            "tip": "La résistance et l’inductance déterminent la constante de temps et le courant après établissement de la source.",
+            "card": "circuit-rl-transitoire",
+            "section": "etablissement",
+            "color": "orange"
+          },
+          {
+            "id": 6,
+            "title": "Comparer la décharge",
+            "subtitle": "Chemin de courant conservé",
+            "tip": "La source est retirée dans un scénario distinct ; le circuit RL reste fermé et dissipe son énergie initiale.",
+            "card": "circuit-rl-transitoire",
+            "section": "decharge",
             "color": "green"
           }
         ]
