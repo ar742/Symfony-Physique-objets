@@ -205,7 +205,7 @@ Ces nombres sont des résultats de calcul et des contrôles internes, sans mesur
 
 ## Interface, reproduction et portée
 
-L’[explorateur des lagrangiens et surfaces](LAGRANGIEN-SURFACES.md) propose trois vues distinctes : le vrai L affine d’un PL enregistré, la production réalisable suivant deux fractions et la courbe couplée A2/A5 suivant s1. Il conserve les autres données, recalcule les marqueurs projetés et signale les parties hors contraintes du PL. Un plan, un plateau ou une cassure est conservé tel quel ; aucun pic artificiel n’est ajouté et aucune coupe ne remplace le contrôle global des bornes.
+L’[explorateur des lagrangiens et surfaces](LAGRANGIEN-SURFACES.md) propose trois vues distinctes : le vrai L affine d’un PL enregistré, la production réalisable suivant deux fractions et une nappe en flux u=x12, v=x23 autour de la meilleure configuration. Un recentrage, un zoom vertical local explicite, deux coupes orthogonales et un tableau de voisins rendent le maximum de frontière lisible. Il conserve les autres données, recalcule les marqueurs projetés et signale les parties hors contraintes du PL. Un plan, un plateau ou une cassure est conservé tel quel ; aucun pic artificiel n’est ajouté et aucune coupe ne remplace le contrôle global des bornes.
 
 La page permet de préparer chaque rendement, copier une loi sur les douze branches, choisir le pas et le budget de grille, puis comparer. Un second formulaire prépare les plages de conception ; la construction libre est accessible séparément. Changer l’état affiché déplace ensemble le graphe, les tableaux, la courbe et l’analyse de branche. Les ancres qualifient le réseau, l’arc, le cas et la position, par exemple `reseau-5-3-1b-2.0`.
 

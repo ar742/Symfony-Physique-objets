@@ -38,16 +38,22 @@
 .branch-surface-axis { stroke:var(--muted); stroke-width:1.5; }
 .branch-surface-label, .branch-surface-tick { fill:var(--ink); stroke:var(--paper); stroke-width:4; paint-order:stroke; font:600 17px system-ui,sans-serif; }
 .branch-surface-tick { font-size:15px; font-weight:400; }
-.branch-surface-tile { fill:var(--tone-blue); fill-opacity:.24; stroke:var(--tone-blue); stroke-width:.65; stroke-opacity:.65; cursor:crosshair; }
+.branch-surface-tile { fill:var(--tone-blue); stroke:var(--tone-blue); stroke-width:.65; stroke-opacity:.65; cursor:crosshair; }
 .branch-surface-tile:hover { fill-opacity:.65; }
 .branch-surface-outside { fill:var(--muted); stroke:var(--muted); fill-opacity:.15; stroke-dasharray:3 3; }
 .branch-surface-marker { stroke:var(--paper); stroke-width:2.5; fill:var(--tone-orange); cursor:crosshair; }
 .branch-surface-marker.grid { stroke:var(--tone-green); stroke-width:3; fill:none; }
 .branch-surface-curve { fill:none; stroke:var(--tone-blue); stroke-width:4; }
 .branch-surface-dot { fill:var(--tone-blue); cursor:crosshair; }
+.branch-surface-focus { padding:1rem 1.4rem; margin-block:1rem; border-left:5px solid var(--tone-orange); background:var(--wash); border-radius:.5rem; }
+.branch-focus-value { font-size:clamp(1.5rem,3vw,2.1rem); font-weight:700; margin-block:.6rem; font-variant-numeric:tabular-nums; }
+.branch-surface-section, .branch-profile-line { fill:none; stroke:var(--tone-orange); stroke-width:3; }
+.branch-surface-profiles { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+.branch-profile { margin:0; padding:.6rem; border:1px solid var(--line); border-radius:.7rem; min-width:0; }
+.branch-profile .production-chart-text { font-size:15px; }
 #branches-surface-samples > details .graph-table-wrap { max-height:26rem; overflow:auto; }
 #branches-lagrangian-diagnostic { margin:1.5rem 0; padding:1rem; border:1px solid var(--line); border-radius:.8rem; }
 #branches-lagrangian-diagnostic .graph-table-wrap { max-height:28rem; overflow:auto; }
-@media(max-width:600px) { .branch-surface-controls { grid-template-columns:1fr; } .branch-surface-figure { padding:.4rem; } #branches-surface { min-width:640px; } .branch-surface-mobile-note { display:block; } .branch-surface-label { font-size:23px; } .branch-surface-tick { font-size:20px; } }
+@media(max-width:600px) { .branch-surface-controls, .branch-surface-profiles { grid-template-columns:1fr; } .branch-surface-figure { padding:.4rem; } #branches-surface { min-width:640px; } .branch-profile .production-chart-text { font-size:20px; } .branch-surface-mobile-note { display:block; } .branch-surface-label { font-size:23px; } .branch-surface-tick { font-size:20px; } }
 @media(max-width:800px) { .branch-label { font-size:30px; } .branch-junction text { font-size:30px; } .branch-junction .branch-total { font-size:25px; } }
 @media(min-width:801px) and (min-height:950px) { [data-graph-study="production-branches"] .graph-map-panel { position:sticky; } }

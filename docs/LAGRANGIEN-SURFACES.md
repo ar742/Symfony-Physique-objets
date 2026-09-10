@@ -10,11 +10,11 @@ Le modèle demeure celui des [fondements](FONDEMENTS-DU-PROJET.md) : chaque bran
 | --- | --- | --- |
 | Lagrangien du réseau non linéaire, L_NLP | Alimentations x, productions y ; lois et multiplicateurs d’égalités déclarés | Écrire les lois et les bilans dans une fonction ; il ne constitue pas à lui seul une résolution globale |
 | Lagrangien d’une relaxation linéaire, L_PL | Variables z du sous-problème, avec ses vrais multiplicateurs λ fixés | Calculer une majoration de ce sous-problème, avec correction du résidu dual et marge |
-| Surface réalisable R(s1,s2) | Deux partages indépendants ; autres partages et toutes les lois figés | Montrer comment varie la production recalculée, dans une coupe à deux dimensions du problème |
+| Surface réalisable de rendement | Deux alimentations de branche ou deux fractions ; autres partages et toutes les lois figés | Montrer comment varie la production recalculée, dans une coupe à deux dimensions du problème |
 
 La troisième ligne fournit la nappe courbe recherchée. La deuxième expose l’usage effectif du lagrangien dans les calculs. Elles ne portent ni sur les mêmes variables ni sur le même domaine.
 
-L’explorateur 3D distingue trois vues dans ce même cadre : la production réalisable suivant deux fractions, le plan du vrai lagrangien d’un PL suivant deux de ses variables, et la courbe des entrées couplées A2/A5 et de la production finale lorsque seul s1 varie. Le mode, les axes, les données figées et la provenance du résultat sont identifiés séparément.
+L’explorateur distingue la surface de rendement suivant les alimentations u=x12 et v=x23, les coupes suivant deux fractions et le plan du vrai lagrangien d’un PL. La courbe couplée A2/A5 de la première version n’est plus un mode de l’interface. Le voisinage initial est resserré autour du meilleur résultat, avec un rayon de 0,03, un zoom vertical local explicitement annoncé, des coupes orthogonales et un tableau de voisins. L’échelle globale reste disponible. Le mode, les axes, les données figées et la provenance du résultat sont identifiés séparément.
 
 ## Lagrangien du problème non linéaire
 
@@ -105,74 +105,91 @@ L_PL(z;λ) ≈ 0,5443200576790044 − 1,242597656249766 x_2_3.
 
 Les autres coefficients sont numériquement proches de zéro ; ils ne sont pas supprimés du calcul. Au meilleur état, x_2_3=0 et r≈0,5443200000000002, tandis que L_PL≈0,5443200576790044. Le supremum brut sur la boîte vaut environ 0,5443200576790074 ; le certificat après marge donne environ 0,5443200576807237. Cette différence illustre la distinction entre production, lagrangien de relaxation et borne corrigée. Les identifiants et nombres peuvent changer après modification du problème ou du calcul ; l’interface doit reprendre les données de l’exécution, sans réutiliser ces valeurs comme constantes.
 
-## Une surface avec deux commandes indépendantes
+## La vue locale suivant deux alimentations de branche
 
-Le premier choix pédagogique est :
-
-```text
-t = s1 : part de la source allouée à 1→2
-v = s2 : part disponible en 2 allouée à 2→3
-R(t,v) = production finale du réseau recalculé
-         avec s1=t, s2=v et s3,s5,s7 fixés.
-```
-
-La part de 2 dirigée vers la sortie 8 vaut 1−v : accroître s2 ne signifie donc pas envoyer davantage directement vers 8. Chaque paire (t,v) appartient à [0,1]². Le calcul reconstruit successivement toutes les entrées et sorties dans l’ordre du graphe, avec y=x f(x). Il respecte ainsi les bilans ; les valeurs de l’état affiché peuvent être contrôlées indépendamment du maillage graphique.
-
-Toutes les lois doivent rester fixées pendant cette coupe. Si l’état retenu provient d’une optimisation des paramètres, sa surface utilise ses douze quadruplets reconstruits et figés. Réoptimiser les paramètres ou les autres partages à chaque point produirait une autre fonction de valeur et demanderait un nouveau calcul sous contraintes à chaque point.
-
-La surface se situe dans l’ensemble admissible défini par les lois et les bilans. Sur elle, le lagrangien d’égalités du réseau vaut R(t,v). Cela autorise la mention « production réalisable ; égale à L_NLP sur les contraintes d’égalité », mais pas l’affirmation que les multiplicateurs du PL ont créé ou optimisé directement cette nappe.
-
-Le meilleur point d’une grille 3D est seulement le meilleur des points échantillonnés de cette coupe. Le marqueur du meilleur état trouvé par la recherche continue doit être évalué à ses coordonnées exactes, même s’il tombe entre les nœuds du maillage ; son statut et son écart de bornes déterminent si l’optimalité a été établie à la tolérance annoncée. Le domaine dessiné, les trois autres fractions, les lois et l’état de référence restent visibles. Un zoom près de la frontière est tronqué à [0,1] et ne crée pas de part négative.
-
-Un résultat de la grille des cinq fractions ne se situe sur cette même coupe que si ses trois autres fractions sont identiques aux valeurs figées. Sinon, placer un marqueur « grille projetée » signifie reprendre seulement ses deux coordonnées, conserver les trois fractions de la coupe et **recalculer** sa hauteur. La valeur du résultat complet de grille doit alors rester distincte. Deux marqueurs ne comparent le même problème que si les douze lois et la source sont les mêmes.
-
-### Pourquoi les entrées des nœuds 2 et 5 ne forment pas une surface indépendante
-
-Si « Exp. IN 2 » et « Exp. IN 5 » désignent les sommes disponibles en ces nœuds, elles valent :
+Les axes de cette vue sont deux alimentations allouées à des branches identifiées :
 
 ```text
-A2 = g12(t)
-A5 = g15(1−t),  0≤t≤1.
+u = x12                 entrée de la branche 1→2
+v = x23                 entrée de la branche 2→3
+A2 = g12(u)             somme reçue au nœud 2
+x28 = A2−v              alimentation restante de la branche 2→8
+0≤u≤1 ; 0≤v≤g12(u).
 ```
 
-À source et lois fixées, le couple (A2,A5) décrit une **courbe paramétrée à une dimension**. En général A2+A5≤1 ; ce n’est pas le partage brut (t,1−t), car les rendements ont déjà été appliqués. La courbe peut comporter des portions nulles ou ne pas identifier t de façon unique. Un rectangle de valeurs arbitraires A2/A5 contiendrait des couples sans partage source compatible.
+Ce domaine possède deux dimensions lorsque g12(u)>0, mais ce n’est pas tout le rectangle [0,1]² : la branche 2→3 ne peut recevoir davantage que la somme disponible au nœud 2. La vue signale les couples incompatibles ; elle ne les écrête pas et ne leur attribue aucune production.
 
-Ces quantités peuvent être affichées comme conséquences des réglages ou dans un graphique de raccord. Pour obtenir deux axes d’alimentation indépendants, il faudrait modifier explicitement le problème, par exemple ajouter un apport indépendant ; ce n’est pas le modèle actuel.
+La reconstruction utilise s1=u, puis s2=v/g12(u) lorsque g12(u)>0. Les fractions s3, s5, s7 et les douze lois restent fixées à celles de l’état de référence. Si g12(u)=0, seul v=0 est admissible ; s2 n’est alors pas identifié par les flux et conserve la valeur de référence, sans effet sur les productions nulles. Le réseau est ensuite entièrement recalculé, ce qui définit R_f(u,v).
 
-La troisième vue représente précisément la courbe 3D `(A2(s1), A5(s1), r(s1))`. Les quatre autres fractions et les douze lois y sont figées. La troisième coordonnée donne la production finale du réseau recalculé ; elle ne crée pas une deuxième commande indépendante. Chaque point conserve sa valeur de s1, notamment si la projection dans le plan A2/A5 est ambiguë. Cette vue explique le couplage des entrées, sans remplir artificiellement le rectangle A2×A5.
+**L’entrée d’une branche et la somme d’un nœud ne sont pas interchangeables.** Au résultat initial, u=x12=0,8, tandis que A2=y12=0,72. Le rendement de 1→2 a déjà été appliqué dans A2. L’autre axe est v=x23=0 ; il ne désigne ni A2 ni une entrée du nœud 7.
 
-### Autres choix d’axes possibles
+Les coupes suivant deux fractions restent disponibles séparément. Par exemple R_s(t,w) utilise t=s1, w=s2 et recalcule le réseau, à s3,s5,s7 fixés. Les deux descriptions sont reliées par u=t et v=w g12(t). Elles ne donnent donc pas les mêmes dérivées ni les mêmes graduations sur leur deuxième axe. Augmenter v ou s2 oriente une alimentation supplémentaire vers 2→3 et diminue celle dirigée directement vers 8.
 
-| Axes | Sens | Limite à annoncer |
-| --- | --- | --- |
-| s1 et s2 | Partage source et bifurcation du chemin court | Choix utile près des maxima fixes présentés ci-dessous |
-| Deux autres fractions parmi les cinq | Coupe de commandes indépendantes | Une fraction d’un nœud non alimenté peut donner une direction parfaitement plate |
-| Deux paramètres de loi | Étude de conception à autres données fixées | Domaine admissible à contrôler ; ce n’est plus le même problème à lois fixées |
-| Deux coordonnées z d’un PL | Plan affine L_PL à λ fixé | Montrer aussi les contraintes de la relaxation ; ce n’est pas une production de réseau reconstruite |
+### Référence, paramètres et marqueurs
 
-Un choix d’axes est une déclaration de la question examinée. Il ne constitue pas une réduction équivalente de toute l’optimisation à deux variables.
+Toutes les lois restent fixées pendant une coupe. Si la référence provient d’une optimisation des paramètres, elle fournit ses douze quadruplets reconstruits et figés. Réoptimiser les paramètres ou les autres partages à chaque point produirait une autre fonction de valeur et demanderait un nouveau calcul sous contraintes à chaque point.
+
+Sur les points recalculés admissibles, les égalités de bilan et de loi sont satisfaites, donc L_NLP=r. Cette identité ne transforme pas la surface de rendement en plan du lagrangien des PL et ne fournit pas des multiplicateurs du réseau original.
+
+Après le calcul, le voisinage est centré sur le meilleur résultat retenu, avec ses coordonnées exactes ; le réglage local initial est de 0,03 de chaque côté, tronqué aux bornes et à l’admissibilité. Le maillage sert à représenter la surface, pas à retrouver artificiellement son sommet. Le statut de recherche et l’écart des bornes déterminent si ce résultat est certifié à la tolérance annoncée ou reste le meilleur état connu après un arrêt.
+
+Un résultat de grille appartient à la même coupe si les trois fractions non explorées sont celles de la référence. Sinon, son marqueur reprend ses deux coordonnées, conserve les trois fractions figées et **recalcule** sa hauteur ; il est qualifié de projection. Dans la vue des flux, les coordonnées reprises sont ses x12 et x23. La valeur du résultat complet de grille reste distincte. Deux marqueurs ne comparent le même problème que si les douze lois et la source sont identiques.
+
+## Pourquoi A2 et A7 ne donnent pas la nappe attendue près de ce résultat
+
+Si « Exp. IN 2 » et « Exp. IN 7 » désignent les sommes disponibles aux nœuds, leurs valeurs sont :
+
+```text
+A2 = g12(s1)
+A5 = g15(1−s1)
+A7 = g57((1−s5) A5).
+```
+
+Avec les lois initiales, a=0,3. Au meilleur partage s1=0,8, la branche 1→5 reçoit 0,2 et produit zéro. Plus généralement, dès que s1>0,7, son entrée est inférieure au seuil : A5=0 et **A7=0**, quelle que soit s5. Un voisinage resserré autour de s1=0,8 ne peut donc faire varier A7 comme une deuxième entrée indépendante.
+
+Si s2 et les autres commandes restent fixés, les points admissibles se réduisent localement à une courbe avec A7=0. Pour s2=0, r=g28(A2) près de A2=0,72 ; cette fonction est croissante et le maximum est au bord A2=0,72. Une représentation fidèle ne peut transformer ce bord en dôme lisse intérieur.
+
+Si s2 varie aussi, A2 et A7 ne déterminent même plus r à eux seuls : pour (A2,A7)=(0,72 ; 0), s2=0 donne r=0,54432, tandis que s2=0,1 donne r=0,4059072. Il faut donc déclarer les commandes fixées avant de parler d’une fonction r(A2,A7). Cela motive les axes de branche u=x12 et v=x23, dont le domaine et les conséquences sont explicitement calculés.
+
+Le couple A2/A5 de la première version était lui aussi couplé : à lois et source fixées, (g12(s1),g15(1−s1)) ne dépend que d’une commande. L’interface n’en propose plus une vue 3D autonome. Ces dépendances restent des propriétés du réseau, et non des alimentations externes que l’on pourrait régler librement.
 
 ## Exemples près des maxima à lois fixées
 
-### Valeurs initiales : s1=0,8, s2=0
+### Valeurs initiales : u=0,8, v=0
 
 Les douze lois valent `(a,b,c,d)=(0,3 ; 0,8 ; 0,9 ; 0,6)`. Le chemin 1→2→8 reçoit x12=0,8 puis x28=0,72 et donne r=0,54432. L’autre branche source reçoit 0,2, sous son seuil. Les autres fractions peuvent être figées aux valeurs du résultat retenu.
 
-Au voisinage de ce point, les autres routes sont inactives et la surface s’écrit :
+Au voisinage de ce point, les autres routes sont inactives et la surface des alimentations s’écrit :
 
 ```text
-R(t,v) = g((1−v)g(t)).
+R_f(u,v) = g28(g12(u)−v).
 ```
 
-Le maximum est à la frontière v=0. En t=0,8, g change de portion ; la nappe a une cassure et non un sommet intérieur lisse. Les dérivées unilatérales calculées au point sont :
+Le maximum est à la frontière v=0. En u=0,8, g12 change de portion ; la nappe a une cassure et non un sommet intérieur lisse. Les dérivées unilatérales calculées au point sont :
 
 ```text
-∂R/∂t à gauche  = +4,80168
-∂R/∂t à droite  = −0,6156
-∂R/∂v vers v>0  = −1,47744.
+∂R_f/∂u à gauche  = +4,80168
+∂R_f/∂u à droite  = −0,6156
+∂R_f/∂v vers v>0  = −2,052.
 ```
 
-Elles décrivent une augmentation vers la cassure puis une diminution, et une diminution lorsqu’on quitte la frontière par une direction admissible. Une différence centrée en t qui traverse la cassure n’est pas une dérivée ordinaire ; une différence centrée en v demanderait un partage négatif. Ces signes sont des diagnostics locaux. La preuve globale r≤0,54432 est donnée séparément dans les [repères analytiques](OPTIMISATION-BRANCHES.md#repères-analytiques-pour-les-deux-domaines-proposés).
+Elles décrivent une augmentation vers la cassure puis une diminution, et une diminution lorsqu’on quitte la frontière par une direction admissible. Une différence centrée en u traverse la cassure ; une différence centrée en v demanderait une alimentation négative. Dans la vue des fractions, la dérivée suivant s2 vaut plutôt −1,47744, car v=s2 A2. Ces signes sont des diagnostics locaux. La preuve globale r≤0,54432 est donnée séparément dans les [repères analytiques](OPTIMISATION-BRANCHES.md#repères-analytiques-pour-les-deux-domaines-proposés).
+
+### Coupes orthogonales et voisins
+
+Deux courbes passent par le point de référence : R_f(u,v*) à v fixé, puis R_f(u*,v) à u fixé. Elles respectent le domaine admissible et permettent de lire le changement de pente ainsi que le bord v=0. Le tableau de voisins examine le centre et les déplacements ±rayon/3 sur chaque axe ; un voisin incompatible est nommé comme tel, sans inventer une valeur de r.
+
+Avec le rayon initial 0,03, ces déplacements valent 0,01. Pour les lois initiales :
+
+| Position | u | v | Rendement calculé |
+| --- | ---: | ---: | ---: |
+| Centre | 0,80 | 0 | 0,54432 |
+| Voisin à gauche | 0,79 | 0 | 0,49764306312 |
+| Voisin à droite | 0,81 | 0 | 0,5378740605 |
+| Voisin vers v positif | 0,80 | 0,01 | 0,52398 |
+| Voisin vers v négatif | 0,80 | −0,01 | Incompatible |
+
+Ces nombres montrent que les voisins admissibles sont plus bas. Ils ne démontrent pas à eux seuls qu’aucun autre maximum n’existe ailleurs dans le réseau. Les coupes et le tableau complètent la surface ; ils ne sont pas des calculs de gradient à une cassure.
 
 ### Variante b=0,83
 
@@ -183,7 +200,7 @@ x12 = 0,83 ; y12 = 0,747
 x28 = 0,747 ; y28 ≈ 0,567015283018868.
 ```
 
-Cette configuration fournit le résultat continu vérifié, accompagné de la borne du calcul global. Le maximum se situe encore sur v=0 et à la cassure t=b. Un maillage au pas 0,1 ne contient pas t=0,83 : le meilleur point de cette grille peut donc être plus bas. La surface doit distinguer son maillage de représentation, le marqueur exact du résultat et l’écart des bornes du solveur.
+Cette configuration fournit le résultat continu vérifié, accompagné de la borne du calcul global. Dans les coordonnées des alimentations, u=0,83 et v=0. Le maximum se situe encore sur v=0 et à la cassure u=b. Un maillage de fractions au pas 0,1 ne contient pas s1=0,83 : le meilleur point de cette grille peut donc être plus bas. La surface doit distinguer son maillage de représentation, le marqueur exact du résultat et l’écart des bornes du solveur.
 
 ## Ce qu’un diagnostic de maximum peut conclure
 
@@ -191,6 +208,10 @@ Un point peut être à la frontière du domaine des commandes, à une cassure de
 
 Un zoom et son maillage décrivent les variations locales de la coupe. Une direction plate peut simplement correspondre à un nœud sans alimentation ; elle ne signifie pas que toute modification du réseau est indifférente. Un maximum apparent dans la coupe ne prouve rien sur les trois fractions figées ni sur des paramètres tenus constants. La portée globale vient des bornes et de leur couverture, ou d’une preuve analytique séparée du scénario.
 
-L’échelle verticale garde les repères 0 et1 pour situer la production par rapport à la source. Elle ne doit pas transformer un écart numérique minuscule en relief spectaculaire. En mode L_PL, des valeurs hors[0,1] restent toutefois possibles, particulièrement hors des contraintes ; l’échelle s’étend pour les montrer et ne les écrête pas. Les nombres, résidus et étiquettes du diagnostic permettent de lire un plan presque horizontal même si son relief est visuellement faible.
+### Zoom vertical local et échelle globale
+
+Le zoom vertical local est proposé explicitement pour lire les différences près du résultat. L’axe porte les valeurs absolues de r et l’intervalle affiché ; le mot « local » indique que son origine peut être différente de zéro. Une marge de 10 % autour des valeurs et une étendue minimale de 10⁻⁴ évitent un cadrage dégénéré ou l’amplification d’un simple bruit d’arrondi. La référence au rendement maximal universel 1 reste annoncée, sans forcer 0 et1 à appartenir à ce cadrage local.
+
+Le mode global conserve au contraire les repères 0 et1. Pour L_PL, les deux modes s’étendent aux valeurs calculées pertinentes, y compris hors[0,1] ; ils ne les écrêtent pas. Les parties hors contraintes restent identifiées. Un zoom est un changement d’échelle, pas une modification des valeurs ou de la courbure : il peut rendre la cassure plus lisible, mais ne transforme pas un plan en dôme ni un maximum de frontière en maximum intérieur. Les nombres et les résidus permettent de contrôler ce que montre le relief.
 
 Le lagrangien du réseau, la dualité des PL, les surfaces de production et leurs contrôles restent donc liés par leurs contraintes et leurs résultats identifiables. Aucune entropie, temporalité, énergie conservée ni mesure industrielle supplémentaire n’est déduite de leur représentation. Les références officielles ont été consultées le 10 septembre 2026 ; les équations et exemples propres à ce réseau sont des dérivations du modèle du projet.

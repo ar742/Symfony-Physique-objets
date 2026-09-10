@@ -106,7 +106,8 @@ foreach ([
     'branches-view' => ['initial', 'grid', 'global', 'bounded', 'free'],
     'branches-divisions' => ['5', '10', '20', '50', '100'], 'branches-grid-budget' => ['200000', '1000000', '5000000'],
     'branches-surface-reference' => ['initial', 'grid', 'global', 'bounded', 'free'],
-    'branches-surface-mode' => ['yield', 'lagrangian', 'coupled'],
+    'branches-surface-mode' => ['flows', 'yield', 'lagrangian'],
+    'branches-surface-scale' => ['local', 'global'],
 ] as $id => $expected) {
     $select = $requiredElement($id, 'select');
     if ($select === null) { continue; }
@@ -116,7 +117,10 @@ foreach ([
         $actual[] = $option->getAttribute('value');
         if ($option->hasAttribute('selected')) { $selected[] = $option->getAttribute('value'); }
     }
-    $defaults = ['branches-view' => 'initial', 'branches-divisions' => '10', 'branches-grid-budget' => '200000'];
+    $defaults = [
+        'branches-view' => 'initial', 'branches-divisions' => '10', 'branches-grid-budget' => '200000',
+        'branches-surface-reference' => 'initial', 'branches-surface-mode' => 'flows', 'branches-surface-scale' => 'local',
+    ];
     if (isset($defaults[$id])) {
         $check(count($selected) <= 1 && ($selected[0] ?? $actual[0] ?? null) === $defaults[$id], 'Valeur sélectionnée initialement '.$id);
     }
@@ -203,7 +207,8 @@ if ($inspector !== null) {
 }
 
 // The formulas and surface controls exist before JavaScript. The mesh, diagnostic
-// values and accessible sample table are computed later and tested in the browser.
+// values, neighborhood table and two profile SVGs are computed later and tested
+// in the browser; server checks cover their named containers, not dynamic markup.
 foreach (['branches-lagrangian-heading', 'branches-surface-heading'] as $id) {
     $heading = $requiredElement($id);
     if ($heading !== null) { $check(trim($heading->textContent) !== '', 'Intitulé de section '.$id); }
@@ -219,7 +224,7 @@ foreach (['branches-surface-x', 'branches-surface-y'] as $id) {
     if ($select !== null) { $check($hasName($select, $xpath), 'Nom accessible de l’axe '.$id); }
 }
 $surfaceInputs = [
-    'branches-surface-radius' => ['type' => 'number', 'min' => 0.02, 'max' => 1.0, 'step' => 0.01],
+    'branches-surface-radius' => ['type' => 'number', 'min' => 0.001, 'max' => 1.0, 'step' => 0.001, 'value' => 0.03],
     'branches-surface-yaw' => ['type' => 'range', 'min' => -180.0, 'max' => 180.0],
     'branches-surface-pitch' => ['type' => 'range', 'min' => 15.0, 'max' => 75.0],
 ];
@@ -250,7 +255,22 @@ if ($surface !== null) {
         $check($xpath->query('.//*[@id="'.$id.'"]', $surface)->length === 1, 'Description intégrée au SVG '.$id);
     }
 }
-foreach (['branches-surface-caption', 'branches-lagrangian-diagnostic', 'branches-surface-samples'] as $id) { $requiredElement($id); }
+foreach (['branches-surface-center', 'branches-surface-demo'] as $id) {
+    $button = $requiredElement($id, 'button');
+    if ($button === null) { continue; }
+    $check($button->getAttribute('type') === 'button', 'Commande de voisinage sans soumission directe '.$id);
+    $check($hasName($button, $xpath), 'Nom accessible de la commande de voisinage '.$id);
+    if ($id === 'branches-surface-center') { $check($button->hasAttribute('disabled'), 'Recentrage désactivé sans résultat calculé'); }
+}
+foreach ([
+    'branches-surface-caption', 'branches-lagrangian-diagnostic', 'branches-surface-samples',
+    'branches-surface-focus', 'branches-surface-neighbors', 'branches-surface-profiles',
+] as $id) { $requiredElement($id); }
+$surfacePoint = $requiredElement('branches-surface-point');
+if ($surfacePoint !== null) {
+    $check($surfacePoint->getAttribute('role') === 'status', 'Annonce accessible du point de voisinage');
+    $check($xpath->query('ancestor::*[@id="branches-surface-samples"]', $surfacePoint)->length === 0, 'Détail du point indépendant du tableau complet des échantillons');
+}
 $surfaceStatus = $requiredElement('branches-surface-status');
 if ($surfaceStatus !== null) { $check($surfaceStatus->getAttribute('role') === 'status', 'Annonce accessible de l’état de la nappe'); }
 $check($xpath->query('//head/script[@type="module" and @src="/scripts/branch-study.mjs"]')->length === 1, 'Module des branches déclaré dans head');

@@ -61,10 +61,11 @@ function enableActions(busy) {
     $('branches-cancel').hidden=!busy;
 }
 function stop(message, incomplete=false) {
+    surfaces?.cancelPendingDemo();
     if (worker) {worker.terminate();worker=null;}
-    if (incomplete && runningKind && results[runningKind] && phases[runningKind] === 'running') {
+    if (incomplete && runningKind && phases[runningKind] === 'running') {
         phases[runningKind]='stopped';
-        results[runningKind]={...results[runningKind],status:'cancelled'};
+        if(results[runningKind])results[runningKind]={...results[runningKind],status:'cancelled'};
     }
     runningKind=null;enableActions(false);
     if(message)$('branches-status').textContent=message;
@@ -266,7 +267,7 @@ function restore(scroll) {
     if(scroll)requestAnimationFrame(()=>{const target=match[2]?$(location.hash.slice(1)):$('branches-inspector');target.scrollIntoView({block:'start'});if(match[2])target.focus({preventScroll:true});else{$('inspector-title').tabIndex=-1;$('inspector-title').focus({preventScroll:true});}});
 }
 try {
-    surfaces=createBranchSurfaces();
+    surfaces=createBranchSurfaces({onDemo:()=>{load();start('fixed');}});
     $('branches-controls').addEventListener('submit',event=>{event.preventDefault();start('fixed');});
     $('branches-design').addEventListener('submit',event=>{event.preventDefault();start('bounded');});
     $('branch-choice').addEventListener('change',()=>{updateLawDraft();editingLaw=$('branch-choice').value;showLawDraft();});

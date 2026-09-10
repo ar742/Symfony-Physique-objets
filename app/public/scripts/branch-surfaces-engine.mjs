@@ -1,4 +1,4 @@
-import {evaluateBranches} from './branches-engine.mjs';
+import {evaluateBranches, branchProductionRate} from './branches-engine.mjs';
 import {evaluateLagrangianPoint} from './branches-lagrangian.mjs';
 
 export const SPLIT_VARIABLES = [
@@ -26,7 +26,19 @@ function sameLaws(first,second) {
 }
 function ranges(points) {
     const values=points.flat();
-    return {x:[Math.min(...values.map(p=>p.x)),Math.max(...values.map(p=>p.x))],y:[Math.min(...values.map(p=>p.y)),Math.max(...values.map(p=>p.y))],z:[Math.min(0,...values.map(p=>p.z)),Math.max(1,...values.map(p=>p.z))]};
+    const zs=values.map(point=>point.z).filter(Number.isFinite);
+    return {x:[Math.min(...values.map(p=>p.x)),Math.max(...values.map(p=>p.x))],y:[Math.min(...values.map(p=>p.y)),Math.max(...values.map(p=>p.y))],z:[Math.min(0,...zs),Math.max(1,...zs)]};
+}
+
+/** Absolute vertical values; local zoom never replaces r or L by a normalised value. */
+export function verticalRange(surface,{mode='local'}={}) {
+    if(!['local','global'].includes(mode))throw new RangeError('Échelle verticale locale ou globale requise.');
+    if(!surface||!Array.isArray(surface.points))throw new TypeError('Une surface échantillonnée est requise.');
+    const values=[...surface.points.flat(),...(surface.markers??[])].map(point=>point?.z).filter(Number.isFinite);
+    if(mode==='global')return [Math.min(0,...values),Math.max(1,...values)];
+    if(!values.length)throw new RangeError('Aucune valeur finie à représenter.');
+    const low=Math.min(...values),high=Math.max(...values),span=Math.max(high-low,1e-4),middle=(low+high)/2;
+    return [middle-0.6*span,middle+0.6*span];
 }
 
 /** Recompute every downstream flow with three fractions and all twelve laws frozen. */
@@ -51,6 +63,54 @@ export function sampleYieldSurface(state,{x='s1',y='s2',radius=.15,steps=24,comp
         else comparisonStatus+='-outside';
     } else if(comparison)comparisonStatus='different-laws';
     return {kind:'yield',xLabel:SPLIT_VARIABLES.find(item=>item.id===x).label,yLabel:SPLIT_VARIABLES.find(item=>item.id===y).label,zLabel:'Rendement r',points,markers,ranges:ranges(points),comparisonStatus,frozen:splitIds.filter(key=>key!==x&&key!==y).map(key=>({key,value:state.controls[key]}))};
+}
+
+/** Two actual branch inputs: u=x12 and v=x23; admissibility is 0<=v<=g12(u). */
+export function sampleFlowSurface(state,{radius=.03,steps=30,comparison=null}={}) {
+    settings(radius,steps);
+    const model=modelForState(state),branch12=state.branches.find(branch=>branch.id==='1-2'),branch23=state.branches.find(branch=>branch.id==='2-3');
+    const u0=branch12.input,v0=branch23.input;
+    const comparable=comparison?.feasible&&sameLaws(state,comparison);
+    const comparedU=comparable?comparison.branches.find(branch=>branch.id==='1-2').input:null;
+    const comparedV=comparable?comparison.branches.find(branch=>branch.id==='2-3').input:null;
+    const xs=axis(u0,1,radius,steps,[branch12.parameters.a,branch12.parameters.b,...(comparable?[comparedU]:[])]);
+    const ys=axis(v0,1,radius,steps,comparable?[comparedV]:[]);
+    const at=(u,v)=>{
+        const invalid=reason=>({x:u,y:v,z:null,feasible:false,reason});
+        if(!Number.isFinite(u)||!Number.isFinite(v)||u<0||u>1||v<0||v>1)return invalid('Une entrée de branche doit appartenir à [0,1].');
+        const available2=branchProductionRate(u,branch12.parameters);
+        if(v>available2)return invalid('La dérivation x23 dépasse la somme disponible A2=g12(x12).');
+        // At zero supply the split is unidentifiable; preserve the reference split.
+        const s2=available2===0?state.controls.s2:v/available2;
+        const controls={...state.controls,s1:u,s2};
+        const result=evaluateBranches(model,controls);
+        if(!result.feasible)return invalid(result.reason);
+        return {x:u,y:v,z:result.production,feasible:true,available2,s2};
+    };
+    const points=ys.map(v=>xs.map(u=>at(u,v)));
+    const center=at(u0,v0),markers=[{...center,kind:'reference',label:'Configuration de référence'}];
+    let comparisonStatus='absent';
+    if(comparable) {
+        const projected=['s5','s3','s7'].some(key=>Math.abs(state.controls[key]-comparison.controls[key])>1e-12);
+        comparisonStatus=projected?'projected':'same-slice';
+        if(comparedU>=xs[0]&&comparedU<=xs.at(-1)&&comparedV>=ys[0]&&comparedV<=ys.at(-1)) {
+            markers.push({...at(comparedU,comparedV),kind:'grid',label:projected?'Grille projetée dans cette coupe de flux, rendement recalculé':'Meilleur résultat de la grille dans cette coupe de flux',projected,originalYield:comparison.production});
+        } else comparisonStatus+='-outside';
+    } else if(comparison)comparisonStatus='different-laws';
+    const step=radius/3;
+    const neighbors=[
+        {label:'Centre',...center},
+        {label:'x12 − rayon/3',...at(u0-step,v0)},
+        {label:'x12 + rayon/3',...at(u0+step,v0)},
+        {label:'x23 − rayon/3',...at(u0,v0-step)},
+        {label:'x23 + rayon/3',...at(u0,v0+step)},
+    ];
+    return {
+        kind:'flows',xLabel:'Exp. IN 1→2 · Allocation x12',yLabel:'Exp. IN 2→3 · Dérivation x23',zLabel:'Rendement r',
+        points,markers,ranges:ranges(points),comparisonStatus,
+        frozen:['s5','s3','s7'].map(key=>({key,value:state.controls[key]})),
+        profiles:{x:xs.map(u=>at(u,v0)),y:ys.map(v=>at(u0,v))},neighbors,
+    };
 }
 
 /** Slice the recorded LP Lagrangian; never substitute a penalized yield surface. */
