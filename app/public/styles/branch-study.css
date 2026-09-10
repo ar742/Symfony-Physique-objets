@@ -47,6 +47,9 @@
 .branch-surface-dot { fill:var(--tone-blue); cursor:crosshair; }
 .branch-surface-focus { padding:1rem 1.4rem; margin-block:1rem; border-left:5px solid var(--tone-orange); background:var(--wash); border-radius:.5rem; }
 .branch-focus-value { font-size:clamp(1.5rem,3vw,2.1rem); font-weight:700; margin-block:.6rem; font-variant-numeric:tabular-nums; }
+.branch-interior-example { margin-block:1.5rem; padding:1.2rem; border:2px solid var(--tone-green); border-radius:.8rem; background:var(--wash); }
+.branch-interior-example h3 { margin-top:0; }
+.branch-example-notice { font-weight:650; color:var(--tone-green); }
 .branch-surface-section, .branch-profile-line { fill:none; stroke:var(--tone-orange); stroke-width:3; }
 .branch-surface-profiles { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
 .branch-profile { margin:0; padding:.6rem; border:1px solid var(--line); border-radius:.7rem; min-width:0; }

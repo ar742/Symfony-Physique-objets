@@ -108,6 +108,7 @@ foreach ([
     'branches-surface-reference' => ['initial', 'grid', 'global', 'bounded', 'free'],
     'branches-surface-mode' => ['flows', 'yield', 'lagrangian'],
     'branches-surface-scale' => ['local', 'global'],
+    'branches-surface-resolution' => ['20', '40', '60'],
 ] as $id => $expected) {
     $select = $requiredElement($id, 'select');
     if ($select === null) { continue; }
@@ -120,6 +121,7 @@ foreach ([
     $defaults = [
         'branches-view' => 'initial', 'branches-divisions' => '10', 'branches-grid-budget' => '200000',
         'branches-surface-reference' => 'initial', 'branches-surface-mode' => 'flows', 'branches-surface-scale' => 'local',
+        'branches-surface-resolution' => '40',
     ];
     if (isset($defaults[$id])) {
         $check(count($selected) <= 1 && ($selected[0] ?? $actual[0] ?? null) === $defaults[$id], 'Valeur sélectionnée initialement '.$id);
@@ -255,7 +257,7 @@ if ($surface !== null) {
         $check($xpath->query('.//*[@id="'.$id.'"]', $surface)->length === 1, 'Description intégrée au SVG '.$id);
     }
 }
-foreach (['branches-surface-center', 'branches-surface-demo'] as $id) {
+foreach (['branches-surface-center', 'branches-surface-demo', 'branches-surface-wide', 'branches-surface-interior'] as $id) {
     $button = $requiredElement($id, 'button');
     if ($button === null) { continue; }
     $check($button->getAttribute('type') === 'button', 'Commande de voisinage sans soumission directe '.$id);
@@ -304,6 +306,7 @@ $requests = [
     ['GET', '/scripts/branch-study.mjs', 200], ['GET', '/scripts/branch-study-worker.mjs', 200], ['GET', '/scripts/branches-engine.mjs', 200],
     ['GET', '/scripts/branches-parameter-envelope.mjs', 200], ['GET', '/scripts/bounded-linear-program.mjs', 200],
     ['GET', '/scripts/branches-lagrangian.mjs', 200], ['GET', '/scripts/branch-surfaces-engine.mjs', 200], ['GET', '/scripts/branch-surfaces.mjs', 200],
+    ['GET', '/scripts/branch-interior-example.mjs', 200],
     ['GET', '/scripts/production-engine.mjs', 200], ['GET', '/styles/branch-study.css', 200],
 ];
 foreach ($requests as [$method, $path, $status]) {

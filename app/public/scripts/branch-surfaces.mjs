@@ -1,7 +1,8 @@
 import {element,svgElement,table} from './graph-studies.mjs';
 import {BRANCH_GRAPH} from './branches-engine.mjs';
 import {explainBranchesLagrangian} from './branches-lagrangian.mjs';
-import {SPLIT_VARIABLES,sampleYieldSurface,sampleLagrangianSurface,sampleFlowSurface,verticalRange} from './branch-surfaces-engine.mjs';
+import {SPLIT_VARIABLES,sampleYieldSurface,sampleLagrangianSurface,sampleFlowSurface,verticalRange,modelForState} from './branch-surfaces-engine.mjs';
+import {isInteriorPeakModel} from './branch-interior-example.mjs';
 
 const $=id=>document.getElementById(id);
 const num=value=>Number.isFinite(value)?new Intl.NumberFormat('fr-FR',{maximumSignificantDigits:9}).format(value):'—';
@@ -31,9 +32,17 @@ export function createBranchSurfaces({onDemo}={}) {
         if(!centerReady())return;
         reference=centerKey();select.value=reference;autoReference=false;
         mode='flows';modeSelect.value=mode;sampleX='x12';sampleY='x23';
-        $('branches-surface-radius').value='.03';$('branches-surface-scale').value='local';
+        const interior=isInteriorPeakModel(modelForState(state()));
+        $('branches-surface-radius').value=interior?'.1':'.03';$('branches-surface-scale').value='local';
+        $('branches-surface-resolution').value=interior?'60':'40';
         $('branches-surface-yaw').value='35';$('branches-surface-pitch').value='35';refresh(true);
         requestAnimationFrame(()=>$('branches-surface-focus').scrollIntoView({block:'start'}));
+    }
+    function widen() {
+        if(!state())return;
+        mode='flows';modeSelect.value=mode;sampleX='x12';sampleY='x23';
+        $('branches-surface-radius').value='.15';$('branches-surface-resolution').value='60';
+        $('branches-surface-scale').value='local';refresh(true);
     }
     function choices() {
         if(mode==='flows') {
@@ -90,9 +99,9 @@ export function createBranchSurfaces({onDemo}={}) {
     }
     function renderData() {
         if(!context||!state())return;
-        const radius=Number($('branches-surface-radius').value);
+        const radius=Number($('branches-surface-radius').value),steps=Number($('branches-surface-resolution').value);
         choices();
-        if(!Number.isFinite(radius)||radius<.001||radius>1) {
+        if(!Number.isFinite(radius)||radius<.001||radius>1||![20,40,60].includes(steps)) {
             data=null;draw();renderFocus();renderProfiles();$('branches-surface-title').textContent='Fenêtre de représentation invalide';$('branches-surface-desc').textContent='Choisir un rayon entre 0,001 et 1 pour calculer une nouvelle coupe.';
             $('branches-surface-samples').replaceChildren();$('branches-surface-caption').textContent='La coupe n’est pas affichée avec ce rayon invalide.';
             $('branches-surface-point').textContent='Aucun point disponible avec ce rayon invalide.';
@@ -103,9 +112,9 @@ export function createBranchSurfaces({onDemo}={}) {
             $('branches-surface-caption').textContent='La nappe du lagrangien nécessite un PL enregistré pour la référence choisie. Consultez le certificat ci-dessus ou choisissez le résultat global à fonctions fixées.';
             $('branches-surface-samples').replaceChildren();$('branches-surface-point').textContent='Aucun point du lagrangien disponible pour cette référence.';$('branches-surface-status').textContent='Pas de multiplicateurs inventés : aucune surface de L n’est calculée pour cet état.';return;
         }
-        data=mode==='lagrangian'?sampleLagrangianSurface(diagnostic,{x:Number(sampleX),y:Number(sampleY),radius})
-            :mode==='flows'?sampleFlowSurface(state(),{radius,comparison:['initial','grid','global'].includes(reference)?context.results.grid?.best:null})
-            :sampleYieldSurface(state(),{x:sampleX,y:sampleY,radius,comparison:['initial','grid','global'].includes(reference)?context.results.grid?.best:null});
+        data=mode==='lagrangian'?sampleLagrangianSurface(diagnostic,{x:Number(sampleX),y:Number(sampleY),radius,steps})
+            :mode==='flows'?sampleFlowSurface(state(),{radius,steps,comparison:['initial','grid','global'].includes(reference)?context.results.grid?.best:null})
+            :sampleYieldSurface(state(),{x:sampleX,y:sampleY,radius,steps,comparison:['initial','grid','global'].includes(reference)?context.results.grid?.best:null});
         const frozen=data.frozen.map(item=>item.key+'='+num(item.value)).join(' ; ');
         const prefix=names[reference]+' · '+(result()?.status==='certified'?'Optimum numérique établi à la tolérance annoncée.':reference==='free'?'Rendement idéal atteint par construction.':'Configuration de référence ; cette vue ne prouve pas son optimalité.');
         const explanation=mode==='flows'
@@ -126,12 +135,16 @@ export function createBranchSurfaces({onDemo}={}) {
     function renderFocus() {
         const zone=$('branches-surface-focus');zone.replaceChildren();
         const r=result(),s=state();
+        if(isInteriorPeakModel(modelForState(s)))zone.append(element('p','Exemple complémentaire · lois différentes de celles du résultat 0,54432. Le maximum analytique de cette variante vaut 0,21875 ; la valeur et le statut ci-dessous proviennent du calcul courant.','branch-example-notice'));
         zone.append(element('p',names[reference]+' · '+(r?.status==='certified'?'Optimum numérique, écart à la borne '+scientific(r.gap):reference==='free'?'Rendement idéal atteint':reference==='initial'?'Configuration initiale, sans recherche d’optimum':'Meilleur état disponible ; consulter le budget et la borne'),'eyebrow'));
         zone.append(element('p','r = '+num(s.production)+' · '+num(100*s.production)+' %','branch-focus-value'));
         if(data) {
             const point=data.markers.find(marker=>marker.kind==='reference');
             zone.append(element('p',data.xLabel+' = '+num(point.x)+' ; '+data.yLabel+' = '+num(point.y)+'. Rayon '+num(Number($('branches-surface-radius').value))+'.'));
-            if(mode==='flows')zone.append(element('p','Somme réellement reçue par le nœud 2 : '+num(s.available['2'])+' ; par le nœud 7 : '+num(s.available['7'])+'. Le point reste sur le bord de la nappe lorsqu’une contrainte est atteinte.'));
+            if(mode==='flows') {
+                const interior=point.x>0&&point.x<1&&point.y>0&&point.y<point.available2;
+                zone.append(element('p','Somme réellement reçue par le nœud 2 : '+num(s.available['2'])+' ; par le nœud 7 : '+num(s.available['7'])+'. '+(interior?'Ce point est à l’intérieur du domaine admissible des deux flux.':'Ce point se trouve sur une frontière du domaine admissible des deux flux.')));
+            }
         }
     }
     function renderProfiles() {
@@ -223,22 +236,26 @@ export function createBranchSurfaces({onDemo}={}) {
     $('branches-surface-radius').addEventListener('input',renderData);
     $('branches-surface-scale').addEventListener('change',renderData);
     $('branches-surface-center').addEventListener('click',center);
-    $('branches-surface-demo').addEventListener('click',()=>{onDemo?.();pendingDemo=context?.model;});
+    $('branches-surface-wide').addEventListener('click',widen);
+    $('branches-surface-resolution').addEventListener('change',renderData);
+    for(const [id,preset] of [['branches-surface-demo','default'],['branches-surface-interior','interior']])$(id).addEventListener('click',()=>{onDemo?.(preset);pendingDemo=context?.model?{model:context.model,preset}:null;});
     ['yaw','pitch'].forEach(key=>$('branches-surface-'+key).addEventListener('input',draw));
     return {
         update(next) {
-            if(pendingDemo&&pendingDemo!==next.model)pendingDemo=null;
+            if(pendingDemo&&pendingDemo.model!==next.model)pendingDemo=null;
             if(context?.model!==next.model){reference='initial';autoReference=true;lastState=null;}
             context=next;
             for(const option of select.options)option.disabled=option.value!=='initial'&&(!context.results[option.value]?.best||context.phases[option.value]==='running');
             if(select.querySelector('[value="'+reference+'"]').disabled)reference='initial';
             if(autoReference&&context.results.global?.best&&context.phases.global!=='running'){reference='global';autoReference=false;}
             $('branches-surface-demo').disabled=typeof onDemo!=='function'||Object.values(context.phases).includes('running');
+            $('branches-surface-interior').disabled=$('branches-surface-demo').disabled;
+            $('branches-surface-wide').disabled=!state();
             $('branches-surface-center').disabled=!centerReady();
             select.value=reference;refresh();
-            if(pendingDemo===context.model&&context.results.global?.best&&context.phases.global==='done'){pendingDemo=null;reference='global';center();}
+            if(pendingDemo?.model===context.model&&context.results.global?.best&&context.phases.global==='done'){pendingDemo=null;reference='global';center();}
         },
         cancelPendingDemo:()=>{pendingDemo=null;},
-        snapshot:()=>({reference,mode,axes:mode==='flows'?{x:'x12',y:'x23'}:{x:sampleX,y:sampleY},radius:Number($('branches-surface-radius').value),verticalScale:{mode:$('branches-surface-scale').value,bounds:data?verticalRange(data,{mode:$('branches-surface-scale').value}):null},rotation:{yaw:Number($('branches-surface-yaw').value),pitch:Number($('branches-surface-pitch').value)},diagnostic,samples:data}),
+        snapshot:()=>({reference,mode,example:state()&&isInteriorPeakModel(modelForState(state()))?'interior-peak':'current-laws',axes:mode==='flows'?{x:'x12',y:'x23'}:{x:sampleX,y:sampleY},radius:Number($('branches-surface-radius').value),resolution:Number($('branches-surface-resolution').value),verticalScale:{mode:$('branches-surface-scale').value,bounds:data?verticalRange(data,{mode:$('branches-surface-scale').value}):null},rotation:{yaw:Number($('branches-surface-yaw').value),pitch:Number($('branches-surface-pitch').value)},diagnostic,samples:data}),
     };
 }

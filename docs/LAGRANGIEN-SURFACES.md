@@ -12,9 +12,9 @@ Le modèle demeure celui des [fondements](FONDEMENTS-DU-PROJET.md) : chaque bran
 | Lagrangien d’une relaxation linéaire, L_PL | Variables z du sous-problème, avec ses vrais multiplicateurs λ fixés | Calculer une majoration de ce sous-problème, avec correction du résidu dual et marge |
 | Surface réalisable de rendement | Deux alimentations de branche ou deux fractions ; autres partages et toutes les lois figés | Montrer comment varie la production recalculée, dans une coupe à deux dimensions du problème |
 
-La troisième ligne fournit la nappe courbe recherchée. La deuxième expose l’usage effectif du lagrangien dans les calculs. Elles ne portent ni sur les mêmes variables ni sur le même domaine.
+La troisième ligne permet d’examiner une courbure lorsqu’elle existe ; elle peut aussi comporter des directions plates, des cassures et des frontières. La deuxième expose l’usage effectif du lagrangien dans les calculs. Elles ne portent ni sur les mêmes variables ni sur le même domaine.
 
-L’explorateur distingue la surface de rendement suivant les alimentations u=x12 et v=x23, les coupes suivant deux fractions et le plan du vrai lagrangien d’un PL. La courbe couplée A2/A5 de la première version n’est plus un mode de l’interface. Le voisinage initial est resserré autour du meilleur résultat, avec un rayon de 0,03, un zoom vertical local explicitement annoncé, des coupes orthogonales et un tableau de voisins. L’échelle globale reste disponible. Le mode, les axes, les données figées et la provenance du résultat sont identifiés séparément.
+L’explorateur distingue la surface de rendement suivant les alimentations u=x12 et v=x23, les coupes suivant deux fractions et le plan du vrai lagrangien d’un PL. La courbe couplée A2/A5 de la première version n’est plus un mode de l’interface. Le voisinage initial est resserré autour du meilleur résultat, avec un rayon de 0,03, un zoom vertical local explicitement annoncé, des coupes orthogonales et un tableau de voisins. Le maillage propose 20, 40 ou 60 subdivisions, avec 40 par défaut ; les coordonnées exactes des marqueurs et des cassures pertinentes sont ajoutées au maillage. Une vue élargie utilise un rayon de 0,15 et 60 subdivisions. La variante pédagogique à sommet intérieur décrite plus loin utilise un rayon de 0,1 et 60 subdivisions. Ces réglages ne changent ni les lois ni les valeurs. L’échelle globale reste disponible. Le mode, les axes, les données figées et la provenance du résultat sont identifiés séparément.
 
 ## Lagrangien du problème non linéaire
 
@@ -175,6 +175,60 @@ Le maximum est à la frontière v=0. En u=0,8, g12 change de portion ; la nappe 
 
 Elles décrivent une augmentation vers la cassure puis une diminution, et une diminution lorsqu’on quitte la frontière par une direction admissible. Une différence centrée en u traverse la cassure ; une différence centrée en v demanderait une alimentation négative. Dans la vue des fractions, la dérivée suivant s2 vaut plutôt −1,47744, car v=s2 A2. Ces signes sont des diagnostics locaux. La preuve globale r≤0,54432 est donnée séparément dans les [repères analytiques](OPTIMISATION-BRANCHES.md#repères-analytiques-pour-les-deux-domaines-proposés).
 
+### Pourquoi aucun couple des cinq fractions ne crée un sommet intérieur isolé
+
+Pour les lois initiales, la production d’une branche est exactement :
+
+```text
+g(x) = 0                     pour 0≤x≤0,3
+       1,8 x²−0,54 x         pour 0,3≤x≤0,8
+       2,1 x−1,5 x²          pour 0,8≤x≤1.
+```
+
+Le contrôle du voisinage peut être fait sur toute la fenêtre élargie, et non seulement aux cinq voisins. Si 0,65≤s1≤0,95, la branche 1→5 reçoit au plus 0,35 et fournit A5≤g(0,35)=0,0315. Les entrées de 5→3 et 5→7 restent donc sous le seuil 0,3, quelle que soit s5. Si, de plus, 0≤s2≤0,15, l’entrée de 2→3 est au plus 0,15×0,72=0,108, également sous le seuil. On a ainsi A3=A7=0 ; les commandes s3, s5, s7 ne modifient aucune sortie finale. Dans cette fenêtre :
+
+```text
+R_s(s1,s2,s5,s3,s7) = g((1−s2) g(s1)).
+```
+
+Dans la même fenêtre en flux, 0,65≤u≤0,95 et 0≤v≤0,15, on a v≤g(u) puisque g(u)≥0,4095. La branche 2→3 reste inactive, et R_f(u,v)=g(g(u)−v) est donc valable sur tout ce rectangle. L’élargissement à 0,15 ne fait pas apparaître une autre route active. Le calcul direct du réseau et cette expression concordent à moins de 3,4×10⁻¹⁶ sur les points de contrôle de la fenêtre ; cette vérification numérique complète les inégalités précédentes.
+
+Le maximum local exige g(s1)=0,72 et s2=0, donc s1=0,8. Les trois autres fractions sont libres. L’ensemble des configurations maximisantes près de ce résultat est :
+
+```text
+{s1=0,8 ; s2=0} × [0,1]³, pour (s5,s3,s7).
+```
+
+Les dix choix de deux fractions se répartissent ainsi, les autres fractions étant figées à une configuration maximisante :
+
+| Axes choisis | Nombre de couples | Géométrie au maximum |
+| --- | ---: | --- |
+| s1 et s2 | 1 | Cassure en s1 ; maximum à la frontière s2=0 |
+| s1 et l’une de s5, s3, s7 | 3 | Crête constante suivant la fraction inactive |
+| s2 et l’une de s5, s3, s7 | 3 | Crête à la frontière s2=0, constante suivant la fraction inactive |
+| Deux fractions parmi s5, s3, s7 | 3 | Surface constante |
+
+Une crête peut traverser l’intérieur du dessin si une fraction inactive est centrée, par exemple à 0,5. Cela ne produit pas un maximum isolé : une ligne entière a la même hauteur. Un changement régulier de coordonnées de la même coupe conserve sa frontière et ses directions plates. Transformer artificiellement s2 en carré d’une nouvelle variable pour déplacer le bord vers le centre ne donnerait plus deux coordonnées indépendantes et régulières au maximum.
+
+### La courbure réelle et l’effet du rayon
+
+La surface de rendement initiale n’est pas affine. Sur le profil u=0,8, pour 0≤v≤0,15, l’entrée de 2→8 reste dans sa portion quadratique croissante :
+
+```text
+R_f(0,8,v) = 1,8 (0,72−v)²−0,54 (0,72−v)
+           = 0,54432−2,052 v+1,8 v²
+∂²R_f/∂v² = 3,6.
+```
+
+Ce profil descend tout en étant convexe ; il ne dessine pas le haut d’un dôme. Entre v=0 et v=ρ, son écart maximal à la corde qui joint les deux extrémités vaut 3,6ρ²/8=0,45ρ², au milieu. Le changement de rayon rend cette courbure plus visible :
+
+| Rayon ρ | R_f(0,8,ρ) | Écart maximal du profil à sa corde |
+| --- | ---: | ---: |
+| 0,03 | 0,48438 | 0,000405 |
+| 0,15 | 0,27702 | 0,010125 |
+
+L’écart est multiplié par 25 lorsque le rayon est multiplié par 5. Sur le profil v=0, les limites des dérivées secondes en u valent +27,09936 à gauche de 0,8 et −5,832 à droite ; elles ne constituent pas une dérivée seconde à la cassure elle-même. Ces variations expliquent pourquoi une vue très rapprochée peut paraître presque plane, surtout sur une échelle verticale globale 0–1. Élargir la fenêtre et montrer les profils révèle la courbure existante ; augmenter uniquement le nombre de points améliore le tracé sans créer de courbure. Le lagrangien du PL reste, lui, exactement affine à multiplicateurs fixés.
+
 ### Coupes orthogonales et voisins
 
 Deux courbes passent par le point de référence : R_f(u,v*) à v fixé, puis R_f(u*,v) à u fixé. Elles respectent le domaine admissible et permettent de lire le changement de pente ainsi que le bord v=0. Le tableau de voisins examine le centre et les déplacements ±rayon/3 sur chaque axe ; un voisin incompatible est nommé comme tel, sans inventer une valeur de r.
@@ -201,6 +255,51 @@ x28 = 0,747 ; y28 ≈ 0,567015283018868.
 ```
 
 Cette configuration fournit le résultat continu vérifié, accompagné de la borne du calcul global. Dans les coordonnées des alimentations, u=0,83 et v=0. Le maximum se situe encore sur v=0 et à la cassure u=b. Un maillage de fractions au pas 0,1 ne contient pas s1=0,83 : le meilleur point de cette grille peut donc être plus bas. La surface doit distinguer son maillage de représentation, le marqueur exact du résultat et l’écart des bornes du solveur.
+
+### Autre modèle pédagogique : un sommet intérieur courbe
+
+Cette variante conserve le réseau et la définition y=x f(x), mais change explicitement les douze lois. Son optimum est différent de 0,54432 ; elle ne transforme pas le résultat initial en sommet bombé. Les paramètres sont :
+
+| Branches | a | b | c | d |
+| --- | ---: | ---: | ---: | ---: |
+| 1→2 | 0 | 0,1 | 0,9 | 0 |
+| 1→5 | 0 | 0,1 | 0 | 0 |
+| 2→3 et 2→8 | 0 | 0,01 | 0,99 | 0 |
+| Les huit autres branches | 0 | 0,001 | 1 | 1 |
+
+La branche 1→5 fournit toujours zéro. Pour 1→2, on a g12(u)=9u² jusqu’à u=0,1, puis **p(u)=u(1−u)**. Les deux branches 2→3 et 2→8 ont une même production q(t)=99t² jusqu’à t=0,01, puis **q(t)=t(1−t)**. Les autres branches transmettent sans perte dès que leur entrée atteint 0,001 ; en dessous, leur production vaut 1000t². Ces petites portions près de zéro restent présentes dans le modèle.
+
+Dans la coupe, les fractions aval sont figées à s3=1 et s5=s7=0,5. La route issue de 2→3 passe donc par 3→4→8. Autour de u=0,5 et v=0,125, elle est sans perte et :
+
+```text
+p = u(1−u)
+R_f(u,v) = q(v)+q(p−v)
+         = p−p²+2pv−2v².
+```
+
+Cette expression est valable sur toute la fenêtre de rayon 0,1 proposée : 0,4≤u≤0,6 et 0,025≤v≤0,225. En effet, 0,24≤p≤0,25, les deux entrées v et p−v restent au moins égales à 0,015, et la production de 2→3 reste au moins égale à 0,024375. Les deux lois q sont dans leurs portions paraboliques et les branches aval sur leur portion sans perte. Le rectangle entier est admissible ; son centre est strictement à l’intérieur du domaine 0<v<p. Sur 441 points de contrôle, le réseau recalculé et cette expression diffèrent d’au plus 8,4×10⁻¹⁷.
+
+Au centre, le gradient est nul et la matrice des dérivées secondes est définie négative :
+
+```text
+u*=1/2 ; p*=1/4 ; v*=1/8 ; s2*=v*/p*=1/2
+R_f(u*,v*)=7/32=0,21875
+Hessienne_(u,v) R_f(u*,v*) = [−1,5   0]
+                            [  0    −4].
+```
+
+Il s’agit donc bien d’un maximum intérieur strict de cette coupe, avec une courbure dans ses deux directions. Ce constat local peut ici être complété par une preuve globale pour toutes les fractions, sous les nouvelles lois. Pour tout u∈[0,1], la somme A=g12(u) reçue en 2 vérifie A≤u(1−u)≤1/4. Pour tout t∈[0,1], q(t)≤t(1−t), y compris dans la petite portion initiale. Comme la branche 1→5 est inactive et que les transferts aval n’amplifient aucune production :
+
+```text
+r ≤ q(v)+q(A−v)
+  ≤ A−v²−(A−v)²
+  = A−A²/2−2(v−A/2)²
+  ≤ A−A²/2 ≤ 1/4−(1/4)²/2 = 7/32.
+```
+
+La dernière fonction est croissante pour 0≤A≤1/4. Le témoin u=1/2, v=1/8 atteint toutes ces inégalités : les deux productions issues de 2 valent chacune 7/64=0,109375, et la route 3→4→8 transmet sa part sans perte. La borne 7/32 est donc atteinte globalement pour cette variante.
+
+Le maximum reste **non unique dans les cinq fractions** : s5 et s7 sont libres puisque leurs nœuds ne reçoivent rien. La fraction s3 peut aussi varier sans perte lorsque les deux parts aval non nulles restent au moins égales à 0,001, soit s3∈[8/875,867/875], ou lorsque toute la production prend une seule branche, s3=0 ou s3=1. Elle n’est pas libre sur tout [0,1] : une petite part strictement comprise entre 0 et 0,001 subit une perte. Le sommet isolé représenté concerne donc la coupe à deux alimentations, avec les trois autres fractions déclarées et figées ; il ne prouve pas un maximum isolé du problème à cinq fractions.
 
 ## Ce qu’un diagnostic de maximum peut conclure
 

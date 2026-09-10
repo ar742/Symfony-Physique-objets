@@ -3,6 +3,7 @@ import {createParameterBox, validateParameterBox} from './branches-parameter-env
 import {productionRate} from './production-engine.mjs';
 import {element, svgElement, table, renderInspector} from './graph-studies.mjs';
 import {createBranchSurfaces} from './branch-surfaces.mjs';
+import {createInteriorPeakScenario} from './branch-interior-example.mjs';
 
 const $ = id => document.getElementById(id);
 const keys = ['a','b','c','d'], splits = ['s1','s2','s5','s3','s7'];
@@ -75,15 +76,15 @@ function resetResults() {
     [...$('branches-view').options].forEach(option=>option.disabled=option.value!=='initial');
 }
 function load(preset='default') {
-    stop();model=createBranchesScenario();
+    stop();model=preset==='interior'?createInteriorPeakScenario():createBranchesScenario();
     if(preset==='between')model.branches.forEach(branch=>branch.b=.83);
     initial=evaluateBranches(model,model.initialControls);
     draftLaws=clone(model.branches);boxes=Object.fromEntries(edges.map(edge=>[edge.id,createParameterBox()]));
     editingLaw=editingBox='1-2';$('branch-choice').value=editingLaw;$('branches-box-choice').value=editingBox;
-    showLawDraft();showBoxDraft();splits.forEach(key=>$('branch-'+key).value='.5');
+    showLawDraft();showBoxDraft();splits.forEach(key=>$('branch-'+key).value=String(model.initialControls[key]));
     $('branches-divisions').value='10';$('branches-grid-budget').value='200000';$('branches-node-budget').value='10000';
     options=null;resetResults();$('branches-error').textContent='';$('branches-design-error').textContent='';
-    $('branches-status').textContent=preset==='between'?'Exemple b=0,83 chargé sur les douze branches. Lancez la comparaison avec la grille au pas 0,1.':'Douze lois proposées et partages à 0,5 chargés. Lancez la comparaison.';
+    $('branches-status').textContent=preset==='interior'?'Exemple complémentaire chargé : lois différentes, sommet intérieur attendu à r=0,21875. Les deux méthodes vont calculer leur résultat.':preset==='between'?'Exemple b=0,83 chargé sur les douze branches. Lancez la comparaison avec la grille au pas 0,1.':'Douze lois proposées et partages à 0,5 chargés. Lancez la comparaison.';
     $('branches-design-status').textContent='Plages proposées : a [0,2 ; 0,4], b [0,7 ; 0,9], c [0,8 ; 1], d [0,5 ; 0,7].';
     renderResults();renderState();
 }
@@ -267,7 +268,7 @@ function restore(scroll) {
     if(scroll)requestAnimationFrame(()=>{const target=match[2]?$(location.hash.slice(1)):$('branches-inspector');target.scrollIntoView({block:'start'});if(match[2])target.focus({preventScroll:true});else{$('inspector-title').tabIndex=-1;$('inspector-title').focus({preventScroll:true});}});
 }
 try {
-    surfaces=createBranchSurfaces({onDemo:()=>{load();start('fixed');}});
+    surfaces=createBranchSurfaces({onDemo:(preset='default')=>{load(preset);start('fixed');}});
     $('branches-controls').addEventListener('submit',event=>{event.preventDefault();start('fixed');});
     $('branches-design').addEventListener('submit',event=>{event.preventDefault();start('bounded');});
     $('branch-choice').addEventListener('change',()=>{updateLawDraft();editingLaw=$('branch-choice').value;showLawDraft();});
