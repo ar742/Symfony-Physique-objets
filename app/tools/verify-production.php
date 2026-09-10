@@ -8,6 +8,7 @@ $kernel = new App\Kernel('dev', true);
 $kernel->boot();
 $productionPath = '/graphes/production';
 $graphPaths = ['/graphes/', '/graphes/dependances', $productionPath];
+$knownGraphPaths = [...$graphPaths, '/graphes/production/optimisation'];
 $checks = 0;
 $errors = [];
 $documents = [];
@@ -84,8 +85,9 @@ foreach (['production-map', 'production-curve', 'production-history-chart'] as $
     $svg = $requiredElement($id, 'svg');
     if ($svg !== null) { $check($hasName($svg, $xpath), 'Nom accessible du SVG '.$id); }
 }
-$requiredElement('production-controls', 'form');
-foreach (['production-preset' => ['balanced', 'threshold', 'oscillating'], 'production-machine' => ['M1', 'M2', 'M3']] as $id => $expected) {
+$form = $requiredElement('production-controls', 'form');
+if ($form !== null) { $check($form->hasAttribute('novalidate'), 'Validation du domaine confiée au script de production'); }
+foreach (['production-preset' => ['balanced', 'threshold', 'oscillating', 'optimization'], 'production-machine' => ['M1', 'M2', 'M3']] as $id => $expected) {
     $select = $requiredElement($id, 'select');
     if ($select === null) { continue; }
     $actual = [];
@@ -100,6 +102,9 @@ foreach (['a', 'b', 'c', 'd', 'external', 'initial'] as $parameter) {
     if ($input === null) { continue; }
     $check($input->getAttribute('type') === 'number' && $input->hasAttribute('required'), 'Paramètre numérique obligatoire machine-'.$parameter);
     $check($hasName($input, $xpath), 'Nom accessible machine-'.$parameter);
+    if (in_array($parameter, ['a', 'b', 'c', 'd'], true)) {
+        $check(is_numeric($input->getAttribute('step')) && (float) $input->getAttribute('step') === 0.1, 'Pas de réglage de 0,1 pour machine-'.$parameter);
+    }
 }
 $cycles = $requiredElement('production-cycles', 'input');
 if ($cycles !== null) {
@@ -135,7 +140,7 @@ foreach ($document->getElementsByTagName('a') as $link) {
     $url = parse_url(html_entity_decode($link->getAttribute('href')));
     if ($url === false || isset($url['host']) || isset($url['scheme'])) { continue; }
     $targetPath = $url['path'] ?? $productionPath;
-    if (str_starts_with($targetPath, '/graphes')) { $check(in_array($targetPath, $graphPaths, true), 'Destination du volet Graphes '.$targetPath); }
+    if (str_starts_with($targetPath, '/graphes')) { $check(in_array($targetPath, $knownGraphPaths, true), 'Destination du volet Graphes '.$targetPath); }
     if (!isset($documents[$targetPath], $url['fragment'])) { continue; }
     $fragment = rawurldecode($url['fragment']);
     if ($targetPath === $productionPath && str_starts_with($fragment, 'machine-M')) {

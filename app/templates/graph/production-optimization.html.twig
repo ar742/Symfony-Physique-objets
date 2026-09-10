@@ -1,0 +1,96 @@
+{% extends 'graph/layout.html.twig' %}
+{% block title %}Huit machines : comparer les optimisations — Physique objets{% endblock %}
+{% block graph_assets %}<link rel="stylesheet" href="{{ asset('styles/production-optimization.css') }}">{% endblock %}
+{% block graph_scripts %}<script type="module" src="{{ asset('scripts/production-optimization.mjs') }}"></script>{% endblock %}
+{% block graph_body %}
+<div data-graph-study="production-optimization">
+<header class="page-heading">
+    <p class="eyebrow">Production · Exemple 4 · Huit machines identiques</p>
+    <h1>Optimiser la sortie d’un réseau de machines</h1>
+    <p class="lead">Un apport limité, trois partages et une production finale r. Comparez des petites variations depuis un état compatible à une recherche globale sous les mêmes contraintes.</p>
+    <p><a href="{{ path('graph_production') }}">Retrouver les trois exemples par cycles</a> · <a href="#optimization-results-heading">Comparer les résultats</a> · <a href="#optimization-method-heading">Comprendre les méthodes</a></p>
+</header>
+<section class="content-note">
+    <h2>Le problème commun aux deux méthodes</h2>
+    <p>M1 reçoit l’unique apport externe u, avec 0 ≤ u ≤ B. Chaque machine applique la même loi f(a)=0, f(b)=c, f(1)=d. Les productions intermédiaires sont entièrement partagées ; les entrées additionnent les contributions reçues. Une machine peut rester inactive ; les partages 0 et 1 sont permis. M8 fournit la seule sortie externe : <strong>r = y₈ à maximiser</strong>.</p>
+    <p>Nous cherchons un <strong>état de fonctionnement compatible</strong> sur ce graphe sans circuit fermé : toutes les lois et tous les bilans sont satisfaits ensemble. Une entrée supérieure à 1 est refusée. Les itérations d’optimisation ne représentent pas des cycles de fabrication ; aucun stock ni excédent perdu n’est ajouté.</p>
+</section>
+<div class="optimization-starts" aria-label="Configurations pédagogiques">
+    <button id="optimization-start-active" type="button">1 · Départ actif, budget 0,2</button>
+    <button id="optimization-start-zero" type="button">2 · Départ nul, même budget</button>
+    <button id="optimization-start-abundant" type="button">3 · Budget 0,4 et sorties partagées</button>
+    <p class="small-note">Ces boutons rechargent les paramètres communs (0,1 ; 0,5 ; 0,8 ; 0,4), le budget et le départ indiqués.</p>
+</div>
+<div class="optimization-workspace">
+<figure class="graph-map-panel">
+    <svg id="optimization-map" viewBox="0 0 620 920" role="group" aria-labelledby="optimization-map-title optimization-map-desc"><title id="optimization-map-title">Réseau de huit machines et sortie finale</title><desc id="optimization-map-desc">Les dix flèches orientées partagent les productions et réunissent les alimentations. Chaque machine ouvre son analyse en trois positions.</desc></svg>
+    <figcaption id="optimization-map-caption">État initial compatible. Les nombres des flèches sont des flux normalisés.</figcaption>
+</figure>
+<section class="graph-controls" aria-labelledby="optimization-settings-heading">
+    <h2 id="optimization-settings-heading">Régler la comparaison</h2>
+    <form id="optimization-controls" novalidate>
+    <fieldset><legend>Une loi commune aux huit machines</legend><div class="optimization-fields">
+    {% for key,label in {a:'a · Seuil de démarrage',b:'b · Entrée au sommet',c:'c · Production au sommet',d:'d · Production à x = 1'} %}
+    <div class="graph-field"><label for="opt-{{ key }}">{{ label }}</label><input id="opt-{{ key }}" name="{{ key }}" type="number" min="0" max="1" step="0.1" required value="{{ {a:0.1,b:0.5,c:0.8,d:0.4}[key] }}"></div>
+    {% endfor %}
+    </div><p class="small-note">Flèches par pas de 0,1 ; une valeur plus précise peut être saisie. 0 ≤ a &lt; b &lt; 1 et 0 ≤ d ≤ c ≤ 1.</p></fieldset>
+    <div class="graph-field"><label for="opt-budget">B · Apport extérieur maximal</label><input id="opt-budget" type="number" min="0" max="1" step="0.1" value="0.2" required></div>
+    <fieldset><legend>Départ de la recherche locale</legend>
+    <div class="graph-field"><label for="opt-u">u · Apport initial à M1</label><input id="opt-u" type="number" min="0" max="1" step="any" value="0.196" required></div>
+    <div class="graph-field"><label for="opt-s1">s₁ · Part de M1 vers M2 (reste vers M3)</label><input id="opt-s1" type="number" min="0" max="1" step="any" value="1" required></div>
+    <div class="graph-field"><label for="opt-s3">s₃ · Part de M3 vers M4 (reste vers M5)</label><input id="opt-s3" type="number" min="0" max="1" step="any" value="1" required></div>
+    <div class="graph-field"><label for="opt-s5">s₅ · Part de M5 vers M6 (reste vers M7)</label><input id="opt-s5" type="number" min="0" max="1" step="any" value="1" required></div>
+    </fieldset>
+    <details><summary>Pas des petites variations</summary>
+        <div class="graph-field"><label for="opt-source-step">Variation initiale de u</label><input id="opt-source-step" type="number" min="0.000001" max="1" step="any" value="0.02" required></div>
+        <div class="graph-field"><label for="opt-split-step">Variation initiale des partages</label><input id="opt-split-step" type="number" min="0.000001" max="1" step="any" value="0.1" required></div>
+        <div class="graph-field"><label for="opt-min-step">Seuil d’arrêt des pas</label><input id="opt-min-step" type="number" min="0.000001" max="0.1" step="any" value="0.00001" required></div>
+        <p class="small-note">Les pas diminuent si aucune amélioration admissible n’est trouvée. Le budget de recherche locale est de 80 itérations ; son arrêt ne prouve pas un optimum.</p>
+    </details>
+    <div class="optimization-actions"><button type="submit" id="optimization-compare" class="graph-primary" disabled>Appliquer et comparer les méthodes</button><button id="optimization-cancel" type="button" hidden>Arrêter le calcul</button></div>
+    <p id="optimization-error" role="alert"></p><p id="optimization-status" role="status" aria-live="polite">Préparation de l’atelier…</p>
+    <p class="small-note">Les champs préparent la prochaine comparaison. Le bouton applique tout ensemble ; les résultats indiquent les paramètres effectivement utilisés. Les réglages ne sont pas sauvegardés après rechargement.</p>
+    </form>
+</section>
+</div>
+<section class="graph-section" aria-labelledby="optimization-results-heading">
+    <h2 id="optimization-results-heading">Comparer les résultats</h2>
+    <p id="optimization-applied"></p>
+    <div id="optimization-results" aria-live="polite"><p>Lancez la comparaison pour calculer les deux méthodes.</p></div>
+    <div class="graph-two-columns">
+        <div class="graph-field"><label for="optimization-view">État représenté dans le graphe et les analyses</label><select id="optimization-view"><option value="initial">Départ compatible</option><option value="local" disabled>Résultat de la recherche locale</option><option value="global" disabled>Meilleur résultat global calculé</option></select></div>
+        <div class="graph-field"><label for="optimization-machine">Machine à examiner</label><select id="optimization-machine">{% for i in 1..8 %}<option value="M{{ i }}">M{{ i }}{% if i == 8 %} · Sortie finale{% endif %}</option>{% endfor %}</select></div>
+    </div>
+    <p id="optimization-commands" class="optimization-figure-note"></p><div id="optimization-state"></div><div id="optimization-flows"></div>
+    <p class="small-note">Les deux méthodes utilisent les mêmes lois, le même budget et les mêmes bilans. Le départ n’influence que la recherche locale. Chaque état annoncé admissible est recalculé avec les lois complètes. Les tableaux arrondissent les résultats à six décimales au plus, le graphe à trois ; les paramètres conservent leur précision et les calculs précèdent les arrondis.</p>
+    <figure class="graph-surface"><svg id="optimization-progress-chart" viewBox="0 0 820 300" role="img" aria-labelledby="optimization-progress-title optimization-progress-desc"><title id="optimization-progress-title">Progression de la recherche locale et référence globale</title><desc id="optimization-progress-desc">Production finale selon les étapes de recherche locale. La meilleure solution globale et sa borne supérieure sont indiquées après le calcul.</desc></svg><figcaption>Les étapes sont celles de l’algorithme, pas des dates de production.</figcaption></figure>
+    <details><summary>Lire les étapes de la recherche locale</summary><div id="optimization-local-history"></div></details>
+    <details><summary>Examiner la borne globale et les contrôles</summary><div id="optimization-certificate"></div></details>
+</section>
+<section class="graph-section" aria-labelledby="optimization-curve-heading">
+    <h2 id="optimization-curve-heading">La même fonction, des alimentations différentes</h2>
+    <figure class="graph-surface"><svg id="optimization-curve" viewBox="0 0 600 320" role="img" aria-labelledby="optimization-curve-title optimization-curve-desc"><title id="optimization-curve-title">Loi commune et fonctionnement de la machine choisie</title><desc id="optimization-curve-desc">Plateau nul, croissance puis baisse ou plateau. Le point met en relation alimentation et production de la machine sélectionnée.</desc></svg><figcaption id="optimization-curve-caption"></figcaption></figure>
+</section>
+{% include 'graph/_inspector.html.twig' with {inspector_id:'optimization-inspector',subject:'machine'} only %}
+<section class="graph-section" aria-labelledby="optimization-method-heading">
+    <h2 id="optimization-method-heading">Ce que la comparaison permet de conclure</h2>
+    <h3>1 · Petites variations depuis un état compatible</h3>
+    <p>On essaie des augmentations et diminutions de u et des trois partages, une commande à la fois. Chaque essai recalcule les huit machines. Une entrée trop élevée rend l’essai inadmissible ; une production finale plus grande autorise l’amélioration. Depuis zéro, de petites variations peuvent rester sous les seuils : la méthode peut s’arrêter sur un plateau.</p>
+    <h3>2 · Contraintes globales et bornes lagrangiennes</h3>
+    <p>La fonction peut être non concave, notamment en présence du seuil initial. On examine ses trois régimes pour chacune des huit machines : au plus 3⁸ = 6 561 combinaisons. Dans chaque combinaison, les flux, les lois et les bilans forment un programme linéaire. Sa formulation duale, issue du lagrangien, fournit une borne supérieure. La couverture des régimes et le contrôle de ces bornes donnent la portée globale du résultat.</p>
+    <p>Le tableau affiche une solution réalisable, une borne supérieure et leur écart. Un écart suffisamment petit permet de conclure à un optimum à la tolérance annoncée. Un régime non résolu conserve une borne prudente : il ne disparaît pas du bilan. Il s’agit de contrôles numériques, sans arithmétique formelle exacte.</p>
+    <details><summary>Écrire les contraintes et le lagrangien</summary>
+        <p>Pour chaque arc i→j, pᵢⱼ ≥ 0. Pour i≠M1 : xᵢ = Σⱼ pⱼᵢ ; x₁=u, 0≤u≤B. Pour i≠M8 : Σⱼ pᵢⱼ=yᵢ. Toutes les machines satisfont yᵢ=f(xᵢ), 0≤xᵢ≤1 ; r=y₈.</p>
+        <p>Un régime fixe donne yᵢ=mᵢxᵢ+tᵢ et un intervalle pour xᵢ. Écrit max gᵀz sous Az≤h et z≥0, le problème possède le lagrangien L(z,λ)=gᵀz+λᵀ(h−Az), λ≥0. Une solution duale Aᵀλ≥g fournit la borne hᵀλ. Les égalités sont représentées par deux inégalités. Les résidus numériques sont pris en compte dans les bornes affichées.</p>
+    </details>
+    <h3>Un exemple dont on peut vérifier l’optimum à la main</h3>
+    <p>Pour a=0,1 ; b=0,5 ; c=0,8 ; d=0,4 et B=0,2, la loi vérifie f(x)≤x sur [0 ; 0,2]. Le partage sans duplication et les regroupements ne créent pas de flux supplémentaire : r≤u≤0,2. En envoyant u=0,2 par M1→M2→M4→M6→M8, chaque machine de ce chemin produit 0,2. <strong>L’optimum est donc r*=0,2</strong>, inférieur au maximum isolé c=0,8.</p>
+    <p>Les boutons « départ actif » et « départ nul » permettent de garder exactement ce problème tout en changeant l’initialisation locale. Le budget 0,4 permet ensuite d’examiner un autre problème, avec des partages actifs et la portion décroissante de f.</p>
+    <h3>La place éventuelle de l’entropie</h3>
+    <p>Une entropie des partages favoriserait une distribution des flux selon un critère supplémentaire. Elle ne remplace pas la maximisation de r : il faudrait définir son poids ou l’utiliser pour départager des solutions de même production. Cette comparaison conserve un seul objectif commun, r.</p>
+    <p><a href="https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf">Boyd et Vandenberghe · Dualité et lagrangien, chapitre 5</a> · <a href="https://arxiv.org/abs/1708.00050">Huchette et Vielma · Fonctions affines par morceaux</a></p>
+    <p class="small-note">Réseau et données fictifs, conversions normalisées κ=1, sans délais ni stocks. La topologie est fixe dans cette première étude ; plusieurs types de machines, ressources et produits pourront la prolonger.</p>
+</section>
+</div>
+{% endblock %}
+{% block graph_method_note %}<section class="content-note"><h2>Une analyse par machine</h2><p>Les nœuds portent Exp. IN → TH → Exp. OUT, cas 1b. Les flèches relient une production à une alimentation ; elles explicitent les bilans du réseau. Le choix d’un algorithme d’optimisation ne remplace pas cette analyse du sujet.</p></section>{% endblock %}

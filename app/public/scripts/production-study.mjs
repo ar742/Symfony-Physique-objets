@@ -183,7 +183,10 @@ function restoreMachine(scroll=true) {
 
 try {
   $('production-controls').addEventListener('submit',event=>{event.preventDefault();applySettings();});
-  $('load-production-preset').addEventListener('click',()=>setScenario($('production-preset').value));
+  $('load-production-preset').addEventListener('click',()=>{
+    if ($('production-preset').value === 'optimization') { location.assign('/graphes/production/optimisation'); return; }
+    setScenario($('production-preset').value);
+  });
   $('production-machine').addEventListener('change',()=>{rememberDraft();selected=$('production-machine').value;showDraft();history.replaceState(null, '', `#machine-${selected}-1b`);renderCycle();});
   $('production-probe').addEventListener('input',()=>drawCurve(simulation.history[cycle]));
   $('production-cycle').addEventListener('input',()=>{cycle=Number($('production-cycle').value);renderCycle();});

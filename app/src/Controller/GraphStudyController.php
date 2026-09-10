@@ -8,6 +8,12 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class GraphStudyController extends AbstractController
 {
+    #[Route('/graphes/production/optimisation', name: 'graph_production_optimization', methods: ['GET'])]
+    public function productionOptimization(): Response
+    {
+        return $this->render('graph/production-optimization.html.twig');
+    }
+
     #[Route('/graphes/production', name: 'graph_production', methods: ['GET'])]
     public function production(): Response
     {

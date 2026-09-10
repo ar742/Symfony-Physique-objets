@@ -127,3 +127,5 @@ Les données MySQL persistent dans le volume Docker. Ne pas utiliser `docker com
 L'ancienne version reste accessible dans [l'historique avant modernisation](https://github.com/ar742/Symfony-Physique-objets/tree/0d307f0aae3564ea5c2a5a2b93d8371f04e13cdb). Le remplacement est un nouveau commit, sans réécriture de cet historique.
 
 GitHub héberge ici **le code du projet**. Le domaine historique `physicstopics.fr` n'a plus d'hébergement. La configuration fournie est destinée au développement local : écoute sur `127.0.0.1`, mode debug actif, courriels neutralisés. Un hébergement public PHP/MySQL et sa configuration de production feront l'objet d'une étape distincte.
+
+Le [quatrième exemple de production](docs/OPTIMISATION-PRODUCTION.md), accessible sous `/graphes/production/optimisation`, compare des petites variations et une optimisation globale par régimes et bornes lagrangiennes sur huit machines identiques. Les départs nul et actif conservent le même problème ; un budget différent forme une troisième configuration. La borne, l’écart restant et les états compatibles sont consultables. Les flèches des paramètres a, b, c et d avancent de 0,1.

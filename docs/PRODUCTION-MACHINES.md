@@ -167,3 +167,7 @@ Les contrôles à maintenir portent sur les paramètres admissibles, les raccord
 Faire varier des paramètres et observer un résidu ne résout pas ces problèmes d’optimisation. Le meilleur réglage d’une machine isolée peut modifier les alimentations de ses partenaires ; il ne définit pas automatiquement le meilleur réseau. Une extension vers des bilans physiques exige des données et lois adaptées, avant d’attribuer une signification énergétique aux valeurs normalisées.
 
 La référence externe a été consultée le 10 septembre 2026. Elle étaye la condition mathématique de contraction ; la fonction de production, les scénarios et leurs calculs sont propres à cet atelier. Les PDF commerciaux, rendus, extractions privées, exports SQL et secrets restent hors du dépôt. Les prochains lots de fiches de physique restent [en attente](CHANTIER-DOMAINES.md), E1e étant terminé.
+
+## Quatrième exemple : comparaison des optimisations
+
+Le [réseau de huit machines](OPTIMISATION-PRODUCTION.md) ajoute un exemple sous `/graphes/production/optimisation`. Il recherche un état compatible sur un graphe sans circuit fermé, avec apport borné, partage intégral et aucune alimentation supérieure à 1. Il conserve la même loi scalaire par machine, mais son problème statique et ses bilans sont distincts de la simulation par cycles des trois exemples précédents. Une recherche locale est comparée à la couverture des régimes et à leurs bornes lagrangiennes ; résultats, certificats numériques et preuves particulières sont séparés.

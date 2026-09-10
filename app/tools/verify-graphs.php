@@ -138,7 +138,7 @@ if ($load !== null) {
 }
 
 // Only server-rendered destinations are inspected here; SVG nodes and computed results belong to the JavaScript tests.
-$knownGraphPages = ['/graphes/', '/graphes/dependances', '/graphes/production'];
+$knownGraphPages = ['/graphes/', '/graphes/dependances', '/graphes/production', '/graphes/production/optimisation'];
 foreach ($documents as $path => $document) {
     foreach ($document->getElementsByTagName('a') as $link) {
         $url = parse_url(html_entity_decode($link->getAttribute('href')));
