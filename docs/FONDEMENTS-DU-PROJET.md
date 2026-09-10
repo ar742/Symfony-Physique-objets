@@ -98,3 +98,13 @@ Le périmètre n'est pas nécessairement un sujet isolé et définitivement fix�
 Les 37 fiches actuelles et leurs schémas constituent la mise en œuvre du cas 4. Les autres formes ont leurs exemples méthodologiques distincts, décrits dans [les quatre formes d’analyse](FORMES-ANALYSE.md). Leur rédaction doit progressivement se préciser suivant ce fondement ; la présence du schéma ne vaut pas validation scientifique de chaque contenu.
 
 Les coordonnées, raccords et fichiers de l'application sont décrits dans [la mise en œuvre à deux niveaux](ANALYSES-DEUX-NIVEAUX.md). Les livraisons sont suivies dans [le journal des avancées](AVANCEES.md), et les domaines à développer dans [le chantier](CHANTIER-DOMAINES.md).
+
+## Extension du 10 septembre 2026 : graphes de branches analysées
+
+L’auteur étend la démarche à un ensemble de branches connectées. Chaque branche commence par le cas 1, variante 1a ou 1b suivant les attributs suivis ; elle pourra être approfondie ultérieurement par les cas 2, 3 et 4. Le graphe organise les raccords entre sujets ou systèmes, tandis que la forme analytique décrit le traitement interne d’une branche. Ces deux échelles ne se confondent pas.
+
+Le premier exemple relie des villes : position d’entrée, traitement de distance, position d’une extrémité de sortie fixée. Les positions sont les attributs suivis en 1a et la distance qualifie la liaison. Poser la question « paire de positions vers distance » produit une analyse 1b du même objet. Les recherches portent sur les parcours autorisés, leur coût cumulé, une borne ou un objectif d’optimisation.
+
+Une branche peut traiter plusieurs attributs. La sortie d’une autre branche peut alimenter une entrée, une variable ou l’environnement du traitement ; le raccord doit déclarer son type, son unité, son statut et sa dépendance. Des descriptions globales, par analogie eulérienne, et des suivis de parcours, par analogie lagrangienne, peuvent alors organiser l’étude. Elles ne garantissent pas à elles seules l’existence d’un optimum, ni la validité d’un algorithme statique pour un réseau couplé ou évolutif.
+
+La première réalisation, ses limites et les développements réservés sont précisés dans [le cadre des études de graphes](ETUDES-GRAPHES.md). Elle conserve les analyses et les lots de physique existants, dont les suites restent en attente.

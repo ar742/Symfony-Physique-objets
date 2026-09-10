@@ -1,0 +1,18 @@
+<section id="{{ inspector_id }}" class="graph-inspector" aria-labelledby="inspector-title">
+    <p class="eyebrow" id="branch-coordinate">Branche · Cas 1</p>
+    <h2 id="inspector-title">Lire une branche</h2>
+    <p id="branch-summary">Sélectionnez une liaison dans le graphe ou dans la liste.</p>
+    {% set steps = [
+        {id:1, color:'blue', coordinate:'1.0', title:'Exp. IN', subtitle:'Attributs d’entrée', tip:'Données, hypothèses et environnement de la branche.', href:'#graph-input'},
+        {id:2, color:'orange', coordinate:'2.0', title:'TH', subtitle:'Traitement de la branche', tip:'Loi ou modèle explicitement appliqué aux entrées et au contexte.', href:'#graph-theory'},
+        {id:3, color:'green', coordinate:'3.0', title:'Exp. OUT', subtitle:'Attributs de sortie', tip:'Résultats calculés ou attributs de l’extrémité de sortie, selon la question posée.', href:'#graph-output'}
+    ] %}
+    {% include 'analysis/_board.html.twig' with {steps:steps, prefix:'graph-role', board_label:'Analyse de la branche en trois positions'} only %}
+    {% for step in steps %}
+    <section class="guide-step graph-point tone-{{ step.color }}" id="{{ ['graph-input','graph-theory','graph-output'][loop.index0] }}" data-graph-point="{{ step.id }}" tabindex="-1">
+        <p class="eyebrow">{{ step.coordinate }} · {{ step.title }}</p><h3>{{ step.subtitle }}</h3>
+        <div class="graph-point-content"><p>Le contenu de la branche s’affichera ici.</p></div>
+    </section>
+    {% endfor %}
+    <p class="graph-assessment" id="branch-assessment"></p>
+</section>

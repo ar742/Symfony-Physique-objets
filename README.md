@@ -6,6 +6,8 @@ Un site pour étudier la physique en reliant observations, modèles et applicati
 
 Les prochains lots de physique sont en attente. E1e est terminé ; les réalisations existantes restent accessibles.
 
+Le volet [Études de graphes](docs/ETUDES-GRAPHES.md) applique le cas 1 aux branches : réseau interurbain fictif en `/graphes/`, chemins simples sous une borne stricte, comparaison Dijkstra / Bellman–Ford / Floyd–Warshall ; puis `/graphes/dependances`, un débit externe qui modifie une durée. Les analyses 1a/1b et leurs coordonnées sont accessibles depuis les liaisons. Les cas 2/3/4 internes aux branches et les réseaux dynamiques couplés sont des extensions futures.
+
 ## Contenu disponible
 
 - **Quatre formes accessibles dès l’accueil**, avec schémas cliquables, explications au survol, navigation clavier et thème clair/sombre. Les trois positions forment une chaîne ouverte ; les six positions comportent le retour.
