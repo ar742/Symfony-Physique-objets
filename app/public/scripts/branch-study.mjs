@@ -2,6 +2,7 @@ import {BRANCH_GRAPH, createBranchesScenario, evaluateBranches, branchProduction
 import {createParameterBox, validateParameterBox} from './branches-parameter-envelope.mjs';
 import {productionRate} from './production-engine.mjs';
 import {element, svgElement, table, renderInspector} from './graph-studies.mjs';
+import {createBranchSurfaces} from './branch-surfaces.mjs';
 
 const $ = id => document.getElementById(id);
 const keys = ['a','b','c','d'], splits = ['s1','s2','s5','s3','s7'];
@@ -16,6 +17,7 @@ const arrow = id => id.replace('-', ' → ');
 let model, initial, draftLaws, boxes, appliedBoxes = null, results = {}, times = {}, phases = {};
 let worker = null, runningKind = null, selected = '1-2', view = 'initial', options = null;
 let editingLaw = '1-2', editingBox = '1-2', boundedOptions = null;
+let surfaces;
 
 function numeric(id) {
     const raw = $(id).value.trim();
@@ -192,6 +194,7 @@ function renderResults() {
         const bounds=table(['Branche','a min / max','b min / max','c min / max','d min / max'],'Plages effectivement appliquées au calcul borné');
         edges.forEach(edge=>{const tr=element('tr');tr.append(element('th',arrow(edge.id)));keys.forEach(key=>tr.append(element('td',appliedBoxes[edge.id][key].map(precise).join(' / '))));bounds.body.append(tr);});certificate.append(bounds.wrap);
     }
+    surfaces?.update({model,initial,results,phases,parameterBoxes:appliedBoxes});
 }
 function renderState() {
     const state=displayed();
@@ -263,6 +266,7 @@ function restore(scroll) {
     if(scroll)requestAnimationFrame(()=>{const target=match[2]?$(location.hash.slice(1)):$('branches-inspector');target.scrollIntoView({block:'start'});if(match[2])target.focus({preventScroll:true});else{$('inspector-title').tabIndex=-1;$('inspector-title').focus({preventScroll:true});}});
 }
 try {
+    surfaces=createBranchSurfaces();
     $('branches-controls').addEventListener('submit',event=>{event.preventDefault();start('fixed');});
     $('branches-design').addEventListener('submit',event=>{event.preventDefault();start('bounded');});
     $('branch-choice').addEventListener('change',()=>{updateLawDraft();editingLaw=$('branch-choice').value;showLawDraft();});
@@ -274,7 +278,7 @@ try {
     $('branches-view').addEventListener('change',()=>setView($('branches-view').value));
     $('branches-inspect').addEventListener('change',()=>{selected=$('branches-inspect').value;history.replaceState(null,'','#reseau-'+selected+'-1b');renderState();});
     $('branches-export').addEventListener('click',()=>{
-        const record={model,initial,branchLaw:'y = x * f(x)',objective:'global yield r; source=1; r<=1',options:{fixed:options,bounded:boundedOptions},parameterBoxes:appliedBoxes,results,timesMilliseconds:times,phases,displayedView:view,displayedBranch:selected,units:'flux normalisés et coefficients de rendement, données fictives',tolerance:1e-7};
+        const record={model,initial,branchLaw:'y = x * f(x)',objective:'global yield r; source=1; r<=1',options:{fixed:options,bounded:boundedOptions},parameterBoxes:appliedBoxes,results,timesMilliseconds:times,phases,displayedView:view,displayedBranch:selected,surface:surfaces.snapshot(),units:'flux normalisés et coefficients de rendement, données fictives',tolerance:1e-7};
         const url=URL.createObjectURL(new Blob([JSON.stringify(record,null,2)],{type:'application/json'}));const link=element('a');link.href=url;link.download='reseau-douze-branches.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
     });
     window.addEventListener('hashchange',()=>restore(true));window.addEventListener('pagehide',()=>stop());

@@ -8,12 +8,24 @@
     <p class="eyebrow">Production · Exemple 5 · Huit nœuds, douze transformations</p>
     <h1>Partager les entrées, optimiser les branches</h1>
     <p class="lead">Chaque branche possède son coefficient de rendement f(x) et produit x f(x). Les nœuds additionnent les résultats reçus puis répartissent cette somme. Comment choisir les cinq partages pour maximiser le résultat en 8 ?</p>
-    <p><a href="{{ path('graph_production') }}">Tous les exemples de production</a> · <a href="#branches-results-heading">Comparer les méthodes</a> · <a href="#branches-design-heading">Faire varier les fonctions</a></p>
+    <p><a href="{{ path('graph_production') }}">Tous les exemples de production</a> · <a href="#branches-lagrangian-heading">Le lagrangien</a> · <a href="#branches-surface-heading">Explorer en 3D</a> · <a href="#branches-results-heading">Comparer les méthodes</a> · <a href="#branches-design-heading">Faire varier les fonctions</a></p>
 </header>
 <section class="content-note">
     <h2>Une source fixée à 1,00 ; trois arrivées pour r</h2>
     <p>Les douze liaisons sont <strong>1→2, 1→5, 2→3, 2→8, 5→3, 5→7, 7→6, 7→4, 3→4, 3→6, 4→8, 6→8</strong>. Sur chaque branche i→j : l’entrée xᵢⱼ est la part allouée en i, la sortie vaut yᵢⱼ=xᵢⱼ fᵢⱼ(xᵢⱼ), puis contribue à la somme disponible en j. Le nœud 1 fournit exactement 1,00. Le nœud 8 collecte <strong>r=y₂₈+y₄₈+y₆₈</strong>, le rendement global pour une source égale à 1.</p>
     <p>Puisque 0≤f(x)≤1, chaque branche vérifie 0≤y≤x. Les partages sont intégraux et ne dupliquent aucun flux : <strong>0≤r≤1</strong>. Le cas r=1 représente le rendement idéal de 100 %, sans perte. La perte de chaque branche vaut x−y et leur somme vaut 1−r. Aucun écrêtage ni stock n’est ajouté. Les flux et les rendements de ce modèle sont normalisés ; les conversions sont supposées égales à 1.</p>
+</section>
+<section class="branch-lagrangian-intro" aria-labelledby="branches-lagrangian-heading">
+    <p class="eyebrow">Au cœur de la comparaison</p>
+    <h2 id="branches-lagrangian-heading">Le lagrangien relie les contraintes à la borne du rendement</h2>
+    <p>La grille fournit des configurations réalisables. La méthode globale les confronte à des bornes : elle encadre les lois quadratiques par des programmes linéaires (PL), puis affine les régions tant qu’un meilleur rendement reste possible. Voici les deux écritures à distinguer.</p>
+    <h3>Le réseau complet : lois et bilans</h3>
+    <p id="branches-lagrangian-primal" class="branch-formula">L<sub>NLP</sub>(x,y,μ,ν) = r + μ₁(1 − x₁₂ − x₁₅) + Σ<sub>i=2,…,7</sub> μᵢ(Σ<sub>k→i</sub> yₖᵢ − Σ<sub>i→j</sub> xᵢⱼ) + Σ<sub>i→j</sub> νᵢⱼ[xᵢⱼ fᵢⱼ(xᵢⱼ) − yᵢⱼ]</p>
+    <p>r=y₂₈+y₄₈+y₆₈ ; les sommes portent sur les liaisons présentes. Les égalités ont des multiplicateurs μ et ν libres en signe ; les bornes 0≤x,y≤1 restent dans le domaine. Sur tout réseau compatible, les termes de contraintes s’annulent : <strong>L<sub>NLP</sub>=r</strong>. Cela permet de visualiser le rendement sur les partages, mais ne constitue pas une preuve d’optimalité ni un calcul des multiplicateurs du problème non linéaire.</p>
+    <h3>Le lagrangien effectivement utilisé pour les bornes</h3>
+    <p id="branches-lagrangian-dual" class="branch-formula">L<sub>PL</sub>(z,λ) = q₀ + qᵀz + λᵀ(h − Az), λ ≥ 0<br>sup<sub>0≤z≤U</sub> L<sub>PL</sub> = q₀ + λᵀh + Σⱼ max[0, qⱼ − (Aᵀλ)ⱼ] Uⱼ</p>
+    <p>Chaque relaxation écrit max q₀+qᵀz sous Az≤h et 0≤z≤U. Pour un point admissible, λᵀ(h−Az)≥0 : le supremum de L donne une borne supérieure. <strong>À λ fixé, ce lagrangien est affine : sa surface est un plan, éventuellement un plateau.</strong> Un pic arrondi n’est donc pas attendu. Les multiplicateurs réellement enregistrés, l’expression numérique de L et sa surface sont accessibles ci-dessous après le calcul.</p>
+    <p><a href="#branches-settings-heading">1. Appliquer et comparer</a> · <a href="#branches-surface-heading">2. Examiner le lagrangien et les surfaces</a></p>
 </section>
 <div class="optimization-workspace">
 <figure class="graph-map-panel">
@@ -59,6 +71,26 @@
     <details><summary>Bornes, budgets et données du calcul</summary><div id="branches-certificates"></div><button type="button" id="branches-export">Exporter la configuration et les résultats (JSON)</button></details>
     <p class="small-note">Les résultats calculés ne sont pas des mesures. Tableaux arrondis à six décimales, graphe à trois ; l’export conserve la précision des calculs et des paramètres.</p>
 </section>
+<section class="graph-section" aria-labelledby="branches-surface-heading">
+    <h2 id="branches-surface-heading">Le lagrangien et le rendement, vus en 3D</h2>
+    <p>Commencez par les valeurs proposées, puis l’exemple <strong>b=0,83</strong> : la grille au pas 0,1 manque alors le meilleur partage continu. Après la comparaison, la référence de cette vue devient automatiquement le résultat global. Son choix est indépendant de l’état affiché dans le graphe du réseau.</p>
+    <div class="graph-field"><label for="branches-surface-reference">Configuration de référence pour la vue 3D</label><select id="branches-surface-reference"><option value="initial">Partages initiaux</option><option value="grid" disabled>Meilleur résultat de la grille</option><option value="global" disabled>Global · fonctions fixées</option><option value="bounded" disabled>Global · paramètres bornés</option><option value="free" disabled>Construction libre</option></select></div>
+    <div id="branches-lagrangian-diagnostic"><p>Les coefficients et multiplicateurs seront renseignés après le calcul global.</p></div>
+    <div class="branch-surface-controls">
+        <div class="graph-field branch-surface-wide"><label for="branches-surface-mode">Grandeur et contraintes représentées</label><select id="branches-surface-mode"><option value="yield">Nappe du rendement · bilans et lois recalculés</option><option value="lagrangian">Plan du lagrangien réellement utilisé · multiplicateurs fixes</option><option value="coupled">Courbe des entrées Exp. IN 2 et Exp. IN 5 · variables liées</option></select></div>
+        <div class="graph-field"><label for="branches-surface-x">Variable de l’axe x</label><select id="branches-surface-x"><option value="s1">s1 · Part en 1 vers 2</option></select></div>
+        <div class="graph-field"><label for="branches-surface-y">Variable de l’axe y</label><select id="branches-surface-y"><option value="s2">s2 · Part en 2 vers 3</option></select></div>
+        <div class="graph-field"><label for="branches-surface-radius">Rayon du voisinage autour de la référence</label><input id="branches-surface-radius" type="number" min="0.02" max="1" step="0.01" value="0.15"><span class="small-note">Unités normalisées des variables ; intervalle limité à leurs bornes.</span></div>
+        <div class="graph-field"><label for="branches-surface-yaw">Rotation horizontale, en degrés · <output id="branches-surface-yaw-value" for="branches-surface-yaw">−35°</output></label><input id="branches-surface-yaw" type="range" min="-180" max="180" step="1" value="-35"></div>
+        <div class="graph-field"><label for="branches-surface-pitch">Inclinaison, en degrés · <output id="branches-surface-pitch-value" for="branches-surface-pitch">35°</output></label><input id="branches-surface-pitch" type="range" min="15" max="75" step="1" value="35"></div>
+    </div>
+    <p class="branch-surface-mobile-note small-note">Sur petit écran, faites défiler le graphique horizontalement pour lire ses axes. Les tableaux donnent aussi toutes les coordonnées.</p>
+    <figure class="branch-surface-figure"><div class="branch-surface-viewport" tabindex="0" role="group" aria-label="Graphique 3D, défilement horizontal sur petit écran"><svg id="branches-surface" viewBox="0 0 900 650" role="img" aria-labelledby="branches-surface-title branches-surface-desc"><title id="branches-surface-title">Rendement et lagrangien près d’une configuration</title><desc id="branches-surface-desc">Deux fractions indépendantes définissent une nappe de rendement. Deux variables du PL définissent une coupe affine du lagrangien. Les entrées des nœuds 2 et 5 décrivent une courbe à un paramètre. Les valeurs sont aussi disponibles dans les tableaux.</desc></svg></div><figcaption id="branches-surface-caption">Préparation de la vue 3D…</figcaption></figure>
+    <p id="branches-surface-status" role="status" aria-live="polite"></p>
+    <div id="branches-surface-samples"></div>
+    <p>Avec les douze lois proposées, le meilleur partage est s1=0,8 et s2=0 : <strong>r=0,54432, soit 54,432 %</strong>. Le sommet de la nappe est une cassure suivant s1 et un maximum de frontière suivant s2. Pour b=0,83, le calcul continu atteint environ 0,567015283, contre 0,473276490 sur la grille au pas 0,1. Les repères affichés sont toujours ceux de votre calcul effectif.</p>
+    <p class="small-note">Une coupe ne réoptimise pas les autres commandes. Un maximum peut se trouver sur une frontière ou à une cassure ; des commandes inactives donnent des plateaux. L’accord de deux points visibles complète la comparaison numérique, sans remplacer le contrôle de l’écart à la borne globale.</p>
+</section>
 <section class="graph-section" aria-labelledby="branches-curve-heading">
     <h2 id="branches-curve-heading">La transformation de la branche choisie</h2>
     <figure class="graph-surface"><svg id="branches-curve" viewBox="0 0 600 320" role="img" aria-labelledby="branches-curve-title branches-curve-desc"><title id="branches-curve-title">Loi de branche et point de fonctionnement</title><desc id="branches-curve-desc">Coefficient f affine par morceaux et production x f(x), quadratique par morceaux, avec le point de fonctionnement et la diagonale sans perte y=x.</desc></svg><figcaption id="branches-curve-caption"></figcaption></figure>
@@ -89,7 +121,7 @@
     <details><summary>Les équations du réseau et le lagrangien</summary>
         <p>x₁₂+x₁₅=1. Pour i=2,…,7 : Σⱼ xᵢⱼ=Σₖ yₖᵢ. Pour chaque branche : yᵢⱼ=xᵢⱼ fᵢⱼ(xᵢⱼ), 0≤xᵢⱼ≤1. L’objectif est max r=y₂₈+y₄₈+y₆₈. Les sommes portent uniquement sur les douze liaisons du réseau.</p>
         <p>f(x)=0 pour 0≤x≤a ; f(x)=c(x−a)/(b−a) pour a≤x≤b ; f(x)=c+(d−c)(x−b)/(1−b) pour b≤x≤1. Ces formules définissent le coefficient. La production vaut g(x)=x f(x), donc g(x)=0, c(x²−ax)/(b−a), puis x[c+(d−c)(x−b)/(1−b)]. Il existe 3¹² combinaisons de régimes ; une subdivision spatiale supplémentaire est nécessaire pour encadrer les portions quadratiques.</p>
-        <p>Pour un sous-problème max qᵀz sous Az≤h et 0≤z≤U, le lagrangien est L(z,λ)=qᵀz+λᵀ(h−Az), λ≥0. Tout λ admissible donne la borne λᵀh+Σⱼ max(0,qⱼ−(Aᵀλ)ⱼ)Uⱼ. Cette correction sur les bornes des variables garde un sens même en présence d’un résidu dual. Les marges numériques sont prises en compte.</p>
+        <p>Pour un sous-problème max q₀+qᵀz sous Az≤h et 0≤z≤U, le lagrangien est L(z,λ)=q₀+qᵀz+λᵀ(h−Az), λ≥0. Tout λ admissible donne la borne q₀+λᵀh+Σⱼ max(0,qⱼ−(Aᵀλ)ⱼ)Uⱼ. Cette correction sur les bornes des variables garde un sens même en présence d’un résidu dual. Les marges numériques sont prises en compte.</p>
     </details>
     <h3>Paramètres bornés : représenter toutes les fonctions permises</h3>
     <p>Dans les plages annoncées, les coefficients réalisables à une entrée x forment exactement un intervalle entre deux enveloppes affines par morceaux. En multipliant par x≥0, on obtient les deux enveloppes quadratiques de la production. Le moteur les encadre, sépare leurs régimes et affine les intervalles tout en optimisant les flux ensemble. Chaque solution retenue reconstruit pour chaque branche des a,b,c,d réellement admissibles et recalcule le réseau. On affiche ainsi une configuration réalisable et une borne pour ce domaine de conception.</p>

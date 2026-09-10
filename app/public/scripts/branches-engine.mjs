@@ -195,34 +195,42 @@ function buildProgram(domains, selections, intervals) {
     const input = Array(12), output = Array(12);
     const available = Object.fromEntries(ORDER.map(node => [node, scalar(0)])); available['1'] = scalar(1);
     const bounds = Array(5).fill(1);
+    const variableDetails = CONTROL_NODES.map(node => ({ name: `x_${EDGES[OUT[node][0]].id.replace('-', '_')}`, branch: EDGES[OUT[node][0]].id, quantity: 'input' }));
     let next = 5;
     for (const node of ORDER) for (let position = 0; position < OUT[node].length; position += 1) {
         const index = OUT[node][position];
         input[index] = OUT[node].length === 1 ? available[node] : position === 0 ? variable(CONTROL_NODES.indexOf(node)) : add(available[node], multiply(variable(CONTROL_NODES.indexOf(node)), -1));
-        if (freeOutputs[index]) { output[index] = variable(next++); bounds.push(domains[index].maximum); }
+        if (freeOutputs[index]) {
+            output[index] = variable(next++); bounds.push(domains[index].maximum);
+            variableDetails.push({ name: `y_${EDGES[index].id.replace('-', '_')}`, branch: EDGES[index].id, quantity: 'output' });
+        }
         else {
             const { slope, intercept } = affineCell(domains[index].cells[selections[index]]);
             output[index] = multiply(input[index], slope, intercept);
         }
         available[EDGES[index].to] = add(available[EDGES[index].to], output[index]);
     }
-    const A = [], b = [];
-    const constrain = (expression, bound) => { A.push(expression.slice(0, size)); b.push(bound - expression[size]); };
+    const A = [], b = [], constraintNames = [];
+    const constrain = (expression, bound, name) => { A.push(expression.slice(0, size)); b.push(bound - expression[size]); constraintNames.push(name); };
     for (let index = 0; index < 12; index += 1) {
         const cells = selections[index] < 0 ? domains[index].cells : [domains[index].cells[selections[index]]];
         const lower = intervals[index]?.lower ?? Math.min(...cells.map(cell => cell.lower)), upper = intervals[index]?.upper ?? Math.max(...cells.map(cell => cell.upper));
-        constrain(input[index], upper); constrain(multiply(input[index], -1), -lower);
-        constrain(add(output[index], multiply(input[index], -1)), 0);
+        const name = EDGES[index].id;
+        constrain(input[index], upper, `${name} : borne supérieure de x`);
+        constrain(multiply(input[index], -1), -lower, `${name} : borne inférieure de x`);
+        constrain(add(output[index], multiply(input[index], -1)), 0, `${name} : production y ≤ alimentation x`);
         if (!freeOutputs[index]) continue;
         if (selections[index] >= 0) {
             const { below, above } = supportLines(cells[0], lower, upper);
-            for (const line of below) {
+            for (const [lineIndex, line] of below.entries()) {
                 const margin = 128 * Number.EPSILON * (1 + Math.abs(line.slope) + Math.abs(line.intercept));
-                constrain(add(multiply(input[index], line.slope), multiply(output[index], -1)), -line.intercept + margin);
+                constrain(add(multiply(input[index], line.slope), multiply(output[index], -1)), -line.intercept + margin,
+                    `${name} : minorant ${cells[0].lowerQuadratic.A >= 0 ? 'tangent' : 'sécant'} ${lineIndex + 1}`);
             }
-            for (const line of above) {
+            for (const [lineIndex, line] of above.entries()) {
                 const margin = 128 * Number.EPSILON * (1 + Math.abs(line.slope) + Math.abs(line.intercept));
-                constrain(add(multiply(input[index], -line.slope), output[index]), line.intercept + margin);
+                constrain(add(multiply(input[index], -line.slope), output[index]), line.intercept + margin,
+                    `${name} : majorant ${cells[0].upperQuadratic.A <= 0 ? 'tangent' : 'sécant'} ${lineIndex + 1}`);
             }
             continue;
         }
@@ -230,7 +238,8 @@ function buildProgram(domains, selections, intervals) {
         if (polygons.some(polygon => !polygon || !polygon.length)) return null;
         const polygon = convexHull(polygons.flat());
         if (polygon.length === 1) {
-            constrain(output[index], polygon[0].y); constrain(multiply(output[index], -1), -polygon[0].y);
+            constrain(output[index], polygon[0].y, `${name} : point, borne supérieure de y`);
+            constrain(multiply(output[index], -1), -polygon[0].y, `${name} : point, borne inférieure de y`);
         } else {
             for (let j = 0; j < polygon.length; j += 1) {
                 const first = polygon[j], second = polygon[(j + 1) % polygon.length];
@@ -238,13 +247,15 @@ function buildProgram(domains, selections, intervals) {
                 if (width === 0) continue;
                 const dx = (second.x - first.x) / width, dy = (second.y - first.y) / width;
                 const margin = 128 * Number.EPSILON * (1 + Math.abs(first.x) + Math.abs(first.y));
-                constrain(add(multiply(input[index], dy), multiply(output[index], -dx)), dy * first.x - dx * first.y + margin);
+                constrain(add(multiply(input[index], dy), multiply(output[index], -dx)), dy * first.x - dx * first.y + margin,
+                    `${name} : facette ${j + 1} de l’enveloppe convexe`);
             }
         }
     }
     const objective = available['8'];
     if (![...A.flat(), ...b, ...objective].every(Number.isFinite)) return null;
-    return { A, b, c: objective.slice(0, size), constant: objective[size], bounds, input, output, size };
+    return { A, b, c: objective.slice(0, size), constant: objective[size], bounds, input, output, size,
+        variableNames: variableDetails.map(variable => variable.name), variableDetails, constraintNames };
 }
 
 function expressionValue(expression, point) { return expression.at(-1) + point.reduce((sum, value, i) => sum + value * expression[i], 0); }
@@ -311,6 +322,51 @@ function candidateFromPoint(ready, domains, program, point, boxes, tolerance) {
     } : null;
     const state = evaluateReady(ready, controls, choose);
     return state.feasible ? state : null;
+}
+
+function makeProblemSignature(ready, boxes) {
+    return JSON.stringify({ version: 'branch-yield-spatial-1', source: 1,
+        branches: ready.branches.map(branch => ({ id: branch.id, from: branch.from, to: branch.to,
+            ...(boxes ? { box: Object.fromEntries(['a', 'b', 'c', 'd'].map(key => [key, [...boxes[branch.id][key]]])) }
+                : { parameters: Object.fromEntries(['a', 'b', 'c', 'd'].map(key => [key, branch[key]])) }) })),
+    });
+}
+
+/** Canonical problem identity, independent of starts, array order and search budgets. */
+export function branchesProblemSignature(model, { parameterBoxes } = {}) {
+    const ready = prepare(model);
+    if (parameterBoxes !== undefined) {
+        if (!parameterBoxes || EDGES.some(edge => !Object.hasOwn(parameterBoxes, edge.id))) throw new TypeError('Les douze boîtes du problème sont requises.');
+        EDGES.forEach(edge => productionParameterEnvelope(parameterBoxes[edge.id]));
+    }
+    return makeProblemSignature(ready, parameterBoxes);
+}
+
+/** Replay the actual LP geometry; this performs no optimisation or new LP solve. */
+export function inspectBranchesRelaxation(model, record, { parameterBoxes } = {}) {
+    const ready = prepare(model);
+    let domains = fixedDomains(ready);
+    if (parameterBoxes !== undefined) {
+        if (!parameterBoxes || EDGES.some(edge => !Object.hasOwn(parameterBoxes, edge.id))) throw new TypeError('Les douze boîtes du problème sont requises.');
+        domains = EDGES.map(edge => {
+            const envelope = productionParameterEnvelope(parameterBoxes[edge.id]);
+            return { cells: envelope.cells, maximum: domainMaximum(envelope.cells, parameterBoxes[edge.id].c[1]) };
+        });
+    }
+    if (!record || !Array.isArray(record.selections) || !Array.isArray(record.intervals)
+        || record.selections.length !== 12 || record.intervals.length !== 12) throw new TypeError('Le sous-problème enregistré est incomplet.');
+    for (let i = 0; i < 12; i += 1) {
+        const selection = record.selections[i], interval = record.intervals[i];
+        if (!Number.isInteger(selection) || selection < -1 || selection >= domains[i].cells.length) throw new RangeError('Cellule enregistrée invalide.');
+        if (selection < 0) { if (interval !== null) throw new RangeError('Intervalle sans cellule enregistrée.'); }
+        else {
+            const cell = domains[i].cells[selection];
+            if (!interval || !Number.isFinite(interval.lower) || !Number.isFinite(interval.upper)
+                || interval.lower < cell.lower || interval.upper > cell.upper || interval.lower > interval.upper) throw new RangeError('Intervalle enregistré invalide.');
+        }
+    }
+    const program = buildProgram(domains, record.selections, record.intervals);
+    return program ? { ...program, problemSignature: makeProblemSignature(ready, parameterBoxes) } : null;
 }
 
 /**
@@ -384,6 +440,9 @@ export function optimiseBranchesGlobal(model, options = {}) {
         if (solved?.certificate) {
             record.certificate = solved.certificate; record.primalResidual = solved.primalResidual ?? null;
         }
+        if (solved?.status === 'optimal') {
+            record.lpStatus = 'optimal'; record.lpPoint = [...solved.point]; record.lpObjectiveValue = solved.objectiveValue;
+        }
         if (solved?.status === 'infeasible') record.upperBound = null;
         else if (solved?.status === 'optimal') {
             node.upperBound = Math.min(node.upperBound, solved.certificate.upperBound);
@@ -431,7 +490,7 @@ export function optimiseBranchesGlobal(model, options = {}) {
     const result = {
         ...snapshot(),
         certificates: {
-            records, unresolved: unresolved.length, universalBound: 1, terminalBound, sourceBound, sourceCertificate, closedUpper,
+            records, problemSignature: makeProblemSignature(ready, boxes), unresolved: unresolved.length, universalBound: 1, terminalBound, sourceBound, sourceCertificate, closedUpper,
             frontier: [...queue.map(node => ({ ...node, status: 'open' })), ...unresolved.map(node => ({ ...node, status: 'unresolved' }))],
             arithmetic: 'floating-point-with-margins',
         },

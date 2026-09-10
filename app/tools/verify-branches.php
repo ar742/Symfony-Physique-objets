@@ -105,6 +105,8 @@ foreach ([
     'branch-choice' => $branchIds, 'branches-inspect' => $branchIds, 'branches-box-choice' => $branchIds,
     'branches-view' => ['initial', 'grid', 'global', 'bounded', 'free'],
     'branches-divisions' => ['5', '10', '20', '50', '100'], 'branches-grid-budget' => ['200000', '1000000', '5000000'],
+    'branches-surface-reference' => ['initial', 'grid', 'global', 'bounded', 'free'],
+    'branches-surface-mode' => ['yield', 'lagrangian', 'coupled'],
 ] as $id => $expected) {
     $select = $requiredElement($id, 'select');
     if ($select === null) { continue; }
@@ -199,6 +201,58 @@ if ($inspector !== null) {
         }
     }
 }
+
+// The formulas and surface controls exist before JavaScript. The mesh, diagnostic
+// values and accessible sample table are computed later and tested in the browser.
+foreach (['branches-lagrangian-heading', 'branches-surface-heading'] as $id) {
+    $heading = $requiredElement($id);
+    if ($heading !== null) { $check(trim($heading->textContent) !== '', 'Intitulé de section '.$id); }
+}
+foreach (['branches-lagrangian-primal', 'branches-lagrangian-dual'] as $id) {
+    $formula = $requiredElement($id);
+    if ($formula === null) { continue; }
+    $check(trim($formula->textContent) !== '', 'Formule rendue dans le HTML '.$id);
+    $check($xpath->query('ancestor-or-self::*[@hidden or @aria-hidden="true"]', $formula)->length === 0, 'Formule accessible sans activation JavaScript '.$id);
+}
+foreach (['branches-surface-x', 'branches-surface-y'] as $id) {
+    $select = $requiredElement($id, 'select');
+    if ($select !== null) { $check($hasName($select, $xpath), 'Nom accessible de l’axe '.$id); }
+}
+$surfaceInputs = [
+    'branches-surface-radius' => ['type' => 'number', 'min' => 0.02, 'max' => 1.0, 'step' => 0.01],
+    'branches-surface-yaw' => ['type' => 'range', 'min' => -180.0, 'max' => 180.0],
+    'branches-surface-pitch' => ['type' => 'range', 'min' => 15.0, 'max' => 75.0],
+];
+foreach ($surfaceInputs as $id => $attributes) {
+    $input = $requiredElement($id, 'input');
+    if ($input === null) { continue; }
+    $check($hasName($input, $xpath), 'Nom accessible du réglage de nappe '.$id);
+    foreach ($attributes as $attribute => $expected) {
+        $actual = $input->getAttribute($attribute);
+        $check(is_string($expected) ? $actual === $expected : is_numeric($actual) && (float) $actual === $expected, 'Réglage de nappe '.$id.' : '.$attribute);
+    }
+    if ($input->hasAttribute('value')) {
+        $value = $input->getAttribute('value');
+        $check(is_numeric($value) && (float) $value >= $attributes['min'] && (float) $value <= $attributes['max'], 'Valeur initiale admissible '.$id);
+    }
+}
+$surface = $requiredElement('branches-surface', 'svg');
+if ($surface !== null) {
+    $check($surface->getAttribute('role') === 'img', 'Rôle image de la nappe');
+    $references = preg_split('/\s+/', trim($surface->getAttribute('aria-labelledby')), flags: PREG_SPLIT_NO_EMPTY);
+    sort($references);
+    $check($references === ['branches-surface-desc', 'branches-surface-title'], 'Titre et description associés à la nappe');
+    $check($hasName($surface, $xpath), 'Nom accessible de la nappe');
+    foreach (['branches-surface-title' => 'title', 'branches-surface-desc' => 'desc'] as $id => $tag) {
+        $description = $requiredElement($id, $tag);
+        if ($description === null) { continue; }
+        $check(trim($description->textContent) !== '', 'Texte accessible de la nappe '.$id);
+        $check($xpath->query('.//*[@id="'.$id.'"]', $surface)->length === 1, 'Description intégrée au SVG '.$id);
+    }
+}
+foreach (['branches-surface-caption', 'branches-lagrangian-diagnostic', 'branches-surface-samples'] as $id) { $requiredElement($id); }
+$surfaceStatus = $requiredElement('branches-surface-status');
+if ($surfaceStatus !== null) { $check($surfaceStatus->getAttribute('role') === 'status', 'Annonce accessible de l’état de la nappe'); }
 $check($xpath->query('//head/script[@type="module" and @src="/scripts/branch-study.mjs"]')->length === 1, 'Module des branches déclaré dans head');
 $check($xpath->query('//head/link[@rel="stylesheet" and @href="/styles/branch-study.css"]')->length === 1, 'Style des branches déclaré dans head');
 
@@ -229,6 +283,7 @@ $requests = [
     ['GET', $branchesPath, 200], ['HEAD', $branchesPath, 200], ['POST', $branchesPath, 405], ['GET', $branchesPath.'/inconnu', 404],
     ['GET', '/scripts/branch-study.mjs', 200], ['GET', '/scripts/branch-study-worker.mjs', 200], ['GET', '/scripts/branches-engine.mjs', 200],
     ['GET', '/scripts/branches-parameter-envelope.mjs', 200], ['GET', '/scripts/bounded-linear-program.mjs', 200],
+    ['GET', '/scripts/branches-lagrangian.mjs', 200], ['GET', '/scripts/branch-surfaces-engine.mjs', 200], ['GET', '/scripts/branch-surfaces.mjs', 200],
     ['GET', '/scripts/production-engine.mjs', 200], ['GET', '/styles/branch-study.css', 200],
 ];
 foreach ($requests as [$method, $path, $status]) {

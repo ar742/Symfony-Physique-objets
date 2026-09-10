@@ -205,6 +205,8 @@ Ces nombres sont des résultats de calcul et des contrôles internes, sans mesur
 
 ## Interface, reproduction et portée
 
+L’[explorateur des lagrangiens et surfaces](LAGRANGIEN-SURFACES.md) propose trois vues distinctes : le vrai L affine d’un PL enregistré, la production réalisable suivant deux fractions et la courbe couplée A2/A5 suivant s1. Il conserve les autres données, recalcule les marqueurs projetés et signale les parties hors contraintes du PL. Un plan, un plateau ou une cassure est conservé tel quel ; aucun pic artificiel n’est ajouté et aucune coupe ne remplace le contrôle global des bornes.
+
 La page permet de préparer chaque rendement, copier une loi sur les douze branches, choisir le pas et le budget de grille, puis comparer. Un second formulaire prépare les plages de conception ; la construction libre est accessible séparément. Changer l’état affiché déplace ensemble le graphe, les tableaux, la courbe et l’analyse de branche. Les ancres qualifient le réseau, l’arc, le cas et la position, par exemple `reseau-5-3-1b-2.0`.
 
 Le module `branch-study.mjs` gère l’interface ; `branch-study-worker.mjs` exécute les recherches. L’export JSON conserve les paramètres, les commandes, les résultats et les options propres aux recherches à lois fixées et à paramètres bornés. Il ne publie rien et ne constitue pas une mesure indépendante.
