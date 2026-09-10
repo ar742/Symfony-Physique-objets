@@ -9,7 +9,7 @@ $kernel->boot();
 $productionPath = '/graphes/production';
 $optimizationPath = $productionPath.'/optimisation';
 $graphTabs = ['/graphes/', '/graphes/dependances', $productionPath];
-$knownGraphPaths = [...$graphTabs, $optimizationPath];
+$knownGraphPaths = [...$graphTabs, $optimizationPath, '/graphes/production/branches'];
 $checks = 0;
 $errors = [];
 $documents = [];

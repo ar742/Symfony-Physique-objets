@@ -1,0 +1,101 @@
+{% extends 'graph/layout.html.twig' %}
+{% block title %}Douze branches : partages et fonctions — Physique objets{% endblock %}
+{% block graph_assets %}<link rel="stylesheet" href="{{ asset('styles/branch-study.css') }}">{% endblock %}
+{% block graph_scripts %}<script type="module" src="{{ asset('scripts/branch-study.mjs') }}"></script>{% endblock %}
+{% block graph_body %}
+<div data-graph-study="production-branches">
+<header class="page-heading">
+    <p class="eyebrow">Production · Exemple 5 · Huit nœuds, douze transformations</p>
+    <h1>Partager les entrées, optimiser les branches</h1>
+    <p class="lead">Chaque branche possède son coefficient de rendement f(x) et produit x f(x). Les nœuds additionnent les résultats reçus puis répartissent cette somme. Comment choisir les cinq partages pour maximiser le résultat en 8 ?</p>
+    <p><a href="{{ path('graph_production') }}">Tous les exemples de production</a> · <a href="#branches-results-heading">Comparer les méthodes</a> · <a href="#branches-design-heading">Faire varier les fonctions</a></p>
+</header>
+<section class="content-note">
+    <h2>Une source fixée à 1,00 ; trois arrivées pour r</h2>
+    <p>Les douze liaisons sont <strong>1→2, 1→5, 2→3, 2→8, 5→3, 5→7, 7→6, 7→4, 3→4, 3→6, 4→8, 6→8</strong>. Sur chaque branche i→j : l’entrée xᵢⱼ est la part allouée en i, la sortie vaut yᵢⱼ=xᵢⱼ fᵢⱼ(xᵢⱼ), puis contribue à la somme disponible en j. Le nœud 1 fournit exactement 1,00. Le nœud 8 collecte <strong>r=y₂₈+y₄₈+y₆₈</strong>, le rendement global pour une source égale à 1.</p>
+    <p>Puisque 0≤f(x)≤1, chaque branche vérifie 0≤y≤x. Les partages sont intégraux et ne dupliquent aucun flux : <strong>0≤r≤1</strong>. Le cas r=1 représente le rendement idéal de 100 %, sans perte. La perte de chaque branche vaut x−y et leur somme vaut 1−r. Aucun écrêtage ni stock n’est ajouté. Les flux et les rendements de ce modèle sont normalisés ; les conversions sont supposées égales à 1.</p>
+</section>
+<div class="optimization-workspace">
+<figure class="graph-map-panel">
+    <svg id="branches-map" viewBox="0 0 800 960" role="group" aria-labelledby="branches-map-title branches-map-desc"><title id="branches-map-title">Réseau de huit nœuds et douze branches</title><desc id="branches-map-desc">Chaque flèche ouvre sa propre analyse en trois positions. Les disques représentent les sommes aux nœuds ; les croisements sans disque ne sont pas des raccords.</desc></svg>
+    <figcaption id="branches-map-caption">Les croisements sans disque ne sont pas des raccords. Cliquez sur une flèche pour examiner sa transformation.</figcaption>
+</figure>
+<section class="graph-controls" aria-labelledby="branches-settings-heading">
+    <h2 id="branches-settings-heading">1 · Fonctions fixées : comparer les partages</h2>
+    <form id="branches-controls" novalidate>
+    <fieldset><legend>Douze lois réglables indépendamment</legend>
+    <div class="graph-field"><label for="branch-choice">Branche dont les paramètres sont à préparer</label><select id="branch-choice">{% for edge in ['1-2','1-5','2-3','2-8','5-3','5-7','7-6','7-4','3-4','3-6','4-8','6-8'] %}<option value="{{ edge }}">{{ edge|replace({'-':' → '}) }}</option>{% endfor %}</select></div>
+    <div class="optimization-fields">
+    {% for key,label in {a:'a · Seuil de démarrage',b:'b · Entrée au sommet',c:'c · Rendement au sommet',d:'d · Rendement à x = 1'} %}
+    <div class="graph-field"><label for="branch-{{ key }}">{{ label }}</label><input id="branch-{{ key }}" type="number" min="0" max="1" step="0.1" required value="{{ {a:0.3,b:0.8,c:0.9,d:0.6}[key] }}"></div>
+    {% endfor %}</div>
+    <button type="button" id="branches-copy-law">Copier cette loi sur les douze branches</button>
+    <p class="small-note">Flèches par pas de 0,1 ; saisie plus précise possible. 0≤a&lt;b&lt;1 et 0≤d≤c≤1. Changer de branche conserve les réglages préparés ; le bouton de comparaison les applique ensemble.</p>
+    </fieldset>
+    <fieldset><legend>Les cinq partages initiaux</legend>
+    {% for key,label in {s1:'En 1 : part vers 2 ; reste vers 5',s2:'En 2 : part vers 3 ; reste vers 8',s5:'En 5 : part vers 3 ; reste vers 7',s3:'En 3 : part vers 4 ; reste vers 6',s7:'En 7 : part vers 6 ; reste vers 4'} %}
+    <div class="graph-field"><label for="branch-{{ key }}">{{ label }}</label><input id="branch-{{ key }}" type="number" min="0" max="1" step="0.1" value="0.5" required></div>
+    {% endfor %}
+    <p class="small-note">0 et 1 sont autorisés. La grille teste tous les partages de son pas, indépendamment du départ ; le départ sert aussi de solution initiale à la recherche globale.</p>
+    </fieldset>
+    <div class="graph-field"><label for="branches-divisions">Pas de la grille de partages</label><select id="branches-divisions"><option value="5">0,2 · 7 776 configurations</option><option value="10" selected>0,1 · 161 051 configurations</option><option value="20">0,05 · 4 084 101 configurations</option><option value="50">0,02 · 345 025 251 configurations</option><option value="100">0,01 · 10 510 100 501 configurations</option></select></div>
+    <div class="graph-field"><label for="branches-grid-budget">Maximum de configurations à tester</label><select id="branches-grid-budget"><option value="200000">200 000</option><option value="1000000">1 000 000</option><option value="5000000">5 000 000</option></select></div>
+    <div class="graph-field"><label for="branches-node-budget">Budget de sous-problèmes pour chaque recherche globale</label><input id="branches-node-budget" type="number" min="1" max="50000" step="1" value="10000" required></div>
+    <div class="optimization-actions"><button type="submit" id="branches-compare" class="graph-primary" disabled>Appliquer et comparer</button><button type="button" id="branches-cancel" hidden>Arrêter le calcul en cours</button><button type="button" id="branches-reset">Revenir aux valeurs proposées</button><button type="button" id="branches-between">Exemple : b = 0,83 entre deux points de grille</button></div>
+    <p class="small-note">Le dernier bouton prépare b=0,83 sur les douze branches, avec a=0,3, c=0,9, d=0,6 et les partages initiaux à 0,5. Lancez ensuite la comparaison au pas 0,1 pour étudier l’effet de la discrétisation.</p>
+    <p id="branches-error" role="alert"></p><p id="branches-status" role="status" aria-live="polite">Préparation de l’atelier…</p>
+    <p class="small-note">Les calculs s’exécutent dans votre navigateur. Les réglages ne sont pas conservés après rechargement ; l’export JSON enregistre la configuration et les résultats.</p>
+    </form>
+</section>
+</div>
+<section class="graph-section" aria-labelledby="branches-results-heading">
+    <h2 id="branches-results-heading">Résultats et configurations à reproduire</h2>
+    <div id="branches-results" aria-live="polite"><p>Lancez la comparaison pour mesurer le résultat de chaque méthode.</p></div>
+    <div class="graph-two-columns">
+        <div class="graph-field"><label for="branches-view">État affiché dans le graphe, les tableaux et les analyses</label><select id="branches-view"><option value="initial">Partages initiaux</option><option value="grid" disabled>Meilleur résultat de la grille</option><option value="global" disabled>Recherche globale, fonctions fixées</option><option value="bounded" disabled>Recherche globale, paramètres bornés</option><option value="free" disabled>Paramètres libres : construction r = 1</option></select></div>
+        <div class="graph-field"><label for="branches-inspect">Branche à examiner</label><select id="branches-inspect">{% for edge in ['1-2','1-5','2-3','2-8','5-3','5-7','7-6','7-4','3-4','3-6','4-8','6-8'] %}<option value="{{ edge }}">{{ edge|replace({'-':' → '}) }}</option>{% endfor %}</select></div>
+    </div>
+    <p id="branches-commands" class="optimization-figure-note"></p><div id="branches-balances"></div><div id="branches-flows"></div>
+    <details><summary>Bornes, budgets et données du calcul</summary><div id="branches-certificates"></div><button type="button" id="branches-export">Exporter la configuration et les résultats (JSON)</button></details>
+    <p class="small-note">Les résultats calculés ne sont pas des mesures. Tableaux arrondis à six décimales, graphe à trois ; l’export conserve la précision des calculs et des paramètres.</p>
+</section>
+<section class="graph-section" aria-labelledby="branches-curve-heading">
+    <h2 id="branches-curve-heading">La transformation de la branche choisie</h2>
+    <figure class="graph-surface"><svg id="branches-curve" viewBox="0 0 600 320" role="img" aria-labelledby="branches-curve-title branches-curve-desc"><title id="branches-curve-title">Loi de branche et point de fonctionnement</title><desc id="branches-curve-desc">Coefficient f affine par morceaux et production x f(x), quadratique par morceaux, avec le point de fonctionnement et la diagonale sans perte y=x.</desc></svg><figcaption id="branches-curve-caption"></figcaption></figure>
+</section>
+{% include 'graph/_inspector.html.twig' with {inspector_id:'branches-inspector',subject:'branche'} only %}
+<section class="graph-section" aria-labelledby="branches-design-heading">
+    <h2 id="branches-design-heading">2 · Faire varier aussi les douze fonctions</h2>
+    <p>Cinq partages et 48 paramètres font 53 commandes. Une exploration naïve avec dix valeurs par commande compterait 10⁵³ combinaisons avant même le contrôle des contraintes. La recherche suivante traite directement les plages admissibles des fonctions et les bilans du réseau.</p>
+    <form id="branches-design" class="graph-controls" novalidate>
+        <div class="graph-field"><label for="branches-box-choice">Branche dont les plages sont à préparer</label><select id="branches-box-choice">{% for edge in ['1-2','1-5','2-3','2-8','5-3','5-7','7-6','7-4','3-4','3-6','4-8','6-8'] %}<option value="{{ edge }}">{{ edge|replace({'-':' → '}) }}</option>{% endfor %}</select></div>
+        {% for key,limits in {a:[0.2,0.4],b:[0.7,0.9],c:[0.8,1],d:[0.5,0.7]} %}
+        <fieldset class="branch-box"><legend>Plage de {{ key }}</legend>{% for index,suffix in ['min','max'] %}<div class="graph-field"><label for="box-{{ key }}-{{ suffix }}">{{ key }} · {{ suffix == 'min' ? 'Minimum' : 'Maximum' }}</label><input id="box-{{ key }}-{{ suffix }}" type="number" min="0" max="1" step="0.1" value="{{ limits[index] }}" required></div>{% endfor %}</fieldset>
+        {% endfor %}
+        <p class="small-note">Plages proposées autour des valeurs initiales, modifiables branche par branche. Dans cet atelier : a max &lt; b min, b max &lt; 1, d max ≤ c min. Ces conditions assurent que toute combinaison des plages définit une loi admissible. Les plages n’introduisent aucun coût de modification.</p>
+        <div class="optimization-actions"><button type="button" id="branches-copy-box">Copier ces plages sur les douze branches</button><button type="submit" id="branches-design-run" disabled>Optimiser partages et paramètres bornés</button><button type="button" id="branches-free">Examiner la construction libre r = 1</button></div>
+        <p id="branches-design-error" role="alert"></p><p id="branches-design-status" role="status" aria-live="polite">Appliquez les plages pour calculer une configuration.</p>
+    </form>
+    <details><summary>Pourquoi la liberté complète permet r = 1</summary><p>Les fonctions ne créent aucun flux et les partages ne le dupliquent pas : r≤1. Prenons a=0,3, b=0,5, c=d=1 partout et envoyons toute la source par 1→2→8 : s1=1, s2=0. Les deux branches actives reçoivent x=1 et ont f(1)=1, donc chacune transmet y=1. Le résultat atteint r=1, soit 100 %. Il s’agit d’un optimum global construit explicitement pour des coefficients libres autorisant le cas sans perte. Les trois autres partages, ici 0,5, n’agissent que sur des flux nuls.</p><p>Des plages de paramètres, des coûts ou des limites technologiques créent un problème différent et plus contraint. Le bouton ci-dessus montre les paramètres et les flux de cette construction libre ; il ne modifie pas les plages préparées.</p></details>
+</section>
+<section class="graph-section" aria-labelledby="branches-method-heading">
+    <h2 id="branches-method-heading">Comprendre la portée des deux méthodes</h2>
+    <h3>La grille : une référence coûteuse et finie</h3>
+    <p>Chaque partage prend les valeurs 0, h, 2h, …, 1, avec h=1/n. Les (n+1)⁵ configurations sont calculées dans l’ordre des cinq partages ; toute entrée de branche hors [0,1] rend la configuration incompatible. Une exploration terminée trouve le maximum de cette grille. Elle ne prouve pas le maximum continu entre ses points. Un budget atteint ou un arrêt conserve seulement le meilleur résultat de la partie visitée.</p>
+    <h3>Le lagrangien fournit une borne ; les intervalles sont affinés</h3>
+    <p>La production g(x)=x f(x) est quadratique par morceaux et peut être non concave. Les seules équations de stationnarité ne suffisent donc pas à prouver un maximum global. Le moteur utilise des programmes linéaires qui encadrent chaque portion quadratique par des tangentes et des sécantes orientées selon sa courbure. Il sépare les régimes puis affine les intervalles d’entrée pour resserrer ces encadrements.</p>
+    <p>Chaque programme fournit une borne supérieure issue de son dual lagrangien. La meilleure configuration recalculée donne une borne inférieure. Les régions écartées ont une justification ; les régions encore ouvertes ou numériquement incertaines conservent leur borne. L’écart annoncé mesure ce qui reste possible. La tolérance visée est 10⁻⁷ ; les certificats sont numériques, sans arithmétique formelle exacte.</p>
+    <p>Le moteur commence aussi par la borne de conservation r≤1 et par le maximum de la somme des deux productions issues de la source. Aucun traitement ultérieur ne peut accroître cette somme. Lorsqu’une configuration atteint cette borne, elle suffit à conclure ; l’affichage explique alors pourquoi aucune subdivision supplémentaire n’a été nécessaire.</p>
+    <details><summary>Les équations du réseau et le lagrangien</summary>
+        <p>x₁₂+x₁₅=1. Pour i=2,…,7 : Σⱼ xᵢⱼ=Σₖ yₖᵢ. Pour chaque branche : yᵢⱼ=xᵢⱼ fᵢⱼ(xᵢⱼ), 0≤xᵢⱼ≤1. L’objectif est max r=y₂₈+y₄₈+y₆₈. Les sommes portent uniquement sur les douze liaisons du réseau.</p>
+        <p>f(x)=0 pour 0≤x≤a ; f(x)=c(x−a)/(b−a) pour a≤x≤b ; f(x)=c+(d−c)(x−b)/(1−b) pour b≤x≤1. Ces formules définissent le coefficient. La production vaut g(x)=x f(x), donc g(x)=0, c(x²−ax)/(b−a), puis x[c+(d−c)(x−b)/(1−b)]. Il existe 3¹² combinaisons de régimes ; une subdivision spatiale supplémentaire est nécessaire pour encadrer les portions quadratiques.</p>
+        <p>Pour un sous-problème max qᵀz sous Az≤h et 0≤z≤U, le lagrangien est L(z,λ)=qᵀz+λᵀ(h−Az), λ≥0. Tout λ admissible donne la borne λᵀh+Σⱼ max(0,qⱼ−(Aᵀλ)ⱼ)Uⱼ. Cette correction sur les bornes des variables garde un sens même en présence d’un résidu dual. Les marges numériques sont prises en compte.</p>
+    </details>
+    <h3>Paramètres bornés : représenter toutes les fonctions permises</h3>
+    <p>Dans les plages annoncées, les coefficients réalisables à une entrée x forment exactement un intervalle entre deux enveloppes affines par morceaux. En multipliant par x≥0, on obtient les deux enveloppes quadratiques de la production. Le moteur les encadre, sépare leurs régimes et affine les intervalles tout en optimisant les flux ensemble. Chaque solution retenue reconstruit pour chaque branche des a,b,c,d réellement admissibles et recalcule le réseau. On affiche ainsi une configuration réalisable et une borne pour ce domaine de conception.</p>
+    <p><a href="https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf">Boyd et Vandenberghe · Dualité et lagrangien</a> · <a href="https://arxiv.org/abs/1708.00050">Huchette et Vielma · Fonctions affines par morceaux</a> · <a href="https://stanford.edu/class/ee364b/lectures/bb_notes.pdf">Boyd et Mattingley · Séparation et évaluation</a></p>
+    <p class="small-note">La topologie, les conversions, les lois et leurs plages définissent le modèle. Les flèches indiquent une dépendance de calcul, sans délai chronologique imposé. Une entropie ou un coût changeraient le critère ; ils ne sont pas ajoutés à la maximisation de r.</p>
+</section>
+</div>
+{% endblock %}
+{% block graph_method_note %}<section class="content-note"><h2>Une analyse sur chaque branche</h2><p>Les fonctions appartiennent ici aux douze branches, conformément à la précision de l’auteur. L’entrée allouée, le traitement x↦x f(x) et la production sont analysés en cas 1b : même normalisation numérique, rôles d’attributs distincts. Les huit nœuds assurent les sommes et les partages. <a href="{{ path('graph_production_optimization') }}">Le précédent atelier de huit machines</a> conserve son modèle où les transformations appartiennent aux nœuds.</p></section>{% endblock %}

@@ -1,0 +1,30 @@
+@import url('./production-optimization.css');
+[data-graph-study="production-branches"] svg { width:100%; display:block; height:auto; color:var(--ink); }
+[data-graph-study="production-branches"] details { margin-block:1rem; }
+[data-graph-study="production-branches"] summary { cursor:pointer; font-weight:650; }
+[data-graph-study="production-branches"] .graph-two-columns { margin-block:1rem; }
+[data-graph-study="production-branches"] .graph-controls { min-width:0; }
+[data-graph-study="production-branches"] .graph-map-panel { position:static; }
+#branches-error, #branches-design-error { color:var(--tone-orange); font-weight:650; }
+#branches-error:empty, #branches-design-error:empty { display:none; }
+#branches-curve { max-width:640px; margin-inline:auto; }
+.branch-coefficient-line { fill:none; stroke:var(--tone-green); stroke-width:2.5; stroke-dasharray:8 5; }
+.branch-identity { stroke:var(--muted); stroke-width:1; stroke-dasharray:3 5; }
+#branches-design { max-width:760px; }
+.branch-box { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; border:1px solid var(--line); border-radius:.5rem; padding:.8rem; margin-block:.8rem; min-width:0; }
+.branch-arc { color:var(--tone-blue); }
+.branch-arc .branch-line { stroke:currentColor; stroke-width:2.5; fill:none; }
+.branch-hit { stroke:transparent; stroke-width:22; fill:none; }
+.branch-arc[data-selected] .branch-line, .branch-arc:hover .branch-line, .branch-arc:focus .branch-line { stroke-width:5; }
+.branch-arc[data-selected] { color:var(--tone-orange); }
+.branch-arc:focus { outline:none; }
+.branch-arc:focus .branch-line { stroke:var(--focus); }
+.branch-label { font:600 19px system-ui,sans-serif; fill:var(--ink); stroke:var(--paper); stroke-width:6px; paint-order:stroke; text-anchor:middle; }
+.branch-junction circle { fill:var(--paper); stroke:var(--tone-blue); stroke-width:3; }
+.branch-junction text { fill:var(--ink); text-anchor:middle; font:600 23px system-ui,sans-serif; }
+.branch-junction[data-final] circle { stroke:var(--tone-green); stroke-width:4; }
+.branch-junction .branch-total { font-size:17px; }
+#branches-results { font-variant-numeric:tabular-nums; }
+#branches-certificates pre { white-space:pre-wrap; overflow-wrap:anywhere; max-height:24rem; overflow:auto; }
+@media(max-width:800px) { .branch-label { font-size:30px; } .branch-junction text { font-size:30px; } .branch-junction .branch-total { font-size:25px; } }
+@media(min-width:801px) and (min-height:950px) { [data-graph-study="production-branches"] .graph-map-panel { position:sticky; } }

@@ -8,7 +8,7 @@ $kernel = new App\Kernel('dev', true);
 $kernel->boot();
 $productionPath = '/graphes/production';
 $graphPaths = ['/graphes/', '/graphes/dependances', $productionPath];
-$knownGraphPaths = [...$graphPaths, '/graphes/production/optimisation'];
+$knownGraphPaths = [...$graphPaths, '/graphes/production/optimisation', '/graphes/production/branches'];
 $checks = 0;
 $errors = [];
 $documents = [];
@@ -87,7 +87,7 @@ foreach (['production-map', 'production-curve', 'production-history-chart'] as $
 }
 $form = $requiredElement('production-controls', 'form');
 if ($form !== null) { $check($form->hasAttribute('novalidate'), 'Validation du domaine confiée au script de production'); }
-foreach (['production-preset' => ['balanced', 'threshold', 'oscillating', 'optimization'], 'production-machine' => ['M1', 'M2', 'M3']] as $id => $expected) {
+foreach (['production-preset' => ['balanced', 'threshold', 'oscillating', 'optimization', 'branches'], 'production-machine' => ['M1', 'M2', 'M3']] as $id => $expected) {
     $select = $requiredElement($id, 'select');
     if ($select === null) { continue; }
     $actual = [];
