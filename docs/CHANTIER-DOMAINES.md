@@ -2,7 +2,13 @@
 
 Chantier ouvert le 9 septembre 2026 à la demande de l'auteur. La thermodynamique et la physique statistique conservent leur parcours existant. Le présent chantier porte sur les autres domaines, avec les mathématiques comme prérequis et la chimie seulement lorsqu'un lien physique l'exige.
 
-## Ordre des lots
+## Mise en attente au 10 septembre 2026
+
+À la demande de l’auteur, **les prochains lots de physique sont réservés pour plus tard**. E1e est livré et aucun lot commencé ne reste à terminer. Les pistes ci-dessous sont conservées comme réserve ; elles ne constituent pas un travail actif.
+
+La priorité est désormais [l’élargissement des formes d’analyse](FORMES-ANALYSE.md) : présenter les quatre cas dès l’accueil, puis réaliser leurs exemples. Les 37 fiches et tous les lots déjà livrés restent accessibles sous le cas 4. Les nouveaux exemples méthodologiques réutilisent des sujets existants sans lancer de lot scientifique supplémentaire.
+
+## Ordre des lots en réserve
 
 **Priorité depuis le 9 septembre 2026 : la structure analytique de chaque fiche.** Les 37 fiches disponibles disposent de six systèmes globaux, chacun décliné selon la même boucle de six sous-niveaux (1 332 points). Le premier approfondissement analytique des 22 premières fiches est achevé avec AP8. E1a à E1e ajoutent quinze fiches d’électromagnétisme avec leurs analyses détaillées dès la création ; la relecture scientifique avec l'auteur se poursuit. Voir [la méthode et les règles d'extension](ANALYSES-DEUX-NIVEAUX.md).
 
@@ -47,7 +53,7 @@ Lire d'abord [les fondements du projet](FONDEMENTS-DU-PROJET.md) : la nature du 
 
 1. Choisir un ensemble limité de notions et relever les passages exacts des deux recueils. Examiner visuellement les formules, unités et conventions.
 2. Rédiger une synthèse web originale : objectif, prérequis, système, hypothèses, lois, limites, exemple recalculé, question corrigée, références précises.
-3. Définir les six systèmes globaux de chaque fiche et les six sous-niveaux de chacun selon la même chaîne analytique. Rédiger les 36 actions, sorties et comparaisons spécifiques au sujet. Relier le schéma global aux six schémas locaux, puis aux descriptions et passages scientifiques : clic, survol, clavier et bouton tactile. N'ajouter une simulation que si elle apporte un apprentissage identifiable.
+3. Pour une fiche du catalogue du cas 4, définir les six systèmes globaux et les six sous-niveaux de chacun selon la même chaîne analytique. Rédiger les 36 actions, sorties et comparaisons spécifiques au sujet. Relier le schéma global aux six schémas locaux, puis aux descriptions et passages scientifiques : clic, survol, clavier et bouton tactile. N'ajouter une simulation que si elle apporte un apprentissage identifiable.
 4. Contrôler les formules avec des sources primaires, puis vérifier calculs, liens, ancres, affichage serveur et absence de régression sur les parcours existants. Documenter les erreurs de source identifiées sans modifier les PDF.
 5. Actualiser le journal, synchroniser les fichiers concernés avec l'application locale, créer un commit lisible et l'envoyer sur `master`. Vérifier que la branche distante pointe sur ce commit. Aucune réécriture de l'historique.
 

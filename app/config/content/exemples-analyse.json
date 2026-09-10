@@ -1,0 +1,893 @@
+[
+  {
+    "slug": "chauffage-temperature",
+    "format": "cas-1",
+    "title": "Chauffer un gaz à volume fixé",
+    "variant": "1a",
+    "question": "Quelle température finale obtient-on en apportant 249,42 J à un gaz initialement à 300 K ?",
+    "scope": "Même échantillon fermé de 1,00 mol de gaz parfait monoatomique classique, composition fixe, excitations électroniques négligées. Enceinte rigide, seul travail possible de pression ; variations d’énergie cinétique et potentielle macroscopiques négligées. États initial et final à l’équilibre.",
+    "basis": "T₀ = 300 K et chaleur reçue Q = +249,42 J sont supposés. R ≈ 8,314 J·mol⁻¹·K⁻¹ est arrondi pour ce calcul. C_V = 3nR/2 est constant dans le modèle ; tous les résultats sont calculés.",
+    "reading_card": "capacites-thermiques",
+    "attributes": {
+      "input": "Température initiale T₀, grandeur scalaire en kelvins. n, Q, R et la contrainte de volume sont le contexte affiché du traitement.",
+      "output": "Température finale T_f du même échantillon, en kelvins ; aucune nouvelle valeur de Q n’est recherchée.",
+      "comparison": "1a : la température conserve sa nature physique entre deux états, tandis que sa valeur change. Les paramètres du chauffage restent distincts des attributs principaux."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Décrire l’état à chauffer",
+        "system": "Le gaz initial et le transfert thermique imposé.",
+        "input": "T₀ = 300 K ; 1,00 mol reçoit Q = +249,42 J dans l’enceinte rigide.",
+        "action": "Identifier la température initiale et la chaleur reçue ; conserver composition et quantité de matière.",
+        "output": "État initial à 300 K, avec chauffage positif et volume fixe.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Le dossier distingue un attribut d’état, T₀, du transfert Q qui intervient dans le traitement."
+        }
+      },
+      {
+        "id": 2,
+        "title": "Intégrer le bilan thermique",
+        "system": "La transformation de température sous le premier principe.",
+        "input": "T₀, Q, n et les contraintes de l’enceinte.",
+        "action": "Calculer C_V = 3nR/2 = 12,471 J/K. À volume fixé, W = 0 ; intégrer Q = ΔU = C_V(T_f−T₀), donc T_f = T₀+Q/C_V.",
+        "output": "ΔT = 20 K ; T_f = 300 K + 20 K.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le modèle calorique et le bilan d’énergie transforment les attributs initiaux en température prédite."
+        }
+      },
+      {
+        "id": 3,
+        "title": "Restituer la température finale",
+        "system": "L’état d’équilibre final calculé.",
+        "input": "La somme T_f = 300 K + 20 K obtenue en 2.",
+        "action": "Restituer la valeur avec son unité et la contrainte de volume.",
+        "output": "T_f = 320 K pour le même échantillon ; résultat calculé, sans mesure annoncée.",
+        "relation": {
+          "nature": "logique",
+          "description": "La sortie conserve le type température ; elle n’assimile pas chauffage et augmentation de capacité thermique."
+        }
+      }
+    ],
+    "review": {
+      "object": "Le type température en entrée et en sortie, puis la cohérence du bilan chiffré.",
+      "conditions": "Même échantillon, volume constant, C_V = 12,471 J/K ; R reste une approximation numérique.",
+      "criterion": "T_f−T₀ = 20 K et C_V(T_f−T₀) = 249,42 J ; le chauffage positif augmente T dans ce cadre.",
+      "finding": "La transformation est de type 1a. Le recalcul retrouve Q ; il s’agit d’une cohérence interne, sans confrontation expérimentale."
+    },
+    "references": [
+      {
+        "title": "OpenStax · University Physics 2, §3.5 — Heat Capacities of an Ideal Gas",
+        "url": "https://openstax.org/books/university-physics-volume-2/pages/3-5-heat-capacities-of-an-ideal-gas",
+        "note": "Équation 3.9 et tableau 3.3, vérifiés le 10 septembre 2026. La source note une capacité molaire ; C_V désigne ici la capacité totale 3nR/2."
+      }
+    ]
+  },
+  {
+    "slug": "decharge-courant",
+    "format": "cas-1",
+    "title": "Un courant diminue dans une boucle RL",
+    "variant": "1a",
+    "question": "Que devient le courant initial de 0,400 A après une durée τ ln 2 ?",
+    "scope": "Après commutation, R = 20,0 Ω et L = 0,200 H forment une boucle fermée sans source. Bobine idéale, paramètres constants et localisés ; pas de circuit ouvert ni d’impulsion de tension. Le sens positif reste fixé dans la même branche.",
+    "basis": "Le courant initial i₀ = +0,400 A est supposé ; sa préparation n’est pas simulée. On demande i au temps t* = (L/R) ln 2 ≈ 6,93147 ms après le début de la décharge. Les valeurs sont calculées.",
+    "reading_card": "circuit-rl-transitoire",
+    "attributes": {
+      "input": "Courant initial i₀, grandeur signée en ampères ; R, L, la topologie fermée et t* sont les paramètres du problème.",
+      "output": "Courant i(t*) dans la même branche et la même orientation, en ampères.",
+      "comparison": "1a : on suit le même courant entre deux dates. Sa diminution n’implique ni inversion de sens ni conservation de sa valeur."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Fixer le début de la décharge",
+        "system": "La branche RL et sa condition initiale.",
+        "input": "i₀ = +0,400 A ; source retirée, chemin RL fermé.",
+        "action": "Fixer t = 0 à la décharge et conserver le sens positif du courant après la commutation.",
+        "output": "i(0) = +0,400 A dans une boucle sans source.",
+        "relation": {
+          "nature": "chronologique",
+          "description": "Les deux états correspondent à deux dates du scénario supposé ; la topologie conserve un chemin pour le courant."
+        }
+      },
+      {
+        "id": 2,
+        "title": "Résoudre la décroissance",
+        "system": "L’équation différentielle du courant.",
+        "input": "i₀, R = 20,0 Ω, L = 0,200 H et t* = (L/R) ln 2.",
+        "action": "Résoudre L di/dt + Ri = 0 : i(t) = i₀ exp(−t/τ), avec τ = L/R = 10,0 ms. À t*, exp(−t*/τ) = 1/2.",
+        "output": "i(t*) = i₀/2 = +0,200 A.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La loi des mailles et la condition initiale déterminent le courant à la date demandée."
+        }
+      },
+      {
+        "id": 3,
+        "title": "Lire le courant ultérieur",
+        "system": "Le courant prédit à t*.",
+        "input": "La valeur i(t*) = +0,200 A.",
+        "action": "Associer le résultat à t* ≈ 6,93147 ms, à la branche et à son orientation.",
+        "output": "Le courant reste positif et vaut +0,200 A à cette date.",
+        "relation": {
+          "nature": "logique",
+          "description": "La sortie restitue un courant, distinct des tensions et de l’énergie stockée."
+        }
+      }
+    ],
+    "review": {
+      "object": "Les courants initial et ultérieur, leur signe et leur rapport.",
+      "conditions": "R et L constants, boucle fermée sans source, même référence de courant et t* = τ ln 2.",
+      "criterion": "i(t*)/i₀ = 1/2 et 0 < i(t*) < i₀ ; le résultat satisfait la solution de la décharge.",
+      "finding": "La grandeur principale reste un courant : variante 1a. La loi suppose le circuit déclaré ; aucun courant réel n’a été mesuré."
+    },
+    "references": [
+      {
+        "title": "OpenStax · University Physics 2, §14.4 — RL Circuits",
+        "url": "https://openstax.org/books/university-physics-volume-2/pages/14-4-rl-circuits",
+        "note": "Équations 14.30–14.31, vérifiées le 10 septembre 2026 : décroissance dans une boucle RL fermée, avec une condition initiale donnée."
+      }
+    ]
+  },
+  {
+    "slug": "charge-vers-champ",
+    "format": "cas-1",
+    "title": "D’une charge au champ électrique",
+    "variant": "1b",
+    "question": "Quel champ produit une charge de +3,00 nC au point de coordonnées relatives (0,18 ; 0,24 ; 0) m ?",
+    "scope": "Source ponctuelle unique maintenue immobile dans le vide. Le vecteur R = OM est exprimé dans une base orthonormée ; M est distinct de O. Aucun champ supplémentaire, aucune force ni trajectoire de charge test ne sont étudiés.",
+    "basis": "Q = +3,00 nC et R = (0,18 ; 0,24 ; 0) m sont supposés ; k ≈ 8,99 × 10⁹ N·m²·C⁻² est approché. Le champ et ses composantes sont calculés.",
+    "reading_card": "champ-coulomb",
+    "attributes": {
+      "input": "Charge source Q en coulombs et position relative R en mètres ; le vide et k font partie du contexte.",
+      "output": "Champ électrique vectoriel E en N/C au point M.",
+      "comparison": "1b : charge et géométrie donnent une autre grandeur, le champ. On contrôle leur relation par Coulomb, sans soustraire des quantités de types différents."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Décrire source et point",
+        "system": "La configuration électrostatique supposée.",
+        "input": "Q = +3,00 nC ; R = OM = (0,18 ; 0,24 ; 0) m.",
+        "action": "Identifier O comme source et M comme point d’évaluation ; conserver le signe positif de Q.",
+        "output": "Une charge positive et une position relative sont définies, sans charge test nécessaire.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "Le dossier de configuration précède le calcul du champ ; il ne décrit pas une propagation temporelle."
+        }
+      },
+      {
+        "id": 2,
+        "title": "Appliquer la loi de Coulomb",
+        "system": "La loi de champ d’une source ponctuelle.",
+        "input": "Q, R et k approché.",
+        "action": "Calculer r = ||R|| = 0,30 m et e_r = R/r = (0,6 ; 0,8 ; 0). Appliquer E = (kQ/r²)e_r.",
+        "output": "E_r ≈ +299,6667 N/C ; E ≈ (179,800 ; 239,733 ; 0) N/C.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La loi transforme charge et géométrie en un vecteur champ, radial sortant pour Q positif."
+        }
+      },
+      {
+        "id": 3,
+        "title": "Restituer le vecteur champ",
+        "system": "Les attributs du champ au point M.",
+        "input": "Les composantes obtenues par Coulomb.",
+        "action": "Conserver composantes, unité et point d’évaluation ; distinguer le champ d’une force sur une charge test.",
+        "output": "E ≈ (179,800 ; 239,733 ; 0) N/C en M, de norme ≈ 299,6667 N/C.",
+        "relation": {
+          "nature": "logique",
+          "description": "La sortie porte sur le champ créé par Q ; aucune donnée mécanique n’est ajoutée."
+        }
+      }
+    ],
+    "review": {
+      "object": "Le changement de type charge-position → champ, avec sa cohérence géométrique.",
+      "conditions": "Source ponctuelle dans le vide, r > 0, même base et même k approché ; calcul avant arrondi d’affichage.",
+      "criterion": "||E|| = kQ/r² ≈ 299,6667 N/C, E parallèle à R et E·R > 0 pour Q > 0.",
+      "finding": "Le champ est radial sortant : variante 1b. Le contrôle vectoriel est interne au modèle ; il ne vérifie pas toute la loi spatiale par une mesure."
+    },
+    "references": [
+      {
+        "title": "OpenStax · University Physics 2, §5.4 — Electric Field",
+        "url": "https://openstax.org/books/university-physics-volume-2/pages/5-4-electric-field",
+        "note": "Équation 5.4 et sens du champ, vérifiés le 10 septembre 2026 : une seule source ponctuelle est retenue ici."
+      }
+    ]
+  },
+  {
+    "slug": "profondeur-vers-pression",
+    "format": "cas-1",
+    "title": "D’une profondeur à une surpression",
+    "variant": "1b",
+    "question": "Quelle surpression trouve-t-on à 1,50 m sous la surface d’un liquide au repos ?",
+    "scope": "Liquide homogène au repos, ρ = 1 000 kg/m³, pesanteur uniforme g = 9,81 m/s² et référentiel galiléen. L’axe z monte ; la surface a une pression uniforme p_s. Seule la différence p(M)−p_s est recherchée.",
+    "basis": "h = 1,50 m, ρ et g sont supposés. La pression de surface n’est pas chiffrée ; Δp sera calculé, sans mesure ni pression absolue inventée.",
+    "reading_card": "hydrostatique-archimede",
+    "attributes": {
+      "input": "Profondeur h, longueur positive en mètres ; ρ, g et la pression de référence à la surface constituent le contexte.",
+      "output": "Surpression Δp = p(M)−p_s, différence de pression en pascals.",
+      "comparison": "1b : une longueur est exploitée pour obtenir une différence de pression. Δp ne désigne ni une profondeur finale ni une force sur une paroi."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Repérer la profondeur",
+        "system": "La position du point M sous la surface.",
+        "input": "h = 1,50 m et axe z orienté vers le haut.",
+        "action": "Associer profondeur et différence d’altitude : z_M−z_s = −h ; retenir la surface comme référence.",
+        "output": "M est à 1,50 m sous la surface, sans valeur imposée à p_s.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "La convention géométrique fixe le signe avant d’intégrer le bilan hydrostatique."
+        }
+      },
+      {
+        "id": 2,
+        "title": "Intégrer l’équilibre du liquide",
+        "system": "Le bilan vertical des forces dans le fluide.",
+        "input": "h = 1,50 m, ρ = 1 000 kg/m³ et g = 9,81 m/s².",
+        "action": "Intégrer dp/dz = −ρg entre z_s et z_M : Δp = −ρg(z_M−z_s) = ρgh.",
+        "output": "Δp = 14 715 Pa.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’équilibre statique relie profondeur et différence de pression, sous densité et pesanteur constantes."
+        }
+      },
+      {
+        "id": 3,
+        "title": "Restituer la surpression",
+        "system": "La différence de pression par rapport à la surface.",
+        "input": "Δp = 14 715 Pa.",
+        "action": "Exprimer le résultat en kilopascals en conservant sa référence : Δp = p(M)−p_s.",
+        "output": "À cette profondeur, la pression dépasse celle de la surface de 14,715 kPa.",
+        "relation": {
+          "nature": "logique",
+          "description": "La sortie conserve la référence à la surface ; elle n’ajoute pas de pression atmosphérique supposée."
+        }
+      }
+    ],
+    "review": {
+      "object": "Le passage de la profondeur en mètres à la surpression en pascals.",
+      "conditions": "Liquide homogène au repos, g uniforme et même référence de surface ; p_s non chiffrée.",
+      "criterion": "ρgh a l’unité kg·m⁻¹·s⁻² = Pa et vaut +14 715 Pa ; le point plus profond a la pression la plus forte.",
+      "finding": "La transformation est de type 1b. On connaît Δp ; obtenir la pression absolue p(M) exigerait aussi la valeur de p_s."
+    },
+    "references": [
+      {
+        "title": "MIT 8.01SC — Static Fluids, chapitre 27, §27.4",
+        "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter27.pdf",
+        "note": "Page 27-6, équations 27.4.5–27.4.7, vérifiées le 10 septembre 2026. Le MIT oriente son axe vers le bas ; ici z monte et h est la profondeur positive."
+      }
+    ]
+  },
+  {
+    "slug": "chauffage-temperature-detaille",
+    "format": "cas-2",
+    "title": "D’un état thermique au suivant",
+    "variant": "1a",
+    "question": "Comment décomposer le calcul de 300 K à 320 K en trois systèmes, chacun analysé par trois étapes ?",
+    "scope": "Même échantillon fermé de 1,00 mol de gaz parfait monoatomique classique, composition fixe, excitations électroniques négligées. Enceinte rigide, seul travail possible de pression ; variations d’énergie cinétique et potentielle macroscopiques négligées. États initial et final à l’équilibre.",
+    "basis": "T₀ = 300 K et chaleur reçue Q = +249,42 J sont supposés. R ≈ 8,314 J·mol⁻¹·K⁻¹ est arrondi pour ce calcul. C_V = 3nR/2 est constant dans le modèle ; tous les résultats sont calculés.",
+    "reading_card": "capacites-thermiques",
+    "attributes": {
+      "input": "Température initiale T₀, grandeur scalaire en kelvins. n, Q, R et la contrainte de volume sont le contexte affiché du traitement.",
+      "output": "Température finale T_f du même échantillon, en kelvins ; aucune nouvelle valeur de Q n’est recherchée.",
+      "comparison": "1a : la température conserve sa nature physique entre deux états, tandis que sa valeur change. Les paramètres du chauffage restent distincts des attributs principaux. Chaque système local précise ses propres types ; ils peuvent différer de la variante globale."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Constituer les attributs thermiques",
+        "system": "Le dossier de l’échantillon et sa capacité thermique.",
+        "input": "T₀ = 300 K, Q = +249,42 J, n = 1,00 mol et le modèle monoatomique dans l’enceinte rigide.",
+        "action": "Associer les valeurs au système et déterminer C_V = 3nR/2 sous le modèle déclaré.",
+        "output": "C_V = 12,471 J/K ; T₀, Q, n et volume fixé restent dans le dossier.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le dossier est préparé pour le bilan avec une capacité totale calculée."
+        },
+        "variant": "1b",
+        "attributes": {
+          "input": "Quantité de matière n en moles ; T₀, Q et le modèle sont le contexte.",
+          "output": "Capacité thermique totale C_V en J/K pour cet échantillon ; T₀ et Q restent disponibles.",
+          "comparison": "1b local : C_V = 3nR/2 relie quantité de matière et capacité, de natures différentes ; aucune température finale n’est encore déduite."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le dossier initial",
+            "input": "T₀ = 300 K, n = 1,00 mol, Q = +249,42 J ; gaz et enceinte définis.",
+            "action": "Séparer température de l’état initial, transfert reçu et quantité de matière conservée.",
+            "output": "Dossier de valeurs supposées ; aucune température finale encore connue.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le dossier distingue attribut d’état, quantité de matière et transfert reçu."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Déduire la capacité totale",
+            "input": "n, R approché et modèle classique monoatomique à composition fixe.",
+            "action": "Utiliser U(T) = 3nRT/2 + constante pour obtenir C_V = ∂U/∂T = 3nR/2.",
+            "output": "C_V = 12,471 J/K, total pour l’échantillon, supposé constant sur l’intervalle étudié.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La dérivation du modèle d’énergie donne une capacité totale, distincte de la capacité molaire."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les données du bilan",
+            "input": "T₀, Q et capacité obtenue en 1.2.",
+            "action": "Constituer les données du bilan, avec frontière rigide et absence d’autres travaux.",
+            "output": "Transmis à 2.1 : T₀ = 300 K, Q = +249,42 J, C_V = 12,471 J/K et contraintes conservées.",
+            "relation": {
+              "nature": "logique",
+              "description": "La sortie 1.3 fournit au système 2 la capacité et les conditions du bilan."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Intégrer le bilan énergétique",
+        "system": "La relation entre chaleur reçue et variation de température.",
+        "input": "T₀, Q, C_V et les contraintes transmis par 1.3.",
+        "action": "Établir W = 0 puis intégrer Q = ΔU = C_V(T_f−T₀), d’où ΔT = Q/C_V.",
+        "output": "ΔT = 20 K et T_f = T₀+ΔT.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le premier principe transforme le transfert reçu en élévation de température."
+        },
+        "variant": "1b",
+        "attributes": {
+          "input": "Chaleur reçue Q en joules ; C_V, T₀ et le volume constant sont les paramètres du bilan.",
+          "output": "Élévation de température ΔT en kelvins, avec la relation T_f = T₀+ΔT.",
+          "comparison": "1b local : une énergie transférée est reliée à une différence de température ; Q et ΔT ne sont pas soustraits directement."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Poser la température inconnue",
+            "input": "Dossier reçu de 1.3, deux états d’équilibre du même système.",
+            "action": "Poser T_f comme inconnue ; conserver Q reçu et les hypothèses qui annulent les autres variations énergétiques.",
+            "output": "Attributs de l’équation à résoudre : T₀, Q, C_V et température finale inconnue.",
+            "relation": {
+              "nature": "logique",
+              "description": "Les données du système 1 deviennent les attributs de l’équation à résoudre."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Résoudre le premier principe",
+            "input": "Ces attributs et la frontière rigide.",
+            "action": "Établir W = −∫p_ext dV = 0, donc Q = ΔU = ∫ de T₀ à T_f C_V dT ; intégrer avec C_V constant.",
+            "output": "T_f = T₀+Q/C_V ; ΔT = 249,42/12,471 = 20 K.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "L’intégration transforme la chaleur reçue en variation de température."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la relation résolue",
+            "input": "Relation résolue et élévation de température calculée.",
+            "action": "Conserver le résultat intermédiaire et son domaine de validité, sans lui attribuer une origine mesurée.",
+            "output": "Transmis à 3.1 : ΔT = 20 K, T₀ = 300 K, C_V = 12,471 J/K et T_f = T₀+ΔT.",
+            "relation": {
+              "nature": "logique",
+              "description": "La sortie 2.3 transmet la relation résolue et les paramètres au système 3."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Caractériser la température finale",
+        "system": "L’état final prédit et sa dépendance au chauffage.",
+        "input": "ΔT = 20 K, T₀ = 300 K et C_V = 12,471 J/K transmis par 2.3.",
+        "action": "Évaluer T_f = T₀+ΔT et dériver sa sensibilité ∂T_f/∂Q = 1/C_V à contexte fixé.",
+        "output": "T_f = 320 K ; ∂T_f/∂Q ≈ +0,08019 K/J dans ce modèle.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le résultat est évalué et caractérisé sans chaîne de retour implicite."
+        },
+        "variant": "1a",
+        "attributes": {
+          "input": "Température initiale T₀ en kelvins ; ΔT calculé et C_V constituent le contexte de restitution.",
+          "output": "Température finale T_f en kelvins ; sa sensibilité à Q est une information complémentaire.",
+          "comparison": "1a local : on établit la température finale depuis la température initiale. La sensibilité ne remplace pas l’attribut principal T_f."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le résultat intermédiaire",
+            "input": "T₀ et ΔT transmis par 2.3.",
+            "action": "Fixer la grandeur à restituer : température finale absolue, et non chaleur ou capacité.",
+            "output": "T_f à évaluer en kelvins, mêmes n et V que l’état initial.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "La variation reçue est distinguée de la température absolue à restituer."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer la valeur et sa sensibilité",
+            "input": "T_f = T₀+ΔT et relation T_f = T₀+Q/C_V.",
+            "action": "Calculer T_f = 320 K ; obtenir ∂T_f/∂Q = 1/C_V ≈ 0,08019 K/J à contexte fixé.",
+            "output": "Température 320 K ; sensibilité positive dans ce modèle à capacité constante.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Le traitement établit une valeur et sa sensibilité, sans incertitude de mesure inventée."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Restituer l’état thermique calculé",
+            "input": "Température et sensibilité établies en 3.2.",
+            "action": "Restituer l’état final prédit et la dépendance de ce résultat au chauffage supposé.",
+            "output": "T_f = 320 K pour Q = +249,42 J ; une hausse de Q augmente T_f dans le domaine déclaré.",
+            "relation": {
+              "nature": "logique",
+              "description": "La chaîne se termine par un état prédit ; aucun retour automatique vers 1.1 n’est ajouté."
+            }
+          }
+        ]
+      }
+    ],
+    "review": {
+      "object": "La transformation globale température → température et les transformations locales n → C_V, Q → ΔT, T₀ → T_f.",
+      "conditions": "Même échantillon fermé à volume fixé ; capacité totale constante et données supposées conservées entre systèmes.",
+      "criterion": "C_V = 12,471 J/K, ΔT = 20 K, T_f = 320 K et C_V(T_f−T₀) = Q. Chaque sous-niveau 2 réalise le traitement annoncé.",
+      "finding": "La variante globale est 1a, malgré deux transformations locales 1b. Ce contrôle interne n’ajoute ni théorie de retour ni mesure indépendante."
+    },
+    "references": [
+      {
+        "title": "OpenStax · University Physics 2, §3.5 — Heat Capacities of an Ideal Gas",
+        "url": "https://openstax.org/books/university-physics-volume-2/pages/3-5-heat-capacities-of-an-ideal-gas",
+        "note": "Équation 3.9 et tableau 3.3, vérifiés le 10 septembre 2026. La source note une capacité molaire ; C_V désigne ici la capacité totale 3nR/2."
+      }
+    ]
+  },
+  {
+    "slug": "charge-vers-champ-detaille",
+    "format": "cas-2",
+    "title": "De la charge au champ vectoriel",
+    "variant": "1b",
+    "question": "Comment séparer géométrie, loi de Coulomb et restitution du champ en trois systèmes de trois étapes ?",
+    "scope": "Source ponctuelle unique maintenue immobile dans le vide. Le vecteur R = OM est exprimé dans une base orthonormée ; M est distinct de O. Aucun champ supplémentaire, aucune force ni trajectoire de charge test ne sont étudiés.",
+    "basis": "Q = +3,00 nC et R = (0,18 ; 0,24 ; 0) m sont supposés ; k ≈ 8,99 × 10⁹ N·m²·C⁻² est approché. Le champ et ses composantes sont calculés.",
+    "reading_card": "champ-coulomb",
+    "attributes": {
+      "input": "Charge source Q en coulombs et position relative R en mètres ; le vide et k font partie du contexte.",
+      "output": "Champ électrique vectoriel E en N/C au point M.",
+      "comparison": "1b : charge et géométrie donnent une autre grandeur, le champ. On contrôle leur relation par Coulomb, sans soustraire des quantités de types différents. Chaque système local précise ses propres types ; ils peuvent différer de la variante globale."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Préparer la configuration",
+        "system": "Les attributs de la source et de la position relative.",
+        "input": "Q = +3,00 nC et R = (0,18 ; 0,24 ; 0) m dans la base orthonormée.",
+        "action": "Convertir la charge et représenter la position relative par r = ||R|| et e_r = R/r.",
+        "output": "Q = +3,00 × 10⁻⁹ C, r = 0,30 m et e_r = (0,6 ; 0,8 ; 0) ; R = r e_r.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La configuration est préparée sans changer la charge ni la position physique."
+        },
+        "variant": "1a",
+        "attributes": {
+          "input": "Charge Q et position relative vectorielle R ; base et source fixe constituent le contexte.",
+          "output": "Même charge et même position, représentées par Q en coulombs et le couple complet (r,e_r).",
+          "comparison": "1a local : Q et R = r e_r désignent la même configuration malgré le changement de représentation. Conserver seulement r perdrait l’orientation."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Identifier la configuration source-point",
+            "input": "Charge +3,00 nC, source en O, R = OM = (0,18 ; 0,24 ; 0) m.",
+            "action": "Définir le point M et conserver les rôles distincts de source et de point d’évaluation.",
+            "output": "Position relative et charge supposées ; aucune charge test requise.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Les rôles de la charge et de la position relative sont fixés avant leur exploitation."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Normaliser la position relative",
+            "input": "Q et composantes de R dans une base orthonormée.",
+            "action": "Convertir Q = 3,00 × 10⁻⁹ C ; calculer r = √(0,18²+0,24²) et normaliser e_r = R/r.",
+            "output": "r = 0,30 m > 0 et e_r = (0,6 ; 0,8 ; 0), de norme un.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "Conversion et normalisation conservent charge et géométrie, y compris l’orientation."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre les attributs géométriques",
+            "input": "Charge convertie, distance et direction obtenues.",
+            "action": "Associer les attributs géométriques au vide et à la source immobile unique.",
+            "output": "Transmis à 2.1 : Q, r, e_r et k ≈ 8,99 × 10⁹ N·m²·C⁻².",
+            "relation": {
+              "nature": "logique",
+              "description": "La sortie 1.3 fournit les attributs nécessaires au modèle du système 2."
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Calculer le coefficient radial",
+        "system": "La loi du champ électrique dans le modèle ponctuel.",
+        "input": "Q, r, e_r et k transmis par 1.3.",
+        "action": "Appliquer E_r = kQ/r² puis E = E_r e_r ; déduire le sens du champ du signe de Q.",
+        "output": "E_r ≈ +299,6667 N/C et E = E_r e_r, radial sortant.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La loi transforme configuration en champ ; la géométrie seule ne prouve pas la dépendance inverse carrée."
+        },
+        "variant": "1b",
+        "attributes": {
+          "input": "Charge Q et distance r, avec direction e_r et k dans le contexte.",
+          "output": "Champ E représenté par E_r et la direction e_r.",
+          "comparison": "1b local : les attributs de configuration donnent un champ en N/C. Son signe est interprété avec la même direction radiale."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Définir les attributs du modèle",
+            "input": "Configuration et coefficient approché reçus de 1.3.",
+            "action": "Fixer l’objet recherché : champ de Q en M ; exclure toute force ou mouvement de test.",
+            "output": "Attributs de la loi : Q positif, r strictement positif, direction radiale fixée.",
+            "relation": {
+              "nature": "logique",
+              "description": "La configuration devient l’entrée du modèle de champ, sans charge test ajoutée."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Évaluer la loi de champ",
+            "input": "Q, r, e_r et loi de Coulomb admise dans ce cadre.",
+            "action": "Évaluer E_r = kQ/r² = 26,97/0,09 ; former E = E_r e_r et vérifier [E_r] = N/C.",
+            "output": "E_r ≈ +299,6667 N/C ; champ sortant selon e_r.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La loi physique transforme charge et distance en coefficient radial du champ."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Transmettre la représentation radiale",
+            "input": "Coefficient radial et expression vectorielle obtenus par 2.2.",
+            "action": "Conserver signe, unité, direction et statut de résultat de la loi postulée.",
+            "output": "Transmis à 3.1 : E_r = kQ/r² non arrondi pour les opérations, e_r = (0,6 ; 0,8 ; 0) et E = E_r e_r ; E_r ≈ 299,6667 N/C à l’affichage.",
+            "relation": {
+              "nature": "logique",
+              "description": "La sortie 2.3 transmet le champ radial au système de restitution cartésienne."
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Restituer les composantes du champ",
+        "system": "Le vecteur champ au point M et ses représentations.",
+        "input": "E = E_r e_r transmis par 2.3 ; coefficient, base et point M conservés.",
+        "action": "Calculer les composantes, leur norme et le signe du produit scalaire E·R.",
+        "output": "E ≈ (179,800 ; 239,733 ; 0) N/C, norme ≈ 299,6667 N/C, sens sortant.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le vecteur est décrit dans la base initiale et sa cohérence géométrique est précisée."
+        },
+        "variant": "1a",
+        "attributes": {
+          "input": "Champ électrique E dans sa représentation radiale complète E_r e_r, au point M.",
+          "output": "Même champ E en composantes cartésiennes, avec norme et orientation.",
+          "comparison": "1a local : la représentation du même vecteur change ; la base et le point d’évaluation restent fixés."
+        },
+        "steps": [
+          {
+            "id": 1,
+            "title": "Recevoir le champ radial",
+            "input": "Coefficient et direction transmis par 2.3.",
+            "action": "Identifier les trois composantes à restituer dans la base initiale, avec leur même point d’évaluation.",
+            "output": "E_x, E_y, E_z à calculer à partir de E_r et e_r.",
+            "relation": {
+              "nature": "interprétative",
+              "description": "Le même vecteur champ est reçu dans une représentation à développer."
+            }
+          },
+          {
+            "id": 2,
+            "title": "Calculer composantes et orientation",
+            "input": "E_r non arrondi pendant le calcul et e_r = (0,6 ; 0,8 ; 0).",
+            "action": "Multiplier les composantes : E_x = 0,6E_r, E_y = 0,8E_r, E_z = 0 ; calculer ||E|| = E_r et E·R = E_r r = 89,9 N·m/C > 0.",
+            "output": "E ≈ (179,800 ; 239,733 ; 0) N/C, norme ≈ 299,6667 N/C, sens sortant.",
+            "relation": {
+              "nature": "calculatoire",
+              "description": "La décomposition établit composantes, norme et orientation dans la base initiale."
+            }
+          },
+          {
+            "id": 3,
+            "title": "Établir la sortie vectorielle",
+            "input": "Composantes, norme et orientation obtenues par 3.2.",
+            "action": "Présenter les attributs du champ avec les arrondis d’affichage séparés des valeurs de calcul.",
+            "output": "Champ vectoriel calculé en M ; le signe positif de Q se traduit par un champ s’éloignant de O.",
+            "relation": {
+              "nature": "logique",
+              "description": "Le champ constitue la sortie finale ; aucune boucle automatique ni inversion de Q n’est ajoutée."
+            }
+          }
+        ]
+      }
+    ],
+    "review": {
+      "object": "Le changement global charge-position → champ et les transformations locales de représentation.",
+      "conditions": "Même source, même point M, même base, r > 0 et k approché ; opérations avant arrondis.",
+      "criterion": "r = 0,30 m ; ||e_r|| = 1 ; E_r ≈ 299,6667 N/C ; ||E|| = E_r et E·R > 0. Les représentations radiale et cartésienne désignent le même vecteur.",
+      "finding": "La variante globale est 1b, avec deux systèmes locaux 1a. Le contrôle est interne au calcul de Coulomb et à la géométrie ; il ne constitue pas une mesure indépendante."
+    },
+    "references": [
+      {
+        "title": "OpenStax · University Physics 2, §5.4 — Electric Field",
+        "url": "https://openstax.org/books/university-physics-volume-2/pages/5-4-electric-field",
+        "note": "Équation 5.4 et sens du champ, vérifiés le 10 septembre 2026 : une seule source ponctuelle est retenue ici."
+      }
+    ]
+  },
+  {
+    "slug": "oscillateur-aller-retour",
+    "format": "cas-3",
+    "title": "Oscillateur : prévoir, reconstruire et comparer",
+    "question": "Les indicateurs d’une oscillation libre permettent-ils de retrouver son modèle, puis de prévoir l’effet d’une amplitude doublée ?",
+    "scope": "Masse-ressort horizontale, support fixe et laboratoire galiléen supposé ; ressort sans masse, rappel linéaire, frottement visqueux éventuel et aucune excitation entretenue.",
+    "basis": "m = 0,200 kg, k = 20,0 N·m⁻¹ et A = 0,0500 m sont supposés. Deux modèles sont comparés : b = 0 puis b = 0,400 kg·s⁻¹. Tous les indicateurs sont calculés ; aucun relevé de maxima n’est fourni.",
+    "reading_card": "oscillateur-harmonique",
+    "attributes": {
+      "input": "Attributs principaux : m, k, b et état initial (position et vitesse). L’amplitude A décrit ici le départ idéal. Contexte conservé : équilibre fixe, linéarité, mouvement libre et unité de temps.",
+      "output": "Attributs principaux : paramètres reconstruits conditionnellement, période, vitesse maximale et énergie d’un second départ idéal à amplitude doublée. Le contexte matériel reste supposé.",
+      "comparison": "La chaîne change de types intermédiaires : paramètres → indicateurs temporels et énergétiques → paramètres. Le retour compare chaque grandeur à la même grandeur initiale, avec sa dimension et son scénario."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Définir les deux scénarios libres",
+        "system": "Le dossier mécanique et cinématique de la masse-ressort.",
+        "input": "m = 0,200 kg, k = 20,0 N·m⁻¹, A = 0,0500 m ; b = 0 ou 0,400 kg·s⁻¹. X est l’écart à l’équilibre fixe.",
+        "action": "Poser X(0) = A et Ẋ(0) = 0 pour le cas idéal. Séparer la variante amortie, dont seules les échelles temporelles seront calculées sans lui inventer un départ.",
+        "output": "Le niveau 2 reçoit les paramètres et le départ idéal. Une reprise depuis 6 peut ajouter le départ A′ = 2A comme scénario distinct.",
+        "relation": {
+          "nature": "logique",
+          "description": "L’organisation des données distingue état initial, paramètres des forces et contexte ; elle ne décrit aucune mise en mouvement effectuée."
+        }
+      },
+      {
+        "id": 2,
+        "title": "Déduire mouvement et signatures",
+        "system": "Les modèles de Newton avec rappel linéaire et résistance visqueuse.",
+        "input": "Le dossier de 1 et la résultante horizontale −kX − bẊ ; masse constante et mouvement libre.",
+        "action": "Obtenir Ẍ + (b/m)Ẋ + (k/m)X = 0. Poser ω₀ = √(k/m), γ = b/(2m) et, si γ < ω₀, ωd = √(ω₀² − γ²). Déduire T₀ = 2π/ω₀, Td = 2π/ωd et le rapport r = exp(−γTd) de maxima positifs successifs.",
+        "output": "Pour b = 0 : X = A cos(ω₀t), Em = kA²/2 et vmax = Aω₀. Pour la variante pseudopériodique : enveloppe relative exp(−γt), pseudopériode Td et rapport r, transmis à 3.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "L’équation et ses solutions transforment les attributs de 1 en signatures ; b, en kg·s⁻¹, se distingue de b/m, en s⁻¹."
+        }
+      },
+      {
+        "id": 3,
+        "title": "Établir les indicateurs calculés",
+        "system": "Les résultats temporels et énergétiques des deux modèles.",
+        "input": "Expressions de 2 et valeurs supposées en 1 ; mêmes m et k pour les deux scénarios.",
+        "action": "Évaluer séparément les expressions idéales et amorties, en gardant une période entière entre maxima positifs successifs.",
+        "output": "Idéal : ω₀ = 10,000 rad·s⁻¹, T₀ ≈ 0,628319 s, Em = 0,0250 J et vmax = 0,500 m·s⁻¹. Amorti : γ = 1,000 s⁻¹, ωd ≈ 9,949874 rad·s⁻¹, Td ≈ 0,631484 s, τ = 1/γ = 1,000 s et r ≈ 0,531802. Ces références passent à 4.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les substitutions produisent des prévisions. τ est un temps de décroissance d’enveloppe, pas une période ; la trajectoire amortie n’est pas entièrement spécifiée."
+        }
+      },
+      {
+        "id": 4,
+        "title": "Reprendre les résultats comme données comparables",
+        "system": "Les attributs nécessaires à une lecture de maxima, avec un zéro de position déterminé.",
+        "input": "Références calculées de 3 ; dates tn et hauteurs positives Hn de maxima successifs éventuels, encore non renseignées.",
+        "action": "Définir Δt = t(n+1) − tn et r = H(n+1)/Hn. Exiger des hauteurs depuis le même équilibre ; si Hbrut = H + δ, soustraire le décalage δ avant de former le rapport.",
+        "output": "Le niveau 5 reçoit les signatures calculées (Δt,r) = (T₀,1) ou (Td,exp(−γTd)), ainsi que m connu. Aucun couple de maxima mesurés n’est ajouté.",
+        "relation": {
+          "nature": "interprétative",
+          "description": "La reprise conserve les prévisions de 3 tout en définissant les attributs qui rendraient un relevé comparable ; elle ne suppose pas un outil de saisie."
+        },
+        "comparison": "4 ↔ 3 : mêmes signatures de période et d’enveloppe, avec scénarios et statut calculé conservés.",
+        "evaluation": {
+          "object": "Les indicateurs repris et les prévisions temporelles de 3.",
+          "conditions": "Oscillation non nulle ; maxima positifs successifs, équilibre fixe et hauteurs corrigées. Les valeurs indépendantes restent absentes.",
+          "criterion": "Δt désigne T₀ ou Td, et non la demi-période entre extrema alternés ; r désigne 1 ou exp(−γTd).",
+          "finding": "Les attributs sont comparables sous ces conventions. Un rapport brut biaisé par δ ne permet pas, à lui seul, de conclure à une autre loi de frottement."
+        }
+      },
+      {
+        "id": 5,
+        "title": "Reconstruire les coefficients et le bilan",
+        "system": "L’inversion des signatures et la confrontation au modèle dynamique d’entrée.",
+        "input": "Les couples (Δt,r) de 4, m connu, Δt > 0 et 0 < r ≤ 1 ; même modèle libre linéaire et régime pseudopériodique.",
+        "action": "Calculer γ = −ln(r)/Δt, b = 2mγ et k = m[(2π/Δt)² + γ²]. Multiplier l’équation de 2 par Ẋ pour obtenir dEm/dt = −bẊ². Dans le cas idéal, appliquer la linéarité à X′ = 2X : T′ = T₀, v′max = 2vmax et E′m = 4Em.",
+        "output": "Les signatures non arrondies restituent k = 20,0 N·m⁻¹ avec b = 0 ou 0,400 kg·s⁻¹. Les lois de variation idéales sont transmises à 6 pour un autre départ à même masse et raideur.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour réalise une inversion conditionnelle, établit le bilan et prépare une variation d’état initial ; il ne déduit pas un frottement réel de prévisions."
+        },
+        "comparison": "5 ↔ 2 : les paramètres reconstruits et le bilan énergétique sont confrontés aux coefficients et aux forces du modèle direct.",
+        "evaluation": {
+          "object": "Modèle de Newton en 2, inversion temporelle et bilan en 5.",
+          "conditions": "Masse connue, maxima définis en 4 et signatures issues des mêmes modèles ; calcul avant arrondi. Aucune excitation extérieure.",
+          "criterion": "Réinjecter b et k doit redonner Δt et r ; b ≥ 0 entraîne dEm/dt ≤ 0, avec conservation lorsque b = 0.",
+          "finding": "Les deux modèles sont retrouvés par cohérence interne. Δt seul ne sépare pas raideur et amortissement ; aucune identification expérimentale n’est établie."
+        }
+      },
+      {
+        "id": 6,
+        "title": "Comparer un départ à amplitude doublée",
+        "system": "Deux préparations idéales distinctes, au repos à leur extrémité.",
+        "input": "Lois idéales de 5 ; m et k inchangés, b = 0, départ initial A et second départ A′ = 2A = 0,1000 m.",
+        "action": "Évaluer les rapports T′/T₀ = 1, v′max/vmax = 2 et E′m/Em = 4. Avec k conservé, retrouver A′ = √(2E′m/k), puis comparer les deux états initiaux.",
+        "output": "T′ ≈ 0,628319 s, v′max = 1,000 m·s⁻¹ et E′m = 0,100 J ; A′ = 0,1000 m est restituée. Le dossier peut être repris en 1 avec cette seconde préparation explicitement séparée.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Le retour compare des états supposés sous le même modèle. Le supplément d’énergie ne constitue pas un gain spontané pendant une oscillation libre."
+        },
+        "comparison": "6 ↔ 1 : masse, raideur, équilibre et repos initial sont conservés ; seule l’amplitude du scénario idéal change.",
+        "evaluation": {
+          "object": "Attributs du second départ et dossier mécanique initial.",
+          "conditions": "Deux scénarios idéaux sans excitation ; rappel linéaire supposé valable jusqu’à |X| = 0,1000 m.",
+          "criterion": "Conserver m = 0,200 kg, k = 20,0 N·m⁻¹ et b = 0 ; retrouver A′/A = 2 avec les rapports de sortie (1,2,4).",
+          "finding": "La comparaison retrouve les paramètres et isole la variation d’amplitude. L’application à un ressort réel demanderait de vérifier son domaine linéaire."
+        }
+      }
+    ],
+    "review": {
+      "object": "La chaîne paramètres → signatures → reconstruction et la comparaison de deux amplitudes.",
+      "conditions": "Modèle mécanique supposé, masse connue et mêmes conventions d’équilibre ; aucun signal indépendant.",
+      "criterion": "Comparer des grandeurs de même type dans les évaluations 4/3 et 6/1, puis les hypothèses et relations inverses dans 5/2 ; conserver unités et scénarios.",
+      "finding": "Le traitement retrouve les coefficients et les rapports attendus. Il ne valide ni la force visqueuse ni la linéarité matérielle à l’amplitude doublée."
+    },
+    "references": [
+      {
+        "title": "MIT 8.01SC — Oscillations libres et amorties",
+        "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter23.pdf",
+        "note": "Chapitre 23, §23.2–23.3 et §23.5 : rappel linéaire, énergie, coefficient b/m, pulsation amortie et enveloppe. Notre γ correspond au coefficient de décroissance α du MIT. Les inversions et l’exemple numérique sont rédigés ici."
+      }
+    ]
+  },
+  {
+    "slug": "poynting-aller-retour",
+    "format": "cas-3",
+    "title": "Poynting : du champ au flux, puis retour aux attributs",
+    "question": "Comment calculer l’énergie traversant une surface et retrouver l’amplitude de l’onde sans confondre intensité et orientation de la surface ?",
+    "scope": "Une onde plane progressive sinusoïdale unique dans le vide, sans charges, courants, frontières ni champ statique superposé ; une surface géométrique de comptage, sans absorption supposée.",
+    "basis": "Champs et domaine supposés : E0 = 3,00 V·m⁻¹ crête, f = 100 MHz, propagation +z, A = 0,0100 m² et Δt = 1,00 µs. Référence de normale +z, variante séparée à 60°. Les flux et inversions sont calculés.",
+    "reading_card": "energie-onde-poynting",
+    "attributes": {
+      "input": "Attributs principaux : amplitude crête E0, fréquence et orientation des champs. Contexte du comptage : aire géométrique A, normale, durée et modèle de vide.",
+      "output": "Attributs principaux : amplitude reconstruite conditionnellement et énergie traversante pour deux normales. Aire, fréquence et durée restent fournies ; l’intensité de l’onde est distinguée du flux normal.",
+      "comparison": "Les types intermédiaires sont champ, densité d’énergie, intensité, puissance et énergie. Chaque comparaison précise la conversion dimensionnelle ; un changement de normale ne devient pas un changement d’onde."
+    },
+    "levels": [
+      {
+        "id": 1,
+        "title": "Définir l’onde et la surface de comptage",
+        "system": "Les champs supposés et le domaine fini de l’intégration.",
+        "input": "E0 = 3,00 V·m⁻¹ crête, f = 100 MHz ; A = 0,0100 m² au plan z = 0, normale +z ; Δt = 1,00 µs.",
+        "action": "Fixer une base directe et ψ = ωt − kz, avec ω = 2πf, k = ω/c. Poser E = E0 cosψ e_x et B = (E0/c)cosψ e_y. Employer c = 299 792 458 m·s⁻¹ exact, μ0 ≈ 4π × 10⁻⁷ H·m⁻¹ et ε0 = 1/(μ0c²) approché.",
+        "output": "Le niveau 2 reçoit la paire de champs, T = 10 ns et Δt = 100T. Une reprise depuis 6 distinguera la normale à 60° de la normale initiale.",
+        "relation": {
+          "nature": "logique",
+          "description": "La définition sépare l’onde et le domaine de comptage ; les constantes approchées restent cohérentes avec c exact."
+        }
+      },
+      {
+        "id": 2,
+        "title": "Former densité et flux instantanés",
+        "system": "Le traitement énergétique local de la paire de champs.",
+        "input": "Champs réels, phase et constantes de 1 ; aucun courant matériel dans la région.",
+        "action": "Calculer u = ε0E²/2 + B²/(2μ0) et S = E×B/μ0. Pour cette onde, obtenir u = ε0E0²cos²ψ et S = cu e_z ; leurs dérivées donnent ∂tu + div S = 0 puisque ω = ck.",
+        "output": "Les contributions électrique et magnétique sont égales instantanément. Densité u et flux S passent à 3 comme fonctions du temps et de la position.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "Les produits des champs et le bilan local construisent les grandeurs énergétiques ; S = cu e_z utilise l’onde progressive unique choisie."
+        }
+      },
+      {
+        "id": 3,
+        "title": "Calculer les moyennes temporelles",
+        "system": "L’intensité de l’onde et la valeur efficace du champ.",
+        "input": "u et S de 2, période T et amplitude crête E0 ; moyenne temporelle à position fixe.",
+        "action": "Intégrer cos²ψ sur T : ⟨cos²ψ⟩ = 1/2. En déduire I = ⟨S_z⟩ = ε0cE0²/2, ⟨u⟩ = I/c et Eeff = E0/√2.",
+        "output": "I ≈ 0,0119448843 W·m⁻², ⟨u⟩ ≈ 3,984385 × 10⁻¹¹ J·m⁻³ et Eeff ≈ 2,121320 V·m⁻¹ sont transmis à 4 ; le flux instantané de crête vaut 2I.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La moyenne du carré fournit l’intensité. Le champ signé a une moyenne nulle, mais son carré possède une moyenne positive."
+        }
+      },
+      {
+        "id": 4,
+        "title": "Reprendre l’intensité sur un domaine fini",
+        "system": "L’énergie traversant la surface normale pendant cent périodes.",
+        "input": "Moyennes de 3 et domaine de 1 : normale +z, A = 0,0100 m², Δt = 100T.",
+        "action": "Conserver ⟨S⟩ = I e_z et intégrer sur l’aire et la durée : puissance moyenne P₀ = IA, puis énergie traversante W₀ = IAΔt.",
+        "output": "P₀ ≈ 1,19448843 × 10⁻⁴ W et W₀ ≈ 1,19448843 × 10⁻¹⁰ J, soit 0,119448843 nJ. W₀, A et Δt passent à 5.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La reprise convertit une intensité en puissance puis en énergie pour une aire et une durée définies ; elle ne calcule pas l’énergie totale de l’onde infinie."
+        },
+        "comparison": "4 ↔ 3 : le flux intégré est comparé à l’intensité et à la densité moyennes conservées.",
+        "evaluation": {
+          "object": "Les moyennes de 3 et l’énergie de comptage en 4.",
+          "conditions": "Même onde, surface normale, aire uniforme et fenêtre de cent périodes entières.",
+          "criterion": "W₀/(AΔt) = I et W₀/(AcΔt) = ⟨u⟩ ; unités respectives W·m⁻² et J·m⁻³.",
+          "finding": "L’intégration restitue les moyennes sous leurs unités. W₀ décrit un transport à travers la surface, sans préjuger une absorption."
+        }
+      },
+      {
+        "id": 5,
+        "title": "Reconstruire l’amplitude sous les mêmes hypothèses",
+        "system": "L’inversion de la moyenne énergétique et les informations qu’elle ne restitue pas.",
+        "input": "W₀, A > 0 et Δt > 0 de 4 ; normale +z connue, constantes et onde linéaire sinusoïdale unique conservées.",
+        "action": "Calculer Irec = W₀/(AΔt), puis E0,rec = √[2Irec/(ε0c)] et B0,rec = E0,rec/c. Remplacer séparément ψ par ψ + φ : ⟨cos²(ψ + φ)⟩ reste 1/2 pour toute phase φ.",
+        "output": "E0,rec = 3,00 V·m⁻¹ et B0,rec ≈ 10,006923 nT. La phase n’est pas retrouvée par I ; direction et polarisation restent des hypothèses. L’onde reconstruite et le domaine sont transmis à 6.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La racine positive restitue une amplitude crête, non le signe instantané du champ ; la moyenne perd l’information de phase."
+        },
+        "comparison": "5 ↔ 2 : l’inversion de la moyenne est confrontée aux produits quadratiques du calcul direct.",
+        "evaluation": {
+          "object": "Densité et flux construits en 2, amplitude reconstruite en 5.",
+          "conditions": "Même onde linéaire sinusoïdale, amplitude positive et constantes connues ; les valeurs proviennent du calcul direct.",
+          "criterion": "Réinjecter E0,rec doit donner S_z,max = ε0cE0,rec² = 2Irec. Des phases différentes doivent conserver la même intensité.",
+          "finding": "L’amplitude est retrouvée conditionnellement. Une intensité scalaire seule ne reconstitue pas tous les champs, leur fréquence ou leur direction."
+        }
+      },
+      {
+        "id": 6,
+        "title": "Comparer une normale inclinée à 60°",
+        "system": "La même onde traversant une surface de même aire géométrique, avec une autre orientation.",
+        "input": "Onde et domaine de 5 ; même A et même Δt, normale n = sinθ e_x + cosθ e_z avec θ = 60°.",
+        "action": "Moyenner en chaque point sur les cent périodes, puis intégrer ⟨S⟩·n : Wθ = IAΔt cosθ. Retrouver I = Wθ/(AΔt cosθ), puis E0, avec θ connu et cosθ non nul.",
+        "output": "À 60°, P₆₀ ≈ 5,97244214 × 10⁻⁵ W et W₆₀ ≈ 5,97244214 × 10⁻¹¹ J ; I et E0 restent inchangés. La nouvelle normale peut être reportée en 1 comme scénario distinct.",
+        "relation": {
+          "nature": "calculatoire",
+          "description": "La projection modifie le flux normal. Même si la phase varie sur l’aire oblique, la fenêtre entière de périodes donne partout la même moyenne."
+        },
+        "comparison": "6 ↔ 1 : l’amplitude de l’onde est retrouvée ; fréquence, aire et durée sont conservées comme données, seule la normale change.",
+        "evaluation": {
+          "object": "Attributs de l’onde et du domaine final comparés à ceux de 1.",
+          "conditions": "Deux surfaces de même aire, même onde et même durée ; angles connus séparément à 0° et 60°.",
+          "criterion": "W₆₀/W₀ = 1/2 ; dans chaque cas, Wθ/(AΔt cosθ) redonne I puis E0 = 3,00 V·m⁻¹.",
+          "finding": "Le facteur deux vient de la géométrie. À 90°, Wθ = 0 pour toute amplitude : cette mesure de flux ne permettrait plus d’inverser E0."
+        }
+      }
+    ],
+    "review": {
+      "object": "Le passage des champs aux moyennes, leur intégration et la reconstruction conditionnelle de l’amplitude.",
+      "conditions": "Onde unique supposée, géométrie et constantes connues ; cent périodes entières, résultats calculés.",
+      "criterion": "Conserver les facteurs 1/2 de moyenne et cosθ de projection, les unités de chaque grandeur et les évaluations 4/3, 5/2 et 6/1.",
+      "finding": "Le retour distingue amplitude retrouvée et contexte conservé. Une seule énergie ne sépare pas simultanément amplitude, durée, aire et orientation ; aucune mesure ni validation indépendante n’est annoncée."
+    },
+    "references": [
+      {
+        "title": "OpenStax — Énergie transportée par une onde électromagnétique",
+        "url": "https://openstax.org/books/university-physics-volume-2/pages/16-3-energy-carried-by-electromagnetic-waves",
+        "note": "§16.3, équations 16.27–16.33 : densité, vecteur de Poynting et moyenne harmonique ; figure 16.11 : énergie traversant une aire pendant une durée. La projection et les inversions sont explicitées ici."
+      },
+      {
+        "title": "NIST — Constantes CODATA 2022",
+        "url": "https://physics.nist.gov/cuu/pdf/all.pdf",
+        "note": "Tableau p. 1 : la perméabilité du vide possède une incertitude ; μ0 = 4π × 10⁻⁷ H·m⁻¹ est utilisé ici comme valeur approchée."
+      }
+    ]
+  }
+]

@@ -1,0 +1,3 @@
+<div class="format-shape shape-{{ format.width }}" role="img" aria-label="{{ format.width }} systèmes{% if format.depth == 2 %}, chacun en {{ format.width }} sous-systèmes{% endif %}">
+{% for n in 1..format.width %}<div class="shape-system tone-{{ n in [2,5] ? 'orange' : (n in [1,4] ? 'blue' : 'green') }}" aria-hidden="true"><b>{{ n in [2,5] ? 'TH' : 'Exp.' }}</b>{% if format.depth == 2 %}<div class="shape-children">{% for p in 1..format.width %}<span class="tone-{{ p in [2,5] ? 'orange' : (p in [1,4] ? 'blue' : 'green') }}">{{ p in [2,5] ? 'TH' : 'E' }}</span>{% endfor %}</div>{% endif %}</div>{% endfor %}
+</div>

@@ -1,0 +1,10 @@
+<section class="guide-step analysis-point tone-{{ point.color }}" id="point-{{ point.coordinate }}" tabindex="-1" data-format-point>
+    <div class="guide-step-heading"><span class="step-number">{{ point.coordinate }}</span><div><p class="eyebrow">{{ point.label }}</p><h2>{{ point.title }}</h2></div></div>
+    {% if point.system is defined %}<p><strong>Système étudié :</strong> {{ point.system }}</p>{% endif %}
+    <p><strong>Éléments reçus :</strong> {{ point.input }}</p>
+    <p class="analysis-relation"><strong>Relation · {{ point.relation.nature }} :</strong> {{ point.relation.description }}</p>
+    <p><strong>Traitement :</strong> {{ point.action }}</p>
+    <p class="deliverable"><strong>À conserver :</strong> {{ point.output }}</p>
+    {% if point.evaluation is defined %}<div class="analysis-review"><h3>Évaluation {{ point.id }} ↔ {{ 7 - point.id }}</h3><p>{{ point.comparison }}</p>{% include 'science/_analysis-evaluation.html.twig' with {evaluation: point.evaluation} only %}<a href="#point-{{ 7 - point.id }}.0">Revoir le niveau {{ 7 - point.id }}.0</a></div>{% endif %}
+    <p><a href="#schema">Revenir au schéma</a></p>
+</section>

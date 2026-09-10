@@ -1,4 +1,6 @@
-# Analyser chaque fiche à deux niveaux
+# Cas 4 : analyser une fiche à deux étages
+
+Depuis le 10 septembre 2026, ce document décrit spécifiquement le **cas 4 (6 × 6)**. Les cas 1 (3), 2 (3 × 3) et 3 (6) sont décrits dans [les quatre formes d’analyse](FORMES-ANALYSE.md).
 
 Cette présentation reprend la conception du schéma général de 2018, précisée par l'auteur le 9 septembre 2026. La priorité est la structure analytique de chaque phénomène ou objet théorique ; les développements scientifiques pourront être affinés ensuite à tous les niveaux.
 
@@ -54,7 +56,7 @@ Les données sont explicitement rédigées dans `app/config/content/analyses-fic
 
 Le couple identifiant de fiche + coordonnée n.p situe l'élément à répertorier, relire et réviser. Préserver ces repères lors des enrichissements et documenter les déplacements en cas de restructuration. Le nombre de points renseignés et la validité technique des liens ne suffisent pas à établir la précision scientifique de leurs significations et évaluations.
 
-Pour ajouter une fiche, rédiger son analyse complète avec six niveaux et six sous-niveaux par niveau. Chaque niveau doit nommer son propre système, ses entrées, sa sortie, un passage associé et ses comparaisons. Les tests refusent une fiche sans analyse et vérifient la couverture, les coordonnées et les destinations des liens.
+Pour ajouter une fiche au catalogue du cas 4, rédiger son analyse complète avec six niveaux et six sous-niveaux par niveau. Chaque niveau doit nommer son propre système, ses entrées, sa sortie, un passage associé et ses comparaisons. Les tests refusent une fiche sans analyse et vérifient la couverture, les coordonnées et les destinations des liens.
 
 Les [lots d'approfondissement analytique AP1 à AP8](PRECISIONS-ANALYTIQUES.md) précisent les vingt-deux premières fiches : oscillateur, Bernoulli, Lagrange–Hamilton, travail-énergie, Poiseuille, corde, rotation axiale, roulement, référentiel tournant, Newton, orbite centrale, hydrostatique, élasticité, acoustique, système thermodynamique, gaz parfait, premier principe, capacités thermiques, détentes, entropie, microcanonique et Boltzmann. Ils distinguent la nature et le périmètre du sujet, les entrées de chaque sous-niveau, les relations avec ces entrées et les quatre champs de chaque évaluation. Le [volet E1a d’électrostatique](ELECTROSTATIQUE-E1A.md) ajoute trois fiches avec ces champs détaillés dès leur création. Le [volet E1b](MAGNETOSTATIQUE-E1B.md) ajoute Lorentz, Ampère et la spire avec la même structure. Le [volet E1c](INDUCTION-E1C.md) ajoute le solénoïde et deux situations d’induction. Le [volet E1d](MAXWELL-INDUCTANCE-E1D.md) ajoute le courant de déplacement, l’énergie inductive et le circuit RL. Le [volet E1e](ONDES-ELECTROMAGNETIQUES-E1E.md) ajoute l’onde plane dans le vide, la polarisation et le flux d’énergie. Les 37 analyses réunissent 1 332 entrées locales, 1 554 relations et 777 évaluations ; la précision scientifique des textes reste à poursuivre avec l'auteur.
 

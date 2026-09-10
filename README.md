@@ -2,14 +2,19 @@
 
 Un site pour étudier la physique en reliant observations, modèles et applications. Cette version remplace l'ancien projet Symfony par une application Symfony 7.4, PHP 8.5, MySQL 8.4 et Twig, démarrée avec Docker Compose.
 
-**Le fondement du projet est une analyse continuellement précisée, à deux étages de six fonctions**, pour répertorier les éléments d'un sujet physique ou théorique et y revenir. Les positions 2 et 5 sont toujours les traitements théoriques ; les évaluations 6/1 (Exp.), 5/2 (TH) et 4/3 (Exp.) sont systématiques. Le sens d'« Exp. », les relations causales, chronologiques ou logiques et l'extension à un champ de sujets sont consignés dans [les fondements du projet](docs/FONDEMENTS-DU-PROJET.md), référence pour les prochaines évolutions.
+**Le fondement du projet est une analyse continuellement précisée d’un sujet physique ou théorique.** Depuis le 10 septembre 2026, l’accueil propose quatre formes : **3**, **3 × 3**, **6**, **6 × 6**. Les chaînes à trois positions distinguent des sorties de même type que les attributs d’entrée (1a) ou de types différents (1b). Les chaînes à six positions conservent leurs évaluations 4/3, 5/2 et 6/1. Voir [les fondements](docs/FONDEMENTS-DU-PROJET.md) et [les formes et exemples](docs/FORMES-ANALYSE.md).
+
+Les prochains lots de physique sont en attente. E1e est terminé ; les réalisations existantes restent accessibles.
 
 ## Contenu disponible
 
-- **Chaque fiche possède six systèmes globaux et six sous-niveaux par système** : 222 systèmes et **1 332 sous-niveaux rédigés pour les 37 fiches**. Un clic ouvre la sous-boucle, puis la description du point choisi ; survol, clavier et boutons d'information tactiles donnent accès aux explications.
+- **Quatre formes accessibles dès l’accueil**, avec schémas cliquables, explications au survol, navigation clavier et thème clair/sombre. Les trois positions forment une chaîne ouverte ; les six positions comportent le retour.
+- **Huit exemples méthodologiques autonomes** : quatre pour le cas 1 (deux par variante), deux pour le cas 2 (un par variante), deux pour le cas 3. Deux fiches existantes présentent le cas 4, dont les 37 analyses restent disponibles. Ces exemples ne s’ajoutent pas au décompte des fiches du catalogue 6 × 6.
+
+- **Chaque fiche du catalogue du cas 4 possède six systèmes globaux et six sous-niveaux par système** : 222 systèmes et **1 332 sous-niveaux rédigés pour les 37 fiches**. Un clic ouvre la sous-boucle, puis la description du point choisi ; survol, clavier et boutons d'information tactiles donnent accès aux explications.
 - La même chaîne analytique se répète aux deux échelles : expression du système, formalisation, résultats, relecture, confrontation théorique, résultats de retour. Les liens comparent les résultats, les théories et les données initiales. Voir [la méthode à deux niveaux](docs/ANALYSES-DEUX-NIVEAUX.md).
 - **Des entrées et évaluations explicites pour les 37 fiches** : 1 332 sous-niveaux précisent les entrées, 1 554 relations qualifient les liens et 777 évaluations détaillent objets, conditions, critères et constats. La nature physique ou théorique du sujet est explicite. Voir [les approfondissements AP1 à AP8](docs/PRECISIONS-ANALYTIQUES.md) et les volets [E1a](docs/ELECTROSTATIQUE-E1A.md), [E1b](docs/MAGNETOSTATIQUE-E1B.md), [E1c](docs/INDUCTION-E1C.md), [E1d](docs/MAXWELL-INDUCTANCE-E1D.md) et [E1e](docs/ONDES-ELECTROMAGNETIQUES-E1E.md).
-- La boucle générale et ses six sous-boucles transversales initiales restent accessibles comme parcours d'introduction.
+- La boucle générale et ses six sous-boucles transversales initiales restent accessibles dans le panneau historique de l’accueil ; leurs ancres sont conservées.
 - **Huit fiches web** de thermodynamique et physique statistique : hypothèses, 13 équations MathML, exemples calculés, questions corrigées et références de pages.
 - **Quatre fiches de mécanique** : Newton et référentiel, travail-énergie, oscillateur amorti, force centrale et orbite. Une boucle de mécanique à six entrées ouvre directement les sections des fiches.
 - **Quatre fiches de mécanique supplémentaires** : rotation autour d'un axe fixe, roulement sans glissement, référentiel tournant, Lagrange et Hamilton. Une seconde boucle de six entrées conserve l'accès à la première et relie les nouveaux sujets.

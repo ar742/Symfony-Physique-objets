@@ -1,7 +1,12 @@
 {% extends 'site/layout.html.twig' %}
-{% block title %}La boucle d’étude — Physique objets{% endblock %}
+{% block title %}Choisir une forme d’analyse — Physique objets{% endblock %}
 {% block body %}
-    <div class="loop-heading"><p class="eyebrow">Expression du système · Théorie · Résultats · Retour</p><h1>Explorer la physique par sa boucle d’étude</h1><p class="lead">Six systèmes, chacun analysé par six sous-niveaux de même conception. Les chaînes aller et retour confrontent résultats, théories et données initiales.</p></div>
+    <header class="loop-heading"><p class="eyebrow">Un sujet · Plusieurs profondeurs d’analyse</p><h1>Choisir une forme pour analyser</h1><p class="lead">Partir des éléments d’un sujet, les traiter théoriquement et examiner ce qui en découle. Du parcours en trois positions à la double boucle 6 × 6, choisissez la structure adaptée à votre travail.</p><p>Phénomène physique, objet théorique ou champ de sujets : les attributs et leur statut sont précisés à chaque étape.</p></header>
+    <section aria-labelledby="formes-titre" id="formes"><h2 id="formes-titre">Quatre possibilités, avec leurs exemples</h2><div class="format-grid">
+    {% for format in formats %}<a class="format-card" data-analysis-format="{{ format.id }}" href="{{ path('analysis_format', {format:format.id}) }}"><div class="format-card-heading"><span class="eyebrow">{{ format.id|replace({'cas-':'Cas '}) }}</span><span class="format-dimension">{{ format.shape }}</span></div><h3>{{ format.title }}</h3>{% include 'analysis/_shape.html.twig' with {format:format} only %}<p>{{ format.summary }}</p><p class="format-card-detail">{% if format.id == 'cas-1' %}1a : mêmes types d’attributs · 1b : types différents{% elseif format.id == 'cas-2' %}3 systèmes et 9 sous-systèmes · variantes 1a et 1b{% elseif format.id == 'cas-3' %}6 systèmes · comparaisons 4/3, 5/2 et 6/1{% else %}6 systèmes et 36 sous-systèmes · comparaisons aux deux étages{% endif %}</p><span class="format-open">Voir le modèle et les exemples →</span></a>{% endfor %}
+    </div></section>
+    <section class="source-entry-strip" id="travaux-realises"><div><h2>Retrouver les travaux réalisés</h2><p>{{ card_count }} fiches complètes en 6 × 6, leurs sources et leurs lots thématiques. Les prochains lots de physique sont en attente ; le chantier actuel porte sur les formes d’analyse.</p></div><div class="format-existing-links"><a class="primary-link" href="{{ path('learning_domains') }}">Parcourir les domaines et les lots</a><a href="{{ path('learning_index') }}">Toutes les fiches du cas 4</a></div></section>
+    <details class="historical-loop" id="parcours-historique"><summary>Retrouver la boucle transversale initiale et le schéma de 2018</summary><p>Ce parcours historique illustre le cas 4 à partir de plusieurs fiches de thermodynamique et de physique statistique. Chaque fiche possède aussi sa propre analyse.</p>
     <section class="interactive-loop" aria-labelledby="boucle-titre">
         <div class="loop-toolbar"><h2 id="boucle-titre">La boucle générale</h2><a href="{{ path('sitephys_physmvc_presentation', {_fragment: 'niveaux'}) }}">Voir le schéma d’origine</a></div>
         {% include 'site/_loop.html.twig' with {comparison_links: [
@@ -11,7 +16,6 @@
         ]} %}
         <p class="loop-help">Cliquez sur une étape pour la parcourir. Survolez-la ou utilisez Tab pour son explication. Sur mobile, touchez « i ». Échap ferme l’info-bulle.</p>
     </section>
-    <section class="source-entry-strip" aria-label="Analyses par fiche"><div><h2>{{ card_count }} fiches, chacune avec sa propre analyse</h2><p>Chaque fiche dispose de six niveaux et de 36 sous-niveaux rédigés pour son sujet. Un clic ouvre l’étage suivant du schéma.</p></div><a class="primary-link" href="{{ path('learning_index') }}">Choisir une fiche à analyser</a></section>
     <div class="guide-heading"><p class="eyebrow">Parcours transversal initial</p><h2>Thermodynamique et physique statistique</h2><p>Le premier exemple commun à plusieurs fiches reste accessible ci-dessous. Les analyses propres à chaque fiche se trouvent désormais directement en tête de celle-ci.</p><a class="primary-link" href="{{ path('learning_domain', {slug: 'thermodynamique-statistique'}) }}">Lire les huit fiches</a> <a href="{{ path('learning_corrections') }}">Voir les corrections documentées</a></div>
     {% for step in steps %}
         <section class="guide-step tone-{{ step.color }}" id="etape-{{ step.id }}" tabindex="-1">
@@ -22,6 +26,7 @@
             <div class="step-actions"><a href="{{ path('source_index', {_fragment: 'recueil-' ~ (step.id < 4 ? 'cpge' : 'theorique')}) }}">Situer ces fiches dans le recueil</a><a href="#boucle-titre">Revenir à la boucle</a></div>
         </section>
     {% endfor %}
+    </details>
     <section class="external-selection" id="ressources"><h2>Compléments de référence</h2><p>Des ressources institutionnelles pour les unités, les définitions et les prolongements des cours.</p>
         <div class="topic-grid">
             <a class="topic-card" href="https://www.bipm.org/fr/publications/si-brochure" rel="noopener noreferrer"><span class="eyebrow">BIPM · Français</span><h3>Unités et conventions</h3><p>Le Système international d’unités et sa brochure de référence.</p></a>

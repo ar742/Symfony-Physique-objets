@@ -256,3 +256,20 @@ Voir [le détail scientifique et documentaire d’E1d](MAXWELL-INDUCTANCE-E1D.md
 - Validation : **12 tests et 25 428 assertions ; 25 311 contrôles fonctionnels sur 274 pages, sans erreur**. Analyses, entrées, relations, évaluations, exemples, MathML, ancres et HTTP sont contrôlés. Le lot est synchronisé au site local après sauvegarde. Aucune recette visuelle au navigateur effectuée.
 
 Voir [le détail scientifique et documentaire d’E1e](ONDES-ELECTROMAGNETIQUES-E1E.md). Les milieux, interfaces et couplages pourront prolonger E1. La précision des analyses reste ouverte à la relecture de l’auteur. PDF commerciaux, rendus, extractions privées, SQL et secrets restent hors du dépôt.
+
+## 10 septembre 2026 — Quatre formes d’analyse et leurs exemples
+
+L’auteur réserve les prochains lots de physique pour plus tard ; E1e est terminé. Cette livraison met en œuvre les deux chantiers demandés : présentation des quatre formes dès l’accueil, puis exemples pour les parcourir.
+
+- **Cas 1 : trois positions Exp.–TH–Exp.** Deux exemples 1a suivent la température et le courant ; deux exemples 1b relient charge/géométrie et champ, puis profondeur et surpression. Les types principaux, les paramètres, les hypothèses et le statut des données sont distincts.
+- **Cas 2 : trois systèmes et neuf sous-systèmes.** Chauffage (1a global) et Coulomb (1b global) sont décomposés selon les attributs propres à chaque système. Les variantes locales sont explicites. Les traitements n.2 sont effectifs ; les raccords n.3 vers le système suivant sont décrits. Aucune chaîne de retour automatique n’est introduite dans les cas 1/2.
+- **Cas 3 : six systèmes sans sous-niveaux.** Oscillateur et Poynting disposent de descriptions autonomes, avec traitements TH2/TH5 et évaluations 4/3, 5/2 et 6/1.
+- **Cas 4 : six systèmes et trente-six sous-niveaux.** Deux fiches déjà rédigées sont mises en avant : oscillateur et énergie de Poynting. Toutes les 37 fiches et leurs 1 332 sous-niveaux restent accessibles par les domaines, les lots et le catalogue. Les huit nouveaux exemples méthodologiques, soit 30 systèmes globaux et 18 sous-systèmes, ne sont pas comptés comme huit nouvelles fiches 6×6.
+
+Les modèles et exemples ont leurs pages dédiées, schémas cliquables, info-bulles et coordonnées. L’accueil garde le parcours historique dans un panneau ; les anciennes ancres l’ouvrent automatiquement. Le thème et le clavier réutilisent le fonctionnement existant. Les fondements, consignes et état du chantier sont mis à jour ; aucune migration de base ou dépendance nouvelle.
+
+Les huit exemples ont été relus intégralement et les six exemples des cas 1/2 ont aussi reçu une relecture croisée. Les calculs directs et inverses, unités, signes, arrondis et références primaires ont été vérifiés. La rédaction reste ouverte aux précisions de l’auteur ; aucun résultat calculé n’est présenté comme une observation.
+
+Validation effective : **17 tests, 26 967 assertions** ; **1 698 contrôles sur 27 pages** pour les formes, liens et exemples ; **25 316 contrôles sur 274 pages** du catalogue existant, sans erreur. Les ensembles de pages peuvent se recouper. Recette ciblée au navigateur : accueil et exemples en clair/sombre, ouverture des sous-systèmes, info-bulles et Échap, Tab/Entrée avec focus sur coordonnées, comparaisons du cas 3 et anciennes ancres. À 390 pixels, l’accueil et les triplets locaux sont lisibles sans débordement horizontal. Cela ne constitue pas un audit de tous les navigateurs.
+
+Voir [les formes et leur mise en œuvre](FORMES-ANALYSE.md). Le site local est synchronisé après sauvegarde. PDF commerciaux, extractions et rendus privés, SQL et secrets restent hors du dépôt.

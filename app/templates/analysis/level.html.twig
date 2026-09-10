@@ -1,0 +1,13 @@
+{% extends 'site/layout.html.twig' %}
+{% block title %}{{ level.coordinate }} · {{ level.title }} — {{ example.title }}{% endblock %}
+{% block body %}
+<nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="{{ path('analysis_format',{format:'cas-2'}) }}">Cas 2 · 3 × 3</a> / <a href="{{ path('analysis_example',{format:'cas-2',slug:example.slug}) }}">{{ example.title }}</a> / {{ level.coordinate }}</nav>
+<header class="page-heading"><p class="eyebrow">Système {{ level.coordinate }} · {{ level.label }} · Analyse locale {{ level.variant }}</p><h1>{{ level.title }}</h1><p class="lead">{{ level.system }}</p></header>
+<nav class="base-switcher" aria-label="Changer de système">{% for other in example.levels %}<a href="{{ path('analysis_example_level',{slug:example.slug,base:other.id}) }}"{% if other.id == base %} aria-current="page"{% endif %}>{{ other.coordinate }} · {{ other.label }}</a>{% endfor %}</nav>
+<p><strong>Statut :</strong> {{ example.basis }}</p><dl class="analysis-io"><div><dt>Attributs d’entrée de ce sous-système</dt><dd>{{ level.attributes.input }}</dd></div><div><dt>Attributs de sortie</dt><dd>{{ level.attributes.output }}</dd></div></dl><p>{{ level.attributes.comparison }}</p>
+<section class="interactive-loop" aria-labelledby="schema"><h2 id="schema">{{ base }}.1 → {{ base }}.2 → {{ base }}.3</h2>{% include 'analysis/_board.html.twig' with {steps:level.steps,board_label:'Sous-systèmes de ' ~ level.coordinate,prefix:'local'} only %}</section>
+{% if base > 1 %}<p><a href="{{ path('analysis_example_level',{slug:example.slug,base:base-1,_fragment:'point-' ~ (base-1) ~ '.3'}) }}">Revoir les éléments transmis par {{ base-1 }}.3</a></p>{% endif %}
+<p>La position {{ base }}.2 exploite théoriquement {{ base }}.1 pour produire {{ base }}.3, quelle que soit la fonction globale de {{ level.coordinate }}.</p>
+{% for point in level.steps %}{% include 'analysis/_point.html.twig' with {point:point} only %}{% endfor %}
+<nav class="analysis-footer"><a href="{{ path('analysis_example',{format:'cas-2',slug:example.slug,_fragment:'point-' ~ base ~ '.0'}) }}">Revenir au système {{ base }}.0</a>{% if base < 3 %}<a href="{{ path('analysis_example_level',{slug:example.slug,base:base+1,_fragment:'point-' ~ (base+1) ~ '.1'}) }}">Transmettre {{ base }}.3 à {{ base+1 }}.1 →</a>{% else %}<a href="{{ path('analysis_example',{format:'cas-2',slug:example.slug,_fragment:'comparaisons'}) }}">Examiner les résultats de l’ensemble</a>{% endif %}</nav>
+{% endblock %}

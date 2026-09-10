@@ -1,0 +1,14 @@
+{% if steps|length == 3 %}
+<div class="linear-board" role="group" aria-label="{{ board_label }}">
+{% for step in steps %}
+    <div class="loop-node node-{{ step.id }} tone-{{ step.color }}" data-loop-node>
+        <a class="loop-node-link" href="{{ step.href }}" aria-describedby="{{ prefix }}-tip-{{ step.id }}"><span class="step-number">{{ step.coordinate }}</span><strong>{{ step.title }}</strong><span class="step-subtitle">{{ step.subtitle }}</span></a>
+        <button class="tip-toggle" type="button" aria-label="À propos de {{ step.coordinate }} : {{ step.title }}" aria-controls="{{ prefix }}-tip-{{ step.id }}" aria-expanded="false">i</button>
+        <span class="loop-tooltip" role="tooltip" id="{{ prefix }}-tip-{{ step.id }}">{{ step.tip }}</span>
+    </div>
+{% endfor %}
+</div>
+{% else %}
+{% include 'site/_loop.html.twig' with {steps: steps, board_label: board_label, tip_prefix: prefix ~ '-tip-', marker_id: prefix ~ '-arrow', evaluation_href: evaluation_href|default('#comparaisons'), comparison_links: comparison_links|default([])} only %}
+{% endif %}
+<p class="loop-help">Cliquez pour ouvrir l’élément. Survol ou Tab : explication ; bouton « i » sur écran tactile. Échap ferme l’info-bulle.</p>

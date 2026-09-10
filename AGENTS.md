@@ -1,11 +1,13 @@
 # Référence de conception du projet
 
-Avant de modifier les contenus, les schémas ou les outils d'analyse, lire [les fondements du projet](docs/FONDEMENTS-DU-PROJET.md), précisés par l'auteur le 9 septembre 2026, puis [leur mise en œuvre](docs/ANALYSES-DEUX-NIVEAUX.md).
+Lire [les fondements](docs/FONDEMENTS-DU-PROJET.md), étendus par l’auteur le 10 septembre 2026, puis [les quatre formes d’analyse](docs/FORMES-ANALYSE.md). La mise en œuvre historique [à deux étages de six fonctions](docs/ANALYSES-DEUX-NIVEAUX.md) décrit le cas 4.
 
-- Une fiche peut porter sur un phénomène physique, un sujet théorique ou un champ de sujets. Pour un sujet théorique, les éléments Exp. sont ses attributs ; ne pas leur inventer un statut de mesure physique.
-- Six niveaux globaux, chacun analysé par six sous-niveaux. Aux deux étages, 2 et 5 sont toujours les traitements théoriques des entrées Exp. 1 et 4, conduisant aux résultats Exp. 3 et 6.
-- Définir systématiquement les évaluations 6/1 (Exp.), 5/2 (TH), 4/3 (Exp.). Les comparaisons complémentaires ne les remplacent pas.
-- Les coordonnées servent à reprendre et préciser continuellement l'analyse. Qualifier les relations : causalité, chronologie, logique ou autre ; ne pas déduire leur nature des seules flèches.
-- Les textes actuels restent perfectibles. Ne pas présenter une rédaction complète comme une validation scientifique définitive.
+- Un sujet peut être physique, théorique ou un champ de sujets. Exp. désigne ses attributs, avec statut explicite : observé, supposé, calculé, à recueillir. Ne pas inventer de mesure.
+- Cas 1 : Exp.1 → TH2 → Exp.3. 1a conserve la nature et le sens des attributs principaux suivis, pas nécessairement leur valeur ; 1b produit d’autres attributs. Distinguer ces attributs du contexte, des paramètres et des hypothèses.
+- Cas 2 : trois systèmes, chacun analysé en trois sous-systèmes Exp.–TH–Exp. TH2 est effectif globalement et localement. Qualifier 1a/1b à chaque échelle selon les attributs réellement traités. Pas de boucle de retour implicite 3→1.
+- Cas 3 : six systèmes globaux, sans sous-niveaux. TH2 et TH5 effectifs ; évaluations 4/3, 5/2 et 6/1 explicites.
+- Cas 4 : six systèmes × six sous-systèmes. TH2 et TH5 et les trois évaluations sont définis aux deux étages. Les 37 fiches existantes relèvent de ce cas.
+- Conserver des coordonnées stables, qualifier les relations sans déduire une causalité des flèches. Une analyse renseignée reste perfectible et ne constitue pas une validation scientifique définitive.
+- Les nouveaux exemples méthodologiques sont dans exemples-analyse.json ; ne pas gonfler le décompte des fiches 6×6. Les lots scientifiques suivants sont en attente depuis le 10 septembre ; le lot E1e est terminé. Le journal consigne les seules livraisons effectives.
 
-Les PDF commercialisés, leurs rendus et extractions privées, les exports SQL et les secrets restent hors du dépôt. Le journal des avancées décrit les livraisons effectives ; le chantier distingue les travaux futurs.
+Les PDF commercialisés, leurs rendus et extractions privées, les exports SQL et les secrets restent hors du dépôt. Chaque avancée cohérente et vérifiée est synchronisée localement et publiée sur GitHub selon l’autorisation de l’auteur.
