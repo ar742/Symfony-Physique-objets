@@ -1,21 +1,21 @@
 import {CITY_GRAPH, distance, weightedCityGraph, dijkstra, bellmanFord, floydWarshall, enumerateSimplePaths, dependentRoutes} from './graph-engine.mjs';
 
 const $ = id => document.getElementById(id);
-const number = value => new Intl.NumberFormat('fr-FR', {maximumFractionDigits: 3}).format(value);
+export const number = value => new Intl.NumberFormat('fr-FR', {maximumFractionDigits: 3}).format(value);
 const sequence = path => path.join(' → ');
-const element = (tag, text, className) => {
+export const element = (tag, text, className) => {
   const node = document.createElement(tag);
   if (text !== undefined) node.textContent = text;
   if (className) node.className = className;
   return node;
 };
-function svgElement(tag, attributes = {}, text) {
+export function svgElement(tag, attributes = {}, text) {
   const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
   for (const [key, value] of Object.entries(attributes)) node.setAttribute(key, value);
   if (text !== undefined) node.textContent = text;
   return node;
 }
-function table(headers, caption) {
+export function table(headers, caption) {
   const wrap = element('div', undefined, 'graph-table-wrap');
   const node = element('table', undefined, 'graph-table');
   if (caption) node.append(element('caption', caption));
@@ -27,7 +27,7 @@ function table(headers, caption) {
 function branchHash(edge, variant, point = '') {
   return `#branche-${edge}-${variant}${point ? `-${point}.0` : ''}`;
 }
-function renderInspector(model) {
+export function renderInspector(model) {
   $('branch-coordinate').textContent = `${model.edge} · Cas ${model.variant} · Trois positions`;
   $('inspector-title').textContent = model.title;
   $('branch-summary').textContent = model.summary;
@@ -35,7 +35,7 @@ function renderInspector(model) {
   model.points.forEach((point, index) => {
     const id = index + 1, coordinate = `${model.edge} / ${id}.0`;
     const section = document.querySelector(`[data-graph-point="${id}"]`);
-    section.id = branchHash(model.edge, model.variant, id).slice(1);
+    section.id = model.anchorPrefix ? `${model.anchorPrefix}-${id}.0` : branchHash(model.edge, model.variant, id).slice(1);
     section.querySelector('.eyebrow').textContent = `${coordinate} · ${['Exp. IN', 'TH', 'Exp. OUT'][index]}`;
     section.querySelector('h3').textContent = point.title;
     section.querySelector('.graph-point-content').replaceChildren(...point.paragraphs.map(text => element('p', text)));

@@ -1,14 +1,16 @@
 {% extends 'site/layout.html.twig' %}
 {% block page_assets %}
 <link rel="stylesheet" href="{{ asset('styles/graph-studies.css') }}">
-<script type="module" src="{{ asset('scripts/graph-studies.mjs') }}"></script>
+{% block graph_assets %}{% endblock %}
+{% block graph_scripts %}<script type="module" src="{{ asset('scripts/graph-studies.mjs') }}"></script>{% endblock %}
 {% endblock %}
 {% block body %}
 <nav class="graph-tabs" aria-label="Études de graphes">
     <a href="{{ path('graph_index') }}"{% if app.request.attributes.get('_route') == 'graph_index' %} aria-current="page"{% endif %}>01 · Réseau de villes</a>
     <a href="{{ path('graph_dependencies') }}"{% if app.request.attributes.get('_route') == 'graph_dependencies' %} aria-current="page"{% endif %}>02 · Branches dépendantes</a>
+    <a href="{{ path('graph_production') }}"{% if app.request.attributes.get('_route') == 'graph_production' %} aria-current="page"{% endif %}>03 · Machines et production</a>
 </nav>
 {% block graph_body %}{% endblock %}
-<section class="content-note"><h2>Une branche, une analyse à reprendre</h2><p>Chaque branche possède ici trois positions : Exp. IN (1.0), TH (2.0), Exp. OUT (3.0). Cliquez sur une liaison, puis sur une position de son schéma pour lire ses attributs, son traitement et ses limites. Les coordonnées portent l’identifiant de la branche et de la variante.</p><p><a href="{{ path('analysis_format', {format:'cas-1'}) }}">Revoir les variantes 1a et 1b</a> · Les cas 2, 3 et 4 pourront ensuite approfondir l’analyse interne des branches. Ce premier volet n’ajoute pas de sous-niveaux implicites.</p></section>
+{% block graph_method_note %}<section class="content-note"><h2>Une branche, une analyse à reprendre</h2><p>Chaque branche possède ici trois positions : Exp. IN (1.0), TH (2.0), Exp. OUT (3.0). Cliquez sur une liaison, puis sur une position de son schéma pour lire ses attributs, son traitement et ses limites. Les coordonnées portent l’identifiant de la branche et de la variante.</p><p><a href="{{ path('analysis_format', {format:'cas-1'}) }}">Revoir les variantes 1a et 1b</a> · Les cas 2, 3 et 4 pourront ensuite approfondir l’analyse interne des branches. Ce premier volet n’ajoute pas de sous-niveaux implicites.</p></section>{% endblock %}
 <noscript><p class="content-note">Les calculs et les schémas de ce laboratoire nécessitent JavaScript. Les explications et les références restent consultables ; activez JavaScript pour explorer les parcours.</p></noscript>
 {% endblock %}

@@ -1,0 +1,54 @@
+.production-intro { margin-bottom: 2rem; }
+.production-formula { padding: .8rem 1rem; background: var(--paper); border-left: 3px solid var(--tone-orange); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.production-formula p { margin: .4rem 0; }
+.production-presets { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.5rem; }
+.production-presets .graph-field { flex: 1 1 25rem; margin: 0; }
+.production-presets p { flex-basis: 100%; }
+.production-workspace { grid-template-columns: 1.1fr 1fr; }
+.production-parameters { display: grid; grid-template-columns: 1fr 1fr; gap: .1rem 1rem; }
+.production-allocation-settings { border-block: 1px solid var(--line); padding: .8rem 0; margin: 1rem 0; }
+.production-allocation-settings summary { cursor: pointer; font-weight: 650; }
+#production-allocation-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: .1rem 1rem; }
+#production-error:empty { display: none; }
+#production-error { color: var(--tone-orange); font-weight: 650; }
+[data-graph-study=production] svg { width: 100%; display: block; height: auto; color: var(--ink); }
+.production-machine circle { fill: var(--paper); stroke-width: 3; }
+.production-machine text { fill: var(--ink); text-anchor: middle; font: 650 19px system-ui,sans-serif; }
+.production-machine .machine-external { font-size: 15px; font-weight: 400; }
+.production-machine:hover circle, .production-machine:focus circle, .production-machine[aria-current] circle { fill: var(--selected); stroke-width: 5; }
+.production-machine:focus { outline: none; }
+.production-machine:focus circle { stroke: var(--focus); stroke-dasharray: 5 3; }
+.production-transfer { stroke: var(--flow); fill: none; stroke-width: 2; }
+.production-transfer-label { fill: var(--ink); font: 16px system-ui,sans-serif; paint-order: stroke; stroke: var(--wash); stroke-width: 6px; stroke-linejoin: round; text-anchor: middle; }
+.production-chart-axis { stroke: var(--muted); stroke-width: 1; }
+.production-chart-grid { stroke: var(--line); stroke-width: 1; }
+.production-chart-text { fill: var(--ink); font: 15px system-ui,sans-serif; }
+.production-curve-line { stroke: var(--blue); fill: none; stroke-width: 3; }
+.production-knot { fill: var(--paper); stroke: var(--blue); stroke-width: 2; }
+.production-sample { fill: var(--tone-green); stroke: var(--paper); stroke-width: 2; }
+.production-operating { fill: var(--tone-orange); stroke: var(--paper); stroke-width: 2; }
+.production-series { fill: none; stroke-width: 3; stroke-linecap: round; }
+.production-series-legend { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: .5rem; }
+.production-series-legend span:nth-child(1) { color: var(--tone-blue); }
+.production-series-legend span:nth-child(2) { color: var(--tone-orange); }
+.production-series-legend span:nth-child(3) { color: var(--tone-green); }
+.production-timeline { display: flex; align-items: center; gap: 1.3rem; margin: 1.7rem 0; }
+.production-timeline .graph-field { flex: 1; margin: 0; }
+.production-timeline output { font-size: 1rem; }
+#production-history { max-height: 32rem; overflow: auto; }
+#production-history tr[data-current] { background: var(--selected); }
+#production-law-values { font-variant-numeric: tabular-nums; }
+#production-probe-result { display: block; margin: .6rem 0; }
+.production-alert { background: var(--tone-orange-wash); border-left: 3px solid var(--tone-orange); padding: 1rem; }
+.production-inspector-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+@media (max-width: 800px) {
+  .production-workspace { grid-template-columns: 1fr; }
+  .production-timeline { flex-wrap: wrap; gap: .5rem; }
+  .production-timeline .graph-field { order: -1; flex-basis: 100%; }
+  .production-parameters { gap: .1rem .65rem; }
+  .production-parameters label { font-size: .9rem; }
+  .production-machine text { font-size: 23px; }
+  .production-machine .machine-external { font-size: 20px; }
+  .production-transfer-label { font-size: 20px; }
+}
+@media print { .production-presets, .production-timeline { display: none; } #production-history { max-height: none; overflow: visible; } }

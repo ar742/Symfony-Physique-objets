@@ -160,3 +160,10 @@ Les coordonnées prennent la forme `#branche-A-B-1a-2.0` : branche orientée A v
 Pour passer à un réseau réel ou à une autre physique, préciser les sommets, les sens autorisés, les attributs et unités, le statut des données, les lois de branche, les raccords, puis l’objectif : distance, durée, énergie, plusieurs critères ou contraintes. Ces choix conditionnent l’algorithme ; ils ne se résument pas au dessin du graphe. Le chantier G3 à G6 est indépendant des lots de nouvelles fiches de physique laissés en attente.
 
 Vérification reproductible : depuis la racine du projet, `node --test app/tools/test-graph-engine.mjs` lance les tests du moteur avec Node.js. Dans le conteneur web, depuis `/var/www/html`, `php tools/verify-graphs.php` vérifie les pages et les ressources HTTP ; `php tools/verify-analysis-formats.php` contrôle les formes existantes ; `php vendor/bin/phpunit` exécute la suite PHP. Node.js n’est utile qu’au test du moteur : l’utilisation des ateliers demande simplement le navigateur et le serveur déjà installés.
+
+
+## Troisième étude : machines de production
+
+L’extension [Machines et production](PRODUCTION-MACHINES.md), accessible en `/graphes/production`, place les machines aux nœuds et les répartitions sur les arcs. Chaque machine transforme une alimentation normalisée en production par la loi à seuil et deux segments affines proposée par l’auteur. Le réseau comporte des retours entre machines ; la simulation les traite par mises à jour synchrones, en distinguant les anciens apports des nouvelles sorties.
+
+Cette étude commence le travail G4/G5 sur un réseau abstrait évoluant par cycles. Elle permet de régler les lois, alimentations, productions initiales et six fractions entre trois machines. Elle ne termine pas G3 (éditeur général, import, sauvegarde), G4 (temporalité et apports variables plus généraux), G5 (bilans physiques et optimisation du réseau) ou G6 (analyses internes approfondies). Les deux premières études et les lots scientifiques restent dans leur périmètre précédent.

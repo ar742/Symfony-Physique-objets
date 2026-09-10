@@ -8,6 +8,8 @@ Les prochains lots de physique sont en attente. E1e est terminé ; les réalisat
 
 Le volet [Études de graphes](docs/ETUDES-GRAPHES.md) applique le cas 1 aux branches : réseau interurbain fictif en `/graphes/`, chemins simples sous une borne stricte, comparaison Dijkstra / Bellman–Ford / Floyd–Warshall ; puis `/graphes/dependances`, un débit externe qui modifie une durée. Les analyses 1a/1b et leurs coordonnées sont accessibles depuis les liaisons. Les cas 2/3/4 internes aux branches et les réseaux dynamiques couplés sont des extensions futures.
 
+Un troisième atelier, [Machines et production](docs/PRODUCTION-MACHINES.md), est accessible en `/graphes/production` : seuil d’alimentation puis deux segments affines, paramètres et répartitions modifiables, transferts réciproques et calcul synchrone par cycles. Trois scénarios montrent stabilisation, blocage sous seuil et oscillation. Il ne s’agit pas d’une optimisation industrielle ni d’une sauvegarde de graphes utilisateur.
+
 ## Contenu disponible
 
 - **Quatre formes accessibles dès l’accueil**, avec schémas cliquables, explications au survol, navigation clavier et thème clair/sombre. Les trois positions forment une chaîne ouverte ; les six positions comportent le retour.

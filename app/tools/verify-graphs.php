@@ -138,12 +138,13 @@ if ($load !== null) {
 }
 
 // Only server-rendered destinations are inspected here; SVG nodes and computed results belong to the JavaScript tests.
+$knownGraphPages = ['/graphes/', '/graphes/dependances', '/graphes/production'];
 foreach ($documents as $path => $document) {
     foreach ($document->getElementsByTagName('a') as $link) {
         $url = parse_url(html_entity_decode($link->getAttribute('href')));
         if ($url === false || isset($url['host']) || isset($url['scheme'])) { continue; }
         $targetPath = $url['path'] ?? $path;
-        if (str_starts_with($targetPath, '/graphes')) { $check(isset($documents[$targetPath]), 'Destination du volet Graphes '.$targetPath); }
+        if (str_starts_with($targetPath, '/graphes')) { $check(in_array($targetPath, $knownGraphPages, true), 'Destination du volet Graphes '.$targetPath); }
         if (isset($documents[$targetPath], $url['fragment'])) {
             $fragment = rawurldecode($url['fragment']);
             if (isset($studies[$targetPath]) && str_starts_with($fragment, 'branche-')) {

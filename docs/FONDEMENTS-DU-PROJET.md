@@ -108,3 +108,11 @@ Le premier exemple relie des villes : position d’entrée, traitement de distan
 Une branche peut traiter plusieurs attributs. La sortie d’une autre branche peut alimenter une entrée, une variable ou l’environnement du traitement ; le raccord doit déclarer son type, son unité, son statut et sa dépendance. Des descriptions globales, par analogie eulérienne, et des suivis de parcours, par analogie lagrangienne, peuvent alors organiser l’étude. Elles ne garantissent pas à elles seules l’existence d’un optimum, ni la validité d’un algorithme statique pour un réseau couplé ou évolutif.
 
 La première réalisation, ses limites et les développements réservés sont précisés dans [le cadre des études de graphes](ETUDES-GRAPHES.md). Elle conserve les analyses et les lots de physique existants, dont les suites restent en attente.
+
+### Machines de production : transformations aux nœuds
+
+L’auteur propose ensuite des machines comme nœuds du graphe. Leurs productions se répartissent entre plusieurs destinataires et peuvent contribuer en retour à leurs propres fournisseurs. L’analyse interne d’une machine est ici Exp. IN (alimentation), TH (fonction de production), Exp. OUT (production et répartition) : cas 1b malgré la normalisation commune sur [0,1]. Les arcs représentent alors les transferts entre machines, non le traitement de fabrication lui-même.
+
+La première loi proposée est nulle jusqu’au seuil a, affine croissante jusqu’à (b,c), puis affine jusqu’à (1,d), avec 0 ≤ a < b < 1 et 0 ≤ d ≤ c ≤ 1. Le seuil a peut recevoir une interprétation énergétique après définition de l’entrée et de sa référence. La production et son rendement ne sont pas synonymes. Des fonctions internes à plusieurs entrées et plusieurs sorties pourront remplacer cette première loi scalaire ; les dépendances entre plusieurs machines existent déjà au niveau du réseau.
+
+La réalisation choisit explicitement des cycles synchrones et des conversions de ressources normalisées. Ce choix illustre le couplage ; il n’impose pas cette temporalité à tous les futurs sujets. Les hypothèses, indices, scénarios et limites sont consignés dans [l’atelier de production](PRODUCTION-MACHINES.md).

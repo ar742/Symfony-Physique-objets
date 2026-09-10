@@ -8,6 +8,12 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class GraphStudyController extends AbstractController
 {
+    #[Route('/graphes/production', name: 'graph_production', methods: ['GET'])]
+    public function production(): Response
+    {
+        return $this->render('graph/production.html.twig');
+    }
+
     #[Route('/graphes/', name: 'graph_index', methods: ['GET'])]
     public function index(): Response
     {
