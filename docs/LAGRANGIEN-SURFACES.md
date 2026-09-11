@@ -1,5 +1,9 @@
 # Lagrangiens et surfaces du réseau de douze branches
 
+> **Référence actuelle — 11 septembre 2026 :** [l’unique préréglage de l’atelier et son lagrangien exact](EXEMPLE-GLOBAL-BRANCHES.md), r=7/32.
+> Ce document conserve les développements et exemples historiques des versions précédentes.
+> Les préréglages 0,54432, b=0,83 et la construction libre ne sont plus proposés dans l’interface ; les descriptions de leurs anciennes vues ne décrivent pas l’atelier actuel.
+
 Complément du 10 septembre 2026 à l’[optimisation des branches](OPTIMISATION-BRANCHES.md). L’auteur demande de voir le lagrangien effectivement utilisé et une surface à deux variables au voisinage d’un maximum. Ce document distingue le problème non linéaire du réseau, les relaxations linéaires calculées et la surface des productions réalisables.
 
 Le modèle demeure celui des [fondements](FONDEMENTS-DU-PROJET.md) : chaque branche transforme son alimentation x en production y=x f(x), avec un rendement f dans [0,1]. La source vaut 1, les nœuds additionnent et répartissent intégralement, et r=y28+y48+y68≤1. Les paramètres, flux et valeurs représentés sont supposés ou calculés ; aucune mesure n’est introduite. La forme analytique des branches reste le [cas 1b](FORMES-ANALYSE.md).

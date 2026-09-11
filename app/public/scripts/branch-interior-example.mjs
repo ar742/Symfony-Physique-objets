@@ -1,5 +1,5 @@
 /**
- * A separate fixed-law teaching example on the unchanged twelve-branch graph.
+ * The single reference preset of the twelve-branch workshop, with fixed laws.
  * Its smooth peak is a consequence of y=x*f(x); no objective penalty, nonlinear
  * change of axes or optimum is inserted into either optimisation algorithm.
  */
@@ -36,7 +36,7 @@ export function isInteriorPeakModel(model) {
 
 /** Explanatory reference only: neither solver imports or consumes this object. */
 export const INTERIOR_PEAK_ANALYTICS = Object.freeze({
-    title: 'Sommet intérieur : lois distinctes du scénario initial',
+    title: 'Cas de référence : maximum global 7/32 à lois fixes',
     axes: Object.freeze({ u: 'x12', v: 'x23' }),
     point: Object.freeze({ u: 0.5, v: 0.125, production: 0.21875 }),
     referenceControls: Object.freeze({ s1: 0.5, s2: 0.5, s5: 0.5, s3: 1, s7: 0.5 }),

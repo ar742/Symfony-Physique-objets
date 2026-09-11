@@ -1,5 +1,5 @@
-import {BRANCH_GRAPH, createBranchesScenario, evaluateBranches, branchProductionRate} from './branches-engine.mjs';
-import {createParameterBox, validateParameterBox} from './branches-parameter-envelope.mjs';
+import {BRANCH_GRAPH, evaluateBranches, branchProductionRate} from './branches-engine.mjs';
+import {validateParameterBox} from './branches-parameter-envelope.mjs';
 import {productionRate} from './production-engine.mjs';
 import {element, svgElement, table, renderInspector} from './graph-studies.mjs';
 import {createBranchSurfaces} from './branch-surfaces.mjs';
@@ -8,7 +8,7 @@ import {createInteriorPeakScenario} from './branch-interior-example.mjs';
 const $ = id => document.getElementById(id);
 const keys = ['a','b','c','d'], splits = ['s1','s2','s5','s3','s7'];
 const edges = BRANCH_GRAPH.edges;
-const names = {initial:'Partages initiaux',grid:'Grille de partages',global:'Global · fonctions fixées',bounded:'Global · paramètres bornés',free:'Construction · paramètres libres'};
+const names = {initial:'Partages initiaux',grid:'Grille de partages',global:'Global · fonctions fixées',bounded:'Global · paramètres bornés'};
 const number = value => Number.isFinite(value) ? new Intl.NumberFormat('fr-FR',{maximumFractionDigits:6}).format(value) : '—';
 const compact = value => new Intl.NumberFormat('fr-FR',{maximumFractionDigits:3}).format(value);
 const precise = value => String(value).replace('.', ',');
@@ -75,17 +75,16 @@ function resetResults() {
     results={};times={};phases={};appliedBoxes=null;boundedOptions=null;view='initial';$('branches-view').value=view;
     [...$('branches-view').options].forEach(option=>option.disabled=option.value!=='initial');
 }
-function load(preset='default') {
-    stop();model=preset==='interior'?createInteriorPeakScenario():createBranchesScenario();
-    if(preset==='between')model.branches.forEach(branch=>branch.b=.83);
+function load() {
+    stop();model=createInteriorPeakScenario();
     initial=evaluateBranches(model,model.initialControls);
-    draftLaws=clone(model.branches);boxes=Object.fromEntries(edges.map(edge=>[edge.id,createParameterBox()]));
+    draftLaws=clone(model.branches);boxes=Object.fromEntries(model.branches.map(branch=>[branch.id,Object.fromEntries(keys.map(key=>[key,[branch[key],branch[key]]]))]));
     editingLaw=editingBox='1-2';$('branch-choice').value=editingLaw;$('branches-box-choice').value=editingBox;
     showLawDraft();showBoxDraft();splits.forEach(key=>$('branch-'+key).value=String(model.initialControls[key]));
     $('branches-divisions').value='10';$('branches-grid-budget').value='200000';$('branches-node-budget').value='10000';
     options=null;resetResults();$('branches-error').textContent='';$('branches-design-error').textContent='';
-    $('branches-status').textContent=preset==='interior'?'Exemple complémentaire chargé : lois différentes, sommet intérieur attendu à r=0,21875. Les deux méthodes vont calculer leur résultat.':preset==='between'?'Exemple b=0,83 chargé sur les douze branches. Lancez la comparaison avec la grille au pas 0,1.':'Douze lois proposées et partages à 0,5 chargés. Lancez la comparaison.';
-    $('branches-design-status').textContent='Plages proposées : a [0,2 ; 0,4], b [0,7 ; 0,9], c [0,8 ; 1], d [0,5 ; 0,7].';
+    $('branches-status').textContent='Cas de référence chargé : lois fixes et partages donnant r=0,21875. Lancez la comparaison pour calculer les certificats numériques.';
+    $('branches-design-status').textContent='Plages préparées égales aux lois de chaque branche : les paramètres sont fixes tant que les bornes restent égales.';
     renderResults();renderState();
 }
 function start(mode) {
@@ -139,18 +138,6 @@ function start(mode) {
             options:mode==='fixed'?options:{global:boundedOptions}});
     } catch(error) {$(errorId).textContent='Réglages non appliqués : '+error.message;}
 }
-function freeConstruction() {
-    const free=createBranchesScenario();
-    free.branches.forEach(branch=>Object.assign(branch,{a:.3,b:.5,c:1,d:1}));
-    Object.assign(free.initialControls,{s1:1,s2:0});
-    const best=evaluateBranches(free,free.initialControls);
-    if(!best.feasible || Math.abs(best.production-1)>1e-12)throw new Error('La construction libre doit atteindre r=1.');
-    results.free={best,upperBound:1,gap:0,status:'constructed',complete:true};phases.free='done';
-    $('branches-view').querySelector('[value="free"]').disabled=false;
-    setView('free');renderResults();
-    $('branches-design-status').textContent='Construction libre affichée : r=1, soit 100 %, atteint la borne de conservation par le trajet 1→2→8 sans perte. Les plages préparées sont conservées.';
-    $('branches-results-heading').scrollIntoView({block:'start'});
-}
 function residual(state) {
     if(!state?.feasible)return NaN;
     let value=0;
@@ -166,14 +153,13 @@ function residual(state) {
 function setView(key) {if(!stateFor(key))return;view=key;$('branches-view').value=key;renderState();}
 function describeResult(key,result) {
     if(!result)return 'Non calculé';
-    if(key==='free')return 'Borne atteinte par construction';
     if(phases[key]==='running')return 'En cours · résultat partiel';
     if(phases[key]==='stopped')return 'Arrêt demandé · résultat partiel';
     if(key==='grid')return result.complete?'Grille entièrement explorée':'Budget atteint · grille partielle';
     return result.status==='certified'?'Optimum numérique à 10⁻⁷':result.status==='uncertain'?'Régions numériquement non résolues':'Budget atteint · optimum non établi';
 }
 function renderResults() {
-    const result=table(['Étude / méthode','Rendement global r','Borne supérieure','Écart à la borne','Portée','Examiner'],'Fonctions fixées : grille et global comparables. Paramètres bornés ou libres : domaines de conception différents.');
+    const result=table(['Étude / méthode','Rendement global r','Borne supérieure','Écart à la borne','Portée','Examiner'],'Fonctions fixées : grille et global comparables. Paramètres bornés : autre domaine si les plages sont élargies.');
     for(const key of Object.keys(names)) {
         const state=stateFor(key),record=results[key];
         const bound=['initial','grid'].includes(key)?results.global?.upperBound:record?.upperBound;
@@ -268,7 +254,7 @@ function restore(scroll) {
     if(scroll)requestAnimationFrame(()=>{const target=match[2]?$(location.hash.slice(1)):$('branches-inspector');target.scrollIntoView({block:'start'});if(match[2])target.focus({preventScroll:true});else{$('inspector-title').tabIndex=-1;$('inspector-title').focus({preventScroll:true});}});
 }
 try {
-    surfaces=createBranchSurfaces({onDemo:(preset='default')=>{load(preset);start('fixed');}});
+    surfaces=createBranchSurfaces({onDemo:()=>{load();start('fixed');}});
     $('branches-controls').addEventListener('submit',event=>{event.preventDefault();start('fixed');});
     $('branches-design').addEventListener('submit',event=>{event.preventDefault();start('bounded');});
     $('branch-choice').addEventListener('change',()=>{updateLawDraft();editingLaw=$('branch-choice').value;showLawDraft();});
@@ -276,7 +262,7 @@ try {
     $('branches-copy-law').addEventListener('click',()=>{try{updateLawDraft();const branch=draftLaws.find(edge=>edge.id===editingLaw);validateLaw(branch);const p=Object.fromEntries(keys.map(key=>[key,branch[key]]));draftLaws=draftLaws.map(edge=>({...edge,...p}));$('branches-error').textContent='';$('branches-status').textContent='Loi copiée dans les douze réglages préparés. Cliquez sur « Appliquer et comparer ».';}catch(error){$('branches-error').textContent=error.message;}});
     $('branches-copy-box').addEventListener('click',()=>{try{updateBoxDraft();const box=validateParameterBox(boxes[editingBox]);boxes=Object.fromEntries(edges.map(edge=>[edge.id,clone(box)]));$('branches-design-error').textContent='';$('branches-design-status').textContent='Plages copiées dans les douze réglages préparés. Lancez le calcul borné pour les appliquer.';}catch(error){$('branches-design-error').textContent=error.message;}});
     $('branches-cancel').addEventListener('click',()=>{stop('Calcul arrêté. Les résultats partiels reçus restent affichés ; relancez pour poursuivre une nouvelle recherche.',true);renderResults();});
-    $('branches-reset').addEventListener('click',()=>load());$('branches-between').addEventListener('click',()=>load('between'));$('branches-free').addEventListener('click',freeConstruction);
+    $('branches-reset').addEventListener('click',()=>load());
     $('branches-view').addEventListener('change',()=>setView($('branches-view').value));
     $('branches-inspect').addEventListener('change',()=>{selected=$('branches-inspect').value;history.replaceState(null,'','#reseau-'+selected+'-1b');renderState();});
     $('branches-export').addEventListener('click',()=>{

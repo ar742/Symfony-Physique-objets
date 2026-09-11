@@ -41,6 +41,9 @@
 .branch-surface-tile { fill:var(--tone-blue); stroke:var(--tone-blue); stroke-width:.65; stroke-opacity:.65; cursor:crosshair; }
 .branch-surface-tile:hover { fill-opacity:.65; }
 .branch-surface-outside { fill:var(--muted); stroke:var(--muted); fill-opacity:.15; stroke-dasharray:3 3; }
+.branch-surface-nlp { fill:var(--tone-green); stroke:var(--tone-green); }
+.branch-surface-analysis { margin-block:1.5rem; padding:1.2rem; border:2px solid var(--tone-blue); border-radius:.8rem; background:var(--wash); }
+.branch-surface-analysis h3 { margin-top:0; }
 .branch-surface-marker { stroke:var(--paper); stroke-width:2.5; fill:var(--tone-orange); cursor:crosshair; }
 .branch-surface-marker.grid { stroke:var(--tone-green); stroke-width:3; fill:none; }
 .branch-surface-curve { fill:none; stroke:var(--tone-blue); stroke-width:4; }

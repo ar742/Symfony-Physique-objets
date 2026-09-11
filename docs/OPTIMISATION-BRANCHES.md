@@ -1,5 +1,9 @@
 # Douze branches : rendement, production et optimisation
 
+> **Atelier actuel — 11 septembre 2026 :** consulter [l’unique préréglage global 7/32 et son lagrangien exact](EXEMPLE-GLOBAL-BRANCHES.md).
+> Les réglages, boutons, plages initiales et résultats numériques décrits ci-dessous retracent les versions précédentes ; les exemples 0,54432, b=0,83 et la construction libre ne sont plus proposés dans l’interface.
+> Les méthodes générales restent documentées ici. Le panneau avancé actuel commence avec min=max aux lois du préréglage, comme précisé dans la nouvelle référence.
+
 Cinquième exemple du volet Production, précisé par l’auteur le 10 septembre 2026 et accessible sous `/graphes/production/branches`. **Chaque branche possède un coefficient de rendement f ; sa production est y=x f(x).** Les huit nœuds additionnent les productions reçues et répartissent la somme disponible. Le précédent [atelier de huit machines](OPTIMISATION-PRODUCTION.md) conserve son modèle propre, avec les transformations aux nœuds.
 
 Chaque branche porte l’analyse Exp. IN → TH → Exp. OUT du [cas 1b](FORMES-ANALYSE.md) : alimentation allouée, application du rendement et calcul de la production, production transmise. Le réseau, les lois et les conversions sont supposés ; les résultats sont calculés, sans mesure industrielle inventée. Il s’agit d’une configuration statique compatible, sans durée ni stock ajoutés.

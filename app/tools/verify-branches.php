@@ -103,10 +103,10 @@ foreach (['réglages' => $form, 'conception' => $design] as $label => $element) 
 }
 foreach ([
     'branch-choice' => $branchIds, 'branches-inspect' => $branchIds, 'branches-box-choice' => $branchIds,
-    'branches-view' => ['initial', 'grid', 'global', 'bounded', 'free'],
+    'branches-view' => ['initial', 'grid', 'global', 'bounded'],
     'branches-divisions' => ['5', '10', '20', '50', '100'], 'branches-grid-budget' => ['200000', '1000000', '5000000'],
-    'branches-surface-reference' => ['initial', 'grid', 'global', 'bounded', 'free'],
-    'branches-surface-mode' => ['flows', 'yield', 'lagrangian'],
+    'branches-surface-reference' => ['initial', 'grid', 'global', 'bounded'],
+    'branches-surface-mode' => ['flows', 'yield', 'nlp', 'lagrangian'],
     'branches-surface-scale' => ['local', 'global'],
     'branches-surface-resolution' => ['20', '40', '60'],
 ] as $id => $expected) {
@@ -121,7 +121,7 @@ foreach ([
     $defaults = [
         'branches-view' => 'initial', 'branches-divisions' => '10', 'branches-grid-budget' => '200000',
         'branches-surface-reference' => 'initial', 'branches-surface-mode' => 'flows', 'branches-surface-scale' => 'local',
-        'branches-surface-resolution' => '40',
+        'branches-surface-resolution' => '60',
     ];
     if (isset($defaults[$id])) {
         $check(count($selected) <= 1 && ($selected[0] ?? $actual[0] ?? null) === $defaults[$id], 'Valeur sélectionnée initialement '.$id);
@@ -131,7 +131,7 @@ foreach ([
     $check($actual === $expected, 'Choix du sélecteur '.$id);
     $check($hasName($select, $xpath), 'Nom accessible '.$id);
 }
-foreach (['a' => 0.3, 'b' => 0.8, 'c' => 0.9, 'd' => 0.6, 's1' => 0.5, 's2' => 0.5, 's5' => 0.5, 's3' => 0.5, 's7' => 0.5] as $parameter => $expected) {
+foreach (['a' => 0.0, 'b' => 0.1, 'c' => 0.9, 'd' => 0.0, 's1' => 0.5, 's2' => 0.5, 's5' => 0.5, 's3' => 1.0, 's7' => 0.5] as $parameter => $expected) {
     $id = 'branch-'.$parameter;
     $input = $requiredElement($id, 'input');
     if ($input === null) { continue; }
@@ -143,7 +143,7 @@ foreach (['a' => 0.3, 'b' => 0.8, 'c' => 0.9, 'd' => 0.6, 's1' => 0.5, 's2' => 0
     }
     if ($form !== null) { $check($xpath->query('.//*[@id="'.$id.'"]', $form)->length === 1, 'Paramètre du formulaire '.$id); }
 }
-foreach (['a' => [0.2, 0.4], 'b' => [0.7, 0.9], 'c' => [0.8, 1.0], 'd' => [0.5, 0.7]] as $parameter => $limits) {
+foreach (['a' => [0.0, 0.0], 'b' => [0.1, 0.1], 'c' => [0.9, 0.9], 'd' => [0.0, 0.0]] as $parameter => $limits) {
     foreach (['min', 'max'] as $index => $bound) {
         $id = 'box-'.$parameter.'-'.$bound;
         $input = $requiredElement($id, 'input');
@@ -173,11 +173,13 @@ if ($cancel !== null) {
     $check($hasName($cancel, $xpath), 'Nom accessible de l’annulation');
     $check($cancel->hasAttribute('hidden'), 'Annulation masquée hors calcul');
 }
-foreach (['branches-copy-law', 'branches-reset', 'branches-between', 'branches-export', 'branches-copy-box', 'branches-design-run', 'branches-free'] as $id) {
+foreach (['branches-copy-law', 'branches-reset', 'branches-export', 'branches-copy-box', 'branches-design-run'] as $id) {
     $button = $requiredElement($id, 'button');
     if ($button === null) { continue; }
     $check($hasName($button, $xpath), 'Nom accessible de la commande '.$id);
-    if ($id === 'branches-between') { $check($button->getAttribute('type') === 'button', 'Préparation du cas intermédiaire sans soumission automatique'); }
+    if ($id === 'branches-reset') {
+        $check($button->getAttribute('type') === 'button' && str_contains($button->textContent, 'cas de référence'), 'Rétablissement du cas de référence sans soumission');
+    }
     if ($id === 'branches-design-run') {
         $check($button->getAttribute('type') === 'submit' && $button->hasAttribute('disabled'), 'Conception par soumission désactivée avant JavaScript');
     }
@@ -211,7 +213,7 @@ if ($inspector !== null) {
 // The formulas and surface controls exist before JavaScript. The mesh, diagnostic
 // values, neighborhood table and two profile SVGs are computed later and tested
 // in the browser; server checks cover their named containers, not dynamic markup.
-foreach (['branches-lagrangian-heading', 'branches-surface-heading'] as $id) {
+foreach (['branches-lagrangian-heading', 'branches-surface-heading', 'branches-reference-heading', 'branches-gradient-heading'] as $id) {
     $heading = $requiredElement($id);
     if ($heading !== null) { $check(trim($heading->textContent) !== '', 'Intitulé de section '.$id); }
 }
@@ -226,7 +228,7 @@ foreach (['branches-surface-x', 'branches-surface-y'] as $id) {
     if ($select !== null) { $check($hasName($select, $xpath), 'Nom accessible de l’axe '.$id); }
 }
 $surfaceInputs = [
-    'branches-surface-radius' => ['type' => 'number', 'min' => 0.001, 'max' => 1.0, 'step' => 0.001, 'value' => 0.03],
+    'branches-surface-radius' => ['type' => 'number', 'min' => 0.001, 'max' => 1.0, 'step' => 0.001, 'value' => 0.1],
     'branches-surface-yaw' => ['type' => 'range', 'min' => -180.0, 'max' => 180.0],
     'branches-surface-pitch' => ['type' => 'range', 'min' => 15.0, 'max' => 75.0],
 ];
@@ -257,16 +259,20 @@ if ($surface !== null) {
         $check($xpath->query('.//*[@id="'.$id.'"]', $surface)->length === 1, 'Description intégrée au SVG '.$id);
     }
 }
-foreach (['branches-surface-center', 'branches-surface-demo', 'branches-surface-wide', 'branches-surface-interior'] as $id) {
+foreach (['branches-surface-center', 'branches-surface-demo', 'branches-surface-wide'] as $id) {
     $button = $requiredElement($id, 'button');
     if ($button === null) { continue; }
     $check($button->getAttribute('type') === 'button', 'Commande de voisinage sans soumission directe '.$id);
     $check($hasName($button, $xpath), 'Nom accessible de la commande de voisinage '.$id);
     if ($id === 'branches-surface-center') { $check($button->hasAttribute('disabled'), 'Recentrage désactivé sans résultat calculé'); }
+    if ($id === 'branches-surface-demo') {
+        $check(str_contains($button->textContent, 'cas de référence') && str_contains($button->textContent, '0,21875'), 'Recalcul du seul cas de référence annoncé');
+    }
 }
 foreach ([
     'branches-surface-caption', 'branches-lagrangian-diagnostic', 'branches-surface-samples',
     'branches-surface-focus', 'branches-surface-neighbors', 'branches-surface-profiles',
+    'branches-surface-derivatives', 'branches-exact-certificate',
 ] as $id) { $requiredElement($id); }
 $surfacePoint = $requiredElement('branches-surface-point');
 if ($surfacePoint !== null) {
@@ -277,6 +283,20 @@ $surfaceStatus = $requiredElement('branches-surface-status');
 if ($surfaceStatus !== null) { $check($surfaceStatus->getAttribute('role') === 'status', 'Annonce accessible de l’état de la nappe'); }
 $check($xpath->query('//head/script[@type="module" and @src="/scripts/branch-study.mjs"]')->length === 1, 'Module des branches déclaré dans head');
 $check($xpath->query('//head/link[@rel="stylesheet" and @href="/styles/branch-study.css"]')->length === 1, 'Style des branches déclaré dans head');
+foreach (['branches-between', 'branches-surface-interior', 'branches-free'] as $id) {
+    $check($document->getElementById($id) === null, 'Ancienne commande retirée '.$id);
+}
+$pageText = '';
+foreach ($xpath->query('//main//text()[not(ancestor::script or ancestor::style or ancestor::*[@hidden or @aria-hidden="true"])]') as $text) {
+    $pageText .= ' '.$text->textContent;
+}
+foreach ([
+    '/0[.,]54432|54[.,]432/u' => 'ancien résultat 0,54432',
+    '/\bb\s*=\s*0[.,]83\b/iu' => 'ancien exemple b=0,83',
+    '/complémentaire/iu' => 'qualification d’exemple complémentaire',
+] as $pattern => $label) {
+    $check(preg_match($pattern, $pageText) === 0, 'Absence dans le HTML affiché : '.$label);
+}
 
 // Computed triplets do not exist in server HTML; check the arc and coordinate of their links.
 foreach ($document->getElementsByTagName('a') as $link) {
@@ -307,6 +327,7 @@ $requests = [
     ['GET', '/scripts/branches-parameter-envelope.mjs', 200], ['GET', '/scripts/bounded-linear-program.mjs', 200],
     ['GET', '/scripts/branches-lagrangian.mjs', 200], ['GET', '/scripts/branch-surfaces-engine.mjs', 200], ['GET', '/scripts/branch-surfaces.mjs', 200],
     ['GET', '/scripts/branch-interior-example.mjs', 200],
+    ['GET', '/scripts/branch-peak-analysis.mjs', 200], ['GET', '/scripts/branches-exact-lagrangian.mjs', 200],
     ['GET', '/scripts/production-engine.mjs', 200], ['GET', '/styles/branch-study.css', 200],
 ];
 foreach ($requests as [$method, $path, $status]) {
