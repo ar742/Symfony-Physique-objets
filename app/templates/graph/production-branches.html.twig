@@ -8,14 +8,22 @@
     <p class="eyebrow">Production · Exemple 5 · Huit nœuds, douze transformations</p>
     <h1>Partager les entrées, optimiser les branches</h1>
     <p class="lead">Chaque branche possède son coefficient de rendement f(x) et produit x f(x). Les nœuds additionnent les résultats reçus puis répartissent cette somme. Comment choisir les cinq partages pour maximiser le résultat en 8 ?</p>
-    <p><a href="{{ path('graph_production') }}">Tous les exemples de production</a> · <a href="#branches-lagrangian-heading">Le lagrangien</a> · <a href="#branches-surface-heading">Explorer en 3D</a> · <a href="#branches-results-heading">Comparer les méthodes</a> · <a href="#branches-design-heading">Faire varier les fonctions</a></p>
+    <p><a href="{{ path('graph_production') }}">Tous les exemples de production</a> · <a id="branches-main-lagrangian-link" href="#branches-lagrangian-heading">Le lagrangien</a> · <a href="#branches-surface-heading">Explorer en 3D</a> · <a href="#branches-results-heading">Comparer les méthodes</a> · <a href="#branches-design-heading">Faire varier les fonctions</a></p>
 </header>
 <section class="content-note">
     <h2>Une source fixée à 1,00 ; trois arrivées pour r</h2>
     <p>Les douze liaisons sont <strong>1→2, 1→5, 2→3, 2→8, 5→3, 5→7, 7→6, 7→4, 3→4, 3→6, 4→8, 6→8</strong>. Sur chaque branche i→j : l’entrée xᵢⱼ est la part allouée en i, la sortie vaut yᵢⱼ=xᵢⱼ fᵢⱼ(xᵢⱼ), puis contribue à la somme disponible en j. Le nœud 1 fournit exactement 1,00. Le nœud 8 collecte <strong>r=y₂₈+y₄₈+y₆₈</strong>, le rendement global pour une source égale à 1.</p>
     <p>Puisque 0≤f(x)≤1, chaque branche vérifie 0≤y≤x. Les partages sont intégraux et ne dupliquent aucun flux : <strong>0≤r≤1</strong>. Le cas r=1 représente le rendement idéal de 100 %, sans perte. La perte de chaque branche vaut x−y et leur somme vaut 1−r. Aucun écrêtage ni stock n’est ajouté. Les flux et les rendements de ce modèle sont normalisés ; les conversions sont supposées égales à 1.</p>
 </section>
-{% include 'graph/_branch-global-analysis.html.twig' %}
+<section class="content-note" aria-labelledby="branches-examples-heading">
+    <h2 id="branches-examples-heading">Deux exemples à comparer</h2>
+    <div class="graph-field"><label for="branches-example">Exemple à charger</label><select id="branches-example"><option value="interior">Premier exemple · maximum 0,21875</option><option value="active">Exemple complémentaire · nœuds 2 à 8 tous actifs</option></select></div>
+    <button id="branches-example-load" type="button">Charger cet exemple et comparer</button>
+    <p id="branches-example-status" role="status">Le premier exemple est chargé. Le second conserve la topologie et rend les douze branches actives.</p>
+    <p>Charger un exemple rétablit ses douze lois et ses cinq partages, puis lance les calculs. Les deux développements ci-dessous restent consultables indépendamment des réglages.</p>
+</section>
+<details id="branches-reference-explanation" class="branch-example-details" open><summary>Premier exemple · maximum global 0,21875</summary>{% include 'graph/_branch-global-analysis.html.twig' %}</details>
+<details id="branches-active-explanation" class="branch-example-details"><summary>Exemple complémentaire · tous les nœuds actifs · maximum global 0,447553125</summary>{% include 'graph/_branch-active-analysis.html.twig' %}</details>
 <div class="optimization-workspace">
 <figure class="graph-map-panel">
     <svg id="branches-map" viewBox="0 0 800 960" role="group" aria-labelledby="branches-map-title branches-map-desc"><title id="branches-map-title">Réseau de huit nœuds et douze branches</title><desc id="branches-map-desc">Chaque flèche ouvre sa propre analyse en trois positions. Les disques représentent les sommes aux nœuds ; les croisements sans disque ne sont pas des raccords.</desc></svg>
@@ -63,11 +71,11 @@
     <h2 id="branches-surface-heading">Le lagrangien et le rendement, vus en 3D</h2>
     <p>Examinez la forme du rendement <strong>au voisinage de la meilleure configuration calculée</strong>. Les coordonnées sont deux entrées de branche, avec une échelle verticale locale graduée en valeurs réelles de r. Le rayon et le nombre de points sont réglables.</p>
     <div class="optimization-actions"><button id="branches-surface-demo" type="button" disabled>Recalculer le cas de référence r = 0,21875</button><button id="branches-surface-center" type="button" disabled>Centrer sur le meilleur résultat du problème choisi</button><button id="branches-surface-wide" type="button" disabled>Élargir le voisinage · voir la courbure</button></div>
-    <p class="small-note">Recalculer rétablit les douze lois du cas de référence et ses cinq partages initiaux. Centrer conserve le problème et choisit sa meilleure configuration disponible, même si son budget est atteint. Élargir conserve la référence et les lois, passe au rayon 0,15 et à 60 divisions par axe. La densité du dessin ne change pas la précision de l’optimiseur.</p>
+    <p class="small-note">Recalculer rétablit les lois et partages de l’exemple chargé. Centrer conserve le problème et choisit sa meilleure configuration disponible, même si son budget est atteint. Élargir conserve la référence et les lois, passe au rayon 0,15 et à 60 divisions par axe. La densité du dessin ne change pas la précision de l’optimiseur.</p>
     <aside class="branch-interior-example" aria-labelledby="branches-interior-heading">
-        <h3 id="branches-interior-heading">Sommet global du cas de référence</h3>
-        <p>Le maximum 0,21875 est prouvé sur tous les partages avec les lois de référence fixes. Les nappes de rendement recalculent les contraintes ; les nappes du lagrangien non linéaire explorent aussi des points hors contraintes avec des multiplicateurs analytiques fixes.</p>
-        <p><a href="#branches-reference-heading">Lois et partages initiaux</a> · <a href="#branches-lagrangian-heading">Lagrangien et borne globale</a> · <a href="#branches-gradient-heading">Toutes les formules de dérivées</a></p>
+        <h3 id="branches-interior-heading">Les sommets globaux des deux exemples</h3>
+        <p>Chaque exemple possède sa propre preuve à lois fixes. Les nappes de rendement recalculent les contraintes ; celles du lagrangien non linéaire explorent aussi des points hors contraintes avec des multiplicateurs analytiques fixes. Modifier les lois nécessite une nouvelle analyse.</p>
+        <p><a href="#branches-reference-heading">Premier exemple</a> · <a href="#branches-active-heading">Exemple complémentaire</a> · <a href="#branches-gradient-heading">Dérivées du premier exemple</a> · <a href="#branches-active-gradient-heading">Dérivées du complémentaire</a></p>
     </aside>
     <div class="graph-field"><label for="branches-surface-reference">Configuration de référence pour la vue 3D</label><select id="branches-surface-reference"><option value="initial">Partages initiaux</option><option value="grid" disabled>Meilleur résultat de la grille</option><option value="global" disabled>Global · fonctions fixées</option><option value="bounded" disabled>Global · paramètres bornés</option></select></div>
     <div id="branches-surface-focus" class="branch-surface-focus" aria-live="polite"><p>Le cas de référence est chargé à son sommet analytique. Recalculez pour obtenir aussi le certificat numérique.</p></div>
@@ -100,7 +108,7 @@
 <section class="graph-section" aria-labelledby="branches-design-heading">
     <h2 id="branches-design-heading">Étude avancée : changer le domaine des lois</h2>
     <details><summary>Préparer d’autres bornes de paramètres</summary>
-    <p>Cette étude change le problème dès qu’une plage est élargie. Le maximum global 0,21875 et son certificat exact concernent les lois de référence fixes.</p>
+    <p>Cette étude change le problème dès qu’une plage est élargie. Les deux certificats analytiques concernent uniquement les lois fixes de leur exemple.</p>
     <p>Cinq partages et 48 paramètres font 53 commandes. Une exploration naïve avec dix valeurs par commande compterait 10⁵³ combinaisons avant même le contrôle des contraintes. La recherche suivante traite directement les plages admissibles des fonctions et les bilans du réseau.</p>
     <form id="branches-design" class="graph-controls" novalidate>
         <div class="graph-field"><label for="branches-box-choice">Branche dont les plages sont à préparer</label><select id="branches-box-choice">{% for edge in ['1-2','1-5','2-3','2-8','5-3','5-7','7-6','7-4','3-4','3-6','4-8','6-8'] %}<option value="{{ edge }}">{{ edge|replace({'-':' → '}) }}</option>{% endfor %}</select></div>

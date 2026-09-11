@@ -1,4 +1,5 @@
-import {searchBranchesGrid, optimiseBranchesGlobal} from './branches-engine.mjs';
+import {searchBranchesGrid} from './branches-engine.mjs';
+import {optimiseBranchesStudy} from './branches-global-study.mjs';
 
 self.onmessage = ({data}) => {
     const {model, options, parameterBoxes, mode} = data;
@@ -13,7 +14,7 @@ self.onmessage = ({data}) => {
         const globalOptions = {...options.global,
             onProgress: result => self.postMessage({kind, result, partial:true, milliseconds:performance.now()-started})};
         if (mode === 'bounded') globalOptions.parameterBoxes = parameterBoxes;
-        const result = optimiseBranchesGlobal(model, globalOptions);
+        const result = optimiseBranchesStudy(model, globalOptions);
         self.postMessage({kind, result, partial:false, milliseconds:performance.now()-started});
         self.postMessage({kind:'done'});
     } catch (error) {

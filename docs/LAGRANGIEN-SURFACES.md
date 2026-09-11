@@ -1,6 +1,6 @@
 # Lagrangiens et surfaces du réseau de douze branches
 
-> **Référence actuelle — 11 septembre 2026 :** [l’unique préréglage de l’atelier et son lagrangien exact](EXEMPLE-GLOBAL-BRANCHES.md), r=7/32.
+> **Références actuelles — 11 septembre 2026 :** deux préréglages, [le cas 7/32](EXEMPLE-GLOBAL-BRANCHES.md) et [le complément à douze branches actives](EXEMPLE-ACTIF-BRANCHES.md), chacun avec son lagrangien et sa preuve.
 > Ce document conserve les développements et exemples historiques des versions précédentes.
 > Les préréglages 0,54432, b=0,83 et la construction libre ne sont plus proposés dans l’interface ; les descriptions de leurs anciennes vues ne décrivent pas l’atelier actuel.
 

@@ -1,0 +1,68 @@
+<section class="graph-section" aria-labelledby="branches-active-heading">
+<h2 id="branches-active-heading">Un exemple complémentaire : sept flux proches, douze branches actives</h2>
+<p>La condition porte sur les <strong>nœuds 2 à 8, source 1 exclue</strong>. On compare leurs flux réels Aᵢ, sommes disponibles puis intégralement réparties, avec A8=r. Aucune capacité de normalisation ni alimentation supplémentaire n’est introduite. « Première valeur » désigne la première propagation complète dans l’ordre du graphe ; aucun stock ou état transitoire n’est supposé.</p>
+<p>Le départ utilise <strong>s1=0,5 ; s2=0,5 ; s5=0,25 ; s3=0,5 ; s7=0,5</strong>. Il est déjà optimal. Les douze entrées et sorties de branche sont strictement positives, et chaque nœud de partage alimente ses deux destinations.</p>
+<div class="graph-table-wrap"><table><caption>Flux des nœuds 2 à 8 dès la première propagation</caption><thead><tr><th scope="col">Nœud</th><th scope="col">Flux Aᵢ</th><th scope="col">Allocations avant les transformations suivantes</th></tr></thead><tbody>
+<tr><th scope="row">2</th><td>0,45</td><td>0,225 vers 3 ; 0,225 vers 8</td></tr>
+<tr><th scope="row">3</th><td>0,320625</td><td>0,1603125 vers 4 ; 0,1603125 vers 6</td></tr>
+<tr><th scope="row">4</th><td>0,30459375</td><td>Tout vers 8</td></tr>
+<tr><th scope="row">5</th><td>0,45</td><td>0,1125 vers 3 ; 0,3375 vers 7</td></tr>
+<tr><th scope="row">6</th><td>0,30459375</td><td>Tout vers 8</td></tr>
+<tr><th scope="row">7</th><td>0,320625</td><td>0,1603125 vers 6 ; 0,1603125 vers 4</td></tr>
+<tr><th scope="row">8</th><td>0,447553125</td><td>Résultat : 0,1125 + 0,1675265625 + 0,1675265625</td></tr>
+</tbody></table></div>
+<p>Maximum/minimum = 0,45/0,30459375 = <strong>1600/1083 ≈ 1,477377655</strong> : le plus grand dépasse le plus petit d’environ <strong>47,74 %</strong>. Les valeurs ne sont pas toutes égales. Cette condition décrit le départ ; elle n’est pas ajoutée comme contrainte à l’optimisation.</p>
+<p>La source 1 fournit toujours 1, réparti en 0,5 vers chaque branche. Leurs coefficients valent 0,9 à ce point : les nœuds 2 et 5 reçoivent chacun 0,45. Le rendement final vaut <strong>r*=143217/320000=0,447553125</strong> et les pertes totalisent 0,552446875.</p>
+<h3 id="branches-active-laws-heading">Les douze lois, différentes selon leur rôle</h3>
+<p>Pour toutes les branches : a=0 et b=0,001. Les coefficients α et β du tableau définissent exactement c=α−βb et d=α−β. Ainsi gₑ(t)=(αₑ/b−βₑ)t² pour t≤b, puis gₑ(t)=αₑt−βₑt² pour t≥b. Le coefficient f=g/t reste dans [0,1]. Les décimales ci-dessous sont arrondies ; les calculs et l’export conservent leur précision.</p>
+{% set active_laws = [
+    {ids:'1→2 et 1→5',input:0.5,k:0.9,mi:0.35,mj:0.41},
+    {ids:'2→3',input:0.225,k:0.95,mi:0.41,mj:0.44},
+    {ids:'2→8',input:0.225,k:0.5,mi:0.41,mj:1},
+    {ids:'5→3',input:0.1125,k:0.95,mi:0.41,mj:0.44},
+    {ids:'5→7',input:0.3375,k:0.95,mi:0.41,mj:0.44},
+    {ids:'3→4, 3→6, 7→4 et 7→6',input:0.1603125,k:0.95,mi:0.44,mj:0.48},
+    {ids:'4→8 et 6→8',input:0.30459375,k:0.55,mi:0.48,mj:1}
+] %}
+<div class="graph-table-wrap"><table><caption>Paramètres et coefficients des douze branches actives</caption><thead><tr><th scope="col">Branches</th><th scope="col">a</th><th scope="col">b</th><th scope="col">c</th><th scope="col">d</th><th scope="col">α</th><th scope="col">β</th><th scope="col">Entrée x*</th><th scope="col">f(x*)</th></tr></thead><tbody>
+{% for law in active_laws %}{% set m = law.mi / law.mj %}{% set alpha = 2 * law.k - m %}{% set beta = (law.k - m) / law.input %}
+<tr><th scope="row">{{ law.ids }}</th><td>0</td><td>0,001</td><td>{{ (alpha-beta*0.001)|number_format(9, ',', '') }}</td><td>{{ (alpha-beta)|number_format(9, ',', '') }}</td><td>{{ alpha|number_format(9, ',', '') }}</td><td>{{ beta|number_format(9, ',', '') }}</td><td>{{ law.input|number_format(7, ',', '') }}</td><td>{{ law.k|number_format(2, ',', '') }}</td></tr>
+{% endfor %}</tbody></table></div>
+<p>Construction reproductible : mₑ=μᵢ/μⱼ, βₑ=(fₑ(x*ₑ)−mₑ)/x*ₑ et αₑ=2fₑ(x*ₑ)−mₑ. Les entrées et coefficients du tableau, avec les μ ci-dessous, déterminent les lois sans ajustement graphique.</p>
+</section>
+<section class="graph-section" aria-labelledby="branches-active-lagrangian-heading">
+<h2 id="branches-active-lagrangian-heading">Lagrangien et preuve du maximum global</h2>
+<p>Comme dans le premier exemple : h1=1−x12−x15, hᵢ=Σy reçus−Σx alloués pour i=2,…,7, et les douze égalités gₑ(xₑ)−yₑ=0. Le domaine conserve 0≤xₑ,yₑ≤1.</p>
+<p class="branch-formula">L=r+Σᵢ μᵢhᵢ+Σₑ νₑ[gₑ(xₑ)−yₑ].</p>
+<p><strong>μ1=0,35 ; μ2=μ5=0,41 ; μ3=μ7=0,44 ; μ4=μ6=0,48 ; μ8=1</strong>, où μ8 note le coefficient de l’objectif, et <strong>νᵢⱼ=μⱼ</strong>. Ces multiplicateurs sont analytiques, indépendants de ceux des programmes linéaires du solveur.</p>
+<p class="branch-formula">L=0,35+Σ₍ᵢ→ⱼ₎[μⱼgᵢⱼ(xᵢⱼ)−μᵢxᵢⱼ].</p>
+<p>Les termes en y se compensent. Pour chaque branche, sur tout [0,1], gₑ(t)≤αₑt−βₑt². Avant b, la différence vaut αₑt(1−t/b)≥0. De plus μⱼαₑ−μᵢ=2μⱼβₑx*ₑ. Posons wₑ=μⱼβₑ&gt;0 :</p>
+<p class="branch-formula">L≤0,35+Σₑ wₑ[(x*ₑ)²−(xₑ−x*ₑ)²]≤143217/320000.</p>
+<p>Le départ satisfait tous les bilans et atteint la borne : L=r=r*. Le maximum est donc <strong>global et unique dans les cinq partages</strong>. En effet, atteindre la borne impose chaque entrée xₑ=x*ₑ ; tous les nœuds étant alimentés, cela fixe aussi leurs fractions. Ce certificat particulier reste distinct du statut numérique du solveur.</p>
+<p class="branch-formula">∂L/∂xᵢⱼ=μⱼg′ᵢⱼ(xᵢⱼ)−μᵢ ; ∂L/∂yᵢⱼ=0. Au témoin : g′ᵢⱼ(x*ᵢⱼ)=μᵢ/μⱼ, donc toutes ces dérivées sont nulles.</p>
+</section>
+<section class="graph-section" aria-labelledby="branches-active-gradient-heading">
+<h2 id="branches-active-gradient-heading">Nappes et dérivées explicites du complémentaire</h2>
+<p>Les trois fractions aval restent s5=1/4 et s3=s7=1/2 pour les deux premières vues. Les formules suivantes valent dans le voisinage où toutes les entrées restent au-dessus de b ; ailleurs, le maillage et les dérivées utilisent les morceaux effectifs.</p>
+<details open><summary>Rendement compatible : x=x12 et y=x23</summary>
+<p>Posons P=g12, Q=g15, D(t)=g34(t/2) et H=g48 ; les lois de 3→4, 3→6, 7→4 et 7→6 sont identiques, comme celles de 4→8 et 6→8.</p>
+<p class="branch-formula">U=P(x), V=Q(1−x), A=g23(y)+g53(V/4), B=g57(3V/4), C=D(A)+D(B), R(x,y)=g28(U−y)+2H(C).</p>
+<p class="branch-formula">Rₓ=g28′(U−y)P′(x)−2H′(C)Q′(1−x)[D′(A)g53′(V/4)/4+3D′(B)g57′(3V/4)/4].</p>
+<p class="branch-formula">Rᵧ=−g28′(U−y)+2H′(C)D′(A)g23′(y).</p>
+<p>Chaque dérivée g′(t)=α−2βt utilise le tableau des lois ; D′(t)=g34′(t/2)/2. Au sommet <strong>(x0,y0)=(0,5 ; 0,225)</strong>, Rₓ=0,35−0,35=0 et Rᵧ=−0,41+0,41=0. La Hessienne, calculée sous la nappe, est définie négative.</p>
+</details>
+<details><summary>Rendement compatible : x=s1 et y=s2</summary>
+<p class="branch-formula">S(x,y)=R(x,yP(x)), Sₓ=Rₓ+yP′(x)Rᵧ, Sᵧ=P(x)Rᵧ.</p>
+<p>En <strong>(0,5 ; 0,5)</strong>, Rₓ=Rᵧ=0, donc les deux dérivées de S s’annulent. Hessienne ≈ [−0,406629139 ; 0,163882963 / 0,163882963 ; −0,227902216], définie négative. Les autres couples de fractions sont également explorables ; leur propagation analytique et leur gradient sont explicités sous la nappe.</p>
+</details>
+<details><summary>Trois coupes libres du lagrangien non linéaire</summary>
+<p>Les 22 autres coordonnées et tous les multiplicateurs restent fixes au témoin. Hors des égalités, la hauteur est L, pas un rendement réalisable. Les poids utiles sont w12=0,038 ; w23=8/225 ; w28=0,4.</p>
+<div class="graph-table-wrap"><table><caption>Expressions locales centrées sur le sommet r*=0,447553125</caption><thead><tr><th scope="col">Axes</th><th scope="col">L(x,y)</th><th scope="col">∂L/∂x</th><th scope="col">∂L/∂y</th><th scope="col">(x0,y0)</th></tr></thead><tbody>
+<tr><th scope="row">x12, x23</th><td>r*−0,038(x−0,5)²−(8/225)(y−0,225)²</td><td>−0,076(x−0,5)</td><td>−(16/225)(y−0,225)</td><td>(0,5 ; 0,225)</td></tr>
+<tr><th scope="row">x12, x28</th><td>r*−0,038(x−0,5)²−0,4(y−0,225)²</td><td>−0,076(x−0,5)</td><td>−0,8(y−0,225)</td><td>(0,5 ; 0,225)</td></tr>
+<tr><th scope="row">x23, x28</th><td>r*−(8/225)(x−0,225)²−0,4(y−0,225)²</td><td>−(16/225)(x−0,225)</td><td>−0,8(y−0,225)</td><td>(0,225 ; 0,225)</td></tr>
+</tbody></table></div>
+<p>Les deux dérivées s’annulent à chaque point annoncé. Les deux courbures diagonales sont strictement négatives. Le calcul conserve les cassures si une fenêtre élargie atteint b ; les formules centrées ci-dessus supposent les 22 coordonnées du témoin.</p>
+</details>
+<p><a href="#branches-examples-heading">Charger l’exemple complémentaire</a> · <a href="#branches-surface-heading">Explorer les nappes et lire les dérivées calculées</a></p>
+</section>

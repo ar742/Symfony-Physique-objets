@@ -5,11 +5,15 @@ import {SPLIT_VARIABLES,sampleYieldSurface,sampleLagrangianSurface,sampleFlowSur
 import {isInteriorPeakModel} from './branch-interior-example.mjs';
 import {analyseInteriorPeakSurface} from './branch-peak-analysis.mjs';
 import {explainExactLagrangian,sampleExactLagrangianSurface} from './branches-exact-lagrangian.mjs';
+import {isActiveBranchesModel,ACTIVE_BRANCH_ANALYTICS} from './branch-active-example.mjs';
+import {explainActiveLagrangian,sampleActiveLagrangianSurface} from './branch-active-lagrangian.mjs';
+import {analyseBranchYieldSurface} from './branch-yield-calculus.mjs';
 
 const $=id=>document.getElementById(id);
 const num=value=>Number.isFinite(value)?new Intl.NumberFormat('fr-FR',{maximumSignificantDigits:9}).format(value):'—';
 const axisNum=value=>new Intl.NumberFormat('fr-FR',{maximumSignificantDigits:5}).format(value);
 const scientific=value=>Number.isFinite(value)?value.toExponential(3):'—';
+const derivative=value=>Number.isFinite(value)&&value!==0&&Math.abs(value)<=1e-10?'≈ 0 ('+scientific(value)+')':num(value);
 const names={initial:'Partages initiaux',grid:'Meilleur résultat de la grille',global:'Global · fonctions fixées',bounded:'Global · paramètres bornés'};
 const unavailable={
     'no-linear-program-needed':'Aucun PL nécessaire : les bornes directes suffisent à ce calcul.',
@@ -24,6 +28,8 @@ export function createBranchSurfaces({onDemo}={}) {
     const xSelect=$('branches-surface-x'),ySelect=$('branches-surface-y');
     const state=()=>reference==='initial'?context.initial:context.results[reference]?.best;
     const result=()=>context.results[reference];
+    const active=()=>state()&&isActiveBranchesModel(modelForState(state()));
+    const exactBound=()=>exact?.available?num(exact.certificate.upperBound):'non disponible';
     const centerKey=()=>reference==='bounded'?reference:'global';
     const centerReady=()=>context?.results[centerKey()]?.best&&context.phases[centerKey()]!=='running';
     const finite=point=>point&&Number.isFinite(point.z);
@@ -35,8 +41,8 @@ export function createBranchSurfaces({onDemo}={}) {
         reference=centerKey();select.value=reference;autoReference=false;
         mode='flows';modeSelect.value=mode;sampleX='x12';sampleY='x23';
         const interior=isInteriorPeakModel(modelForState(state()));
-        $('branches-surface-radius').value=interior?'.1':'.03';$('branches-surface-scale').value='local';
-        $('branches-surface-resolution').value=interior?'60':'40';
+        $('branches-surface-radius').value=active()?'.08':interior?'.1':'.03';$('branches-surface-scale').value='local';
+        $('branches-surface-resolution').value=interior||active()?'60':'40';
         $('branches-surface-yaw').value='35';$('branches-surface-pitch').value='35';refresh(true);
         requestAnimationFrame(()=>$('branches-surface-focus').scrollIntoView({block:'start'}));
     }
@@ -80,6 +86,22 @@ export function createBranchSurfaces({onDemo}={}) {
     }
     function renderDiagnostic() {
         const zone=$('branches-lagrangian-diagnostic');zone.replaceChildren();
+        const computed=result()?.certificates?.smoothWitness;
+        if(computed?.status==='certified') {
+            zone.append(element('h3','Le lagrangien recalculé depuis les lois et les flux'));
+            zone.append(element('p','Les multiplicateurs sont obtenus en résolvant les équations μᵢ−g′ᵢⱼ(xᵢⱼ)μⱼ≈0, avec μ8=1. Leur petit résidu ne suffit pas : chaque terme μⱼgᵢⱼ(t)−μᵢt est ensuite maximisé sur tout [0,1], sur toutes les portions de la loi. Le calcul ne lit aucun préréglage ni multiplicateur analytique.'));
+            zone.append(element('p','L=μ1+Σ[μⱼgᵢⱼ(xᵢⱼ)−μᵢxᵢⱼ] ; '+computed.potentials.map((value,i)=>'μ'+(i+1)+'≈'+num(value)).join(' ; ')+'.','branch-formula'));
+            const values=table(['Grandeur','Valeur'],'Borne numérique globale obtenue à partir des multiplicateurs calculés');
+            for(const [name,value] of [['Rendement du témoin',computed.production],['Supremum avant marge',computed.certificate.rawUpperBound],['Marge numérique',computed.certificate.numericalMargin],['Borne globale avec marge',computed.upperBound],['Écart à la borne',computed.gap],['Résidu de stationnarité',computed.residuals.stationarity]]) {
+                const row=element('tr');row.append(element('th',name),element('td',Math.abs(value)<1e-8?scientific(value):num(value)));values.body.append(row);
+            }
+            zone.append(values.wrap);
+            const details=element('details');details.append(element('summary','Vérifier les douze maxima et les multiplicateurs calculés'));
+            const terms=table(['Branche','μ départ','μ arrivée','Entrée maximisante','Maximum du terme'],'Maxima sur toutes les portions, sans hypothèse de concavité globale');
+            computed.terms.forEach(term=>{const row=element('tr');row.append(element('th',term.id.replace('-','→')),element('td',num(term.sourcePotential)),element('td',num(term.destinationPotential)),element('td',term.maximizers.map(num).join(' ; ')),element('td',num(term.rawMaximum)));terms.body.append(row);});details.append(terms.wrap);zone.append(details);
+            zone.append(element('p','Le certificat numérique et la preuve analytique du modèle sont distincts ; leurs multiplicateurs concordent ici à l’arrondi près. L’export conserve les équations, les candidats de chaque morceau et les marges.'));
+            if(!diagnostic?.available){zone.append(element('p','Aucun programme linéaire nécessaire : cette borne du lagrangien non linéaire ferme déjà l’écart. Aucun plan de PL n’est inventé.'));return;}
+        }
         if(!diagnostic?.available) {
             zone.append(element('p',unavailable[diagnostic?.reason]||'Le diagnostic du lagrangien n’est pas disponible pour cet état.'));
             if(diagnostic?.reason==='no-linear-program-needed') {
@@ -124,20 +146,24 @@ export function createBranchSurfaces({onDemo}={}) {
             data=null;draw();renderFocus();renderProfiles();renderDerivatives();
             $('branches-surface-title').textContent='Certificat analytique indisponible pour ces lois';
             $('branches-surface-desc').textContent=exact?.reason||'Les lois du cas de référence sont requises.';
-            $('branches-surface-caption').textContent='Le lagrangien et la borne exacts 7/32 sont propres aux lois du cas de référence. Ils ne sont pas appliqués à des lois modifiées.';
+            $('branches-surface-caption').textContent='Les certificats analytiques sont propres aux lois reconnues de chacun des deux exemples. Ils ne sont pas appliqués à des lois modifiées.';
             $('branches-surface-status').textContent='Choisissez une nappe de rendement ou rétablissez le cas de référence.';
             $('branches-surface-point').textContent='Aucun point disponible pour ce certificat.';$('branches-surface-samples').replaceChildren();return;
         }
         if(mode==='lagrangian'&&!diagnostic?.available) {
             data=null;draw();renderFocus();renderProfiles();$('branches-surface-title').textContent='Lagrangien non disponible pour cette référence';$('branches-surface-desc').textContent='Aucun plan dessiné : cette configuration ne dispose pas de multiplicateurs enregistrés utilisables.';
-            $('branches-surface-caption').textContent='La nappe du lagrangien nécessite un PL enregistré pour la référence choisie. Consultez le certificat ci-dessus ou choisissez le résultat global à fonctions fixées.';
+            $('branches-surface-caption').textContent=result()?.certificates?.smoothWitness?.status==='certified'
+                ?'Ce calcul est certifié par le lagrangien non linéaire, sans PL. Choisissez « Nappe du lagrangien non linéaire » pour voir ses coupes courbes ; aucun plan de PL n’est disponible.'
+                :'Le plan du lagrangien nécessite un PL enregistré pour la référence choisie. Consultez le diagnostic ou choisissez une nappe de rendement.';
             $('branches-surface-samples').replaceChildren();$('branches-surface-point').textContent='Aucun point du lagrangien disponible pour cette référence.';$('branches-surface-status').textContent='Pas de multiplicateurs inventés : aucune surface de L n’est calculée pour cet état.';renderDerivatives();return;
         }
         data=mode==='lagrangian'?sampleLagrangianSurface(diagnostic,{x:Number(sampleX),y:Number(sampleY),radius,steps})
-            :mode==='nlp'?sampleExactLagrangianSurface(state(),{x:sampleX,y:sampleY,radius,steps})
+            :mode==='nlp'?(active()?sampleActiveLagrangianSurface:sampleExactLagrangianSurface)(state(),{x:sampleX,y:sampleY,radius,steps})
             :mode==='flows'?sampleFlowSurface(state(),{radius,steps,comparison:['initial','grid','global'].includes(reference)?context.results.grid?.best:null})
             :sampleYieldSurface(state(),{x:sampleX,y:sampleY,radius,steps,comparison:['initial','grid','global'].includes(reference)?context.results.grid?.best:null});
-        if(['flows','yield'].includes(mode))calculus=analyseInteriorPeakSurface(state(),{mode,x:sampleX,y:sampleY});
+        if(['flows','yield'].includes(mode))calculus=active()
+            ?analyseBranchYieldSurface(state(),{mode,x:sampleX,y:sampleY,witnessControls:ACTIVE_BRANCH_ANALYTICS.witnessControls,expectedProduction:ACTIVE_BRANCH_ANALYTICS.upperBound})
+            :analyseInteriorPeakSurface(state(),{mode,x:sampleX,y:sampleY});
         const frozen=data.frozen.map(item=>item.key+'='+num(item.value)).join(' ; ');
         const prefix=names[reference]+' · '+(result()?.status==='certified'?'Optimum numérique établi à la tolérance annoncée.':'État de référence ; consulter la preuve analytique et les bornes calculées.');
         const explanation=mode==='flows'
@@ -145,7 +171,7 @@ export function createBranchSurfaces({onDemo}={}) {
             :mode==='yield'
             ?'Chaque point recalcule tout le réseau avec ses douze lois de référence. Trois fractions restent fixes : '+frozen+'. Sur cet ensemble compatible, les termes de contraintes du lagrangien non linéaire s’annulent : L_NLP=r. Cette nappe de rendement n’est pas le L affine du solveur.'
             :mode==='nlp'
-            ?'Vrai L_NLP avec μ1=0, μ2=3/4, μ3…μ7=1, ν12=3/4 et les onze autres ν=1. Les 22 autres entrées/sorties sont figées à la référence. La nappe verte évalue L dans la boîte [0,1]²⁴ ; les égalités du réseau ne sont pas réappliquées. Un point hors contraintes est une valeur de L, pas un rendement réalisable. Le certificat exact donne L≤7/32. Le tableau indique les résidus et les dérivées.'
+            ?'Vrai L_NLP, multiplicateurs analytiques : '+exact.multipliers.balances.map(item=>item.symbol+'='+num(item.value)).join(' ; ')+'. Les ν sont ceux des douze lois du certificat. Les 22 autres entrées/sorties sont figées à la référence. La nappe verte évalue L dans la boîte [0,1]²⁴ ; les égalités du réseau ne sont pas réappliquées. Un point hors contraintes est une valeur de L, pas un rendement réalisable. La borne exacte vaut '+exactBound()+'. Le tableau indique les résidus et les dérivées.'
                 :'Vrai L affine du PL '+diagnostic.recordId+', λ̄ et les '+data.frozen.length+' autres variables figés à z*. Les mailles grises touchent des points hors contraintes du PL : elles représentent L, sans constituer des flux réalisables. Les mailles bleues satisfont les contraintes du PL à la tolérance, ce qui ne suffit pas à satisfaire les lois non linéaires. Un plan ou un plateau est attendu ; aucune pénalité artificielle n’est ajoutée.';
         let comparison='';
         if(data.comparisonStatus?.startsWith('projected'))comparison=' Le repère grille est une projection : les trois fractions figées sont celles de la référence, et sa hauteur a été recalculée. Il ne représente donc pas nécessairement le rendement original de la grille.';
@@ -161,6 +187,7 @@ export function createBranchSurfaces({onDemo}={}) {
         const zone=$('branches-surface-focus');zone.replaceChildren();
         const r=result(),s=state();
         if(isInteriorPeakModel(modelForState(s)))zone.append(element('p','Lois du cas de référence · borne analytique globale 7/32=0,21875. Écart entre cette borne et l’état affiché : '+scientific(Math.max(0,.21875-s.production))+'. La certification numérique reste indiquée séparément.','branch-example-notice'));
+        if(active())zone.append(element('p','Douze branches actives · maximum global analytique 143217/320000=0,447553125. Écart de l’état affiché : '+scientific(Math.max(0,ACTIVE_BRANCH_ANALYTICS.upperBound-s.production))+'. Ce certificat est distinct du budget et de la borne numériques.','branch-example-notice'));
         zone.append(element('p',names[reference]+' · '+(r?.status==='certified'?'Optimum numérique, écart à la borne '+scientific(r.gap):reference==='initial'?'État de départ ; calcul numérique à lancer':'Meilleur état disponible ; consulter le budget et la borne'),'eyebrow'));
         zone.append(element('p','r = '+num(s.production)+' · '+num(100*s.production)+' %','branch-focus-value'));
         if(data) {
@@ -202,28 +229,33 @@ export function createBranchSurfaces({onDemo}={}) {
             zone.append(element('p',data.formula,'branch-formula'),element('p',data.derivativeFormula.dx,'branch-formula'),element('p',data.derivativeFormula.dy,'branch-formula'));
             zone.append(element('p','Ces dérivées sont prises dans les deux entrées libres, avec les 22 autres coordonnées et les multiplicateurs fixés. Les coudes sont signalés sans inventer de dérivée.'));
             current=data.markers.find(point=>point.kind==='reference');peak=data.peak;
-            zone.append(element('p','Sommet de cette coupe : '+(peak.attainsGlobalBound?'sa hauteur atteint la borne globale exacte 7/32.':'les autres coordonnées figées abaissent sa hauteur sous 7/32.')+' '+(peak.feasible?'Ce point satisfait les égalités du réseau.':'Ce point ne satisfait pas les égalités du réseau : sa hauteur représente L, pas r.')+' '+(peak.inWindow?'Il appartient à la fenêtre affichée.':'Il est hors de la fenêtre affichée.')));
+            zone.append(element('p','Sommet de cette coupe : '+(peak.attainsGlobalBound?'sa hauteur atteint la borne globale exacte '+exactBound()+'.':'les autres coordonnées figées abaissent sa hauteur sous '+exactBound()+'.')+' '+(peak.feasible?'Ce point satisfait les égalités du réseau.':'Ce point ne satisfait pas les égalités du réseau : sa hauteur représente L, pas r.')+' '+(peak.inWindow?'Il appartient à la fenêtre affichée.':'Il est hors de la fenêtre affichée.')));
         } else if(mode==='lagrangian') {
             const dx=diagnostic.lagrangian.coefficients[Number(sampleX)],dy=diagnostic.lagrangian.coefficients[Number(sampleY)];
             zone.append(element('p','Pour ce PL réellement enregistré : ∂L_PL/∂x='+num(dx)+' ; ∂L_PL/∂y='+num(dy)+'. Ces dérivées sont constantes. Un plan ne possède pas de sommet intérieur strict ; les bornes et les contraintes du PL restent déterminantes.','branch-formula'));return;
         } else {
             zone.append(element('p',calculus?.summary||'Analyse locale indisponible.'));
             if(!calculus?.formula)return;
-            zone.append(element('p',calculus.formula,'branch-formula'),element('p',calculus.derivativeFormula,'branch-formula'));
+            if(active()) {
+                const derivation=element('details');derivation.append(element('summary','Développer les douze expressions et leur dérivation analytique'),element('p',calculus.formula,'branch-formula'),element('p',calculus.derivativeFormula,'branch-formula'));zone.append(derivation);
+                zone.append(element('p','Les formules du complémentaire sont développées ci-dessus et calculées par la règle de dérivation des fonctions composées. Les valeurs ci-dessous proviennent des douze lois effectives.'));
+                const link=element('a','Lire les expressions compactes des nappes R, S et L');link.href='#branches-active-gradient-heading';zone.append(link);
+            } else zone.append(element('p',calculus.formula,'branch-formula'),element('p',calculus.derivativeFormula,'branch-formula'));
             zone.append(element('p','Correspondance des axes affichés : x='+sampleX+' ; y='+sampleY+'. Les deux composantes numériques ci-dessous suivent cet ordre.'));
             current=calculus.current;peak=calculus.peak;
             const conditions=table(['Condition au point de référence','Vérification'],'Domaine de validité de la formule locale et de ses dérivées');
             calculus.conditions.forEach(condition=>{const row=element('tr');row.append(element('th',condition.label),element('td',condition.satisfied?(condition.smooth?'Satisfaite, portion régulière':'Valeur valide, seuil ou frontière'):'Non satisfaite'));conditions.body.append(row);});
             const details=element('details');details.append(element('summary','Vérifier les portions des lois et les transmissions aval'),conditions.wrap);zone.append(details);
-            if(!peak.attained)zone.append(element('p','Avec les fractions aval de cette référence, le sommet 7/32 n’est pas atteint dans cette coupe.'));
+            if(!peak?.attained)zone.append(element('p','Avec les fractions figées de cette référence, le témoin ne démontre pas un sommet strict atteignant la borne globale dans cette coupe.'));
         }
         const values=table(['Point','x','y',data.zLabel,'∂/∂x','∂/∂y'],'Valeurs recalculées des dérivées ; — indique une formule non applicable ou une dérivée non définie');
         for(const [label,point] of [['Référence',current],['Sommet de la coupe',peak]]) {
-            const row=element('tr');row.append(element('th',label),element('td',num(point.x)),element('td',num(point.y)),element('td',num(point.z)),element('td',num(point.gradient?.[0])),element('td',num(point.gradient?.[1])));values.body.append(row);
+            if(!point)continue;
+            const row=element('tr');row.append(element('th',label),element('td',num(point.x)),element('td',num(point.y)),element('td',num(point.z)),element('td',derivative(point.gradient?.[0])),element('td',derivative(point.gradient?.[1])));values.body.append(row);
         }
         zone.append(values.wrap);
-        if(peak.hessian?.flat().every(Number.isFinite))zone.append(element('p','Hessienne au sommet, dans l’ordre des axes : ['+peak.hessian.map(row=>row.map(num).join(' ; ')).join(' / ')+'].','branch-formula'));
-        zone.append(element('p','L’annulation des dérivées et la courbure concernent cette coupe. Le caractère global du rendement à lois fixes est démontré séparément par L≤7/32 atteint sur un réseau compatible.'));
+        if(peak?.hessian?.flat().every(Number.isFinite))zone.append(element('p','Hessienne au sommet, dans l’ordre des axes : ['+peak.hessian.map(row=>row.map(num).join(' ; ')).join(' / ')+'].','branch-formula'));
+        zone.append(element('p','L’annulation des dérivées et la courbure concernent cette coupe. Le caractère global est démontré séparément par la borne du lagrangien à lois reconnues : '+exactBound()+', atteinte sur un réseau compatible.'));
     }
     function renderSamples() {
         const zone=$('branches-surface-samples');zone.replaceChildren();
@@ -283,7 +315,7 @@ export function createBranchSurfaces({onDemo}={}) {
         if(force||state()!==lastState||result()!==lastResult) {
             lastState=state();lastResult=result();lastGrid=context.results.grid?.best;
             diagnostic=explainBranchesLagrangian(context.model,result(),reference==='bounded'?{parameterBoxes:context.parameterBoxes}:{});
-            exact=explainExactLagrangian(state());
+            exact=active()?explainActiveLagrangian(state()):explainExactLagrangian(state());
             renderDiagnostic();renderData();
         } else if(lastGrid!==context.results.grid?.best&&context.phases.grid!=='running') {lastGrid=context.results.grid?.best;renderData();}
     }
@@ -313,6 +345,6 @@ export function createBranchSurfaces({onDemo}={}) {
             if(pendingDemo?.model===context.model&&context.results.global?.best&&context.phases.global==='done'){pendingDemo=null;reference='global';center();}
         },
         cancelPendingDemo:()=>{pendingDemo=null;},
-        snapshot:()=>({reference,mode,example:state()&&isInteriorPeakModel(modelForState(state()))?'interior-peak':'current-laws',axes:mode==='flows'?{x:'x12',y:'x23'}:{x:sampleX,y:sampleY},radius:Number($('branches-surface-radius').value),resolution:Number($('branches-surface-resolution').value),verticalScale:{mode:$('branches-surface-scale').value,bounds:data?verticalRange(data,{mode:$('branches-surface-scale').value}):null},rotation:{yaw:Number($('branches-surface-yaw').value),pitch:Number($('branches-surface-pitch').value)},diagnostic,exactLagrangian:exact,calculus,samples:data}),
+        snapshot:()=>({reference,mode,example:active()?'active-branches':state()&&isInteriorPeakModel(modelForState(state()))?'interior-peak':'current-laws',axes:mode==='flows'?{x:'x12',y:'x23'}:{x:sampleX,y:sampleY},radius:Number($('branches-surface-radius').value),resolution:Number($('branches-surface-resolution').value),verticalScale:{mode:$('branches-surface-scale').value,bounds:data?verticalRange(data,{mode:$('branches-surface-scale').value}):null},rotation:{yaw:Number($('branches-surface-yaw').value),pitch:Number($('branches-surface-pitch').value)},diagnostic,exactLagrangian:exact,calculus,samples:data}),
     };
 }

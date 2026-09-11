@@ -4,6 +4,7 @@ import {productionRate} from './production-engine.mjs';
 import {element, svgElement, table, renderInspector} from './graph-studies.mjs';
 import {createBranchSurfaces} from './branch-surfaces.mjs';
 import {createInteriorPeakScenario} from './branch-interior-example.mjs';
+import {createActiveBranchesScenario,isActiveBranchesModel} from './branch-active-example.mjs';
 
 const $ = id => document.getElementById(id);
 const keys = ['a','b','c','d'], splits = ['s1','s2','s5','s3','s7'];
@@ -18,7 +19,7 @@ const arrow = id => id.replace('-', ' → ');
 let model, initial, draftLaws, boxes, appliedBoxes = null, results = {}, times = {}, phases = {};
 let worker = null, runningKind = null, selected = '1-2', view = 'initial', options = null;
 let editingLaw = '1-2', editingBox = '1-2', boundedOptions = null;
-let surfaces;
+let surfaces, exampleKey='interior';
 
 function numeric(id) {
     const raw = $(id).value.trim();
@@ -75,15 +76,24 @@ function resetResults() {
     results={};times={};phases={};appliedBoxes=null;boundedOptions=null;view='initial';$('branches-view').value=view;
     [...$('branches-view').options].forEach(option=>option.disabled=option.value!=='initial');
 }
-function load() {
-    stop();model=createInteriorPeakScenario();
+function load(example=exampleKey) {
+    stop();exampleKey=example==='active'?'active':'interior';
+    model=exampleKey==='active'?createActiveBranchesScenario():createInteriorPeakScenario();
+    $('branches-example').value=exampleKey;
+    $('branches-reference-explanation').open=exampleKey==='interior';
+    $('branches-active-explanation').open=exampleKey==='active';
+    $('branches-main-lagrangian-link').href=exampleKey==='active'?'#branches-active-lagrangian-heading':'#branches-lagrangian-heading';
+    const title=exampleKey==='active'?'Exemple complémentaire · nœuds 2 à 8 tous actifs':'Cas de référence · r = 0,21875';
+    $('branches-example-status').textContent=title+' chargé dans les réglages et le réseau.';
+    $('branches-surface-demo').textContent=exampleKey==='active'?'Recalculer l’exemple complémentaire r = 0,447553125':'Recalculer le cas de référence r = 0,21875';
+    $('branches-reset').textContent=exampleKey==='active'?'Rétablir l’exemple complémentaire':'Rétablir le cas de référence';
     initial=evaluateBranches(model,model.initialControls);
     draftLaws=clone(model.branches);boxes=Object.fromEntries(model.branches.map(branch=>[branch.id,Object.fromEntries(keys.map(key=>[key,[branch[key],branch[key]]]))]));
     editingLaw=editingBox='1-2';$('branch-choice').value=editingLaw;$('branches-box-choice').value=editingBox;
     showLawDraft();showBoxDraft();splits.forEach(key=>$('branch-'+key).value=String(model.initialControls[key]));
     $('branches-divisions').value='10';$('branches-grid-budget').value='200000';$('branches-node-budget').value='10000';
     options=null;resetResults();$('branches-error').textContent='';$('branches-design-error').textContent='';
-    $('branches-status').textContent='Cas de référence chargé : lois fixes et partages donnant r=0,21875. Lancez la comparaison pour calculer les certificats numériques.';
+    $('branches-status').textContent=title+' : lois fixes et partages initiaux optimaux. Lancez la comparaison pour calculer les certificats numériques.';
     $('branches-design-status').textContent='Plages préparées égales aux lois de chaque branche : les paramètres sont fixes tant que les bornes restent égales.';
     renderResults();renderState();
 }
@@ -113,7 +123,7 @@ function start(mode) {
         $('branches-status').textContent=mode==='fixed'?'Exploration de la grille, puis recherche globale continue…':'Recherche globale des partages et des paramètres dans les plages appliquées…';
         if(mode==='bounded')$('branches-design-status').textContent='Plages appliquées aux douze branches. Calcul global en cours…';
         renderResults();renderState();
-        const running=new Worker(new URL('./branch-study-worker.mjs',import.meta.url),{type:'module'});worker=running;
+        const running=new Worker(new URL('./branch-study-worker.mjs?v=active-lagrangian-1',import.meta.url),{type:'module'});worker=running;
         running.onmessage=({data})=>{
             if(worker!==running)return;
             if(data.kind==='error') {
@@ -156,6 +166,7 @@ function describeResult(key,result) {
     if(phases[key]==='running')return 'En cours · résultat partiel';
     if(phases[key]==='stopped')return 'Arrêt demandé · résultat partiel';
     if(key==='grid')return result.complete?'Grille entièrement explorée':'Budget atteint · grille partielle';
+    if(result.status==='certified'&&result.globalMethod==='smooth-witness-lagrangian')return 'Optimum numérique · borne du lagrangien non linéaire';
     return result.status==='certified'?'Optimum numérique à 10⁻⁷':result.status==='uncertain'?'Régions numériquement non résolues':'Budget atteint · optimum non établi';
 }
 function renderResults() {
@@ -168,11 +179,13 @@ function renderResults() {
     }
     const zone=$('branches-results');zone.replaceChildren(result.wrap);
     if(results.grid)zone.append(element('p','Grille : '+number(results.grid.evaluated)+' / '+number(results.grid.total)+' configurations testées, dont '+number(results.grid.feasibleCount)+' compatibles. '+(results.grid.complete?'Le maximum est établi sur cette grille finie.':'La partie non visitée ne permet aucune conclusion de maximum de grille.')));
+    if(isActiveBranchesModel(model)&&results.grid&&results.grid.divisions%4!==0)zone.append(element('p','Dans cet exemple, le partage optimal s5=0,25 n’appartient pas à la grille de pas '+number(1/results.grid.divisions)+'. Son meilleur résultat est donc inférieur au maximum continu ; ce décalage n’est pas un désaccord des méthodes. Le pas 0,05 inclut le témoin, mais demande 4 084 101 configurations et un budget suffisant.','branch-example-notice'));
     const certificate=$('branches-certificates');certificate.replaceChildren();
     for(const key of ['grid','global','bounded'])if(results[key]) {
         const r=results[key];
         certificate.append(element('p',names[key]+' : '+describeResult(key,r)+'. Durée indicative '+number(times[key]/1000)+' s. '+(key==='grid'?'Pas '+number(1/r.divisions)+'.':number(r.processedNodes)+' sous-problèmes résolus ; '+number(r.openNodes)+' régions ouvertes ou non résolues. Borne '+number(r.upperBound)+' ; écart '+small(r.gap)+'.')));
         if(r.certificates) {
+            if(r.certificates.smoothWitness?.status==='certified')certificate.append(element('p','Les multiplicateurs ont été calculés à partir des lois et des dérivées du témoin. Le supremum global de chaque terme du lagrangien donne une borne '+precise(r.certificates.smoothWitness.upperBound)+', avec sa marge numérique. Cette certification ne lit pas les valeurs analytiques du préréglage.'));
             certificate.append(element('p','Certificats numériques : '+number(r.certificates.records.length)+' programmes linéaires enregistrés ; '+number(r.certificates.unresolved)+' régions non résolues. L’export contient les multiplicateurs, les intervalles et les marges.'));
             if(Number.isFinite(r.certificates.sourceBound))certificate.append(element('p','Borne après le partage de la source : '+number(r.certificates.sourceBound)+'. Elle maximise la somme des deux productions de départ sur tous les partages. Les branches suivantes ne peuvent augmenter ce total. Si une configuration atteint déjà cette borne, aucun programme linéaire supplémentaire n’est nécessaire.'));
         }
@@ -192,6 +205,11 @@ function renderState() {
         const outgoing=state.branches.filter(edge=>edge.from===node.id).reduce((sum,edge)=>sum+edge.input,0);
         const tr=element('tr');tr.append(element('th',node.id),element('td',number(state.available[node.id])),element('td',number(node.id==='8'?state.production:outgoing)),element('td',node.id==='1'?'Source fixée':node.id==='8'?'Résultat r':'Somme puis partage intégral'));balances.body.append(tr);
     });$('branches-balances').replaceChildren(balances.wrap);
+    if(isActiveBranchesModel(model)) {
+        const values=BRANCH_GRAPH.nodes.filter(node=>node.id!=='1').map(node=>state.available[node.id]);
+        const min=Math.min(...values),max=Math.max(...values),positive=min>0;
+        $('branches-balances').append(element('p','Nœuds 2 à 8, source exclue : minimum '+number(min)+' ; maximum '+number(max)+' ; '+(positive?'rapport max/min '+number(max/min)+' (écart '+number(100*(max/min-1))+' % du minimum).':'rapport non défini car un flux est nul.')+' La condition demandée de 50 % décrit le départ ; les configurations explorées restent libres.','branch-example-notice'));
+    }
     const flows=table(['Branche','Part reçue de la somme','Exp. IN x','Coefficient f(x)','Exp. OUT x f(x)','Perte x−y','a','b','c','d'],'Configuration affichée : flux, coefficients de rendement et paramètres effectifs');
     state.branches.forEach(branch=>{
         const tr=element('tr'),th=element('th'),link=element('a',arrow(branch.id));link.href='#reseau-'+branch.id+'-1b';th.append(link);tr.append(th,element('td',number(branch.fraction)),element('td',number(branch.input)),element('td',number(productionRate(branch.input,branch.parameters))),element('td',number(branch.output)),element('td',number(branch.input-branch.output)));
@@ -253,8 +271,13 @@ function restore(scroll) {
     selected=match[1];$('branches-inspect').value=selected;renderState();
     if(scroll)requestAnimationFrame(()=>{const target=match[2]?$(location.hash.slice(1)):$('branches-inspector');target.scrollIntoView({block:'start'});if(match[2])target.focus({preventScroll:true});else{$('inspector-title').tabIndex=-1;$('inspector-title').focus({preventScroll:true});}});
 }
+function revealExplanation(hash) {
+    let target=document.getElementById(hash.replace(/^#/,''));
+    while(target){if(target.localName==='details')target.open=true;target=target.parentElement;}
+}
 try {
     surfaces=createBranchSurfaces({onDemo:()=>{load();start('fixed');}});
+    $('branches-example-load').addEventListener('click',()=>{load($('branches-example').value);start('fixed');});
     $('branches-controls').addEventListener('submit',event=>{event.preventDefault();start('fixed');});
     $('branches-design').addEventListener('submit',event=>{event.preventDefault();start('bounded');});
     $('branch-choice').addEventListener('change',()=>{updateLawDraft();editingLaw=$('branch-choice').value;showLawDraft();});
@@ -266,10 +289,11 @@ try {
     $('branches-view').addEventListener('change',()=>setView($('branches-view').value));
     $('branches-inspect').addEventListener('change',()=>{selected=$('branches-inspect').value;history.replaceState(null,'','#reseau-'+selected+'-1b');renderState();});
     $('branches-export').addEventListener('click',()=>{
-        const record={model,initial,branchLaw:'y = x * f(x)',objective:'global yield r; source=1; r<=1',options:{fixed:options,bounded:boundedOptions},parameterBoxes:appliedBoxes,results,timesMilliseconds:times,phases,displayedView:view,displayedBranch:selected,surface:surfaces.snapshot(),units:'flux normalisés et coefficients de rendement, données fictives',tolerance:1e-7};
+        const record={model,initial,selectedExample:exampleKey,branchLaw:'y = x * f(x)',objective:'global yield r; source=1; r<=1',options:{fixed:options,bounded:boundedOptions},parameterBoxes:appliedBoxes,results,timesMilliseconds:times,phases,displayedView:view,displayedBranch:selected,surface:surfaces.snapshot(),units:'flux normalisés et coefficients de rendement, données fictives',tolerance:1e-7};
         const url=URL.createObjectURL(new Blob([JSON.stringify(record,null,2)],{type:'application/json'}));const link=element('a');link.href=url;link.download='reseau-douze-branches.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
     });
-    window.addEventListener('hashchange',()=>restore(true));window.addEventListener('pagehide',()=>stop());
+    window.addEventListener('hashchange',()=>{revealExplanation(location.hash);restore(true);});window.addEventListener('pagehide',()=>stop());
+    document.addEventListener('click',event=>{const link=event.target.closest?.('a[href^="#branches-"]');if(link)revealExplanation(link.getAttribute('href'));});
     document.addEventListener('click',event=>{const link=event.target.closest?.('a[href^="#reseau-"]');if(link&&link.getAttribute('href')===location.hash){event.preventDefault();restore(true);}});
-    load();restore(Boolean(location.hash));
+    load(new URLSearchParams(location.search).get('exemple')==='actif'?'active':'interior');revealExplanation(location.hash);restore(Boolean(location.hash));
 } catch(error) {stop('L’atelier n’a pas pu démarrer.');$('branches-error').textContent=error.message;}

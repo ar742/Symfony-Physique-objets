@@ -102,6 +102,7 @@ foreach (['réglages' => $form, 'conception' => $design] as $label => $element) 
     if ($element !== null) { $check($element->hasAttribute('novalidate'), 'Validation du domaine confiée au script : '.$label); }
 }
 foreach ([
+    'branches-example' => ['interior', 'active'],
     'branch-choice' => $branchIds, 'branches-inspect' => $branchIds, 'branches-box-choice' => $branchIds,
     'branches-view' => ['initial', 'grid', 'global', 'bounded'],
     'branches-divisions' => ['5', '10', '20', '50', '100'], 'branches-grid-budget' => ['200000', '1000000', '5000000'],
@@ -119,6 +120,7 @@ foreach ([
         if ($option->hasAttribute('selected')) { $selected[] = $option->getAttribute('value'); }
     }
     $defaults = [
+        'branches-example' => 'interior',
         'branches-view' => 'initial', 'branches-divisions' => '10', 'branches-grid-budget' => '200000',
         'branches-surface-reference' => 'initial', 'branches-surface-mode' => 'flows', 'branches-surface-scale' => 'local',
         'branches-surface-resolution' => '60',
@@ -173,15 +175,109 @@ if ($cancel !== null) {
     $check($hasName($cancel, $xpath), 'Nom accessible de l’annulation');
     $check($cancel->hasAttribute('hidden'), 'Annulation masquée hors calcul');
 }
-foreach (['branches-copy-law', 'branches-reset', 'branches-export', 'branches-copy-box', 'branches-design-run'] as $id) {
+foreach (['branches-example-load', 'branches-copy-law', 'branches-reset', 'branches-export', 'branches-copy-box', 'branches-design-run'] as $id) {
     $button = $requiredElement($id, 'button');
     if ($button === null) { continue; }
     $check($hasName($button, $xpath), 'Nom accessible de la commande '.$id);
+    if ($id === 'branches-example-load') {
+        $check($button->getAttribute('type') === 'button', 'Chargement de l’exemple sans soumission du formulaire');
+    }
     if ($id === 'branches-reset') {
         $check($button->getAttribute('type') === 'button' && str_contains($button->textContent, 'cas de référence'), 'Rétablissement du cas de référence sans soumission');
     }
     if ($id === 'branches-design-run') {
         $check($button->getAttribute('type') === 'submit' && $button->hasAttribute('disabled'), 'Conception par soumission désactivée avant JavaScript');
+    }
+}
+$exampleStatus = $requiredElement('branches-example-status');
+if ($exampleStatus !== null) { $check($exampleStatus->getAttribute('role') === 'status', 'Annonce accessible de l’exemple chargé'); }
+$lagrangianLink = $requiredElement('branches-main-lagrangian-link', 'a');
+if ($lagrangianLink !== null) {
+    $check($lagrangianLink->getAttribute('href') === '#branches-lagrangian-heading', 'Lien initial vers le lagrangien du premier exemple');
+}
+$exampleDetails = [];
+foreach (['branches-reference-explanation' => ['branches-reference-heading', true], 'branches-active-explanation' => ['branches-active-heading', false]] as $id => [$headingId, $open]) {
+    $details = $requiredElement($id, 'details');
+    if ($details === null) { continue; }
+    $exampleDetails[$id] = $details;
+    $summary = $xpath->query('./summary', $details);
+    $check($summary->length === 1 && trim($summary->item(0)?->textContent ?? '') !== '', 'Résumé accessible de l’exemple '.$id);
+    $check($details->hasAttribute('open') === $open, 'Ouverture initiale de l’explication '.$id);
+    $check($xpath->query('.//*[@id="'.$headingId.'"]', $details)->length === 1, 'Analyse intégrée à son explication '.$id);
+}
+
+// These tables are server-rendered explanations, independent of the dynamic
+// controls. Check their rounded numbers and topology without executing JavaScript.
+$activeDetails = $exampleDetails['branches-active-explanation'] ?? null;
+if ($activeDetails !== null) {
+    $readNumber = static function (string $text): ?float {
+        $value = str_replace(',', '.', preg_replace('/\s|\x{00a0}|\x{202f}/u', '', $text));
+        return is_numeric($value) ? (float) $value : null;
+    };
+    $check(preg_match('/source\s+1\s+exclue/u', $activeDetails->textContent) === 1, 'Source 1 explicitement exclue de la comparaison des sept flux');
+    $check(str_contains($activeDetails->textContent, 'strictement positives'), 'Entrées et sorties positives annoncées dans le complémentaire');
+    $nodeTable = $xpath->query('.//table[caption[contains(., "Flux des nœuds 2 à 8")]]', $activeDetails);
+    $check($nodeTable->length === 1, 'Tableau accessible des sept flux du complémentaire');
+    if ($nodeTable->length === 1) {
+        $rows = $xpath->query('./tbody/tr', $nodeTable->item(0));
+        $expectedFlows = [2 => 0.45, 3 => 0.320625, 4 => 0.30459375, 5 => 0.45, 6 => 0.30459375, 7 => 0.320625, 8 => 143217 / 320000];
+        $check($rows->length === count($expectedFlows), 'Sept nœuds documentés, sans la source');
+        $seenNodes = [];
+        $actualFlows = [];
+        foreach ($rows as $row) {
+            $cells = $xpath->query('./th|./td', $row);
+            $node = trim($cells->item(0)?->textContent ?? '');
+            $value = $readNumber($cells->item(1)?->textContent ?? '');
+            $seenNodes[] = $node;
+            $check($cells->length === 3 && isset($expectedFlows[$node]), 'Ligne de flux correspondant à un nœud 2 à 8 : '.$node);
+            $check($cells->item(0)?->getAttribute('scope') === 'row', 'En-tête accessible du nœud '.$node);
+            $check($value !== null && $value > 0 && isset($expectedFlows[$node]) && abs($value - $expectedFlows[$node]) < 5e-10, 'Flux positif et valeur du nœud '.$node);
+            if ($value !== null) { $actualFlows[] = $value; }
+        }
+        $check($seenNodes === ['2', '3', '4', '5', '6', '7', '8'], 'Nœuds 2 à 8 présents une fois chacun');
+        $check(count($actualFlows) === 7 && min($actualFlows) > 0 && abs(max($actualFlows) / min($actualFlows) - 1600 / 1083) < 1e-9, 'Rapport des flux maximum/minimum du complémentaire');
+    }
+    $lawsTable = $xpath->query('.//table[caption[contains(., "Paramètres et coefficients des douze branches")]]', $activeDetails);
+    $check($lawsTable->length === 1, 'Tableau accessible des douze lois du complémentaire');
+    if ($lawsTable->length === 1) {
+        $groups = [
+            [['1-2', '1-5'], 0.5, 0.9, 0.35, 0.41],
+            [['2-3'], 0.225, 0.95, 0.41, 0.44],
+            [['2-8'], 0.225, 0.5, 0.41, 1.0],
+            [['5-3'], 0.1125, 0.95, 0.41, 0.44],
+            [['5-7'], 0.3375, 0.95, 0.41, 0.44],
+            [['3-4', '3-6', '7-4', '7-6'], 0.1603125, 0.95, 0.44, 0.48],
+            [['4-8', '6-8'], 0.30459375, 0.55, 0.48, 1.0],
+        ];
+        $rows = $xpath->query('./tbody/tr', $lawsTable->item(0));
+        $check($rows->length === count($groups), 'Sept groupes de lois documentés');
+        $seenBranches = [];
+        foreach ($rows as $index => $row) {
+            $cells = $xpath->query('./th|./td', $row);
+            $check($cells->length === 9, 'Neuf colonnes des lois, groupe '.($index + 1));
+            if (!isset($groups[$index]) || $cells->length !== 9) { continue; }
+            [$ids, $input, $coefficient, $muIn, $muOut] = $groups[$index];
+            preg_match_all('/([1-8])→([1-8])/u', $cells->item(0)->textContent, $matches, PREG_SET_ORDER);
+            $actualIds = array_map(static fn (array $match): string => $match[1].'-'.$match[2], $matches);
+            $check($actualIds === $ids, 'Branches du groupe '.($index + 1));
+            $seenBranches = [...$seenBranches, ...$actualIds];
+            $check($cells->item(0)->getAttribute('scope') === 'row', 'En-tête accessible du groupe de lois '.($index + 1));
+            $linear = 2 * $coefficient - $muIn / $muOut;
+            $curvature = ($coefficient - $muIn / $muOut) / $input;
+            $expected = [0.0, 0.001, $linear - 0.001 * $curvature, $linear - $curvature, $linear, $curvature, $input, $coefficient];
+            foreach ($expected as $column => $number) {
+                $actual = $readNumber($cells->item($column + 1)->textContent);
+                $tolerance = $column === 6 ? 5.1e-8 : 5.1e-10;
+                $check($actual !== null && abs($actual - $number) < $tolerance, 'Valeur arrondie du groupe '.($index + 1).', colonne '.($column + 2));
+            }
+            $displayedInput = $readNumber($cells->item(7)->textContent);
+            $displayedCoefficient = $readNumber($cells->item(8)->textContent);
+            $check($displayedInput !== null && $displayedInput > 0 && $displayedCoefficient !== null && $displayedCoefficient > 0 && $displayedCoefficient <= 1, 'Entrée et production positives du groupe '.($index + 1));
+        }
+        sort($seenBranches);
+        $expectedBranches = $branchIds;
+        sort($expectedBranches);
+        $check($seenBranches === $expectedBranches, 'Douze branches du graphe documentées une fois chacune');
     }
 }
 foreach (['branches-results', 'branches-commands', 'branches-balances', 'branches-flows', 'branches-certificates'] as $id) { $requiredElement($id); }
@@ -213,7 +309,7 @@ if ($inspector !== null) {
 // The formulas and surface controls exist before JavaScript. The mesh, diagnostic
 // values, neighborhood table and two profile SVGs are computed later and tested
 // in the browser; server checks cover their named containers, not dynamic markup.
-foreach (['branches-lagrangian-heading', 'branches-surface-heading', 'branches-reference-heading', 'branches-gradient-heading'] as $id) {
+foreach (['branches-examples-heading', 'branches-lagrangian-heading', 'branches-surface-heading', 'branches-reference-heading', 'branches-gradient-heading', 'branches-active-heading', 'branches-active-laws-heading', 'branches-active-lagrangian-heading', 'branches-active-gradient-heading'] as $id) {
     $heading = $requiredElement($id);
     if ($heading !== null) { $check(trim($heading->textContent) !== '', 'Intitulé de section '.$id); }
 }
@@ -266,7 +362,7 @@ foreach (['branches-surface-center', 'branches-surface-demo', 'branches-surface-
     $check($hasName($button, $xpath), 'Nom accessible de la commande de voisinage '.$id);
     if ($id === 'branches-surface-center') { $check($button->hasAttribute('disabled'), 'Recentrage désactivé sans résultat calculé'); }
     if ($id === 'branches-surface-demo') {
-        $check(str_contains($button->textContent, 'cas de référence') && str_contains($button->textContent, '0,21875'), 'Recalcul du seul cas de référence annoncé');
+        $check(str_contains($button->textContent, 'cas de référence') && str_contains($button->textContent, '0,21875'), 'Recalcul du premier exemple initialement affiché');
     }
 }
 foreach ([
@@ -293,7 +389,6 @@ foreach ($xpath->query('//main//text()[not(ancestor::script or ancestor::style o
 foreach ([
     '/0[.,]54432|54[.,]432/u' => 'ancien résultat 0,54432',
     '/\bb\s*=\s*0[.,]83\b/iu' => 'ancien exemple b=0,83',
-    '/complémentaire/iu' => 'qualification d’exemple complémentaire',
 ] as $pattern => $label) {
     $check(preg_match($pattern, $pageText) === 0, 'Absence dans le HTML affiché : '.$label);
 }
@@ -328,6 +423,9 @@ $requests = [
     ['GET', '/scripts/branches-lagrangian.mjs', 200], ['GET', '/scripts/branch-surfaces-engine.mjs', 200], ['GET', '/scripts/branch-surfaces.mjs', 200],
     ['GET', '/scripts/branch-interior-example.mjs', 200],
     ['GET', '/scripts/branch-peak-analysis.mjs', 200], ['GET', '/scripts/branches-exact-lagrangian.mjs', 200],
+    ['GET', '/scripts/branch-active-example.mjs', 200], ['GET', '/scripts/branch-active-lagrangian.mjs', 200],
+    ['GET', '/scripts/branch-yield-calculus.mjs', 200], ['GET', '/scripts/branches-smooth-certificate.mjs', 200],
+    ['GET', '/scripts/branches-global-study.mjs', 200],
     ['GET', '/scripts/production-engine.mjs', 200], ['GET', '/styles/branch-study.css', 200],
 ];
 foreach ($requests as [$method, $path, $status]) {

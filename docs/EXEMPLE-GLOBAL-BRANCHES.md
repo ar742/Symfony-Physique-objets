@@ -1,6 +1,6 @@
 # Un réseau, un maximum global et plusieurs nappes
 
-Référence du 11 septembre 2026 pour l’atelier `/graphes/production/branches`. Il propose désormais **un seul préréglage**, dont le maximum à lois fixées vaut **7/32 = 0,21875**. Les anciens exemples donnant 0,54432, la variante b=0,83 et le bouton de construction libre sont retirés de cette interface. Leurs développements demeurent dans les documents historiques.
+Référence du 11 septembre 2026 pour le **premier des deux préréglages** de l’atelier `/graphes/production/branches`, dont le maximum à lois fixées vaut **7/32 = 0,21875**. Le [préréglage complémentaire à douze branches actives](EXEMPLE-ACTIF-BRANCHES.md) atteint 0,447553125 ; ses sommes reçues aux nœuds 2 à 8 sont proches au départ, source exclue, sans renormalisation. Les lois et les preuves des deux cas restent distinctes. Les anciens exemples donnant 0,54432, la variante b=0,83 et le bouton de construction libre restent retirés de cette interface ; leurs développements demeurent dans les documents historiques.
 
 Les valeurs sont des données fictives de modèle et des résultats calculés. Ce réseau abstrait ne décrit pas une installation industrielle mesurée. Il respecte les [fondements du projet](FONDEMENTS-DU-PROJET.md) : chaque branche constitue un système Exp. IN → TH → Exp. OUT, [cas 1b](FORMES-ANALYSE.md). Les nœuds raccordent les branches ; ils ne portent aucune fonction de fabrication.
 

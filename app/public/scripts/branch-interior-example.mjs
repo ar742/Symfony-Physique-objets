@@ -1,5 +1,5 @@
 /**
- * The single reference preset of the twelve-branch workshop, with fixed laws.
+ * The first reference preset of the twelve-branch workshop, with fixed laws.
  * Its smooth peak is a consequence of y=x*f(x); no objective penalty, nonlinear
  * change of axes or optimum is inserted into either optimisation algorithm.
  */
