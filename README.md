@@ -4,6 +4,8 @@ Un site pour étudier la physique en reliant observations, modèles et applicati
 
 **Recueils et ressources de l’auteur :** le [site d’Aurélien Roudier — MPCLab](https://enseignantpostbac.nexgate.ch/) présente notamment les *Fiches de CPGE scientifiques* et *Physique théorique*, avec sommaires, extraits, errata et compléments pédagogiques.
 
+Le public prioritaire est celui des **CPGE scientifiques** et des **masters et doctorants en physique théorique**. Accès directs aux [ressources par programme CPGE](https://enseignantpostbac.nexgate.ch/programme-liens.html), aux [annales CPGE](https://enseignantpostbac.nexgate.ch/annales-liens.html) et aux [ressources de physique théorique, entrée TQC](https://enseignantpostbac.nexgate.ch/physmod-liens.html?partie=tqc). La page `/links/` complète ces plateformes par des ressources de concours et des cours universitaires avancés.
+
 **Le fondement du projet est une analyse continuellement précisée d’un sujet physique ou théorique.** Depuis le 10 septembre 2026, l’accueil propose quatre formes : **3**, **3 × 3**, **6**, **6 × 6**. Les chaînes à trois positions distinguent des sorties de même type que les attributs d’entrée (1a) ou de types différents (1b). Les chaînes à six positions conservent leurs évaluations 4/3, 5/2 et 6/1. Voir [les fondements](docs/FONDEMENTS-DU-PROJET.md) et [les formes et exemples](docs/FORMES-ANALYSE.md).
 
 Les prochains lots de physique sont en attente. E1e est terminé ; les réalisations existantes restent accessibles.

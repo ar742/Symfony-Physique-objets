@@ -9,8 +9,8 @@ $kernel->boot();
 $productionPath = '/graphes/production';
 $optimizationPath = $productionPath.'/optimisation';
 $branchesPath = $productionPath.'/branches';
-$graphTabs = ['/graphes/', '/graphes/dependances', $productionPath];
-$knownGraphPaths = [...$graphTabs, $optimizationPath, $branchesPath, $productionPath.'/concordances'];
+$graphTabs = ['/graphes/', '/graphes/dependances', $productionPath, $productionPath.'/concordances'];
+$knownGraphPaths = [...$graphTabs, $optimizationPath, $branchesPath];
 $branchIds = ['1-2', '1-5', '2-3', '2-8', '5-3', '5-7', '7-6', '7-4', '3-4', '3-6', '4-8', '6-8'];
 $checks = 0;
 $errors = [];
@@ -69,6 +69,7 @@ foreach ([$productionPath, $optimizationPath, $branchesPath] as $path) {
     $xpath = new DOMXPath($document);
     $check($xpath->query('//header//nav//a[@href="/graphes/" and (@aria-current="page" or @aria-current="true")]')->length === 1, 'Navigation Graphes active '.$path);
     $tabs = '//nav[contains(concat(" ",normalize-space(@class)," ")," graph-tabs ")]';
+    $check($xpath->query($tabs.'/a')->length === count($graphTabs), 'Quatre onglets de graphes '.$path);
     foreach ($graphTabs as $target) {
         $check($xpath->query($tabs.'/a[@href="'.$target.'"]')->length === 1, 'Onglet '.$target.' depuis '.$path);
     }

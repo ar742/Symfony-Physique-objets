@@ -1,11 +1,37 @@
 {% extends 'site/layout.html.twig' %}
-{% block title %}Liens et ressources — Physique objets{% endblock %}
+{% block title %}Liens CPGE et physique théorique — Physique objets{% endblock %}
 {% block body %}
-    <div class="page-heading"><p class="eyebrow">Pour poursuivre la lecture</p><h1>Liens et ressources</h1><p class="lead">Les ressources externes répertoriées dans la version historique du site.</p></div>
+    <header class="page-heading"><p class="eyebrow">CPGE scientifiques · Master · Doctorat</p><h1>Liens et ressources</h1><p class="lead">Des plateformes pour travailler les programmes et concours des CPGE scientifiques, puis approfondir la physique théorique au niveau master et doctorat.</p></header>
+    <nav class="domain-index" aria-label="Parcours de ressources"><a href="#plateformes-auteur">Plateformes de l’auteur</a><a href="#complements-cpge">Compléments CPGE</a><a href="#complements-theorique">Physique théorique avancée</a></nav>
+
+    <section id="plateformes-auteur" aria-labelledby="plateformes-titre">
+        <h2 id="plateformes-titre">Les plateformes de l’auteur</h2>
+        <p>Trois accès au <a href="https://enseignantpostbac.nexgate.ch/">site d’Aurélien Roudier — MPCLab</a>, en lien avec ses recueils de CPGE scientifiques et de physique théorique.</p>
+        <div class="topic-grid">
+            <a class="topic-card" href="https://enseignantpostbac.nexgate.ch/programme-liens.html"><span class="eyebrow">CPGE · Programmes</span><h3>Travailler par notion et par filière</h3><p>Cours, exercices, oraux et vidéos organisés autour du programme des CPGE scientifiques.</p></a>
+            <a class="topic-card" href="https://enseignantpostbac.nexgate.ch/annales-liens.html"><span class="eyebrow">CPGE · Concours</span><h3>Explorer les annales</h3><p>Énoncés, corrigés et rapports de concours, classés par notion ou banque d’épreuves.</p></a>
+            <a class="topic-card" href="https://enseignantpostbac.nexgate.ch/physmod-liens.html?partie=tqc"><span class="eyebrow">Master · Doctorat</span><h3>Approfondir la physique théorique</h3><p>Références, cours, articles et vidéos liés aux chapitres du recueil, avec une entrée directe par la théorie quantique des champs.</p></a>
+        </div>
+    </section>
+
     <div class="resource-list">
-        {% for id, title in {site1: 'Travaux pratiques et préparation aux études supérieures', site2: 'Physique-chimie au lycée', site3: 'Astronomie, physique et technologies'} %}
-            <section class="resource"><h2>{{ title }}</h2><div class="legacy-text">{% include 'site/legacy/' ~ id ~ '.html.twig' %}</div></section>
-        {% endfor %}
+        <section class="resource" id="complements-cpge" aria-labelledby="cpge-titre">
+            <h2 id="cpge-titre">Compléments pour les CPGE scientifiques</h2>
+            <p>Des sources institutionnelles pour préparer les épreuves et confronter son travail aux attentes des concours.</p>
+            <ul>
+                <li><a href="https://www.scei-concours.fr/">SCEI — concours et TIPE</a> : informations officielles sur les concours scientifiques et la préparation des TIPE.</li>
+                <li><a href="https://www.concours-centrale-supelec.fr/sujets-rapports">CentraleSupélec — sujets et rapports</a> : énoncés officiels et rapports des jurys, par filière et année.</li>
+                <li><a href="https://www.concours-commun-inp.fr/fr/epreuves/annales.html">CCINP — annales</a> : sujets et rapports officiels classés par filière.</li>
+            </ul>
+        </section>
+        <section class="resource" id="complements-theorique" aria-labelledby="theorique-titre">
+            <h2 id="theorique-titre">Physique théorique : master et doctorat</h2>
+            <p>Des cours universitaires avancés pour construire les bases, puis des articles pour poursuivre une étude spécialisée.</p>
+            <ul>
+                <li><a href="https://davidtong.org/teaching/quantum-field-theory/">David Tong — Quantum Field Theory</a> : notes de cours de niveau master et exercices en théorie quantique des champs. <span class="small-note">Anglais.</span></li>
+                <li><a href="https://ocw.mit.edu/courses/8-323-relativistic-quantum-field-theory-i-spring-2023/">MIT OpenCourseWare — Relativistic Quantum Field Theory I</a> : cours avancé, vidéos, problèmes et solutions. <span class="small-note">Anglais · niveau graduate.</span></li>
+                <li><a href="https://arxiv.org/list/hep-th/recent">arXiv — High Energy Physics – Theory</a> : articles et prépublications récents en théorie des hautes énergies, à aborder avec les prérequis du sujet. <span class="small-note">Recherche · principalement en anglais.</span></li>
+            </ul>
+        </section>
     </div>
-    <p class="small-note">Descriptions reprises du site de 2017 ; la disponibilité actuelle des sites externes n'a pas été vérifiée.</p>
 {% endblock %}

@@ -89,9 +89,15 @@ $studies = [
     '/graphes/' => ['kind' => 'cities', 'map' => 'city-map', 'panels' => ['branch-inspector', 'route-results', 'algorithm-results']],
     '/graphes/dependances' => ['kind' => 'dependencies', 'map' => 'dependency-map', 'panels' => ['dependency-results', 'dependency-inspector']],
 ];
+$graphTabs = ['/graphes/', '/graphes/dependances', '/graphes/production', '/graphes/production/concordances'];
 foreach ($studies as $path => $study) {
     $document = $fetch($path);
     $xpath = new DOMXPath($document);
+    $tabs = '//nav[contains(concat(" ",normalize-space(@class)," ")," graph-tabs ")]';
+    $check($xpath->query($tabs.'/a')->length === count($graphTabs), 'Quatre onglets de graphes '.$path);
+    foreach ($graphTabs as $target) { $check($xpath->query($tabs.'/a[@href="'.$target.'"]')->length === 1, 'Onglet '.$target.' depuis '.$path); }
+    $check($xpath->query($tabs.'/a[@aria-current="page"]')->length === 1, 'Un seul onglet courant '.$path);
+    $check($xpath->query($tabs.'/a[@href="'.$path.'" and @aria-current="page"]')->length === 1, 'Onglet courant '.$path);
     $check($xpath->query('//*[@data-graph-study]')->length === 1, 'Une étude par page '.$path);
     $check($xpath->query('//*[@data-graph-study="'.$study['kind'].'"]')->length === 1, 'Type d’étude '.$path);
     $map = $requiredElement($document, $study['map'], 'svg', $path);
@@ -138,7 +144,7 @@ if ($load !== null) {
 }
 
 // Only server-rendered destinations are inspected here; SVG nodes and computed results belong to the JavaScript tests.
-$knownGraphPages = ['/graphes/', '/graphes/dependances', '/graphes/production', '/graphes/production/optimisation', '/graphes/production/branches'];
+$knownGraphPages = [...$graphTabs, '/graphes/production/optimisation', '/graphes/production/branches'];
 foreach ($documents as $path => $document) {
     foreach ($document->getElementsByTagName('a') as $link) {
         $url = parse_url(html_entity_decode($link->getAttribute('href')));

@@ -8,7 +8,8 @@ $kernel = new App\Kernel('dev', true);
 $kernel->boot();
 $productionPath = '/graphes/production';
 $graphPaths = ['/graphes/', '/graphes/dependances', $productionPath];
-$knownGraphPaths = [...$graphPaths, '/graphes/production/optimisation', '/graphes/production/branches', '/graphes/production/concordances'];
+$graphTabs = [...$graphPaths, '/graphes/production/concordances'];
+$knownGraphPaths = [...$graphTabs, '/graphes/production/optimisation', '/graphes/production/branches'];
 $checks = 0;
 $errors = [];
 $documents = [];
@@ -68,7 +69,9 @@ foreach ($graphPaths as $path) {
     $xpath = new DOMXPath($document);
     $check($xpath->query('//header//nav//a[@href="/graphes/" and (@aria-current="page" or @aria-current="true")]')->length === 1, 'Navigation Graphes active '.$path);
     $tabs = '//nav[contains(concat(" ",normalize-space(@class)," ")," graph-tabs ")]';
-    foreach ($graphPaths as $target) { $check($xpath->query($tabs.'/a[@href="'.$target.'"]')->length === 1, 'Onglet '.$target.' depuis '.$path); }
+    $check($xpath->query($tabs.'/a')->length === count($graphTabs), 'Quatre onglets de graphes '.$path);
+    foreach ($graphTabs as $target) { $check($xpath->query($tabs.'/a[@href="'.$target.'"]')->length === 1, 'Onglet '.$target.' depuis '.$path); }
+    $check($xpath->query($tabs.'/a[@aria-current="page"]')->length === 1, 'Un seul onglet courant '.$path);
     $check($xpath->query($tabs.'/a[@href="'.$path.'" and @aria-current="page"]')->length === 1, 'Onglet courant '.$path);
 }
 

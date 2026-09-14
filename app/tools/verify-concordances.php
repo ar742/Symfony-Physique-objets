@@ -9,8 +9,8 @@ $kernel->boot();
 $productionPath = '/graphes/production';
 $branchesPath = $productionPath.'/branches';
 $concordancePath = $productionPath.'/concordances';
-$graphTabs = ['/graphes/', '/graphes/dependances', $productionPath];
-$knownGraphPaths = [...$graphTabs, $productionPath.'/optimisation', $branchesPath, $concordancePath];
+$graphTabs = ['/graphes/', '/graphes/dependances', $productionPath, $concordancePath];
+$knownGraphPaths = [...$graphTabs, $productionPath.'/optimisation', $branchesPath];
 $edges = [[1, 2], [1, 5], [2, 3], [2, 8], [5, 3], [5, 7], [7, 6], [7, 4], [3, 4], [3, 6], [4, 8], [6, 8]];
 $shares = ['s1', 's2', 's5', 's3', 's7'];
 $checks = 0;
@@ -69,11 +69,13 @@ foreach ([$productionPath, $branchesPath, $concordancePath] as $path) {
     $xpath = new DOMXPath($document);
     $check($xpath->query('//header//nav//a[@href="/graphes/" and (@aria-current="page" or @aria-current="true")]')->length === 1, 'Navigation Graphes active '.$path);
     $tabs = '//nav[contains(concat(" ",normalize-space(@class)," ")," graph-tabs ")]';
+    $check($xpath->query($tabs.'/a')->length === count($graphTabs), 'Quatre onglets de graphes '.$path);
     foreach ($graphTabs as $target) {
         $check($xpath->query($tabs.'/a[@href="'.$target.'"]')->length === 1, 'Onglet '.$target.' depuis '.$path);
     }
     $check($xpath->query($tabs.'/a[@aria-current="page"]')->length === 1, 'Un seul onglet courant '.$path);
-    $check($xpath->query($tabs.'/a[@href="'.$productionPath.'" and @aria-current="page"]')->length === 1, 'Onglet Production actif '.$path);
+    $activeTab = $path === $concordancePath ? $concordancePath : $productionPath;
+    $check($xpath->query($tabs.'/a[@href="'.$activeTab.'" and @aria-current="page"]')->length === 1, 'Onglet actif '.$activeTab.' depuis '.$path);
     if ($path !== $concordancePath) {
         $check($xpath->query('//main//a[@href="'.$concordancePath.'"]')->length > 0, 'Lien HTML vers les concordances depuis '.$path);
     }

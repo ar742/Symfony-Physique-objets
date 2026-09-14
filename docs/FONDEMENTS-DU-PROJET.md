@@ -6,6 +6,8 @@ Référence de conception précisée par l'auteur le 9 septembre 2026 et élargi
 
 ## Finalité : répertorier, analyser et reprendre
 
+Le site s’adresse en priorité aux étudiants et enseignants de **CPGE scientifiques**, ainsi qu’aux **masters et doctorants en physique théorique**. Ses liens et compléments pédagogiques suivent ce positionnement, précisé par l’auteur le 14 septembre 2026. Les plateformes de programmes et d’annales CPGE et celle de physique théorique de l’auteur constituent les premiers accès de la rubrique Liens.
+
 Le projet doit permettre de répertorier explicitement les éléments relatifs à un sujet de physique, de les situer précisément et d'y travailler à nouveau. Le choix entre quatre formes sert une analyse progressivement plus poussée : on peut revenir sur un élément, préciser sa signification, ses attributs, ses hypothèses, ses relations et son évaluation, sans perdre sa place dans l'ensemble.
 
 Une analyse n’est pas considérée comme achevée parce que toutes ses positions sont renseignées, y compris les 36 sous-niveaux du cas 4. La rédaction, la signification scientifique et la précision des analyses peuvent toujours évoluer. La confrontation entre chaîne d’entrée et chaîne de retour est constitutive des cas 3 et 4 ; les cas 1 et 2 permettent de commencer par une seule chaîne Exp.–TH–Exp.

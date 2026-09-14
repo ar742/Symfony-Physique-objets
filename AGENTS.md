@@ -18,6 +18,8 @@ Lire [les fondements](docs/FONDEMENTS-DU-PROJET.md), étendus par l’auteur le 
 
 Les PDF commercialisés, leurs rendus et extractions privées, les exports SQL et les secrets restent hors du dépôt. Chaque avancée cohérente et vérifiée est synchronisée localement et publiée sur GitHub selon l’autorisation de l’auteur.
 
+Le public prioritaire est celui des **CPGE scientifiques** et, pour la physique théorique, des **masters et doctorants**. La page Liens met en avant les plateformes de l’auteur : programme-liens.html et annales-liens.html pour les CPGE, physmod-liens.html?partie=tqc pour la physique théorique, sur enseignantpostbac.nexgate.ch. Les compléments doivent correspondre à ces niveaux ; ne pas réintroduire les anciennes descriptions de ressources destinées au lycée. Le volet Environnement, concordances et production possède l’accès direct **04**, distinct de Machines et production (03).
+
 ## Étude nodale du 14 septembre 2026
 
 L’atelier [Environnement et concordances](docs/CONCORDANCES-NODALES.md) conserve le DAG de huit nœuds et douze arcs, mais place les transformations aux **nœuds**. Il est distinct de l’atelier aux deux préréglages de fonctions de branche. **Objectif Y₈ après TH₈**, avec Cᵢ=eᵢ+Σⱼεᵢⱼqⱼᵢ : le mode rectifié applique Yᵢ=max(0,XᵢCᵢ), le mode signé demandé en complément applique Yᵢ=XᵢCᵢ. Aucun plafond positif ajouté ; ne pas importer r≤1. Source Y₁=1, partages intégraux entre 0 et 1, sans stock ni boucle temporelle. En signé, une sortie négative se répartit avec son signe, puis les apports se somment algébriquement ; Σ|q vers 8|, X₈ et Y₈ restent distincts. Un maximum signé négatif n’est jamais remplacé par zéro.
