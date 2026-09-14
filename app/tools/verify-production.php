@@ -8,7 +8,7 @@ $kernel = new App\Kernel('dev', true);
 $kernel->boot();
 $productionPath = '/graphes/production';
 $graphPaths = ['/graphes/', '/graphes/dependances', $productionPath];
-$knownGraphPaths = [...$graphPaths, '/graphes/production/optimisation', '/graphes/production/branches'];
+$knownGraphPaths = [...$graphPaths, '/graphes/production/optimisation', '/graphes/production/branches', '/graphes/production/concordances'];
 $checks = 0;
 $errors = [];
 $documents = [];

@@ -8,6 +8,12 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class GraphStudyController extends AbstractController
 {
+    #[Route('/graphes/production/concordances', name: 'graph_production_concordances', methods: ['GET'])]
+    public function productionConcordances(): Response
+    {
+        return $this->render('graph/concordances.html.twig');
+    }
+
     #[Route('/graphes/production/branches', name: 'graph_production_branches', methods: ['GET'])]
     public function productionBranches(): Response
     {

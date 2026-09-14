@@ -10,6 +10,7 @@
     <p class="lead">Chaque branche possède son coefficient de rendement f(x) et produit x f(x). Les nœuds additionnent les résultats reçus puis répartissent cette somme. Comment choisir les cinq partages pour maximiser le résultat en 8 ?</p>
     <p><a href="{{ path('graph_production') }}">Tous les exemples de production</a> · <a id="branches-main-lagrangian-link" href="#branches-lagrangian-heading">Le lagrangien</a> · <a href="#branches-surface-heading">Explorer en 3D</a> · <a href="#branches-results-heading">Comparer les méthodes</a> · <a href="#branches-design-heading">Faire varier les fonctions</a></p>
 </header>
+<p class="content-note"><a href="{{ path('graph_production_concordances') }}">Nouvelle étude : environnement et concordances entre les nœuds</a> — même réseau, avec une transformation dans chaque nœud dépendant des contributions reçues.</p>
 <section class="content-note">
     <h2>Une source fixée à 1,00 ; trois arrivées pour r</h2>
     <p>Les douze liaisons sont <strong>1→2, 1→5, 2→3, 2→8, 5→3, 5→7, 7→6, 7→4, 3→4, 3→6, 4→8, 6→8</strong>. Sur chaque branche i→j : l’entrée xᵢⱼ est la part allouée en i, la sortie vaut yᵢⱼ=xᵢⱼ fᵢⱼ(xᵢⱼ), puis contribue à la somme disponible en j. Le nœud 1 fournit exactement 1,00. Le nœud 8 collecte <strong>r=y₂₈+y₄₈+y₆₈</strong>, le rendement global pour une source égale à 1.</p>

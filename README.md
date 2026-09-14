@@ -2,6 +2,8 @@
 
 Un site pour étudier la physique en reliant observations, modèles et applications. Cette version remplace l'ancien projet Symfony par une application Symfony 7.4, PHP 8.5, MySQL 8.4 et Twig, démarrée avec Docker Compose.
 
+**Recueils et ressources de l’auteur :** le [site d’Aurélien Roudier — MPCLab](https://enseignantpostbac.nexgate.ch/) présente notamment les *Fiches de CPGE scientifiques* et *Physique théorique*, avec sommaires, extraits, errata et compléments pédagogiques.
+
 **Le fondement du projet est une analyse continuellement précisée d’un sujet physique ou théorique.** Depuis le 10 septembre 2026, l’accueil propose quatre formes : **3**, **3 × 3**, **6**, **6 × 6**. Les chaînes à trois positions distinguent des sorties de même type que les attributs d’entrée (1a) ou de types différents (1b). Les chaînes à six positions conservent leurs évaluations 4/3, 5/2 et 6/1. Voir [les fondements](docs/FONDEMENTS-DU-PROJET.md) et [les formes et exemples](docs/FORMES-ANALYSE.md).
 
 Les prochains lots de physique sont en attente. E1e est terminé ; les réalisations existantes restent accessibles.
@@ -9,6 +11,8 @@ Les prochains lots de physique sont en attente. E1e est terminé ; les réalisat
 Le volet [Études de graphes](docs/ETUDES-GRAPHES.md) applique le cas 1 aux branches : réseau interurbain fictif en `/graphes/`, chemins simples sous une borne stricte, comparaison Dijkstra / Bellman–Ford / Floyd–Warshall ; puis `/graphes/dependances`, un débit externe qui modifie une durée. Les analyses 1a/1b et leurs coordonnées sont accessibles depuis les liaisons. Les cas 2/3/4 internes aux branches et les réseaux dynamiques couplés sont des extensions futures.
 
 Un troisième atelier, [Machines et production](docs/PRODUCTION-MACHINES.md), est accessible en `/graphes/production` : seuil d’alimentation puis deux segments affines, paramètres et répartitions modifiables, transferts réciproques et calcul synchrone par cycles. Trois scénarios montrent stabilisation, blocage sous seuil et oscillation. Il ne s’agit pas d’une optimisation industrielle ni d’une sauvegarde de graphes utilisateur.
+
+L’étude [Environnement et concordances aux nœuds](docs/CONCORDANCES-NODALES.md) dispose de son [atelier local `/graphes/production/concordances`](http://localhost:8080/graphes/production/concordances). Sur huit nœuds et douze branches, elle transforme les apports selon sept environnements et douze concordances : les productions négatives deviennent zéro, puis les cinq partages sont optimisés pour maximiser la sortie du nœud 8 après sa transformation. Grille, recherche locale, borne globale, lagrangien et nappes de voisinage distinguent leurs résultats et leurs limites.
 
 ## Contenu disponible
 

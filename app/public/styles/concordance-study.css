@@ -1,0 +1,79 @@
+@import url('./branch-study.css');
+
+[data-graph-study="concordances"] { min-width: 0; }
+[data-graph-study="concordances"] svg { display: block; width: 100%; height: auto; color: var(--ink); }
+[data-graph-study="concordances"] .graph-map-panel { position: static; min-width: 0; }
+[data-graph-study="concordances"] .graph-controls,
+[data-graph-study="concordances"] .graph-section,
+[data-graph-study="concordances"] .graph-field { min-width: 0; }
+[data-graph-study="concordances"] fieldset { min-width: 0; }
+[data-graph-study="concordances"] input,
+[data-graph-study="concordances"] select { width: 100%; max-width: 100%; min-height: 2.75rem; }
+[data-graph-study="concordances"] button { min-height: 2.75rem; white-space: normal; }
+[data-graph-study="concordances"] label { overflow-wrap: anywhere; }
+[data-graph-study="concordances"] details { margin-block: 1rem; }
+[data-graph-study="concordances"] summary { cursor: pointer; font-weight: 650; }
+[data-graph-study="concordances"] sub { font-size: .78em; }
+.concordance-workspace { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.concordance-fields,
+.concordance-run-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; }
+.concordance-run-controls { margin-block: 1.2rem; }
+.concordance-fields .graph-field { margin: 0; }
+.concordance-fields label { display: block; line-height: 1.45; margin-bottom: .35rem; }
+.concordance-convention h2 { margin-top: 0; }
+.concordance-map-viewport { max-width: 100%; overflow-x: auto; }
+#concordance-map { min-width: 360px; }
+.concordance-table-region { width: 100%; max-width: 100%; overflow-x: auto; margin-block: 1rem; }
+.concordance-table-region table { font-variant-numeric: tabular-nums; }
+#concordance-results { max-width: 100%; overflow-x: auto; font-variant-numeric: tabular-nums; }
+#concordance-lagrangian pre { max-height: 24rem; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+.branch-junction:focus-visible circle { stroke: var(--focus); stroke-width: 5; }
+#concordance-error { color: var(--tone-orange); font-weight: 650; }
+#concordance-error:empty,
+#concordance-lagrangian:empty,
+#concordance-derivatives:empty { display: none; }
+#concordance-status { padding: .85rem 1rem; border-left: 3px solid var(--tone-blue); background: var(--wash); margin-block: 1rem; }
+.concordance-formula { padding: 1rem 1.25rem; border: 1px solid var(--line); border-radius: .5rem; background: var(--wash); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.concordance-formula p { margin-block: .4rem; line-height: 1.7; }
+.concordance-lagrangian-formula { border-left: 4px solid var(--tone-blue); }
+.concordance-equations > p { max-width: 80ch; }
+.concordance-center-control { display: flex; align-items: end; padding-bottom: .25rem; }
+#concordance-surface { min-width: 660px; }
+.concordance-node circle { fill: var(--paper); stroke: var(--tone-blue); stroke-width: 3; }
+.concordance-node text { fill: var(--ink); text-anchor: middle; font: 600 24px system-ui, sans-serif; }
+.concordance-node[data-final] circle { stroke: var(--tone-green); }
+.concordance-node[aria-current="true"] circle,
+.concordance-node:hover circle { fill: var(--selected); stroke-width: 5; }
+.concordance-node:focus-visible { outline: none; }
+.concordance-node:focus-visible circle { stroke: var(--focus); stroke-width: 5; stroke-dasharray: 4 2; }
+.concordance-arc { fill: none; stroke: var(--flow); stroke-width: 2.5; }
+.concordance-arc[data-idle] { stroke-dasharray: 6 5; }
+.concordance-flow-label { fill: var(--ink); text-anchor: middle; paint-order: stroke; stroke: var(--paper); stroke-width: 6; stroke-linejoin: round; font: 600 21px system-ui, sans-serif; }
+
+@media (max-width: 800px) {
+  .concordance-workspace { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+  .concordance-map-viewport { max-width: 580px; margin-inline: auto; }
+  .concordance-node text { font-size: 28px; }
+  .concordance-flow-label { font-size: 25px; }
+}
+@media (max-width: 520px) {
+  .concordance-run-controls { grid-template-columns: minmax(0, 1fr); }
+  .concordance-fields { gap: .7rem; }
+  .concordance-fields label { font-size: .9rem; }
+  .concordance-formula { padding: .8rem; }
+  [data-graph-study="concordances"] .optimization-actions button { flex: 1 1 100%; }
+  .concordance-center-control { align-items: stretch; }
+  .concordance-center-control button { width: 100%; }
+}
+@media print {
+  .concordance-workspace { display: block; }
+  .concordance-map-viewport,
+  .concordance-table-region,
+  #concordance-results,
+  [data-graph-study="concordances"] .branch-surface-viewport { overflow: visible; }
+  #concordance-map,
+  #concordance-surface { min-width: 0; max-width: 100%; }
+  .concordance-center-control,
+  [data-graph-study="concordances"] .branch-surface-controls { display: none; }
+  .concordance-formula { break-inside: avoid; }
+}

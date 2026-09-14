@@ -1,0 +1,162 @@
+{% extends 'graph/layout.html.twig' %}
+{% block title %}Environnement et concordances aux nœuds — Physique objets{% endblock %}
+{% block graph_assets %}<link rel="stylesheet" href="{{ asset('styles/concordance-study.css') }}">{% endblock %}
+{% block graph_scripts %}<script type="module" src="{{ asset('scripts/concordance-study.mjs') }}"></script>{% endblock %}
+{% block graph_body %}
+<div data-graph-study="concordances">
+<header class="page-heading">
+    <p class="eyebrow">Étude 06 · Transformations aux nœuds</p>
+    <h1>Environnement, concordances et production</h1>
+    <p class="lead">Huit nœuds, douze branches et cinq partages : chaque nœud transforme ses apports selon son environnement et les contributions de ses fournisseurs.</p>
+    <p>La source fournit <strong>Y₁ = 1</strong>. Les branches transportent les parts qᵢⱼ ; les transformations s’appliquent <strong>aux nœuds 2 à 8</strong>. Les valeurs sont des données de modèle, sans mesure ni unité physique imposée.</p>
+    <p><a href="#concordance-parameters-title">Régler le modèle</a> · <a href="#concordance-comparison-title">Comparer les recherches</a> · <a href="#concordance-formulas-title">Lire les équations</a> · <a href="#concordance-surface-title">Explorer un voisinage</a></p>
+</header>
+
+<section class="content-note concordance-convention" aria-labelledby="concordance-convention-title">
+    <h2 id="concordance-convention-title">Une convention explicite pour la matrice</h2>
+    <p>La formule du document de l’auteur associe εᵢⱼ à l’apport de j vers i, tandis qu’une parenthèse décrit l’orientation inverse. Ici, <strong>la ligne i désigne le destinataire et la colonne j le fournisseur</strong> : sur 1 → 2, le coefficient actif est donc ε₂₁. Les coefficients des branches absentes valent zéro ; aucune boucle de retour n’est ajoutée.</p>
+    <p>Selon les précisions de l’auteur du 14 septembre 2026, toute production négative est ramenée à zéro et l’objectif est <strong>la sortie Y₈ après la transformation finale</strong>. La somme des arrivées, proposée dans le document initial, reste un indicateur distinct avant cette transformation.</p>
+</section>
+
+<section class="content-note" aria-labelledby="concordance-example-title">
+    <h2 id="concordance-example-title">Un départ calculé et un maximum vérifiable</h2>
+    <p>Initialement, eᵢ = 1 pour tous les nœuds, ε₂₁ = ε₅₁ = −1 et les autres concordances sont nulles. Les cinq parts valent 0,5. On obtient Y₂ = Y₅ = 0,25 et r = Y₈ = 0,5.</p>
+    <p>Pour ces seuls paramètres, les transmissions en aval conservent leur entrée, donc <strong>r = 2s₁(1 − s₁) = 0,5 − 2(s₁ − 0,5)²</strong>. Le maximum 0,5 est atteint pour s₁ = 0,5 ; les quatre autres partages ne changent pas r. La dérivée vaut 2 − 4s₁ suivant s₁ et zéro suivant les autres parts : une nappe peut présenter une crête ou un plateau, sans sommet isolé.</p>
+    <p class="small-note">Il s’agit d’un état calculé sous les hypothèses affichées. Le critère de proximité de 50 % de l’atelier précédent n’est pas une contrainte de ce modèle. Modifier les paramètres exige de reprendre l’étude du maximum.</p>
+</section>
+
+<div class="optimization-workspace concordance-workspace">
+    <figure class="graph-map-panel">
+        <div class="concordance-map-viewport">
+            <svg id="concordance-map" viewBox="0 0 760 980" role="group" aria-labelledby="concordance-map-title concordance-map-desc">
+                <title id="concordance-map-title">Réseau de huit transformations nodales</title>
+                <desc id="concordance-map-desc">La source 1 alimente 2 et 5. Les douze branches convergent vers 8. Sélectionnez un nœud ou utilisez la liste pour lire son entrée, son traitement et sa sortie. Les tableaux présentent également les valeurs.</desc>
+            </svg>
+        </div>
+        <figcaption>Les flèches portent les transferts qᵢⱼ de l’état examiné. Les nœuds portent les transformations Xᵢ → Yᵢ.</figcaption>
+        <p class="small-note">Les parts et les productions sont non négatives : tous les transferts qᵢⱼ sont donc non négatifs. Aucun arc inverse n’est ajouté.</p>
+    </figure>
+
+    <section class="graph-controls" aria-labelledby="concordance-parameters-title">
+        <h2 id="concordance-parameters-title">Régler le modèle et le départ</h2>
+        <form id="concordance-form" novalidate>
+            <fieldset>
+                <legend>Objectif et règle de production</legend>
+                <p><strong>Maximiser r = Y₈ = max(0, X₈C₈).</strong> L’environnement e₈ et les concordances reçues par 8 interviennent dans cet objectif.</p>
+                <p>À chaque nœud, Yᵢ = max(0, XᵢCᵢ). Seules les valeurs négatives sont ramenées à zéro ; aucun plafond positif n’est ajouté. Une amplification reste possible et la borne r ≤ 1 n’est pas automatique.</p>
+                <p class="small-note">La somme q₂₈ + q₄₈ + q₆₈ est l’entrée X₈, avant sa transformation. Elle égale la somme de valeurs absolues du document puisque les transferts sont non négatifs.</p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Environnements eᵢ ∈ [0, 1]</legend>
+                <div class="concordance-fields">
+                {% for node in 2..8 %}
+                    <div class="graph-field"><label for="concordance-env-{{ node }}">Nœud {{ node }} · e<sub>{{ node }}</sub></label><input id="concordance-env-{{ node }}" name="env-{{ node }}" type="number" min="0" max="1" step="0.1" value="1" required></div>
+                {% endfor %}
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Concordances εᵢⱼ ∈ [−1, 1]</legend>
+                <p class="small-note">Chaque coefficient pondère le transfert de la branche indiquée. Les douze paramètres restent fixes pendant une recherche sur les partages.</p>
+                <div class="concordance-fields">
+                {% for edge in [[1,2],[1,5],[2,3],[2,8],[5,3],[5,7],[7,6],[7,4],[3,4],[3,6],[4,8],[6,8]] %}
+                    <div class="graph-field"><label for="concordance-epsilon-{{ edge[0] }}-{{ edge[1] }}">{{ edge[0] }} → {{ edge[1] }} · ε<sub>{{ edge[1] }}{{ edge[0] }}</sub></label><input id="concordance-epsilon-{{ edge[0] }}-{{ edge[1] }}" name="epsilon-{{ edge[0] }}-{{ edge[1] }}" type="number" min="-1" max="1" step="0.1" value="{{ edge[0] == 1 ? '-1' : '0' }}" required></div>
+                {% endfor %}
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Cinq parts de départ, entre 0 et 1</legend>
+                <p class="small-note">Chaque première branche reçoit sᵢYᵢ et la seconde (1 − sᵢ)Yᵢ. Les nœuds 4 et 6 transmettent toute leur sortie à 8.</p>
+                <div class="concordance-fields">
+                {% for share in [{id:'s1',node:1,first:2,second:5},{id:'s2',node:2,first:3,second:8},{id:'s5',node:5,first:3,second:7},{id:'s3',node:3,first:4,second:6},{id:'s7',node:7,first:6,second:4}] %}
+                    <div class="graph-field"><label for="concordance-{{ share.id }}">s<sub>{{ share.node }}</sub> · vers {{ share.first }} ; reste vers {{ share.second }}</label><input id="concordance-{{ share.id }}" name="{{ share.id }}" type="number" min="0" max="1" step="0.1" value="0.5" required></div>
+                {% endfor %}
+                </div>
+            </fieldset>
+            <div class="optimization-actions">
+                <button id="concordance-apply" type="submit" class="graph-primary">Appliquer et calculer le départ</button>
+                <button id="concordance-reset" type="button">Rétablir les valeurs initiales</button>
+            </div>
+            <div id="concordance-error" role="alert"></div>
+            <p class="small-note">Appliquer enregistre ensemble les réglages pour le calcul courant. Modifier un environnement ou une concordance définit un nouveau problème d’optimisation.</p>
+        </form>
+    </section>
+</div>
+
+<section class="graph-section" aria-labelledby="concordance-comparison-title">
+    <h2 id="concordance-comparison-title">Comparer les partages à modèle fixé</h2>
+    <p>La grille examine un ensemble fini de partages ; la recherche locale part du réglage appliqué ; la recherche globale confronte une solution réalisable à une borne. Une grille ou un arrêt local ne prouve pas un maximum sur le domaine continu. La conclusion globale dépend de l’écart obtenu et du budget disponible.</p>
+    <div class="concordance-run-controls">
+        <div class="graph-field"><label for="concordance-grid-divisions">Divisions par axe de la grille</label><select id="concordance-grid-divisions"><option value="5">5 · pas 0,2</option><option value="10" selected>10 · pas 0,1</option><option value="20">20 · pas 0,05</option></select></div>
+        <div class="graph-field"><label for="concordance-budget">Budget de la recherche globale</label><input id="concordance-budget" type="number" min="1" max="30000" step="1" value="4000" required></div>
+    </div>
+    <p class="small-note">Les environnements et les concordances restent identiques pour les trois méthodes. Le maillage ne transforme pas les cinq variables continues en une preuve exhaustive sur le continuum.</p>
+    <div class="optimization-actions"><button id="concordance-compare" type="button" class="graph-primary">Comparer grille, recherche locale et globale</button><button id="concordance-cancel" type="button" hidden>Arrêter la comparaison</button></div>
+    <div id="concordance-status" role="status" aria-live="polite">Le calcul de l’état initial nécessite JavaScript.</div>
+    <div id="concordance-results"></div>
+</section>
+
+<section class="graph-section" aria-labelledby="concordance-state-title">
+    <h2 id="concordance-state-title">Lire un état calculé</h2>
+    <div class="concordance-run-controls">
+        <div class="graph-field"><label for="concordance-view">État examiné dans le graphe et les tableaux</label><select id="concordance-view"><option value="initial">Départ appliqué</option><option value="grid" disabled>Meilleur état de la grille</option><option value="local" disabled>Résultat de la recherche locale</option><option value="global" disabled>Meilleure solution de la recherche globale</option></select></div>
+        <div class="graph-field"><label for="concordance-node">Nœud à analyser</label><select id="concordance-node">{% for node in 1..8 %}<option value="{{ node }}">Nœud {{ node }}{{ node == 1 ? ' · source fixée' : (node == 8 ? ' · destination finale' : '') }}</option>{% endfor %}</select></div>
+    </div>
+    <div id="concordance-state" class="concordance-table-region"></div>
+    <h3>Les douze transferts entre nœuds</h3>
+    <div id="concordance-flows" class="concordance-table-region"></div>
+    <details><summary>Lire la matrice complète des concordances</summary><div id="concordance-matrix"></div></details>
+    <div class="optimization-actions"><button id="concordance-export" type="button">Exporter les paramètres et résultats</button></div>
+</section>
+
+{% include 'graph/_inspector.html.twig' with {inspector_id:'concordance-inspector',subject:'transformation'} only %}
+
+<section class="graph-section concordance-equations" aria-labelledby="concordance-formulas-title">
+    <h2 id="concordance-formulas-title">Du bilan des apports au lagrangien</h2>
+    <p>Pour chaque nœud i de 2 à 8, j parcourt ses fournisseurs réels. L’environnement eᵢ est un paramètre fixe ; le coefficient total Cᵢ dépend des apports, donc des partages en amont.</p>
+    <div class="concordance-formula" aria-label="Équations de transformation nodale">
+        <p>Xᵢ = Σⱼ qⱼᵢ</p>
+        <p>Cᵢ = eᵢ + Σⱼ εᵢⱼ qⱼᵢ</p>
+        <p>Yᵢ = max(0, Xᵢ Cᵢ)</p>
+        <p>Σⱼ qᵢⱼ = Yᵢ pour i = 1, …, 7 ; Y₁ = 1.</p>
+    </div>
+    <p>Le partage conserve la sortie du nœud entre ses branches. La transformation Yᵢ = max(0, XᵢCᵢ) n’impose pas Yᵢ = Xᵢ. À la destination 8, il n’existe aucun arc sortant : on n’ajoute donc pas de bilan qui forcerait Y₈ à zéro.</p>
+    <p>L’objectif est F = Y₈. Avec des multiplicateurs libres pour les égalités, une convention possible est :</p>
+    <div class="concordance-formula concordance-lagrangian-formula" aria-label="Lagrangien des égalités du réseau">
+        <p>L = Y₈</p>
+        <p>+ Σ<sub>i=2…8</sub> λᵢ (Xᵢ − Σⱼ qⱼᵢ)</p>
+        <p>+ Σ<sub>i=2…8</sub> μᵢ (Yᵢ − max(0, XᵢCᵢ))</p>
+        <p>+ Σ<sub>i=1…7</sub> ηᵢ (Σⱼ qᵢⱼ − Yᵢ).</p>
+    </div>
+    <p>Il y a sept termes de chaque famille. Celui de la source est η₁(q₁₂ + q₁₅ − 1). Les bornes des partages, leur relation aux transferts et la non-négativité des grandeurs doivent aussi être prises en compte pour toute conclusion d’optimalité.</p>
+    <p>Sur un état qui satisfait les égalités, L = F. Hors de ces égalités, L dépend des multiplicateurs et ne représente pas une production réalisable. Écrire ce lagrangien ou annuler un gradient ne suffit pas à établir une borne globale.</p>
+    <div id="concordance-lagrangian"></div>
+    <div id="concordance-derivatives"></div>
+    <p class="small-note">La mise à zéro peut créer une rupture de dérivée lorsque XᵢCᵢ s’annule. Une dérivée classique n’y est pas automatiquement définie ; à une frontière admissible, un maximum n’exige pas non plus un gradient nul. Les valeurs absolues de l’ancien objectif sont ici inutiles puisque qᵢⱼ ≥ 0.</p>
+</section>
+
+<section class="graph-section" aria-labelledby="concordance-surface-title">
+    <h2 id="concordance-surface-title">Deux partages pour voir un voisinage</h2>
+    <p>Deux fractions varient ; les trois autres gardent les valeurs de l’état examiné. Les environnements et les concordances restent fixés, et la hauteur représente toujours la sortie Y₈. Chaque point admissible est recalculé avec les équations du réseau.</p>
+    <div class="branch-surface-controls">
+        <div class="graph-field"><label for="concordance-axis-x">Partage sur l’axe horizontal</label><select id="concordance-axis-x">{% for share in ['s1','s2','s5','s3','s7'] %}<option value="{{ share }}"{{ share == 's1' ? ' selected' : '' }}>{{ share }}</option>{% endfor %}</select></div>
+        <div class="graph-field"><label for="concordance-axis-y">Partage sur l’axe de profondeur</label><select id="concordance-axis-y">{% for share in ['s1','s2','s5','s3','s7'] %}<option value="{{ share }}"{{ share == 's2' ? ' selected' : '' }}>{{ share }}</option>{% endfor %}</select></div>
+        <div class="graph-field"><label for="concordance-radius">Rayon du voisinage en fraction</label><input id="concordance-radius" type="number" min="0.000001" max="1" step="0.01" value="0.15"></div>
+        <div class="concordance-center-control"><button id="concordance-center" type="button">Recentrer le voisinage</button></div>
+    </div>
+    <figure class="branch-surface-figure">
+        <div class="branch-surface-viewport"><svg id="concordance-surface" viewBox="0 0 900 560" role="img" aria-labelledby="concordance-surface-title-svg concordance-surface-desc"><title id="concordance-surface-title-svg">Valeur de l’objectif en fonction de deux partages</title><desc id="concordance-surface-desc">Nappe calculée près de l’état examiné. Les coordonnées et valeurs des points voisins sont également proposées dans le tableau.</desc></svg></div>
+        <figcaption><div id="concordance-surface-caption">Le voisinage s’affichera après le calcul de l’état.</div></figcaption>
+    </figure>
+    <div id="concordance-samples" class="concordance-table-region"></div>
+    <p class="small-note">Une nappe suivant deux axes ne teste pas toutes les variations des cinq partages. Un sommet, une arête ou un plateau restent ceux du modèle calculé : aucun relief n’est ajouté pour suggérer un maximum.</p>
+</section>
+
+<noscript><p class="content-note">Sans JavaScript, les formules et les conventions restent lisibles ; aucun transfert ni résultat d’optimisation n’est calculé par cette page.</p></noscript>
+</div>
+{% endblock %}
+{% block graph_method_note %}
+<section class="content-note"><h2>Une transformation, trois positions</h2><p>Au nœud i, Exp. IN rassemble les apports et leur somme Xᵢ ; TH applique l’environnement et les concordances ; Exp. OUT donne Yᵢ et sa répartition. La source 1 fournit une donnée fixée. Les branches relient ces transformations sans leur attribuer une loi de production supplémentaire.</p><p><a href="{{ path('analysis_format', {format:'cas-1'}) }}">Revoir les variantes du cas 1</a> · <a href="{{ path('graph_production') }}">Revenir aux ateliers de production</a>. Le choix 1a/1b dépend de la nature des attributs que l’on décide de suivre, et pas seulement de leur écriture numérique.</p></section>
+{% endblock %}
