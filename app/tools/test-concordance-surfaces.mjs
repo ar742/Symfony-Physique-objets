@@ -36,3 +36,19 @@ test('Les axes distincts, frontières et fenêtres invalides sont traités expli
     assert.throws(()=>sampleConcordanceSurface(model,state,{x:'s1',y:'s1'}));
     assert.throws(()=>sampleConcordanceSurface(model,state,{x:'source'}));
 });
+
+test('Le voisinage signé conserve la loi polynomiale et les hauteurs négatives',()=>{
+    const model=createConcordanceScenario();model.environments['8']=.1;
+    model.epsilon['8']={'2':-1,'4':-1,'6':-1};
+    const state=evaluateConcordance(model,model.initialControls,{domain:'signed'});
+    const surface=sampleConcordanceSurface(model,state,{radius:.15,steps:20});
+    assert.equal(surface.domain,'signed');
+    assert.equal(surface.reference.z,-.2);
+    assert.ok(surface.ranges.z[1]<0);
+    for(const p of surface.points.flat()){
+        const input=2*p.x*(1-p.x);
+        assert.ok(Math.abs(p.z-input*(.1-input))<1e-14);
+    }
+    const rectified=evaluateConcordance(model);
+    assert.equal(sampleConcordanceSurface(model,rectified,{radius:.15,steps:20}).reference.z,0);
+});

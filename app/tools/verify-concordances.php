@@ -92,7 +92,7 @@ $check($xpath->query('//main//a[@href="'.$productionPath.'"]')->length > 0, 'Ret
 $form = $requiredElement('concordance-form', 'form');
 if ($form !== null) {
     $check($form->hasAttribute('novalidate'), 'Validation des valeurs confiée au script');
-    $check($xpath->query('.//input', $form)->length === 24, 'Dix-neuf paramètres et cinq parts dans le formulaire');
+    $check($xpath->query('.//input', $form)->length === 25, 'Dix-neuf paramètres, cinq parts et une graine dans le formulaire');
 }
 $expectedInputs = [];
 foreach (range(2, 8) as $node) { $expectedInputs['concordance-env-'.$node] = [0.0, 1.0, 1.0]; }
@@ -114,10 +114,9 @@ foreach ($edges as [$from, $to]) {
     $label = preg_replace('/\s+/u', '', $labels->item(0)?->textContent ?? '');
     $check(str_contains($label, $from.'→'.$to) && str_contains($label, 'ε'.$to.$from), 'Concordance indexée destinataire puis fournisseur '.$from.'→'.$to);
 }
-foreach (['concordance-domain', 'concordance-objective'] as $id) {
-    $check($document->getElementById($id) === null, 'Ancien choix d’interprétation retiré '.$id);
-}
+$check($document->getElementById('concordance-objective') === null, 'Objectif unique après TH8');
 foreach ([
+    'concordance-domain' => [['rectified', 'signed'], 'rectified'],
     'concordance-grid-divisions' => [['5', '10', '20'], '10'],
     'concordance-view' => [['initial', 'grid', 'local', 'global'], 'initial'],
     'concordance-node' => [array_map('strval', range(1, 8)), null],
@@ -143,6 +142,7 @@ foreach ([
     $check($hasName($select, $xpath), 'Nom accessible '.$id);
 }
 foreach ([
+    'concordance-seed' => ['min' => 0.0, 'max' => 4294967295.0, 'step' => 1.0, 'value' => 1.0],
     'concordance-budget' => ['min' => 1.0, 'max' => 30000.0, 'step' => 1.0, 'value' => 4000.0],
     'concordance-radius' => ['max' => 1.0, 'value' => 0.15],
 ] as $id => $attributes) {
@@ -154,7 +154,7 @@ foreach ([
         $check(is_numeric($actual) && (float) $actual === $expected, 'Réglage '.$id.' : '.$attribute);
     }
 }
-foreach (['concordance-apply', 'concordance-reset', 'concordance-compare', 'concordance-cancel', 'concordance-center', 'concordance-export'] as $id) {
+foreach (['concordance-apply', 'concordance-reset', 'concordance-compare', 'concordance-cancel', 'concordance-center', 'concordance-export', 'concordance-negative', 'concordance-randomize'] as $id) {
     $button = $requiredElement($id, 'button');
     if ($button === null) { continue; }
     $check($hasName($button, $xpath), 'Nom accessible de la commande '.$id);
@@ -200,6 +200,8 @@ foreach ([
     'ηᵢ(Σⱼqᵢⱼ−Yᵢ)' => 'Contraintes de répartition du lagrangien',
     'η₁(q₁₂+q₁₅−1)' => 'Contrainte de la source fixée',
     '0,5−2(s₁−0,5)²' => 'Preuve du maximum du seul réglage initial',
+    'r=Y₈=−1pourtouslespartages' => 'Exemple construit de maximum strictement négatif',
+    'Modesigné:Yᵢ=XᵢCᵢ' => 'Mode signé explicite',
 ] as $formula => $label) { $check(str_contains($text, $formula), $label); }
 $lagrangian = $xpath->query('//*[contains(concat(" ",normalize-space(@class)," ")," concordance-lagrangian-formula ")]')->item(0);
 $lagrangianText = preg_replace('/\s+/u', '', $lagrangian?->textContent ?? '');
@@ -225,7 +227,7 @@ foreach ([['HEAD', $concordancePath, 200], ['POST', $concordancePath, 405], ['GE
     $response = $kernel->handle(Symfony\Component\HttpFoundation\Request::create($path, $method), Symfony\Component\HttpKernel\HttpKernelInterface::SUB_REQUEST);
     $check($response->getStatusCode() === $expected, 'Route '.$method.' '.$path);
 }
-$assets = ['scripts/concordance-study.mjs', 'scripts/concordance-worker.mjs', 'scripts/concordance-engine.mjs', 'scripts/concordance-surfaces.mjs', 'styles/concordance-study.css'];
+$assets = ['scripts/concordance-study.mjs', 'scripts/concordance-worker.mjs', 'scripts/concordance-engine.mjs', 'scripts/concordance-surfaces.mjs', 'scripts/concordance-scenarios.mjs', 'scripts/concordance-sample-results.mjs', 'styles/concordance-study.css'];
 foreach ($assets as $asset) { $check(is_file($root.'/public/'.$asset), 'Ressource locale '.$asset); }
 $baseUrl = rtrim(getenv('VERIFY_BASE_URL') ?: 'http://127.0.0.1', '/');
 $requests = [['GET', $concordancePath, 200], ['HEAD', $concordancePath, 200], ['POST', $concordancePath, 405], ['GET', $concordancePath.'/inconnu', 404]];

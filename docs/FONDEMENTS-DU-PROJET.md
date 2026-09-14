@@ -1,6 +1,6 @@
 # Fondements du projet Physique objets
 
-**Extension du 14 septembre 2026 :** l’auteur fournit une nouvelle étude d’environnement et de concordances sur le graphe à huit nœuds. Sa [spécification nodale](CONCORDANCES-NODALES.md) précise les transformations aux nœuds, la mise à zéro des productions négatives et l’objectif après TH₈. Elle complète les ateliers existants sans modifier leur modèle.
+**Extension du 14 septembre 2026 :** l’auteur fournit une nouvelle étude d’environnement et de concordances sur le graphe à huit nœuds. Sa [spécification nodale](CONCORDANCES-NODALES.md) précise les transformations aux nœuds et l’objectif après TH₈. Elle propose la mise à zéro des productions négatives ainsi que, sur demande ultérieure de l’auteur, leur conservation en mode signé et des matrices aléatoires reproductibles. Elle complète les ateliers existants sans modifier leur modèle.
 
 Référence de conception précisée par l'auteur le 9 septembre 2026 et élargie le 10 septembre 2026, dans la continuité du site de 2018. Ce document consigne le sens de la démarche ; les intitulés et les textes des fiches restent à affiner. Toute évolution du contenu, de la navigation ou des outils de travail doit respecter ce fondement. Une formulation ancienne ou provisoire doit être relue à sa lumière.
 

@@ -180,11 +180,11 @@ test('adjoints agree with five share derivatives and remain a diagnostic rather 
     assert.equal(chosen.atReference.differentiable,false);assert.equal(chosen.atReference.gradient,null);assert.ok(chosen.selections.length>0);
 });
 
-test('validation rejects invalid parameters, unsupported signed propagation and malformed independent coordinates',()=>{
-    for(const mutate of [m=>m.source=.9,m=>m.environments['8']=1.1,m=>m.epsilon['8']['2']=-1.1,m=>m.epsilon['3']['8']=.2,m=>m.epsilon['1']={'2':.1},m=>m.initialControls.s3=2]) {
+test('validation rejects invalid parameters, diagonal influences and malformed independent coordinates',()=>{
+    for(const mutate of [m=>m.source=.9,m=>m.environments['8']=1.1,m=>m.epsilon['8']['2']=-1.1,m=>m.epsilon['3']['8']=1.2,m=>m.epsilon['1']={'1':.1},m=>m.initialControls.s3=2,m=>m.epsilon['9']={},m=>m.epsilon['3']['9']=0]) {
         const bad=createConcordanceScenario();mutate(bad);assert.throws(()=>validateConcordanceModel(bad));
     }
-    assert.throws(()=>evaluateConcordance(model,model.initialControls,{domain:'signed'}));
+    assert.throws(()=>evaluateConcordance(model,model.initialControls,{domain:'unknown'}));
     assert.throws(()=>evaluateConcordance(model,model.initialControls,{objective:'abs-output'}));
     for(const method of [searchConcordanceGrid,searchConcordanceLocal,searchConcordanceGlobal])assert.throws(()=>method(model,{unexpected:1}));
     assert.throws(()=>searchConcordanceGlobal(model,{maxNodes:-1}));
@@ -194,4 +194,138 @@ test('validation rejects invalid parameters, unsupported signed propagation and 
     assert.throws(()=>boundConcordanceBox(model,[[0,1]]));
     assert.throws(()=>evaluateConcordanceLagrangian(model,Array(25).fill(0)));
     assert.throws(()=>evaluateConcordanceLagrangian(model,Array(26).fill(0),{multipliers:[0]}));
+});
+
+const signedMixed=()=>{
+    const current=influenced();current.environments['2']=0;current.epsilon['5']['1']=0;return current;
+};
+const negativeMaximum=()=>{
+    const current=createConcordanceScenario();
+    for(const row of Object.values(current.epsilon))for(const from of Object.keys(row))row[from]=0;
+    current.environments['8']=0;
+    for(const from of Object.keys(current.epsilon['8']))current.epsilon['8'][from]=-1;
+    return current;
+};
+
+test('complete destination-first epsilon matrices preserve 56 coefficients while non-edges remain inactive',()=>{
+    const full=createConcordanceScenario();
+    full.epsilon=Object.fromEntries(CONCORDANCE_GRAPH.nodes.map(({id})=>[id,Object.fromEntries(CONCORDANCE_GRAPH.nodes.map(({id:from})=>[from,id===from?0:(Number(id)+Number(from))/16]))]));
+    for(const edge of CONCORDANCE_GRAPH.edges)full.epsilon[edge.to][edge.from]=model.epsilon[edge.to][edge.from];
+    const canonical=validateConcordanceModel(full);
+    assert.equal(Object.values(canonical.epsilon).reduce((total,row)=>total+Object.keys(row).length,0),64);
+    assert.equal(canonical.epsilon['1']['8'],9/16);
+    for(const domain of ['signed','rectified','efficiency']) {
+        const before=evaluateConcordance(model,model.initialControls,{domain}),after=evaluateConcordance(full,full.initialControls,{domain});
+        assert.deepEqual(after,before);
+    }
+    full.epsilon['1']['8']=-1;assert.equal(canonical.epsilon['1']['8'],9/16);
+    for(const badValue of [NaN,Infinity,-1.1,1.1]) {const invalid=structuredClone(full);invalid.epsilon['1']['8']=badValue;assert.throws(()=>validateConcordanceModel(invalid));}
+    const missing=createConcordanceScenario();delete missing.epsilon['8']['2'];assert.throws(()=>validateConcordanceModel(missing));
+});
+
+test('signed transfers subtract at junctions and distinguish algebraic, absolute and transformed arrivals',()=>{
+    const current=createConcordanceScenario();current.environments['2']=0;current.epsilon['5']['1']=0;
+    const controls={s1:.5,s2:.8,s5:.1,s3:.6,s7:.3},state=evaluateConcordance(current,controls,{domain:'signed'});
+    assert.equal(state.feasible,true);assert.ok(state.flows.some(flow=>flow.value<0));
+    close(state.nodes.find(node=>node.id==='2').output,-.25);close(state.nodes.find(node=>node.id==='3').input,-.15);
+    close(state.objectives.algebraicArrivals,.25);close(state.objectives.arrivals,.35);close(state.objectives.output,.25);
+    assert.ok(state.nodes.every(node=>node.rectified===false));
+    for(const node of state.nodes.filter(node=>node.id!=='8')) {
+        const outgoing=state.flows.filter(flow=>flow.from===node.id);
+        close(outgoing.reduce((sum,flow)=>sum+flow.value,0),node.output);
+        for(const flow of outgoing)close(flow.value,node.output*flow.fraction);
+    }
+    close(evaluateConcordance(current,controls,{domain:'rectified'}).objective,.5);
+    close(evaluateConcordance(current,controls,{domain:'signed',objective:'arrivals'}).objective,.35);
+});
+
+test('signed output is polynomial through zero while the optional absolute-arrival objective declares its kink',()=>{
+    const threshold=createConcordanceScenario();threshold.environments['2']=.5;
+    const signed=evaluateConcordance(threshold,threshold.initialControls,{domain:'signed'});
+    assert.equal(signed.derivatives.differentiable,true);assert.deepEqual(signed.derivatives.kinks,[]);
+    close(signed.derivatives.gradient[0],-.5);close(signed.derivatives.hessian[0][0],-4);
+    const absolute=evaluateConcordance(threshold,threshold.initialControls,{domain:'signed',objective:'arrivals'});
+    assert.equal(absolute.derivatives.differentiable,false);assert.equal(absolute.derivatives.gradient,null);
+    assert.ok(absolute.derivatives.kinks.some(kink=>kink.edge==='2-8'));
+    const explained=explainConcordanceLagrangian(threshold,signed);
+    assert.equal(explained.atReference.differentiable,true);assert.deepEqual(explained.selections,[]);
+});
+
+test('signed jets and adjoints match derivatives with negative supplies and both objectives',()=>{
+    const current=signedMixed(),controls={s1:.4,s2:.35,s5:.55,s3:.6,s7:.3},h=1e-6;
+    for(const objective of ['output','arrivals']) {
+        const options={domain:'signed',objective},state=evaluateConcordance(current,controls,options),explanation=explainConcordanceLagrangian(current,state);
+        assert.equal(state.derivatives.differentiable,true);assert.equal(explanation.atReference.feasible,true);assert.equal(explanation.globalCertificate,false);
+        close(explanation.atReference.lagrangian,state.objective);
+        for(let j=12;j<26;j++)close(explanation.atReference.gradient[j],0);
+        for(let j=0;j<5;j++) {
+            const before=evaluateConcordance(current,{...controls,[keys[j]]:controls[keys[j]]-h},options),after=evaluateConcordance(current,{...controls,[keys[j]]:controls[keys[j]]+h},options);
+            close(state.derivatives.gradient[j],(after.objective-before.objective)/(2*h),2e-8);
+            for(let i=0;i<5;i++)close(state.derivatives.hessian[i][j],(after.derivatives.gradient[i]-before.derivatives.gradient[i])/(2*h),2e-8);
+            const id=keys[j].slice(1),outgoing=state.flows.filter(flow=>flow.from===id),supply=state.nodes.find(node=>node.id===id).output;
+            close(state.derivatives.gradient[j],supply*(explanation.edgeValues[outgoing[0].id]-explanation.edgeValues[outgoing[1].id]));
+        }
+    }
+});
+
+test('signed free L accepts negative compatible supplies, rejects incompatible fractions and retains the bilinear Hessian',()=>{
+    const current=signedMixed(),state=evaluateConcordance(current,{s1:.4,s2:.35,s5:.55,s3:.6,s7:.3},{domain:'signed'}),point=concordanceWitnessPoint(state),multipliers=Array.from({length:21},(_,i)=>(i-10)/20),options={domain:'signed',multipliers};
+    const actual=evaluateConcordanceLagrangian(current,point,options),h=1e-6;
+    assert.equal(actual.feasible,true);assert.equal(actual.constraints.length,21);assert.equal(actual.differentiable,true);
+    assert.match(actual.convention,/hY=Y−XC/);close(actual.lagrangian,state.objective);
+    for(let j=0;j<26;j++) {
+        const before=[...point],after=[...point];before[j]-=h;after[j]+=h;
+        const left=evaluateConcordanceLagrangian(current,before,options),right=evaluateConcordanceLagrangian(current,after,options);
+        close(actual.gradient[j],(right.lagrangian-left.lagrangian)/(2*h),2e-8);
+        for(let i=0;i<26;i++)close(actual.hessian[i][j],(right.gradient[i]-left.gradient[i])/(2*h),2e-8);
+    }
+    const reversed=[...point];reversed[2]=Math.abs(reversed[2]);assert.equal(evaluateConcordanceLagrangian(current,reversed,options).shareAdmissible,false);
+    const excessive=[...point];excessive[2]=2*state.nodes.find(node=>node.id==='2').output;assert.equal(evaluateConcordanceLagrangian(current,excessive,options).shareAdmissible,false);
+    const zeroSupply=[...point];zeroSupply[19]=0;assert.equal(evaluateConcordanceLagrangian(current,zeroSupply,options).shareAdmissible,false);
+    const zero=Array(26).fill(0),zeroL=evaluateConcordanceLagrangian(current,zero,options);assert.equal(zeroL.differentiable,true);assert.equal(zeroL.feasible,false);
+});
+
+test('signed interval bounds include cancellations, negative coefficients and narrow boxes without positive cut bounds',()=>{
+    let seed=851126;const random=()=>((seed=(1664525*seed+1013904223)>>>0)/4294967296);
+    for(let trial=0;trial<40;trial++) {
+        const varied=createConcordanceScenario();
+        for(const id of Object.keys(varied.environments)){varied.environments[id]=random();for(const from of Object.keys(varied.epsilon[id]))varied.epsilon[id][from]=2*random()-1;}
+        const box=keys.map(()=>{const a=random(),b=random();return trial%3===0?[a,Math.min(1,a+1e-12)]:[Math.min(a,b),Math.max(a,b)];});
+        for(const objective of ['output','arrivals']) {
+            const options={domain:'signed',objective},bound=boundConcordanceBox(varied,box,options);
+            assert.equal(bound.cutBounds,null);assert.equal(bound.impossible,false);
+            for(let sample=0;sample<25;sample++) {
+                const controls=Object.fromEntries(keys.map((key,i)=>[key,box[i][0]+random()*(box[i][1]-box[i][0])])),state=evaluateConcordance(varied,controls,options);
+                assert.ok(state.objective>=bound.lowerBound&&state.objective<=bound.upperBound,`${state.objective} outside [${bound.lowerBound},${bound.upperBound}]`);
+                for(const node of state.nodes)assert.ok(node.output>=bound.nodes[node.id].output[0]&&node.output<=bound.nodes[node.id].output[1]);
+            }
+        }
+    }
+});
+
+test('a provably negative global maximum remains a negative best for every search instead of being replaced by zero',()=>{
+    // Upstream identity laws preserve total1. Hence X8=1, C8=−1 and Y8=−1
+    // for every share vector; this is an independent proof, not a solver shortcut.
+    const current=negativeMaximum(),options={domain:'signed'},states=[current.initialControls,{s1:0,s2:1,s5:0,s3:1,s7:0},{s1:.31,s2:.67,s5:.48,s3:.29,s7:.77}];
+    for(const controls of states) {
+        const state=evaluateConcordance(current,controls,options);
+        close(state.objectives.algebraicArrivals,1);close(state.objectives.arrivals,1);close(state.objective,-1);
+        assert.equal(state.feasible,true);assert.ok(state.derivatives.gradient.every(value=>Math.abs(value)<1e-12));
+    }
+    const grid=searchConcordanceGrid(current,{...options,divisions:4}),local=searchConcordanceLocal(current,{...options,maxEvaluations:200}),global=searchConcordanceGlobal(current,{...options,maxNodes:12});
+    assert.equal(grid.complete,true);assert.equal(grid.feasibleCount,3125);
+    for(const result of [grid,local,global]) {assert.ok(result.best);assert.equal(result.best.domain,'signed');close(result.best.objective,-1);assert.ok(result.best.objective<0);}
+    assert.ok(global.upperBound>=-1);assert.equal(global.status,'node-limit');assert.ok(global.gap>global.tolerance);assert.equal(global.complete,false);
+    assert.equal(global.certificate.scope.domain,'signed');assert.ok(global.certificate.frontier.length>0);
+    close(evaluateConcordance(current,current.initialControls,{domain:'rectified'}).objective,0);
+});
+
+test('signed partial searches preserve their budget, objective and inherited bounds',()=>{
+    const current=signedMixed(),options={domain:'signed',objective:'arrivals'},events=[];
+    const limited=searchConcordanceGlobal(current,{...options,maxNodes:0}),partial=searchConcordanceGlobal(current,{...options,maxNodes:8,onProgress:event=>events.push(event)});
+    assert.ok(partial.upperBound<=limited.upperBound);assert.ok(partial.upperBound>=partial.best.objective);
+    assert.ok(partial.best.objective>=limited.best.objective);assert.ok(partial.processedNodes<=8);assert.equal(events.at(-1),partial);
+    const prefix=searchConcordanceGrid(current,{...options,divisions:10,maxEvaluations:5});
+    assert.equal(prefix.evaluations,5);assert.equal(prefix.complete,false);assert.equal(prefix.best.objectiveKind,'arrivals');
+    for(const method of [searchConcordanceGrid,searchConcordanceLocal,searchConcordanceGlobal])assert.equal(method(current,{...options,shouldCancel:()=>true}).best,null);
 });

@@ -14,8 +14,21 @@
 
 <section class="content-note concordance-convention" aria-labelledby="concordance-convention-title">
     <h2 id="concordance-convention-title">Une convention explicite pour la matrice</h2>
-    <p>La formule du document de l’auteur associe εᵢⱼ à l’apport de j vers i, tandis qu’une parenthèse décrit l’orientation inverse. Ici, <strong>la ligne i désigne le destinataire et la colonne j le fournisseur</strong> : sur 1 → 2, le coefficient actif est donc ε₂₁. Les coefficients des branches absentes valent zéro ; aucune boucle de retour n’est ajoutée.</p>
-    <p>Selon les précisions de l’auteur du 14 septembre 2026, toute production négative est ramenée à zéro et l’objectif est <strong>la sortie Y₈ après la transformation finale</strong>. La somme des arrivées, proposée dans le document initial, reste un indicateur distinct avant cette transformation.</p>
+    <p>La formule du document de l’auteur associe εᵢⱼ à l’apport de j vers i, tandis qu’une parenthèse décrit l’orientation inverse. Ici, <strong>la ligne i désigne le destinataire et la colonne j le fournisseur</strong> : sur 1 → 2, le coefficient actif est donc ε₂₁. La diagonale est nulle. Un tirage renseigne les 56 coefficients hors diagonale ; seuls les douze arcs déclarés transportent des apports. Les 44 autres coefficients sont conservés mais inactifs : leur transfert q vaut zéro. Aucune boucle de retour n’est ajoutée.</p>
+    <p>L’objectif reste <strong>la sortie Y₈ après la transformation finale</strong>. Deux lois sont maintenant comparables : mise à zéro des productions négatives, ou conservation de toutes les valeurs signées. La somme algébrique des arrivées X₈ est un indicateur distinct avant TH₈ ; elle peut différer de la somme des valeurs absolues du document initial.</p>
+</section>
+
+<section class="content-note" aria-labelledby="concordance-negative-title">
+    <h2 id="concordance-negative-title">Un maximum global strictement négatif</h2>
+    <p>Un exemple construit permet de contrôler le nouveau mode : e₂ à e₇ valent 1, e₈ vaut 0 ; ε₈₂ = ε₈₄ = ε₈₆ = −1, toutes les autres concordances sont nulles. Les cinq parts initiales valent 0,5.</p>
+    <p>Les nœuds intermédiaires conservent leurs apports : toute la source atteint 8, donc X₈ = 1 et C₈ = −1. En mode signé, <strong>r = Y₈ = −1 pour tous les partages</strong> : −1 est le maximum global, également le minimum. Ses cinq dérivées sont nulles et la nappe est plane. Avec mise à zéro, le même modèle donne r = 0. La preuve analytique reste distincte d’une éventuelle borne numérique encore ouverte.</p>
+    <button id="concordance-negative" type="button">Charger l’exemple signé de maximum −1</button>
+</section>
+
+<section class="graph-section" aria-labelledby="concordance-random-studies-title">
+    <h2 id="concordance-random-studies-title">Études de matrices aléatoires</h2>
+    <p>Ces tirages reproductibles illustrent la différence entre les deux lois. Les sept environnements valent 0,5 et les cinq parts initiales 0,5. Les coefficients restent fixes pendant chaque optimisation. Ces exemples ne constituent pas une estimation statistique de toutes les matrices possibles.</p>
+    <div id="concordance-random-studies"></div>
 </section>
 
 <section class="content-note" aria-labelledby="concordance-example-title">
@@ -34,7 +47,7 @@
             </svg>
         </div>
         <figcaption>Les flèches portent les transferts qᵢⱼ de l’état examiné. Les nœuds portent les transformations Xᵢ → Yᵢ.</figcaption>
-        <p class="small-note">Les parts et les productions sont non négatives : tous les transferts qᵢⱼ sont donc non négatifs. Aucun arc inverse n’est ajouté.</p>
+        <p class="small-note" id="concordance-flow-rule">En mode avec mise à zéro, les transferts sont non négatifs. En mode signé, chaque arc transmet la fraction choisie de la sortie signée, sans changer le sens de dépendance du graphe.</p>
     </figure>
 
     <section class="graph-controls" aria-labelledby="concordance-parameters-title">
@@ -42,9 +55,10 @@
         <form id="concordance-form" novalidate>
             <fieldset>
                 <legend>Objectif et règle de production</legend>
-                <p><strong>Maximiser r = Y₈ = max(0, X₈C₈).</strong> L’environnement e₈ et les concordances reçues par 8 interviennent dans cet objectif.</p>
-                <p>À chaque nœud, Yᵢ = max(0, XᵢCᵢ). Seules les valeurs négatives sont ramenées à zéro ; aucun plafond positif n’est ajouté. Une amplification reste possible et la borne r ≤ 1 n’est pas automatique.</p>
-                <p class="small-note">La somme q₂₈ + q₄₈ + q₆₈ est l’entrée X₈, avant sa transformation. Elle égale la somme de valeurs absolues du document puisque les transferts sont non négatifs.</p>
+                <div class="graph-field"><label for="concordance-domain">Traitement des sorties négatives</label><select id="concordance-domain"><option value="rectified">Mise à zéro · Y = max(0, XC)</option><option value="signed">Valeurs signées · Y = XC</option></select></div>
+                <p><strong>Maximiser r = Y₈ après TH₈.</strong> L’environnement e₈ et les concordances reçues par 8 interviennent dans cet objectif.</p>
+                <p>Mode avec mise à zéro : Yᵢ = max(0, XᵢCᵢ). Mode signé : Yᵢ = XᵢCᵢ, même si ce produit est négatif. Dans les deux modes, aucun plafond positif n’est ajouté ; la borne r ≤ 1 n’est pas automatique.</p>
+                <p class="small-note">Les fractions restent dans [0,1]. En signé, qᵢⱼ = sᵢⱼYᵢ peut être négatif ; les apports s’additionnent algébriquement. Une valeur négative exprime ici un attribut signé du modèle, pas une quantité matérielle négative mesurée.</p>
             </fieldset>
 
             <fieldset>
@@ -59,6 +73,9 @@
             <fieldset>
                 <legend>Concordances εᵢⱼ ∈ [−1, 1]</legend>
                 <p class="small-note">Chaque coefficient pondère le transfert de la branche indiquée. Les douze paramètres restent fixes pendant une recherche sur les partages.</p>
+                <div class="graph-field"><label for="concordance-seed">Graine du tirage aléatoire</label><input id="concordance-seed" type="number" min="0" max="4294967295" step="1" value="1" required></div>
+                <button id="concordance-randomize" type="button">Tirer la matrice avec cette graine</button>
+                <p id="concordance-provenance" class="small-note">Le tirage conserve les environnements et les parts saisis. Une même graine redonne la même matrice.</p>
                 <div class="concordance-fields">
                 {% for edge in [[1,2],[1,5],[2,3],[2,8],[5,3],[5,7],[7,6],[7,4],[3,4],[3,6],[4,8],[6,8]] %}
                     <div class="graph-field"><label for="concordance-epsilon-{{ edge[0] }}-{{ edge[1] }}">{{ edge[0] }} → {{ edge[1] }} · ε<sub>{{ edge[1] }}{{ edge[0] }}</sub></label><input id="concordance-epsilon-{{ edge[0] }}-{{ edge[1] }}" name="epsilon-{{ edge[0] }}-{{ edge[1] }}" type="number" min="-1" max="1" step="0.1" value="{{ edge[0] == 1 ? '-1' : '0' }}" required></div>
@@ -119,22 +136,22 @@
     <div class="concordance-formula" aria-label="Équations de transformation nodale">
         <p>Xᵢ = Σⱼ qⱼᵢ</p>
         <p>Cᵢ = eᵢ + Σⱼ εᵢⱼ qⱼᵢ</p>
-        <p>Yᵢ = max(0, Xᵢ Cᵢ)</p>
+        <p id="concordance-law-formula">Yᵢ = max(0, Xᵢ Cᵢ) ; en mode signé : Yᵢ = XᵢCᵢ.</p>
         <p>Σⱼ qᵢⱼ = Yᵢ pour i = 1, …, 7 ; Y₁ = 1.</p>
     </div>
-    <p>Le partage conserve la sortie du nœud entre ses branches. La transformation Yᵢ = max(0, XᵢCᵢ) n’impose pas Yᵢ = Xᵢ. À la destination 8, il n’existe aucun arc sortant : on n’ajoute donc pas de bilan qui forcerait Y₈ à zéro.</p>
+    <p>Le partage conserve la sortie du nœud entre ses branches. La transformation n’impose pas Yᵢ = Xᵢ. À la destination 8, il n’existe aucun arc sortant : on n’ajoute donc pas de bilan qui forcerait Y₈ à zéro.</p>
     <p>L’objectif est F = Y₈. Avec des multiplicateurs libres pour les égalités, une convention possible est :</p>
     <div class="concordance-formula concordance-lagrangian-formula" aria-label="Lagrangien des égalités du réseau">
         <p>L = Y₈</p>
         <p>+ Σ<sub>i=2…8</sub> λᵢ (Xᵢ − Σⱼ qⱼᵢ)</p>
-        <p>+ Σ<sub>i=2…8</sub> μᵢ (Yᵢ − max(0, XᵢCᵢ))</p>
+        <p id="concordance-lagrangian-law">+ Σ<sub>i=2…8</sub> μᵢ (Yᵢ − max(0, XᵢCᵢ))</p>
         <p>+ Σ<sub>i=1…7</sub> ηᵢ (Σⱼ qᵢⱼ − Yᵢ).</p>
     </div>
-    <p>Il y a sept termes de chaque famille. Celui de la source est η₁(q₁₂ + q₁₅ − 1). Les bornes des partages, leur relation aux transferts et la non-négativité des grandeurs doivent aussi être prises en compte pour toute conclusion d’optimalité.</p>
+    <p>Il y a sept termes de chaque famille. Celui de la source est η₁(q₁₂ + q₁₅ − 1). En mode signé, le terme de transformation devient μᵢ(Yᵢ − XᵢCᵢ). Les fractions sont toujours bornées entre 0 et 1 : les transferts issus d’un même nœud ont le signe de sa sortie et leur somme la conserve. La non-négativité de X, Y et q n’est exigée que dans le mode avec mise à zéro.</p>
     <p>Sur un état qui satisfait les égalités, L = F. Hors de ces égalités, L dépend des multiplicateurs et ne représente pas une production réalisable. Écrire ce lagrangien ou annuler un gradient ne suffit pas à établir une borne globale.</p>
     <div id="concordance-lagrangian"></div>
     <div id="concordance-derivatives"></div>
-    <p class="small-note">La mise à zéro peut créer une rupture de dérivée lorsque XᵢCᵢ s’annule. Une dérivée classique n’y est pas automatiquement définie ; à une frontière admissible, un maximum n’exige pas non plus un gradient nul. Les valeurs absolues de l’ancien objectif sont ici inutiles puisque qᵢⱼ ≥ 0.</p>
+    <p class="small-note">La mise à zéro peut créer une rupture de dérivée lorsque XᵢCᵢ s’annule. En mode signé, les lois sont polynomiales et cette rupture disparaît. À une frontière admissible, un maximum n’exige pas un gradient nul. L’objectif Y₈ n’est remplacé par aucune valeur absolue.</p>
 </section>
 
 <section class="graph-section" aria-labelledby="concordance-surface-title">

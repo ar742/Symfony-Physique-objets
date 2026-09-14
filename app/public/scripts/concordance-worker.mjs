@@ -2,7 +2,8 @@ import {searchConcordanceGrid,searchConcordanceLocal,searchConcordanceGlobal} fr
 
 self.onmessage=({data})=>{
     try {
-        const {model,settings}=data;
+        const {model,settings,options:mode={objective:'output',domain:'rectified'}}=data;
+        if(mode.objective!=='output'||!['rectified','signed'].includes(mode.domain))throw new RangeError('L’atelier optimise uniquement la sortie finale, en mode rectifié ou signé.');
         for (const [kind,search,options] of [
             ['grid',searchConcordanceGrid,{divisions:settings.divisions,maxEvaluations:200000}],
             ['local',searchConcordanceLocal,{initialControls:model.initialControls,initialStep:.1,minStep:1e-5,maxEvaluations:5000}],
@@ -10,7 +11,7 @@ self.onmessage=({data})=>{
         ]) {
             self.postMessage({kind:'phase',phase:kind});
             const start=performance.now();
-            const result=search(model,{...options,objective:'output',domain:'rectified',
+            const result=search(model,{...options,...mode,
                 onProgress:result=>self.postMessage({kind,result,partial:true,milliseconds:performance.now()-start})});
             self.postMessage({kind,result,partial:false,milliseconds:performance.now()-start});
         }
