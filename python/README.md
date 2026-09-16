@@ -35,7 +35,7 @@ L’environnement et le carnet ont été validés sous **Windows avec Python 3.1
    .\lancer.ps1
    ```
 
-   Ouvrir **http://localhost:8501** dans le navigateur. Garder PowerShell ouvert pendant l’utilisation ; **Ctrl+C** arrête le serveur local. Lors des utilisations suivantes, cette seule commande de lancement suffit. Si le port est occupé, utiliser par exemple `.\lancer.ps1 -Port 8502`, puis ouvrir le port indiqué.
+   Le navigateur s’ouvre sur l’atelier ; **http://localhost:8501** reste accessible directement. Si l’atelier est déjà lancé, le script reconnaît son processus et vérifie qu’il répond, puis ouvre sa page sans démarrer un second serveur. Lors d’un nouveau démarrage, garder PowerShell ouvert pendant l’utilisation ; **Ctrl+C** arrête ce serveur local. Lors des utilisations suivantes, cette seule commande de lancement suffit. Si un autre service occupe le port, le script le signale sans l’arrêter : utiliser par exemple `.\lancer.ps1 -Port 8502`. L’option `-NoBrowser` permet un lancement sans ouverture automatique du navigateur.
 
 5. Pour ouvrir le carnet Jupyter à la place de l’application, ou dans une seconde fenêtre PowerShell placée dans le même dossier :
 
