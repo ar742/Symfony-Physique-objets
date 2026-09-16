@@ -16,6 +16,14 @@ Un troisième atelier, [Machines et production](docs/PRODUCTION-MACHINES.md), es
 
 L’étude [Environnement et concordances aux nœuds](docs/CONCORDANCES-NODALES.md) dispose de son [atelier local `/graphes/production/concordances`](http://localhost:8080/graphes/production/concordances). Sur huit nœuds et douze branches, elle optimise cinq partages pour maximiser la sortie du nœud 8 après sa transformation. Le mode rectifié ramène les productions négatives à zéro ; le mode signé les conserve. Une matrice complète peut être tirée avec une graine reproductible : douze coefficients agissent, 44 restent inactifs faute de branche. Trois graines comparées et un exemple de maximum signé égal à −1 complètent la grille, la recherche locale, les bornes globales et le lagrangien, avec leurs limites explicites.
 
+## Atelier Python pour les graphes
+
+Le dossier [python/](python/README.md) fournit une application locale **Streamlit**, un **carnet Jupyter** et des moteurs de calcul modifiables en Python. Il reprend les quatre familles : villes, dépendances, machines/branches et concordances nodales. Les modèles JSON permettent de modifier attributs, paramètres et topologies prises en charge ; un registre de fonctions permet d’ajouter ses propres lois Python.
+
+Graphes et courbes Plotly, nappes compatibles, lagrangien nodal à 26 variables avec dérivées, recherches locales et bornes par intervalles sont accessibles dans l’atelier. Les exports JSON, CSV et HTML permettent de conserver les études. Les limites des solveurs et des modèles sont détaillées dans le guide : une recherche numérique n’est pas automatiquement un certificat global.
+
+Depuis le dossier `python/`, installer une fois avec `powershell -NoProfile -ExecutionPolicy Bypass -File .\installer.ps1`, puis lancer avec `powershell -NoProfile -ExecutionPolicy Bypass -File .\lancer.ps1` et ouvrir [l’atelier local](http://localhost:8501/). Docker n’est pas nécessaire pour Python ; le site Symfony conserve le port 8080. [Guide de démarrage et premier parcours](python/README.md).
+
 ## Contenu disponible
 
 - **Quatre formes accessibles dès l’accueil**, avec schémas cliquables, explications au survol, navigation clavier et thème clair/sombre. Les trois positions forment une chaîne ouverte ; les six positions comportent le retour.

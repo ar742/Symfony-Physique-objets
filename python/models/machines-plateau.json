@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "name": "machines-huit-plateau",
+  "mode": "nodes",
+  "source": {
+    "node": "M1",
+    "input": 0,
+    "budget": 0.2
+  },
+  "sink": "M8",
+  "nodes": [
+    {
+      "id": "M1",
+      "name": "Machine 1",
+      "x": 0,
+      "y": 0.5,
+      "attributes": {},
+      "law": {
+        "name": "piecewise_response",
+        "parameters": {
+          "a": 0.1,
+          "b": 0.5,
+          "c": 0.8,
+          "d": 0.4
+        }
+      }
+    },
+    {
+      "id": "M2",
+      "name": "Machine 2",
+      "x": 0.25,
+      "y": 0.85,
+      "attributes": {},
+      "law": {
+        "name": "piecewise_response",
+        "parameters": {
+          "a": 0.1,
+          "b": 0.5,
+          "c": 0.8,
+          "d": 0.4
+        }
+      }
+    },
+    {
+      "id": "M3",
+      "name": "Machine 3",
+      "x": 0.25,
+      "y": 0.15,
+      "attributes": {},
+      "law": {
+        "name": "piecewise_response",
+        "parameters": {
+          "a": 0.1,
+          "b": 0.5,
+          "c": 0.8,
+          "d": 0.4
+        }
+      }
+    },
+    {
+      "id": "M4",
+      "name": "Machine 4",
+      "x": 0.5,
+      "y": 0.85,
+      "attributes": {},
+      "law": {
+        "name": "piecewise_response",
+        "parameters": {
+          "a": 0.1,
+          "b": 0.5,
+          "c": 0.8,
+          "d": 0.4
+        }
+      }
+    },
+    {
+      "id": "M5",
+      "name": "Machine 5",
+      "x": 0.5,
+      "y": 0.15,
+      "attributes": {},
+      "law": {
+        "name": "piecewise_response",
+        "parameters": {
+          "a": 0.1,
+          "b": 0.5,
+          "c": 0.8,
+          "d": 0.4
+        }
+      }
+    },
+    {
+      "id": "M6",
+      "name": "Machine 6",
+      "x": 0.75,
+      "y": 0.85,
+      "attributes": {},
+      "law": {
+        "name": "piecewise_response",
+        "parameters": {
+          "a": 0.1,
+          "b": 0.5,
+          "c": 0.8,
+          "d": 0.4
+        }
+      }
+    },
+    {
+      "id": "M7",
+      "name": "Machine 7",
+      "x": 0.75,
+      "y": 0.15,
+      "attributes": {},
+      "law": {
+        "name": "piecewise_response",
+        "parameters": {
+          "a": 0.1,
+          "b": 0.5,
+          "c": 0.8,
+          "d": 0.4
+        }
+      }
+    },
+    {
+      "id": "M8",
+      "name": "Machine 8",
+      "x": 1,
+      "y": 0.5,
+      "attributes": {},
+      "law": {
+        "name": "piecewise_response",
+        "parameters": {
+          "a": 0.1,
+          "b": 0.5,
+          "c": 0.8,
+          "d": 0.4
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "M1M2",
+      "from": "M1",
+      "to": "M2",
+      "fraction": 0.5,
+      "attributes": {}
+    },
+    {
+      "id": "M1M3",
+      "from": "M1",
+      "to": "M3",
+      "fraction": 0.5,
+      "attributes": {}
+    },
+    {
+      "id": "M2M4",
+      "from": "M2",
+      "to": "M4",
+      "fraction": 1,
+      "attributes": {}
+    },
+    {
+      "id": "M3M4",
+      "from": "M3",
+      "to": "M4",
+      "fraction": 0.5,
+      "attributes": {}
+    },
+    {
+      "id": "M3M5",
+      "from": "M3",
+      "to": "M5",
+      "fraction": 0.5,
+      "attributes": {}
+    },
+    {
+      "id": "M4M6",
+      "from": "M4",
+      "to": "M6",
+      "fraction": 1,
+      "attributes": {}
+    },
+    {
+      "id": "M5M6",
+      "from": "M5",
+      "to": "M6",
+      "fraction": 0.5,
+      "attributes": {}
+    },
+    {
+      "id": "M5M7",
+      "from": "M5",
+      "to": "M7",
+      "fraction": 0.5,
+      "attributes": {}
+    },
+    {
+      "id": "M6M8",
+      "from": "M6",
+      "to": "M8",
+      "fraction": 1,
+      "attributes": {}
+    },
+    {
+      "id": "M7M8",
+      "from": "M7",
+      "to": "M8",
+      "fraction": 1,
+      "attributes": {}
+    }
+  ]
+}

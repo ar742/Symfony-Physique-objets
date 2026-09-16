@@ -1,0 +1,262 @@
+{
+  "version": 1,
+  "name": "branches-actives-143217-sur-320000",
+  "mode": "branches",
+  "source": {
+    "node": "1",
+    "input": 1
+  },
+  "sink": "8",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Nœud 1",
+      "x": 0,
+      "y": 0.5,
+      "attributes": {}
+    },
+    {
+      "id": "2",
+      "name": "Nœud 2",
+      "x": 0.25,
+      "y": 0.85,
+      "attributes": {}
+    },
+    {
+      "id": "3",
+      "name": "Nœud 3",
+      "x": 0.5,
+      "y": 0.9,
+      "attributes": {}
+    },
+    {
+      "id": "4",
+      "name": "Nœud 4",
+      "x": 0.75,
+      "y": 0.85,
+      "attributes": {}
+    },
+    {
+      "id": "5",
+      "name": "Nœud 5",
+      "x": 0.25,
+      "y": 0.15,
+      "attributes": {}
+    },
+    {
+      "id": "6",
+      "name": "Nœud 6",
+      "x": 0.75,
+      "y": 0.15,
+      "attributes": {}
+    },
+    {
+      "id": "7",
+      "name": "Nœud 7",
+      "x": 0.5,
+      "y": 0.1,
+      "attributes": {}
+    },
+    {
+      "id": "8",
+      "name": "Nœud 8",
+      "x": 1,
+      "y": 0.5,
+      "attributes": {}
+    }
+  ],
+  "edges": [
+    {
+      "id": "1-2",
+      "from": "1",
+      "to": "2",
+      "fraction": 0.5,
+      "law": {
+        "name": "piecewise_yield",
+        "parameters": {
+          "a": 0,
+          "b": 0.001,
+          "c": 0.9462487804878048,
+          "d": 0.8536585365853658
+        }
+      },
+      "attributes": {}
+    },
+    {
+      "id": "1-5",
+      "from": "1",
+      "to": "5",
+      "fraction": 0.5,
+      "law": {
+        "name": "piecewise_yield",
+        "parameters": {
+          "a": 0,
+          "b": 0.001,
+          "c": 0.9462487804878048,
+          "d": 0.8536585365853658
+        }
+      },
+      "attributes": {}
+    },
+    {
+      "id": "2-3",
+      "from": "2",
+      "to": "3",
+      "fraction": 0.5,
+      "law": {
+        "name": "piecewise_yield",
+        "parameters": {
+          "a": 0,
+          "b": 0.001,
+          "c": 0.96810101010101,
+          "d": 0.8873737373737374
+        }
+      },
+      "attributes": {}
+    },
+    {
+      "id": "2-8",
+      "from": "2",
+      "to": "8",
+      "fraction": 0.5,
+      "law": {
+        "name": "piecewise_yield",
+        "parameters": {
+          "a": 0,
+          "b": 0.001,
+          "c": 0.5896,
+          "d": 0.18999999999999995
+        }
+      },
+      "attributes": {}
+    },
+    {
+      "id": "5-3",
+      "from": "5",
+      "to": "3",
+      "fraction": 0.25,
+      "law": {
+        "name": "piecewise_yield",
+        "parameters": {
+          "a": 0,
+          "b": 0.001,
+          "c": 0.968020202020202,
+          "d": 0.8065656565656565
+        }
+      },
+      "attributes": {}
+    },
+    {
+      "id": "5-7",
+      "from": "5",
+      "to": "7",
+      "fraction": 0.75,
+      "law": {
+        "name": "piecewise_yield",
+        "parameters": {
+          "a": 0,
+          "b": 0.001,
+          "c": 0.9681279461279461,
+          "d": 0.9143097643097643
+        }
+      },
+      "attributes": {}
+    },
+    {
+      "id": "7-6",
+      "from": "7",
+      "to": "6",
+      "fraction": 0.5,
+      "law": {
+        "name": "piecewise_yield",
+        "parameters": {
+          "a": 0,
+          "b": 0.001,
+          "c": 0.9831254061078621,
+          "d": 0.7754061078622482
+        }
+      },
+      "attributes": {}
+    },
+    {
+      "id": "7-4",
+      "from": "7",
+      "to": "4",
+      "fraction": 0.5,
+      "law": {
+        "name": "piecewise_yield",
+        "parameters": {
+          "a": 0,
+          "b": 0.001,
+          "c": 0.9831254061078621,
+          "d": 0.7754061078622482
+        }
+      },
+      "attributes": {}
+    },
+    {
+      "id": "3-4",
+      "from": "3",
+      "to": "4",
+      "fraction": 0.5,
+      "law": {
+        "name": "piecewise_yield",
+        "parameters": {
+          "a": 0,
+          "b": 0.001,
+          "c": 0.9831254061078621,
+          "d": 0.7754061078622482
+        }
+      },
+      "attributes": {}
+    },
+    {
+      "id": "3-6",
+      "from": "3",
+      "to": "6",
+      "fraction": 0.5,
+      "law": {
+        "name": "piecewise_yield",
+        "parameters": {
+          "a": 0,
+          "b": 0.001,
+          "c": 0.9831254061078621,
+          "d": 0.7754061078622482
+        }
+      },
+      "attributes": {}
+    },
+    {
+      "id": "4-8",
+      "from": "4",
+      "to": "8",
+      "fraction": 1,
+      "law": {
+        "name": "piecewise_yield",
+        "parameters": {
+          "a": 0,
+          "b": 0.001,
+          "c": 0.6197701856981636,
+          "d": 0.3901856981635375
+        }
+      },
+      "attributes": {}
+    },
+    {
+      "id": "6-8",
+      "from": "6",
+      "to": "8",
+      "fraction": 1,
+      "law": {
+        "name": "piecewise_yield",
+        "parameters": {
+          "a": 0,
+          "b": 0.001,
+          "c": 0.6197701856981636,
+          "d": 0.3901856981635375
+        }
+      },
+      "attributes": {}
+    }
+  ]
+}

@@ -13,3 +13,9 @@
 /app/config/reference.php
 /sauvegardes/
 *.log
+/python/.venv/
+.ipynb_checkpoints/
+/python/outputs/
+__pycache__/
+*.pyc
+.pytest_cache/
