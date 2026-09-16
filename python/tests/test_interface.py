@@ -61,6 +61,62 @@ def test_import_concordance_defaults_order_and_domain():
     assert list(gradient_table["∂Y₈/∂s"]) == pytest.approx(expected)
 
 
+def test_matrix_buttons_preserve_parameters_and_replay():
+    from physique_graphes import concordances as c
+    app = AppTest.from_file(str(APP), default_timeout=60).run()
+    app.sidebar.radio[0].set_value(app.sidebar.radio[0].options[3]).run()
+    model = json.loads(app.text_area[0].value)
+    model["environments"]["2"] = .3
+    model["initial_controls"]["s1"] = .25
+    model["attributes"] = {"commentaire": "Mon étude"}
+    app.text_area[0].set_value(json.dumps({"model": model, "domain": "rectified"}))
+    button(app, "Appliquer le modèle").click().run()
+    button(app, "Lancer la recherche").click().run()
+    assert_ready(app)
+    for _ in range(2):
+        old = json.loads(app.text_area[0].value)
+        button(app, "Nouvelle matrice aléatoire").click().run()
+        assert_ready(app)
+        new = json.loads(app.text_area[0].value)
+        assert new["epsilon"] != old["epsilon"]
+        assert new["environments"] == model["environments"]
+        assert new["initial_controls"] == model["initial_controls"]
+        assert new["attributes"] == model["attributes"]
+        assert app.session_state["concordance-domain"] == "rectified"
+        seed = new["provenance"]["seed"]
+        assert new["epsilon"] == c.randomize(model, seed)["epsilon"]
+        assert not any(b.label == "Adopter les partages trouvés et centrer les nappes" for b in app.button)
+    button(app, "Rejouer cette graine").click().run()
+    assert json.loads(app.text_area[0].value) == new
+    # La matrice colorée montre les valeurs réelles, avec exactement douze cellules actives.
+    import plotly.io as pio
+    chart = pio.from_json(app.get("plotly_chart")[0].proto.spec)
+    assert sum(label == "Coefficient actif" for row in chart.data[0].customdata for label in row) == 12
+    assert [list(row) for row in chart.data[0].z] == [[new["epsilon"][str(i)][str(j)] for j in range(1, 9)] for i in range(1, 9)]
+    app.sidebar.radio[0].set_value(app.sidebar.radio[0].options[0]).run()
+    app.sidebar.radio[0].set_value(app.sidebar.radio[0].options[3]).run()
+    assert_ready(app)
+    assert json.loads(app.text_area[0].value) == new
+    assert app.session_state["concordance-seed"] == seed
+    assert app.session_state["concordance-domain"] == "rectified"
+
+
+def test_emblematic_buttons_and_all_examples():
+    app = AppTest.from_file(str(APP), default_timeout=60).run()
+    app.sidebar.radio[0].set_value(app.sidebar.radio[0].options[3]).run()
+    for label, output in [("Neutre · ε=0", 1.), ("Amplification · ε=+1", 1267226673/67108864),
+                          ("Inhibition · ε=−1", 15775215/67108864)]:
+        button(app, label).click().run()
+        assert_ready(app)
+        assert float(app.metric[0].value) == pytest.approx(output)
+    for index in range(len(app.selectbox[0].options)):
+        app.selectbox[0].select_index(index).run()
+        assert_ready(app)
+        assert len(json.loads(app.text_area[0].value)["epsilon"]) == 8
+    button(app, "Recharger cet exemple").click().run()
+    assert_ready(app)
+
+
 def test_dag_presets_cycles_and_model_edit():
     app = AppTest.from_file(str(APP), default_timeout=60).run()
     app.sidebar.radio[0].set_value(app.sidebar.radio[0].options[2]).run()

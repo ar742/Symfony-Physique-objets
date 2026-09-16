@@ -2,6 +2,7 @@
 from copy import deepcopy
 import json
 import math
+import secrets
 
 import numpy as np
 import pandas as pd
@@ -9,7 +10,8 @@ import streamlit as st
 
 from physique_graphes import concordances as c, dag, lois, production as p, reseaux as r
 from physique_graphes.optimisation import optimiser
-from physique_graphes.visualisation import graphe, courbes, echantillonner_surface, nappe
+from physique_graphes.exemples_concordances import EXAMPLES, create_example, randomize_matrix
+from physique_graphes.visualisation import graphe, courbes, echantillonner_surface, nappe, matrice_concordances
 from examples.lois_personnelles import PERSONAL_LAWS
 
 st.set_page_config(page_title="Graphes · Atelier Python", page_icon="🔬", layout="wide")
@@ -259,22 +261,93 @@ def dag_page():
 
 def concordance_page():
     st.header("04 · Environnement, concordances et production")
-    label = st.selectbox("Scénario", ["Référence : parabole de maximum 0,5", "Maximum signé négatif −1", "Matrice aléatoire reproductible"])
-    if label.startswith("Matrice"):
-        cols = st.columns(2)
-        seed = cols[0].number_input("Graine entière", min_value=0, max_value=2**32-1, value=34, step=1)
-        environment = cols[1].number_input("Environnement initial commun", min_value=0., max_value=1., value=.5, step=.1)
-        def factory():
-            m = c.create_scenario()
-            m["environments"] = {n: environment for n in m["environments"]}
-            return c.randomize(m, seed)
-        key = f"concordances-random-{seed}-{environment}"
-    else:
-        factory = c.create_scenario if label.startswith("Référence") else c.create_negative_scenario
-        key = "concordances-"+str(label.startswith("Référence"))
-    model = model_editor(key, factory, c.validate_model)
+    key = "concordances-active"
+    if key not in st.session_state:
+        st.session_state[key] = create_example("reference")
+    origin = st.session_state[key].get("provenance", {})
+    while isinstance(origin, dict) and origin.get("kind") == "edited" and isinstance(origin.get("initial"), dict):
+        origin = origin["initial"]
+    if not isinstance(origin, dict):
+        origin = {}
+    matrix_origin = origin.get("matrix", origin)
+    initial_seed = matrix_origin.get("seed", 34) if isinstance(matrix_origin, dict) else 34
+    if type(initial_seed) is not int or not 0 <= initial_seed <= 2**32-1:
+        initial_seed = 34
+    if "concordance-seed" not in st.session_state:
+        st.session_state["concordance-seed"] = initial_seed
+    if "concordance-example" not in st.session_state:
+        st.session_state["concordance-example"] = origin.get("example_id") if origin.get("example_id") in EXAMPLES else "random"
+    if "concordance-domain" not in st.session_state:
+        st.session_state["concordance-domain"] = st.session_state.get("concordance-last-domain", "signed")
+
+    def load_example(example_id=None):
+        selected = example_id or st.session_state["concordance-example"]
+        if selected == "random":
+            initial = c.create_scenario()
+            initial["environments"] = {n: .5 for n in initial["environments"]}
+            model = randomize_matrix(initial, st.session_state["concordance-seed"])
+        else:
+            model = create_example(selected)
+        st.session_state[key] = model
+        st.session_state["concordance-example"] = selected
+        provenance = model.get("provenance", {})
+        seed = provenance.get("seed", provenance.get("matrix", {}).get("seed"))
+        if seed is not None:
+            st.session_state["concordance-seed"] = seed
+
+    def redraw_matrix(fresh=True):
+        seed = st.session_state["concordance-seed"]
+        current = st.session_state[key]
+        if fresh:
+            # La graine suivante est nouvelle ; le tirage de coefficients reste reproductible.
+            previous = seed
+            while True:
+                seed = secrets.randbelow(2**32)
+                if seed != previous and randomize_matrix(current, seed)["epsilon"] != current["epsilon"]:
+                    break
+        st.session_state[key] = randomize_matrix(current, seed)
+        st.session_state["concordance-seed"] = seed
+        st.session_state["concordance-example"] = "random"
+
+    cols = st.columns([2, 1, 1])
+    cols[0].button("Nouvelle matrice aléatoire", type="primary", on_click=redraw_matrix,
+                   key="concordance-randomize", width="stretch")
+    cols[1].number_input("Graine à rejouer", min_value=0, max_value=2**32-1, step=1, key="concordance-seed")
+    cols[2].button("Rejouer cette graine", on_click=redraw_matrix, args=(False,), key="concordance-replay", width="stretch")
+    st.caption("Un clic renouvelle les 56 coefficients hors diagonale dans [−1,1]. "
+               "Les environnements, les cinq partages et le mode signé/rectifié sont conservés. La diagonale reste nulle.")
+    example_ids = ["reference", "negative", "random"]+[name for name in EXAMPLES if name not in ("reference", "negative")]
+    titles = {name: item["title"] for name, item in EXAMPLES.items()}
+    titles["random"] = "Matrice aléatoire reproductible · e=0,5 au chargement"
+    st.selectbox("Exemple de départ", example_ids, format_func=titles.__getitem__,
+                 key="concordance-example", on_change=load_example)
+    st.caption("Choisir un exemple charge sa matrice, ses environnements et ses partages initiaux. Le mode d’étude reste inchangé.")
+    buttons = st.columns(4)
+    for column, label, example_id in zip(buttons[:3], ["Neutre · ε=0", "Amplification · ε=+1", "Inhibition · ε=−1"], ["neutral", "positive", "inhibitory"]):
+        column.button(label, on_click=load_example, args=(example_id,), width="stretch", key="example-"+example_id)
+    buttons[3].button("Recharger cet exemple", on_click=load_example, width="stretch", key="concordance-restore")
+    model = model_editor(key, lambda: create_example("reference"), c.validate_model)
     model["initial_controls"] = c.validate_model(model)["initial_controls"]
+    provenance = model.get("provenance", {})
+    original = provenance
+    while isinstance(original, dict) and original.get("kind") == "edited" and isinstance(original.get("initial"), dict):
+        original = original["initial"]
+    example_id = original.get("example_id") if isinstance(original, dict) else None
+    if example_id in EXAMPLES:
+        if c.validate_model(model) == c.validate_model(create_example(example_id)):
+            st.info(EXAMPLES[example_id]["description"])
+        else:
+            st.caption("Modèle modifié à partir de « "+EXAMPLES[example_id]["title"]+" ». Les valeurs de référence décrivent le préréglage d’origine.")
+    matrix_origin = original.get("matrix", original) if isinstance(original, dict) else {}
+    if isinstance(matrix_origin, dict) and type(matrix_origin.get("seed")) is int and 0 <= matrix_origin["seed"] <= 2**32-1:
+        seed = matrix_origin["seed"]
+        unchanged = c.randomize(model, seed)["epsilon"] == model["epsilon"]
+        st.caption(f"Graine {'de la matrice' if unchanged else 'd’origine (coefficients modifiés)'} : {seed} · LCG32. "
+                   "La graine et la matrice effective sont conservées dans l’export JSON.")
     domain = st.radio("Traitement des sorties", ["signed", "rectified"], format_func=lambda v: "Signé · conserver les valeurs négatives" if v == "signed" else "Rectifié · ramener les sorties négatives à zéro", horizontal=True, key="concordance-domain")
+    st.session_state["concordance-last-domain"] = domain
+    figure(matrice_concordances(model, c.GRAPH["edges"]), key+"matrice")
+    st.caption("● : coefficient actif sur l’un des douze arcs. Les 44 autres coefficients hors diagonale n’agissent pas ; ils ne créent pas de liaison.")
     st.latex(r"X_i=\sum_jq_{ji},\quad C_i=e_i+\sum_j\varepsilon_{ij}q_{ji},\quad Y_i=T_i(X_i,C_i),\quad \max Y_8")
     with st.expander("Régler les environnements, la matrice et les cinq partages"):
         with st.form(key+"params"):

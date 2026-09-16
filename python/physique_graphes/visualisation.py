@@ -95,3 +95,24 @@ def courbes(x, series, *, xlabel="Entrée", ylabel="Sortie"):
         fig.add_trace(go.Scatter(x=x, y=values, mode="lines", name=str(name)))
     fig.update_layout(xaxis_title=xlabel, yaxis_title=ylabel, height=400, template="plotly_white")
     return fig
+
+
+def matrice_concordances(model, edges):
+    """Matrice effective, échelle fixe [-1,1] ; les arcs sont identifiés sans en créer."""
+    ids = [str(i) for i in range(1, 9)]
+    active = {(edge["to"], edge["from"]) for edge in edges}
+    values = [[model["epsilon"].get(i, {}).get(j, 0) for j in ids] for i in ids]
+    labels = [[f"{values[row][col]:.2f}"+(" ●" if (i, j) in active else "")
+               for col, j in enumerate(ids)] for row, i in enumerate(ids)]
+    status = [["Diagonale nulle" if i == j else "Coefficient actif" if (i, j) in active else "Sans arc : inactif"
+               for j in ids] for i in ids]
+    fig = go.Figure(go.Heatmap(x=ids, y=ids, z=values, zmin=-1, zmax=1, zmid=0,
+                              colorscale="RdBu", text=labels, texttemplate="%{text}",
+                              textfont=dict(size=11), customdata=status,
+                              hovertemplate="Destinataire %{y}, fournisseur %{x}<br>ε = %{z:.6f}<br>%{customdata}<extra></extra>",
+                              colorbar=dict(title="ε", tickvals=[-1, 0, 1])))
+    fig.update_layout(title="Matrice de concordances courante", height=450,
+                      xaxis=dict(title="Fournisseur j", type="category"),
+                      yaxis=dict(title="Destinataire i", type="category", autorange="reversed"),
+                      margin=dict(l=40, r=15, t=55, b=45))
+    return fig

@@ -89,6 +89,26 @@ Pour diagnostiquer directement le lancement, depuis `python/` :
 
 ## Modifier les modèles JSON
 
+Dans **04 · Concordances**, les commandes en haut de page permettent aussi de changer de matrice sans éditer le JSON :
+
+- **Nouvelle matrice aléatoire** tire une nouvelle graine puis renouvelle les 56 coefficients hors diagonale dans [−1,1]. Les environnements, les partages appliqués, les attributs personnels et le mode signé/rectifié sont conservés ; la diagonale reste nulle.
+- **Rejouer cette graine** reproduit la matrice correspondant au nombre saisi. La graine de la matrice effective est également indiquée dans la page et enregistrée avec les coefficients dans le JSON.
+- Les trois boutons **Neutre**, **Amplification** et **Inhibition** chargent directement des exemples complets. Le menu **Exemple de départ** propose neuf modèles pédagogiques et un tirage libre reproductible. Choisir ou recharger un exemple remplace aussi ses environnements et ses parts initiales, en conservant le mode d’étude.
+
+| Exemple | Ce qu’il montre avec ses paramètres d’origine |
+|---|---|
+| Référence | Y₈=2s₁(1−s₁), maximum 0,5 ; les quatre parts aval ne changent pas cette valeur. |
+| Maximum négatif | Y₈=−1 pour tous les partages en signé, et 0 en rectifié. |
+| Concordances nulles | Transmission neutre : Y₈=1, surface en plateau. |
+| Concordances positives | ε=+1 hors diagonale, e=1 : amplification Y=X(1+X). Le départ donne environ 18,8831, sans affirmation de maximum. |
+| Concordances négatives | ε=−1 hors diagonale, e=1 : inhibition Y=X(1−X). Le départ donne environ 0,235069, sans affirmation de maximum. |
+| Coefficients hors arcs | Seuls les 44 coefficients inactifs valent +1 ; ils ne créent aucune liaison et Y₈ reste égal à 1. |
+| Graines 7, 8 et 34 | Trois matrices mixtes reproductibles, environnements e=0,5 et parts initiales à 0,5. Comparer les modes et les recherches ; une valeur au départ ne certifie pas un maximum. |
+
+La **matrice colorée** affiche les valeurs effectives avec une échelle fixe de −1 à +1. Les lignes sont les destinataires, les colonnes les fournisseurs ; un point ● repère les douze coefficients actifs. Le survol précise la valeur et son rôle. Graphes, nappes et dérivées sont recalculés après chaque changement ; les résultats d’une recherche antérieure ne sont plus affichés si le modèle a changé. Les descriptions quantitatives d’un exemple modifié ne sont pas présentées comme celles du modèle courant.
+
+Depuis un carnet, utiliser `create_example("positive")` ou `randomize_matrix(modele, 34)` après `from physique_graphes.exemples_concordances import create_example, randomize_matrix`. Ce module conserve les mêmes conventions que l’interface.
+
 Dans l’application, ouvrir **Modèle complet · attributs, topologie, lois · importer / exporter**. Modifier le texte ou importer un fichier, puis **Appliquer le modèle**. Télécharger ensuite le modèle pour le conserver. L’éditeur de DAG permet notamment de changer les noms, coordonnées, attributs, topologie et lois ; le moteur des concordances conserve volontairement son DAG fixe.
 
 Un DAG minimal à deux branches peut s’écrire ainsi :
