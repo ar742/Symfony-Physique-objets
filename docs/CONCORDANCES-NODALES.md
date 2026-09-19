@@ -1,5 +1,7 @@
 # Environnement et concordances aux huit nœuds
 
+Cette page décrit le cadre de l’atelier **Symfony** du 14 septembre. L’[extension Python du 18 septembre](CONCORDANCES-PYTHON.md) précise les types indépendants de matrice et d’environnements, le départ à e=0, l’extension de e à [−1,1] et les recherches par groupe de paramètres. Ses choix nouveaux ne modifient pas rétroactivement les hypothèses des résultats historiques ci-dessous.
+
 Étude fournie par l’auteur le 14 septembre 2026 : **l’objectif est la sortie du nœud 8 après TH₈**. La première réalisation ramène les productions négatives à zéro. Une extension demandée le même jour permet de la comparer à la formule signée, ainsi que de tirer une matrice complète à graine reproductible. Le document source privé n’est pas publié. Cette étude possède son propre atelier `/graphes/production/concordances` ; les deux exemples de fonctions sur les branches restent dans leur atelier précédent.
 
 ## Réseau et convention des indices

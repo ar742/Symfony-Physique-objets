@@ -2,16 +2,15 @@
 from copy import deepcopy
 import json
 import math
-import secrets
 
 import numpy as np
 import pandas as pd
 import streamlit as st
 
-from physique_graphes import concordances as c, dag, lois, production as p, reseaux as r
+from physique_graphes import dag, lois, production as p, reseaux as r
 from physique_graphes.optimisation import optimiser
-from physique_graphes.exemples_concordances import EXAMPLES, create_example, randomize_matrix
-from physique_graphes.visualisation import graphe, courbes, echantillonner_surface, nappe, matrice_concordances
+from ui_concordances import concordance_page
+from physique_graphes.visualisation import graphe, courbes, echantillonner_surface, nappe
 from examples.lois_personnelles import PERSONAL_LAWS
 
 st.set_page_config(page_title="Graphes · Atelier Python", page_icon="🔬", layout="wide")
@@ -259,198 +258,6 @@ def dag_page():
     download_result({"model": model, "state": state}, key)
 
 
-def concordance_page():
-    st.header("04 · Environnement, concordances et production")
-    key = "concordances-active"
-    if key not in st.session_state:
-        st.session_state[key] = create_example("reference")
-    origin = st.session_state[key].get("provenance", {})
-    while isinstance(origin, dict) and origin.get("kind") == "edited" and isinstance(origin.get("initial"), dict):
-        origin = origin["initial"]
-    if not isinstance(origin, dict):
-        origin = {}
-    matrix_origin = origin.get("matrix", origin)
-    initial_seed = matrix_origin.get("seed", 34) if isinstance(matrix_origin, dict) else 34
-    if type(initial_seed) is not int or not 0 <= initial_seed <= 2**32-1:
-        initial_seed = 34
-    if "concordance-seed" not in st.session_state:
-        st.session_state["concordance-seed"] = initial_seed
-    if "concordance-example" not in st.session_state:
-        st.session_state["concordance-example"] = origin.get("example_id") if origin.get("example_id") in EXAMPLES else "random"
-    if "concordance-domain" not in st.session_state:
-        st.session_state["concordance-domain"] = st.session_state.get("concordance-last-domain", "signed")
-
-    def load_example(example_id=None):
-        selected = example_id or st.session_state["concordance-example"]
-        if selected == "random":
-            initial = c.create_scenario()
-            initial["environments"] = {n: .5 for n in initial["environments"]}
-            model = randomize_matrix(initial, st.session_state["concordance-seed"])
-        else:
-            model = create_example(selected)
-        st.session_state[key] = model
-        st.session_state["concordance-example"] = selected
-        provenance = model.get("provenance", {})
-        seed = provenance.get("seed", provenance.get("matrix", {}).get("seed"))
-        if seed is not None:
-            st.session_state["concordance-seed"] = seed
-
-    def redraw_matrix(fresh=True):
-        seed = st.session_state["concordance-seed"]
-        current = st.session_state[key]
-        if fresh:
-            # La graine suivante est nouvelle ; le tirage de coefficients reste reproductible.
-            previous = seed
-            while True:
-                seed = secrets.randbelow(2**32)
-                if seed != previous and randomize_matrix(current, seed)["epsilon"] != current["epsilon"]:
-                    break
-        st.session_state[key] = randomize_matrix(current, seed)
-        st.session_state["concordance-seed"] = seed
-        st.session_state["concordance-example"] = "random"
-
-    cols = st.columns([2, 1, 1])
-    cols[0].button("Nouvelle matrice aléatoire", type="primary", on_click=redraw_matrix,
-                   key="concordance-randomize", width="stretch")
-    cols[1].number_input("Graine à rejouer", min_value=0, max_value=2**32-1, step=1, key="concordance-seed")
-    cols[2].button("Rejouer cette graine", on_click=redraw_matrix, args=(False,), key="concordance-replay", width="stretch")
-    st.caption("Un clic renouvelle les 56 coefficients hors diagonale dans [−1,1]. "
-               "Les environnements, les cinq partages et le mode signé/rectifié sont conservés. La diagonale reste nulle.")
-    example_ids = ["reference", "negative", "random"]+[name for name in EXAMPLES if name not in ("reference", "negative")]
-    titles = {name: item["title"] for name, item in EXAMPLES.items()}
-    titles["random"] = "Matrice aléatoire reproductible · e=0,5 au chargement"
-    st.selectbox("Exemple de départ", example_ids, format_func=titles.__getitem__,
-                 key="concordance-example", on_change=load_example)
-    st.caption("Choisir un exemple charge sa matrice, ses environnements et ses partages initiaux. Le mode d’étude reste inchangé.")
-    buttons = st.columns(4)
-    for column, label, example_id in zip(buttons[:3], ["Neutre · ε=0", "Amplification · ε=+1", "Inhibition · ε=−1"], ["neutral", "positive", "inhibitory"]):
-        column.button(label, on_click=load_example, args=(example_id,), width="stretch", key="example-"+example_id)
-    buttons[3].button("Recharger cet exemple", on_click=load_example, width="stretch", key="concordance-restore")
-    model = model_editor(key, lambda: create_example("reference"), c.validate_model)
-    model["initial_controls"] = c.validate_model(model)["initial_controls"]
-    provenance = model.get("provenance", {})
-    original = provenance
-    while isinstance(original, dict) and original.get("kind") == "edited" and isinstance(original.get("initial"), dict):
-        original = original["initial"]
-    example_id = original.get("example_id") if isinstance(original, dict) else None
-    if example_id in EXAMPLES:
-        if c.validate_model(model) == c.validate_model(create_example(example_id)):
-            st.info(EXAMPLES[example_id]["description"])
-        else:
-            st.caption("Modèle modifié à partir de « "+EXAMPLES[example_id]["title"]+" ». Les valeurs de référence décrivent le préréglage d’origine.")
-    matrix_origin = original.get("matrix", original) if isinstance(original, dict) else {}
-    if isinstance(matrix_origin, dict) and type(matrix_origin.get("seed")) is int and 0 <= matrix_origin["seed"] <= 2**32-1:
-        seed = matrix_origin["seed"]
-        unchanged = c.randomize(model, seed)["epsilon"] == model["epsilon"]
-        st.caption(f"Graine {'de la matrice' if unchanged else 'd’origine (coefficients modifiés)'} : {seed} · LCG32. "
-                   "La graine et la matrice effective sont conservées dans l’export JSON.")
-    domain = st.radio("Traitement des sorties", ["signed", "rectified"], format_func=lambda v: "Signé · conserver les valeurs négatives" if v == "signed" else "Rectifié · ramener les sorties négatives à zéro", horizontal=True, key="concordance-domain")
-    st.session_state["concordance-last-domain"] = domain
-    figure(matrice_concordances(model, c.GRAPH["edges"]), key+"matrice")
-    st.caption("● : coefficient actif sur l’un des douze arcs. Les 44 autres coefficients hors diagonale n’agissent pas ; ils ne créent pas de liaison.")
-    st.latex(r"X_i=\sum_jq_{ji},\quad C_i=e_i+\sum_j\varepsilon_{ij}q_{ji},\quad Y_i=T_i(X_i,C_i),\quad \max Y_8")
-    with st.expander("Régler les environnements, la matrice et les cinq partages"):
-        with st.form(key+"params"):
-            env = st.data_editor(pd.DataFrame([{"nœud": n, "e": v} for n, v in model["environments"].items()]), disabled=["nœud"], width="stretch")
-            matrix = pd.DataFrame([[model["epsilon"].get(str(i), {}).get(str(j), 0.) for j in range(1, 9)] for i in range(1, 9)],
-                                  index=[str(i) for i in range(1, 9)], columns=[str(j) for j in range(1, 9)])
-            st.caption("ε : lignes = destinataires, colonnes = fournisseurs. Diagonale nulle ; 12 coefficients actifs, 44 hors arcs conservés mais sans effet.")
-            epsilon = st.data_editor(matrix, width="stretch")
-            shares = st.data_editor(pd.DataFrame([{"partage": n, "valeur": v} for n, v in model["initial_controls"].items()]), disabled=["partage"], width="stretch")
-            if st.form_submit_button("Appliquer les coefficients et les partages"):
-                try:
-                    candidate = {**model, "environments": {row["nœud"]: row["e"] for row in env.to_dict("records")},
-                                 "epsilon": epsilon.to_dict("index"), "initial_controls": {row["partage"]: row["valeur"] for row in shares.to_dict("records")}}
-                    c.validate_model(candidate)
-                    candidate["provenance"] = {"kind": "edited", "initial": model.get("provenance")}
-                    st.session_state[key] = candidate
-                    st.rerun()
-                except (ValueError, TypeError) as error:
-                    st.error(str(error))
-    controls = model["initial_controls"]
-    state = c.evaluate(model, domain=domain)
-    cols = st.columns(3)
-    for col, title, value in zip(cols, ["Y₈ après TH₈ · objectif", "X₈ · somme algébrique", "Σ |q vers 8|"],
-                                 [state["objective"], state["objectives"]["algebraic_arrivals"], state["objectives"]["arrivals"]]):
-        col.metric(title, f"{value:.10g}")
-    figure(graphe(c.GRAPH, {n["id"]: n["output"] for n in state["nodes"]},
-                  {e["id"]: e["value"] for e in state["flows"]}, title="Sorties signées" if domain == "signed" else "Sorties rectifiées"), key+"graphe")
-    st.dataframe(state["nodes"], width="stretch")
-    st.subheader("Comparaison des recherches")
-    method = st.selectbox("Méthode", ["Locale", "Grille", "Intervalles globaux"])
-    budget = st.number_input("Budget (évaluations locales / boîtes globales)", min_value=10, max_value=10000, value=1000, step=100)
-    divisions = st.selectbox("Divisions par partage pour la grille", [2, 5, 10], index=1)
-    st.caption(f"La grille visitera {(divisions+1)**5:,} configurations. Une grille finie ne prouve pas le maximum continu. "
-               "Les intervalles rapportent séparément témoin, borne supérieure et écart restant.")
-    resultkey = key+"-"+domain+"-search"
-    if st.button("Lancer la recherche"):
-        with st.spinner("Calcul en Python…"):
-            result = c.search_local(model, domain=domain, max_evaluations=budget) if method == "Locale" else (
-                c.search_grid(model, domain=domain, divisions=divisions) if method == "Grille" else c.search_global(model, domain=domain, max_nodes=budget))
-            st.session_state[resultkey] = (json_text(model), result)
-    previous = st.session_state.get(resultkey)
-    if previous and previous[0] == json_text(model):
-        result = previous[1]
-        st.json({k: v for k, v in result.items() if k not in ("best", "history")})
-        if result["best"]:
-            st.write(f"Meilleur témoin Y₈ : {result['best']['objective']:.10g}")
-            if st.button("Adopter les partages trouvés et centrer les nappes"):
-                st.session_state[key] = {**model, "initial_controls": result["best"]["controls"]}
-                st.rerun()
-        download_result({"model": model, "domain": domain, "search": result}, resultkey)
-    compatible_surface(controls, lambda parts: c.evaluate(model, parts, domain=domain, detailed=False)["objective"], key, "Y₈")
-    st.subheader("Dérivées exactes par rapport aux cinq partages")
-    derivative = state["derivatives"]
-    if derivative["differentiable"]:
-        st.dataframe(pd.DataFrame({"partage": c.GRAPH["controls"], "∂Y₈/∂s": derivative["gradient"]}), width="stretch")
-        with st.expander("Hessienne des partages"):
-            st.dataframe(pd.DataFrame(derivative["hessian"], index=c.GRAPH["controls"], columns=c.GRAPH["controls"]))
-    else:
-        st.warning("Un seuil empêche d’affirmer la différentiabilité à cette configuration.")
-        st.json(derivative["kinks"])
-    lagrangian_view(model, state, key, domain)
-    download_result({"model": model, "domain": domain, "state": state}, key)
-
-
-def lagrangian_view(model, state, key, domain):
-    st.subheader("Lagrangien : 26 variables libres, 21 égalités")
-    st.latex(r"\mathcal L=Y_8+\sum_{i=2}^{8}\lambda_i(X_i-\sum_jq_{ji})"
-             r"+\sum_{i=2}^{8}\mu_i(Y_i-T_i)+\sum_{i=1}^{7}\eta_i(\sum_kq_{ik}-Y_i)")
-    st.caption("Tᵢ = XᵢCᵢ en signé, max(0,XᵢCᵢ) en rectifié. Y₁ = 1. Les multiplicateurs adjoints sont calculés à la référence puis fixés pour la coupe. "
-               "Hors contraintes, L n’est pas une production réalisable ; une selle n’est pas transformée en maximum.")
-    explanation = c.explain_lagrangian(model, state)
-    at_reference = explanation["at_reference"]
-    st.write(f"L à la référence : {at_reference['lagrangian']:.10g} · résidu des égalités : {at_reference['residual']:.3g}")
-    st.latex(r"\partial_{X_i}\mathcal L=\lambda_i-\mu_i\phi_i C_i,\qquad"
-             r"\partial_{q_{ji}}\mathcal L=\eta_j-\lambda_i-\mu_i\phi_iX_i\varepsilon_{ij}")
-    st.latex(r"\partial_{Y_i}\mathcal L=\mu_i-\eta_i\ (i<8),\quad"
-             r"\partial_{Y_8}\mathcal L=1+\mu_8,\quad \phi_i=1\ \text{en signé}")
-    st.caption("En rectifié, φᵢ=1 si XᵢCᵢ>0, 0 si XᵢCᵢ<0 ; au seuil, il s’agit d’une sélection de sous-gradient, pas d’une dérivée affirmée.")
-    with st.expander("Multiplicateurs, contraintes et dérivées détaillées"):
-        st.json(explanation)
-    with st.expander("Nappe libre de L et ses deux dérivées partielles"):
-        names = ["q"+e["id"] for e in c.GRAPH["edges"]]+[f"X{i}" for i in range(2, 9)]+[f"Y{i}" for i in range(2, 9)]
-        cols = st.columns(3)
-        xname = cols[0].selectbox("Variable libre x", names, key=key+"lx")
-        others = [n for n in names if n != xname]
-        yname = cols[1].selectbox("Variable libre y", others, index=others.index("X2") if "X2" in others else 0, key=key+"ly")
-        radius = cols[2].number_input("Rayon libre", min_value=.001, max_value=5., value=.1, step=.05, key=key+"lr")
-        ix, iy = names.index(xname), names.index(yname)
-        point = explanation["reference_point"]
-        def value(x, y):
-            modified = list(point)
-            modified[ix], modified[iy] = x, y
-            return c.evaluate_lagrangian(model, modified, multipliers=explanation["multipliers"], domain=domain)["lagrangian"]
-        x, y, z = echantillonner_surface(value, point[ix], point[iy], radius=radius, points=21)
-        figure(nappe(x, y, z, xlabel=xname, ylabel=yname, zlabel="L libre",
-                     reference=(point[ix], point[iy], value(point[ix], point[iy]))), key+"libre")
-        if at_reference["differentiable"]:
-            grad = at_reference["gradient"]
-            st.write(f"À la référence x₀={point[ix]:.9g}, y₀={point[iy]:.9g} : ∂L/∂x={grad[ix]:.9g}, ∂L/∂y={grad[iy]:.9g}.")
-        else:
-            st.warning("Référence sur un seuil : dérivées classiques non affirmées.")
-
-
 st.title("Graphes · Atelier Python")
 st.caption("Modèles éditables • calculs locaux • graphes, courbes et nappes interactives")
 family = st.sidebar.radio("Étude", ["01 · Villes", "02 · Dépendances", "03 · Production", "04 · Concordances"])
@@ -466,7 +273,7 @@ try:
         study = st.radio("Modèle de production", ["DAG · branches ou machines", "Machines couplées · cycles"], horizontal=True)
         dag_page() if study.startswith("DAG") else cycles_page()
     else:
-        concordance_page()
+        concordance_page(figure, json_text, download_result)
 except (ValueError, KeyError, TypeError, OverflowError) as error:
     st.error(f"Le modèle ne peut pas être calculé en l’état : {error}")
     st.info("Corrigez les valeurs dans l’éditeur ou choisissez un autre préréglage. Les autres études restent accessibles.")

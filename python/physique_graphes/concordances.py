@@ -3,6 +3,7 @@
 Y1=1; Xi=sum(qji); Ci=ei+sum(epsilon[i][j]*qji). Signed mode uses
 Yi=Xi*Ci and rectified mode max(0, Xi*Ci). Fractions distribute each
 output completely, including its sign. The default objective is Y8.
+Environments and concordances both belong to [-1,1]; fractions remain in [0,1].
 
 Only the Python standard library is used. Search budgets, interval bounds and
 adjoint diagnostics have separate meanings: a local stop is not a certificate.
@@ -93,8 +94,8 @@ def validate_model(model):
     environments, epsilon = {}, {}
     for n in _IDS:
         env = model["environments"].get(n)
-        if not _finite(env) or not 0 <= env <= 1:
-            raise ValueError(f"Environment {n} must be in [0,1]")
+        if not _finite(env) or not -1 <= env <= 1:
+            raise ValueError(f"Environment {n} must be in [-1,1]")
         environments[n], epsilon[n] = env, {}
         row = model["epsilon"].get(n)
         if not isinstance(row, dict):

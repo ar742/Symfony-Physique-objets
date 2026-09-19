@@ -67,8 +67,8 @@ Pour diagnostiquer directement le lancement, depuis `python/` :
 2. **02 · Dépendances** : faire varier le débit autour de **40 véhicules/min**. Les parcours A–B–D et A–C–D durent chacun 8 minutes au seuil. Le débit est un paramètre externe figé, pas un trafic simulé.
 3. **03 · Production → Machines couplées · cycles** : comparer les trois scénarios. L’exemple équilibré approche `(0,275 ; 0,265 ; 0,1875)`, le départ nul sous seuil reste nul et l’exemple oscillant alterne entre deux états.
 4. Dans **03 · Production → DAG · branches ou machines**, choisir les **12 branches actives**. Le départ donne `0,447553125`. Modifier une loi ou un partage, examiner les pertes et la nappe, puis lancer une recherche locale. Le point affiché n’est pas automatiquement un maximum du modèle modifié.
-5. **04 · Concordances** : choisir une matrice aléatoire, graine **34**, environnements **0,5** ; comparer les modes signé et rectifié. Distinguer la somme algébrique `X8`, la somme des valeurs absolues des arrivées et l’objectif `Y8` après transformation du nœud 8.
-6. Télécharger un **modèle JSON**, un **résultat JSON** et une **figure HTML**. Les modifications de l’interface vivent dans la session ; ces exports permettent de conserver votre étude.
+5. **04 · Concordances** : le départ associe une matrice aléatoire signée, des environnements **nuls** et cinq parts à 0,5. Choisir un type de matrice et, indépendamment, un type d’environnements ; le panneau adjacent permet d’affiner les valeurs. Comparer les modes signé et rectifié, puis rechercher une meilleure configuration en faisant varier les distributions, les environnements ou les concordances actives. Tableau, graphe et nappes se placent automatiquement sur le meilleur état trouvé.
+6. Télécharger une **étude JSON** et une **figure HTML**. En 04, l’étude rassemble le modèle initial, le modèle retenu et les résultats ; les autres familles proposent aussi leur éditeur et leur export de modèle. Les modifications de l’interface vivent dans la session ; ces exports permettent de conserver votre travail.
 
 ## Les quatre familles et leurs conventions
 
@@ -77,7 +77,7 @@ Pour diagnostiquer directement le lancement, depuis `python/` :
 | 01 · Villes | `reseaux.villes_exemple`, `ponderer_villes`, `dijkstra`, `bellman_ford`, `floyd_warshall`, `parcours_bornes` | Plus court chemin pour les poids fournis ; énumération de chemins **simples**, sans sommet répété, sous une borne **stricte**. |
 | 02 · Dépendances | `routes_dependantes`, `sensibilite_dependance` | Comparaison statique de deux durées pour `q ∈ [0,100]` véhicules/min. La sensibilité de la meilleure durée a une cassure à 40. |
 | 03 · Production | `production.production_exemple`, `f_piecewise`, `simuler_production` ; `dag.evaluate` et `optimisation.optimiser` | Simulation synchrone des réseaux cycliques, ou propagation statique sur un DAG. Ces deux cadres restent distincts. |
-| 04 · Concordances | `concordances.evaluate`, `search_local`, `search_grid`, `search_global`, `explain_lagrangian` | États nodaux, dérivées, recherches et bornes globales par intervalles, avec leur budget et leur écart restant. |
+| 04 · Concordances | `concordances.evaluate`, `explain_lagrangian` ; `optimisation_concordances.variables`, `gradient`, `search` | Trois groupes de variables, recherches bornées, différentielles et nappes compatibles. Les intervalles certifiants sont réservés aux distributions à paramètres fixes. |
 
 **Villes.** Le préréglage comporte six sommets et neuf liaisons bidirectionnelles. `villes_exemple()` fournit neuf liaisons non pondérées ; `ponderer_villes()` calcule dix-huit arcs dirigés depuis les coordonnées. Il remplace les éventuels poids saisis par ces distances. Pour des poids abstraits ou négatifs, appeler les algorithmes directement avec un graphe pondéré. Dijkstra refuse tout poids négatif ; Bellman–Ford et Floyd–Warshall refusent les cycles négatifs pertinents pour la paire demandée. Sans extrémités, Floyd–Warshall renvoie une matrice complète et refuse tout cycle négatif affectant une paire. À coût égal, le départage privilégie moins d’arcs, puis l’ordre des identifiants. Une recherche de parcours interrompue retourne `complete=False` et un avertissement : sa liste n’est pas nécessairement celle des K meilleurs parcours. Les parcours inverses sont distincts lorsque toutes les paires sont explorées.
 
@@ -85,31 +85,79 @@ Pour diagnostiquer directement le lancement, depuis `python/` :
 
 **DAG statique.** Les lois sont exclusivement portées par les branches (`mode="branches"`) ou les nœuds (`mode="nodes"`). Dans les préréglages, `piecewise_yield` produit `x f(x)` sur une branche et `piecewise_response` produit `f(x)` au nœud. Les sorties sont entièrement réparties, sans écrêtage ni stock. Une entrée hors du domaine d’une loi rend l’état incompatible. Avec une loi personnelle, le moteur attend directement la **production de sortie** : il ne multiplie pas automatiquement une deuxième fois par `x`. Les attributs `loss=input−output` peuvent être négatifs pour une loi amplificatrice ; ils ne décrivent alors pas une dissipation physique. En présence de plusieurs puits, `production` concerne le puits choisi et `exported` la somme des sorties terminales.
 
-**Concordances.** Le DAG est ici fixé à huit nœuds et douze arcs. `X_i=Σq_ji`, `C_i=e_i+Σε_ij q_ji`, puis `Y_i=X_i C_i` en signé ou `max(0,X_i C_i)` en rectifié. Source `Y1=1`, objectif **Y8 après TH8**, sans plafond positif ajouté. Le mode signé répartit également les sorties négatives, avec leur signe. La matrice est indexée par destinataire puis fournisseur : huit zéros diagonaux, douze coefficients actifs, quarante-quatre valeurs hors arcs conservées mais inactives. Une graine fixe rend le tirage reproductible ; les exemples aléatoires ne sont pas un échantillon représentatif de tous les réseaux possibles.
+**Concordances.** Le DAG est ici fixé à huit nœuds et douze arcs. `X_i=Σq_ji`, `C_i=e_i+Σε_ij q_ji`, puis `Y_i=X_i C_i` en signé ou `max(0,X_i C_i)` en rectifié. Source `Y1=1`, objectif **Y8 après TH8**, sans plafond positif ajouté. Le mode signé répartit également les sorties négatives, avec leur signe. La matrice est indexée par destinataire puis fournisseur : huit zéros diagonaux, douze coefficients actifs, quarante-quatre valeurs hors arcs conservées mais inactives. Les environnements e et les concordances ε appartiennent ici à **[−1,1]** ; les fractions de distribution restent dans **[0,1]**. L’extension de e au domaine signé est propre à cette version Python, distincte du cadre initial du PDF et du site Symfony. Une graine fixe rend le tirage reproductible ; les exemples aléatoires ne sont pas un échantillon représentatif de tous les réseaux possibles. Les équations, indices et différentielles sont développés dans [Concordances en Python](../docs/CONCORDANCES-PYTHON.md).
+
+## Régler et rechercher dans 04 · Concordances
+
+La ligne supérieure propose **Type de matrice ε**, le panneau **Régler les environnements, matrice, etc.**, puis **Type d’environnements eᵢ**. Les deux menus sont indépendants : choisir une matrice conserve les environnements et les parts ; choisir les environnements conserve la matrice et les parts. Le traitement signé/rectifié reste un choix séparé.
+
+Les types comprennent les valeurs nulles, +1, −1, des profils de référence, des graines fixes 7/8/34, des tirages positifs ou signés et des valeurs personnalisées. Ces noms décrivent des paramètres, **pas un maximum ou un résultat imposé**. Une matrice nulle n’est une transmission identique qu’avec des environnements adéquats ; e=0 ne supprime pas nécessairement les termes de concordance. Les graines 7/8/34 des menus ne remettent pas automatiquement e à 0,5.
+
+Le panneau permet d’éditer les graines, les sept e, la matrice et les cinq partages. Pour faire varier une graine, sélectionner un type **aléatoire** ; un type à graine fixe conserve la graine annoncée dans son nom. La matrice colorée garde l’échelle −1 à +1 et repère par ● les douze concordances actives. Les 44 autres valeurs hors diagonale restent conservées, sans créer de nouvelles liaisons.
+
+Pour une recherche, choisir **un seul groupe** :
+
+| Groupe | Variables libres | Variables conservées |
+|---|---|---|
+| Distributions | Cinq parts dans [0,1]. | Les sept e et toute la matrice ε. |
+| Environnements | Sept e dans [−1,1]. | Les cinq parts et toute la matrice ε. |
+| Concordances actives | Douze ε dans [−1,1]. | Les cinq parts, les sept e et les 44 ε hors arcs. |
+
+Le choix par défaut compare **SLSQP** et **l’évolution différentielle**, depuis les mêmes réglages. Une grille finie est aussi disponible ; l’encadrement global par intervalles concerne uniquement les distributions. Chaque méthode rapporte son budget, son statut et, lorsqu’elle en possède une, sa borne supérieure. Un accord entre deux méthodes heuristiques ne certifie pas le maximum continu.
+
+Après recherche, la meilleure configuration trouvée alimente automatiquement le tableau des flux, le graphe, les dérivées et les nappes. Aucun bouton d’adoption n’est nécessaire. Les réglages initiaux restent en haut ; après leur modification, les résultats d’un autre problème ne sont plus présentés comme courants. La nappe principale représente **L compatible = Y8**, avec tous les flux recalculés. Elle varie deux coordonnées du groupe choisi autour de la configuration retenue, en respectant leurs bornes. Les deux profils passent par ce centre ; la coupe libre de L, hors contraintes, est proposée séparément comme complément.
+
+Depuis un carnet, les types sont disponibles sans interface :
+
+```python
+from physique_graphes.types_concordances import (
+    create_default_model, apply_matrix_type, apply_environment_type,
+)
+from physique_graphes import concordances as c
+
+modele = create_default_model(seed=34)  # matrice signée, e=0, parts=.5
+modele = apply_environment_type(modele, "random-signed", seed=8)
+modele = apply_matrix_type(modele, "positive")  # conserve les e et les parts
+etat = c.evaluate(modele, domain="signed")
+```
+
+Le module historique `exemples_concordances.py` reste disponible pour reproduire les anciens **exemples complets**, notamment leurs environnements e=0,5. Ces exemples ne sont pas assimilés aux nouvelles sélections indépendantes de paramètres. Le carnet initial conserve ses choix explicites et reproductibles.
+
+Pour lancer puis examiner une recherche depuis Python :
+
+```python
+from physique_graphes import optimisation_concordances as recherche
+
+resultat = recherche.search(
+    modele, "shares", method="evolution", domain="signed",
+    seed=42, max_evaluations=1000,
+)
+retenu = resultat["best_model"]
+print(resultat["best_state"]["objective"], resultat["status"])
+derivees = recherche.gradient(retenu, "shares", domain="signed")
+print(derivees["names"], derivees["gradient"])
+```
+
+Remplacer `"shares"` par `"environments"` ou `"epsilon"` change uniquement le groupe étudié. La méthode `"interval"` est réservée à `"shares"` et son budget s’exprime avec `max_nodes`, tandis que les méthodes `"local"`, `"evolution"` et `"grid"` utilisent `max_evaluations`. Le champ `best_model` contient les paramètres effectivement retenus ; une modification des paramètres après la recherche impose un nouveau calcul.
 
 ## Modifier les modèles JSON
 
-Dans **04 · Concordances**, les commandes en haut de page permettent aussi de changer de matrice sans éditer le JSON :
+Dans les familles qui le proposent, ouvrir **Modèle complet · attributs, topologie, lois · importer / exporter**. Modifier le texte ou importer un fichier, puis **Appliquer le modèle**. Télécharger ensuite le modèle pour le conserver. L’éditeur de DAG permet notamment de changer les noms, coordonnées, attributs, topologie et lois.
 
-- **Nouvelle matrice aléatoire** tire une nouvelle graine puis renouvelle les 56 coefficients hors diagonale dans [−1,1]. Les environnements, les partages appliqués, les attributs personnels et le mode signé/rectifié sont conservés ; la diagonale reste nulle.
-- **Rejouer cette graine** reproduit la matrice correspondant au nombre saisi. La graine de la matrice effective est également indiquée dans la page et enregistrée avec les coefficients dans le JSON.
-- Les trois boutons **Neutre**, **Amplification** et **Inhibition** chargent directement des exemples complets. Le menu **Exemple de départ** propose neuf modèles pédagogiques et un tirage libre reproductible. Choisir ou recharger un exemple remplace aussi ses environnements et ses parts initiales, en conservant le mode d’étude.
+En **04**, cet éditeur complet a été retiré : les réglages se font dans les menus et le panneau supérieur, et le DAG reste fixe. **Enregistrer les résultats JSON** produit le fichier `concordances-etude-resultats.json`, qui conserve les paramètres et les calculs. Pour reprendre ses valeurs dans un script ou un carnet, charger explicitement le modèle retenu, ou le modèle initial :
 
-| Exemple | Ce qu’il montre avec ses paramètres d’origine |
-|---|---|
-| Référence | Y₈=2s₁(1−s₁), maximum 0,5 ; les quatre parts aval ne changent pas cette valeur. |
-| Maximum négatif | Y₈=−1 pour tous les partages en signé, et 0 en rectifié. |
-| Concordances nulles | Transmission neutre : Y₈=1, surface en plateau. |
-| Concordances positives | ε=+1 hors diagonale, e=1 : amplification Y=X(1+X). Le départ donne environ 18,8831, sans affirmation de maximum. |
-| Concordances négatives | ε=−1 hors diagonale, e=1 : inhibition Y=X(1−X). Le départ donne environ 0,235069, sans affirmation de maximum. |
-| Coefficients hors arcs | Seuls les 44 coefficients inactifs valent +1 ; ils ne créent aucune liaison et Y₈ reste égal à 1. |
-| Graines 7, 8 et 34 | Trois matrices mixtes reproductibles, environnements e=0,5 et parts initiales à 0,5. Comparer les modes et les recherches ; une valeur au départ ne certifie pas un maximum. |
+```python
+import json
+from pathlib import Path
+from physique_graphes import concordances as c
 
-La **matrice colorée** affiche les valeurs effectives avec une échelle fixe de −1 à +1. Les lignes sont les destinataires, les colonnes les fournisseurs ; un point ● repère les douze coefficients actifs. Le survol précise la valeur et son rôle. Graphes, nappes et dérivées sont recalculés après chaque changement ; les résultats d’une recherche antérieure ne sont plus affichés si le modèle a changé. Les descriptions quantitatives d’un exemple modifié ne sont pas présentées comme celles du modèle courant.
+etude = json.loads(Path("concordances-etude-resultats.json").read_text(encoding="utf-8"))
+modele = etude["model"]  # etude["initial_model"] pour les réglages de départ
+c.validate_model(modele)
+etat = c.evaluate(modele, domain=etude["domain"])
+```
 
-Depuis un carnet, utiliser `create_example("positive")` ou `randomize_matrix(modele, 34)` après `from physique_graphes.exemples_concordances import create_example, randomize_matrix`. Ce module conserve les mêmes conventions que l’interface.
-
-Dans l’application, ouvrir **Modèle complet · attributs, topologie, lois · importer / exporter**. Modifier le texte ou importer un fichier, puis **Appliquer le modèle**. Télécharger ensuite le modèle pour le conserver. L’éditeur de DAG permet notamment de changer les noms, coordonnées, attributs, topologie et lois ; le moteur des concordances conserve volontairement son DAG fixe.
+Le mode signé ou rectifié est repris explicitement : appeler le moteur sans ce choix utilise son mode rectifié par défaut, qui peut produire un autre résultat.
 
 Un DAG minimal à deux branches peut s’écrire ainsi :
 
@@ -150,7 +198,7 @@ print(etat["feasible"], etat["production"])
 # modele = dag.load_model("mon-modele.json")
 ```
 
-Les modèles de villes et de machines cycliques utilisent les clés du site (`nodes`, `edges`, `machines`, `allocations`, etc.). Les concordances utilisent `initial_controls` en Python ; l’interface accepte également `initialControls` lors de l’import d’un export web. Un modèle JSON contient des données et des noms de lois, **pas du code exécutable**.
+Les modèles de villes et de machines cycliques utilisent les clés du site (`nodes`, `edges`, `machines`, `allocations`, etc.). Les concordances utilisent `initial_controls` en Python ; pour reprendre dans un script un ancien export web portant `initialControls`, renommer explicitement cette clé. Un modèle JSON contient des données et des noms de lois, **pas du code exécutable**.
 
 ## Écrire une loi personnelle
 
@@ -186,24 +234,28 @@ Une loi définie dans le carnet peut être transmise de la même façon par un d
 ## Ce qui est certifié, calculé ou seulement recherché
 
 - **DAG et SciPy** : SLSQP est une recherche locale ; l’évolution différentielle explore un domaine borné. Les deux retournent un meilleur état trouvé, sans borne supérieure globale : `certified=False`, `upper_bound=None`. L’apport et les lois restent fixes ; seuls les partages binaires varient. Les références `7/32` et `143217/320000` sont propres aux modèles exacts documentés sur le site, pas des certificats produits par SciPy.
-- **Grille de concordances** : une grille complète de `d` divisions visite `(d+1)^5` points. Elle est exhaustive sur ces points, pas sur le continuum. Un budget insuffisant donne un résultat incomplet.
-- **Intervalles de concordances** : `search_global` rapporte un témoin, une borne supérieure et un écart. Le statut `certified` signifie que l’écart est inférieur à la tolérance demandée selon ses calculs d’intervalles arrondis vers l’extérieur. `node-limit` ou `uncertain` laissent une borne ouverte ; ils ne prouvent pas que le meilleur témoin est optimal. Les coupures fondées sur la positivité ne sont pas utilisées en signé.
-- **Lagrangien des concordances** : la formule à 26 coordonnées libres `q/X/Y` et 21 égalités est évaluée explicitement. Les dérivées sont analytiques sur les portions différentiables. Les adjoints à la référence ne sont pas un certificat global ; à une rupture, une sélection de sous-gradient n’est pas une dérivée classique affirmée. Hors contraintes, `L` n’est pas une production réalisable.
+- **SLSQP et évolution différentielle pour les concordances** : ces recherches produisent des témoins pour le groupe choisi, sans certificat global. La première est locale ; la seconde explore plus largement selon sa graine et son budget. Les conditions de stationnarité sur une boîte sont nécessaires à un maximum régulier, jamais suffisantes pour le certifier.
+- **Grille de concordances** : une grille complète de `d` divisions visite `(d+1)^n` points, avec n=5 pour les distributions, 7 pour les environnements ou 12 pour les concordances actives. Elle est exhaustive sur ces points, pas sur le continuum. Un budget insuffisant donne un résultat incomplet.
+- **Intervalles de concordances** : à e et ε fixes, `search_global` encadre la recherche sur les **cinq distributions seulement**. Il rapporte un témoin, une borne supérieure et un écart. Le statut `certified` signifie que l’écart est inférieur à la tolérance demandée selon ses calculs d’intervalles arrondis vers l’extérieur. `node-limit` ou `uncertain` laissent une borne ouverte ; ils ne prouvent pas que le meilleur témoin est optimal. Les coupures fondées sur la positivité ne sont pas utilisées en signé. Ce certificat ne s’étend pas à la recherche sur e ou ε.
+- **Lagrangien des concordances** : la formule à 26 coordonnées libres `q/X/Y` et 21 égalités est évaluée aux paramètres retenus. Sur les états compatibles, **L=Y8** ; hors contraintes, L n’est pas une production réalisable et peut montrer une selle. Les différentielles sur les parts, e ou ε intègrent les effets aval. Les adjoints à la référence ne sont pas un certificat global ; à une rupture, une sélection de sous-gradient n’est pas une dérivée classique affirmée.
 - **Portée du portage** : le solveur global par PL de tous les régimes des huit machines, le solveur spatial des branches et leurs lagrangiens particuliers à 24 coordonnées ne sont pas portés ici. Les nappes Python des DAG montrent des états compatibles recalculés ; les nappes libres de `L` sont celles des concordances à 26 coordonnées. Un graphe visuellement bombé ou un gradient faible ne fournit pas de preuve supplémentaire.
 
-Le carnet montre une nappe compatible et une coupe libre du lagrangien pour le même modèle signé, avec légendes distinctes. Les axes verticaux portent les valeurs absolues calculées ; leur cadrage peut agrandir visuellement un faible écart.
+Le carnet montre une nappe compatible et une coupe libre du lagrangien pour le même modèle signé, avec légendes distinctes. Les axes verticaux portent les valeurs numériques calculées, avec leur signe et sans soustraction de la valeur au centre ; leur cadrage peut agrandir visuellement un faible écart.
 
 ## Fichiers et vérifications
 
 | Fichier | Rôle |
 |---|---|
 | [app.py](app.py) | Application Streamlit et éditeurs. |
+| [ui_concordances.py](ui_concordances.py) | Page 04 : types indépendants, recherches, flux, dérivées et nappes. |
 | [notebooks/01_explorer_les_graphes.ipynb](notebooks/01_explorer_les_graphes.ipynb) | Parcours reproductible : villes, dépendances, cycles, DAG, concordances. |
 | [physique_graphes/reseaux.py](physique_graphes/reseaux.py) | Chemins et dépendances temporelles. |
 | [physique_graphes/production.py](physique_graphes/production.py) | Machines en cycles synchrones. |
 | [physique_graphes/dag.py](physique_graphes/dag.py), [lois.py](physique_graphes/lois.py) | Modèles de DAG et registre de lois. |
 | [physique_graphes/optimisation.py](physique_graphes/optimisation.py) | Recherches SciPy sans certificat global. |
 | [physique_graphes/concordances.py](physique_graphes/concordances.py) | Propagation nodale, recherches, intervalles et lagrangien. |
+| [physique_graphes/types_concordances.py](physique_graphes/types_concordances.py) | Types de matrice et d’environnements, graines et provenance. |
+| [physique_graphes/optimisation_concordances.py](physique_graphes/optimisation_concordances.py) | Groupes de variables, recherches et différentielles compatibles. |
 | [physique_graphes/visualisation.py](physique_graphes/visualisation.py) | Figures Plotly partagées entre l’application et le carnet. |
 
 Depuis le dossier `python/`, lancer les tests :
@@ -212,4 +264,4 @@ Depuis le dossier `python/`, lancer les tests :
 .\.venv\Scripts\python.exe -m pytest tests -q
 ```
 
-Les tests de parité avec les moteurs JavaScript utilisent Node.js lorsqu’il est disponible ; ce sont des contrôles de développement, pas une dépendance des calculs Python. Le carnet est livré sans sorties enregistrées : **Exécuter toutes les cellules** les recrée avec vos paramètres. Les PDF privés et les extractions des ouvrages ne sont ni nécessaires à cet atelier ni inclus dans ce dossier.
+Les tests de parité avec les moteurs JavaScript utilisent Node.js lorsqu’il est disponible ; ce sont des contrôles de développement, pas une dépendance des calculs Python. Cette comparaison porte sur le domaine commun aux moteurs ; elle ne couvre pas l’extension Python aux environnements négatifs, vérifiée séparément. Le carnet est livré sans sorties enregistrées : **Exécuter toutes les cellules** les recrée avec vos paramètres. Les PDF privés et les extractions des ouvrages ne sont ni nécessaires à cet atelier ni inclus dans ce dossier.

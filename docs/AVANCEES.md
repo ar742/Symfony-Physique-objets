@@ -1,5 +1,14 @@
 # Journal des avancées
 
+## 19 septembre 2026 — Atelier Python 04 : matrices, environnements et recherches par groupe
+
+- La vue **04 · Environnement, concordances et production** commence par une matrice ε aléatoire dans [−1,1], des environnements e₂…e₈ nuls et cinq distributions à 0,5. Deux listes indépendantes proposent les matrices emblématiques, les tirages dans [0,1] et [−1,1], ainsi que les mêmes familles pour les environnements ; les graines et la provenance sont conservées.
+- Le panneau supérieur « Régler les environnements, matrice, etc. » remplace l’éditeur JSON complet de cette vue. Il permet d’éditer la matrice complète, les eᵢ et les distributions, en maintenant la convention ligne destinataire / colonne fournisseur et les douze arcs actifs.
+- La recherche porte séparément sur les cinq distributions, les sept environnements ou les douze concordances actives. SLSQP, évolution différentielle et grille rendent leurs budgets et leurs statuts visibles ; l’encadrement par intervalles reste limité aux distributions à paramètres fixes. Le meilleur état trouvé alimente le tableau des flux, le graphe annoté et les nappes compatibles.
+- Les formules du PDF privé sont reprises avec l’objectif demandé ensuite, Y₈ après TH₈. L’interface explicite q, X, e, C, ε et Y, le lagrangien 26/21, les adjoints et les différentielles par rapport aux trois groupes. Elle distingue la nappe compatible ℒ=Y₈ de la coupe libre hors contraintes.
+- Validation Python : 132 tests, 298 sous-tests passés ; les tests dédiés aux concordances couvrent 42 tests et 100 sous-cas, dont les différences finies en signé/rectifié, les bornes e négatives, l’orientation de la matrice, la conservation des composantes non étudiées et les budgets.
+- Les deux copies Python sont synchronisées après audit sans PDF, SQL, secrets, chemins personnels ni sorties de carnet. La recette visuelle dans le navigateur reste à exécuter lorsque le contrôle local est disponible.
+
 ## 9 septembre 2026 — Plan des domaines
 
 - Découpage des domaines hors thermodynamique et physique statistique en douze lots avec repères CPGE et théoriques.
