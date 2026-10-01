@@ -1,23 +1,35 @@
 # Point 05 — Construire et analyser un graphe de 2 à 24 nœuds
 
-Le point **05** devient un atelier de graphes personnalisés, avec l’exemple à huit nœuds comme départ. Il ne crée pas un sixième point. La présentation privilégie quatre onglets : **Lagrangien et dérivées**, **Construire le graphe**, **Optimum et flux**, **Nappes**.
+Le point **05** devient un atelier de graphes personnalisés, avec l’exemple à huit nœuds comme départ. Il ne crée pas un sixième point. La présentation privilégie quatre onglets : **Construire le graphe**, **Lagrangien et dérivées**, **Optimum et flux**, **Nappes**. La construction s’ouvre en premier et la validation conduit directement aux expressions mathématiques.
 
 Les conventions restent : support non orienté, matrice A symétrique doublement stochastique, diagonale nulle, poids nuls hors liaisons, IN₁=1,0 et OUTₙ=INₙ au dernier nœud. Les résultats sont calculés. Le [développement de l’exemple initial](LIAISONS-SYMETRIQUES-PYTHON.md) conserve sa portée propre.
 
-## Saisir les nœuds et leurs liaisons
+## Dessiner à la souris
 
-1. Dans **Construire le graphe**, conserver le dessin initial ou choisir **Nouveau graphe depuis 1**.
+1. Dans **Construire le graphe**, choisir le **Nombre de nœuds** (2 à 24), puis **Créer un dessin vide**. Ce bouton remplace les liaisons du brouillon ; l’étude validée est conservée. On peut aussi modifier directement l’exemple initial.
+2. Avec **Relier les nœuds**, cliquer sur le premier puis le second nœud, ou tirer une liaison de l’un vers l’autre. Une liaison existante peut être retirée en cliquant dessus ou en sélectionnant à nouveau ses deux extrémités. Les doublons et les boucles sur un seul nœud sont exclus.
+3. Avec **Déplacer les nœuds**, tirer les nœuds pour organiser le dessin. Leur position n’affecte ni les coefficients ni l’ordre de propagation. **Annuler la dernière modification du dessin** permet de revenir jusqu’à trente gestes en arrière (liaisons ou déplacements).
+4. Choisir **Valider le graphe et passer à l’analyse**. Le contrôle de connexité et de faisabilité s’effectue avant remplacement de l’étude. L’onglet du lagrangien s’ouvre automatiquement en cas de succès.
+5. Choisir **Rechercher le maximum**, puis **Nappes**. Chaque nappe choisit exactement deux coordonnées indépendantes, toutes les autres restant fixées à la configuration retenue. Il faut que le graphe validé ait au moins deux degrés libres ; l’éditeur ne crée pas de variables fictives si les contraintes en laissent moins.
+
+Les nœuds et les liaisons sont accessibles au clavier : Tab pour les atteindre, Entrée ou Espace pour sélectionner ; Échap annule une sélection. La position des nœuds est conservée dans les exports JSON et reprise par le graphe de résultat après validation. Les fichiers plus anciens, sans positions, restent importables.
+
+L’éditeur SVG utilise les [composants intégrés de Streamlit](https://docs.streamlit.io/develop/api-reference/custom-components/st.components.v2.component), sans service externe ni nouvelle installation. Les gestes ne transmettent que des liaisons et des positions numériques au serveur local ; une révision périmée ou des données invalides sont refusées. Les recherches ne sont pas relancées à chaque trait.
+
+## Saisie au clavier, en complément
+
+1. Ouvrir **Saisie au clavier et ordre de calcul**, conserver le dessin initial ou choisir **Nouveau graphe depuis 1**.
 2. Choisir le **Nœud à renseigner**, saisir ses voisins, par exemple `2, 5, 9`, puis **Enregistrer les liaisons**.
 3. Les références futures créent automatiquement les nœuds jusqu’au plus grand numéro saisi, au maximum 24. Le plus grand numéro est le terminal N. Les nœuds intermédiaires créés doivent ensuite être reliés.
 4. Renseigner les autres nœuds. La saisie remplace toutes les liaisons du nœud choisi, dans les deux sens ; un champ vide les retire. Une liaison déjà indiquée par son autre extrémité n’est comptée qu’une fois. Les boucles d’un nœud vers lui-même sont refusées.
-5. Vérifier l’**ordre de calcul**, commençant par 1 et finissant par N, puis choisir **Analyser ce graphe**.
+5. Vérifier l’**ordre de calcul**, commençant par 1 et finissant par N, puis choisir **Valider le graphe et passer à l’analyse**.
 6. Les formules sont disponibles dès validation. **Rechercher le maximum** lance les recherches et l’encadrement avec les budgets choisis.
 
 Le brouillon et l’étude validée sont distincts. Une construction incomplète ou impossible reste modifiable ; elle ne remplace pas la dernière analyse valide. Le bandeau indique explicitement lorsque les calculs concernent encore cette dernière. L’ajout ou le retrait du dernier nœud modifie le terminal du brouillon.
 
 Le panneau JSON enregistre une construction ou en reprend une, sans exécuter de code. L’export de l’étude complète contient également la construction validée. Le départ numérique peut être saisi avec des fractions, par exemple `1/2, 1/4` dans l’ordre des variables affichées.
 
-Trois constructions supplémentaires sont proposées : un triangle à coefficients tous imposés, un cycle à quatre nœuds avec une seule variable, et une échelle à vingt-quatre nœuds avec onze variables.
+Quatre constructions supplémentaires sont proposées : le graphe complet à quatre nœuds avec **exactement deux variables indépendantes**, un triangle à coefficients tous imposés, un cycle à quatre nœuds avec une seule variable, et une échelle à vingt-quatre nœuds avec onze variables. Le premier possède six liaisons et quatre égalités indépendantes ; sa recherche atteint R=1, borne de conservation globale. Ce résultat n’est pas une preuve particulière applicable à tous les dessins.
 
 ## Un support non orienté, un ordre de propagation explicite
 

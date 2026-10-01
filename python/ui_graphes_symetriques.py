@@ -11,6 +11,7 @@ import streamlit as st
 
 from physique_graphes import graphes_symetriques as g
 from physique_graphes.visualisation import nappe, courbes
+import graph_editor
 
 
 def edge_tex(edge):
@@ -90,10 +91,12 @@ def analyse(model_json, method, seed, starts, maxiter, tolerance, budget, start)
     return result
 
 
-def graph_figure(model, state=None, directed=False):
+def graph_figure(model, state=None, directed=False, drawing_positions=None):
     graph = nx.Graph()
     graph.add_nodes_from(range(1, model["n"]+1)); graph.add_edges_from(model["edges"])
-    if model["n"] == 1:
+    if drawing_positions:
+        positions = {int(i):(p[0],-p[1]) for i,p in drawing_positions.items()}
+    elif model["n"] == 1:
         positions = {1: (0, 0)}
     else:
         # La même disposition stable sert au brouillon et aux résultats.
@@ -130,33 +133,81 @@ def graph_figure(model, state=None, directed=False):
 
 
 def _set_draft(model):
-    st.session_state["s05g-draft"] = g.normalize(model, draft=True)
+    model = g.normalize(model, draft=True)
+    old = st.session_state.get("s05g-draft",{})
+    if model["n"] != old.get("n") or model["order"] != old.get("order"):
+        st.session_state.pop("s05g-positions",None)
+    st.session_state["s05g-draft"] = model
     st.session_state["s05g-revision"] = st.session_state.get("s05g-revision", 0)+1
+    st.session_state["s05g-drawing-history"] = []
+    st.session_state.pop("s05g-drawing-error",None)
+    st.session_state.pop("s05g-validation-error",None)
+
+
+def validate_graph():
+    """Callback avant affichage : le changement d'onglet reste légal et immédiat."""
+    try:
+        model = g.normalize(st.session_state["s05g-draft"])
+        compile_cached(json.dumps(model,sort_keys=True))
+        st.session_state["s05g-active"] = model
+        st.session_state["s05g-active-positions"] = st.session_state.get("s05g-positions") or graph_editor.positions_for(model)
+        st.session_state.pop("s05g-result", None)
+        st.session_state.pop("s05g-start", None)
+        st.session_state.pop("s05g-validation-error",None)
+        st.session_state["s05g-tabs"] = "Lagrangien et dérivées"
+    except ValueError as error:
+        st.session_state["s05g-validation-error"] = str(error)
 
 
 def constructor(figure, json_text):
-    st.subheader("Composer les liaisons depuis le nœud 1")
-    st.write("Le plus grand numéro est le terminal N : OUTₙ = INₙ. Un voisin encore absent crée ce nœud "
-             "et les numéros intermédiaires, jusqu’à 24. Les liaisons sont réciproques ; leur saisie ne leur donne pas de sens.")
+    st.subheader("1 · Choisir les nœuds, 2 · Dessiner les liaisons, 3 · Valider")
+    st.caption("IN₁ = 1,0. Le dernier nœud est le terminal : OUTₙ = INₙ. Les liaisons sont non orientées.")
+    current_n = st.session_state["s05g-draft"]["n"]
+    if st.session_state.get("s05g-count-model") != current_n:
+        st.session_state["s05g-count"] = max(2,current_n)
+        st.session_state["s05g-count-model"] = current_n
     cols = st.columns(3)
-    if cols[0].button("Nouveau graphe depuis 1", key="s05g-new"):
-        _set_draft({"n": 1, "edges": [], "order": [1]}); st.rerun()
-    if cols[1].button("Reprendre l’exemple à 8 nœuds", key="s05g-reset"):
+    n = cols[0].number_input("Nombre de nœuds",2,24,8,1,key="s05g-count")
+    if cols[1].button("Créer un dessin vide",key="s05g-empty"):
+        _set_draft({"n":int(n),"edges":[]}); st.rerun()
+    if cols[2].button("Reprendre l’exemple à 8 nœuds", key="s05g-reset"):
         _set_draft(g.initial_graph()); st.rerun()
-    preset = cols[2].selectbox("Autres exemples de construction", ["Choisir…", "Triangle · aucun degré libre", "Cycle à 4 nœuds · une variable", "Échelle à 24 nœuds"], key="s05g-preset")
-    if st.button("Charger cet exemple dans le brouillon", key="s05g-load", disabled=preset == "Choisir…"):
-        if preset.startswith("Triangle"):
-            model = {"n": 3, "edges": [[1,2],[2,3],[1,3]]}
-        elif preset.startswith("Cycle"):
-            model = {"n": 4, "edges": [[1,2],[2,3],[3,4],[1,4]]}
-        else:
-            model = {"n": 24, "edges": [[i,i+1] for i in range(1,12)]+[[i,i+1] for i in range(13,24)]+[[i,i+12] for i in range(1,13)],
-                     "order": [v for i in range(1,13) for v in (i,i+12)]}
-        _set_draft(model); st.rerun()
+    st.caption("« Créer un dessin vide » utilise le nombre choisi et retire les anciennes liaisons du brouillon.")
+    with st.expander("Exemples prêts à modifier"):
+        preset = st.selectbox("Autres exemples de construction", ["Choisir…", "Quatre nœuds · deux variables", "Triangle · aucun degré libre", "Cycle à 4 nœuds · une variable", "Échelle à 24 nœuds"], key="s05g-preset")
+        if st.button("Charger cet exemple dans le brouillon", key="s05g-load", disabled=preset == "Choisir…"):
+            if preset.startswith("Quatre"):
+                model = {"n":4,"edges":[[i,j] for i in range(1,5) for j in range(i+1,5)]}
+            elif preset.startswith("Triangle"):
+                model = {"n": 3, "edges": [[1,2],[2,3],[1,3]]}
+            elif preset.startswith("Cycle"):
+                model = {"n": 4, "edges": [[1,2],[2,3],[3,4],[1,4]]}
+            else:
+                model = {"n": 24, "edges": [[i,i+1] for i in range(1,12)]+[[i,i+1] for i in range(13,24)]+[[i,i+12] for i in range(1,13)],
+                         "order": [v for i in range(1,13) for v in (i,i+12)]}
+            _set_draft(model); st.rerun()
     draft = st.session_state["s05g-draft"]
     revision = st.session_state.get("s05g-revision", 0)
-    cols = st.columns([1, 2])
-    with cols[0]:
+    graph_editor.draw(draft)
+    history = st.session_state.get("s05g-drawing-history",[])
+    if st.button("Annuler la dernière modification du dessin",key="s05g-undo",disabled=not history):
+        model,positions = history[-1]
+        st.session_state["s05g-draft"] = model
+        st.session_state["s05g-positions"] = positions
+        st.session_state["s05g-drawing-history"] = history[:-1]
+        st.session_state["s05g-revision"] = revision+1
+        st.session_state.pop("s05g-validation-error",None)
+        st.rerun()
+    st.caption("Ordre de propagation : "+" → ".join(map(str,draft["order"]))+". Modifiable dans la saisie au clavier ci-dessous.")
+    st.button("Valider le graphe et passer à l’analyse",type="primary",key="s05g-apply",on_click=validate_graph)
+    if st.session_state.get("s05g-validation-error"):
+        st.error(st.session_state["s05g-validation-error"])
+        st.info("Corrigez les liaisons puis validez à nouveau. La dernière étude valide reste disponible.")
+    st.caption("Les nappes utilisent exactement deux coordonnées indépendantes à la fois, les autres restant fixées au résultat retenu. "
+               "Si les contraintes en laissent moins de deux, une courbe ou une configuration unique est affichée. L’exemple « Quatre nœuds » en possède deux.")
+    with st.expander("Saisie au clavier et ordre de calcul"):
+        if st.button("Nouveau graphe depuis 1", key="s05g-new"):
+            _set_draft({"n": 1, "edges": [], "order": [1]}); st.rerun()
         node = st.selectbox("Nœud à renseigner", list(range(1, draft["n"]+1)), key="s05g-node")
         neighbors = sorted(j if i == node else i for i, j in draft["edges"] if node in (i, j))
         with st.form("s05g-neighbor-form"):
@@ -174,42 +225,36 @@ def constructor(figure, json_text):
             new_order = [1] if n == 2 else [i for i in draft["order"] if i not in (n, n-1)]+[n-1]
             _set_draft({"n": n-1, "edges": [e for e in draft["edges"] if n not in e], "order": new_order})
             st.rerun()
-    with cols[1]:
-        figure(graph_figure(draft), "s05g-draft-graph")
-    st.dataframe(pd.DataFrame([{"Nœud": i, "Voisins": ", ".join(str(b if a == i else a) for a,b in draft["edges"] if i in (a,b))} for i in range(1,draft["n"]+1)]), hide_index=True, width="stretch")
-    with st.form("s05g-order-form"):
-        order = st.text_input("Ordre de calcul, de 1 au terminal", ", ".join(map(str, draft["order"])), key=f"s05g-order-{revision}")
-        st.caption("Chaque liaison transmet du nœud le plus tôt au plus tard dans cet ordre. La matrice reste symétrique. "
-                   "Une circulation simultanée dans les deux sens serait un autre modèle.")
-        if st.form_submit_button("Enregistrer l’ordre de calcul"):
-            try:
-                _set_draft({**draft, "order": g.parse_ids(order)}); st.rerun()
-            except ValueError as error:
-                st.error(str(error))
+        st.dataframe(pd.DataFrame([{"Nœud": i, "Voisins": ", ".join(str(b if a == i else a) for a,b in draft["edges"] if i in (a,b))} for i in range(1,draft["n"]+1)]), hide_index=True, width="stretch")
+        with st.form("s05g-order-form"):
+            order = st.text_input("Ordre de calcul, de 1 au terminal", ", ".join(map(str, draft["order"])), key=f"s05g-order-{revision}")
+            st.caption("Chaque liaison transmet du nœud le plus tôt au plus tard dans cet ordre. La matrice reste symétrique. "
+                       "Une circulation simultanée dans les deux sens serait un autre modèle.")
+            if st.form_submit_button("Enregistrer l’ordre de calcul"):
+                try:
+                    _set_draft({**draft, "order": g.parse_ids(order)}); st.rerun()
+                except ValueError as error:
+                    st.error(str(error))
     with st.expander("Enregistrer ou reprendre une construction JSON"):
-        st.download_button("Enregistrer le graphe JSON", json_text(draft), "point05-graphe.json", "application/json", key="s05g-save-graph")
+        st.download_button("Enregistrer le graphe JSON", json_text({**draft,"positions":st.session_state.get("s05g-positions") or graph_editor.positions_for(draft)}), "point05-graphe.json", "application/json", key="s05g-save-graph")
         uploaded = st.file_uploader("Reprendre un graphe JSON", type="json", key="s05g-import")
         if st.button("Importer dans le brouillon", key="s05g-import-button", disabled=uploaded is None):
             try:
                 if uploaded.size > 1_000_000:
                     raise ValueError("Le fichier de construction doit rester inférieur à 1 Mo.")
                 value = json.loads(uploaded.getvalue().decode("utf-8-sig"))
+                positions = value.get("drawing_positions") if isinstance(value,dict) else None
                 if isinstance(value, dict) and "model" in value:
                     value = value["model"]
-                _set_draft(value); st.rerun()
+                positions = value.get("positions",positions) if isinstance(value,dict) else None
+                model = g.normalize(value,draft=True)
+                if positions is not None:
+                    _,positions = graph_editor.validate_drawing({"revision":0,"edges":model["edges"],"positions":positions},model,0)
+                _set_draft(model)
+                st.session_state["s05g-positions"] = positions or graph_editor.positions_for(model)
+                st.rerun()
             except (ValueError, UnicodeError) as error:
                 st.error("Import refusé : "+str(error))
-    if st.button("Analyser ce graphe", type="primary", key="s05g-apply"):
-        try:
-            model = g.normalize(draft)
-            compile_cached(json_text(model))
-            st.session_state["s05g-active"] = model
-            st.session_state.pop("s05g-result", None)
-            st.session_state.pop("s05g-start", None)
-            st.rerun()
-        except ValueError as error:
-            st.error(str(error))
-            st.info("Le brouillon est conservé pour correction. L’analyse précédente reste disponible et n’est pas remplacée.")
 
 
 def formulas(graph, state, diagnostics):
@@ -328,80 +373,80 @@ def stochastic_page(figure, json_text, download_result):
     st.header("05 · Construire et analyser un graphe")
     st.write("L’exemple à huit nœuds est le point de départ d’un atelier de **2 à 24 nœuds**, "
              "avec liaisons non orientées et matrice symétrique doublement stochastique. **IN₁ = 1,0 ; OUTₙ = INₙ** au dernier nœud.")
-    st.caption("Construire dans le deuxième onglet, puis « Analyser ce graphe ». Le nombre de variables, le lagrangien et les nappes sont recalculés pour ce graphe.")
+    st.caption("Dessinez les liaisons dans le premier onglet, puis validez. Le lagrangien réduit, ses dérivées et les nappes sont recalculés pour ce graphe.")
     st.session_state.setdefault("s05g-active",g.normalize(g.initial_graph()))
     st.session_state.setdefault("s05g-draft",g.normalize(g.initial_graph()))
     active=st.session_state["s05g-active"]
     model_json=json_text(active)
     graph=compile_cached(model_json)
     if st.session_state["s05g-draft"] != active:
-        st.info(f"Brouillon en cours : {st.session_state['s05g-draft']['n']} nœud(s). Les calculs ci-dessous concernent encore le graphe validé de {graph.n} nœuds.")
-    is_initial=active==g.normalize(g.initial_graph())
-    start=st.session_state.get("s05g-start",list(map(str,graph.start_exact)))
-    with st.expander("Recherche, précision et configuration de départ"):
-        method=st.selectbox("Recherche",["multi","local"],format_func=lambda v:"Plusieurs départs SLSQP" if v=="multi" else "Un départ SLSQP",key="s05g-method")
-        cols=st.columns(4)
-        starts=cols[0].number_input("Nombre de départs",1,40,16 if is_initial else 4,1,key="s05g-starts-"+str(graph.d),disabled=method=="local")
-        seed=cols[1].number_input("Graine",0,2**32-1,42,1,key="s05g-seed")
-        budget=cols[2].number_input("Budget de subdivisions",100,150000,30000 if is_initial else 1500,100,key="s05g-budget-"+str(is_initial))
-        tolerance=cols[3].selectbox("Écart global visé",[1e-4,1e-6,1e-8],index=1,key="s05g-tolerance")
-        maxiter=st.number_input("Itérations maximales par départ",10,500,200 if graph.d<=20 else 60,10,key="s05g-maxiter-"+str(graph.d))
-        st.caption("Le calcul peut fournir une borne ouverte pour un grand graphe. L’accord de recherches locales ne prouve pas le maximum global. "
-                   "La borne Bernstein de l’exemple initial n’est pas réutilisée pour un graphe ou un ordre différent.")
-        if graph.d:
-            with st.form("s05g-start-form"):
-                text=st.text_input("Valeurs initiales, dans l’ordre des variables ci-dessous",", ".join(start),key="s05g-start-text-"+model_json)
-                st.caption(", ".join(graph.names)+". Fractions acceptées, par exemple 1/2.")
-                if st.form_submit_button("Appliquer le départ"):
-                    try:
-                        values=[str(F(v.strip())) for v in text.split(",")]
-                        graph.exact_value(values)
-                        st.session_state["s05g-start"]=values
-                        st.session_state.pop("s05g-result",None)
-                        st.rerun()
-                    except (ValueError,ZeroDivisionError) as error:
-                        st.error("Départ refusé : "+str(error))
-    settings=(model_json,method,int(seed),int(starts),int(maxiter),float(tolerance),int(budget),tuple(start))
-    previous=st.session_state.get("s05g-result")
-    if not graph.d:
-        result=g.search(graph,start=start)
-        result["bound"]=g.global_bound(graph,result)
-    elif is_initial and previous is None:
-        with st.spinner("Calcul de l’exemple initial…"):
-            result=analyse(*settings)
-        st.session_state["s05g-result"]=(settings,result)
-    elif previous and previous[0]==settings:
-        result=previous[1]
-    else:
-        # Montrer les formules dès la validation, sans lancer un calcul lourd à chaque édition.
-        value=graph.exact_value(start)
-        result={"best":[float(F(v)) for v in start],"best_exact":list(start),"objective":float(value),"exact_value":str(value),"runs":[],"method":"départ", "bound":None}
-    if st.button("Rechercher le maximum",type="primary",key="s05g-search",disabled=not graph.d):
-        with st.spinner("Recherche avec le budget choisi…"):
-            result=analyse(*settings)
-        st.session_state["s05g-result"]=(settings,result)
-    state=graph.state(result["best"]);diagnostics=graph.kkt(result["best"])
-    cols=st.columns(3)
-    cols[0].metric("Sortie au départ",f"{float(graph.exact_value(start)):.10g}")
-    cols[1].metric("Meilleure sortie trouvée R" if result["method"]!="départ" else "Sortie de la configuration de départ",f"{state['objective']:.10g}")
-    bound=result["bound"]
-    cols[2].metric("Écart avec la borne globale",f"{bound['gap']:.3g}" if bound else "À calculer")
-    if bound:
-        st.write(f"**Encadrement du maximum global : [{bound['lower']:.12g} ; {bound['upper']:.12g}]** — {bound['status']}.")
-    else:
-        st.caption("Les formules et les figures portent sur le départ compatible. Lancer la recherche pour les centrer sur le meilleur résultat trouvé.")
-    tabs=st.tabs(["Lagrangien et dérivées","Construire le graphe","Optimum et flux","Nappes"],key="s05g-tabs",on_change="rerun")
+        st.info(f"Brouillon en cours : {st.session_state['s05g-draft']['n']} nœud(s). Les autres onglets concernent encore le graphe validé de {graph.n} nœuds, jusqu’à votre validation.")
+    tabs=st.tabs(["Construire le graphe","Lagrangien et dérivées","Optimum et flux","Nappes"],key="s05g-tabs",on_change="rerun")
     with tabs[0]:
-        formulas(graph,state,diagnostics)
-    with tabs[1]:
         constructor(figure,json_text)
+    with tabs[1]:
+        is_initial=active==g.normalize(g.initial_graph())
+        start=st.session_state.get("s05g-start",list(map(str,graph.start_exact)))
+        with st.expander("Recherche, précision et configuration de départ"):
+            method=st.selectbox("Recherche",["multi","local"],format_func=lambda v:"Plusieurs départs SLSQP" if v=="multi" else "Un départ SLSQP",key="s05g-method")
+            cols=st.columns(4)
+            starts=cols[0].number_input("Nombre de départs",1,40,16 if is_initial else 4,1,key="s05g-starts-"+str(graph.d),disabled=method=="local")
+            seed=cols[1].number_input("Graine",0,2**32-1,42,1,key="s05g-seed")
+            budget=cols[2].number_input("Budget de subdivisions",100,150000,30000 if is_initial else 1500,100,key="s05g-budget-"+str(is_initial))
+            tolerance=cols[3].selectbox("Écart global visé",[1e-4,1e-6,1e-8],index=1,key="s05g-tolerance")
+            maxiter=st.number_input("Itérations maximales par départ",10,500,200 if graph.d<=20 else 60,10,key="s05g-maxiter-"+str(graph.d))
+            st.caption("Le calcul peut fournir une borne ouverte pour un grand graphe. L’accord de recherches locales ne prouve pas le maximum global. "
+                       "La borne Bernstein de l’exemple initial n’est pas réutilisée pour un graphe ou un ordre différent.")
+            if graph.d:
+                with st.form("s05g-start-form"):
+                    text=st.text_input("Valeurs initiales, dans l’ordre des variables ci-dessous",", ".join(start),key="s05g-start-text-"+model_json)
+                    st.caption(", ".join(graph.names)+". Fractions acceptées, par exemple 1/2.")
+                    if st.form_submit_button("Appliquer le départ"):
+                        try:
+                            values=[str(F(v.strip())) for v in text.split(",")]
+                            graph.exact_value(values)
+                            st.session_state["s05g-start"]=values
+                            st.session_state.pop("s05g-result",None)
+                            st.rerun()
+                        except (ValueError,ZeroDivisionError) as error:
+                            st.error("Départ refusé : "+str(error))
+        settings=(model_json,method,int(seed),int(starts),int(maxiter),float(tolerance),int(budget),tuple(start))
+        previous=st.session_state.get("s05g-result")
+        if not graph.d:
+            result=g.search(graph,start=start)
+            result["bound"]=g.global_bound(graph,result)
+        elif is_initial and previous is None:
+            with st.spinner("Calcul de l’exemple initial…"):
+                result=analyse(*settings)
+            st.session_state["s05g-result"]=(settings,result)
+        elif previous and previous[0]==settings:
+            result=previous[1]
+        else:
+            # Montrer les formules dès la validation, sans lancer un calcul lourd à chaque édition.
+            value=graph.exact_value(start)
+            result={"best":[float(F(v)) for v in start],"best_exact":list(start),"objective":float(value),"exact_value":str(value),"runs":[],"method":"départ", "bound":None}
+        if st.button("Rechercher le maximum",type="primary",key="s05g-search",disabled=not graph.d):
+            with st.spinner("Recherche avec le budget choisi…"):
+                result=analyse(*settings)
+            st.session_state["s05g-result"]=(settings,result)
+        state=graph.state(result["best"]);diagnostics=graph.kkt(result["best"])
+        cols=st.columns(3)
+        cols[0].metric("Sortie au départ",f"{float(graph.exact_value(start)):.10g}")
+        cols[1].metric("Meilleure sortie trouvée R" if result["method"]!="départ" else "Sortie de la configuration de départ",f"{state['objective']:.10g}")
+        bound=result["bound"]
+        cols[2].metric("Écart avec la borne globale",f"{bound['gap']:.3g}" if bound else "À calculer")
+        if bound:
+            st.write(f"**Encadrement du maximum global : [{bound['lower']:.12g} ; {bound['upper']:.12g}]** — {bound['status']}.")
+        else:
+            st.caption("Les formules et les figures portent sur le départ compatible. Lancer la recherche pour les centrer sur le meilleur résultat trouvé.")
+        formulas(graph,state,diagnostics)
     with tabs[2]:
         st.subheader(f"Graphe validé : {graph.n} nœuds et {len(graph.edges)} liaisons")
         st.write("Ordre de propagation : "+" → ".join(map(str,active["order"])))
         st.caption("Les poids symétriques multiplient IN. La part non transmise vers l’aval n’est pas redistribuée. "
                    "Il ne s’agit pas d’un équilibre avec circulation dans les deux sens.")
         directed=st.toggle("Afficher les transferts vers le terminal",key="s05-directed")
-        figure(graph_figure(active,state,directed),"s05g-result-graph")
+        figure(graph_figure(active,state,directed,st.session_state.get("s05g-active-positions")),"s05g-result-graph")
         rows=[]
         for n in state["nodes"]:
             rows.append({"Nœud":n["id"],"Apports depuis":" ; ".join(f"{f['from']} : {f['value']:.6g}" for f in n["incoming"]) or ("Source = 1" if n["id"]=="1" else "Aucun apport"),
@@ -414,7 +459,7 @@ def stochastic_page(figure, json_text, download_result):
             if bound:st.json(bound)
     with tabs[3]:
         sampled=surfaces(graph,result,diagnostics,figure)
-    download_result({"study":"05-custom-symmetric-forward-v2","model":active,"start":start,"independent_names":graph.names,
+    download_result({"study":"05-custom-symmetric-forward-v2","model":active,"drawing_positions":st.session_state.get("s05g-active-positions") or graph_editor.positions_for(active),"start":start,"independent_names":graph.names,
                      "reduction":{"dimension":graph.d,"rank":graph.rank,"forced_zero_edges":[list(graph.edges[e]) for e in graph.forced_zero],
                                   "offset_exact":list(map(str,graph.offset_exact)),"mapping_exact":[list(map(str,row)) for row in graph.mapping_exact],
                                   "zero_certificates":graph.zero_certificates},

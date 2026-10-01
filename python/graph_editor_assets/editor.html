@@ -1,0 +1,11 @@
+<div class="editor">
+  <div class="toolbar" role="group" aria-label="Outils du dessin">
+    <button type="button" data-mode="link" aria-pressed="true">Relier les nœuds</button>
+    <button type="button" data-mode="move" aria-pressed="false">Déplacer les nœuds</button>
+    <span class="count"></span>
+  </div>
+  <p class="hint">Cliquez sur un nœud puis sur un autre, ou tirez de l’un vers l’autre. Cliquez sur une liaison pour la supprimer.</p>
+  <svg viewBox="0 0 900 480" aria-label="Dessin du graphe non orienté" role="group"></svg>
+  <div class="legend"><span class="source">● 1 : entrée = 1</span><span class="terminal">● Dernier : sortie = entrée</span><span>Le placement ne change pas l’ordre de calcul.</span></div>
+  <p class="status" role="status" aria-live="polite">Choisissez deux nœuds à relier.</p>
+</div>

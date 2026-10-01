@@ -1,0 +1,24 @@
+.editor {font-family:var(--st-font, sans-serif); color:var(--st-text-color,#17384b)}
+.toolbar {display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+button {font:inherit; padding:10px 15px; border:1px solid #94aab5; border-radius:8px; background:var(--st-background-color,white); color:inherit; cursor:pointer}
+button[aria-pressed=true] {background:#176579; color:white; border-color:#176579}
+button:focus-visible, .node:focus-visible circle, .edge:focus-visible line {outline:3px solid #e79e26; outline-offset:3px}
+.count {margin-left:auto; font-weight:600}
+.hint,.legend,.status {font-size:.9rem; line-height:1.5}
+.hint {margin:10px 0}
+svg {display:block; width:100%; height:clamp(300px,55vh,480px); border:1px solid #aebfc9; border-radius:12px; background:var(--st-secondary-background-color,#f6f9fb); touch-action:none; user-select:none}
+.edge {cursor:pointer}
+.edge .hit {stroke:transparent; stroke-width:18}
+.edge .visible {stroke:#567d93; stroke-width:3; pointer-events:none}
+.edge:hover .visible,.edge:focus .visible {stroke:#bd3746; stroke-width:5}
+.node {cursor:crosshair; outline:none}
+.node circle {fill:#225e83; stroke:white; stroke-width:3}
+.node.source circle {fill:#c66122}
+.node.terminal circle {fill:#277b64}
+.node.selected circle {stroke:#eaa723; stroke-width:7}
+.node text {fill:white; font:bold 19px sans-serif; text-anchor:middle; dominant-baseline:central; pointer-events:none}
+.preview {stroke:#e1a023; stroke-width:3; stroke-dasharray:8 5; pointer-events:none}
+.legend {display:flex; gap:18px; flex-wrap:wrap; margin-top:9px}
+.source {color:#c66122}.terminal {color:#277b64}
+.status {min-height:1.5em; margin:8px 0 0; font-weight:600}
+@media(max-width:600px) {button{padding:8px}.count{width:100%;margin:0}.legend{gap:8px}}

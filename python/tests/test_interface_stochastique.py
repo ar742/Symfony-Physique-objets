@@ -36,7 +36,7 @@ def chart(app,key):
 
 def test_default_optimum_and_surface_modes():
     app=study()
-    assert [t.label for t in app.tabs]==["Lagrangien et dérivées","Construire le graphe","Optimum et flux","Nappes"]
+    assert [t.label for t in app.tabs]==["Construire le graphe","Lagrangien et dérivées","Optimum et flux","Nappes"]
     assert float(app.metric[0].value)==.203125
     assert float(app.metric[1].value)==.3125
     assert float(app.metric[2].value)<=1e-6
@@ -60,7 +60,7 @@ def test_create_triangle_from_future_nodes_and_zero_variables():
     assert app.session_state["s05g-draft"]["n"]==3
     app.selectbox(key="s05g-node").set_value(2).run();ready(app)
     neighbors(app,"1, 3")
-    click(app,"Analyser ce graphe")
+    click(app,"Valider le graphe et passer à l’analyse")
     assert app.session_state["s05g-active"]["n"]==3
     assert float(app.metric[1].value)==.75
     assert float(app.metric[2].value)==0
@@ -74,12 +74,12 @@ def test_invalid_chain_keeps_active_graph_and_can_be_corrected():
     neighbors(app,"2")
     app.selectbox(key="s05g-node").set_value(2).run()
     neighbors(app,"1, 3")
-    click(app,"Analyser ce graphe",valid=False)
+    click(app,"Valider le graphe et passer à l’analyse",valid=False)
     assert app.error and "Aucune matrice" in app.error[0].value
     assert app.session_state["s05g-active"]["n"]==8 and float(app.metric[1].value)==.3125
     app.selectbox(key="s05g-node").set_value(1).run()
     neighbors(app,"2, 3")
-    click(app,"Analyser ce graphe")
+    click(app,"Valider le graphe et passer à l’analyse")
     assert app.session_state["s05g-active"]["n"]==3
 
 
@@ -87,7 +87,7 @@ def test_one_variable_curve_and_search():
     app=study()
     app.selectbox(key="s05g-preset").set_value("Cycle à 4 nœuds · une variable").run()
     click(app,"Charger cet exemple dans le brouillon")
-    click(app,"Analyser ce graphe")
+    click(app,"Valider le graphe et passer à l’analyse")
     assert any("Une seule variable" in item.value for item in app.info)
     assert chart(app,"s05g-curve")
     click(app,"Rechercher le maximum")
@@ -112,8 +112,9 @@ def test_24_nodes_analysis_search_and_navigation():
     app=study()
     app.selectbox(key="s05g-preset").set_value("Échelle à 24 nœuds").run()
     click(app,"Charger cet exemple dans le brouillon")
-    click(app,"Analyser ce graphe")
+    click(app,"Valider le graphe et passer à l’analyse")
     assert app.session_state["s05g-active"]["n"]==24
+
     assert any("11 variables libres" in x.value for x in app.markdown)
     app.number_input(key="s05g-starts-11").set_value(2)
     app.number_input(key="s05g-maxiter-11").set_value(20)
@@ -124,3 +125,21 @@ def test_24_nodes_analysis_search_and_navigation():
     app.sidebar.radio[0].set_value(app.sidebar.radio[0].options[3]).run();ready(app)
     app.sidebar.radio[0].set_value(app.sidebar.radio[0].options[4]).run();ready(app)
     assert app.session_state["s05g-active"]["n"]==24
+
+
+def test_graphical_start_and_two_independent_variables_example():
+    app=study()
+    app.number_input(key="s05g-count").set_value(6).run()
+    click(app,"Créer un dessin vide")
+    assert app.session_state["s05g-draft"]=={"version":1,"n":6,"edges":[],"order":[1,2,3,4,5,6]}
+    click(app,"Valider le graphe et passer à l’analyse",valid=False)
+    assert "connecté" in app.error[0].value
+    assert app.session_state["s05g-active"]["n"]==8
+    app.selectbox(key="s05g-preset").set_value("Quatre nœuds · deux variables").run()
+    click(app,"Charger cet exemple dans le brouillon")
+    click(app,"Valider le graphe et passer à l’analyse")
+    assert any("2 variables libres" in x.value for x in app.markdown)
+    click(app,"Rechercher le maximum")
+    assert float(app.metric[1].value)==1 and float(app.metric[2].value)==0
+    assert len(next(box for box in app.selectbox if box.label=="Axe x").options)==2
+    assert chart(app,"s05-surface")

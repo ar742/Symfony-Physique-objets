@@ -1,5 +1,15 @@
 # Journal des avancées
 
+## 1er octobre 2026 — Point 05 : dessin des liaisons à la souris
+
+Le premier onglet propose désormais **nombre de nœuds → dessin → validation**. Deux clics sur les nœuds, ou un glissement de l’un vers l’autre, créent une liaison non orientée. Un clic sur une liaison la retire. Le mode Déplacer réorganise le dessin ; l’annulation conserve jusqu’à trente gestes. Les placements accompagnent les exports JSON et la figure de résultat, sans agir sur les calculs. L’exemple initial reste accessible, avec un dessin lisible ; un préréglage complet à quatre nœuds possède exactement deux coordonnées indépendantes.
+
+La validation finale contrôle le graphe et ouvre automatiquement le lagrangien réduit. La recherche du maximum et les nappes restent dans les onglets d’analyse ; les brouillons n’en remplacent pas les résultats avant validation. Chaque nappe emploie deux coordonnées indépendantes, les autres fixées au résultat retenu ; les cas d=0 ou d=1 restent présentés honnêtement. Les moteurs scientifiques et leurs encadrements sont conservés.
+
+Validation automatisée : **180 tests Python et 298 sous-cas réussis**, incluant les messages périmés, les positions invalides, la conservation de l’étude active, l’historique d’annulation, le passage à l’analyse et le préréglage à deux variables. Copies locales synchronisées après audit des fichiers à publier, sans document privé ni secret.
+
+L’éditeur SVG utilise Streamlit déjà installé, sans dépendance ou service externe supplémentaire. Les messages du dessin sont contrôlés côté Python, y compris leur révision, les identifiants et les positions numériques. La saisie textuelle complémentaire, les imports historiques et les exports restent disponibles. Recette réelle au navigateur : création des six liaisons du graphe à quatre nœuds, tracé par glissement, déplacement et annulation, suppression puis restauration d’une liaison, validation ouvrant les formules à deux variables, recherche atteignant l’encadrement [1 ; 1], nappe et sélection du dernier nœud d’un dessin à 24 nœuds. L’exemple initial à huit nœuds est rétabli avec son encadrement précédent. Le [guide](GRAPHES-PERSONNALISES-PYTHON.md) décrit le nouveau parcours.
+
 ## 1er octobre 2026 — Point 05 : construction de graphes jusqu’à 24 nœuds
 
 Le point **05** devient un constructeur, sans sixième point. L’exemple initial à huit nœuds reste chargé au départ. Quatre onglets privilégient le lagrangien et ses dérivées, la construction, l’optimum et ses flux, puis les nappes. Depuis le seul nœud 1, la saisie des voisins crée les numéros futurs ; les liaisons restent réciproques. Le terminal est le plus grand numéro, avec IN₁=1 et OUTₙ=INₙ. L’ordre de propagation est explicite et modifiable, distinct du support non orienté.
