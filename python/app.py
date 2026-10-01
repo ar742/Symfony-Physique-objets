@@ -10,6 +10,7 @@ import streamlit as st
 from physique_graphes import dag, lois, production as p, reseaux as r
 from physique_graphes.optimisation import optimiser
 from ui_concordances import concordance_page
+from ui_stochastique import stochastic_page
 from physique_graphes.visualisation import graphe, courbes, echantillonner_surface, nappe
 from examples.lois_personnelles import PERSONAL_LAWS
 
@@ -260,7 +261,7 @@ def dag_page():
 
 st.title("Graphes · Atelier Python")
 st.caption("Modèles éditables • calculs locaux • graphes, courbes et nappes interactives")
-family = st.sidebar.radio("Étude", ["01 · Villes", "02 · Dépendances", "03 · Production", "04 · Concordances"])
+family = st.sidebar.radio("Étude", ["01 · Villes", "02 · Dépendances", "03 · Production", "04 · Concordances", "05 · Liaisons symétriques"])
 st.sidebar.markdown("[Guide et code Python](https://github.com/ar742/Symfony-Physique-objets/tree/master/python)\n\n[Site Symfony local](http://localhost:8080/graphes/)")
 st.sidebar.caption("Les valeurs modifiées vivent dans la session. Exportez votre JSON pour conserver une étude. Les figures HTML fonctionnent hors ligne.")
 try:
@@ -272,8 +273,10 @@ try:
         st.header("03 · Machines, branches et production")
         study = st.radio("Modèle de production", ["DAG · branches ou machines", "Machines couplées · cycles"], horizontal=True)
         dag_page() if study.startswith("DAG") else cycles_page()
-    else:
+    elif family.startswith("04"):
         concordance_page(figure, json_text, download_result)
+    else:
+        stochastic_page(figure, json_text, download_result)
 except (ValueError, KeyError, TypeError, OverflowError) as error:
     st.error(f"Le modèle ne peut pas être calculé en l’état : {error}")
     st.info("Corrigez les valeurs dans l’éditeur ou choisissez un autre préréglage. Les autres études restent accessibles.")

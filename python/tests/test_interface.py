@@ -16,7 +16,7 @@ def button(app, label):
     return next(item for item in app.button if item.label == label)
 
 
-@pytest.mark.parametrize("family", range(4))
+@pytest.mark.parametrize("family", range(5))
 def test_families_render(family):
     app = AppTest.from_file(str(APP), default_timeout=60).run()
     app.sidebar.radio[0].set_value(app.sidebar.radio[0].options[family]).run()
