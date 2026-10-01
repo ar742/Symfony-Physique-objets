@@ -1,5 +1,15 @@
 # Journal des avancées
 
+## 1er octobre 2026 — Point 05 : construction de graphes jusqu’à 24 nœuds
+
+Le point **05** devient un constructeur, sans sixième point. L’exemple initial à huit nœuds reste chargé au départ. Quatre onglets privilégient le lagrangien et ses dérivées, la construction, l’optimum et ses flux, puis les nappes. Depuis le seul nœud 1, la saisie des voisins crée les numéros futurs ; les liaisons restent réciproques. Le terminal est le plus grand numéro, avec IN₁=1 et OUTₙ=INₙ. L’ordre de propagation est explicite et modifiable, distinct du support non orienté.
+
+Le moteur vérifie la faisabilité de la matrice symétrique doublement stochastique, élimine les poids forcés à zéro avec certificats rationnels, puis réduit exactement les égalités. Les coordonnées libres sont des coefficients aᵢⱼ, en nombre minimal effectif. La reconstruction a=b+Bθ, les récurrences des entrées, le lagrangien réduit et les dérivées adjointes sont affichés. Les coupes en deux variables développent h, hₓ et hᵧ sans expansion du polynôme complet ; une seule variable produit une courbe, aucune variable une configuration unique.
+
+Les recherches locales et multiples utilisent les gradients analytiques, avec témoins vérifiés en rationnels. La borne Bernstein historique exige le support et l’ordre initiaux ; les autres graphes disposent d’un encadrement par intervalles et conservation, dont le budget et l’écart restant sont indiqués. Une borne ouverte ne constitue pas une preuve d’optimalité. Les brouillons incomplets ou impossibles conservent la dernière étude valide, identifiée explicitement. Import/export JSON de la construction et de l’étude complète ; aucun code importé n’est exécuté.
+
+Validation : **162 tests Python et 298 sous-cas réussis**. Ils couvrent notamment les voisins futurs, les graphes impossibles, les zéros forcés, la dimension minimale, le graphe complet à 24 nœuds (276 liaisons et 252 variables), les dérivées par différences finies, les bornes, les nappes et les interactions. Recette navigateur : construction d’un triangle depuis 1, validation de son maximum unique 0,75, maintien de l’onglet pendant la saisie, restauration de l’exemple initial et vérification de ses nappes. La référence retrouve l’encadrement [0,3125 ; 0,312500998529]. Streamlit 1.64 minimum assure la conservation de l’onglet actif. Le [guide du constructeur](GRAPHES-PERSONNALISES-PYTHON.md) détaille la saisie et les conventions.
+
 ## 19 septembre 2026 — Atelier Python 04 : matrices, environnements et recherches par groupe
 
 - La vue **04 · Environnement, concordances et production** commence par une matrice ε aléatoire dans [−1,1], des environnements e₂…e₈ nuls et cinq distributions à 0,5. Deux listes indépendantes proposent les matrices emblématiques, les tirages dans [0,1] et [−1,1], ainsi que les mêmes familles pour les environnements ; les graines et la provenance sont conservées.

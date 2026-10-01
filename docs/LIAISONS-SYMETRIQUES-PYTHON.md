@@ -1,5 +1,7 @@
 # Point 05 — Liaisons symétriques et maximum de la sortie 8
 
+Cette page détaille **l’exemple initial à huit nœuds**. Le point 05 permet désormais de [construire et analyser un graphe de 2 à 24 nœuds](GRAPHES-PERSONNALISES-PYTHON.md), avec réduction automatique des variables, lagrangien, dérivées et nappes adaptés au graphe saisi.
+
 Cette étude Python applique la formulation de l’auteur, avec les précisions confirmées le 1er octobre 2026 : **support non orienté**, matrice symétrique doublement stochastique, **Exp. OUT₈ = Exp. IN₈**. Le document source reste privé. Le point 04 conserve son propre modèle, ses concordances ε et ses environnements.
 
 ## Sens des liaisons et du calcul
