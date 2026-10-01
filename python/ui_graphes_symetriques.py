@@ -10,6 +10,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from physique_graphes import graphes_symetriques as g
+from physique_graphes import expressions_symetriques as expr
 from physique_graphes.visualisation import nappe, courbes
 import graph_editor
 
@@ -61,16 +62,22 @@ def partial(poly, axis):
     return result
 
 
-def polynomial_tex(poly, lhs):
+def polynomial_tex(poly, lhs, variables=("x","y")):
     terms = []
-    for (px, py), coefficient in sorted(poly.items(), key=lambda p: (-sum(p[0]), -p[0][0])):
-        if abs(float(coefficient)) < 1e-14:
+    for powers, coefficient in sorted(poly.items(), key=lambda p: (-sum(p[0]),tuple(-k for k in p[0]))):
+        if not coefficient:
             continue
-        label = ("x" if px == 1 else rf"x^{{{px}}}" if px else "")+("y" if py == 1 else rf"y^{{{py}}}" if py else "")
+        label = "".join(v if p==1 else v+rf"^{{{p}}}" if p else "" for v,p in zip(variables,powers))
         terms.append((coefficient, label))
     if not terms:
         return lhs+"=0"
-    chunks = [terms[k:k+5] for k in range(0, len(terms), 5)]
+    chunks,chunk,size = [],[],0
+    for term in terms:
+        width=len(term[1])+8
+        if chunk and (size+width>88 or len(chunk)>=4):
+            chunks.append(chunk);chunk=[];size=0
+        chunk.append(term);size+=width
+    if chunk:chunks.append(chunk)
     lines = [lhs+"&="+terms_tex(chunks[0])]
     for chunk in chunks[1:]:
         text = terms_tex(chunk)
@@ -81,6 +88,97 @@ def polynomial_tex(poly, lhs):
 @st.cache_data(show_spinner=False)
 def compile_cached(model_json):
     return g.compile_graph(json.loads(model_json))
+
+
+@st.cache_data(show_spinner=False)
+def expanded_cached(model_json):
+    graph=compile_cached(model_json)
+    try:
+        return expr.objective(graph),None
+    except expr.ExpansionLimit as error:
+        return None,str(error)
+
+
+def penalty_terms(graph, axis=None):
+    terms=[]
+    for e,row in enumerate(graph.mapping_exact):
+        if not any(row):
+            continue  # Les poids fixes ont μ=0 dans le diagnostic réduit.
+        mu=rf"\mu_{{{graph.edges[e][0]},{graph.edges[e][1]}}}"
+        if axis is None:
+            terms.append((F(1),mu+r"\left("+affine_tex(graph,e)+r"\right)"))
+        elif row[axis]:
+            terms.append((row[axis],mu))
+    return terms
+
+
+def sum_tex(lhs,terms):
+    if not terms:return lhs+"=0"
+    lines=[]
+    for index in range(0,len(terms),2):
+        rhs=terms_tex(terms[index:index+2])
+        lines.append((lhs+"&=" if index==0 else "&"+("" if rhs.startswith("-") else "+"))+rhs)
+    return r"\begin{aligned}"+r"\\".join(lines)+r"\end{aligned}"
+
+
+def explicit_formulas(graph, diagnostics):
+    """Affichage et export de la même expression en seuls coefficients libres."""
+    variables=[edge_tex(graph.edges[e]) for e in graph.free]
+    signature=",".join(variables) if graph.d<=6 else r"\boldsymbol a_{\rm libres}"
+    poly,reason=expanded_cached(json.dumps(graph.model,sort_keys=True))
+    lines=[]
+    def show(tex):
+        st.latex(tex);lines.append(tex)
+    st.subheader("Expressions explicites dans les seuls aᵢⱼ indépendants")
+    st.caption("Tous les autres poids et toutes les entrées sont remplacés par leurs expressions. "
+               "Les μ restent des multiplicateurs de contraintes, pas de nouvelles variables de production.")
+    if poly is not None:
+        with st.expander(f"R entièrement développé · {len(poly)} monômes",expanded=len(poly)<=60):
+            show(polynomial_tex(poly,"R("+signature+")",variables))
+    else:
+        st.info(reason+" Aucun terme n’est supprimé pour raccourcir le calcul.")
+    show(sum_tex(r"\mathcal L("+signature+r";\mu)",[(F(1),"R("+signature+")")]+penalty_terms(graph)))
+    st.caption("Cette formule conserve les contraintes aᵢⱼ ≥ 0 après élimination des égalités. "
+               "Le maximum recherché est celui de R sous contraintes ; ℒ à μ fixés peut présenter une selle hors contraintes.")
+    # Forme factorisée de secours : seuls les a libres figurent dans les facteurs.
+    with st.expander("Forme factorisée exacte, avec tous les poids remplacés",expanded=poly is None):
+        st.caption("Pⱼ désigne le polynôme d’entrée déjà calculé, pas une variable indépendante supplémentaire. R=Pₙ.")
+        show("P_1=1")
+        for j in graph.model["order"][1:]:
+            terms=[(F(1),r"\left("+affine_tex(graph,e)+r"\right)"+(rf"P_{{{i}}}" if i!=1 else "")) for e,i in graph.incoming[j] if any(graph.mapping_exact[e]) or graph.offset_exact[e]]
+            show(sum_tex(rf"P_{{{j}}}",terms))
+        show(rf"R=P_{{{graph.n}}}")
+    if graph.d:
+        k=st.selectbox("Expression de la dérivée selon aᵢⱼ",range(graph.d),format_func=lambda k:graph.names[k],key="s05g-explicit-derivative-"+graph_key(graph))
+        if poly is not None:
+            show(polynomial_tex(expr.derivative(poly,k),rf"\frac{{\partial R}}{{\partial {variables[k]}}}",variables))
+        else:
+            st.caption("Dⱼ est la dérivée de Pⱼ par rapport au coefficient sélectionné ; les récurrences suivantes sont entièrement substituées.")
+            show(rf"D_j=\frac{{\partial P_j}}{{\partial {variables[k]}}},\quad D_1=0")
+            for j in graph.model["order"][1:]:
+                terms=[]
+                for e,i in graph.incoming[j]:
+                    if graph.mapping_exact[e][k]:terms.append((graph.mapping_exact[e][k],rf"P_{{{i}}}" if i!=1 else ""))
+                    if i!=1 and (any(graph.mapping_exact[e]) or graph.offset_exact[e]):terms.append((F(1),r"\left("+affine_tex(graph,e)+rf"\right)D_{{{i}}}"))
+                show(sum_tex(rf"D_{{{j}}}",terms))
+            show(rf"\frac{{\partial R}}{{\partial {variables[k]}}}=D_{{{graph.n}}}")
+        show(sum_tex(rf"\frac{{\partial\mathcal L}}{{\partial {variables[k]}}}",[(F(1),rf"\frac{{\partial R}}{{\partial {variables[k]}}}")]+penalty_terms(graph,k)))
+        show(rf"\left.\frac{{\partial\mathcal L}}{{\partial {variables[k]}}}\right|_{{\rm reference}}={diagnostics['lagrangian_gradient'][k]:.9g}")
+    if poly is not None:
+        fixed=expr.fixed_lagrangian(graph,poly,diagnostics["multipliers"])
+        with st.expander("Lagrangien avec les multiplicateurs numériques retenus"):
+            st.caption("Les coefficients numériques sont affichés à six chiffres significatifs lorsque leur fraction est longue. Le calcul et l’export conservent les valeurs non arrondies.")
+            show(polynomial_tex(fixed,r"\mathcal L_*",variables))
+        # L'export comprend toutes les dérivées, même celles qui ne sont pas ouvertes.
+        for k,variable in enumerate(variables):
+            lines.append(polynomial_tex(expr.derivative(poly,k),rf"\frac{{\partial R}}{{\partial {variable}}}",variables))
+            lines.append(sum_tex(rf"\frac{{\partial\mathcal L}}{{\partial {variable}}}",[(F(1),rf"\frac{{\partial R}}{{\partial {variable}}}")]+penalty_terms(graph,k)))
+    lines=list(dict.fromkeys(lines))
+    st.download_button("Enregistrer les formules (texte LaTeX)","\n\n".join(lines),"point05-formules.txt","text/plain",key="s05g-formulas-export")
+    return {"variables":graph.names,"objective":expr.serialize(poly) if poly is not None else None,"expansion_limit":reason,
+            "lagrangian_fixed":expr.serialize(fixed) if poly is not None else None,
+            "partial_derivatives":[expr.serialize(expr.derivative(poly,k)) for k in range(graph.d)] if poly is not None else None,
+            "latex":lines}
 
 
 @st.cache_data(show_spinner=False)
@@ -281,27 +379,20 @@ def formulas(graph, state, diagnostics):
     st.latex(rf"\boxed{{\mathcal L(\theta;\mu)=X_{{{graph.n}}}(\theta)+\sum_{{e\in E}}\mu_e\left(b_e+\sum_{{k=1}}^{{{graph.d}}}B_{{ek}}\theta_k\right)}},\quad\mu_e\geq0")
     st.caption("Les égalités sont éliminées : seules les variables libres restent dans X et a. Les μ sont des multiplicateurs de contraintes, "
                "pas des paramètres de production à maximiser. Les poids fixes utilisent μ=0.")
-    with st.expander("Formule de R par substitutions successives", expanded=True):
-        for node in graph.model["order"][1:]:
-            formula = "+".join(edge_tex(graph.edges[e])+rf"X_{{{i}}}" for e, i in graph.incoming[node]) or "0"
-            st.latex(rf"X_{{{node}}}="+formula)
-        st.caption("En remplaçant chaque poids par sa ligne a=b+Bθ, ces expressions dépendent uniquement des variables indépendantes. "
-                   "Cette forme factorisée évite de développer un polynôme immense pour 24 nœuds.")
+    expressions=explicit_formulas(graph,diagnostics)
+    st.subheader("Vérification des dérivées et conditions d’optimalité")
     st.latex(rf"p_{{{graph.n}}}=1,\quad p_i=\sum_{{i\to j}}a_{{ij}}p_j,\qquad p_i=\frac{{\partial R}}{{\partial X_i}}")
     st.latex(r"\boxed{\frac{\partial\mathcal L}{\partial\theta_k}=\sum_{e=(i\to j)}B_{ek}(X_i p_j+\mu_e)}")
     st.latex(r"a\geq0,\quad\mu\geq0,\quad\mu_ea_e=0,\quad\nabla_\theta\mathcal L=0")
     st.caption("Le calcul adjoint remonte dans l’ordre inverse. Ces dérivées analytiques servent au solveur et aux coupes. "
                "Les KKT sont un contrôle local ; ℒ=R à la référence seulement si la complémentarité est satisfaite.")
     if graph.d:
-        k = st.selectbox("Développer la dérivée par rapport à", range(graph.d), format_func=lambda k: graph.names[k], key="s05g-derivative-"+graph_key(graph))
-        terms = [(row[k], rf"\left(X_{{{i}}}p_{{{j}}}+\mu_{{{graph.edges[e][0]},{graph.edges[e][1]}}}\right)")
-                 for e, (row, (i,j)) in enumerate(zip(graph.mapping_exact, graph.arcs)) if row[k]]
-        st.latex(rf"\frac{{\partial\mathcal L}}{{\partial {edge_tex(graph.edges[graph.free[k]])}}}="+terms_tex(terms))
         st.dataframe(pd.DataFrame({"Variable": graph.names, "Valeur": state["coordinates"], "∂R": diagnostics["gradient"], "∂ℒ": diagnostics["lagrangian_gradient"]}), hide_index=True, width="stretch")
     st.write(f"Résidu de stationnarité : **{diagnostics['stationarity_residual']:.3g}** ; complémentarité : **{diagnostics['complementarity_residual']:.3g}**.")
     with st.expander("Multiplicateurs et sensibilités des nœuds"):
         st.dataframe(pd.DataFrame({"Liaison": graph.edge_names, "Poids a": state["coefficients"], "μ": diagnostics["multipliers"]}), hide_index=True)
         st.dataframe(pd.DataFrame([{"Nœud": n["id"], "X": n["input"], "p = ∂R/∂X": n["adjoint"]} for n in state["nodes"]]), hide_index=True)
+    return expressions
 
 
 def surfaces(graph, result, diagnostics, figure):
@@ -322,6 +413,7 @@ def surfaces(graph, result, diagnostics, figure):
         figure(courbes(x, {"R admissible": y}, xlabel=graph.names[0], ylabel="R"), "s05g-curve")
         st.latex(r"\frac{d\mathcal L}{d\theta_1}=\sum_e B_{e1}(X_i p_j+\mu_e)")
         return {"mode": "courbe", "axis": graph.names[0], "x": x.tolist(), "y": y}
+    st.write(f"**{graph.d} coefficients indépendants : {graph.d*(graph.d-1)//2} couples possibles.** Sélectionnez les deux aᵢⱼ à faire varier.")
     cols = st.columns(4)
     ix = cols[0].selectbox("Axe x", range(graph.d), format_func=lambda i: graph.names[i], key="s05g-axis-x-"+graph_key(graph))
     choices = [i for i in range(graph.d) if i != ix]
@@ -333,6 +425,10 @@ def surfaces(graph, result, diagnostics, figure):
     axes = (ix, iy); x0, y0 = best[ix], best[iy]
     st.latex(rf"x={edge_tex(graph.edges[graph.free[ix]])},\quad y={edge_tex(graph.edges[graph.free[iy]])},\quad(x_0,y_0)=({x0:.9g},{y0:.9g})")
     st.caption("Les autres variables indépendantes restent fixes ; tous les poids dépendants sont recalculés. Le voisinage contient exactement le point de référence.")
+    with st.expander("Valeurs fixées des autres coefficients indépendants"):
+        others=[{"Coefficient":graph.names[k],"Valeur fixée":best[k]} for k in range(graph.d) if k not in axes]
+        if others:st.dataframe(pd.DataFrame(others),hide_index=True,width="stretch")
+        else:st.write("Ce graphe possède exactement ces deux variables indépendantes : aucune autre n’est à fixer.")
     x,y,z = g.surface(graph, best, axes, radius=radius, points=points, multipliers=mu, free=free)
     reference = graph.lagrangian(best,mu)[0] if free else result["objective"]
     if free:
@@ -340,17 +436,20 @@ def surfaces(graph, result, diagnostics, figure):
     else:
         st.caption(f"{np.isfinite(z).sum()} / {z.size} points admissibles. Les points interdits sont masqués ; une frontière ou un domaine réduit à une ligne restent visibles.")
     label = "ℒ libre" if free else "R admissible"
-    fig = nappe(x,y,z,xlabel=graph.names[ix],ylabel=graph.names[iy],zlabel=label,reference=(x0,y0,reference))
-    fig.update_layout(title=dict(text=f"05 · {label} · référence {reference:.8g}",x=.02),margin=dict(t=55))
-    figure(fig,"s05-surface")
     poly = graph.slice_polynomial(best,axes,mu if free else None)
     hx, hy = partial(poly,0),partial(poly,1)
     grad = diagnostics["lagrangian_gradient"] if free else diagnostics["gradient"]
-    st.latex(rf"h_x(x_0,y_0)={grad[ix]:.8g},\qquad h_y(x_0,y_0)={grad[iy]:.8g}")
-    with st.expander("Expressions de h(x,y) et de ses deux dérivées",expanded=len(poly)<=20):
+    variables=[edge_tex(graph.edges[graph.free[k]]) for k in axes]
+    surface_formulas=[]
+    with st.expander("Expression de la nappe et dérivées selon les deux aᵢⱼ choisis",expanded=True):
         st.caption("Développement limité à ces deux variables. Les coefficients simples sont exacts ; les autres sont affichés à six chiffres significatifs.")
-        for lhs, p in [("h(x,y)",poly),(r"\partial h/\partial x",hx),(r"\partial h/\partial y",hy)]:
-            st.latex(polynomial_tex(p,lhs))
+        for lhs, p in [("h("+",".join(variables)+")",poly),(r"\partial h/\partial "+variables[0],hx),(r"\partial h/\partial "+variables[1],hy)]:
+            tex=polynomial_tex(p,lhs,variables);st.latex(tex);surface_formulas.append(tex)
+        st.latex(rf"h_x(x_0,y_0)={grad[ix]:.8g},\qquad h_y(x_0,y_0)={grad[iy]:.8g}")
+    fig = nappe(x,y,z,xlabel=graph.names[ix],ylabel=graph.names[iy],zlabel=label,reference=(x0,y0,reference))
+    fig.update_layout(title=dict(text=f"05 · {label} · référence {reference:.8g}",x=.02),margin=dict(t=55))
+    figure(fig,"s05-surface")
+    st.download_button("Enregistrer les formules de cette nappe","\n\n".join(surface_formulas),"point05-nappe-formules.txt","text/plain",key="s05g-surface-formulas")
     with st.expander("Profils et export des points"):
         def profile(values,axis):
             out=[]
@@ -365,7 +464,8 @@ def surfaces(graph, result, diagnostics, figure):
         figure(courbes(y,{f"x={x0:.7g}":profile(y,iy)},xlabel=graph.names[iy],ylabel=label),"s05g-profile-y")
         frame=pd.DataFrame([{graph.names[ix]:float(vx),graph.names[iy]:float(vy),label:z[j,i]} for j,vy in enumerate(y) for i,vx in enumerate(x)])
         st.download_button("Nappe CSV",frame.to_csv(index=False).encode("utf-8-sig"),"point05-nappe.csv","text/csv",key="s05g-csv")
-    return {"axes":[graph.names[ix],graph.names[iy]],"mode":mode,"center":[x0,y0,reference],"x":x.tolist(),"y":y.tolist(),"z":z.tolist(),
+    return {"axes":[graph.names[ix],graph.names[iy]],"mode":mode,"center":[x0,y0,reference],"x":x.tolist(),"y":y.tolist(),"z":z.tolist(),"latex":surface_formulas,
+            "partials":[expr.serialize(hx),expr.serialize(hy)],
             "polynomial":[{"powers":list(e),"coefficient_exact":str(c)} for e,c in poly.items()]}
 
 
@@ -439,7 +539,7 @@ def stochastic_page(figure, json_text, download_result):
             st.write(f"**Encadrement du maximum global : [{bound['lower']:.12g} ; {bound['upper']:.12g}]** — {bound['status']}.")
         else:
             st.caption("Les formules et les figures portent sur le départ compatible. Lancer la recherche pour les centrer sur le meilleur résultat trouvé.")
-        formulas(graph,state,diagnostics)
+        expression_details=formulas(graph,state,diagnostics)
     with tabs[2]:
         st.subheader(f"Graphe validé : {graph.n} nœuds et {len(graph.edges)} liaisons")
         st.write("Ordre de propagation : "+" → ".join(map(str,active["order"])))
@@ -463,4 +563,4 @@ def stochastic_page(figure, json_text, download_result):
                      "reduction":{"dimension":graph.d,"rank":graph.rank,"forced_zero_edges":[list(graph.edges[e]) for e in graph.forced_zero],
                                   "offset_exact":list(map(str,graph.offset_exact)),"mapping_exact":[list(map(str,row)) for row in graph.mapping_exact],
                                   "zero_certificates":graph.zero_certificates},
-                     "search":result,"state":state,"kkt":diagnostics,"surface":sampled},"point05-etude")
+                     "search":result,"state":state,"kkt":diagnostics,"expressions":expression_details,"surface":sampled},"point05-etude")

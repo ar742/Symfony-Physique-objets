@@ -94,6 +94,19 @@ Elles se calculent dans l’ordre inverse de la propagation. Pour chaque coordon
 
 Le menu de dérivation développe cette expression pour chaque coefficient a choisi comme coordonnée. Le tableau fournit toutes les valeurs de ∂R et ∂ℒ. Les KKT contrôlées sont `a≥0`, `μ≥0`, `μₑaₑ=0` et `∇ℒ=0`, avec résidus affichés. Un petit résidu KKT ne prouve pas un maximum global.
 
+### Expressions entièrement substituées dans l’interface
+
+La section **Expressions explicites dans les seuls aᵢⱼ indépendants** présente désormais :
+
+- Le polynôme R après substitution de tous les poids dépendants et de toutes les entrées. Dans l’exemple initial, il comporte **51 monômes dans cinq coordonnées** : a₁₂, a₂₃, a₃₅, a₃₄, a₆₇.
+- Le lagrangien ℒ=R+Σμₑaₑ, avec **chaque expression affine aₑ effectivement remplacée** par sa formule dans ces seules coordonnées. Les poids fixes ont μ=0 selon la convention du diagnostic réduit.
+- Un menu **Expression de la dérivée selon aᵢⱼ** donnant le polynôme ∂R/∂aᵢⱼ, la combinaison explicite des μ qui complète ∂ℒ/∂aᵢⱼ, puis sa valeur au point retenu.
+- Le développement de ℒ avec les multiplicateurs numériques retenus, distinct de la formule à multiplicateurs symboliques.
+
+La forme factorisée exacte est toujours disponible. Les Pⱼ qui y apparaissent désignent des polynômes déjà définis, sans devenir de nouvelles variables indépendantes. Au-delà de 24 coordonnées, 1 200 monômes intermédiaires ou 60 000 produits, le développement intégral est remplacé par cette forme exacte, avec raison affichée. Aucun polynôme tronqué n’est présenté comme complet. Les dérivées peuvent alors être suivies par des récurrences explicites Dⱼ=∂Pⱼ/∂a choisi.
+
+**Enregistrer les formules (texte LaTeX)** conserve les expressions. Lorsque le polynôme complet est disponible, toutes ses dérivées sont incluses dans cet export, même si une seule est affichée. Les exports JSON ajoutent les coefficients rationnels du polynôme, de ses dérivées et du lagrangien à μ fixés. Les longues fractions numériques sont affichées à six chiffres significatifs, mais ne sont pas arrondies dans les calculs ou les coefficients exportés.
+
 ## Recherches, bornes et nappes
 
 SLSQP utilise les gradients analytiques ci-dessus. Une recherche peut partir d’un seul état ou de plusieurs états reproductibles, tirés à partir de sommets admissibles. Les candidats conservés sont vérifiés en rationnels. Une simplification rationnelle ou une légère contraction vers le départ intérieur peut produire un témoin admissible distinct du résultat flottant brut ; ce traitement figure dans l’export.
@@ -101,6 +114,8 @@ SLSQP utilise les gradients analytiques ci-dessus. Une recherche peut partir d�
 Pour le support et l’ordre initiaux, le certificat Bernstein existant reste disponible. Pour les autres graphes, une subdivision en intervalles majore les coefficients affines, puis propage des majorations des entrées, avec arrondis dirigés. La conservation fournit aussi la borne R≤1. Les budgets épuisés conservent une **borne ouverte** : ni une recherche locale ni un nombre de départs fixé ne garantissent l’optimum global de tous les graphes à 24 nœuds. Pour d=0, le domaine est un point et sa valeur est le maximum exact.
 
 Les nappes choisissent deux coefficients parmi les coordonnées indépendantes, en fixant les autres au meilleur résultat trouvé, ou au départ avant recherche. Les poids dépendants et tous les flux sont recalculés. Le développement en **deux variables seulement** permet d’afficher h(x,y), hₓ et hᵧ sans développer le polynôme complet en d variables.
+
+L’interface indique les **d(d−1)/2 couples possibles** (dix pour l’exemple initial). Les deux menus sélectionnent des aᵢⱼ distincts. Les expressions de h et de ses deux dérivées portent directement les noms de ces coefficients ; la correspondance x/y, le centre (x₀,y₀), les valeurs des autres coordonnées fixées et les dérivées au centre restent explicites. Les formules s’affichent avant le tracé et disposent de leur propre export texte ; le JSON conserve aussi leurs coefficients et dérivées. Le développement de ces coupes reste disponible même lorsque le polynôme complet à d variables dépasse le budget d’expansion.
 
 - **R admissible** : les points hors contraintes sont masqués. Une frontière, une ligne ou un point ne sont pas transformés artificiellement en dôme.
 - **ℒ libre à μ fixés** : la formule peut être évaluée hors contraintes. ℒ n’est alors pas une production et son point stationnaire peut être une selle. Même dans le domaine admissible, ℒ=R exige la complémentarité.

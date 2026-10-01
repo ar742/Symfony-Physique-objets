@@ -1,5 +1,15 @@
 # Journal des avancées
 
+## 1er octobre 2026 — Point 05 : expressions explicites en coefficients indépendants
+
+L’onglet **Lagrangien et dérivées** développe désormais R après substitution de toutes les entrées et de tous les poids dépendants. Pour l’exemple initial, le polynôme exact comporte **51 monômes dans cinq aᵢⱼ indépendants**. La formule de ℒ ajoute les termes μa avec leurs expressions affines effectivement substituées. Un menu donne le polynôme de chaque dérivée ∂R/∂aᵢⱼ, les termes en μ de ∂ℒ/∂aᵢⱼ et sa valeur au point retenu ; le lagrangien à multiplicateurs numériques fixés est également développé.
+
+Une forme factorisée exacte reste disponible. Le développement général est borné par des budgets explicites ; s’ils sont dépassés, aucun polynôme partiel n’est présenté comme complet. Les auxiliaires Pⱼ et leurs dérivées ne sont pas de nouvelles variables indépendantes. Les moteurs d’optimisation et leurs certificats restent inchangés.
+
+L’onglet **Nappes** indique le nombre de couples possibles (dix pour l’exemple initial), les deux coefficients choisis, les autres valeurs fixées, puis h et ses deux dérivées avec les noms aᵢⱼ. Les expressions précèdent le tracé. Des exports texte LaTeX et des coefficients rationnels dans le JSON permettent de reprendre les calculs. La précision d’affichage des longues fractions est distinguée des valeurs non arrondies utilisées.
+
+Validation : **189 tests Python et 298 sous-cas réussis**. Le développement initial coïncide exactement avec celui du moteur historique ; les dérivées sont comparées aux adjoints et aux différences finies, et les dix coupes du lagrangien au polynôme général restreint. Les budgets et les petits coefficients non nuls sont couverts. Recette navigateur : choix de ∂ℒ/∂a₆₇, puis nappe ℒ(a₁₂,a₆₇) centrée en (0,5 ; 0), de valeur 0,3125 avec ses deux dérivées nulles. La distinction entre maximum contraint de R et coupe libre de ℒ reste explicite. Copies locales synchronisées, sans document privé ajouté.
+
 ## 1er octobre 2026 — Point 05 : dessin des liaisons à la souris
 
 Le premier onglet propose désormais **nombre de nœuds → dessin → validation**. Deux clics sur les nœuds, ou un glissement de l’un vers l’autre, créent une liaison non orientée. Un clic sur une liaison la retire. Le mode Déplacer réorganise le dessin ; l’annulation conserve jusqu’à trente gestes. Les placements accompagnent les exports JSON et la figure de résultat, sans agir sur les calculs. L’exemple initial reste accessible, avec un dessin lisible ; un préréglage complet à quatre nœuds possède exactement deux coordonnées indépendantes.

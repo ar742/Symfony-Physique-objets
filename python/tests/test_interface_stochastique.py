@@ -143,3 +143,19 @@ def test_graphical_start_and_two_independent_variables_example():
     assert float(app.metric[1].value)==1 and float(app.metric[2].value)==0
     assert len(next(box for box in app.selectbox if box.label=="Axe x").options)==2
     assert chart(app,"s05-surface")
+
+
+def test_explicit_reduced_derivatives_and_named_surface_equations():
+    app=study()
+    equations=[x.value for x in app.latex]
+    assert any("R(a_{1,2},a_{2,3},a_{3,5},a_{3,4},a_{6,7})" in x for x in equations)
+    assert any("\\mathcal L(a_{1,2}" in x and "\\mu_" in x for x in equations)
+    selector=next(s for s in app.selectbox if s.label=="Expression de la dérivée selon aᵢⱼ")
+    selector.set_value(4).run();ready(app)
+    assert any("\\partial R}{\\partial a_{6,7}}" in x.value for x in app.latex)
+    next(box for box in app.selectbox if box.label=="Axe x").set_value(1).run()
+    next(box for box in app.selectbox if box.label=="Axe y").set_value(4).run();ready(app)
+    assert any("h(a_{2,3},a_{6,7})" in x.value for x in app.latex)
+    assert any("10 couples possibles" in x.value for x in app.markdown)
+    mode=app.radio(key="s05g-surface-mode");mode.set_value(mode.options[1]).run();ready(app)
+    assert any("\\partial h/\\partial a_{6,7}" in x.value for x in app.latex)
